@@ -2,7 +2,7 @@
   "name": "describe-type",
   "author": "Adrian C. Miranda",
   "description": "Evaluates whether an object is compatible with a specific data type.",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "types": "index.d.ts",
   "main": "index.js",
   "browser": "index.js",
@@ -19,12 +19,17 @@
   ],
   "scripts": {
     "report-coverage": "codecov -f test/coverage/coverage-final.json",
-    "doc": "documentation build index.js -f html -o docs",
     "upgrade": "ncu -a --loglevel verbose --packageFile package.json && npm i",
     "lint": "eslint --ext .js lib",
     "test:unit": "run-s \"test:watch -- --single-run\"",
     "test:watch": "ava --no-cached --verbose",
     "test": "run-s test:unit",
+    "build": "run-p build:*",
+    "build:amd": "rollup -c ./rollup.config.js --environment=format:amd",
+    "build:cjs": "rollup -c ./rollup.config.js --environment=format:cjs",
+    "build:es": "rollup -c ./rollup.config.js --environment=format:es",
+    "build:iife": "rollup -c ./rollup.config.js --environment=format:iife",
+    "build:umd": "rollup -c ./rollup.config.js --environment=format:umd",
     "precommit": "run-s test",
     "commitmsg": "validate-commit-msg",
     "release": "standard-version"
@@ -33,23 +38,25 @@
     "ava": "~0.19.1",
     "codecov": "~2.2.0",
     "conventional-commit-types": "~2.1.0",
-    "documentation": "~4.0.0-rc.1",
     "eslint": "3.19.0",
     "eslint-config-airbnb-base": "11.2.0",
     "eslint-plugin-import": "1.16.0",
-    "husky": "~0.14.0",
-    "npm-check-updates": "~2.12.0",
-    "npm-run-all": "~4.0.2",
+    "git-revision-webpack-plugin": "^2.5.1",
+    "husky": "~0.14.1",
+    "npm-check-updates": "~2.12.1",
+    "npm-run-all": "^4.0.2",
+    "pirate-flag": "~0.0.2",
+    "rollup": "~0.43.0",
+    "rollup-plugin-commonjs": "~8.0.2",
+    "rollup-plugin-license": "~0.4.0",
     "standard-version": "~4.2.0",
+    "uglify": "^0.1.5",
     "validate-commit-msg": "~2.12.2"
   },
   "config": {
     "validate-commit-msg": {
       "types": "conventional-commit-types"
     }
-  },
-  "engines": {
-    "node": ">=6.10.1"
   },
   "keywords": [
     "describe-type",
@@ -60,6 +67,8 @@
     "constructorNameOf",
     "constructorOf",
     "typify",
+    "test",
+    "util",
     "as",
     "is"
   ]

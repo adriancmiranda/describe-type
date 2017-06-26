@@ -1,17 +1,34 @@
 {
   "name": "describe-type",
-  "version": "1.0.0",
-  "main": "index.js",
+  "description": "Evaluates whether an object is compatible with a specific data type.",
+  "version": "0.1.0",
+  "main": "dist/describe-type.js",
   "license": "MIT",
+  "keywords": [
+    "describe-type",
+    "describe",
+    "type",
+    "typeof",
+    "typeOf",
+    "constructorNameOf",
+    "constructorOf",
+    "typify",
+    "test",
+    "util",
+    "as",
+    "is"
+  ],
   "ignore": [
-    "bin",
     "material",
+    "bower_components",
     "node_modules",
     "lib",
     "test",
     "**/.*",
     "bower.json",
+    "package-lock.json",
     "package.json",
-    "README.md"
+    "README.md",
+    "rollup.config.js"
   ]
 }
