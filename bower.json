@@ -1,0 +1,17 @@
+{
+  "name": "describe-type",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "ignore": [
+    "bin",
+    "material",
+    "node_modules",
+    "lib",
+    "test",
+    "**/.*",
+    "bower.json",
+    "package.json",
+    "README.md"
+  ]
+}

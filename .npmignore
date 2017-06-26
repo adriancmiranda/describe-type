@@ -1,0 +1,6 @@
+material/
+node_modules/
+travis.yml
+appveyor.yml
+codecov.yml
+**/.*
