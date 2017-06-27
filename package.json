@@ -20,16 +20,13 @@
   "scripts": {
     "report-coverage": "codecov -f test/coverage/coverage-final.json",
     "upgrade": "ncu -a --loglevel verbose --packageFile package.json && npm i",
-    "lint": "eslint --ext .js lib",
+    "lint": "eslint --ext .js index.js lib",
     "test:unit": "run-s \"test:watch -- --single-run\"",
     "test:watch": "ava --no-cached --verbose",
     "test": "run-s test:unit",
     "build": "run-p build:*",
-    "build:amd": "rollup -c ./rollup.config.js --environment=format:amd",
-    "build:cjs": "rollup -c ./rollup.config.js --environment=format:cjs",
-    "build:es": "rollup -c ./rollup.config.js --environment=format:es",
-    "build:iife": "rollup -c ./rollup.config.js --environment=format:iife",
-    "build:umd": "rollup -c ./rollup.config.js --environment=format:umd",
+    "build:min": "run-p \"build:modules -- --environment=min:true\"",
+    "build:modules": "rollup -c ./rollup.config.js",
     "precommit": "run-s test",
     "commitmsg": "validate-commit-msg",
     "release": "standard-version"
@@ -45,12 +42,14 @@
     "husky": "~0.14.1",
     "npm-check-updates": "~2.12.1",
     "npm-run-all": "^4.0.2",
-    "pirate-flag": "~0.0.2",
+    "pirate-flag": "~0.1.0",
     "rollup": "~0.43.0",
     "rollup-plugin-commonjs": "~8.0.2",
-    "rollup-plugin-license": "~0.4.0",
+    "rollup-plugin-optimize-js": "0.0.4",
+    "rollup-plugin-uglify": "2.0.1",
     "standard-version": "~4.2.0",
     "uglify": "^0.1.5",
+    "uglify-es": "3.0.20",
     "validate-commit-msg": "~2.12.2"
   },
   "config": {
@@ -71,5 +70,8 @@
     "util",
     "as",
     "is"
-  ]
+  ],
+  "dependencies": {
+    "moment": "2.18.1"
+  }
 }

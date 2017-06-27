@@ -1,31 +1,48 @@
 import pirateFlag from 'pirate-flag';
 import GitRevisionPlugin from 'git-revision-webpack-plugin';
 import commonjs from 'rollup-plugin-commonjs';
-import license from 'rollup-plugin-license';
+import uglify from 'rollup-plugin-uglify';
+import { minify } from 'uglify-es';
+import optimizeJs from 'rollup-plugin-optimize-js';
 import moment from 'moment';
-import pack from './package.json';
+import pkg from './package.json';
 
 moment.locale();
 
 const git = new GitRevisionPlugin({ lightweightTags: true });
+
+const about = {
+	moment: moment().format('LLLL'),
+	commit: git.commithash(),
+	homepage: pkg.homepage,
+	author: pkg.author,
+};
+
 const build = (name, entry) => ({
 	entry: `./${entry}.js`,
-	dest: `./dist/${name}.${process.env.format}.js`,
+	targets: [
+		{ dest: `./dist/${name}.umd${process.env.min ? '.min' : ''}.js`, format: 'umd' },
+		{ dest: `./dist/${name}.amd${process.env.min ? '.min' : ''}.js`, format: 'amd' },
+		{ dest: `./dist/${name}.iife${process.env.min ? '.min' : ''}.js`, format: 'iife' },
+	],
 	format: process.env.format || 'iife',
 	moduleName: name,
 	indent: true,
 	external: ['package.json', 'moment'],
+	banner: pirateFlag(pkg, about, { comment: true }),
 	plugins: [
 		commonjs(),
-		license({
-			banner: pirateFlag(pack, {
-				moment: moment().format('LLLL'),
-				commit: git.commithash(),
-				homepage: pack.homepage,
-				author: pack.author,
-			}),
-		}),
-	],
+	].concat(process.env.min ? [
+		uglify({
+			output: {
+				preamble: pirateFlag(pkg, about, {
+					image: [''],
+					comment: true,
+				}),
+			},
+		}, minify),
+		optimizeJs(),
+	] : []),
 });
 
 export default [

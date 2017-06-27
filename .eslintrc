@@ -13,6 +13,10 @@ rules:
   no-param-reassign: off
   no-tabs: off
 
+  comma-dangle:
+    - warn
+    - always-multiline
+
   indent:
     - 2
     - tab

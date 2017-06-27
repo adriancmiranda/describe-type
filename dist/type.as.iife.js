@@ -1,19 +1,17 @@
-/**
- * /     '      /  /
- * /__      ___ (  /
- * \--`-'-|`---\ |
- * |' _/   ` __/ /
- * '._  W    ,--'
- * |_:_._/
- * 
+/*!
+ *    /     '      /  / 
+ *   /__      ___ (  /   
+ *   \--`-'-|`---\ |  
+ *    |' _/   ` __/ /   
+ *    '._  W    ,--'   
+ *       |_:_._/         
+ *                       
  * ~ describe-type v0.1.0
- *
- * @moment Monday, June 26, 2017 7:21 PM
- * @commit 206b51b991546cfe37a729828e9266a1534512be
+ * 
+ * @moment Monday, June 26, 2017 11:15 PM
+ * @commit d04aff0efbb307a5587d6a323171f33a2b7facd2
  * @homepage https://github.com/adriancmiranda/describe-type
- * @author Adrian C. Miranda
- */
-
+ * @author Adrian C. Miranda */
 this.type = this.type || {};
 this.type.as = (function () {
 	'use strict';
@@ -34,9 +32,9 @@ this.type.as = (function () {
 	};
 
 	var of = function typeOf(value) {
-		const type = Object.prototype.toString.call(value).slice(8, -1);
-		const name = type === 'Object' && Object(value.constructor).name;
-		const buffer = type === 'Uint8Array' && is_buffer(value) && 'Buffer';
+		var type = Object.prototype.toString.call(value).slice(8, -1);
+		var name = type === 'Object' && Object(value.constructor).name;
+		var buffer = type === 'Uint8Array' && is_buffer(value) && 'Buffer';
 		return name || buffer || type;
 	};
 
@@ -45,14 +43,14 @@ this.type.as = (function () {
 	}
 
 	var constructorNameOf = function constructorNameOf(value) {
-		const name = of(value);
+		var name = of(value);
 		return (name === 'Function' && Object(value).name) || name;
 	};
 
-	const varName = /^[^a-zA-Z_$]|[^\w|$]|[^\w$]$/g;
+	var varName = /^[^a-zA-Z_$]|[^\w|$]|[^\w$]$/g;
 
 	var name = function name(value, write) {
-		const type = of(value);
+		var type = of(value);
 		if (type === 'Object' || value === undefined || value === null) {
 			return type;
 		}
@@ -79,9 +77,9 @@ this.type.as = (function () {
 
 
 	function is(expected, value, ignoreCase) {
-		return new RegExp(`(${
-		typify(expected, true)
-	})`, ignoreCase ? 'i' : undefined).test(of(value));
+		return new RegExp('(' +
+			typify(expected, true) +
+		'})', ignoreCase ? 'i' : undefined).test(of(value));
 	}
 
 	is.not = function isnt(expected, value, ignoreCase) {
@@ -98,8 +96,8 @@ this.type.as = (function () {
 	var is_1 = is;
 
 	var as = function as(expected, value, ignoreCase, ...args) {
-		const type = typify(expected, true);
-		const fn = new RegExp('\\bFunction\\b', ignoreCase ? 'i' : undefined);
+		var type = typify(expected, true);
+		var fn = new RegExp('\\bFunction\\b', ignoreCase ? 'i' : undefined);
 		if (constructorOf(value) === Function && !fn.test(type)) {
 			value = value(...args);
 		}

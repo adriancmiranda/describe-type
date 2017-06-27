@@ -1,19 +1,17 @@
-/**
- * /     '      /  /
- * /__      ___ (  /
- * \--`-'-|`---\ |
- * |' _/   ` __/ /
- * '._  W    ,--'
- * |_:_._/
- * 
+/*!
+ *    /     '      /  / 
+ *   /__      ___ (  /   
+ *   \--`-'-|`---\ |  
+ *    |' _/   ` __/ /   
+ *    '._  W    ,--'   
+ *       |_:_._/         
+ *                       
  * ~ describe-type v0.1.0
- *
- * @moment Monday, June 26, 2017 7:21 PM
- * @commit 206b51b991546cfe37a729828e9266a1534512be
+ * 
+ * @moment Monday, June 26, 2017 11:15 PM
+ * @commit d04aff0efbb307a5587d6a323171f33a2b7facd2
  * @homepage https://github.com/adriancmiranda/describe-type
- * @author Adrian C. Miranda
- */
-
+ * @author Adrian C. Miranda */
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
 	typeof define === 'function' && define.amd ? define(factory) :
@@ -36,9 +34,9 @@
 	};
 
 	var of$1 = function typeOf(value) {
-		const type = Object.prototype.toString.call(value).slice(8, -1);
-		const name = type === 'Object' && Object(value.constructor).name;
-		const buffer = type === 'Uint8Array' && is_buffer(value) && 'Buffer';
+		var type = Object.prototype.toString.call(value).slice(8, -1);
+		var name = type === 'Object' && Object(value.constructor).name;
+		var buffer = type === 'Uint8Array' && is_buffer(value) && 'Buffer';
 		return name || buffer || type;
 	};
 
@@ -47,14 +45,14 @@
 	}
 
 	var constructorNameOf$1 = function constructorNameOf(value) {
-		const name = of$1(value);
+		var name = of$1(value);
 		return (name === 'Function' && Object(value).name) || name;
 	};
 
-	const varName = /^[^a-zA-Z_$]|[^\w|$]|[^\w$]$/g;
+	var varName = /^[^a-zA-Z_$]|[^\w|$]|[^\w$]$/g;
 
 	var name$1 = function name(value, write) {
-		const type = of$1(value);
+		var type = of$1(value);
 		if (type === 'Object' || value === undefined || value === null) {
 			return type;
 		}
@@ -81,9 +79,9 @@
 
 
 	function is$1(expected, value, ignoreCase) {
-		return new RegExp(`(${
-		typify$1(expected, true)
-	})`, ignoreCase ? 'i' : undefined).test(of$1(value));
+		return new RegExp('(' +
+			typify$1(expected, true) +
+		'})', ignoreCase ? 'i' : undefined).test(of$1(value));
 	}
 
 	is$1.not = function isnt(expected, value, ignoreCase) {
@@ -100,8 +98,8 @@
 	var is_1 = is$1;
 
 	var as$1 = function as(expected, value, ignoreCase, ...args) {
-		const type = typify$1(expected, true);
-		const fn = new RegExp('\\bFunction\\b', ignoreCase ? 'i' : undefined);
+		var type = typify$1(expected, true);
+		var fn = new RegExp('\\bFunction\\b', ignoreCase ? 'i' : undefined);
 		if (constructorOf$1(value) === Function && !fn.test(type)) {
 			value = value(...args);
 		}
