@@ -60,7 +60,7 @@ test('of', (t) => {
 	t.is(type.of(new Promise((resolve) => { resolve(); })), 'Promise');
 });
 
-test.todo('Need more consistency at NodeJS <= 5');
+test.todo('of.generatorFunction: Need more consistency at NodeJS <= 5');
 test.skip('of.generatorFunction', (t) => {
 	const genFn = function* () { yield 2; return Infinity; };
 	if (type.of(genFn) !== 'GeneratorFunction') {
