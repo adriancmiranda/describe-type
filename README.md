@@ -4,6 +4,7 @@
 [![npm][npm]][npm-url]
 [![deps][deps]][deps-url]
 [![depsci][depsci]][depsci-url]
+[![travis][travis]][travis-url]
 [![appveyor][appveyor]][appveyor-url]
 
 ## 🏴 Installation
