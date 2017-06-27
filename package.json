@@ -23,6 +23,7 @@
     "lint": "eslint --ext .js index.js lib",
     "test:unit": "run-s \"test:watch -- --single-run\"",
     "test:watch": "ava --no-cached --verbose",
+    "test:appveyor": "node --max_old_space_size=4096 \"node_modules\\ava-cli\\cli\" --no-cache --verbose",
     "test": "run-s test:unit",
     "build": "run-p build:*",
     "build:min": "run-p \"build:modules -- --environment=min:true\"",

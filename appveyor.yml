@@ -1,0 +1,39 @@
+branches:
+  only:
+    - master
+    - /^greenkeeper-/
+
+init:
+  - git config --global core.autocrlf input
+
+clone_depth: 50
+
+environment:
+  matrix:
+    - nodejs_version: stable
+      job_part: test
+    - nodejs_version: 7
+      job_part: test
+    - nodejs_version: 6
+      job_part: test
+    - nodejs_version: 5
+      job_part: test
+
+install:
+  - ps: Install-Product node $env:nodejs_version x64
+  - npm prune
+  - npm i -g npm@latest
+  - npm i
+
+build: off
+
+matrix:
+  fast_finish: true
+
+test_script:
+  - node --version
+  - npm --version
+  - cmd: npm run %job_part%:appveyor
+
+after_test:
+  - npm run report-coverage
