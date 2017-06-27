@@ -8,8 +8,8 @@
  *                       
  * ~ describe-type v0.1.0
  * 
- * @moment Monday, June 26, 2017 11:23 PM
- * @commit 76e44a452342a2ed215c725b4b3023a6180b0521
+ * @moment Tuesday, June 27, 2017 12:28 AM
+ * @commit 676b2b8f12bdd048471776da72b1cc958814ae6a
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda */
 define(function () { 'use strict';
@@ -93,11 +93,11 @@ define(function () { 'use strict';
 	is$1.not.a = is$1.not.an = is$1.not;
 	var is_1 = is$1;
 
-	var as$1 = function as(expected, value, ignoreCase, ...args) {
+	var as$1 = function as(expected, value, ignoreCase) {
 		var type = typify$1(expected, true);
 		var fn = new RegExp('\\bFunction\\b', ignoreCase ? 'i' : undefined);
 		if (constructorOf$1(value) === Function && !fn.test(type)) {
-			value = value(...args);
+			value = value.apply(null, Array.prototype.slice.call(arguments, 3));
 		}
 		return is_1(type, value, ignoreCase) ? value : undefined;
 	};
