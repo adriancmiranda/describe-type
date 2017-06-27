@@ -1,6 +1,11 @@
 # describe-type
 > Evaluates whether an object is compatible with a specific data type.
 
+[![npm][npm]][npm-url]
+[![deps][deps]][deps-url]
+[![depsci][depsci]][depsci-url]
+[![appveyor][appveyor]][appveyor-url]
+
 ## 🏴 Installation
 
 ### Using [npm](https://www.npmjs.com/package/npm "A package manager for everything")
