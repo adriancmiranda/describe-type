@@ -1,4 +1,5 @@
 import test from 'ava';
+import generatorFunc from 'make-generator-function';
 import ObjectFixture from '../fixtures/object.fixture';
 import type from '../../';
 
@@ -39,7 +40,6 @@ test('of', (t) => {
 	t.is(type.of(ObjectFixture), 'Function');
 	t.is(type.of(function () {}), 'Function');
 	t.is(type.of(new Function()), 'Function');
-	t.is(type.of(function* () {}), 'GeneratorFunction');
 	t.is(type.of(new Map()), 'Map');
 	t.is(type.of(new WeakMap()), 'WeakMap');
 	t.is(type.of(new Set()), 'Set');
@@ -59,4 +59,15 @@ test('of', (t) => {
 	t.is(type.of(Buffer), 'Function');
 	t.is(type.of(new Buffer(3)), 'Buffer');
 	t.is(type.of(new Promise((resolve) => { resolve(); })), 'Promise');
+});
+
+test('of.generatorFunction', (t) => {
+	if (generatorFunc) {
+		t.is(type.of(function* () { yield 4; return Infinity; }), 'GeneratorFunction');
+		t.is(type.of(generatorFunc), 'GeneratorFunction');
+	} else {
+		t.is(type.of(function* () { yield 4; return Infinity; }), 'Function');
+		t.is(type.of(generatorFunc), 'Function');
+		t.skip('This environment does not support ES6 generator functions.');
+	}
 });
