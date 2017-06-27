@@ -23,6 +23,7 @@ install:
   - ps: Install-Product node $env:nodejs_version x64
   - npm prune
   - npm i -g npm@latest
+  - npm i -g ava-cli
   - npm i
 
 build: off
