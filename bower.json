@@ -2,7 +2,7 @@
   "name": "describe-type",
   "description": "Evaluates whether an object is compatible with a specific data type.",
   "version": "0.1.0",
-  "main": "dist/describe-type.js",
+  "main": "dist/type.umd.js",
   "license": "MIT",
   "ignore": [
     "material",
