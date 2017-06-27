@@ -6,6 +6,7 @@
 [![depsci][depsci]][depsci-url]
 [![travis][travis]][travis-url]
 [![appveyor][appveyor]][appveyor-url]
+[![codecov][codecov]][codecov-url]
 
 ## 🏴 Installation
 
@@ -665,3 +666,6 @@ stringify(1)
 
 [depsci]: https://dependencyci.com/github/adriancmiranda/describe-type/badge
 [depsci-url]: https://dependencyci.com/github/adriancmiranda/describe-type
+
+[codecov]: https://codecov.io/gh/adriancmiranda/describe-type/branch/master/graph/badge.svg
+[codecov-url]: https://codecov.io/gh/adriancmiranda/describe-type
