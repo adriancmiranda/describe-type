@@ -30,6 +30,13 @@ test('is.not.buffer', (t) => {
 	t.is(type.is.not.buffer(new Buffer(1)), false);
 });
 
+test('test Buffer on browser', (t) => {
+	const buffer = Buffer;
+	delete global.Buffer;
+	t.is(type.is.buffer(1), false);
+	global.Buffer = buffer;
+});
+
 test('is', (t) => {
 	t.is(toString.call(type.is), '[object Function]');
 	t.is(type.is.a, type.is, 'alias works');
