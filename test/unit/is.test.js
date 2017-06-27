@@ -76,6 +76,7 @@ test('is', (t) => {
 	t.is(type.is(Number.name, NaN), true);
 	t.is(type.is('Number', NaN), true);
 	t.is(type.is(Buffer, new Uint8Array(1)), false);
+	t.is(type.is(window.HTMLDivElement, document.createElement('div')), true);
 });
 
 test('is.not', (t) => {

@@ -22,46 +22,55 @@
     "report-coverage": "codecov -f test/coverage.lcov --token=CODECOV_TOKEN",
     "upgrade": "ncu -a --loglevel verbose --packageFile package.json && npm i",
     "lint": "eslint --ext .js index.js lib",
-    "test:unit": "nyc ava --no-cached --verbose --single-run",
-    "test:watch": "ava --no-cached --watch",
-    "test:appveyor": "node --max_old_space_size=4096 node_modules\\ava-cli\\cli --no-cache --verbose",
-    "test:travis": "run-s test:unit",
-    "test": "run-s test:unit",
+    "dev": "run-p watch:*",
+    "test": "ava **/*.test.js --color",
+    "test:travis": "npm test -- --no-cache --verbose",
+    "test:appveyor": "npm test -- --no-cache --verbose",
     "build": "run-p build:*",
     "build:min": "run-p \"build:modules -- --environment=min:true\"",
     "build:modules": "rollup -c ./rollup.config.js",
+    "watch:test": "npm test -- --watch",
     "precommit": "run-s test",
     "commitmsg": "validate-commit-msg",
     "release": "standard-version"
   },
   "devDependencies": {
-    "ava": "~0.19.1",
-    "ava-cli": "~0.0.1",
-    "codecov": "~2.2.0",
-    "conventional-commit-types": "~2.1.0",
-    "eslint": "3.19.0",
-    "eslint-config-airbnb-base": "11.2.0",
-    "eslint-plugin-import": "1.16.0",
+    "ava": "^0.19.1",
+    "browser-env": "^2.0.31",
+    "codecov": "^2.2.0",
+    "conventional-commit-types": "^2.1.0",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb-base": "^11.2.0",
+    "eslint-plugin-import": "^1.16.0",
     "git-revision-webpack-plugin": "^2.5.1",
-    "husky": "~0.14.1",
-    "moment": "~2.18.1",
-    "npm-check-updates": "~2.12.1",
+    "husky": "^0.14.1",
+    "moment": "^2.18.1",
+    "npm-check-updates": "^2.12.1",
     "npm-run-all": "^4.0.2",
-    "nyc": "11.0.3",
-    "pirate-flag": "~0.1.0",
-    "rollup": "~0.43.0",
-    "rollup-plugin-commonjs": "~8.0.2",
-    "rollup-plugin-optimize-js": "0.0.4",
-    "rollup-plugin-uglify": "2.0.1",
-    "standard-version": "~4.2.0",
+    "nyc": "^11.0.3",
+    "pirate-flag": "^0.1.0",
+    "rollup": "^0.43.0",
+    "rollup-plugin-commonjs": "^8.0.2",
+    "rollup-plugin-optimize-js": "^0.0.4",
+    "rollup-plugin-uglify": "^2.0.1",
+    "standard-version": "^4.2.0",
     "uglify": "^0.1.5",
-    "uglify-es": "3.0.20",
-    "validate-commit-msg": "~2.12.2"
+    "uglify-es": "^3.0.20",
+    "validate-commit-msg": "^2.12.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/adriancmiranda/describe-type.git"
   },
   "config": {
     "validate-commit-msg": {
       "types": "conventional-commit-types"
     }
+  },
+  "ava": {
+    "require": [
+      "./test/helpers/setup-browser-env.js"
+    ]
   },
   "keywords": [
     "describe-type",
