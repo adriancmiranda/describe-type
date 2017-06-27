@@ -4,6 +4,19 @@
   "version": "0.1.0",
   "main": "dist/describe-type.js",
   "license": "MIT",
+  "ignore": [
+    "material",
+    "bower_components",
+    "node_modules",
+    "lib",
+    "test",
+    "**/.*",
+    "bower.json",
+    "package-lock.json",
+    "package.json",
+    "README.md",
+    "rollup.config.js"
+  ],
   "keywords": [
     "describe-type",
     "describe",
@@ -17,18 +30,5 @@
     "util",
     "as",
     "is"
-  ],
-  "ignore": [
-    "material",
-    "bower_components",
-    "node_modules",
-    "lib",
-    "test",
-    "**/.*",
-    "bower.json",
-    "package-lock.json",
-    "package.json",
-    "README.md",
-    "rollup.config.js"
   ]
 }
