@@ -2,7 +2,7 @@
   "name": "describe-type",
   "author": "Adrian C. Miranda",
   "description": "Evaluates whether an object is compatible with a specific data type.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "types": "index.d.ts",
   "main": "index.js",
   "browser": "index.js",
@@ -36,6 +36,7 @@
   },
   "devDependencies": {
     "ava": "~0.19.1",
+    "ava-cli": "0.0.1",
     "codecov": "~2.2.0",
     "conventional-commit-types": "~2.1.0",
     "eslint": "3.19.0",
