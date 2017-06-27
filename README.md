@@ -646,3 +646,21 @@ stringify(1)
 
 [licenses]: https://app.fossa.io/api/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Fadriancmiranda%2Fdescribe-type.svg?type=large
 [licenses-url]: https://app.fossa.io/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Fadriancmiranda%2Fdescribe-type?ref=badge_large
+
+
+<!-- badges -->
+
+[npm]: https://img.shields.io/npm/v/describe-type.svg
+[npm-url]: https://npmjs.com/package/describe-type
+
+[travis]: https://travis-ci.org/adriancmiranda/describe-type.svg?branch=master
+[travis-url]: https://travis-ci.org/adriancmiranda/describe-type
+
+[appveyor]: https://ci.appveyor.com/api/projects/status/hucvow1n0t3q3le3/branch/master?svg=true
+[appveyor-url]: https://ci.appveyor.com/project/adriancmiranda/describe-type/branch/master
+
+[deps]: https://david-dm.org/adriancmiranda/describe-type.svg
+[deps-url]: https://david-dm.org/adriancmiranda/describe-type
+
+[depsci]: https://dependencyci.com/github/adriancmiranda/describe-type/badge
+[depsci-url]: https://dependencyci.com/github/adriancmiranda/describe-type
