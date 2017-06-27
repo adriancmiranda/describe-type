@@ -19,7 +19,7 @@
   ],
   "scripts": {
     "prereport-coverage": "nyc report --reporter=text-lcov > test/coverage.lcov",
-    "report-coverage": "codecov -f test/coverage.lcov",
+    "report-coverage": "codecov -f test/coverage.lcov --token=CODECOV_TOKEN",
     "upgrade": "ncu -a --loglevel verbose --packageFile package.json && npm i",
     "lint": "eslint --ext .js index.js lib",
     "test:unit": "nyc ava --no-cached --verbose --single-run",
@@ -38,7 +38,6 @@
     "ava": "~0.19.1",
     "codecov": "~2.2.0",
     "conventional-commit-types": "~2.1.0",
-    "detect-generator-support": "1.0.2",
     "eslint": "3.19.0",
     "eslint-config-airbnb-base": "11.2.0",
     "eslint-plugin-import": "1.16.0",

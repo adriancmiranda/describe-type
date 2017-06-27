@@ -1,5 +1,4 @@
 import test from 'ava';
-import detectGeneratorFunction from 'detect-generator-support';
 import ObjectFixture from '../fixtures/object.fixture';
 import type from '../../';
 
@@ -62,9 +61,11 @@ test('of', (t) => {
 });
 
 test('of.generatorFunction', (t) => {
-	if (detectGeneratorFunction()) {
-		t.is(type.of(function* () { yield 4; return Infinity; }), 'GeneratorFunction');
+	const genFn = function* () { yield 2; return Infinity; };
+	if (type.of(genFn) === 'GeneratorFunction') {
+		t.is(type.of(genFn), 'GeneratorFunction');
 	} else {
+		t.is(type.of(genFn), 'Function');
 		t.skip('This environment does not support ES6 generator functions.');
 	}
 });
