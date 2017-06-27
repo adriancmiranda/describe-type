@@ -8,8 +8,8 @@
  *                       
  * ~ describe-type v0.1.0
  * 
- * @moment Monday, June 26, 2017 11:15 PM
- * @commit d04aff0efbb307a5587d6a323171f33a2b7facd2
+ * @moment Monday, June 26, 2017 11:23 PM
+ * @commit 76e44a452342a2ed215c725b4b3023a6180b0521
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda */
 var type = (function () {
@@ -78,7 +78,7 @@ var type = (function () {
 	function is$1(expected, value, ignoreCase) {
 		return new RegExp('(' +
 			typify$1(expected, true) +
-		'})', ignoreCase ? 'i' : undefined).test(of$1(value));
+		')', ignoreCase ? 'i' : undefined).test(of$1(value));
 	}
 
 	is$1.not = function isnt(expected, value, ignoreCase) {
