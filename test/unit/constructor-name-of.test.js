@@ -30,8 +30,8 @@ test('constructorNameOf', (t) => {
 	t.is(type.constructorNameOf(Date.name), 'String');
 	t.is(type.constructorNameOf(null), 'Null');
 	t.is(type.constructorNameOf(undefined), 'Undefined');
-	t.is(type.constructorNameOf(Infinity), 'Number');
-	t.is(type.constructorNameOf(NaN), 'Number');
+	t.is(type.constructorNameOf(Infinity), 'Infinity');
+	t.is(type.constructorNameOf(NaN), 'NaN');
 	t.is(type.constructorNameOf(NaN.name), 'Undefined');
 	t.is(type.constructorNameOf('ab|ba'), 'String');
 	t.is(type.constructorNameOf(new ObjectFixture()), 'ObjectFixture');

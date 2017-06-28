@@ -42,7 +42,7 @@ test('is', (t) => {
 	t.is(type.is.a, type.is, 'alias works');
 	t.is(type.is.an, type.is, 'alias works');
 	t.is(type.is('Arguments', (() => arguments)()), true);
-	t.is(type.is('Function|Array|Number', Infinity), true);
+	t.is(type.is('Function|Array|Number', Infinity), false);
 	t.is(type.is('Function|Array|Infinity', String), true);
 	t.is(type.is('Function|Array', String), true);
 	t.is(type.is('Function|Array', []), true);
@@ -50,7 +50,7 @@ test('is', (t) => {
 	t.is(type.is('String|Function', 'pirate'), true);
 	t.is(type.is([String, Function, Object, Infinity], Infinity), true);
 	t.is(type.is([String, Function, Object, Infinity], Number), true);
-	t.is(type.is([String, Function, Object, Infinity], 0), true);
+	t.is(type.is([String, Function, Object, Infinity], 0), false);
 	t.is(type.is([String, Function, Object, Boolean], 'pirate'), true);
 	t.is(type.is([String.name, Function.name], 'pirate'), true);
 	t.is(type.is('String|Function', () => 'pirate'), true);
@@ -72,9 +72,9 @@ test('is', (t) => {
 	t.is(type.is('null', null, true), true);
 	t.is(type.is('Null', null), true);
 	t.is(type.is(NaN, NaN), true);
-	t.is(type.is(Number, NaN), true);
-	t.is(type.is(Number.name, NaN), true);
-	t.is(type.is('Number', NaN), true);
+	t.is(type.is(Number, NaN), false);
+	t.is(type.is(Number.name, NaN), false);
+	t.is(type.is('Number', NaN), false);
 	t.is(type.is(Buffer, new Uint8Array(1)), false);
 	t.is(type.is(window.HTMLDivElement, document.createElement('div')), true);
 });
@@ -85,7 +85,7 @@ test('is.not', (t) => {
 	t.is(type.is.not.an, type.is.not, 'alias works');
 	t.is(type.is.not('Arguments', (() => arguments)()), false);
 	t.is(type.is.not('Function|Array|Number', String), false);
-	t.is(type.is.not('Function|Array|Number', Infinity), false);
+	t.is(type.is.not('Function|Array|Number', Infinity), true);
 	t.is(type.is.not('Function|Array', String), false);
 	t.is(type.is.not('Function|Array', []), false);
 	t.is(type.is.not('Function|Array', () => []), false);
@@ -93,7 +93,7 @@ test('is.not', (t) => {
 	t.is(type.is.not([String, Function, Object, Boolean], 'pirate'), false);
 	t.is(type.is.not([String, Function, Object, Infinity], Infinity), false);
 	t.is(type.is.not([String, Function, Object, Infinity], Number), false);
-	t.is(type.is.not([String, Function, Object, Infinity], 0), false);
+	t.is(type.is.not([String, Function, Object, Infinity], 0), true);
 	t.is(type.is.not([String.name, Function.name], 'pirate'), false);
 	t.is(type.is.not('String|Function', () => 'pirate'), false);
 	t.is(type.is.not([String, Function], () => 'pirate'), false);
@@ -115,10 +115,10 @@ test('is.not', (t) => {
 	t.is(type.is.not('Null', null), false);
 	t.is(type.is.not(Infinity, Infinity), false);
 	t.is(type.is.not(Infinity, Number), true);
-	t.is(type.is.not(Number, Infinity), false);
+	t.is(type.is.not(Number, Infinity), true);
 	t.is(type.is.not(NaN, NaN), false);
-	t.is(type.is.not(Number, NaN), false);
-	t.is(type.is.not(Number.name, NaN), false);
-	t.is(type.is.not('Number', NaN), false);
+	t.is(type.is.not(Number, NaN), true);
+	t.is(type.is.not(Number.name, NaN), true);
+	t.is(type.is.not('Number', NaN), true);
 	t.is(type.is.not(Uint8Array, new Buffer(0)), true);
 });
