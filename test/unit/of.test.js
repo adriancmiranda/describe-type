@@ -60,17 +60,7 @@ test('of', (t) => {
 	t.is(type.of(new Promise((resolve) => { resolve(); })), 'Promise');
 });
 
-test.todo('of.generatorFunction: Need more consistency at NodeJS <= 5');
 test('of.generatorFunction', (t) => {
 	const genFn = function* () { yield 2; return Infinity; };
-	console.log('\ta)', genFn.toString().replace(/\r|\n|\s/g, ''));
-	console.log('\tb)', typeof genFn);
-	console.log('\tc)', genFn.name);
-	console.log('\td)', Object(genFn.constructor).name);
-	console.log('\te)', type.of(genFn));
-	if (type.of(genFn) !== 'GeneratorFunction') {
-		t.fail('This environment does not support ES6 generator functions.');
-	} else {
-		t.is(type.of(genFn), 'GeneratorFunction');
-	}
+	t.is(type.of(genFn), 'GeneratorFunction');
 });
