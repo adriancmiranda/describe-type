@@ -71,6 +71,8 @@ test('is', (t) => {
 	t.is(type.is(null, null), true);
 	t.is(type.is('null', null, true), true);
 	t.is(type.is('Null', null), true);
+	t.is(type.is(Number, Infinity), false);
+	t.is(type.is(Infinity, Infinity), true);
 	t.is(type.is(NaN, NaN), true);
 	t.is(type.is(Number, NaN), false);
 	t.is(type.is(Number.name, NaN), false);

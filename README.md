@@ -65,9 +65,13 @@ is(Boolean, !1)
 
 is(Number, 1)
 is(Number, new Number(1))
-is(Number, NaN)
-is(Number, Infinity)
 //=> true
+
+is(Number, Infinity)
+//=> false
+
+is(Number, NaN)
+//=> false
 
 is(String, new String('foo'))
 is(String, 'foo')
@@ -396,11 +400,15 @@ constructorNameOf(Object.create(null))
 constructorNameOf(Object)
 //=> 'Object'
 
-constructorNameOf(Infinity)
-constructorNameOf(NaN)
 constructorNameOf(10000)
 constructorNameOf(Number)
 //=> 'Number'
+
+constructorNameOf(Infinity)
+//=> 'Infinity'
+
+constructorNameOf(NaN)
+//=> 'NaN'
 
 constructorNameOf(true)
 constructorNameOf(false)
@@ -484,9 +492,11 @@ name(/^./g)
 //=> 'RegExp'
 
 name(Number)
-name(NaN)
 name(10000)
 //=> 'Number'
+
+name(NaN)
+//=> 'NaN'
 
 name(TypeError)
 //=> 'TypeError'
