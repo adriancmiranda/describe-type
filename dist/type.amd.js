@@ -8,8 +8,8 @@
  *                       
  * ~ describe-type v0.1.1
  * 
- * @moment Tuesday, June 27, 2017 2:26 AM
- * @commit 61ef95618ae33c112d47a6387322b58f17b01b0f
+ * @moment Wednesday, June 28, 2017 9:59 PM
+ * @commit 50bd5bf95d55489029750c3c2a243362fc690e65
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda */
 define(function () { 'use strict';
@@ -31,9 +31,10 @@ define(function () { 'use strict';
 
 	var of$1 = function typeOf(value) {
 		var type = Object.prototype.toString.call(value).slice(8, -1);
-		var name = type === 'Object' && Object(value.constructor).name;
+		var name = /^(Object|Error|Function)$/.test(type) && Object(value.constructor).name;
+		var nil = type === 'Number' && !isFinite(value) && value.toString();
 		var buffer = type === 'Uint8Array' && is_buffer(value) && 'Buffer';
-		return name || buffer || type;
+		return name || nil || buffer || type;
 	};
 
 	function createCommonjsModule(fn, module) {
