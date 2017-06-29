@@ -30,6 +30,35 @@ test('is.not.buffer', (t) => {
 	t.is(type.is.not.buffer(new Buffer(1)), false);
 });
 
+test('is.arrayLike', (t) => {
+	t.is(toString.call(type.is.arrayLike), '[object Function]');
+	t.is(type.is.arrayLike((() => arguments)()), true);
+	t.is(type.is.arrayLike(new Uint8Array(10)), true);
+	t.is(type.is.arrayLike(new String('foo')), true);
+	t.is(type.is.arrayLike(document.body.children), true);
+	t.is(type.is.arrayLike({ 0: NaN, length: 0 }), true);
+	t.is(type.is.arrayLike({ 0: 'foo', length: 1 }), true);
+	t.is(type.is.arrayLike([undefined, undefined, undefined]), true);
+	t.is(type.is.arrayLike([0, 1, undefined]), true);
+	t.is(type.is.arrayLike(new Array(2)), true);
+	t.is(type.is.arrayLike([]), true);
+	t.is(type.is.arrayLike({ length: 0 }), true);
+});
+
+test('is.not.arrayLike', (t) => {
+	t.is(toString.call(type.is.not.arrayLike), '[object Function]');
+	t.is(type.is.not.arrayLike({ length: 2 }), true);
+	t.is(type.is.not.arrayLike(Object.create(null)), true);
+	t.is(type.is.not.arrayLike({}), true);
+	t.is(type.is.not.arrayLike(null), true);
+	t.is(type.is.not.arrayLike(false), true);
+	t.is(type.is.not.arrayLike(), true);
+	t.is(type.is.not.arrayLike({ length: -1 }), true);
+	t.is(type.is.not.arrayLike({ length: NaN }), true);
+	t.is(type.is.not.arrayLike({ length: 'foo' }), true);
+	t.is(type.is.not.arrayLike({ length: '' }), true);
+});
+
 test('test Buffer on browser', (t) => {
 	const buffer = Buffer;
 	delete global.Buffer;
