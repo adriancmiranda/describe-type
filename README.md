@@ -677,3 +677,5 @@ stringify(1)
 
 [codecov]: https://codecov.io/gh/adriancmiranda/describe-type/branch/master/graph/badge.svg
 [codecov-url]: https://codecov.io/gh/adriancmiranda/describe-type
+
+[ecma-type]: https://www.ecma-international.org/ecma-262/#sec-type
