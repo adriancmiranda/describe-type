@@ -27,6 +27,7 @@ install:
   - npm i -g nyc
   - npm install
   - npm-install-retry --wait 1000 --attempts 10 --
+  - npm link describe-type
 
 build: off
 deploy: off
