@@ -21,12 +21,11 @@ environment:
 
 install:
   - ps: Install-Product node $env:nodejs_version x64
-  - npm install -g node-gyp
-  - npm install -g npm-install-retry
-  - npm-install-retry --wait 1000 --attempts 10 --
-  - npm prune
   - npm i -g npm@latest
-  - npm i
+  - npm i -g node-gyp
+  - npm i -g npm-install-retry
+  - npm install
+  - npm-install-retry --wait 1000 --attempts 10 --
 
 build: off
 deploy: off
