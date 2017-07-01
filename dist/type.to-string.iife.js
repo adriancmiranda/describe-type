@@ -12,7 +12,9 @@
  * @commit 966044bdad74a3b24ad1bfbfd5009de8e9bda365
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda */
-define(function () { 'use strict';
+this.type = this.type || {};
+this.type['to-string'] = (function () {
+	'use strict';
 
 	/* eslint-disable no-control-regex */
 	var objectToString = Object.prototype.toString;
@@ -29,28 +31,6 @@ define(function () { 'use strict';
 		return objectToString.call(value).slice(8, -1);
 	};
 
-	var is_arrayLike = function isArrayLike(value) {
-		return (toString_1(value) === 'Array' || (!!value &&
-			typeof value === 'object' && typeof value.length === 'number' &&
-			(value.length === 0 || (value.length > 0 && (value.length - 1) in value))
-		));
-	};
+	return toString_1;
 
-	/* eslint-disable vars-on-top */
-
-
-
-	var of = function typeOf(value) {
-		var name = toString_1(value, true);
-		if (value !== Infinity && value !== undefined && value !== null) {
-			var type = name === 'Number' && !isFinite(value) ? value.toString() : name;
-			var definition = (type === 'Object' && is_arrayLike(value) ? 'Arguments' : type);
-			var args = definition === 'Arguments' && definition;
-			return String(args || type || name || definition);
-		}
-		return String(value);
-	};
-
-	return of;
-
-});
+}());

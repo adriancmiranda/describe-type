@@ -2,7 +2,7 @@
   "name": "describe-type",
   "author": "Adrian C. Miranda",
   "description": "Evaluates whether an object is compatible with a specific data type.",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "types": "index.d.ts",
   "main": "index.js",
   "browser": "index.js",
@@ -11,6 +11,7 @@
   "readmeFilename": "README.md",
   "license": "MIT",
   "files": [
+    "dist",
     "LICENSE",
     "README.md",
     "lib",
