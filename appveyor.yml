@@ -20,13 +20,16 @@ environment:
       job_part: test
 
 install:
-  - ps: Install-Product node $env:nodejs_version x64
+  - ps: Update-NodeJsInstallation (Get-NodeJsLatestBuild $env:nodejs_version)
+  - npm install -g node-gyp
+  - npm install -g npm-install-retry
+  - npm-install-retry --wait 1000 --attempts 10 --
   - npm prune
   - npm i -g npm@latest
-  - npm i -g ava-cli
   - npm i
 
 build: off
+deploy: off
 
 matrix:
   fast_finish: true
