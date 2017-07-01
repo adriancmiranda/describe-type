@@ -53,6 +53,7 @@ export default [
 	build('type.is', 'lib/is'),
 	build('type.name', 'lib/name'),
 	build('type.of', 'lib/of'),
+	build('type.toString', 'lib/to-string'),
 	build('type.stringify', 'lib/stringify'),
 	build('type.typify', 'lib/typify'),
 ];

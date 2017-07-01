@@ -8,8 +8,8 @@
  *                       
  * ~ describe-type v0.1.1
  * 
- * @moment Friday, June 30, 2017 10:39 PM
- * @commit cdfd13c7ef8bc884fdb15d10138081b22e579e6a
+ * @moment Friday, June 30, 2017 10:51 PM
+ * @commit 1da754ab429b1cbf18e26ed1390f434922a286c0
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda */
 (function (global, factory) {
@@ -132,11 +132,11 @@
 	var is_1 = is$1;
 
 	var toArgs = Array.prototype.slice;
+	var reFn = /\bFunction\b/;
 
 	var as$1 = function as(expected, value) {
 		var type = typify$1(expected, true);
-		var fn = new RegExp('\\bFunction\\b');
-		if (constructorOf$1(value) === Function && !fn.test(type)) {
+		if (constructorOf$1(value) === Function && !reFn.test(type)) {
 			value = value.apply(null, toArgs.call(arguments, 2));
 		}
 		return is_1(type, value) ? value : undefined;

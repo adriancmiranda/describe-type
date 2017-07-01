@@ -29,33 +29,6 @@ define(function () { 'use strict';
 		return objectToString.call(value).slice(8, -1);
 	};
 
-	var is_arrayLike = function isArrayLike(value) {
-		return (toString_1(value) === 'Array' || (!!value &&
-			typeof value === 'object' && typeof value.length === 'number' &&
-			(value.length === 0 || (value.length > 0 && (value.length - 1) in value))
-		));
-	};
-
-	/* eslint-disable vars-on-top */
-
-
-
-	var of = function typeOf(value) {
-		var name = toString_1(value, true);
-		if (value !== Infinity && value !== undefined && value !== null) {
-			var type = name === 'Number' && !isFinite(value) ? value.toString() : name;
-			var definition = (type === 'Object' && is_arrayLike(value) ? 'Arguments' : type);
-			var args = definition === 'Arguments' && definition;
-			return String(args || type || name || definition);
-		}
-		return String(value);
-	};
-
-	var constructorNameOf = function constructorNameOf(value) {
-		var name = of(value);
-		return (name === 'Function' && Object(value).name) || name;
-	};
-
-	return constructorNameOf;
+	return toString_1;
 
 });

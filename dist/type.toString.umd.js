@@ -15,7 +15,7 @@
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
 	typeof define === 'function' && define.amd ? define(factory) :
-	(global.type = global.type || {}, global.type.of = factory());
+	(global.type = global.type || {}, global.type.toString = factory());
 }(this, (function () { 'use strict';
 
 	/* eslint-disable no-control-regex */
@@ -33,28 +33,6 @@
 		return objectToString.call(value).slice(8, -1);
 	};
 
-	var is_arrayLike = function isArrayLike(value) {
-		return (toString_1(value) === 'Array' || (!!value &&
-			typeof value === 'object' && typeof value.length === 'number' &&
-			(value.length === 0 || (value.length > 0 && (value.length - 1) in value))
-		));
-	};
-
-	/* eslint-disable vars-on-top */
-
-
-
-	var of = function typeOf(value) {
-		var name = toString_1(value, true);
-		if (value !== Infinity && value !== undefined && value !== null) {
-			var type = name === 'Number' && !isFinite(value) ? value.toString() : name;
-			var definition = (type === 'Object' && is_arrayLike(value) ? 'Arguments' : type);
-			var args = definition === 'Arguments' && definition;
-			return String(args || type || name || definition);
-		}
-		return String(value);
-	};
-
-	return of;
+	return toString_1;
 
 })));

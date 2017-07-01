@@ -8,8 +8,8 @@
  *                       
  * ~ describe-type v0.1.1
  * 
- * @moment Friday, June 30, 2017 10:39 PM
- * @commit cdfd13c7ef8bc884fdb15d10138081b22e579e6a
+ * @moment Friday, June 30, 2017 10:51 PM
+ * @commit 1da754ab429b1cbf18e26ed1390f434922a286c0
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda */
 define(function () { 'use strict';

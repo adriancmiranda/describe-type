@@ -13,7 +13,7 @@
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda */
 this.type = this.type || {};
-this.type.of = (function () {
+this.type.toString = (function () {
 	'use strict';
 
 	/* eslint-disable no-control-regex */
@@ -31,28 +31,6 @@ this.type.of = (function () {
 		return objectToString.call(value).slice(8, -1);
 	};
 
-	var is_arrayLike = function isArrayLike(value) {
-		return (toString_1(value) === 'Array' || (!!value &&
-			typeof value === 'object' && typeof value.length === 'number' &&
-			(value.length === 0 || (value.length > 0 && (value.length - 1) in value))
-		));
-	};
-
-	/* eslint-disable vars-on-top */
-
-
-
-	var of = function typeOf(value) {
-		var name = toString_1(value, true);
-		if (value !== Infinity && value !== undefined && value !== null) {
-			var type = name === 'Number' && !isFinite(value) ? value.toString() : name;
-			var definition = (type === 'Object' && is_arrayLike(value) ? 'Arguments' : type);
-			var args = definition === 'Arguments' && definition;
-			return String(args || type || name || definition);
-		}
-		return String(value);
-	};
-
-	return of;
+	return toString_1;
 
 }());
