@@ -1,7 +1,6 @@
 branches:
   only:
     - master
-    - /^greenkeeper-/
 
 init:
   - git config --global core.autocrlf input
@@ -21,16 +20,13 @@ environment:
 
 install:
   - ps: Install-Product node $env:nodejs_version x64
-  - npm i -g npm@latest
-  - npm i -g node-gyp
-  - npm i -g npm-install-retry
-  - npm i -g nyc
-  - npm install
-  - npm-install-retry --wait 1000 --attempts 10 --
-  - npm link describe-type
+  - npm install ava-cli -g
+  - npm install yarn -g
+  - yarn install
+  - yarn link
+  - yarn link describe-type
 
 build: off
-deploy: off
 
 matrix:
   fast_finish: true
@@ -38,7 +34,5 @@ matrix:
 test_script:
   - node --version
   - npm --version
+  - yarn --version
   - cmd: npm run %job_part%:appveyor
-
-after_test:
-  - npm run report-coverage
