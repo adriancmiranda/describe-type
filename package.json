@@ -20,8 +20,8 @@
     "bower.json"
   ],
   "scripts": {
-    "prereport-coverage": "nyc report --reporter=text-lcov > test/coverage.lcov",
-    "report-coverage": "codecov -f test/coverage.lcov --token=CODECOV_TOKEN",
+    "prereport:coverage": "nyc report --reporter=text-lcov > test/coverage.lcov",
+    "report:coverage": "codecov -f test/coverage.lcov --token=CODECOV_TOKEN",
     "upgrade": "ncu -a --loglevel verbose --packageFile package.json && npm i",
     "lint": "eslint --ext .js index.js lib",
     "dev": "run-p watch:*",
