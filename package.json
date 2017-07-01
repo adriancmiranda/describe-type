@@ -35,15 +35,15 @@
     "release": "standard-version"
   },
   "devDependencies": {
-    "ava": "^0.19.1",
-    "browser-env": "^2.0.31",
+    "ava": "^0.20.0",
+    "browser-env": "^3.0.2",
     "codecov": "^2.2.0",
     "conventional-commit-types": "^2.1.0",
     "eslint": "^3.19.0",
     "eslint-config-airbnb-base": "^11.2.0",
     "eslint-plugin-import": "^1.16.0",
     "git-revision-webpack-plugin": "^2.5.1",
-    "husky": "^0.14.1",
+    "husky": "^0.14.2",
     "moment": "^2.18.1",
     "npm-check-updates": "^2.12.1",
     "npm-run-all": "^4.0.2",
@@ -55,7 +55,7 @@
     "rollup-plugin-uglify": "^2.0.1",
     "standard-version": "^4.2.0",
     "uglify": "^0.1.5",
-    "uglify-es": "^3.0.20",
+    "uglify-es": "^3.0.22",
     "validate-commit-msg": "^2.12.2"
   },
   "repository": {
