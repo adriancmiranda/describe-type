@@ -22,8 +22,8 @@ test('of', (t) => {
 	t.is(type.of(true), 'Boolean');
 	t.is(type.of(false), 'Boolean');
 	t.is(type.of(new Boolean(true)), 'Boolean');
-	t.is(type.of(null), 'Null');
-	t.is(type.of(undefined), 'Undefined');
+	t.is(type.of(null), 'null');
+	t.is(type.of(undefined), 'undefined');
 	t.is(type.of(Symbol), 'Function');
 	t.is(type.of(Symbol('bar')), 'Symbol');
 	t.is(type.of(String), 'Function');

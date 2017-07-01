@@ -109,13 +109,11 @@ is(TypeError, new TypeError())
 is(Error, new Error())
 //=> true
 
-is('Undefined', undefined)
-is('undefined', undefined, true) // <- case-insensitive
+is('undefined', undefined)
 is(undefined, undefined)
 //=> true
 
-is('Null', null)
-is('null', null, true) // <- case-insensitive
+is('null', null)
 is(null, null)
 //=> true
 
@@ -231,10 +229,10 @@ type.of(new Error('message'))
 //=> 'Error'
 
 type.of(null)
-//=> 'Null'
+//=> 'null'
 
 type.of(undefined)
-//=> 'Undefined'
+//=> 'undefined'
 
 type.of(Symbol)
 type.of(String)
@@ -453,11 +451,11 @@ constructorNameOf(Error)
 //=> 'Error'
 
 constructorNameOf(null)
-//=> 'Null'
+//=> 'null'
 
 constructorNameOf(undefined)
 constructorNameOf(NaN.name)
-//=> 'Undefined'
+//=> 'undefined'
 
 constructorNameOf((() => arguments)())
 //=> 'Arguments'
@@ -532,10 +530,10 @@ name(new Date())
 //=> 'Date'
 
 name(null)
-//=> 'Null'
+//=> 'null'
 
 name(undefined)
-//=> 'Undefined'
+//=> 'undefined'
 
 name(function FixtureTest() {})
 //=> 'FixtureTest'

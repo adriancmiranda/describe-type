@@ -16,8 +16,8 @@ test('name', (t) => {
 	t.is(type.name(Array), 'Array');
 	t.is(type.name(Boolean), 'Boolean');
 	t.is(type.name(Date), 'Date');
-	t.is(type.name(null), 'Null');
-	t.is(type.name(undefined), 'Undefined');
+	t.is(type.name(null), 'null');
+	t.is(type.name(undefined), 'undefined');
 	t.is(type.name(NaN), 'NaN');
 	t.is(type.name('|a-b|b>a|', true), '_a_b|b_a_');
 	t.is(type.name('ab|ba', true), 'ab|ba');

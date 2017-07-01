@@ -28,11 +28,11 @@ test('constructorNameOf', (t) => {
 	t.is(type.constructorNameOf(Boolean.name), 'String');
 	t.is(type.constructorNameOf(Date), 'Date');
 	t.is(type.constructorNameOf(Date.name), 'String');
-	t.is(type.constructorNameOf(null), 'Null');
-	t.is(type.constructorNameOf(undefined), 'Undefined');
+	t.is(type.constructorNameOf(null), 'null');
+	t.is(type.constructorNameOf(undefined), 'undefined');
 	t.is(type.constructorNameOf(Infinity), 'Infinity');
 	t.is(type.constructorNameOf(NaN), 'NaN');
-	t.is(type.constructorNameOf(NaN.name), 'Undefined');
+	t.is(type.constructorNameOf(NaN.name), 'undefined');
 	t.is(type.constructorNameOf('ab|ba'), 'String');
 	t.is(type.constructorNameOf(new ObjectFixture()), 'ObjectFixture');
 	t.is(type.constructorNameOf(ObjectFixture), 'ObjectFixture');

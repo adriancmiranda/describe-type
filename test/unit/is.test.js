@@ -96,10 +96,8 @@ test('is', (t) => {
 	t.is(type.is('Pirate', new ObjectFixture('Pirate')), true);
 	t.is(type.is(undefined, undefined), true);
 	t.is(type.is('undefined', undefined, true), true);
-	t.is(type.is('Undefined', undefined), true);
 	t.is(type.is(null, null), true);
 	t.is(type.is('null', null, true), true);
-	t.is(type.is('Null', null), true);
 	t.is(type.is(Number, Infinity), false);
 	t.is(type.is(Infinity, Infinity), true);
 	t.is(type.is(NaN, NaN), true);
@@ -140,10 +138,8 @@ test('is.not', (t) => {
 	t.is(type.is.not('ObjectFixture', new ObjectFixture()), false);
 	t.is(type.is.not(undefined, undefined), false);
 	t.is(type.is.not('undefined', undefined, true), false);
-	t.is(type.is.not('Undefined', undefined), false);
 	t.is(type.is.not(null, null), false);
 	t.is(type.is.not('null', null, true), false);
-	t.is(type.is.not('Null', null), false);
 	t.is(type.is.not(Infinity, Infinity), false);
 	t.is(type.is.not(Infinity, Number), true);
 	t.is(type.is.not(Number, Infinity), true);

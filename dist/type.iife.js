@@ -8,34 +8,48 @@
  *                       
  * ~ describe-type v0.1.1
  * 
- * @moment Wednesday, June 28, 2017 9:59 PM
- * @commit 50bd5bf95d55489029750c3c2a243362fc690e65
+ * @moment Friday, June 30, 2017 10:39 PM
+ * @commit cdfd13c7ef8bc884fdb15d10138081b22e579e6a
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda */
 var type = (function () {
 	'use strict';
 
-	var constructorOf$1 = function constructorOf(value) {
-		if (value === undefined || value === null) {
-			return value;
+	/* eslint-disable no-control-regex */
+	var objectToString = Object.prototype.toString;
+	var reName$1 = /^.*function\s([^\s]*|[^(]*)\([^\x00]+/m;
+	var reTrim = /^\s+|\s$/g;
+
+	var toString_1 = function toString(value, force) {
+		if (value && value.constructor && force) {
+			if (!value.constructor.name || value.constructor.name === 'Object') {
+				return value.constructor.toString().replace(reName$1, '$1').replace(reTrim, '');
+			}
+			return value.constructor.name;
 		}
-		return Object(value).constructor || Object;
+		return objectToString.call(value).slice(8, -1);
 	};
 
-	var is_buffer = function isBuffer(value) {
-		try {
-			return constructorOf$1(value) === Buffer;
-		} catch (err) {
-			return false;
-		}
+	var is_arrayLike = function isArrayLike(value) {
+		return (toString_1(value) === 'Array' || (!!value &&
+			typeof value === 'object' && typeof value.length === 'number' &&
+			(value.length === 0 || (value.length > 0 && (value.length - 1) in value))
+		));
 	};
+
+	/* eslint-disable vars-on-top */
+
+
 
 	var of$1 = function typeOf(value) {
-		var type = Object.prototype.toString.call(value).slice(8, -1);
-		var name = /^(Object|Error|Function)$/.test(type) && Object(value.constructor).name;
-		var nil = type === 'Number' && !isFinite(value) && value.toString();
-		var buffer = type === 'Uint8Array' && is_buffer(value) && 'Buffer';
-		return name || nil || buffer || type;
+		var name = toString_1(value, true);
+		if (value !== Infinity && value !== undefined && value !== null) {
+			var type = name === 'Number' && !isFinite(value) ? value.toString() : name;
+			var definition = (type === 'Object' && is_arrayLike(value) ? 'Arguments' : type);
+			var args = definition === 'Arguments' && definition;
+			return String(args || type || name || definition);
+		}
+		return String(value);
 	};
 
 	function createCommonjsModule(fn, module) {
@@ -71,37 +85,58 @@ var type = (function () {
 	};
 	});
 
+	var constructorOf$1 = function constructorOf(value) {
+		if (value === undefined || value === null) {
+			return value;
+		}
+		return Object(value).constructor || Object;
+	};
+
+	var is_buffer = function isBuffer(value) {
+		try {
+			return constructorOf$1(value) === Buffer;
+		} catch (err) {
+			return false;
+		}
+	};
+
 	/* eslint-disable no-multi-assign */
 
 
 
 
-	function is$1(expected, value, ignoreCase) {
-		return new RegExp('(' +
-			typify$1(expected, true) +
-		')', ignoreCase ? 'i' : undefined).test(of$1(value));
+
+	function is$1(expected, value) {
+		return new RegExp('(' + typify$1(expected, true) + ')').test(of$1(value));
 	}
 
-	is$1.not = function isnt(expected, value, ignoreCase) {
-		return !is$1(expected, value, ignoreCase);
+	is$1.not = function isnt(expected, value) {
+		return !is$1(expected, value);
 	};
 
 	is$1.not.buffer = function isntBuffer(value) {
 		return !is_buffer(value);
 	};
 
+	is$1.not.arrayLike = function isntArrayLike(value) {
+		return !is_arrayLike(value);
+	};
+
 	is$1.buffer = is_buffer;
+	is$1.arrayLike = is_arrayLike;
 	is$1.a = is$1.an = is$1;
 	is$1.not.a = is$1.not.an = is$1.not;
 	var is_1 = is$1;
 
-	var as$1 = function as(expected, value, ignoreCase) {
+	var toArgs = Array.prototype.slice;
+
+	var as$1 = function as(expected, value) {
 		var type = typify$1(expected, true);
-		var fn = new RegExp('\\bFunction\\b', ignoreCase ? 'i' : undefined);
+		var fn = new RegExp('\\bFunction\\b');
 		if (constructorOf$1(value) === Function && !fn.test(type)) {
-			value = value.apply(null, Array.prototype.slice.call(arguments, 3));
+			value = value.apply(null, toArgs.call(arguments, 2));
 		}
-		return is_1(type, value, ignoreCase) ? value : undefined;
+		return is_1(type, value) ? value : undefined;
 	};
 
 	var stringify$1 = function stringify(value, space, replacer) {

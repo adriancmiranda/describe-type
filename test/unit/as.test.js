@@ -5,7 +5,7 @@ test('as', (t) => {
 	const getFoo = function (a, b) { return a + b; };
 	t.is(toString.call(type.as), '[object Function]');
 	t.is(type.as([Number, Function], getFoo), getFoo);
-	t.is(type.as('number', getFoo, true, 1, 2), 3);
+	t.is(type.as('Number', getFoo, 1, 2), 3);
 	t.is(type.as(String, getFoo), undefined);
 	t.is(type.as(Number, () => 'foo'), undefined);
 	t.is(type.as(String, () => 'foo'), 'foo');

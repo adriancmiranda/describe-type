@@ -12,11 +12,10 @@ declare module type {
      * @name as
      * @param expected:
      * @param value:
-     * @param ignoreCase:
      * @param args:
      * @see type.as
      */
-    as(expected: any, value: any, ignoreCase?: boolean, ...args: any[]): any;
+    as(expected: any, value: any, ...args: any[]): any;
 
     /**
      * @name constructorNameOf
@@ -36,10 +35,9 @@ declare module type {
      * @name is
      * @param expected:
      * @param value:
-     * @param ignoreCase:
      * @see type.is
      */
-    is(expected: any, value: any, ignoreCase?: boolean): any;
+    is(expected: any, value: any): any;
 
     /**
      * @name name
