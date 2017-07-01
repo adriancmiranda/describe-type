@@ -21,7 +21,10 @@ environment:
 
 install:
   - ps: Install-Product node $env:nodejs_version x64
+  - npm i -g npm@latest
+  - npm i -g node-gyp
   - npm i -g npm-install-retry
+  - npm i -g nyc
   - npm install
   - npm-install-retry --wait 1000 --attempts 10 --
 
