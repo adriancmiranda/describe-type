@@ -8,7 +8,6 @@
     "material",
     "bower_components",
     "node_modules",
-    "lib",
     "test",
     "**/.*",
     "bower.json",
