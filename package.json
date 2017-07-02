@@ -16,8 +16,7 @@
     "README.md",
     "lib",
     "index.d.ts",
-    "index.js",
-    "bower.json"
+    "index.js"
   ],
   "scripts": {
     "prereport:coverage": "nyc report --reporter=text-lcov > test/coverage.lcov",
