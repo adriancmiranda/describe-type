@@ -136,6 +136,43 @@ is.not(Buffer, new (function Buffer(){})())
 //=> true
 ```
 
+> type.is.arrayLike
+
+```javascript
+const {is} = require('describe-type');
+
+is.arrayLike((() => arguments)())
+is.arrayLike(new Uint8Array(10))
+is.arrayLike(new String('foo'))
+is.arrayLike(document.body.children)
+is.arrayLike({ 0: NaN, length: 0 })
+is.arrayLike({ 0: 'foo', length: 1 })
+is.arrayLike([undefined, undefined, undefined])
+is.arrayLike([0, 1, undefined])
+is.arrayLike(new Array(2))
+is.arrayLike([])
+is.arrayLike({ length: 0 })
+//=> true
+```
+
+> type.is.arrayLike
+
+```javascript
+const {is} = require('describe-type');
+
+is.not.arrayLike({ length: 2 })
+is.not.arrayLike(Object.create(null))
+is.not.arrayLike({})
+is.not.arrayLike(null)
+is.not.arrayLike(false)
+is.not.arrayLike()
+is.not.arrayLike({ length: -1 })
+is.not.arrayLike({ length: NaN })
+is.not.arrayLike({ length: 'foo' })
+is.not.arrayLike({ length: '' })
+//=> true
+```
+
 > type.is.buffer
 
 ```javascript
