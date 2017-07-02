@@ -6,14 +6,28 @@
  *    '._  W    ,--'   
  *       |_:_._/         
  *                       
- * ~ describe-type v0.2.1
+ * ~ describe-type v0.2.2
  * 
- * @moment Saturday, July 1, 2017 11:04 PM
- * @commit ba5b4dd641a8811a3e9a199a403734836366118c
+ * @moment Sunday, July 2, 2017 4:32 PM
+ * @commit 009e831837189e52cd83299056d45b4c586e4d0f
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda */
 var type = (function () {
 	'use strict';
+
+	var constructorOf$1 = function constructorOf(value) {
+		if (value === undefined || value === null) {
+			return value;
+		}
+		return Object(value).constructor || Object;
+	};
+
+	var is_arrayLike = function isArrayLike(value) {
+		return (constructorOf$1(value) === Array || (!!value &&
+			typeof value === 'object' && typeof value.length === 'number' &&
+			(value.length === 0 || (value.length > 0 && (value.length - 1) in value))
+		));
+	};
 
 	var objectToString = Object.prototype.toString;
 	var reName$1 = /^.*function\s([^\s]*|[^(]*)\([^\x00]+/m;
@@ -27,13 +41,6 @@ var type = (function () {
 			return value.constructor.name;
 		}
 		return objectToString.call(value).slice(8, -1);
-	};
-
-	var is_arrayLike = function isArrayLike(value) {
-		return (toString_1$1(value) === 'Array' || (!!value &&
-			typeof value === 'object' && typeof value.length === 'number' &&
-			(value.length === 0 || (value.length > 0 && (value.length - 1) in value))
-		));
 	};
 
 	var of$1 = function typeOf(value) {
@@ -72,7 +79,7 @@ var type = (function () {
 	var typify$1 = createCommonjsModule(function (module) {
 	module.exports = function typify(expected, write) {
 		var i = 0;
-		if (Array.isArray(expected) && expected.length > 0) {
+		if (constructorOf$1(expected) === Array && expected.length > 0) {
 			while (i < expected.length) {
 				expected[i] = module.exports(expected[i], write);
 				i += 1;
@@ -82,13 +89,6 @@ var type = (function () {
 		return name$1(expected, write);
 	};
 	});
-
-	var constructorOf$1 = function constructorOf(value) {
-		if (value === undefined || value === null) {
-			return value;
-		}
-		return Object(value).constructor || Object;
-	};
 
 	var is_buffer = function isBuffer(value) {
 		try {
