@@ -25,6 +25,7 @@
     "lint": "eslint --ext .js index.js lib",
     "dev": "run-p watch:*",
     "test": "ava **/*.test.js --color",
+    "test:speed": "node test/speed",
     "test:coverage": "nyc npm test -- --no-cache --verbose",
     "test:travis": "nyc npm test -- --no-cache --verbose",
     "test:appveyor": "nyc npm test -- --no-cache --verbose",
@@ -38,6 +39,7 @@
   },
   "devDependencies": {
     "ava": "^0.20.0",
+    "benchmark": "^2.1.4",
     "browser-env": "^3.0.2",
     "codecov": "^2.2.0",
     "conventional-commit-types": "^2.1.0",
