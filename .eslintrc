@@ -10,6 +10,9 @@ parserOptions:
 
 rules:
   no-debugger: 2
+  vars-on-top: off
+  no-control-regex: off
+  no-multi-assign: off
   no-param-reassign: off
   no-tabs: off
 

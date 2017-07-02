@@ -8,13 +8,12 @@
  *                       
  * ~ describe-type v0.2.1
  * 
- * @moment Saturday, July 1, 2017 10:58 PM
- * @commit 78192f263688e701fe33161fc0b480afdbf77f3d
+ * @moment Saturday, July 1, 2017 11:04 PM
+ * @commit ba5b4dd641a8811a3e9a199a403734836366118c
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda */
 define(function () { 'use strict';
 
-	/* eslint-disable no-control-regex */
 	var objectToString = Object.prototype.toString;
 	var reName$1 = /^.*function\s([^\s]*|[^(]*)\([^\x00]+/m;
 	var reTrim = /^\s+|\s$/g;
@@ -35,10 +34,6 @@ define(function () { 'use strict';
 			(value.length === 0 || (value.length > 0 && (value.length - 1) in value))
 		));
 	};
-
-	/* eslint-disable vars-on-top */
-
-
 
 	var of$1 = function typeOf(value) {
 		var name = toString_1$1(value, true);
@@ -101,12 +96,6 @@ define(function () { 'use strict';
 			return false;
 		}
 	};
-
-	/* eslint-disable no-multi-assign */
-
-
-
-
 
 	function is$1(expected, value) {
 		return new RegExp('(' + typify$1(expected, true) + ')').test(of$1(value));

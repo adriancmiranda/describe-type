@@ -1,5 +1,6 @@
 import pirateFlag from 'pirate-flag';
 import GitRevisionPlugin from 'git-revision-webpack-plugin';
+import nodeResolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import uglify from 'rollup-plugin-uglify';
 import { minify } from 'uglify-es';
@@ -31,6 +32,7 @@ const build = (name, entry) => ({
 	external: ['package.json', 'moment'],
 	banner: pirateFlag(pkg, about, { comment: true }),
 	plugins: [
+    nodeResolve({ jsnext: true, main: true }),
 		commonjs(),
 	].concat(process.env.min ? [
 		uglify({

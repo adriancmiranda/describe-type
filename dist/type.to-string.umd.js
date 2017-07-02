@@ -8,8 +8,8 @@
  *                       
  * ~ describe-type v0.2.1
  * 
- * @moment Saturday, July 1, 2017 10:58 PM
- * @commit 78192f263688e701fe33161fc0b480afdbf77f3d
+ * @moment Saturday, July 1, 2017 11:04 PM
+ * @commit ba5b4dd641a8811a3e9a199a403734836366118c
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda */
 (function (global, factory) {
@@ -18,7 +18,6 @@
 	(global.type = global.type || {}, global.type['to-string'] = factory());
 }(this, (function () { 'use strict';
 
-	/* eslint-disable no-control-regex */
 	var objectToString = Object.prototype.toString;
 	var reName$1 = /^.*function\s([^\s]*|[^(]*)\([^\x00]+/m;
 	var reTrim = /^\s+|\s$/g;
