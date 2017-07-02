@@ -6,10 +6,10 @@
  *    '._  W    ,--'   
  *       |_:_._/         
  *                       
- * ~ describe-type v0.2.0
+ * ~ describe-type v0.2.1
  * 
- * @moment Friday, June 30, 2017 11:30 PM
- * @commit 966044bdad74a3b24ad1bfbfd5009de8e9bda365
+ * @moment Saturday, July 1, 2017 10:58 PM
+ * @commit 78192f263688e701fe33161fc0b480afdbf77f3d
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda */
 this.type = this.type || {};
@@ -77,10 +77,13 @@ this.type.is = (function () {
 
 	var typify = createCommonjsModule(function (module) {
 	module.exports = function typify(expected, write) {
+		var i = 0;
 		if (Array.isArray(expected) && expected.length > 0) {
-			return expected.map(function typeMap(val) {
-				return module.exports(val, write);
-			}).join('|');
+			while (i < expected.length) {
+				expected[i] = module.exports(expected[i], write);
+				i += 1;
+			}
+			return expected.join('|');
 		}
 		return name(expected, write);
 	};
