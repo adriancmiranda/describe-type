@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-expressions */
 const { Suite } = require('benchmark');
 const type = require('../../');
 
@@ -12,8 +11,8 @@ new Suite()
 	type.of('foo');
 })
 
-.on('cycle', (event) => {
-	console.log(String(event.target));
+.on('cycle', ({ target }) => {
+	console.log(String(target));
 })
 
 .on('complete', function () {

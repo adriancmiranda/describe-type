@@ -1,15 +1,14 @@
-/* eslint-disable no-unused-expressions */
 const { Suite } = require('benchmark');
 const value = /foo/;
 
 new Suite()
 
 .add('typeof value:RegExp', () => {
-	typeof value === 'regexp';
+	typeof value === 'object';
 })
 
 .add('value.constructor === RegExp', () => {
-		value.constructor === RegExp;
+	value.constructor === RegExp;
 })
 
 .add('Object.prototype.toString.call(value:RegExp)', () => {
@@ -20,8 +19,8 @@ new Suite()
 	value instanceof RegExp;
 })
 
-.on('cycle', (event) => {
-	console.log(String(event.target));
+.on('cycle', ({ target }) => {
+	console.log(String(target));
 })
 
 .on('complete', function () {
