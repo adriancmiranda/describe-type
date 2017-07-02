@@ -11,12 +11,20 @@ new Suite()
 	value.constructor === RegExp;
 })
 
+.add('value.constructor.name', () => {
+	value.constructor.name === 'RegExp';
+})
+
 .add('Object.prototype.toString.call(value:RegExp)', () => {
 	Object.prototype.toString.call(value) === '[object RegExp]';
 })
 
 .add('value instanceof RegExp', () => {
 	value instanceof RegExp;
+})
+
+.add('value.toString().replace(/^.*function\\s([^\\s]*|[^(]*)\\([^\x00]+/m, "$1").replace(/^\\s+|\\s$/g, "")', () => {
+	value.constructor.toString().replace(/^.*function\s([^\s]*|[^(]*)\([^\x00]+/m, '$1').replace(/^\s+|\s$/g, '');
 })
 
 .on('cycle', ({ target }) => {
