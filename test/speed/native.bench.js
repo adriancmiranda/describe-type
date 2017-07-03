@@ -19,6 +19,10 @@ new Suite()
 	value.constructor.name === 'RegExp';
 })
 
+.add('value.constructor.toString().replace(/^.*function\\s([^\\s]*|[^(]*)\\([^\x00]+/m, "$1").replace(/\\s+/g, "")', () => {
+	value.constructor.toString().replace(/^.*function\s([^\s]*|[^(]*)\([^\x00]+/m, '$1').replace(/\s+/g, '');
+})
+
 .add('Object.prototype.toString.call(value:RegExp)', () => {
 	Object.prototype.toString.call(value) === '[object RegExp]';
 })
@@ -29,10 +33,6 @@ new Suite()
 
 .add('Object.prototype.toString.call(value:RegExp).replace(/\\[object\\s|\\]$/g, "")', () => {
 	Object.prototype.toString.call(value).replace(/\[object\s|\]$/g, '') === 'RegExp';
-})
-
-.add('value.toString().replace(/^.*function\\s([^\\s]*|[^(]*)\\([^\x00]+/m, "$1").replace(/^\\s+|\\s$/g, "")', () => {
-	value.constructor.toString().replace(/^.*function\s([^\s]*|[^(]*)\([^\x00]+/m, '$1').replace(/^\s+|\s$/g, '');
 })
 
 .on('cycle', ({ target }) => {
