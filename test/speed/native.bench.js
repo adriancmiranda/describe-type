@@ -7,6 +7,10 @@ new Suite()
 	typeof value === 'object';
 })
 
+.add('value instanceof RegExp', () => {
+	value instanceof RegExp;
+})
+
 .add('value.constructor === RegExp', () => {
 	value.constructor === RegExp;
 })
@@ -19,8 +23,12 @@ new Suite()
 	Object.prototype.toString.call(value) === '[object RegExp]';
 })
 
-.add('value instanceof RegExp', () => {
-	value instanceof RegExp;
+.add('Object.prototype.toString.call(value:RegExp).slice(8, -1)', () => {
+	Object.prototype.toString.call(value).slice(8, -1) === 'RegExp';
+})
+
+.add('Object.prototype.toString.call(value:RegExp).replace(/\\[object\\s|\\]$/g, "")', () => {
+	Object.prototype.toString.call(value).replace(/\[object\s|\]$/g, '') === 'RegExp';
 })
 
 .add('value.toString().replace(/^.*function\\s([^\\s]*|[^(]*)\\([^\x00]+/m, "$1").replace(/^\\s+|\\s$/g, "")', () => {
