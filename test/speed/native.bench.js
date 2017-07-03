@@ -32,7 +32,7 @@ new Suite()
 })
 
 .on('complete', function () {
-	console.log('\n\nFastest is ' + this.filter('fastest').map('name'));
+	console.log('\nFastest is ' + this.filter('fastest').map('name'), '\n');
 })
 
 .run({ async: true });

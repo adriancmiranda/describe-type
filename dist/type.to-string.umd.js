@@ -8,8 +8,8 @@
  *                       
  * ~ describe-type v0.2.2
  * 
- * @moment Sunday, July 2, 2017 4:32 PM
- * @commit 009e831837189e52cd83299056d45b4c586e4d0f
+ * @moment Monday, July 3, 2017 8:15 AM
+ * @commit 5c7ee2210a1e71e8b722c2866a5409d7320db258
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda */
 (function (global, factory) {
