@@ -1,13 +1,13 @@
 /*!
- *    /     '      /  / 
- *   /__      ___ (  /   
- *   \--`-'-|`---\ |  
- *    |' _/   ` __/ /   
- *    '._  W    ,--'   
- *       |_:_._/         
- *                       
- * ~~~~ describe-type v0.2.2-rc.1
- * 
+ *    /     '      /  /
+ *   /__      ___ (  /
+ *   \--`-'-|`---\ |
+ *    |' _/   ` __/ /
+ *    '._  W    ,--'
+ *       |_:_._/
+ *
+ * ~~~~ describe-type v0.2.3
+ *
  * @moment Wednesday, July 5, 2017 12:25 PM
  * @commit dd652fc4896f59b1f4dad49444f1a806f252f57c
  * @homepage https://github.com/adriancmiranda/describe-type
