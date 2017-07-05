@@ -2,7 +2,7 @@
   "name": "describe-type",
   "author": "Adrian C. Miranda",
   "description": "Evaluates whether an object is compatible with a specific data type.",
-  "version": "0.2.2",
+  "version": "0.2.2-rc.1",
   "types": "index.d.ts",
   "main": "index.js",
   "browser": "index.js",

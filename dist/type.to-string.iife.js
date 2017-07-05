@@ -6,10 +6,10 @@
  *    '._  W    ,--'   
  *       |_:_._/         
  *                       
- * ~ describe-type v0.2.2
+ * ~~~~ describe-type v0.2.2-rc.1
  * 
- * @moment Monday, July 3, 2017 8:15 AM
- * @commit 5c7ee2210a1e71e8b722c2866a5409d7320db258
+ * @moment Wednesday, July 5, 2017 12:25 PM
+ * @commit dd652fc4896f59b1f4dad49444f1a806f252f57c
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda */
 this.type = this.type || {};
@@ -18,7 +18,7 @@ this.type['to-string'] = (function () {
 
 	var objectToString = Object.prototype.toString;
 	var reName$1 = /^.*function\s([^\s]*|[^(]*)\([^\x00]+/m;
-	var reTrim = /^\s+|\s$/g;
+	var reTrim = /\s+/g;
 
 	var toString_1 = function toString(value, force) {
 		if (value && value.constructor && force) {
