@@ -32,7 +32,7 @@ const build = (name, entry) => ({
 	external: ['package.json', 'moment'],
 	banner: pirateFlag(pkg, about, { comment: true }),
 	plugins: [
-    nodeResolve({ jsnext: true, main: true }),
+    nodeResolve({ jsnext: true, main: true, browser: true }),
 		commonjs(),
 	].concat(process.env.min ? [
 		uglify({
