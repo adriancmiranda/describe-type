@@ -701,7 +701,7 @@ stringify(1)
 [travis]: https://travis-ci.org/adriancmiranda/describe-type.svg?branch=master
 [travis-url]: https://travis-ci.org/adriancmiranda/describe-type
 
-[appveyor]: https://ci.appveyor.com/api/projects/status/hucvow1n0t3q3le3/branch/master?svg=true
+[appveyor]: https://ci.appveyor.com/api/projects/status/skbkb868peiyn9db/branch/master?svg=true
 [appveyor-url]: https://ci.appveyor.com/project/adriancmiranda/describe-type/branch/master
 
 [deps]: https://david-dm.org/adriancmiranda/describe-type.svg
