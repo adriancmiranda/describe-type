@@ -5,6 +5,7 @@
 [![travis][travis]][travis-url]
 [![appveyor][appveyor]][appveyor-url]
 [![codecov][codecov]][codecov-url]
+[![saucelabs][saucelabs]][saucelabs-url]
 
 ## 🏴 Installation
 
@@ -712,5 +713,11 @@ stringify(1)
 
 [codecov]: https://codecov.io/gh/adriancmiranda/describe-type/branch/master/graph/badge.svg
 [codecov-url]: https://codecov.io/gh/adriancmiranda/describe-type
+
+[saucelabs]: https://saucelabs.com/browser-matrix/adriancmiranda.svg
+[saucelabs-url]: https://saucelabs.com/u/adriancmiranda
+
+
+<!-- utils -->
 
 [ecma-type]: https://www.ecma-international.org/ecma-262/#sec-type
