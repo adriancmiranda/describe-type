@@ -5,6 +5,7 @@
 [![travis][travis]][travis-url]
 [![appveyor][appveyor]][appveyor-url]
 [![codecov][codecov]][codecov-url]
+
 [![saucelabs][saucelabs]][saucelabs-url]
 
 ## 🏴 Installation
