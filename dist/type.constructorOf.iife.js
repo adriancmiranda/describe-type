@@ -1,19 +1,19 @@
 /*!
- *    /     '      /  /
- *   /__      ___ (  /
- *   \--`-'-|`---\ |
- *    |' _/   ` __/ /
- *    '._  W    ,--'
- *       |_:_._/
- *
- * ~~~~ describe-type v0.2.3
- *
- * @moment Wednesday, July 5, 2017 12:25 PM
- * @commit dd652fc4896f59b1f4dad49444f1a806f252f57c
+ *    /     '      /  / 
+ *   /__      ___ (  /   
+ *   \--`-'-|`---\ |  
+ *    |' _/   ` __/ /   
+ *    '._  W    ,--'   
+ *       |_:_._/         
+ *                       
+ * ~ describe-type v0.2.3
+ * 
+ * @moment Thursday, July 13, 2017 10:10 PM
+ * @commit a4e17f6980d8c76df26bfabf836ac98c9b5b2db3
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda */
 this.type = this.type || {};
-this.type['constructor-of'] = (function () {
+this.type.constructorOf = (function () {
 	'use strict';
 
 	var constructorOf = function constructorOf(value) {

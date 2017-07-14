@@ -78,13 +78,5 @@ declare module type {
      * @see type.typify
      */
     typify(expected: any, write?: boolean): string;
-    
-    /**
-     * @name toString
-     * @param value:
-     * @param force:
-     * @see type.toString
-     */
-    toString(value: any, force?: boolean): string;
   }
 }

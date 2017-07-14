@@ -12,25 +12,9 @@
  * @commit a4e17f6980d8c76df26bfabf836ac98c9b5b2db3
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda */
-(function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-	typeof define === 'function' && define.amd ? define(factory) :
-	(global.type = global.type || {}, global.type.of = factory());
-}(this, (function () { 'use strict';
-
-	var constructorOf = function constructorOf(value) {
-		if (value === undefined || value === null) {
-			return value;
-		}
-		return Object(value).constructor || Object;
-	};
-
-	var is_arrayLike = function isArrayLike(value) {
-		return (constructorOf(value) === Array || (!!value &&
-			typeof value === 'object' && typeof value.length === 'number' &&
-			(value.length === 0 || (value.length > 0 && (value.length - 1) in value))
-		));
-	};
+this.type = this.type || {};
+this.type.to = (function () {
+	'use strict';
 
 	var objectToString = Object.prototype.toString;
 	var reName$1 = /^.*function\s([^\s]*|[^(]*)\([^\x00]+/m;
@@ -62,16 +46,6 @@
 
 	var to_1 = to;
 
-	var { string } = to_1;
+	return to_1;
 
-	var of = function typeOf(value) {
-		var name = string(value, true);
-		if (value === Infinity || value === undefined || value === null || (name === 'Number' && isNaN(value))) {
-			return String(value);
-		}
-		return name === 'Object' && is_arrayLike(value) ? 'Arguments' : name;
-	};
-
-	return of;
-
-})));
+}());

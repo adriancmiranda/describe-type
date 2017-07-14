@@ -1,15 +1,15 @@
 /*!
- *    /     '      /  /
- *   /__      ___ (  /
- *   \--`-'-|`---\ |
- *    |' _/   ` __/ /
- *    '._  W    ,--'
- *       |_:_._/
- *
- * ~~~~ describe-type v0.2.3
- *
- * @moment Wednesday, July 5, 2017 12:25 PM
- * @commit dd652fc4896f59b1f4dad49444f1a806f252f57c
+ *    /     '      /  / 
+ *   /__      ___ (  /   
+ *   \--`-'-|`---\ |  
+ *    |' _/   ` __/ /   
+ *    '._  W    ,--'   
+ *       |_:_._/         
+ *                       
+ * ~ describe-type v0.2.3
+ * 
+ * @moment Thursday, July 13, 2017 10:10 PM
+ * @commit a4e17f6980d8c76df26bfabf836ac98c9b5b2db3
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda */
 var type = (function () {
@@ -33,7 +33,9 @@ var type = (function () {
 	var reName$1 = /^.*function\s([^\s]*|[^(]*)\([^\x00]+/m;
 	var reTrim = /\s+/g;
 
-	var toString_1$1 = function toString(value, force) {
+	var to$1 = {};
+
+	to$1.string = function toString(value, force) {
 		if (value && value.constructor && force) {
 			if (!value.constructor.name || value.constructor.name === 'Object') {
 				return value.constructor.toString().replace(reName$1, '$1').replace(reTrim, '');
@@ -43,8 +45,24 @@ var type = (function () {
 		return objectToString.call(value).slice(8, -1);
 	};
 
+	to$1.int = function toInt(value) {
+		return value;
+	};
+
+	to$1.uint = function toUint(value) {
+		return value;
+	};
+
+	to$1.bool = function toBoolean(value) {
+		return value;
+	};
+
+	var to_1 = to$1;
+
+	var { string } = to_1;
+
 	var of$1 = function typeOf(value) {
-		var name = toString_1$1(value, true);
+		var name = string(value, true);
 		if (value === Infinity || value === undefined || value === null || (name === 'Number' && isNaN(value))) {
 			return String(value);
 		}
@@ -111,6 +129,55 @@ var type = (function () {
 		return !is_arrayLike(value);
 	};
 
+	is$1.numeric = function isNumeric(value) {
+		return !isNaN(parseFloat(value)) && isFinite(value);
+	};
+
+	is$1.not.numeric = function isntNumeric(value) {
+		return !is$1.numeric(value);
+	};
+
+	is$1.int = function isInt(value) {
+		return parseFloat(value, 10) === parseInt(value, 10);
+	};
+
+	is$1.not.int = function isntInt(value) {
+		return !is$1.int(value);
+	};
+
+	is$1.uint = function isUint(value) {
+		return is$1.int(value) && value >= 0;
+	};
+
+	is$1.not.uint = function isntUint(value) {
+		return !is$1.uint(value);
+	};
+
+	is$1.primitive = function isPrimitive(value) {
+		return value !== Object(value);
+	};
+
+	is$1.not.primitive = function isntPrimitive(value) {
+		return !is$1.primitive(value);
+	};
+
+	const jsonStart = /^\[|^\{(?!\{)/;
+	const jsonEnds = {
+		'[': /\]$/,
+		'{': /\}$/,
+	};
+	is$1.json = function isJson(value) {
+		if (is$1(String, value)) {
+			const start = value.match(jsonStart);
+			return !!(start && jsonEnds[start[0]].test(value));
+		}
+		return false;
+	};
+
+	is$1.not.json = function isntJson(value) {
+		return !is$1.json(value);
+	};
+
 	is$1.buffer = is_buffer;
 	is$1.arrayLike = is_arrayLike;
 	is$1.a = is$1.an = is$1;
@@ -143,7 +210,7 @@ var type = (function () {
 	var is = is_1;
 	var name = name$1;
 	var of = of$1;
-	var toString_1 = toString_1$1;
+	var to = to_1;
 	var stringify = stringify$1;
 	var typify = typify$1;
 
@@ -154,7 +221,7 @@ var type = (function () {
 		is: is,
 		name: name,
 		of: of,
-		toString: toString_1,
+		to: to,
 		stringify: stringify,
 		typify: typify
 	};

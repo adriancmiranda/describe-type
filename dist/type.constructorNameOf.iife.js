@@ -1,18 +1,20 @@
 /*!
- *    /     '      /  /
- *   /__      ___ (  /
- *   \--`-'-|`---\ |
- *    |' _/   ` __/ /
- *    '._  W    ,--'
- *       |_:_._/
- *
- * ~~~~ describe-type v0.2.3
- *
- * @moment Wednesday, July 5, 2017 12:25 PM
- * @commit dd652fc4896f59b1f4dad49444f1a806f252f57c
+ *    /     '      /  / 
+ *   /__      ___ (  /   
+ *   \--`-'-|`---\ |  
+ *    |' _/   ` __/ /   
+ *    '._  W    ,--'   
+ *       |_:_._/         
+ *                       
+ * ~ describe-type v0.2.3
+ * 
+ * @moment Thursday, July 13, 2017 10:10 PM
+ * @commit a4e17f6980d8c76df26bfabf836ac98c9b5b2db3
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda */
-define(function () { 'use strict';
+this.type = this.type || {};
+this.type.constructorNameOf = (function () {
+	'use strict';
 
 	var constructorOf = function constructorOf(value) {
 		if (value === undefined || value === null) {
@@ -32,7 +34,9 @@ define(function () { 'use strict';
 	var reName$1 = /^.*function\s([^\s]*|[^(]*)\([^\x00]+/m;
 	var reTrim = /\s+/g;
 
-	var toString_1 = function toString(value, force) {
+	var to = {};
+
+	to.string = function toString(value, force) {
 		if (value && value.constructor && force) {
 			if (!value.constructor.name || value.constructor.name === 'Object') {
 				return value.constructor.toString().replace(reName$1, '$1').replace(reTrim, '');
@@ -42,8 +46,24 @@ define(function () { 'use strict';
 		return objectToString.call(value).slice(8, -1);
 	};
 
+	to.int = function toInt(value) {
+		return value;
+	};
+
+	to.uint = function toUint(value) {
+		return value;
+	};
+
+	to.bool = function toBoolean(value) {
+		return value;
+	};
+
+	var to_1 = to;
+
+	var { string } = to_1;
+
 	var of = function typeOf(value) {
-		var name = toString_1(value, true);
+		var name = string(value, true);
 		if (value === Infinity || value === undefined || value === null || (name === 'Number' && isNaN(value))) {
 			return String(value);
 		}
@@ -57,4 +77,4 @@ define(function () { 'use strict';
 
 	return constructorNameOf;
 
-});
+}());

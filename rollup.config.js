@@ -32,7 +32,7 @@ const build = (name, entry) => ({
 	external: ['package.json', 'moment'],
 	banner: pirateFlag(pkg, about, { comment: true }),
 	plugins: [
-    nodeResolve({ jsnext: true, main: true, browser: true }),
+		nodeResolve({ jsnext: true, main: true, browser: true }),
 		commonjs(),
 	].concat(process.env.min ? [
 		uglify({
@@ -50,12 +50,12 @@ const build = (name, entry) => ({
 export default [
 	build('type', 'index'),
 	build('type.as', 'lib/as'),
-	build('type.constructor-name-of', 'lib/constructor-name-of'),
-	build('type.constructor-of', 'lib/constructor-of'),
+	build('type.constructorNameOf', 'lib/constructor-name-of'),
+	build('type.constructorOf', 'lib/constructor-of'),
 	build('type.is', 'lib/is'),
 	build('type.name', 'lib/name'),
 	build('type.of', 'lib/of'),
-	build('type.to-string', 'lib/to-string'),
+	build('type.to', 'lib/to'),
 	build('type.stringify', 'lib/stringify'),
 	build('type.typify', 'lib/typify'),
 ];
