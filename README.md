@@ -178,36 +178,80 @@ is.not.arrayLike({ length: '' })
 > type.is.numeric
 
 ```javascript
+const type = require('describe-type');
+
+type.is.numeric('0')
+type.is.numeric('1')
+type.is.numeric('1.2')
+type.is.numeric(1)
+//=> true
 ```
 
 > type.is.not.numeric
 
 ```javascript
+var type = require('describe-type');
+
+type.is.not.numeric('1.2a')
+type.is.not.numeric('a1.2')
+//=> true
 ```
 
 > type.is.int
 
 ```javascript
+var type = require('describe-type');
+
+type.is.int(-1)
+type.is.int(12)
+//=> true
 ```
 
 > type.is.not.int
 
 ```javascript
+var {is} = require('describe-type');
+
+is.not.int(1.2);
+is.not.int(-1.2);
+//=> true
 ```
 
 > type.is.uint
 
 ```javascript
+var type = require('describe-type');
+
+type.is.int(0)
+type.is.uint(1)
+//=> true
 ```
 
 > type.is.not.uint
 
 ```javascript
+var type = require('describe-type');
+
+type.is.not.int(1.2)
+type.is.not.int(-1.2)
+//=> true
 ```
 
 > type.is.primitive
 
 ```javascript
+const {is} = require('describe-type');
+is.primitive()
+is.primitive(null)
+is.primitive(true)
+is.primitive(false)
+is.primitive(NaN)
+is.primitive(Object)
+is.primitive(function foo() {})
+is.primitive(1)
+is.primitive('foo')
+is.primitive(global.Symbol('foo'))
+//=> true
 ```
 
 > type.is.not.primitive
@@ -240,8 +284,6 @@ is.buffer(new Buffer(1))
 const {is} = require('describe-type');
 
 is.not.buffer(new (function Buffer(){})())
-//=> true
-
 is.not.buffer(new Uint8Array(1))
 //=> true
 
@@ -728,21 +770,61 @@ to.string(1)
 > type.to.int
 
 ```javascript
+const type = require('describe-type');
+
+type.to.int(-1.2)
+//=> -1
+
+type.to.int(1.2)
+//=> 1
+
+type.to.int(1)
+//=> 1
 ```
 
 > type.to.uint
 
 ```javascript
+const type = require('describe-type');
+
+type.to.uint(-1.2)
+//=> 0
+
+type.to.uint(1.2)
+//=> 1
+
+type.to.uint(1)
+//=> 1
 ```
 
 > type.to.float
 
 ```javascript
+const type = require('describe-type');
+
+type.to.float('1')
+//=> 1
+
+type.to.float('1.2')
+//=> 1.2
 ```
 
 > type.to.bool
 
 ```javascript
+const type = require('describe-type');
+
+type.to.bool(1)
+type.to.bool('true')
+type.to.bool(Infinity)
+type.to.bool('1')
+//=> true
+
+type.to.bool(0)
+type.to.bool('false')
+type.to.bool(NaN)
+type.to.bool('0')
+//=> false
 ```
 
 ## 🏴 License
