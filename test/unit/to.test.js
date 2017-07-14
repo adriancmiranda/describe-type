@@ -11,17 +11,22 @@ test('to.string', (t) => {
 	t.is(type.to.string(function Test() {}), 'function Test() {}');
 	t.is(type.to.string({}), '{}');
 	t.is(type.to.string(1), '1');
+	t.is(type.to.string(null), 'null');
+	t.is(type.to.string(), undefined);
 });
 
 test('to.int', (t) => {
 	t.is(toString.call(type.to.int), '[object Function]');
 	t.is(type.to.int(-1.2), -1);
+	t.is(type.to.int(1.2), 1);
+	t.is(type.to.int(1), 1);
 });
 
 test('to.uint', (t) => {
 	t.is(toString.call(type.to.uint), '[object Function]');
 	t.is(type.to.uint(-1.2), 0);
 	t.is(type.to.uint(1.2), 1);
+	t.is(type.to.uint(1), 1);
 });
 
 test('to.float', (t) => {

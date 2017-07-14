@@ -131,10 +131,16 @@ test('is.not.primitive', (t) => {
 
 test('is.json', (t) => {
 	t.is(toString.call(type.is.json), '[object Function]');
+	t.is(type.is.json(JSON.stringify({})), true);
+	t.is(type.is.json(JSON.stringify([])), true);
 });
 
 test('is.not.json', (t) => {
 	t.is(toString.call(type.is.not.json), '[object Function]');
+	t.is(type.is.not.json(JSON.stringify('')), true);
+	t.is(type.is.not.json({}), true);
+	t.is(type.is.not.json([]), true);
+	t.is(type.is.not.json(0), true);
 });
 
 test('is', (t) => {
