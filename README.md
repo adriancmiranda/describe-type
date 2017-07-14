@@ -143,17 +143,17 @@ is.not(Buffer, new (function Buffer(){})())
 ```javascript
 const {is} = require('describe-type');
 
-is.arrayLike((() => arguments)())
-is.arrayLike(new Uint8Array(10))
-is.arrayLike(new String('foo'))
-is.arrayLike(document.body.children)
-is.arrayLike({ 0: NaN, length: 0 })
-is.arrayLike({ 0: 'foo', length: 1 })
-is.arrayLike([undefined, undefined, undefined])
-is.arrayLike([0, 1, undefined])
-is.arrayLike(new Array(2))
-is.arrayLike([])
-is.arrayLike({ length: 0 })
+is.arraylike((() => arguments)())
+is.arraylike(new Uint8Array(10))
+is.arraylike(new String('foo'))
+is.arraylike(document.body.children)
+is.arraylike({ 0: NaN, length: 0 })
+is.arraylike({ 0: 'foo', length: 1 })
+is.arraylike([undefined, undefined, undefined])
+is.arraylike([0, 1, undefined])
+is.arraylike(new Array(2))
+is.arraylike([])
+is.arraylike({ length: 0 })
 //=> true
 ```
 
@@ -162,16 +162,16 @@ is.arrayLike({ length: 0 })
 ```javascript
 const {is} = require('describe-type');
 
-is.not.arrayLike({ length: 2 })
-is.not.arrayLike(Object.create(null))
-is.not.arrayLike({})
-is.not.arrayLike(null)
-is.not.arrayLike(false)
-is.not.arrayLike()
-is.not.arrayLike({ length: -1 })
-is.not.arrayLike({ length: NaN })
-is.not.arrayLike({ length: 'foo' })
-is.not.arrayLike({ length: '' })
+is.not.arraylike({ length: 2 })
+is.not.arraylike(Object.create(null))
+is.not.arraylike({})
+is.not.arraylike(null)
+is.not.arraylike(false)
+is.not.arraylike()
+is.not.arraylike({ length: -1 })
+is.not.arraylike({ length: NaN })
+is.not.arraylike({ length: 'foo' })
+is.not.arraylike({ length: '' })
 //=> true
 ```
 
