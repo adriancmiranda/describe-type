@@ -63,20 +63,19 @@ declare module type {
     options(expected: Object, object: Object): any;
 
     /**
-     * @name stringify
-     * @param value:
-     * @param space:
-     * @param replacer:
-     * @see type.stringify
-     */
-    stringify(value: any, space?: number, replacer?: Function): any;
-
-    /**
      * @name typify
      * @param expected:
      * @param write:
      * @see type.typify
      */
     typify(expected: any, write?: boolean): string;
+
+    /**
+     * @name toString
+     * @param value:
+     * @param force:
+     * @see type.toString
+     */
+    toString(value: any, force?: boolean): string;
   }
 }

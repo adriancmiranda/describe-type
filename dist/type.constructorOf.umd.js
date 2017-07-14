@@ -6,10 +6,10 @@
  *    '._  W    ,--'   
  *       |_:_._/         
  *                       
- * ~ describe-type v0.2.3
+ * ~ describe-type v0.3.0
  * 
- * @moment Thursday, July 13, 2017 10:10 PM
- * @commit a4e17f6980d8c76df26bfabf836ac98c9b5b2db3
+ * @moment Friday, July 14, 2017 5:03 AM
+ * @commit 736a15a72797c28208b648156fe8ced65f8891c0
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda */
 (function (global, factory) {

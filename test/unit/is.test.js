@@ -6,7 +6,7 @@ test('is.buffer', (t) => {
 	t.is(toString.call(type.is.buffer), '[object Function]');
 	t.is(type.is.a.buffer, type.is.buffer, 'alias works');
 	t.is(type.is.an.buffer, type.is.buffer, 'alias works');
-	t.is(type.is.buffer(new Uint8Array(1)), false);
+	t.is(type.is.buffer(new global.Uint8Array(1)), false);
 	t.is(type.is.buffer(new Buffer(1)), true);
 	t.is(type.is.buffer(undefined), false);
 	t.is(type.is.buffer(new (function Buffer() {})()), false);
@@ -25,38 +25,38 @@ test('is.not.buffer', (t) => {
 	t.is(toString.call(type.is.not.buffer), '[object Function]');
 	t.is(type.is.not.a.buffer, type.is.not.buffer, 'alias works');
 	t.is(type.is.not.an.buffer, type.is.not.buffer, 'alias works');
-	t.is(type.is.not.buffer(new (function Buffer(){})()), true);
-	t.is(type.is.not.buffer(new Uint8Array(1)), true);
+	t.is(type.is.not.buffer(new (function Buffer() {})()), true);
+	t.is(type.is.not.buffer(new global.Uint8Array(1)), true);
 	t.is(type.is.not.buffer(new Buffer(1)), false);
 });
 
-test('is.arrayLike', (t) => {
-	t.is(toString.call(type.is.arrayLike), '[object Function]');
-	t.is(type.is.arrayLike((() => arguments)()), true);
-	t.is(type.is.arrayLike(new Uint8Array(10)), true);
-	t.is(type.is.arrayLike(new String('foo')), true);
-	t.is(type.is.arrayLike(document.body.children), true);
-	t.is(type.is.arrayLike({ 0: NaN, length: 0 }), true);
-	t.is(type.is.arrayLike({ 0: 'foo', length: 1 }), true);
-	t.is(type.is.arrayLike([undefined, undefined, undefined]), true);
-	t.is(type.is.arrayLike([0, 1, undefined]), true);
-	t.is(type.is.arrayLike(new Array(2)), true);
-	t.is(type.is.arrayLike([]), true);
-	t.is(type.is.arrayLike({ length: 0 }), true);
+test('is.arraylike', (t) => {
+	t.is(toString.call(type.is.arraylike), '[object Function]');
+	t.is(type.is.arraylike((() => arguments)()), true);
+	t.is(type.is.arraylike(new global.Uint8Array(10)), true);
+	t.is(type.is.arraylike(new String('foo')), true);
+	t.is(type.is.arraylike(document.body.children), true);
+	t.is(type.is.arraylike({ 0: NaN, length: 0 }), true);
+	t.is(type.is.arraylike({ 0: 'foo', length: 1 }), true);
+	t.is(type.is.arraylike([undefined, undefined, undefined]), true);
+	t.is(type.is.arraylike([0, 1, undefined]), true);
+	t.is(type.is.arraylike(new Array(2)), true);
+	t.is(type.is.arraylike([]), true);
+	t.is(type.is.arraylike({ length: 0 }), true);
 });
 
-test('is.not.arrayLike', (t) => {
-	t.is(toString.call(type.is.not.arrayLike), '[object Function]');
-	t.is(type.is.not.arrayLike({ length: 2 }), true);
-	t.is(type.is.not.arrayLike(Object.create(null)), true);
-	t.is(type.is.not.arrayLike({}), true);
-	t.is(type.is.not.arrayLike(null), true);
-	t.is(type.is.not.arrayLike(false), true);
-	t.is(type.is.not.arrayLike(), true);
-	t.is(type.is.not.arrayLike({ length: -1 }), true);
-	t.is(type.is.not.arrayLike({ length: NaN }), true);
-	t.is(type.is.not.arrayLike({ length: 'foo' }), true);
-	t.is(type.is.not.arrayLike({ length: '' }), true);
+test('is.not.arraylike', (t) => {
+	t.is(toString.call(type.is.not.arraylike), '[object Function]');
+	t.is(type.is.not.arraylike({ length: 2 }), true);
+	t.is(type.is.not.arraylike(Object.create(null)), true);
+	t.is(type.is.not.arraylike({}), true);
+	t.is(type.is.not.arraylike(null), true);
+	t.is(type.is.not.arraylike(false), true);
+	t.is(type.is.not.arraylike(), true);
+	t.is(type.is.not.arraylike({ length: -1 }), true);
+	t.is(type.is.not.arraylike({ length: NaN }), true);
+	t.is(type.is.not.arraylike({ length: 'foo' }), true);
+	t.is(type.is.not.arraylike({ length: '' }), true);
 });
 
 test('test Buffer on browser', (t) => {
@@ -64,6 +64,77 @@ test('test Buffer on browser', (t) => {
 	delete global.Buffer;
 	t.is(type.is.buffer(1), false);
 	global.Buffer = buffer;
+});
+
+test('is.numeric', (t) => {
+	t.is(toString.call(type.is.numeric), '[object Function]');
+	t.is(type.is.numeric('0'), true);
+	t.is(type.is.numeric('1'), true);
+	t.is(type.is.numeric('1.2'), true);
+	t.is(type.is.numeric(1), true);
+});
+
+test('is.not.numeric', (t) => {
+	t.is(toString.call(type.is.not.numeric), '[object Function]');
+	t.is(type.is.not.numeric('1.2a'), true);
+	t.is(type.is.not.numeric('a1.2'), true);
+});
+
+test('is.int', (t) => {
+	t.is(toString.call(type.is.int), '[object Function]');
+	t.is(type.is.int(-1), true);
+	t.is(type.is.int(12), true);
+	// t.is(type.is.int('12'), false);
+});
+
+test('is.not.int', (t) => {
+	t.is(toString.call(type.is.not.int), '[object Function]');
+	// t.is(type.is.not.int('12'), true);
+	t.is(type.is.not.int('1.2a'), true);
+	t.is(type.is.not.int('1.2'), true);
+	t.is(type.is.not.int(1.2), true);
+	t.is(type.is.not.int(-1.2), true);
+});
+
+test('is.uint', (t) => {
+	t.is(toString.call(type.is.uint), '[object Function]');
+	t.is(type.is.uint(0), true);
+	t.is(type.is.uint(1), true);
+});
+
+test('is.not.uint', (t) => {
+	t.is(toString.call(type.is.not.uint), '[object Function]');
+	t.is(type.is.not.uint(1.2), true);
+	t.is(type.is.not.uint(-1.2), true);
+});
+
+test('is.primitive', (t) => {
+	t.is(toString.call(type.is.primitive), '[object Function]');
+	t.is(type.is.primitive(), true);
+	t.is(type.is.primitive(null), true);
+	t.is(type.is.primitive(true), true);
+	t.is(type.is.primitive(false), true);
+	t.is(type.is.primitive(NaN), true);
+	t.is(type.is.primitive(Object), true);
+	t.is(type.is.primitive(function foo() {}), true);
+	t.is(type.is.primitive(1), true);
+	t.is(type.is.primitive('foo'), true);
+	t.is(type.is.primitive(global.Symbol('foo')), true);
+});
+
+test('is.not.primitive', (t) => {
+	t.is(toString.call(type.is.not.primitive), '[object Function]');
+	t.is(type.is.not.primitive({}), true);
+	t.is(type.is.not.primitive([]), true);
+	t.is(type.is.not.primitive(Object.create(null)), true);
+});
+
+test('is.json', (t) => {
+	t.is(toString.call(type.is.json), '[object Function]');
+});
+
+test('is.not.json', (t) => {
+	t.is(toString.call(type.is.not.json), '[object Function]');
 });
 
 test('is', (t) => {
@@ -104,7 +175,7 @@ test('is', (t) => {
 	t.is(type.is(Number, NaN), false);
 	t.is(type.is(Number.name, NaN), false);
 	t.is(type.is('Number', NaN), false);
-	t.is(type.is(Buffer, new Uint8Array(1)), false);
+	t.is(type.is(Buffer, new global.Uint8Array(1)), false);
 	t.is(type.is(window.HTMLDivElement, document.createElement('div')), true);
 });
 
@@ -147,5 +218,5 @@ test('is.not', (t) => {
 	t.is(type.is.not(Number, NaN), true);
 	t.is(type.is.not(Number.name, NaN), true);
 	t.is(type.is.not('Number', NaN), true);
-	t.is(type.is.not(Uint8Array, new Buffer(0)), true);
+	t.is(type.is.not(global.Uint8Array, new Buffer(0)), true);
 });

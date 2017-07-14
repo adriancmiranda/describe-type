@@ -6,10 +6,10 @@
  *    '._  W    ,--'   
  *       |_:_._/         
  *                       
- * ~ describe-type v0.2.3
+ * ~ describe-type v0.3.0
  * 
- * @moment Thursday, July 13, 2017 10:10 PM
- * @commit a4e17f6980d8c76df26bfabf836ac98c9b5b2db3
+ * @moment Friday, July 14, 2017 5:03 AM
+ * @commit 736a15a72797c28208b648156fe8ced65f8891c0
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda */
 define(function () { 'use strict';
@@ -21,7 +21,7 @@ define(function () { 'use strict';
 		return Object(value).constructor || Object;
 	};
 
-	var is_arrayLike = function isArrayLike(value) {
+	var is_arraylike = function isArraylike(value) {
 		return (constructorOf(value) === Array || (!!value &&
 			typeof value === 'object' && typeof value.length === 'number' &&
 			(value.length === 0 || (value.length > 0 && (value.length - 1) in value))
@@ -32,9 +32,7 @@ define(function () { 'use strict';
 	var reName$1 = /^.*function\s([^\s]*|[^(]*)\([^\x00]+/m;
 	var reTrim = /\s+/g;
 
-	var to = {};
-
-	to.string = function toString(value, force) {
+	var toString_1 = function toString(value, force) {
 		if (value && value.constructor && force) {
 			if (!value.constructor.name || value.constructor.name === 'Object') {
 				return value.constructor.toString().replace(reName$1, '$1').replace(reTrim, '');
@@ -44,28 +42,12 @@ define(function () { 'use strict';
 		return objectToString.call(value).slice(8, -1);
 	};
 
-	to.int = function toInt(value) {
-		return value;
-	};
-
-	to.uint = function toUint(value) {
-		return value;
-	};
-
-	to.bool = function toBoolean(value) {
-		return value;
-	};
-
-	var to_1 = to;
-
-	var { string } = to_1;
-
 	var of = function typeOf(value) {
-		var name = string(value, true);
+		var name = toString_1(value, true);
 		if (value === Infinity || value === undefined || value === null || (name === 'Number' && isNaN(value))) {
 			return String(value);
 		}
-		return name === 'Object' && is_arrayLike(value) ? 'Arguments' : name;
+		return name === 'Object' && is_arraylike(value) ? 'Arguments' : name;
 	};
 
 	function createCommonjsModule(fn, module) {
@@ -112,6 +94,20 @@ define(function () { 'use strict';
 		}
 	};
 
+	var jsonStart = /^\[|^\{(?!\{)/;
+	var jsonEnds = {
+		'[': /\]$/,
+		'{': /\}$/,
+	};
+
+	var is_json = function isJson(value) {
+		if (constructorOf(value) === String) {
+			var start = value.match(jsonStart);
+			return !!(start && jsonEnds[start[0]].test(value));
+		}
+		return false;
+	};
+
 	function is(expected, value) {
 		return new RegExp('(' + typify(expected, true) + ')').test(of(value));
 	}
@@ -124,8 +120,8 @@ define(function () { 'use strict';
 		return !is_buffer(value);
 	};
 
-	is.not.arrayLike = function isntArrayLike(value) {
-		return !is_arrayLike(value);
+	is.not.arraylike = function isntArraylike(value) {
+		return !is_arraylike(value);
 	};
 
 	is.numeric = function isNumeric(value) {
@@ -153,32 +149,20 @@ define(function () { 'use strict';
 	};
 
 	is.primitive = function isPrimitive(value) {
-		return value !== Object(value);
+		return typeof value === 'function' || value !== Object(value);
 	};
 
 	is.not.primitive = function isntPrimitive(value) {
 		return !is.primitive(value);
 	};
 
-	const jsonStart = /^\[|^\{(?!\{)/;
-	const jsonEnds = {
-		'[': /\]$/,
-		'{': /\}$/,
-	};
-	is.json = function isJson(value) {
-		if (is(String, value)) {
-			const start = value.match(jsonStart);
-			return !!(start && jsonEnds[start[0]].test(value));
-		}
-		return false;
-	};
-
 	is.not.json = function isntJson(value) {
-		return !is.json(value);
+		return !is_json(value);
 	};
 
 	is.buffer = is_buffer;
-	is.arrayLike = is_arrayLike;
+	is.arraylike = is_arraylike;
+	is.json = is_json;
 	is.a = is.an = is;
 	is.not.a = is.not.an = is.not;
 	var is_1 = is;

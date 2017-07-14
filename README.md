@@ -138,7 +138,7 @@ is.not(Buffer, new (function Buffer(){})())
 //=> true
 ```
 
-> type.is.arrayLike
+> type.is.arraylike
 
 ```javascript
 const {is} = require('describe-type');
@@ -157,7 +157,7 @@ is.arrayLike({ length: 0 })
 //=> true
 ```
 
-> type.is.arrayLike
+> type.is.arraylike
 
 ```javascript
 const {is} = require('describe-type');
@@ -657,21 +657,21 @@ typify(new Promise((resolve) => { resolve(); }))
 //=> 'Promise'
 ```
 
-> type.stringify
+> type.to.string
 
 ```javascript
-const {stringify} = require('describe-type');
+const {to} = require('describe-type');
 
-stringify(function Test() {})
+to.string(function Test() {})
 //=> 'function Test(){}'
 
-stringify(/foo/)
+to.string(/foo/)
 //=> '/foo/'
 
-stringify({})
+to.string({})
 //=> '{}'
 
-stringify(1)
+to.string(1)
 //=> '1'
 ```
 

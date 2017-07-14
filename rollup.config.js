@@ -56,6 +56,5 @@ export default [
 	build('type.name', 'lib/name'),
 	build('type.of', 'lib/of'),
 	build('type.to', 'lib/to'),
-	build('type.stringify', 'lib/stringify'),
 	build('type.typify', 'lib/typify'),
 ];
