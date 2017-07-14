@@ -22,10 +22,7 @@ install:
   - ps: Install-Product node $env:nodejs_version x64
   - npm install -g npm@latest
   - npm install ava-cli -g
-  - npm install yarn -g
-  - yarn install
-  - yarn link
-  - yarn link describe-type
+  - npm install
 
 build: off
 
@@ -35,5 +32,4 @@ matrix:
 test_script:
   - node --version
   - npm --version
-  - yarn --version
   - cmd: npm run %job_part%:appveyor
