@@ -157,7 +157,7 @@ is.arrayLike({ length: 0 })
 //=> true
 ```
 
-> type.is.arraylike
+> type.is.not.arraylike
 
 ```javascript
 const {is} = require('describe-type');
@@ -173,6 +173,56 @@ is.not.arrayLike({ length: NaN })
 is.not.arrayLike({ length: 'foo' })
 is.not.arrayLike({ length: '' })
 //=> true
+```
+
+> type.is.numeric
+
+```javascript
+```
+
+> type.is.not.numeric
+
+```javascript
+```
+
+> type.is.int
+
+```javascript
+```
+
+> type.is.not.int
+
+```javascript
+```
+
+> type.is.uint
+
+```javascript
+```
+
+> type.is.not.uint
+
+```javascript
+```
+
+> type.is.primitive
+
+```javascript
+```
+
+> type.is.not.primitive
+
+```javascript
+```
+
+> type.is.json
+
+```javascript
+```
+
+> type.is.not.json
+
+```javascript
 ```
 
 > type.is.buffer
@@ -673,6 +723,26 @@ to.string({})
 
 to.string(1)
 //=> '1'
+```
+
+> type.to.int
+
+```javascript
+```
+
+> type.to.uint
+
+```javascript
+```
+
+> type.to.float
+
+```javascript
+```
+
+> type.to.bool
+
+```javascript
 ```
 
 ## 🏴 License
