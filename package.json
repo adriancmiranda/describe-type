@@ -35,7 +35,8 @@
     "watch:test": "npm test -- --watch",
     "precommit": "run-s test",
     "commitmsg": "validate-commit-msg",
-    "release": "standard-version"
+    "release": "standard-version",
+    "uninstall": "rimraf -rf node_modules"
   },
   "devDependencies": {
     "ava": "^0.20.0",
@@ -53,9 +54,10 @@
     "npm-run-all": "^4.0.2",
     "nyc": "^11.0.3",
     "pirate-flag": "^0.1.0",
+    "rimraf": "^2.6.1",
     "rollup": "^0.43.0",
     "rollup-plugin-commonjs": "^8.0.2",
-    "rollup-plugin-node-resolve": "3.0.0",
+    "rollup-plugin-node-resolve": "^3.0.0",
     "rollup-plugin-optimize-js": "^0.0.4",
     "rollup-plugin-uglify": "^2.0.1",
     "standard-version": "^4.2.0",
