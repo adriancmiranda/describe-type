@@ -257,16 +257,34 @@ is.primitive(global.Symbol('foo'))
 > type.is.not.primitive
 
 ```javascript
+const type = require('describe-type');
+
+type.is.not.primitive({}))
+type.is.not.primitive([]))
+type.is.not.primitive(Object.create(null)))
+//=> true
 ```
 
 > type.is.json
 
 ```javascript
+const type = require('describe-type');
+
+type.is.json(JSON.stringify({}));
+type.is.json(JSON.stringify([]));
+//=> true
 ```
 
 > type.is.not.json
 
 ```javascript
+const type = require('describe-type');
+
+type.is.not.json(JSON.stringify('')))
+type.is.not.json({}))
+type.is.not.json([]))
+type.is.not.json(0))
+//=> true
 ```
 
 > type.is.buffer
