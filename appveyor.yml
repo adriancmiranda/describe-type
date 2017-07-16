@@ -1,11 +1,18 @@
+os: unstable
+deploy: off
+build: off
+clone_depth: 50
+
+matrix:
+  fast_finish: true
+
 branches:
   only:
     - master
+    - /^greenkeeper-/
 
 init:
   - git config --global core.autocrlf input
-
-clone_depth: 50
 
 environment:
   matrix:
@@ -17,15 +24,16 @@ environment:
       job_part: test
     - nodejs_version: 5
       job_part: test
+    - nodejs_version: 4
+      job_part: test
+    - nodejs_version: 3
+      job_part: test
+    - nodejs_version: 0.12
+      job_part: test
 
 install:
   - ps: Install-Product node $env:nodejs_version x64
   - npm install
-
-build: off
-
-matrix:
-  fast_finish: true
 
 test_script:
   - node --version
