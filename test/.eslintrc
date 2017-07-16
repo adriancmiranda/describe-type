@@ -1,4 +1,7 @@
 ---
+env:
+  mocha: true
+
 globals:
   fixture: true
 
@@ -6,6 +9,9 @@ rules:
   new-parens: off
   func-names: off
   no-console: off
+  no-new-func: off
+  no-new-object: off
   no-new-wrappers: off
+  no-array-constructor: off
   no-unused-expressions: off
   no-use-before-define: off

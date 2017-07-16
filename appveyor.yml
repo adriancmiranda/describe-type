@@ -21,7 +21,6 @@ environment:
 install:
   - ps: Install-Product node $env:nodejs_version x64
   - npm install -g npm@latest
-  - npm install ava-cli -g
   - npm install
 
 build: off

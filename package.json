@@ -19,12 +19,12 @@
     "index.js"
   ],
   "scripts": {
-    "prereport:coverage": "nyc report --reporter=text-lcov > test/coverage.lcov",
+    "prereport:coverage": "nyc report --reporter=text-lcov npm test > test/coverage.lcov",
     "report:coverage": "codecov -f test/coverage.lcov --token=$CODECOV_TOKEN",
     "upgrade": "ncu -a --loglevel verbose --packageFile package.json && npm i",
     "lint": "eslint --ext .js index.js lib",
     "dev": "run-p watch:*",
-    "test": "ava **/*.test.js --color",
+    "test": "mocha test/**/*.unit.js -G -c -b --inspect --inline-diffs",
     "test:speed": "node test/speed",
     "test:coverage": "nyc npm test -- --no-cache --verbose",
     "test:travis": "nyc npm test -- --no-cache --verbose",
@@ -32,16 +32,15 @@
     "build": "run-p build:*",
     "build:min": "run-p \"build:modules -- --environment=min:true\"",
     "build:modules": "rollup -c ./rollup.config.js",
-    "watch:test": "npm test -- --watch",
+    "watch:test": "npm test -- -w",
     "precommit": "run-s test",
     "commitmsg": "validate-commit-msg",
     "release": "standard-version",
     "uninstall": "rimraf -rf node_modules"
   },
   "devDependencies": {
-    "ava": "^0.20.0",
     "benchmark": "^2.1.4",
-    "browser-env": "^3.0.2",
+    "chai": "^4.1.0",
     "codecov": "^2.2.0",
     "conventional-commit-types": "^2.1.0",
     "eslint": "^3.19.0",
@@ -49,6 +48,7 @@
     "eslint-plugin-import": "^1.16.0",
     "git-revision-webpack-plugin": "^2.5.1",
     "husky": "^0.14.2",
+    "mocha": "^3.4.2",
     "moment": "^2.18.1",
     "npm-check-updates": "^2.12.1",
     "npm-run-all": "^4.0.2",
@@ -74,23 +74,9 @@
       "types": "conventional-commit-types"
     }
   },
-  "ava": {
-    "require": [
-      "./test/helpers/setup-browser-env.js"
-    ]
-  },
   "keywords": [
     "describe-type",
-    "describe",
-    "type",
-    "typeof",
-    "typeOf",
-    "constructorNameOf",
-    "constructorOf",
-    "typify",
-    "test",
-    "util",
-    "as",
-    "is"
+    "is",
+    "util"
   ]
 }
