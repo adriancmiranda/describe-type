@@ -24,7 +24,7 @@
     "upgrade": "ncu -a --loglevel verbose --packageFile package.json && npm i",
     "lint": "eslint --ext .js index.js lib",
     "dev": "run-p watch:*",
-    "test": "mocha test/**/*.unit.js -G -c -b --inspect --inline-diffs",
+    "test": "mocha test/**/*.unit.js -G -c -b --inline-diffs",
     "test:speed": "node test/speed",
     "test:coverage": "nyc npm test -- --no-cache --verbose",
     "test:travis": "nyc npm test -- --no-cache --verbose",
