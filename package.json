@@ -28,7 +28,7 @@
     "test:speed": "node test/speed",
     "test:coverage": "nyc npm test -- -d",
     "test:travis": "nyc npm test -- -d",
-    "test:appveyor": "nyc mocha test\\**\\*.unit.js -G -c -b -d --inline-diffs",
+    "test:appveyor": "nyc mocha test\\**\\*.unit.js -G -c -b --inline-diffs",
     "build": "run-p build:*",
     "build:min": "run-p \"build:modules -- --environment=min:true\"",
     "build:modules": "rollup -c ./rollup.config.js",
