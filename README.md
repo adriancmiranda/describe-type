@@ -132,8 +132,6 @@ is([String, Function], '')
 const {is} = require('describe-type');
 
 is.not(Array, (() => arguments)())
-//=> true
-
 is.not(Buffer, new (function Buffer(){})())
 //=> true
 ```
