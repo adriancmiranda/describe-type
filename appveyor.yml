@@ -1,12 +1,30 @@
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# General configuration
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build: off
+clone_depth: 50
+
+# Branches to build
 branches:
   only:
     - master
+    - /^greenkeeper-/
+  except:
+    - gh-pages
 
+# Including commits with particular message
+only_commits:
+  message: /^(ci|build)/
+
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Environment configuration
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Scripts that are called at very beginning, before repo cloning
 init:
   - git config --global core.autocrlf input
 
-clone_depth: 50
-
+# Environment variables
 environment:
   matrix:
     - nodejs_version: stable
@@ -15,22 +33,33 @@ environment:
       job_part: test
     - nodejs_version: 6
       job_part: test
+    - nodejs_version: 5
+      job_part: test
+    - nodejs_version: 4
+      job_part: test
+    - nodejs_version: 3
+      job_part: test
+    - nodejs_version: 0.12
+      job_part: test
 
-install:
-  - ps: Install-Product node $env:nodejs_version x64
-  - npm install ava-cli -g
-  - npm install yarn -g
-  - yarn install
-  - yarn link
-  - yarn link describe-type
-
-build: off
-
+# Jobs in the matrix
 matrix:
+  # Finish immediately build once one of the jobs fails.
   fast_finish: true
 
+# Scripts that run after cloning repository
+install:
+  # Get the latest stable version of Node 0.STABLE.latest
+  - ps: Install-Product node $env:nodejs_version
+  - IF %nodejs_version% LSS 4 npm -g i npm@2
+  - set PATH=%APPDATA%\npm;%PATH%
+  # Install dependencies
+  - npm install
+
+# To run your custom scripts instead of automatic tests (basically the post-install test scripts)
 test_script:
+  # Output useful info for debugging.
   - node --version
   - npm --version
-  - yarn --version
+  # Run tests
   - cmd: npm run %job_part%:appveyor
