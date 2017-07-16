@@ -35,12 +35,6 @@ environment:
       job_part: test
     - nodejs_version: 5
       job_part: test
-    - nodejs_version: 4
-      job_part: test
-    - nodejs_version: 3
-      job_part: test
-    - nodejs_version: 0.12
-      job_part: test
 
 # Jobs in the matrix
 matrix:
@@ -50,7 +44,7 @@ matrix:
 # Scripts that run after cloning repository
 install:
   # Get the latest stable version of Node 0.STABLE.latest
-  - ps: Install-Product node $env:nodejs_version
+  - ps: Install-Product node $env:nodejs_version x64
   - IF %nodejs_version% LSS 4 npm -g i npm@2
   - set PATH=%APPDATA%\npm;%PATH%
   # Install dependencies
