@@ -41,7 +41,7 @@ environment:
 
 # Jobs in the matrix
 matrix:
-  # Set this flag to immediately finish build once one of the jobs fails.
+  # Finish immediately build once one of the jobs fails.
   fast_finish: true
 
 # Scripts that run after cloning repository
