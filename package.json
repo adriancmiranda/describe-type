@@ -28,7 +28,7 @@
     "test:speed": "node test/speed",
     "test:coverage": "nyc npm test -- --no-cache --verbose",
     "test:travis": "nyc npm test -- --no-cache --verbose",
-    "test:appveyor": "nyc npm test -- --no-cache --verbose",
+    "test:appveyor": "npm test -- --no-cache --verbose",
     "build": "run-p build:*",
     "build:min": "run-p \"build:modules -- --environment=min:true\"",
     "build:modules": "rollup -c ./rollup.config.js",
