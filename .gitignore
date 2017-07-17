@@ -43,6 +43,7 @@ Session.vim
 .*
 !.github
 !.babelrc
+!.sauce.yml
 !.editorconfig
 !.gitattributes
 !.gitignore
