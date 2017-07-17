@@ -45,7 +45,7 @@ before_install:
   - nvm --version
   - node --version
 
-# Scripts that run after cloning repository
+# Scripts that run after cloning repository and before the tests
 before_script:
   - npm i
 
