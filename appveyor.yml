@@ -48,7 +48,8 @@ install:
   - IF %nodejs_version% LSS 4 npm -g i npm@2
   - set PATH=%APPDATA%\npm;%PATH%
   # Install dependencies
-  - npm install
+  - npm i -g testem
+  - npm i
 
 # To run your custom scripts instead of automatic tests (basically the post-install test scripts)
 test_script:

@@ -27,7 +27,7 @@
     "test": "mocha test/**/*.unit.js -G -c -b --inline-diffs",
     "test:speed": "node test/speed",
     "test:coverage": "nyc npm test",
-    "test:travis": "nyc npm test",
+    "test:travis": "nyc npm test --reporter spec",
     "test:appveyor": "nyc mocha test\\**\\*.unit.js -G -c -b --inline-diffs",
     "build": "run-p build:*",
     "build:min": "run-p \"build:modules -- --environment=min:true\"",
@@ -76,7 +76,6 @@
   },
   "keywords": [
     "describe-type",
-    "is",
-    "util"
+    "utility"
   ]
 }
