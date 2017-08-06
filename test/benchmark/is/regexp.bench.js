@@ -1,5 +1,5 @@
 const { Suite } = require('benchmark');
-const { is } = require('../../../source/modules');
+const { is } = require('../../..');
 
 new Suite()
 

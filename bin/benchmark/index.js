@@ -1,9 +1,14 @@
 const { execSync } = require('child_process');
-const { basename } = require('path');
 const { sync } = require('glob');
+const { argv } = require('../config');
 
-sync(`${__dirname}/!(index).js`).forEach((file) => {
-	execSync(`node ./test/benchmark/${basename(file)}`, {
+let files = '**/*';
+if (argv.f) {
+	files = Array.isArray(argv.f) ? `{${argv.f.join(',')}}` : argv.f;
+}
+
+sync(`${process.cwd()}/test/benchmark/${files}.bench.js`).forEach((file) => {
+	execSync(`babel-node --presets es2015 ${file}`, {
 		stdio: 'inherit',
 	});
 });

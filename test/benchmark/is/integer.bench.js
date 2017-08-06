@@ -1,5 +1,5 @@
 const { Suite } = require('benchmark');
-const { is } = require('../../../source/modules');
+const { is } = require('../../..');
 
 function integer(value) {
 	return parseFloat(value) === parseInt(value, 10);
