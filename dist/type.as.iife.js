@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v0.3.0
  * 
- * @commit b5cc948716dd8a6a54e98eaed5dd1c07d348e251
- * @moment Sunday, August 6, 2017 11:24 AM
+ * @commit be25187a3c75e6061912b98148f778030eca2eaf
+ * @moment Sunday, August 6, 2017 6:08 PM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-20173
@@ -19,7 +19,7 @@ this.type.as = (function () {
 		return Object(value).constructor || Object;
 	};
 
-	var is_arraylike = function isArraylike(value) {
+	var arraylike = function isArraylike(value) {
 		return (constructorOf(value) === Array || (!!value &&
 			typeof value === 'object' && typeof value.length === 'number' &&
 			(value.length === 0 || (value.length > 0 && (value.length - 1) in value))
@@ -45,7 +45,7 @@ this.type.as = (function () {
 		if (value === Infinity || value === undefined || value === null || (name === 'Number' && isNaN(value))) {
 			return String(value);
 		}
-		return name === 'Object' && is_arraylike(value) ? 'Arguments' : name;
+		return name === 'Object' && arraylike(value) ? 'Arguments' : name;
 	};
 
 	function createCommonjsModule(fn, module) {
@@ -84,7 +84,27 @@ this.type.as = (function () {
 	};
 	});
 
-	var is_buffer = function isBuffer(value) {
+	var is = function is(expected, value) {
+		return new RegExp(("(" + (typify(expected, true)) + ")")).test(of(value));
+	};
+
+	var numeric = function isNumeric(value) {
+		return !isNaN(parseFloat(value)) && isFinite(value);
+	};
+
+	var int_1 = function isInt(value) {
+		return parseFloat(value, 10) === parseInt(value, 10);
+	};
+
+	var uint = function isUint(value) {
+		return int_1(value) && value >= 0;
+	};
+
+	var primitive = function isPrimitive(value) {
+		return typeof value === 'function' || value !== Object(value);
+	};
+
+	var buffer = function isBuffer(value) {
 		try {
 			return constructorOf(value) === Buffer;
 		} catch (err) {
@@ -98,7 +118,7 @@ this.type.as = (function () {
 		'{': /\}$/,
 	};
 
-	var is_json = function isJson(value) {
+	var json = function isJson(value) {
 		if (constructorOf(value) === String) {
 			var start = value.match(jsonStart);
 			return !!(start && jsonEnds[start[0]].test(value));
@@ -106,48 +126,37 @@ this.type.as = (function () {
 		return false;
 	};
 
-	function is(expected, value) {
-		return new RegExp('(' + typify(expected, true) + ')').test(of(value));
-	}
+	is.numeric = numeric;
+	is.int = int_1;
+	is.uint = uint;
+	is.primitive = primitive;
+	is.buffer = buffer;
+	is.arraylike = arraylike;
+	is.json = json;
+	is.a = is.an = is;
 
 	is.not = function isnt(expected, value) {
 		return !is(expected, value);
 	};
 
 	is.not.buffer = function isntBuffer(value) {
-		return !is_buffer(value);
+		return !is.buffer(value);
 	};
 
 	is.not.arraylike = function isntArraylike(value) {
-		return !is_arraylike(value);
-	};
-
-	is.numeric = function isNumeric(value) {
-		return !isNaN(parseFloat(value)) && isFinite(value);
+		return !is.arraylike(value);
 	};
 
 	is.not.numeric = function isntNumeric(value) {
 		return !is.numeric(value);
 	};
 
-	is.int = function isInt(value) {
-		return parseFloat(value, 10) === parseInt(value, 10);
-	};
-
 	is.not.int = function isntInt(value) {
 		return !is.int(value);
 	};
 
-	is.uint = function isUint(value) {
-		return is.int(value) && value >= 0;
-	};
-
 	is.not.uint = function isntUint(value) {
 		return !is.uint(value);
-	};
-
-	is.primitive = function isPrimitive(value) {
-		return typeof value === 'function' || value !== Object(value);
 	};
 
 	is.not.primitive = function isntPrimitive(value) {
@@ -155,15 +164,11 @@ this.type.as = (function () {
 	};
 
 	is.not.json = function isntJson(value) {
-		return !is_json(value);
+		return !is.json(value);
 	};
 
-	is.buffer = is_buffer;
-	is.arraylike = is_arraylike;
-	is.json = is_json;
-	is.a = is.an = is;
 	is.not.a = is.not.an = is.not;
-	var is_1 = is;
+	var index = is;
 
 	var toArgs = Array.prototype.slice;
 	var reFn = /\bFunction\b/;
@@ -175,7 +180,7 @@ this.type.as = (function () {
 		if (constructorOf(value) === Function && !reFn.test(type)) {
 			value = value.apply(scope, args);
 		}
-		return is_1(type, value) ? value : undefined;
+		return index(type, value) ? value : undefined;
 	};
 
 	return as;

@@ -23,7 +23,7 @@ module.exports = ([{
 	format: env.FORMATS,
 }, {
 	module: 'type.is',
-	source: 'lib/is',
+	source: 'lib/is/index',
 	output: 'dist/type.is',
 	format: env.FORMATS,
 }, {

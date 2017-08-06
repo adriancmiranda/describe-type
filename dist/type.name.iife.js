@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v0.3.0
  * 
- * @commit b5cc948716dd8a6a54e98eaed5dd1c07d348e251
- * @moment Sunday, August 6, 2017 11:24 AM
+ * @commit be25187a3c75e6061912b98148f778030eca2eaf
+ * @moment Sunday, August 6, 2017 6:08 PM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-20173
@@ -19,7 +19,7 @@ this.type.name = (function () {
 		return Object(value).constructor || Object;
 	};
 
-	var is_arraylike = function isArraylike(value) {
+	var arraylike = function isArraylike(value) {
 		return (constructorOf(value) === Array || (!!value &&
 			typeof value === 'object' && typeof value.length === 'number' &&
 			(value.length === 0 || (value.length > 0 && (value.length - 1) in value))
@@ -45,7 +45,7 @@ this.type.name = (function () {
 		if (value === Infinity || value === undefined || value === null || (name === 'Number' && isNaN(value))) {
 			return String(value);
 		}
-		return name === 'Object' && is_arraylike(value) ? 'Arguments' : name;
+		return name === 'Object' && arraylike(value) ? 'Arguments' : name;
 	};
 
 	var constructorNameOf = function constructorNameOf(value) {

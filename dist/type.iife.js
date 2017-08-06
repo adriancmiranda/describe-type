@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v0.3.0
  * 
- * @commit b5cc948716dd8a6a54e98eaed5dd1c07d348e251
- * @moment Sunday, August 6, 2017 11:24 AM
+ * @commit be25187a3c75e6061912b98148f778030eca2eaf
+ * @moment Sunday, August 6, 2017 6:08 PM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-20173
@@ -18,7 +18,7 @@ var type = (function () {
 		return Object(value).constructor || Object;
 	};
 
-	var is_arraylike = function isArraylike(value) {
+	var arraylike = function isArraylike(value) {
 		return (constructorOf$1(value) === Array || (!!value &&
 			typeof value === 'object' && typeof value.length === 'number' &&
 			(value.length === 0 || (value.length > 0 && (value.length - 1) in value))
@@ -44,7 +44,7 @@ var type = (function () {
 		if (value === Infinity || value === undefined || value === null || (name === 'Number' && isNaN(value))) {
 			return String(value);
 		}
-		return name === 'Object' && is_arraylike(value) ? 'Arguments' : name;
+		return name === 'Object' && arraylike(value) ? 'Arguments' : name;
 	};
 
 	function createCommonjsModule(fn, module) {
@@ -83,7 +83,27 @@ var type = (function () {
 	};
 	});
 
-	var is_buffer = function isBuffer(value) {
+	var is$1 = function is(expected, value) {
+		return new RegExp(("(" + (typify$1(expected, true)) + ")")).test(of$1(value));
+	};
+
+	var numeric = function isNumeric(value) {
+		return !isNaN(parseFloat(value)) && isFinite(value);
+	};
+
+	var int_1 = function isInt(value) {
+		return parseFloat(value, 10) === parseInt(value, 10);
+	};
+
+	var uint = function isUint(value) {
+		return int_1(value) && value >= 0;
+	};
+
+	var primitive = function isPrimitive(value) {
+		return typeof value === 'function' || value !== Object(value);
+	};
+
+	var buffer = function isBuffer(value) {
 		try {
 			return constructorOf$1(value) === Buffer;
 		} catch (err) {
@@ -97,7 +117,7 @@ var type = (function () {
 		'{': /\}$/,
 	};
 
-	var is_json = function isJson(value) {
+	var json = function isJson(value) {
 		if (constructorOf$1(value) === String) {
 			var start = value.match(jsonStart);
 			return !!(start && jsonEnds[start[0]].test(value));
@@ -105,48 +125,37 @@ var type = (function () {
 		return false;
 	};
 
-	function is$1(expected, value) {
-		return new RegExp('(' + typify$1(expected, true) + ')').test(of$1(value));
-	}
+	is$1.numeric = numeric;
+	is$1.int = int_1;
+	is$1.uint = uint;
+	is$1.primitive = primitive;
+	is$1.buffer = buffer;
+	is$1.arraylike = arraylike;
+	is$1.json = json;
+	is$1.a = is$1.an = is$1;
 
 	is$1.not = function isnt(expected, value) {
 		return !is$1(expected, value);
 	};
 
 	is$1.not.buffer = function isntBuffer(value) {
-		return !is_buffer(value);
+		return !is$1.buffer(value);
 	};
 
 	is$1.not.arraylike = function isntArraylike(value) {
-		return !is_arraylike(value);
-	};
-
-	is$1.numeric = function isNumeric(value) {
-		return !isNaN(parseFloat(value)) && isFinite(value);
+		return !is$1.arraylike(value);
 	};
 
 	is$1.not.numeric = function isntNumeric(value) {
 		return !is$1.numeric(value);
 	};
 
-	is$1.int = function isInt(value) {
-		return parseFloat(value, 10) === parseInt(value, 10);
-	};
-
 	is$1.not.int = function isntInt(value) {
 		return !is$1.int(value);
 	};
 
-	is$1.uint = function isUint(value) {
-		return is$1.int(value) && value >= 0;
-	};
-
 	is$1.not.uint = function isntUint(value) {
 		return !is$1.uint(value);
-	};
-
-	is$1.primitive = function isPrimitive(value) {
-		return typeof value === 'function' || value !== Object(value);
 	};
 
 	is$1.not.primitive = function isntPrimitive(value) {
@@ -154,15 +163,11 @@ var type = (function () {
 	};
 
 	is$1.not.json = function isntJson(value) {
-		return !is_json(value);
+		return !is$1.json(value);
 	};
 
-	is$1.buffer = is_buffer;
-	is$1.arraylike = is_arraylike;
-	is$1.json = is_json;
-	is$1.a = is$1.an = is$1;
 	is$1.not.a = is$1.not.an = is$1.not;
-	var is_1 = is$1;
+	var index$4 = is$1;
 
 	var toArgs = Array.prototype.slice;
 	var reFn = /\bFunction\b/;
@@ -174,14 +179,14 @@ var type = (function () {
 		if (constructorOf$1(value) === Function && !reFn.test(type)) {
 			value = value.apply(scope, args);
 		}
-		return is_1(type, value) ? value : undefined;
+		return index$4(type, value) ? value : undefined;
 	};
 
 	var stringToBoolean = /^true|[1-9]+$/gi;
 	var to$1 = {};
 
 	to$1.string = function stringify(value, space, replacer) {
-		if (is_1([RegExp, Function], value)) {
+		if (index$4([RegExp, Function], value)) {
 			return value.toString();
 		}
 		return JSON.stringify(value, replacer, space);
@@ -198,11 +203,11 @@ var type = (function () {
 
 	to$1.float = function toFloat(value) {
 		value = parseFloat(value, 10);
-		return is_1.numeric(value) ? value : 0;
+		return index$4.numeric(value) ? value : 0;
 	};
 
 	to$1.bool = function toBoolean(value) {
-		if (is_1(String, value)) {
+		if (index$4(String, value)) {
 			return stringToBoolean.test(value);
 		}
 		return !!value;
@@ -213,7 +218,7 @@ var type = (function () {
 	var as = as$1;
 	var constructorNameOf = constructorNameOf$1;
 	var constructorOf = constructorOf$1;
-	var is = is_1;
+	var is = index$4;
 	var name = name$1;
 	var of = of$1;
 	var to = to_1;
