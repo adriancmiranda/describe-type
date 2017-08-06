@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v0.3.0
  * 
- * @commit be25187a3c75e6061912b98148f778030eca2eaf
- * @moment Sunday, August 6, 2017 6:08 PM
+ * @commit b214cdb480d461291174984885bd0a0615bc8abc
+ * @moment Sunday, August 6, 2017 6:18 PM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-20173
@@ -90,6 +90,19 @@
 		return new RegExp(("(" + (typify$1(expected, true)) + ")")).test(of$1(value));
 	};
 
+	var toArgs = Array.prototype.slice;
+	var reFn = /\bFunction\b/;
+
+	var as$1 = function as(expected, value) {
+		var type = typify$1(expected, true);
+		var args = toArgs.call(arguments, 2);
+		var scope = args[0] || null;
+		if (constructorOf$1(value) === Function && !reFn.test(type)) {
+			value = value.apply(scope, args);
+		}
+		return is$1(type, value) ? value : undefined;
+	};
+
 	var numeric = function isNumeric(value) {
 		return !isNaN(parseFloat(value)) && isFinite(value);
 	};
@@ -172,24 +185,11 @@
 	is$1.not.a = is$1.not.an = is$1.not;
 	var index$4 = is$1;
 
-	var toArgs = Array.prototype.slice;
-	var reFn = /\bFunction\b/;
-
-	var as$1 = function as(expected, value) {
-		var type = typify$1(expected, true);
-		var args = toArgs.call(arguments, 2);
-		var scope = args[0] || null;
-		if (constructorOf$1(value) === Function && !reFn.test(type)) {
-			value = value.apply(scope, args);
-		}
-		return index$4(type, value) ? value : undefined;
-	};
-
 	var stringToBoolean = /^true|[1-9]+$/gi;
 	var to$1 = {};
 
 	to$1.string = function stringify(value, space, replacer) {
-		if (index$4([RegExp, Function], value)) {
+		if (is$1([RegExp, Function], value)) {
 			return value.toString();
 		}
 		return JSON.stringify(value, replacer, space);
@@ -206,11 +206,11 @@
 
 	to$1.float = function toFloat(value) {
 		value = parseFloat(value, 10);
-		return index$4.numeric(value) ? value : 0;
+		return numeric(value) ? value : 0;
 	};
 
 	to$1.bool = function toBoolean(value) {
-		if (index$4(String, value)) {
+		if (is$1(String, value)) {
 			return stringToBoolean.test(value);
 		}
 		return !!value;
