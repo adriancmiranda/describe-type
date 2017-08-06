@@ -1,9 +1,11 @@
 ---
 env:
-  mocha: true
+  jasmine: true
 
 globals:
   fixture: true
+  expect: true
+  sinon: true
 
 rules:
   new-parens: off
@@ -15,3 +17,5 @@ rules:
   no-array-constructor: off
   no-unused-expressions: off
   no-use-before-define: off
+  global-require: off
+  import/no-extraneous-dependencies: off

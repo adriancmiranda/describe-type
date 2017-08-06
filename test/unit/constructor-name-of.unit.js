@@ -1,185 +1,184 @@
-var expect = require('chai').expect;
-var ObjectFixture = require('../fixtures/object.fixture');
-var type = require('../../');
+import Exotic from '../fixtures/exotic.fixture';
+import type from '../../';
 
 describe('constructorNameOf', function () {
 	it('exposed', function () {
-		expect(toString.call(type.constructorNameOf)).to.equal('[object Function]');
+		expect(type.constructorNameOf).toEqual(jasmine.any(Function));
 	});
 
 	it('Arguments', function () {
-		expect(type.constructorNameOf((() => arguments)())).to.equal('Arguments');
+		expect(type.constructorNameOf((() => arguments)())).toEqual('Arguments');
 	});
 
 	it('Function', function () {
-		expect(type.constructorNameOf(() => 'foo')).to.equal('Function');
+		expect(type.constructorNameOf(() => 'foo')).toEqual('Function');
 	});
 
 	it('Function', function () {
-		expect(type.constructorNameOf(function () { return 'foo'; })).to.equal('Function');
+		expect(type.constructorNameOf(function () { return 'foo'; })).toEqual('Function');
 	});
 
 	it('Promise', function () {
-		expect(type.constructorNameOf(global.Promise)).to.equal('Promise');
+		expect(type.constructorNameOf(global.Promise)).toEqual('Promise');
 	});
 
 	it('Symbol', function () {
-		expect(type.constructorNameOf(global.Symbol)).to.equal('Symbol');
+		expect(type.constructorNameOf(global.Symbol)).toEqual('Symbol');
 	});
 
 	it('String', function () {
-		expect(type.constructorNameOf(global.Symbol.name)).to.equal('String');
+		expect(type.constructorNameOf(global.Symbol.name)).toEqual('String');
 	});
 
 	it('String', function () {
-		expect(type.constructorNameOf(String)).to.equal('String');
+		expect(type.constructorNameOf(String)).toEqual('String');
 	});
 
 	it('String', function () {
-		expect(type.constructorNameOf(String.name)).to.equal('String');
+		expect(type.constructorNameOf(String.name)).toEqual('String');
 	});
 
 	it('RegExp', function () {
-		expect(type.constructorNameOf(RegExp)).to.equal('RegExp');
+		expect(type.constructorNameOf(RegExp)).toEqual('RegExp');
 	});
 
 	it('String', function () {
-		expect(type.constructorNameOf(RegExp.name)).to.equal('String');
+		expect(type.constructorNameOf(RegExp.name)).toEqual('String');
 	});
 
 	it('Number', function () {
-		expect(type.constructorNameOf(Number)).to.equal('Number');
+		expect(type.constructorNameOf(Number)).toEqual('Number');
 	});
 
 	it('String', function () {
-		expect(type.constructorNameOf(Number.name)).to.equal('String');
+		expect(type.constructorNameOf(Number.name)).toEqual('String');
 	});
 
 	it('TypeError', function () {
-		expect(type.constructorNameOf(TypeError)).to.equal('TypeError');
+		expect(type.constructorNameOf(TypeError)).toEqual('TypeError');
 	});
 
 	it('String', function () {
-		expect(type.constructorNameOf(TypeError.name)).to.equal('String');
+		expect(type.constructorNameOf(TypeError.name)).toEqual('String');
 	});
 
 	it('Error', function () {
-		expect(type.constructorNameOf(Error)).to.equal('Error');
+		expect(type.constructorNameOf(Error)).toEqual('Error');
 	});
 
 	it('String', function () {
-		expect(type.constructorNameOf(Error.name)).to.equal('String');
+		expect(type.constructorNameOf(Error.name)).toEqual('String');
 	});
 
 	it('Object', function () {
-		expect(type.constructorNameOf(Object)).to.equal('Object');
+		expect(type.constructorNameOf(Object)).toEqual('Object');
 	});
 
 	it('String', function () {
-		expect(type.constructorNameOf(Object.name)).to.equal('String');
+		expect(type.constructorNameOf(Object.name)).toEqual('String');
 	});
 
 	it('Array', function () {
-		expect(type.constructorNameOf(Array)).to.equal('Array');
+		expect(type.constructorNameOf(Array)).toEqual('Array');
 	});
 
 	it('String', function () {
-		expect(type.constructorNameOf(Array.name)).to.equal('String');
+		expect(type.constructorNameOf(Array.name)).toEqual('String');
 	});
 
 	it('Boolean', function () {
-		expect(type.constructorNameOf(Boolean)).to.equal('Boolean');
+		expect(type.constructorNameOf(Boolean)).toEqual('Boolean');
 	});
 
 	it('String', function () {
-		expect(type.constructorNameOf(Boolean.name)).to.equal('String');
+		expect(type.constructorNameOf(Boolean.name)).toEqual('String');
 	});
 
 	it('Date', function () {
-		expect(type.constructorNameOf(Date)).to.equal('Date');
+		expect(type.constructorNameOf(Date)).toEqual('Date');
 	});
 
 	it('String', function () {
-		expect(type.constructorNameOf(Date.name)).to.equal('String');
+		expect(type.constructorNameOf(Date.name)).toEqual('String');
 	});
 
 	it('null', function () {
-		expect(type.constructorNameOf(null)).to.equal('null');
+		expect(type.constructorNameOf(null)).toEqual('null');
 	});
 
 	it('undefined', function () {
-		expect(type.constructorNameOf(undefined)).to.equal('undefined');
+		expect(type.constructorNameOf(undefined)).toEqual('undefined');
 	});
 
 	it('Infinity', function () {
-		expect(type.constructorNameOf(Infinity)).to.equal('Infinity');
+		expect(type.constructorNameOf(Infinity)).toEqual('Infinity');
 	});
 
 	it('NaN', function () {
-		expect(type.constructorNameOf(NaN)).to.equal('NaN');
+		expect(type.constructorNameOf(NaN)).toEqual('NaN');
 	});
 
 	it('undefined', function () {
-		expect(type.constructorNameOf(NaN.name)).to.equal('undefined');
+		expect(type.constructorNameOf(NaN.name)).toEqual('undefined');
 	});
 
 	it('String', function () {
-		expect(type.constructorNameOf('ab|ba')).to.equal('String');
+		expect(type.constructorNameOf('ab|ba')).toEqual('String');
 	});
 
-	it('ObjectFixture', function () {
-		expect(type.constructorNameOf(new ObjectFixture())).to.equal('ObjectFixture');
+	it('Exotic', function () {
+		expect(type.constructorNameOf(new Exotic())).toEqual('Exotic');
 	});
 
-	it('ObjectFixture', function () {
-		expect(type.constructorNameOf(ObjectFixture)).to.equal('ObjectFixture');
+	it('Exotic', function () {
+		expect(type.constructorNameOf(Exotic)).toEqual('Exotic');
 	});
 
 	it('String', function () {
-		expect(type.constructorNameOf(ObjectFixture.name)).to.equal('String');
+		expect(type.constructorNameOf(Exotic.name)).toEqual('String');
 	});
 
 	it('Array', function () {
-		expect(type.constructorNameOf([1, 2])).to.equal('Array');
+		expect(type.constructorNameOf([1, 2])).toEqual('Array');
 	});
 
 	it('RegExp', function () {
-		expect(type.constructorNameOf(/^./g)).to.equal('RegExp');
+		expect(type.constructorNameOf(/^./g)).toEqual('RegExp');
 	});
 
 	it('Number', function () {
-		expect(type.constructorNameOf(10000)).to.equal('Number');
+		expect(type.constructorNameOf(10000)).toEqual('Number');
 	});
 
 	it('Object', function () {
-		expect(type.constructorNameOf({ name: 1 })).to.equal('Object');
+		expect(type.constructorNameOf({ name: 1 })).toEqual('Object');
 	});
 
 	it('Boolean', function () {
-		expect(type.constructorNameOf(false)).to.equal('Boolean');
+		expect(type.constructorNameOf(false)).toEqual('Boolean');
 	});
 
 	it('Date', function () {
-		expect(type.constructorNameOf(new Date())).to.equal('Date');
+		expect(type.constructorNameOf(new Date())).toEqual('Date');
 	});
 
 	it('ArrayBuffer', function () {
-		expect(type.constructorNameOf(global.ArrayBuffer)).to.equal('ArrayBuffer');
+		expect(type.constructorNameOf(global.ArrayBuffer)).toEqual('ArrayBuffer');
 	});
 
 	it('Buffer', function () {
-		expect(type.constructorNameOf(Buffer)).to.equal('Buffer');
+		expect(type.constructorNameOf(Buffer)).toEqual('Buffer');
 	});
 
 	it('String', function () {
-		expect(type.constructorNameOf(Buffer.name)).to.equal('String');
+		expect(type.constructorNameOf(Buffer.name)).toEqual('String');
 	});
 
 	it('Buffer', function () {
-		expect(type.constructorNameOf(new Buffer('ab'))).to.equal('Buffer');
+		expect(type.constructorNameOf(new Buffer('ab'))).toEqual('Buffer');
 	});
 
 	it('Promise', function () {
-		expect(type.constructorNameOf(new global.Promise((resolve) => { resolve(); }))).to.equal('Promise');
+		expect(type.constructorNameOf(new global.Promise((resolve) => { resolve(); }))).toEqual('Promise');
 	});
 });

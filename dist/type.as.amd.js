@@ -1,17 +1,13 @@
 /*!
- *    /     '      /  / 
- *   /__      ___ (  /   
- *   \--`-'-|`---\ |  
- *    |' _/   ` __/ /   
- *    '._  W    ,--'   
- *       |_:_._/         
- *                       
- * ~ describe-type v0.3.0
  * 
- * @moment Friday, July 14, 2017 10:44 AM
- * @commit ce58638680f73cc0f875d078ed94e4a90acddd7d
+ * ~~~~ describe-type v0.3.0
+ * 
+ * @commit b5cc948716dd8a6a54e98eaed5dd1c07d348e251
+ * @moment Sunday, August 6, 2017 11:24 AM
  * @homepage https://github.com/adriancmiranda/describe-type
- * @author Adrian C. Miranda */
+ * @author Adrian C. Miranda
+ * @license (c) 2016-20173
+ */
 define(function () { 'use strict';
 
 	var constructorOf = function constructorOf(value) {

@@ -1,49 +1,48 @@
-var expect = require('chai').expect;
-var type = require('../../');
+import type from '../../';
 
 describe('toString', function () {
 	it('', function () {
-		expect(toString.call(type.toString)).to.equal('[object Function]');
+		expect(type.toString).toEqual(jasmine.any(Function));
 	});
 
 	it('', function () {
-		expect(type.toString(/foo/)).to.equal('RegExp');
+		expect(type.toString(/foo/)).toEqual('RegExp');
 	});
 
 	it('', function () {
-		expect(type.toString(function () {})).to.equal('Function');
+		expect(type.toString(function () {})).toEqual('Function');
 	});
 
 	it('', function () {
-		expect(type.toString(function () {}, true)).to.equal('Function');
+		expect(type.toString(function () {}, true)).toEqual('Function');
 	});
 
 	it('', function () {
-		expect(type.toString(function Test() {})).to.equal('Function');
+		expect(type.toString(function Test() {})).toEqual('Function');
 	});
 
 	it('', function () {
-		expect(type.toString(function Test() {}, true)).to.equal('Function');
+		expect(type.toString(function Test() {}, true)).toEqual('Function');
 	});
 
 	it('', function () {
-		expect(type.toString(new (function Test() {}), true)).to.equal('Test');
+		expect(type.toString(new (function Test() {}), true)).toEqual('Test');
 	});
 
 	it('', function () {
-		expect(type.toString(Object.create(null), true)).to.equal('Object');
+		expect(type.toString(Object.create(null), true)).toEqual('Object');
 	});
 
 	it('', function () {
-		expect(type.toString(Object.create(null))).to.equal('Object');
+		expect(type.toString(Object.create(null))).toEqual('Object');
 	});
 
 	it('', function () {
-		expect(type.toString({})).to.equal('Object');
+		expect(type.toString({})).toEqual('Object');
 	});
 
 	it('', function () {
-		expect(type.toString(1)).to.equal('Number');
+		expect(type.toString(1)).toEqual('Number');
 	});
 });
 

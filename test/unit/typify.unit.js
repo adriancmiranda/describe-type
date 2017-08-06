@@ -1,92 +1,91 @@
-var expect = require('chai').expect;
-var type = require('../../');
+import type from '../../';
 
 describe('typify', function () {
 	it('exposed', function () {
-		expect(toString.call(type.typify)).to.equal('[object Function]');
+		expect(type.typify).toEqual(jasmine.any(Function));
 	});
 
 	it('', function () {
-		expect(type.typify('Arguments', (() => arguments)())).to.equal('Arguments');
+		expect(type.typify('Arguments', (() => arguments)())).toEqual('Arguments');
 	});
 
 	it('', function () {
-		expect(type.typify([global.Symbol, String, Function, Object, Boolean, global.Promise])).to.equal('Symbol|String|Function|Object|Boolean|Promise');
+		expect(type.typify([global.Symbol, String, Function, Object, Boolean, global.Promise])).toEqual('Symbol|String|Function|Object|Boolean|Promise');
 	});
 
 	it('', function () {
-		expect(type.typify([global.Symbol, String, Function, Object, global.Boolean,])).to.equal('Symbol|String|Function|Object|Boolean'); // should be 'Symbol|String|Function|Object|Boolean|Undefined'?
+		expect(type.typify([global.Symbol, String, Function, Object, global.Boolean,])).toEqual('Symbol|String|Function|Object|Boolean'); // should be 'Symbol|String|Function|Object|Boolean|Undefined'?
 	});
 
 	it('', function () {
-		expect(type.typify('Symbol|String|Function|Object|Boolean', true)).to.equal('Symbol|String|Function|Object|Boolean');
+		expect(type.typify('Symbol|String|Function|Object|Boolean', true)).toEqual('Symbol|String|Function|Object|Boolean');
 	});
 
 	it('', function () {
-		expect(type.typify([1, []])).to.equal('Number|Array');
+		expect(type.typify([1, []])).toEqual('Number|Array');
 	});
 
 	it('', function () {
-		expect(type.typify([1, 'Custom', {}])).to.equal('Number|String|Object');
+		expect(type.typify([1, 'Custom', {}])).toEqual('Number|String|Object');
 	});
 
 	it('', function () {
-		expect(type.typify([1, 'Custom', {}], true)).to.equal('Number|Custom|Object');
+		expect(type.typify([1, 'Custom', {}], true)).toEqual('Number|Custom|Object');
 	});
 
 	it('', function () {
-		expect(type.typify('Custom', true)).to.equal('Custom');
+		expect(type.typify('Custom', true)).toEqual('Custom');
 	});
 
 	it('', function () {
-		expect(type.typify([])).to.equal('Array');
+		expect(type.typify([])).toEqual('Array');
 	});
 
 	it('', function () {
-		expect(type.typify(1)).to.equal('Number');
+		expect(type.typify(1)).toEqual('Number');
 	});
 
 	it('', function () {
-		expect(type.typify({})).to.equal('Object');
+		expect(type.typify({})).toEqual('Object');
 	});
 
 	it('', function () {
-		expect(type.typify({ name: 1 })).to.equal('Object');
+		expect(type.typify({ name: 1 })).toEqual('Object');
 	});
 
 	it('', function () {
-		expect(type.typify(/^./g)).to.equal('RegExp');
+		expect(type.typify(/^./g)).toEqual('RegExp');
 	});
 
 	it('', function () {
-		expect(type.typify(false)).to.equal('Boolean');
+		expect(type.typify(false)).toEqual('Boolean');
 	});
 
 	it('', function () {
-		expect(type.typify(new Date())).to.equal('Date');
+		expect(type.typify(new Date())).toEqual('Date');
 	});
 
 	it('', function () {
-		expect(type.typify(Date)).to.equal('Date');
+		expect(type.typify(Date)).toEqual('Date');
 	});
 
 	it('', function () {
-		expect(type.typify(global.ArrayBuffer)).to.equal('ArrayBuffer');
+		expect(type.typify(global.ArrayBuffer)).toEqual('ArrayBuffer');
 	});
 
 	it('', function () {
-		expect(type.typify(new global.ArrayBuffer(4))).to.equal('ArrayBuffer');
+		expect(type.typify(new global.ArrayBuffer(4))).toEqual('ArrayBuffer');
 	});
 
 	it('', function () {
-		expect(type.typify(Buffer)).to.equal('Buffer');
+		expect(type.typify(Buffer)).toEqual('Buffer');
 	});
 
 	it('', function () {
-		expect(type.typify(new Buffer('ab'))).to.equal('Buffer');
+		expect(type.typify(new Buffer('ab'))).toEqual('Buffer');
 	});
 
 	it('', function () {
-		expect(type.typify(new global.Promise((resolve) => { resolve(); }))).to.equal('Promise');
+		expect(type.typify(new global.Promise((resolve) => { resolve(); }))).toEqual('Promise');
 	});
 });

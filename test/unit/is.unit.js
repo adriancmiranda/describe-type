@@ -1,198 +1,197 @@
-var expect = require('chai').expect;
-var ObjectFixture = require('../fixtures/object.fixture');
-var type = require('../../');
+import Exotic from '../fixtures/exotic.fixture';
+import type from '../../';
 
 describe('is', function () {
 	it('exposed', function () {
-		expect(toString.call(type.is)).to.equal('[object Function]');
+		expect(type.is).toEqual(jasmine.any(Function));
 	});
 
 	describe('#buffer', function () {
 		it('exposed', function () {
-			expect(toString.call(type.is.buffer)).to.equal('[object Function]');
+			expect(toString.call(type.is.buffer)).toEqual('[object Function]');
 		});
 
 		it('alias works', function () {
-			expect(type.is.a.buffer).to.equal(type.is.buffer);
+			expect(type.is.a.buffer).toEqual(type.is.buffer);
 		});
 
 		it('alias works', function () {
-			expect(type.is.an.buffer).to.equal(type.is.buffer);
+			expect(type.is.an.buffer).toEqual(type.is.buffer);
 		});
 
 		it('', function () {
-			expect(type.is.buffer(new global.Uint8Array(1))).to.equal(false);
+			expect(type.is.buffer(new global.Uint8Array(1))).toEqual(false);
 		});
 
 		it('', function () {
-			expect(type.is.buffer(new Buffer(1))).to.equal(true);
+			expect(type.is.buffer(new Buffer(1))).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is.buffer(undefined)).to.equal(false);
+			expect(type.is.buffer(undefined)).toEqual(false);
 		});
 
 		it('', function () {
-			expect(type.is.buffer(new (function Buffer() {})())).to.equal(false);
+			expect(type.is.buffer(new (function Buffer() {})())).toEqual(false);
 		});
 
 		it('', function () {
-			expect(type.is.buffer(null)).to.equal(false);
+			expect(type.is.buffer(null)).toEqual(false);
 		});
 
 		it('', function () {
-			expect(type.is.buffer(false)).to.equal(false);
+			expect(type.is.buffer(false)).toEqual(false);
 		});
 
 		it('', function () {
-			expect(type.is.buffer(true)).to.equal(false);
+			expect(type.is.buffer(true)).toEqual(false);
 		});
 
 		it('', function () {
-			expect(type.is.buffer(() => 'foo')).to.equal(false);
+			expect(type.is.buffer(() => 'foo')).toEqual(false);
 		});
 
 		it('', function () {
-			expect(type.is.buffer('foo')).to.equal(false);
+			expect(type.is.buffer('foo')).toEqual(false);
 		});
 
 		it('', function () {
-			expect(type.is.buffer({})).to.equal(false);
+			expect(type.is.buffer({})).toEqual(false);
 		});
 
 		it('', function () {
-			expect(type.is.buffer('')).to.equal(false);
+			expect(type.is.buffer('')).toEqual(false);
 		});
 
 		it('', function () {
-			expect(type.is.buffer(0)).to.equal(false);
+			expect(type.is.buffer(0)).toEqual(false);
 		});
 
 		it('', function () {
-			expect(type.is.buffer(1)).to.equal(false);
+			expect(type.is.buffer(1)).toEqual(false);
 		});
 	});
 
 	describe('#not.buffer', function () {
 		it('exposed', function () {
-			expect(toString.call(type.is.not.buffer)).to.equal('[object Function]');
+			expect(toString.call(type.is.not.buffer)).toEqual('[object Function]');
 		});
 
 		it('alias works', function () {
-			expect(type.is.not.a.buffer).to.equal(type.is.not.buffer);
+			expect(type.is.not.a.buffer).toEqual(type.is.not.buffer);
 		});
 
 		it('alias works', function () {
-			expect(type.is.not.an.buffer).to.equal(type.is.not.buffer);
+			expect(type.is.not.an.buffer).toEqual(type.is.not.buffer);
 		});
 
 		it('', function () {
-			expect(type.is.not.buffer(new (function Buffer() {})())).to.equal(true);
+			expect(type.is.not.buffer(new (function Buffer() {})())).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is.not.buffer(new global.Uint8Array(1))).to.equal(true);
+			expect(type.is.not.buffer(new global.Uint8Array(1))).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is.not.buffer(new Buffer(1))).to.equal(false);
+			expect(type.is.not.buffer(new Buffer(1))).toEqual(false);
 		});
 	});
 
 	describe('#arraylike', function () {
 		it('exposed', function () {
-			expect(toString.call(type.is.arraylike)).to.equal('[object Function]');
+			expect(toString.call(type.is.arraylike)).toEqual('[object Function]');
 		});
 
 		it('', function () {
-			expect(type.is.arraylike((() => arguments)())).to.equal(true);
+			expect(type.is.arraylike((() => arguments)())).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is.arraylike(new global.Uint8Array(10))).to.equal(true);
+			expect(type.is.arraylike(new global.Uint8Array(10))).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is.arraylike(new String('foo'))).to.equal(true);
+			expect(type.is.arraylike(new String('foo'))).toEqual(true);
 		});
 
 		// it('', function () {
-		// 	expect(type.is.arraylike(global.document.body.children)).to.equal(true);
+		// 	expect(type.is.arraylike(global.document.body.children)).toEqual(true);
 		// });
 
 		it('', function () {
-			expect(type.is.arraylike({ 0: NaN, length: 0 })).to.equal(true);
+			expect(type.is.arraylike({ 0: NaN, length: 0 })).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is.arraylike({ 0: 'foo', length: 1 })).to.equal(true);
+			expect(type.is.arraylike({ 0: 'foo', length: 1 })).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is.arraylike([undefined, undefined, undefined])).to.equal(true);
+			expect(type.is.arraylike([undefined, undefined, undefined])).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is.arraylike([0, 1, undefined])).to.equal(true);
+			expect(type.is.arraylike([0, 1, undefined])).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is.arraylike(new Array(2))).to.equal(true);
+			expect(type.is.arraylike(new Array(2))).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is.arraylike([])).to.equal(true);
+			expect(type.is.arraylike([])).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is.arraylike({ length: 0 })).to.equal(true);
+			expect(type.is.arraylike({ length: 0 })).toEqual(true);
 		});
 	});
 
 
 	describe('#not.arraylike', function () {
 		it('exposed', function () {
-			expect(toString.call(type.is.not.arraylike)).to.equal('[object Function]');
+			expect(toString.call(type.is.not.arraylike)).toEqual('[object Function]');
 		});
 
 		it('', function () {
-			expect(type.is.not.arraylike({ length: 2 })).to.equal(true);
+			expect(type.is.not.arraylike({ length: 2 })).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is.not.arraylike(Object.create(null))).to.equal(true);
+			expect(type.is.not.arraylike(Object.create(null))).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is.not.arraylike({})).to.equal(true);
+			expect(type.is.not.arraylike({})).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is.not.arraylike(null)).to.equal(true);
+			expect(type.is.not.arraylike(null)).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is.not.arraylike(false)).to.equal(true);
+			expect(type.is.not.arraylike(false)).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is.not.arraylike()).to.equal(true);
+			expect(type.is.not.arraylike()).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is.not.arraylike({ length: -1 })).to.equal(true);
+			expect(type.is.not.arraylike({ length: -1 })).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is.not.arraylike({ length: NaN })).to.equal(true);
+			expect(type.is.not.arraylike({ length: NaN })).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is.not.arraylike({ length: 'foo' })).to.equal(true);
+			expect(type.is.not.arraylike({ length: 'foo' })).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is.not.arraylike({ length: '' })).to.equal(true);
+			expect(type.is.not.arraylike({ length: '' })).toEqual(true);
 		});
 	});
 
@@ -200,529 +199,529 @@ describe('is', function () {
 		it('unsupported', function () {
 			const buffer = Buffer;
 			delete global.Buffer;
-			expect(type.is.buffer(1)).to.equal(false);
+			expect(type.is.buffer(1)).toEqual(false);
 			global.Buffer = buffer;
 		});
 	});
 
 	describe('#numeric', function () {
 		it('exposed', function () {
-			expect(toString.call(type.is.numeric)).to.equal('[object Function]');
+			expect(toString.call(type.is.numeric)).toEqual('[object Function]');
 		});
 
 		it('', function () {
-			expect(type.is.numeric('0')).to.equal(true);
+			expect(type.is.numeric('0')).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is.numeric('1')).to.equal(true);
+			expect(type.is.numeric('1')).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is.numeric('1.2')).to.equal(true);
+			expect(type.is.numeric('1.2')).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is.numeric(1)).to.equal(true);
+			expect(type.is.numeric(1)).toEqual(true);
 		});
 	});
 
 
 	describe('#not.numeric', function () {
 		it('exposed', function () {
-			expect(toString.call(type.is.not.numeric)).to.equal('[object Function]');
+			expect(toString.call(type.is.not.numeric)).toEqual('[object Function]');
 		});
 
 		it('', function () {
-			expect(type.is.not.numeric('1.2a')).to.equal(true);
+			expect(type.is.not.numeric('1.2a')).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is.not.numeric('a1.2')).to.equal(true);
+			expect(type.is.not.numeric('a1.2')).toEqual(true);
 		});
 	});
 
 	describe('#int', function () {
 		it('exposed', function () {
-			expect(toString.call(type.is.int)).to.equal('[object Function]');
+			expect(toString.call(type.is.int)).toEqual('[object Function]');
 		});
 
 		it('', function () {
-			expect(type.is.int(-1)).to.equal(true);
+			expect(type.is.int(-1)).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is.int(12)).to.equal(true);
+			expect(type.is.int(12)).toEqual(true);
 		});
 
 		// it('', function () {
-		// 	expect(type.is.int('12')).to.equal(false);
+		// 	expect(type.is.int('12')).toEqual(false);
 		// });
 	});
 
 	describe('#not.int', function () {
 		it('exposed', function () {
-			expect(toString.call(type.is.not.int)).to.equal('[object Function]');
+			expect(toString.call(type.is.not.int)).toEqual('[object Function]');
 		});
 
 		// it('', function () {
-		// 	expect(type.is.not.int('12')).to.equal(true);
+		// 	expect(type.is.not.int('12')).toEqual(true);
 		// });
 
 		it('', function () {
-			expect(type.is.not.int('1.2a')).to.equal(true);
+			expect(type.is.not.int('1.2a')).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is.not.int('1.2')).to.equal(true);
+			expect(type.is.not.int('1.2')).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is.not.int(1.2)).to.equal(true);
+			expect(type.is.not.int(1.2)).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is.not.int(-1.2)).to.equal(true);
+			expect(type.is.not.int(-1.2)).toEqual(true);
 		});
 	});
 
 	describe('#uint', function () {
 		it('exposed', function () {
-			expect(toString.call(type.is.uint)).to.equal('[object Function]');
+			expect(toString.call(type.is.uint)).toEqual('[object Function]');
 		});
 
 		it('', function () {
-			expect(type.is.uint(0)).to.equal(true);
+			expect(type.is.uint(0)).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is.uint(1)).to.equal(true);
+			expect(type.is.uint(1)).toEqual(true);
 		});
 	});
 
 	describe('#not.uint', function () {
 		it('exposed', function () {
-			expect(toString.call(type.is.not.uint)).to.equal('[object Function]');
+			expect(toString.call(type.is.not.uint)).toEqual('[object Function]');
 		});
 
 		it('', function () {
-			expect(type.is.not.uint(1.2)).to.equal(true);
+			expect(type.is.not.uint(1.2)).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is.not.uint(-1.2)).to.equal(true);
+			expect(type.is.not.uint(-1.2)).toEqual(true);
 		});
 	});
 
 	describe('#primitive', function () {
 		it('exposed', function () {
-			expect(toString.call(type.is.primitive)).to.equal('[object Function]');
+			expect(toString.call(type.is.primitive)).toEqual('[object Function]');
 		});
 
 		it('', function () {
-			expect(type.is.primitive()).to.equal(true);
+			expect(type.is.primitive()).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is.primitive(null)).to.equal(true);
+			expect(type.is.primitive(null)).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is.primitive(true)).to.equal(true);
+			expect(type.is.primitive(true)).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is.primitive(false)).to.equal(true);
+			expect(type.is.primitive(false)).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is.primitive(NaN)).to.equal(true);
+			expect(type.is.primitive(NaN)).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is.primitive(Object)).to.equal(true);
+			expect(type.is.primitive(Object)).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is.primitive(function foo() {})).to.equal(true);
+			expect(type.is.primitive(function foo() {})).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is.primitive(1)).to.equal(true);
+			expect(type.is.primitive(1)).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is.primitive('foo')).to.equal(true);
+			expect(type.is.primitive('foo')).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is.primitive(global.Symbol('foo'))).to.equal(true);
+			expect(type.is.primitive(global.Symbol('foo'))).toEqual(true);
 		});
 	});
 
 	describe('#not.primitive', function () {
 		it('exposed', function () {
-			expect(toString.call(type.is.not.primitive)).to.equal('[object Function]');
+			expect(toString.call(type.is.not.primitive)).toEqual('[object Function]');
 		});
 
 		it('', function () {
-			expect(type.is.not.primitive({})).to.equal(true);
+			expect(type.is.not.primitive({})).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is.not.primitive([])).to.equal(true);
+			expect(type.is.not.primitive([])).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is.not.primitive(Object.create(null))).to.equal(true);
+			expect(type.is.not.primitive(Object.create(null))).toEqual(true);
 		});
 	});
 
 	describe('#json', function () {
 		it('exposed', function () {
-			expect(toString.call(type.is.json)).to.equal('[object Function]');
+			expect(toString.call(type.is.json)).toEqual('[object Function]');
 		});
 
 		it('', function () {
-			expect(type.is.json(JSON.stringify({}))).to.equal(true);
+			expect(type.is.json(JSON.stringify({}))).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is.json(JSON.stringify([]))).to.equal(true);
+			expect(type.is.json(JSON.stringify([]))).toEqual(true);
 		});
 	});
 
 	describe('#not.json', function () {
 		it('exposed', function () {
-			expect(toString.call(type.is.not.json)).to.equal('[object Function]');
+			expect(toString.call(type.is.not.json)).toEqual('[object Function]');
 		});
 
 		it('', function () {
-			expect(type.is.not.json(JSON.stringify(''))).to.equal(true);
+			expect(type.is.not.json(JSON.stringify(''))).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is.not.json({})).to.equal(true);
+			expect(type.is.not.json({})).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is.not.json([])).to.equal(true);
+			expect(type.is.not.json([])).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is.not.json(0)).to.equal(true);
+			expect(type.is.not.json(0)).toEqual(true);
 		});
 	});
 
 	describe('is', function () {
 		it('exposed', function () {
-			expect(toString.call(type.is)).to.equal('[object Function]');
+			expect(toString.call(type.is)).toEqual('[object Function]');
 		});
 
 		it('alias works', function () {
-			expect(type.is.a).to.equal(type.is);
+			expect(type.is.a).toEqual(type.is);
 		});
 
 		it('alias works', function () {
-			expect(type.is.an).to.equal(type.is);
+			expect(type.is.an).toEqual(type.is);
 		});
 
 		it('', function () {
-			expect(type.is('Arguments', (() => arguments)())).to.equal(true);
+			expect(type.is('Arguments', (() => arguments)())).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is('Function|Array|Number', Infinity)).to.equal(false);
+			expect(type.is('Function|Array|Number', Infinity)).toEqual(false);
 		});
 
 		it('', function () {
-			expect(type.is('Function|Array|Infinity', String)).to.equal(true);
+			expect(type.is('Function|Array|Infinity', String)).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is('Function|Array', String)).to.equal(true);
+			expect(type.is('Function|Array', String)).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is('Function|Array', [])).to.equal(true);
+			expect(type.is('Function|Array', [])).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is('Function|Array', () => [])).to.equal(true);
+			expect(type.is('Function|Array', () => [])).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is('String|Function', 'pirate')).to.equal(true);
+			expect(type.is('String|Function', 'pirate')).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is([String, Function, Object, Infinity], Infinity)).to.equal(true);
+			expect(type.is([String, Function, Object, Infinity], Infinity)).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is([String, Function, Object, Infinity], Number)).to.equal(true);
+			expect(type.is([String, Function, Object, Infinity], Number)).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is([String, Function, Object, Infinity], 0)).to.equal(false);
+			expect(type.is([String, Function, Object, Infinity], 0)).toEqual(false);
 		});
 
 		it('', function () {
-			expect(type.is([String, Function, Object, Boolean], 'pirate')).to.equal(true);
+			expect(type.is([String, Function, Object, Boolean], 'pirate')).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is([String.name, Function.name], 'pirate')).to.equal(true);
+			expect(type.is([String.name, Function.name], 'pirate')).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is('String|Function', () => 'pirate')).to.equal(true);
+			expect(type.is('String|Function', () => 'pirate')).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is([String, Function], () => 'pirate')).to.equal(true);
+			expect(type.is([String, Function], () => 'pirate')).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is([String.name, Function.name], () => 'pirate')).to.equal(true);
+			expect(type.is([String.name, Function.name], () => 'pirate')).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is('Function', () => 'pirate')).to.equal(true);
+			expect(type.is('Function', () => 'pirate')).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is(Function, () => 'pirate')).to.equal(true);
+			expect(type.is(Function, () => 'pirate')).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is(Function.name, () => 'pirate')).to.equal(true);
+			expect(type.is(Function.name, () => 'pirate')).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is('String', () => 'pirate')).to.equal(false);
+			expect(type.is('String', () => 'pirate')).toEqual(false);
 		});
 
 		it('', function () {
-			expect(type.is(String, () => 'pirate')).to.equal(false);
+			expect(type.is(String, () => 'pirate')).toEqual(false);
 		});
 
 		it('', function () {
-			expect(type.is(String.name, () => 'pirate')).to.equal(false);
+			expect(type.is(String.name, () => 'pirate')).toEqual(false);
 		});
 
 		it('', function () {
-			expect(type.is(ObjectFixture, new ObjectFixture('pirate'))).to.equal(true);
+			expect(type.is(Exotic, new Exotic('pirate'))).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is(ObjectFixture.name, new ObjectFixture('pirate'))).to.equal(true);
+			expect(type.is(Exotic.name, new Exotic('pirate'))).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is('Pirate', new ObjectFixture('Pirate'))).to.equal(true);
+			expect(type.is('Pirate', new Exotic('Pirate'))).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is(undefined, undefined)).to.equal(true);
+			expect(type.is(undefined, undefined)).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is('undefined', undefined, true)).to.equal(true);
+			expect(type.is('undefined', undefined, true)).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is(null, null)).to.equal(true);
+			expect(type.is(null, null)).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is('null', null, true)).to.equal(true);
+			expect(type.is('null', null, true)).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is(Number, Infinity)).to.equal(false);
+			expect(type.is(Number, Infinity)).toEqual(false);
 		});
 
 		it('', function () {
-			expect(type.is(Infinity, Infinity)).to.equal(true);
+			expect(type.is(Infinity, Infinity)).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is(NaN, NaN)).to.equal(true);
+			expect(type.is(NaN, NaN)).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is(Number, NaN)).to.equal(false);
+			expect(type.is(Number, NaN)).toEqual(false);
 		});
 
 		it('', function () {
-			expect(type.is(Number.name, NaN)).to.equal(false);
+			expect(type.is(Number.name, NaN)).toEqual(false);
 		});
 
 		it('', function () {
-			expect(type.is('Number', NaN)).to.equal(false);
+			expect(type.is('Number', NaN)).toEqual(false);
 		});
 
 		it('', function () {
-			expect(type.is(Buffer, new global.Uint8Array(1))).to.equal(false);
+			expect(type.is(Buffer, new global.Uint8Array(1))).toEqual(false);
 		});
 	});
 
 	describe('#not', function () {
 		it('exposed', function () {
-			expect(toString.call(type.is.not)).to.equal('[object Function]');
+			expect(toString.call(type.is.not)).toEqual('[object Function]');
 		});
 
 		it('alias works', function () {
-			expect(type.is.not.a).to.equal(type.is.not);
+			expect(type.is.not.a).toEqual(type.is.not);
 		});
 
 		it('alias works', function () {
-			expect(type.is.not.an).to.equal(type.is.not);
+			expect(type.is.not.an).toEqual(type.is.not);
 		});
 
 		it('', function () {
-			expect(type.is.not('Arguments', (() => arguments)())).to.equal(false);
+			expect(type.is.not('Arguments', (() => arguments)())).toEqual(false);
 		});
 
 		it('', function () {
-			expect(type.is.not('Function|Array|Number', String)).to.equal(false);
+			expect(type.is.not('Function|Array|Number', String)).toEqual(false);
 		});
 
 		it('', function () {
-			expect(type.is.not('Function|Array|Number', Infinity)).to.equal(true);
+			expect(type.is.not('Function|Array|Number', Infinity)).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is.not('Function|Array', String)).to.equal(false);
+			expect(type.is.not('Function|Array', String)).toEqual(false);
 		});
 
 		it('', function () {
-			expect(type.is.not('Function|Array', [])).to.equal(false);
+			expect(type.is.not('Function|Array', [])).toEqual(false);
 		});
 
 		it('', function () {
-			expect(type.is.not('Function|Array', () => [])).to.equal(false);
+			expect(type.is.not('Function|Array', () => [])).toEqual(false);
 		});
 
 		it('', function () {
-			expect(type.is.not('String|Function', 'pirate')).to.equal(false);
+			expect(type.is.not('String|Function', 'pirate')).toEqual(false);
 		});
 
 		it('', function () {
-			expect(type.is.not([String, Function, Object, Boolean], 'pirate')).to.equal(false);
+			expect(type.is.not([String, Function, Object, Boolean], 'pirate')).toEqual(false);
 		});
 
 		it('', function () {
-			expect(type.is.not([String, Function, Object, Infinity], Infinity)).to.equal(false);
+			expect(type.is.not([String, Function, Object, Infinity], Infinity)).toEqual(false);
 		});
 
 		it('', function () {
-			expect(type.is.not([String, Function, Object, Infinity], Number)).to.equal(false);
+			expect(type.is.not([String, Function, Object, Infinity], Number)).toEqual(false);
 		});
 
 		it('', function () {
-			expect(type.is.not([String, Function, Object, Infinity], 0)).to.equal(true);
+			expect(type.is.not([String, Function, Object, Infinity], 0)).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is.not([String.name, Function.name], 'pirate')).to.equal(false);
+			expect(type.is.not([String.name, Function.name], 'pirate')).toEqual(false);
 		});
 
 		it('', function () {
-			expect(type.is.not('String|Function', () => 'pirate')).to.equal(false);
+			expect(type.is.not('String|Function', () => 'pirate')).toEqual(false);
 		});
 
 		it('', function () {
-			expect(type.is.not([String, Function], () => 'pirate')).to.equal(false);
+			expect(type.is.not([String, Function], () => 'pirate')).toEqual(false);
 		});
 
 		it('', function () {
-			expect(type.is.not([String.name, Function.name], () => 'pirate')).to.equal(false);
+			expect(type.is.not([String.name, Function.name], () => 'pirate')).toEqual(false);
 		});
 
 		it('', function () {
-			expect(type.is.not('Function', () => 'pirate')).to.equal(false);
+			expect(type.is.not('Function', () => 'pirate')).toEqual(false);
 		});
 
 		it('', function () {
-			expect(type.is.not(Function, () => 'pirate')).to.equal(false);
+			expect(type.is.not(Function, () => 'pirate')).toEqual(false);
 		});
 
 		it('', function () {
-			expect(type.is.not(Function.name, () => 'pirate')).to.equal(false);
+			expect(type.is.not(Function.name, () => 'pirate')).toEqual(false);
 		});
 
 		it('', function () {
-			expect(type.is.not('String', () => 'pirate')).to.equal(true);
+			expect(type.is.not('String', () => 'pirate')).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is.not(String, () => 'pirate')).to.equal(true);
+			expect(type.is.not(String, () => 'pirate')).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is.not(String.name, () => 'pirate')).to.equal(true);
+			expect(type.is.not(String.name, () => 'pirate')).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is.not(ObjectFixture, new ObjectFixture('pirate'))).to.equal(false);
+			expect(type.is.not(Exotic, new Exotic('pirate'))).toEqual(false);
 		});
 
 		it('', function () {
-			expect(type.is.not(ObjectFixture.name, new ObjectFixture('pirate'))).to.equal(false);
+			expect(type.is.not(Exotic.name, new Exotic('pirate'))).toEqual(false);
 		});
 
 		it('', function () {
-			expect(type.is.not('ObjectFixture', new ObjectFixture())).to.equal(false);
+			expect(type.is.not('Exotic', new Exotic())).toEqual(false);
 		});
 
 		it('', function () {
-			expect(type.is.not(undefined, undefined)).to.equal(false);
+			expect(type.is.not(undefined, undefined)).toEqual(false);
 		});
 
 		it('', function () {
-			expect(type.is.not('undefined', undefined, true)).to.equal(false);
+			expect(type.is.not('undefined', undefined, true)).toEqual(false);
 		});
 
 		it('', function () {
-			expect(type.is.not(null, null)).to.equal(false);
+			expect(type.is.not(null, null)).toEqual(false);
 		});
 
 		it('', function () {
-			expect(type.is.not('null', null, true)).to.equal(false);
+			expect(type.is.not('null', null, true)).toEqual(false);
 		});
 
 		it('', function () {
-			expect(type.is.not(Infinity, Infinity)).to.equal(false);
+			expect(type.is.not(Infinity, Infinity)).toEqual(false);
 		});
 
 		it('', function () {
-			expect(type.is.not(Infinity, Number)).to.equal(true);
+			expect(type.is.not(Infinity, Number)).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is.not(Number, Infinity)).to.equal(true);
+			expect(type.is.not(Number, Infinity)).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is.not(NaN, NaN)).to.equal(false);
+			expect(type.is.not(NaN, NaN)).toEqual(false);
 		});
 
 		it('', function () {
-			expect(type.is.not(Number, NaN)).to.equal(true);
+			expect(type.is.not(Number, NaN)).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is.not(Number.name, NaN)).to.equal(true);
+			expect(type.is.not(Number.name, NaN)).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is.not('Number', NaN)).to.equal(true);
+			expect(type.is.not('Number', NaN)).toEqual(true);
 		});
 
 		it('', function () {
-			expect(type.is.not(global.Uint8Array, new Buffer(0))).to.equal(true);
+			expect(type.is.not(global.Uint8Array, new Buffer(0))).toEqual(true);
 		});
 	});
 });

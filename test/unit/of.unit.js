@@ -1,232 +1,231 @@
-var expect = require('chai').expect;
-var ObjectFixture = require('../fixtures/object.fixture');
-var type = require('../../');
+import Exotic from '../fixtures/exotic.fixture';
+import type from '../../';
 
 describe('of', function () {
 	it('exposed', function () {
-		expect(toString.call(type.of)).to.equal('[object Function]');
+		expect(type.of).toEqual(jasmine.any(Function));
 	});
 
 	it('', function () {
-		expect(type.of((() => arguments)())).to.equal('Arguments');
+		expect(type.of((() => arguments)())).toEqual('Arguments');
 	});
 
 	it('', function () {
-		expect(type.of(arguments)).to.equal('Arguments');
+		expect(type.of(arguments)).toEqual('Arguments');
 	});
 
 	it('', function () {
-		expect(type.of('ab')).to.equal('String');
+		expect(type.of('ab')).toEqual('String');
 	});
 
 	it('', function () {
-		expect(type.of(new String('foo'))).to.equal('String');
+		expect(type.of(new String('foo'))).toEqual('String');
 	});
 
 	it('', function () {
-		expect(type.of(/^./g)).to.equal('RegExp');
+		expect(type.of(/^./g)).toEqual('RegExp');
 	});
 
 	it('', function () {
-		expect(type.of(new RegExp('foo'))).to.equal('RegExp');
+		expect(type.of(new RegExp('foo'))).toEqual('RegExp');
 	});
 
 	it('', function () {
-		expect(type.of(10000)).to.equal('Number');
+		expect(type.of(10000)).toEqual('Number');
 	});
 
 	it('', function () {
-		expect(type.of(new Number(42))).to.equal('Number');
+		expect(type.of(new Number(42))).toEqual('Number');
 	});
 
 	it('', function () {
-		expect(type.of({ name: 1 })).to.equal('Object');
+		expect(type.of({ name: 1 })).toEqual('Object');
 	});
 
 	it('', function () {
-		expect(type.of({})).to.equal('Object');
+		expect(type.of({})).toEqual('Object');
 	});
 
 	it('', function () {
-		expect(type.of(Object.create(null))).to.equal('Object');
+		expect(type.of(Object.create(null))).toEqual('Object');
 	});
 
 	it('', function () {
-		expect(type.of(new ObjectFixture())).to.equal('ObjectFixture');
+		expect(type.of(new Exotic())).toEqual('Exotic');
 	});
 
 	it('', function () {
-		expect(type.of([])).to.equal('Array');
+		expect(type.of([])).toEqual('Array');
 	});
 
 	it('', function () {
-		expect(type.of([1, 2])).to.equal('Array');
+		expect(type.of([1, 2])).toEqual('Array');
 	});
 
 	it('', function () {
-		expect(type.of(new Array())).to.equal('Array');
+		expect(type.of(new Array())).toEqual('Array');
 	});
 
 	it('', function () {
-		expect(type.of(true)).to.equal('Boolean');
+		expect(type.of(true)).toEqual('Boolean');
 	});
 
 	it('', function () {
-		expect(type.of(false)).to.equal('Boolean');
+		expect(type.of(false)).toEqual('Boolean');
 	});
 
 	it('', function () {
-		expect(type.of(new Boolean(true))).to.equal('Boolean');
+		expect(type.of(new Boolean(true))).toEqual('Boolean');
 	});
 
 	it('', function () {
-		expect(type.of(null)).to.equal('null');
+		expect(type.of(null)).toEqual('null');
 	});
 
 	it('', function () {
-		expect(type.of(undefined)).to.equal('undefined');
+		expect(type.of(undefined)).toEqual('undefined');
 	});
 
 	it('', function () {
-		expect(type.of(global.Symbol)).to.equal('Function');
+		expect(type.of(global.Symbol)).toEqual('Function');
 	});
 
 	it('', function () {
-		expect(type.of(global.Symbol('bar'))).to.equal('Symbol');
+		expect(type.of(global.Symbol('bar'))).toEqual('Symbol');
 	});
 
 	it('', function () {
-		expect(type.of(String)).to.equal('Function');
+		expect(type.of(String)).toEqual('Function');
 	});
 
 	it('', function () {
-		expect(type.of(Boolean)).to.equal('Function');
+		expect(type.of(Boolean)).toEqual('Function');
 	});
 
 	it('', function () {
-		expect(type.of(Number)).to.equal('Function');
+		expect(type.of(Number)).toEqual('Function');
 	});
 
 	it('', function () {
-		expect(type.of(RegExp)).to.equal('Function');
+		expect(type.of(RegExp)).toEqual('Function');
 	});
 
 	it('', function () {
-		expect(type.of(TypeError)).to.equal('Function');
+		expect(type.of(TypeError)).toEqual('Function');
 	});
 
 	it('', function () {
-		expect(type.of(Error)).to.equal('Function');
+		expect(type.of(Error)).toEqual('Function');
 	});
 
 	it('', function () {
-		expect(type.of(Object)).to.equal('Function');
+		expect(type.of(Object)).toEqual('Function');
 	});
 
 	it('', function () {
-		expect(type.of(Array)).to.equal('Function');
+		expect(type.of(Array)).toEqual('Function');
 	});
 
 	it('', function () {
-		expect(type.of(Boolean)).to.equal('Function');
+		expect(type.of(Boolean)).toEqual('Function');
 	});
 
 	it('', function () {
-		expect(type.of(Date)).to.equal('Function');
+		expect(type.of(Date)).toEqual('Function');
 	});
 
 	it('', function () {
-		expect(type.of(ObjectFixture)).to.equal('Function');
+		expect(type.of(Exotic)).toEqual('Function');
 	});
 
 	it('', function () {
-		expect(type.of(function () {})).to.equal('Function');
+		expect(type.of(function () {})).toEqual('Function');
 	});
 
 	it('', function () {
-		expect(type.of(new Function())).to.equal('Function');
+		expect(type.of(new Function())).toEqual('Function');
 	});
 
 	it('', function () {
-		expect(type.of(new global.Map())).to.equal('Map');
+		expect(type.of(new global.Map())).toEqual('Map');
 	});
 
 	it('', function () {
-		expect(type.of(new global.WeakMap())).to.equal('WeakMap');
+		expect(type.of(new global.WeakMap())).toEqual('WeakMap');
 	});
 
 	it('', function () {
-		expect(type.of(new global.Set())).to.equal('Set');
+		expect(type.of(new global.Set())).toEqual('Set');
 	});
 
 	it('', function () {
-		expect(type.of(new global.WeakSet())).to.equal('WeakSet');
+		expect(type.of(new global.WeakSet())).toEqual('WeakSet');
 	});
 
 	it('', function () {
-		expect(type.of(new global.Int8Array())).to.equal('Int8Array');
+		expect(type.of(new global.Int8Array())).toEqual('Int8Array');
 	});
 
 	it('', function () {
-		expect(type.of(new global.Uint8Array())).to.equal('Uint8Array');
+		expect(type.of(new global.Uint8Array())).toEqual('Uint8Array');
 	});
 
 	it('', function () {
-		expect(type.of(new global.Uint8ClampedArray())).to.equal('Uint8ClampedArray');
+		expect(type.of(new global.Uint8ClampedArray())).toEqual('Uint8ClampedArray');
 	});
 
 	it('', function () {
-		expect(type.of(new global.Int16Array())).to.equal('Int16Array');
+		expect(type.of(new global.Int16Array())).toEqual('Int16Array');
 	});
 
 	it('', function () {
-		expect(type.of(new global.Uint16Array())).to.equal('Uint16Array');
+		expect(type.of(new global.Uint16Array())).toEqual('Uint16Array');
 	});
 
 	it('', function () {
-		expect(type.of(new global.Int32Array())).to.equal('Int32Array');
+		expect(type.of(new global.Int32Array())).toEqual('Int32Array');
 	});
 
 	it('', function () {
-		expect(type.of(new global.Uint32Array())).to.equal('Uint32Array');
+		expect(type.of(new global.Uint32Array())).toEqual('Uint32Array');
 	});
 
 	it('', function () {
-		expect(type.of(new global.Float32Array())).to.equal('Float32Array');
+		expect(type.of(new global.Float32Array())).toEqual('Float32Array');
 	});
 
 	it('', function () {
-		expect(type.of(new global.Float64Array())).to.equal('Float64Array');
+		expect(type.of(new global.Float64Array())).toEqual('Float64Array');
 	});
 
 	it('', function () {
-		expect(type.of(new Date())).to.equal('Date');
+		expect(type.of(new Date())).toEqual('Date');
 	});
 
 	it('', function () {
-		expect(type.of(global.ArrayBuffer)).to.equal('Function');
+		expect(type.of(global.ArrayBuffer)).toEqual('Function');
 	});
 
 	it('', function () {
-		expect(type.of(new global.ArrayBuffer(4))).to.equal('ArrayBuffer');
+		expect(type.of(new global.ArrayBuffer(4))).toEqual('ArrayBuffer');
 	});
 
 	it('', function () {
-		expect(type.of(Buffer)).to.equal('Function');
+		expect(type.of(Buffer)).toEqual('Function');
 	});
 
 	it('', function () {
-		expect(type.of(new Buffer(3))).to.equal('Buffer');
+		expect(type.of(new Buffer(3))).toEqual('Buffer');
 	});
 
 	it('', function () {
-		expect(type.of(new global.Promise((resolve) => { resolve(); }))).to.equal('Promise');
+		expect(type.of(new global.Promise((resolve) => { resolve(); }))).toEqual('Promise');
 	});
 });
 
 describe('of.generatorFunction', function () {
 	it('', function () {
 		const genFn = function* () { yield 2; return Infinity; };
-		expect(type.of(genFn)).to.equal('GeneratorFunction');
+		expect(type.of(genFn)).toEqual('GeneratorFunction');
 	});
 });

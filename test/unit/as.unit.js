@@ -1,57 +1,56 @@
-var expect = require('chai').expect;
-var sumFixture = require('../fixtures/sum.fixture');
-var type = require('../../');
+import type from '../../';
 
 describe('as', function () {
 	it('exposed', function () {
-		expect(toString.call(type.as)).to.equal('[object Function]');
+		expect(type.as).toEqual(jasmine.any(Function));
 	});
 
 	it('Number|Function', function () {
-		expect(type.as([Number, Function], sumFixture)).to.equal(sumFixture);
+		function foo() {}
+		expect(type.as([Number, Function], foo)).toEqual(foo);
 	});
 
 	it('"Number"', function () {
-		expect(type.as('Number', sumFixture, 1, 2)).to.equal(3);
+		expect(type.as('Number', function bar(a, b) { return a + b; }, 1, 2)).toEqual(3);
 	});
 
 	it('String', function () {
-		expect(type.as(String, sumFixture)).to.equal(undefined);
+		expect(type.as(String, function baz() {})).toEqual(undefined);
 	});
 
 	it('Number', function () {
-		expect(type.as(Number, () => 'foo')).to.equal(undefined);
+		expect(type.as(Number, () => 'foo')).toEqual(undefined);
 	});
 
 	it('String', function () {
-		expect(type.as(String, () => 'foo')).to.equal('foo');
+		expect(type.as(String, () => 'foo')).toEqual('foo');
 	});
 
 	it('String', function () {
-		expect(type.as(String, () => '')).to.equal('');
+		expect(type.as(String, () => '')).toEqual('');
 	});
 
 	it('"Number"', function () {
-		expect(type.as(Number, 'foo')).to.equal(undefined);
+		expect(type.as(Number, 'foo')).toEqual(undefined);
 	});
 
 	it('String', function () {
-		expect(type.as(String, 'foo')).to.equal('foo');
+		expect(type.as(String, 'foo')).toEqual('foo');
 	});
 
 	it('undefined', function () {
-		expect(type.as(undefined, undefined)).to.equal(undefined);
+		expect(type.as(undefined, undefined)).toEqual(undefined);
 	});
 
 	it('null', function () {
-		expect(type.as(null, null)).to.equal(null);
+		expect(type.as(null, null)).toEqual(null);
 	});
 
 	it('String', function () {
-		expect(type.as(String, undefined)).to.equal(undefined);
+		expect(type.as(String, undefined)).toEqual(undefined);
 	});
 
 	it('String', function () {
-		expect(type.as(String, '')).to.equal('');
+		expect(type.as(String, '')).toEqual('');
 	});
 });

@@ -1,133 +1,132 @@
-var expect = require('chai').expect;
-var ObjectFixture = require('../fixtures/object.fixture');
-var type = require('../../');
+import Exotic from '../fixtures/exotic.fixture';
+import type from '../../';
 
 describe('name', function () {
 	it('exposed', function () {
-		expect(toString.call(type.name)).to.equal('[object Function]');
+		expect(type.name).toEqual(jasmine.any(Function));
 	});
 
 	it('', function () {
-		expect(type.name((() => arguments)())).to.equal('Arguments');
+		expect(type.name((() => arguments)())).toEqual('Arguments');
 	});
 
 	it('', function () {
-		expect(type.name(global.Promise)).to.equal('Promise');
+		expect(type.name(global.Promise)).toEqual('Promise');
 	});
 
 	it('', function () {
-		expect(type.name(global.Symbol)).to.equal('Symbol');
+		expect(type.name(global.Symbol)).toEqual('Symbol');
 	});
 
 	it('', function () {
-		expect(type.name(String)).to.equal('String');
+		expect(type.name(String)).toEqual('String');
 	});
 
 	it('', function () {
-		expect(type.name(RegExp)).to.equal('RegExp');
+		expect(type.name(RegExp)).toEqual('RegExp');
 	});
 
 	it('', function () {
-		expect(type.name(Number)).to.equal('Number');
+		expect(type.name(Number)).toEqual('Number');
 	});
 
 	it('', function () {
-		expect(type.name(TypeError)).to.equal('TypeError');
+		expect(type.name(TypeError)).toEqual('TypeError');
 	});
 
 	it('', function () {
-		expect(type.name(Error)).to.equal('Error');
+		expect(type.name(Error)).toEqual('Error');
 	});
 
 	it('', function () {
-		expect(type.name(Object)).to.equal('Object');
+		expect(type.name(Object)).toEqual('Object');
 	});
 
 	it('', function () {
-		expect(type.name(Array)).to.equal('Array');
+		expect(type.name(Array)).toEqual('Array');
 	});
 
 	it('', function () {
-		expect(type.name(Boolean)).to.equal('Boolean');
+		expect(type.name(Boolean)).toEqual('Boolean');
 	});
 
 	it('', function () {
-		expect(type.name(Date)).to.equal('Date');
+		expect(type.name(Date)).toEqual('Date');
 	});
 
 	it('', function () {
-		expect(type.name(null)).to.equal('null');
+		expect(type.name(null)).toEqual('null');
 	});
 
 	it('', function () {
-		expect(type.name(undefined)).to.equal('undefined');
+		expect(type.name(undefined)).toEqual('undefined');
 	});
 
 	it('', function () {
-		expect(type.name(NaN)).to.equal('NaN');
+		expect(type.name(NaN)).toEqual('NaN');
 	});
 
 	it('', function () {
-		expect(type.name('|a-b|b>a|', true)).to.equal('_a_b|b_a_');
+		expect(type.name('|a-b|b>a|', true)).toEqual('_a_b|b_a_');
 	});
 
 	it('', function () {
-		expect(type.name('ab|ba', true)).to.equal('ab|ba');
+		expect(type.name('ab|ba', true)).toEqual('ab|ba');
 	});
 
 	it('', function () {
-		expect(type.name('ab|ba')).to.equal('String');
+		expect(type.name('ab|ba')).toEqual('String');
 	});
 
 	it('', function () {
-		expect(type.name(new ObjectFixture('FixtureTest'))).to.equal('FixtureTest');
+		expect(type.name(new Exotic('FixtureTest'))).toEqual('FixtureTest');
 	});
 
 	it('', function () {
-		expect(type.name(ObjectFixture)).to.equal('FixtureTest');
+		expect(type.name(Exotic)).toEqual('FixtureTest');
 	});
 
 	it('', function () {
-		expect(type.name([1, 2])).to.equal('Array');
+		expect(type.name([1, 2])).toEqual('Array');
 	});
 
 	it('', function () {
-		expect(type.name(/^./g)).to.equal('RegExp');
+		expect(type.name(/^./g)).toEqual('RegExp');
 	});
 
 	it('', function () {
-		expect(type.name(10000)).to.equal('Number');
+		expect(type.name(10000)).toEqual('Number');
 	});
 
 	it('', function () {
-		expect(type.name({ name: 1 })).to.equal('Object');
+		expect(type.name({ name: 1 })).toEqual('Object');
 	});
 
 	it('', function () {
-		expect(type.name(false)).to.equal('Boolean');
+		expect(type.name(false)).toEqual('Boolean');
 	});
 
 	it('', function () {
-		expect(type.name(new Date())).to.equal('Date');
+		expect(type.name(new Date())).toEqual('Date');
 	});
 
 	it('', function () {
-		expect(type.name(global.ArrayBuffer)).to.equal('ArrayBuffer');
+		expect(type.name(global.ArrayBuffer)).toEqual('ArrayBuffer');
 	});
 
 	it('', function () {
-		expect(type.name(new global.ArrayBuffer(4))).to.equal('ArrayBuffer');
+		expect(type.name(new global.ArrayBuffer(4))).toEqual('ArrayBuffer');
 	});
 
 	it('', function () {
-		expect(type.name(new global.Int32Array(new global.ArrayBuffer(8)))).to.equal('Int32Array');
+		expect(type.name(new global.Int32Array(new global.ArrayBuffer(8)))).toEqual('Int32Array');
 	});
 
 	it('', function () {
-		expect(type.name(Buffer)).to.equal('Buffer');
+		expect(type.name(Buffer)).toEqual('Buffer');
 	});
 
 	it('', function () {
-		expect(type.name(new Buffer('ab'))).to.equal('Buffer');
+		expect(type.name(new Buffer('ab'))).toEqual('Buffer');
 	});
 });
