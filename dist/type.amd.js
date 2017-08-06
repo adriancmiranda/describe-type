@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v0.3.0
  * 
- * @commit b214cdb480d461291174984885bd0a0615bc8abc
- * @moment Sunday, August 6, 2017 6:18 PM
+ * @commit 5f7470ab91b522af395456371d383c1bb2331705
+ * @moment Sunday, August 6, 2017 7:39 PM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-20173
@@ -99,6 +99,10 @@ define(function () { 'use strict';
 		return is$1(type, value) ? value : undefined;
 	};
 
+	var not = function isnt(expected, value) {
+		return !is$1(expected, value);
+	};
+
 	var numeric = function isNumeric(value) {
 		return !isNaN(parseFloat(value)) && isFinite(value);
 	};
@@ -137,48 +141,22 @@ define(function () { 'use strict';
 		return false;
 	};
 
-	is$1.numeric = numeric;
-	is$1.int = int_1;
-	is$1.uint = uint;
-	is$1.primitive = primitive;
-	is$1.buffer = buffer;
-	is$1.arraylike = arraylike;
-	is$1.json = json;
+	function define(key, fn) {
+		is$1[key] = fn;
+		is$1.not[key] = function (value) { return !fn(value); };
+	}
+
 	is$1.a = is$1.an = is$1;
-
-	is$1.not = function isnt(expected, value) {
-		return !is$1(expected, value);
-	};
-
-	is$1.not.buffer = function isntBuffer(value) {
-		return !is$1.buffer(value);
-	};
-
-	is$1.not.arraylike = function isntArraylike(value) {
-		return !is$1.arraylike(value);
-	};
-
-	is$1.not.numeric = function isntNumeric(value) {
-		return !is$1.numeric(value);
-	};
-
-	is$1.not.int = function isntInt(value) {
-		return !is$1.int(value);
-	};
-
-	is$1.not.uint = function isntUint(value) {
-		return !is$1.uint(value);
-	};
-
-	is$1.not.primitive = function isntPrimitive(value) {
-		return !is$1.primitive(value);
-	};
-
-	is$1.not.json = function isntJson(value) {
-		return !is$1.json(value);
-	};
-
+	is$1.not = not;
 	is$1.not.a = is$1.not.an = is$1.not;
+	define('numeric', numeric);
+	define('int', int_1);
+	define('uint', uint);
+	define('primitive', primitive);
+	define('buffer', buffer);
+	define('arraylike', arraylike);
+	define('json', json);
+
 	var index$4 = is$1;
 
 	var stringToBoolean = /^true|[1-9]+$/gi;

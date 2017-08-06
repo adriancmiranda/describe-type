@@ -8,7 +8,7 @@ describe('is', function () {
 
 	describe('#buffer', function () {
 		it('exposed', function () {
-			expect(toString.call(type.is.buffer)).toEqual('[object Function]');
+			expect(type.is.buffer).toEqual(jasmine.any(Function));
 		});
 
 		it('alias works', function () {
@@ -74,14 +74,14 @@ describe('is', function () {
 
 	describe('#not.buffer', function () {
 		it('exposed', function () {
-			expect(toString.call(type.is.not.buffer)).toEqual('[object Function]');
+			expect(type.is.not.buffer).toEqual(jasmine.any(Function));
 		});
 
-		it('alias works', function () {
+		it('type.is.not.a.buffer: alias works', function () {
 			expect(type.is.not.a.buffer).toEqual(type.is.not.buffer);
 		});
 
-		it('alias works', function () {
+		it('type.is.not.an.buffer: alias works', function () {
 			expect(type.is.not.an.buffer).toEqual(type.is.not.buffer);
 		});
 
@@ -100,7 +100,7 @@ describe('is', function () {
 
 	describe('#arraylike', function () {
 		it('exposed', function () {
-			expect(toString.call(type.is.arraylike)).toEqual('[object Function]');
+			expect(type.is.arraylike).toEqual(jasmine.any(Function));
 		});
 
 		it('', function () {
@@ -151,7 +151,7 @@ describe('is', function () {
 
 	describe('#not.arraylike', function () {
 		it('exposed', function () {
-			expect(toString.call(type.is.not.arraylike)).toEqual('[object Function]');
+			expect(type.is.not.arraylike).toEqual(jasmine.any(Function));
 		});
 
 		it('', function () {
@@ -206,7 +206,7 @@ describe('is', function () {
 
 	describe('#numeric', function () {
 		it('exposed', function () {
-			expect(toString.call(type.is.numeric)).toEqual('[object Function]');
+			expect(type.is.numeric).toEqual(jasmine.any(Function));
 		});
 
 		it('', function () {
@@ -229,7 +229,7 @@ describe('is', function () {
 
 	describe('#not.numeric', function () {
 		it('exposed', function () {
-			expect(toString.call(type.is.not.numeric)).toEqual('[object Function]');
+			expect(type.is.not.numeric).toEqual(jasmine.any(Function));
 		});
 
 		it('', function () {
@@ -243,7 +243,7 @@ describe('is', function () {
 
 	describe('#int', function () {
 		it('exposed', function () {
-			expect(toString.call(type.is.int)).toEqual('[object Function]');
+			expect(type.is.int).toEqual(jasmine.any(Function));
 		});
 
 		it('', function () {
@@ -261,7 +261,7 @@ describe('is', function () {
 
 	describe('#not.int', function () {
 		it('exposed', function () {
-			expect(toString.call(type.is.not.int)).toEqual('[object Function]');
+			expect(type.is.not.int).toEqual(jasmine.any(Function));
 		});
 
 		// it('', function () {
@@ -287,7 +287,7 @@ describe('is', function () {
 
 	describe('#uint', function () {
 		it('exposed', function () {
-			expect(toString.call(type.is.uint)).toEqual('[object Function]');
+			expect(type.is.uint).toEqual(jasmine.any(Function));
 		});
 
 		it('', function () {
@@ -301,7 +301,7 @@ describe('is', function () {
 
 	describe('#not.uint', function () {
 		it('exposed', function () {
-			expect(toString.call(type.is.not.uint)).toEqual('[object Function]');
+			expect(type.is.not.uint).toEqual(jasmine.any(Function));
 		});
 
 		it('', function () {
@@ -315,7 +315,7 @@ describe('is', function () {
 
 	describe('#primitive', function () {
 		it('exposed', function () {
-			expect(toString.call(type.is.primitive)).toEqual('[object Function]');
+			expect(type.is.primitive).toEqual(jasmine.any(Function));
 		});
 
 		it('', function () {
@@ -361,7 +361,7 @@ describe('is', function () {
 
 	describe('#not.primitive', function () {
 		it('exposed', function () {
-			expect(toString.call(type.is.not.primitive)).toEqual('[object Function]');
+			expect(type.is.not.primitive).toEqual(jasmine.any(Function));
 		});
 
 		it('', function () {
@@ -379,7 +379,7 @@ describe('is', function () {
 
 	describe('#json', function () {
 		it('exposed', function () {
-			expect(toString.call(type.is.json)).toEqual('[object Function]');
+			expect(type.is.json).toEqual(jasmine.any(Function));
 		});
 
 		it('', function () {
@@ -393,7 +393,7 @@ describe('is', function () {
 
 	describe('#not.json', function () {
 		it('exposed', function () {
-			expect(toString.call(type.is.not.json)).toEqual('[object Function]');
+			expect(type.is.not.json).toEqual(jasmine.any(Function));
 		});
 
 		it('', function () {
@@ -415,7 +415,7 @@ describe('is', function () {
 
 	describe('is', function () {
 		it('exposed', function () {
-			expect(toString.call(type.is)).toEqual('[object Function]');
+			expect(type.is).toEqual(jasmine.any(Function));
 		});
 
 		it('alias works', function () {
@@ -569,7 +569,7 @@ describe('is', function () {
 
 	describe('#not', function () {
 		it('exposed', function () {
-			expect(toString.call(type.is.not)).toEqual('[object Function]');
+			expect(type.is.not).toEqual(jasmine.any(Function));
 		});
 
 		it('alias works', function () {

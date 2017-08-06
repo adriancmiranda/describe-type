@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v0.3.0
  * 
- * @commit b214cdb480d461291174984885bd0a0615bc8abc
- * @moment Sunday, August 6, 2017 6:18 PM
+ * @commit 5f7470ab91b522af395456371d383c1bb2331705
+ * @moment Sunday, August 6, 2017 7:39 PM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-20173
@@ -88,6 +88,10 @@ this.type.is = (function () {
 		return new RegExp(("(" + (typify(expected, true)) + ")")).test(of(value));
 	};
 
+	var not = function isnt(expected, value) {
+		return !is(expected, value);
+	};
+
 	var numeric = function isNumeric(value) {
 		return !isNaN(parseFloat(value)) && isFinite(value);
 	};
@@ -126,48 +130,22 @@ this.type.is = (function () {
 		return false;
 	};
 
-	is.numeric = numeric;
-	is.int = int_1;
-	is.uint = uint;
-	is.primitive = primitive;
-	is.buffer = buffer;
-	is.arraylike = arraylike;
-	is.json = json;
+	function define(key, fn) {
+		is[key] = fn;
+		is.not[key] = function (value) { return !fn(value); };
+	}
+
 	is.a = is.an = is;
-
-	is.not = function isnt(expected, value) {
-		return !is(expected, value);
-	};
-
-	is.not.buffer = function isntBuffer(value) {
-		return !is.buffer(value);
-	};
-
-	is.not.arraylike = function isntArraylike(value) {
-		return !is.arraylike(value);
-	};
-
-	is.not.numeric = function isntNumeric(value) {
-		return !is.numeric(value);
-	};
-
-	is.not.int = function isntInt(value) {
-		return !is.int(value);
-	};
-
-	is.not.uint = function isntUint(value) {
-		return !is.uint(value);
-	};
-
-	is.not.primitive = function isntPrimitive(value) {
-		return !is.primitive(value);
-	};
-
-	is.not.json = function isntJson(value) {
-		return !is.json(value);
-	};
-
+	is.not = not;
 	is.not.a = is.not.an = is.not;
+	define('numeric', numeric);
+	define('int', int_1);
+	define('uint', uint);
+	define('primitive', primitive);
+	define('buffer', buffer);
+	define('arraylike', arraylike);
+	define('json', json);
+
 	var index = is;
 
 	return index;
