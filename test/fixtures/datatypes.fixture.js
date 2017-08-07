@@ -9,14 +9,14 @@ no-undef
 */
 import Exotic from './exotic.fixture';
 
-export const datatype = (slug, type, name, Data, param) => ({
+export const datatype = (slug, type, name, Data, ...rest) => ({
 	text: `${name}: ${slug}`,
 	slug: `${name}: ${slug}`,
-	type: arguments.length > 4 ? Data : type,
+	type: rest.length ? (typeof Data === 'function' ? Data : type) : type,
 	name: String(name || type.name).toLowerCase(),
 	seal: `[object ${name}]`,
-	data: (arguments.length > 4 && typeof Data === 'function' ?
-		(param ? new Data(param) : new Data()) : Data
+	data: (rest.length && typeof Data !== 'undefined' ?
+		(rest[0] !== undefined ? new Data(...rest) : new Data()) : Data
 	),
 });
 
@@ -103,18 +103,19 @@ export const common = [
 	datatype('#059', URIError, 'URIError', new URIError('foo')),
 ];
 
-export const browser = !global.document ? [] : [
+export const browser = typeof global.document === 'undefined' ? [] : [
 	// element
 	datatype('#061', global.HTMLCollection, 'HTMLCollection', global.document.body.children),
 	datatype('#062', global.HTMLDivElement, 'HTMLDivElement', global.document.createElement('div')),
 ];
 
 export const custom = Exotic.supportsCustomization ? [] : [
-	datatype('#064', Exotic, 'Custom', new Exotic('Custom')),
+	// customized Function.prototype.name
+	datatype('#063', Exotic, 'Custom', new Exotic('Custom')),
 ];
 
 export const es5 = [
-	datatype('#063', Exotic, 'Exotic', new Exotic()),
+	datatype('#064', Exotic, 'Exotic', new Exotic()),
 	datatype('#065', global.Map, 'Map', global.Map, undefined),
 	datatype('#066', global.WeakMap, 'WeakMap', global.WeakMap, undefined),
 	datatype('#067', global.Set, 'Set', global.Set, undefined),
@@ -131,9 +132,9 @@ export const es5 = [
 	datatype('#078', global.ArrayBuffer, 'ArrayBuffer', global.ArrayBuffer, 4),
 ];
 
-export const es6 = !global.Symbol ? [] : [
+export const es6 = typeof global.Symbol === 'undefined' ? [] : [
 	// symbol
-	datatype('#060', Symbol, 'Symbol', Symbol('foo')),
+	datatype('#060', global.Symbol, 'Symbol', global.Symbol('foo')),
 ];
 
 export default ([]).concat(common, browser, custom, es5, es6);
