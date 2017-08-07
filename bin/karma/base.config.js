@@ -15,6 +15,9 @@ const webpack = {
 			test: /\.js$/,
 			loader: 'babel-loader',
 			exclude: /node_modules/,
+			options: {
+				presets: ['env'],
+			},
 		}],
 	},
 };
@@ -25,7 +28,7 @@ module.exports = {
 	port: 9876,
 	colors: true,
 	frameworks: ['jasmine', 'jasmine-matchers', 'sinon', 'fixture', 'phantomjs-shim'],
-	files: ['source/index.js', {
+	files: ['./index.js', {
 		pattern: 'test/fixtures/**/*.fixture.*',
 		watched: true,
 	}, {
@@ -33,7 +36,7 @@ module.exports = {
 		watched: true,
 	}],
 	preprocessors: {
-		'source/index.js': ['webpack', 'sourcemap'],
+		'./index.js': ['webpack', 'sourcemap'],
 		'test/unit/**/{index,*.unit}.js': ['webpack', 'sourcemap'],
 		'test/fixtures/**/{index,*.fixture}.js': ['webpack', 'sourcemap'],
 		'test/fixtures/**/*.fixture.html': ['html2js'],

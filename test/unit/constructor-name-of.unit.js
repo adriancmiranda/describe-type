@@ -18,18 +18,6 @@ describe('constructorNameOf', function () {
 		expect(type.constructorNameOf(function () { return 'foo'; })).toEqual('Function');
 	});
 
-	it('Promise', function () {
-		expect(type.constructorNameOf(global.Promise)).toEqual('Promise');
-	});
-
-	it('Symbol', function () {
-		expect(type.constructorNameOf(global.Symbol)).toEqual('Symbol');
-	});
-
-	it('String', function () {
-		expect(type.constructorNameOf(global.Symbol.name)).toEqual('String');
-	});
-
 	it('String', function () {
 		expect(type.constructorNameOf(String)).toEqual('String');
 	});
@@ -162,23 +150,39 @@ describe('constructorNameOf', function () {
 		expect(type.constructorNameOf(new Date())).toEqual('Date');
 	});
 
-	it('ArrayBuffer', function () {
-		expect(type.constructorNameOf(global.ArrayBuffer)).toEqual('ArrayBuffer');
-	});
+	if (global.Symbol) {
+		it('Symbol', function () {
+			expect(type.constructorNameOf(global.Symbol)).toEqual('Symbol');
+		});
+	}
 
-	it('Buffer', function () {
-		expect(type.constructorNameOf(Buffer)).toEqual('Buffer');
-	});
+	if (global.ArrayBuffer) {
+		it('ArrayBuffer', function () {
+			expect(type.constructorNameOf(global.ArrayBuffer)).toEqual('ArrayBuffer');
+		});
+	}
 
-	it('String', function () {
-		expect(type.constructorNameOf(Buffer.name)).toEqual('String');
-	});
+	if (global.Buffer) {
+		it('Buffer', function () {
+			expect(type.constructorNameOf(global.Buffer)).toEqual('Buffer');
+		});
 
-	it('Buffer', function () {
-		expect(type.constructorNameOf(new Buffer('ab'))).toEqual('Buffer');
-	});
+		it('String', function () {
+			expect(type.constructorNameOf(global.Buffer.name)).toEqual('String');
+		});
 
-	it('Promise', function () {
-		expect(type.constructorNameOf(new global.Promise((resolve) => { resolve(); }))).toEqual('Promise');
-	});
+		it('Buffer', function () {
+			expect(type.constructorNameOf(new global.Buffer('ab'))).toEqual('Buffer');
+		});
+	}
+
+	if (global.Promise) {
+		it('Promise', function () {
+			expect(type.constructorNameOf(global.Promise)).toEqual('Promise');
+		});
+
+		it('Promise', function () {
+			expect(type.constructorNameOf(new global.Promise((resolve) => { resolve(); }))).toEqual('Promise');
+		});
+	}
 });

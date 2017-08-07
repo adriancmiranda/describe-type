@@ -8,7 +8,7 @@ if (argv.f) {
 }
 
 sync(`${process.cwd()}/test/benchmark/${files}.bench.js`).forEach((file) => {
-	execSync(`babel-node --presets es2015 ${file}`, {
+	execSync(`babel-node --presets env ${file}`, {
 		stdio: 'inherit',
 	});
 });

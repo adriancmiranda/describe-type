@@ -7,7 +7,7 @@ describe('to', function () {
 
 	describe('#string', function () {
 		it('exposed', function () {
-			expect(toString.call(type.to.string)).toEqual('[object Function]');
+			expect(type.to.string).toEqual(jasmine.any(Function));
 		});
 
 		it('', function () {
@@ -37,7 +37,7 @@ describe('to', function () {
 
 	describe('#int', function () {
 		it('exposed', function () {
-			expect(toString.call(type.to.int)).toEqual('[object Function]');
+			expect(type.to.int).toEqual(jasmine.any(Function));
 		});
 
 		it('', function () {
@@ -55,7 +55,7 @@ describe('to', function () {
 
 	describe('#uint', function () {
 		it('exposed', function () {
-			expect(toString.call(type.to.uint)).toEqual('[object Function]');
+			expect(type.to.uint).toEqual(jasmine.any(Function));
 		});
 
 		it('', function () {
@@ -73,7 +73,7 @@ describe('to', function () {
 
 	describe('#float', function () {
 		it('exposed', function () {
-			expect(toString.call(type.to.float)).toEqual('[object Function]');
+			expect(type.to.float).toEqual(jasmine.any(Function));
 		});
 
 		it('', function () {
@@ -87,7 +87,7 @@ describe('to', function () {
 
 	describe('#bool', function () {
 		it('exposed', function () {
-			expect(toString.call(type.to.bool)).toEqual('[object Function]');
+			expect(type.to.bool).toEqual(jasmine.any(Function));
 		});
 
 		it('', function () {

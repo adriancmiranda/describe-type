@@ -2,22 +2,25 @@
 eslint-disable
 no-empty-function,
 no-array-constructor,
+no-nested-ternary,
 no-new-wrappers,
 no-new-object,
 no-undef
 */
 import Exotic from './exotic.fixture';
 
-const datatype = (slug, type, name, data) => ({
+export const datatype = (slug, type, name, Data, param) => ({
 	text: `${name}: ${slug}`,
 	slug: `${name}: ${slug}`,
-	data: data,
-	type: type,
+	type: arguments.length > 4 ? Data : type,
 	name: String(name || type.name).toLowerCase(),
 	seal: `[object ${name}]`,
+	data: (arguments.length > 4 && typeof Data === 'function' ?
+		(param ? new Data(param) : new Data()) : Data
+	),
 });
 
-export default [
+export const common = [
 	// undef
 	datatype('#001', undefined, 'undefined'),
 
@@ -55,7 +58,7 @@ export default [
 	datatype('#024', Array, 'Array', []),
 
 	// fn
-	datatype('#025', Function, 'Function', function* foo() {}),
+	// datatype('#025', Function, 'Function', function* foo() {}),
 	datatype('#026', Function, 'Function', function foo() {}),
 	datatype('#027', Function, 'Function', () => {}),
 
@@ -98,29 +101,39 @@ export default [
 	datatype('#057', SyntaxError, 'SyntaxError', new SyntaxError('foo')),
 	datatype('#058', TypeError, 'TypeError', new TypeError('foo')),
 	datatype('#059', URIError, 'URIError', new URIError('foo')),
+];
 
+export const browser = !global.document ? [] : [
+	// element
+	datatype('#061', global.HTMLCollection, 'HTMLCollection', global.document.body.children),
+	datatype('#062', global.HTMLDivElement, 'HTMLDivElement', global.document.createElement('div')),
+];
+
+export const custom = Exotic.supportsCustomization ? [] : [
+	datatype('#064', Exotic, 'Custom', new Exotic('Custom')),
+];
+
+export const es5 = [
+	datatype('#063', Exotic, 'Exotic', new Exotic()),
+	datatype('#065', global.Map, 'Map', global.Map, undefined),
+	datatype('#066', global.WeakMap, 'WeakMap', global.WeakMap, undefined),
+	datatype('#067', global.Set, 'Set', global.Set, undefined),
+	datatype('#068', global.WeakSet, 'WeakSet', global.WeakSet, undefined),
+	datatype('#069', global.Int8Array, 'Int8Array', global.Int8Array, undefined),
+	datatype('#070', global.Uint8Array, 'Uint8Array', global.Uint8Array, [21, 31]),
+	datatype('#071', global.Uint8ClampedArray, 'Uint8ClampedArray', global.Uint8ClampedArray, 16),
+	datatype('#072', global.Int16Array, 'Int16Array', global.Int16Array, 8),
+	datatype('#073', global.Uint16Array, 'Uint16Array', global.Uint16Array, 32),
+	datatype('#074', global.Int32Array, 'Int32Array', global.Int32Array, 4),
+	datatype('#075', global.Uint32Array, 'Uint32Array', global.Uint32Array, 8),
+	datatype('#076', global.Float32Array, 'Float32Array', global.Float32Array, 64),
+	datatype('#077', global.Float64Array, 'Float64Array', global.Float64Array, 32),
+	datatype('#078', global.ArrayBuffer, 'ArrayBuffer', global.ArrayBuffer, 4),
+];
+
+export const es6 = !global.Symbol ? [] : [
 	// symbol
 	datatype('#060', Symbol, 'Symbol', Symbol('foo')),
-
-	// element
-	datatype('#061', global.HTMLCollection, 'HTMLCollection', global.document && document.body.children),
-	datatype('#062', global.HTMLDivElement, 'HTMLDivElement', global.document && document.createElement('div')),
-
-	// a
-	datatype('#063', Exotic, 'Exotic', new Exotic()),
-	datatype('#064', Exotic, 'Custom', new Exotic('Custom')),
-	datatype('#065', Map, 'Map', new Map()),
-	datatype('#066', WeakMap, 'WeakMap', new WeakMap()),
-	datatype('#067', Set, 'Set', new Set()),
-	datatype('#068', WeakSet, 'WeakSet', new WeakSet()),
-	datatype('#069', Int8Array, 'Int8Array', new Int8Array(2)),
-	datatype('#070', Uint8Array, 'Uint8Array', new Uint8Array([21, 31])),
-	datatype('#071', Uint8ClampedArray, 'Uint8ClampedArray', new Uint8ClampedArray(16)),
-	datatype('#072', Int16Array, 'Int16Array', new Int16Array(8)),
-	datatype('#073', Uint16Array, 'Uint16Array', new Uint16Array(32)),
-	datatype('#074', Int32Array, 'Int32Array', new Int32Array(4)),
-	datatype('#075', Uint32Array, 'Uint32Array', new Uint32Array(8)),
-	datatype('#076', Float32Array, 'Float32Array', new Float32Array(64)),
-	datatype('#077', Float64Array, 'Float64Array', new Float64Array(32)),
-	datatype('#078', ArrayBuffer, 'ArrayBuffer', new ArrayBuffer(4)),
 ];
+
+export default ([]).concat(common, browser, custom, es5, es6);

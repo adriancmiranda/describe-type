@@ -10,11 +10,11 @@ describe('typify', function () {
 	});
 
 	it('', function () {
-		expect(type.typify([global.Symbol, String, Function, Object, Boolean, global.Promise])).toEqual('Symbol|String|Function|Object|Boolean|Promise');
+		expect(type.typify([String, Function, Object, Boolean])).toEqual('String|Function|Object|Boolean');
 	});
 
 	it('', function () {
-		expect(type.typify([global.Symbol, String, Function, Object, global.Boolean,])).toEqual('Symbol|String|Function|Object|Boolean'); // should be 'Symbol|String|Function|Object|Boolean|Undefined'?
+		expect(type.typify([String, Function, Object, global.Boolean,])).toEqual('String|Function|Object|Boolean'); // should be 'Symbol|String|Function|Object|Boolean|Undefined'?
 	});
 
 	it('', function () {
@@ -69,23 +69,29 @@ describe('typify', function () {
 		expect(type.typify(Date)).toEqual('Date');
 	});
 
-	it('', function () {
-		expect(type.typify(global.ArrayBuffer)).toEqual('ArrayBuffer');
-	});
+	if (global.ArrayBuffer) {
+		it('', function () {
+			expect(type.typify(global.ArrayBuffer)).toEqual('ArrayBuffer');
+		});
+	}
 
 	it('', function () {
 		expect(type.typify(new global.ArrayBuffer(4))).toEqual('ArrayBuffer');
 	});
 
-	it('', function () {
-		expect(type.typify(Buffer)).toEqual('Buffer');
-	});
+	if (global.Buffer) {
+		it('', function () {
+			expect(type.typify(global.Buffer)).toEqual('Buffer');
+		});
 
-	it('', function () {
-		expect(type.typify(new Buffer('ab'))).toEqual('Buffer');
-	});
+		it('', function () {
+			expect(type.typify(new global.Buffer('ab'))).toEqual('Buffer');
+		});
+	}
 
-	it('', function () {
-		expect(type.typify(new global.Promise((resolve) => { resolve(); }))).toEqual('Promise');
-	});
+	if (global.Promise) {
+		it('', function () {
+			expect(type.typify(new global.Promise((resolve) => { resolve(); }))).toEqual('Promise');
+		});
+	}
 });

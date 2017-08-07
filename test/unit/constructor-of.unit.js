@@ -18,9 +18,11 @@ describe('constructorOf', function () {
 		expect(type.constructorOf(function () {})).toEqual(Function);
 	});
 
-	it('', function () {
-		expect(type.constructorOf(global.Symbol('foo'))).toEqual(global.Symbol);
-	});
+	if (global.Symbol) {
+		it('', function () {
+			expect(type.constructorOf(global.Symbol('foo'))).toEqual(global.Symbol);
+		});
+	}
 
 	it('', function () {
 		expect(type.constructorOf(new String())).toEqual(String);
@@ -106,31 +108,41 @@ describe('constructorOf', function () {
 		expect(type.constructorOf(false)).toEqual(Boolean);
 	});
 
-	it('', function () {
-		expect(type.constructorOf(new global.Uint8Array())).toEqual(global.Uint8Array);
-	});
+	if (global.Promise) {
+		it('', function () {
+			expect(type.constructorOf(new global.Promise((resolve) => { resolve(); }))).toEqual(global.Promise);
+		});
+	}
 
-	it('', function () {
-		expect(type.constructorOf(new global.Int32Array(new global.ArrayBuffer(8)))).toEqual(global.Int32Array);
-	});
+	if (global.Uint8Array) {
+		it('', function () {
+			expect(type.constructorOf(new global.Uint8Array())).toEqual(global.Uint8Array);
+		});
+	}
 
-	it('', function () {
-		expect(type.constructorOf(new global.ArrayBuffer(3))).toEqual(global.ArrayBuffer);
-	});
+	if (global.ArrayBuffer) {
+		it('', function () {
+			expect(type.constructorOf(new global.ArrayBuffer(3))).toEqual(global.ArrayBuffer);
+		});
 
-	it('', function () {
-		expect(type.constructorOf(global.ArrayBuffer)).toEqual(Function);
-	});
+		it('', function () {
+			expect(type.constructorOf(global.ArrayBuffer)).toEqual(Function);
+		});
+	}
 
-	it('', function () {
-		expect(type.constructorOf(Buffer)).toEqual(Function);
-	});
+	if (global.Int32Array && global.ArrayBuffer) {
+		it('', function () {
+			expect(type.constructorOf(new global.Int32Array(new global.ArrayBuffer(8)))).toEqual(global.Int32Array);
+		});
+	}
 
-	it('', function () {
-		expect(type.constructorOf(new Buffer('1234'))).toEqual(Buffer);
-	});
+	if (global.Buffer) {
+		it('', function () {
+			expect(type.constructorOf(global.Buffer)).toEqual(Function);
+		});
 
-	it('', function () {
-		expect(type.constructorOf(new global.Promise((resolve) => { resolve(); }))).toEqual(global.Promise);
-	});
+		it('', function () {
+			expect(type.constructorOf(new global.Buffer('1234'))).toEqual(Buffer);
+		});
+	}
 });

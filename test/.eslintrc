@@ -10,6 +10,7 @@ globals:
 rules:
   new-parens: off
   func-names: off
+  max-len: off
   no-console: off
   no-new-func: off
   no-new-object: off

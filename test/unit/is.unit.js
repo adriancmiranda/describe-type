@@ -354,9 +354,11 @@ describe('is', function () {
 			expect(type.is.primitive('foo')).toEqual(true);
 		});
 
-		it('', function () {
-			expect(type.is.primitive(global.Symbol('foo'))).toEqual(true);
-		});
+		if (global.Symbol) {
+			it('', function () {
+				expect(type.is.primitive(global.Symbol('foo'))).toEqual(true);
+			});
+		}
 	});
 
 	describe('#not.primitive', function () {
@@ -518,9 +520,11 @@ describe('is', function () {
 			expect(type.is(Exotic.name, new Exotic('pirate'))).toEqual(true);
 		});
 
-		it('', function () {
-			expect(type.is('Pirate', new Exotic('Pirate'))).toEqual(true);
-		});
+		if (Exotic.supportsCustomization) {
+			it('', function () {
+				expect(type.is('Pirate', new Exotic('Pirate'))).toEqual(true);
+			});
+		}
 
 		it('', function () {
 			expect(type.is(undefined, undefined)).toEqual(true);

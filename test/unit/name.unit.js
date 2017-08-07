@@ -11,14 +11,6 @@ describe('name', function () {
 	});
 
 	it('', function () {
-		expect(type.name(global.Promise)).toEqual('Promise');
-	});
-
-	it('', function () {
-		expect(type.name(global.Symbol)).toEqual('Symbol');
-	});
-
-	it('', function () {
 		expect(type.name(String)).toEqual('String');
 	});
 
@@ -79,14 +71,6 @@ describe('name', function () {
 	});
 
 	it('', function () {
-		expect(type.name(new Exotic('FixtureTest'))).toEqual('FixtureTest');
-	});
-
-	it('', function () {
-		expect(type.name(Exotic)).toEqual('FixtureTest');
-	});
-
-	it('', function () {
 		expect(type.name([1, 2])).toEqual('Array');
 	});
 
@@ -110,23 +94,51 @@ describe('name', function () {
 		expect(type.name(new Date())).toEqual('Date');
 	});
 
-	it('', function () {
-		expect(type.name(global.ArrayBuffer)).toEqual('ArrayBuffer');
-	});
+	if (Exotic.supportsCustomization) {
+		it('', function () {
+			expect(type.name(new Exotic('FixtureTest'))).toEqual('FixtureTest');
+		});
 
-	it('', function () {
-		expect(type.name(new global.ArrayBuffer(4))).toEqual('ArrayBuffer');
-	});
+		it('', function () {
+			expect(type.name(Exotic)).toEqual('FixtureTest');
+		});
+	}
 
-	it('', function () {
-		expect(type.name(new global.Int32Array(new global.ArrayBuffer(8)))).toEqual('Int32Array');
-	});
+	if (global.Symbol) {
+		it('', function () {
+			expect(type.name(global.Symbol)).toEqual('Symbol');
+		});
+	}
 
-	it('', function () {
-		expect(type.name(Buffer)).toEqual('Buffer');
-	});
+	if (global.Promise) {
+		it('', function () {
+			expect(type.name(global.Promise)).toEqual('Promise');
+		});
+	}
 
-	it('', function () {
-		expect(type.name(new Buffer('ab'))).toEqual('Buffer');
-	});
+	if (global.ArrayBuffer) {
+		it('', function () {
+			expect(type.name(global.ArrayBuffer)).toEqual('ArrayBuffer');
+		});
+
+		it('', function () {
+			expect(type.name(new global.ArrayBuffer(4))).toEqual('ArrayBuffer');
+		});
+	}
+
+	if (global.Int32Array && global.ArrayBuffer) {
+		it('', function () {
+			expect(type.name(new global.Int32Array(new global.ArrayBuffer(8)))).toEqual('Int32Array');
+		});
+	}
+
+	if (global.Buffer) {
+		it('', function () {
+			expect(type.name(global.Buffer)).toEqual('Buffer');
+		});
+
+		it('', function () {
+			expect(type.name(new global.Buffer('ab'))).toEqual('Buffer');
+		});
+	}
 });
