@@ -1,6 +1,7 @@
 const defaultFormats = ['iife', 'umd', 'amd'];
+
 const target = (outputPath, format, minify) => ({
-	dest: `${outputPath}.${format}${minify ? '.min' : ''}.js`,
+	file: `${outputPath}.${format}${minify ? '.min' : ''}.js`,
 	format,
 });
 

@@ -1,14 +1,9 @@
-const { execSync } = require('child_process');
+const path = require('path');
 const { sync } = require('glob');
 const { argv } = require('../config');
+const spawn = require('../@common/spawn');
 
-let files = '**/*';
-if (argv.f) {
-	files = Array.isArray(argv.f) ? `{${argv.f.join(',')}}` : argv.f;
-}
-
-sync(`${process.cwd()}/test/benchmark/${files}.bench.js`).forEach((file) => {
-	execSync(`babel-node --presets env ${file}`, {
-		stdio: 'inherit',
-	});
+const files = Array.isArray(argv.f) ? `{${argv.f.join(',')}}` : argv.f || '**/*';
+sync(path.resolve(`test/benchmark/${files}.bench.js`)).forEach(file => {
+	spawn.sync('babel-node', ['--presets', 'env', file]);
 });

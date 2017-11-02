@@ -2,11 +2,11 @@
  * 
  * ~~~~ describe-type v0.3.0
  * 
- * @commit 4b482c45ce1720d445e47eae2351c1d44510efc9
- * @moment Sunday, August 6, 2017 7:41 PM
+ * @commit b7dc375d7535d03018316db488c4153a68baf1e8
+ * @moment Thursday, November 2, 2017 10:07 AM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
- * @license (c) 2016-2020
+ * @license (c) 2016-2020 Adrian C. Miranda
  */
 this.type = this.type || {};
 this.type.typify = (function () {

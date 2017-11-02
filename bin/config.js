@@ -1,9 +1,9 @@
 const Git = require('git-revision-webpack-plugin');
 const { resolve } = require('path');
-const { aliases } = require('./rollup/aliases');
-const { params } = require('./rollup/env');
-const { args } = require('./rollup/argv');
-const banner = require('./rollup/banner');
+const { aliases } = require('./@common/aliases');
+const { params } = require('./@common/env');
+const { args } = require('./@common/argv');
+const banner = require('./@common/banner');
 
 exports.git = new Git({ lightweightTags: true, branch: true });
 
