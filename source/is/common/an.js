@@ -1,4 +1,4 @@
-import a from './a.js'
+import a from './a.js';
 
 /**
  * @memberof is

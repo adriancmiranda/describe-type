@@ -6,5 +6,5 @@
  * @returns {Boolean}
  */
 export default function nil(value) {
-  return value === null;
+	return value === null;
 }

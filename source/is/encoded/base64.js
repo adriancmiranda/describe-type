@@ -9,5 +9,5 @@ import string from '../shortcuts/string.js';
  * @returns {Boolean}
  */
 export default function base64(value) {
-  return string(value) && reIsBase64.test(value);
+	return string(value) && reIsBase64.test(value);
 }

@@ -1,4 +1,5 @@
 import infinity from '../is/numeric/infinity.js';
+import args from '../is/iterable/args.js';
 import nan from '../is/numeric/nan.js';
 import toString from '../to/toString.js';
 

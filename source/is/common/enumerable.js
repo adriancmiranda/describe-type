@@ -9,5 +9,5 @@ import callable from '../shortcuts/callable.js';
  * @returns {Boolean}
  */
 export default function enumerable(value) {
-  return value != null && number(value.length) && callable(value) === false;
+	return value != null && number(value.length) && callable(value) === false;
 }

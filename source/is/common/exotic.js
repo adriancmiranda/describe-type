@@ -8,5 +8,5 @@ import primitive from './primitive.js';
  * @returns {Boolean}
  */
 export default function exotic(value) {
-  return primitive(value) === false;
+	return primitive(value) === false;
 }

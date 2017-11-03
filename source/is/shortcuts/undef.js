@@ -6,5 +6,5 @@
  * @returns {Boolean}
  */
 export default function undef(value) {
-  return value === undefined;
+	return value === undefined;
 }

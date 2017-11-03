@@ -10,4 +10,4 @@ export { default as typify } from './typify.js';
 export { default as name } from './name.js';
 export { default as slice } from './slice.js';
 export { default as keys } from './keys.js';
-// export { prototypes, builtIn, patterns };
+export { prototypes, builtIn, patterns };

@@ -9,6 +9,7 @@ parserOptions:
   sourceType: module
 
 rules:
+  no-tabs: off
   no-debugger: 2
   no-bitwise: off
   vars-on-top: off
@@ -16,7 +17,7 @@ rules:
   no-multi-assign: off
   no-param-reassign: off
   no-restricted-globals: off
-  no-tabs: off
+  no-self-compare: off
 
   comma-dangle:
     - warn
