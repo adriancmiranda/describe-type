@@ -1,6 +1,6 @@
 const { Suite } = require('benchmark');
 const datatypes = require('../../fixtures/datatypes.fixture').default;
-const is = require('../../../lib/is');
+const is = require('../../../source/is');
 
 datatypes.forEach((datatype) => {
 	const suite = new Suite();

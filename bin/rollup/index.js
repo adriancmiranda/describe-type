@@ -1,6 +1,5 @@
 const nodeResolve = require('rollup-plugin-node-resolve');
-const nodeGlobals = require('rollup-plugin-node-globals');
-const nodeBuiltins = require('rollup-plugin-node-builtins');
+const es3 = require('rollup-plugin-es3');
 const cjs = require('rollup-plugin-commonjs');
 const optimizeJs = require('rollup-plugin-optimize-js');
 const gzip = require('rollup-plugin-gzip');
@@ -24,10 +23,9 @@ module.exports = file => ({
   plugins: [
     replace(vars),
     nodeResolve({ jsnext: true, main: true, browser: true }),
-    nodeGlobals(),
-    nodeBuiltins(),
     cjs(),
     buble(),
+    es3(['defineProperty', 'freeze']),
     alias(Object.assign({ resolve: ['.js', '.json'] }, aliases)),
   ].concat(file.plugins || []).concat(env.MINIFY ? [
     uglify({ output: { preamble: flag, ascii_only: true } }, minify),

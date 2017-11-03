@@ -15,6 +15,7 @@ rules:
   no-control-regex: off
   no-multi-assign: off
   no-param-reassign: off
+  no-restricted-globals: off
   no-tabs: off
 
   comma-dangle:

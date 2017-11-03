@@ -15,7 +15,7 @@ exports.pack = require('../package.json');
 
 exports.flag = banner(exports.pack, exports.git);
 
-exports.aliases = aliases(resolve('lib'));
+exports.aliases = aliases(resolve('source'));
 
 exports.vars = {
 	__ENV__: exports.env.NODE_ENV || 'development',

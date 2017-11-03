@@ -3,7 +3,7 @@
   "description": "Evaluates whether an object is compatible with a specific data type.",
   "homepage": "https://github.com/adriancmiranda/describe-type",
   "version": "0.2.2",
-  "main": "./dist/type.umd.js",
+  "main": "./dist/describe-type.umd.js",
   "license": "MIT",
   "ignore": [
     "material",
@@ -15,20 +15,10 @@
     "package-lock.json",
     "package.json",
     "README.md",
-    "rollup.config.js"
+    "bin"
   ],
   "keywords": [
     "describe-type",
-    "describe",
-    "type",
-    "typeof",
-    "typeOf",
-    "constructorNameOf",
-    "constructorOf",
-    "typify",
-    "test",
-    "util",
-    "as",
-    "is"
+    "utility"
   ]
 }

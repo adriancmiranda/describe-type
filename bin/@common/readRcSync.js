@@ -2,12 +2,12 @@ const path = require('path');
 const { pathExistsSync, readJsonSync } = require('fs-extra');
 const stripJsonComments = require('strip-json-comments');
 const readYamlSync = require('./readYamlSync');
-const instanceOf = require('./instanceOf');
+const as = require('./as');
 
-module.exports = (file, options) => {
+module.exports = (file, defaultValue) => {
 	let returnedConfig;
 	if (pathExistsSync(`${file}.js`)) {
-		returnedConfig = require(file);
+		returnedConfig = require(`${file}.js`);
 	} else if (pathExistsSync(file)) {
 		returnedConfig = readJsonSync(file, { throws: false });
 		if (returnedConfig) returnedConfig = stripJsonComments(returnedConfig);
@@ -20,5 +20,5 @@ module.exports = (file, options) => {
 	} else if (pathExistsSync(`${file}.yml`)) {
 		returnedConfig = readYamlSync(`${file}.yml`);
 	}
-	return instanceOf(Object, returnedConfig, null);
+	return as(Object, returnedConfig, defaultValue);
 };
