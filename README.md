@@ -25,7 +25,7 @@ bower i describe-type -S
 > type.is
 
 ```javascript
-const {is} = require('describe-type');
+const { is } = require('describe-type');
 
 function Sprite() {}
 is(Sprite, new Sprite())
@@ -127,7 +127,7 @@ is([String, Function], '')
 > type.is.not
 
 ```javascript
-const {is} = require('describe-type');
+const { is } = require('describe-type');
 
 is.not(Array, (() => arguments)())
 is.not(Buffer, new (function Buffer(){})())
@@ -137,7 +137,7 @@ is.not(Buffer, new (function Buffer(){})())
 > type.is.arraylike
 
 ```javascript
-const {is} = require('describe-type');
+const { is } = require('describe-type');
 
 is.arraylike((() => arguments)())
 is.arraylike(new Uint8Array(10))
@@ -156,7 +156,7 @@ is.arraylike({ length: 0 })
 > type.is.not.arraylike
 
 ```javascript
-const {is} = require('describe-type');
+const { is } = require('describe-type');
 
 is.not.arraylike({ length: 2 })
 is.not.arraylike(Object.create(null))
@@ -206,7 +206,7 @@ type.is.int(12)
 > type.is.not.int
 
 ```javascript
-var {is} = require('describe-type');
+var { is } = require('describe-type');
 
 is.not.int(1.2);
 is.not.int(-1.2);
@@ -236,7 +236,7 @@ type.is.not.int(-1.2)
 > type.is.primitive
 
 ```javascript
-const {is} = require('describe-type');
+const { is } = require('describe-type');
 is.primitive()
 is.primitive(null)
 is.primitive(true)
@@ -286,7 +286,7 @@ type.is.not.json(0))
 > type.is.buffer
 
 ```javascript
-const {is} = require('describe-type');
+const { is } = require('describe-type');
 
 is.buffer(new Buffer(1))
 //=> true
@@ -295,7 +295,7 @@ is.buffer(new Buffer(1))
 > type.is.not.buffer
 
 ```javascript
-const {is} = require('describe-type');
+const { is } = require('describe-type');
 
 is.not.buffer(new (function Buffer(){})())
 is.not.buffer(new Uint8Array(1))
