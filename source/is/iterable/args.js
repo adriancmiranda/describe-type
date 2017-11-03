@@ -4,6 +4,13 @@ import array from '../shortcuts/array.js';
 import object from '../shortcuts/object.js';
 import arraylike from './arraylike.js';
 
+/**
+ *
+ * @function
+ * @memberof is
+ * @param {any} value
+ * @returns {Boolean}
+ */
 export default function args(value) {
 	return (!array(value) && arraylike(value) &&
 		object(value) && unsafeMethod(value, 'callee')
