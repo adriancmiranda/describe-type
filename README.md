@@ -111,16 +111,14 @@ is(TypeError, new TypeError())
 is(Error, new Error())
 //=> true
 
-is('undefined', undefined)
+is(undefined, undefined)
 is(undefined, undefined)
 //=> true
 
-is('null', null)
+is(null, null)
 is(null, null)
 //=> true
 
-is('String|Function', () => {})
-is('String|Function', '')
 is([String, Function], () => {})
 is([String, Function], '')
 //=> true
