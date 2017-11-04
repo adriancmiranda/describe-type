@@ -1,13 +1,18 @@
 const base = require('./base.config');
 const browsers = require('./browsers.json');
 const { argv } = require('../config');
-const { string } = require('../@common/is');
+const is = require('../@common/is');
 const as = require('../@common/as');
 
 const BrowsersReturnedConfig = {
   get keys() {
-    return as(Object, Object.keys(browsers), []);
+    return as(Array, Object.keys(browsers), []);
   },
+
+  getKeys(key) {
+    return Object.keys(this.fetch(key));
+  },
+
   test(key) {
     return new RegExp(`^(${this.keys.join('|')})$`).test(key);
   },
@@ -18,15 +23,15 @@ const BrowsersReturnedConfig = {
     return Object.assign.apply(Object, this.keys.map(key => browsers[key]));
   },
   fetch(key) {
-    return as(Object, string(key) && this.getOne(key), this.getAll());
+    return as(Object, is(String, key) && this.getOne(key), this.getAll());
   },
 };
 
 module.exports = config => {
   const settings = Object.assign(base, {
     singleRun: true,
-    browsers: BrowsersReturnedConfig.keys,
-    customLaunchers: BrowsersReturnedConfig.fetch(env),
+    browsers: BrowsersReturnedConfig.getKeys(argv.env),
+    customLaunchers: BrowsersReturnedConfig.fetch(argv.env),
     reporters: process.env.CI ? ['dots', 'saucelabs'] : ['progress', 'saucelabs'],
     sauceLabs: {
       testName: 'describe-type unit tests',
