@@ -1,4 +1,4 @@
-import Exotic from 'fixtures/exotic.fixture';
+import Custom from 'fixtures/datatype/types/custom';
 import * as type from '~';
 
 describe('#name', function () {
@@ -94,13 +94,13 @@ describe('#name', function () {
 		expect(type.name(new Date())).toEqual('Date');
 	});
 
-	if (Exotic.supportsCustomization) {
+	if (Custom.supportsCustomization) {
 		it('FixtureTest', function () {
-			expect(type.name(new Exotic('FixtureTest'))).toEqual('FixtureTest');
+			expect(type.name(new Custom('FixtureTest'))).toEqual('FixtureTest');
 		});
 
 		it('FixtureTest', function () {
-			expect(type.name(Exotic)).toEqual('FixtureTest');
+			expect(type.name(Custom)).toEqual('FixtureTest');
 		});
 	}
 

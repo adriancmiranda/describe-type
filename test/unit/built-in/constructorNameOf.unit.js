@@ -1,4 +1,4 @@
-import Exotic from 'fixtures/exotic.fixture';
+import Custom from 'fixtures/datatype/types/custom';
 import * as type from '~';
 
 describe('constructorNameOf', function () {
@@ -114,16 +114,16 @@ describe('constructorNameOf', function () {
 		expect(type.constructorNameOf('ab|ba')).toEqual('String');
 	});
 
-	it('Exotic', function () {
-		expect(type.constructorNameOf(new Exotic())).toEqual('Exotic');
+	it('Custom', function () {
+		expect(type.constructorNameOf(new Custom())).toEqual('Custom');
 	});
 
-	it('Exotic', function () {
-		expect(type.constructorNameOf(Exotic)).toEqual('Exotic');
+	it('Custom', function () {
+		expect(type.constructorNameOf(Custom)).toEqual('Custom');
 	});
 
 	it('String', function () {
-		expect(type.constructorNameOf(Exotic.name)).toEqual('String');
+		expect(type.constructorNameOf(Custom.name)).toEqual('String');
 	});
 
 	it('Array', function () {

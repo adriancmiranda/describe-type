@@ -35,9 +35,6 @@ matrix:
     - os: linux
       node_js: "6"
       env: JOB_PART=test
-    - os: linux
-      node_js: "5"
-      env: JOB_PART=test
 
 # Output useful info for debugging.
 before_install:

@@ -20,7 +20,7 @@ describe('#is', () => {
 	describe('iterable', () => {
 		require('./args.unit');
 		require('./arraylike.unit');
-		require('./element.unit');
+		// require('./element.unit');
 		require('./vector.unit');
 	});
 

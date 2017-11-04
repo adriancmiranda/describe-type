@@ -33,8 +33,6 @@ environment:
       job_part: test
     - nodejs_version: 6
       job_part: test
-    - nodejs_version: 5
-      job_part: test
 
 # Jobs in the matrix
 matrix:

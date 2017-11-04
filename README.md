@@ -153,24 +153,6 @@ is.arraylike({ length: 0 })
 //=> true
 ```
 
-> type.is.not.arraylike
-
-```javascript
-const { is } = require('describe-type');
-
-is.not.arraylike({ length: 2 })
-is.not.arraylike(Object.create(null))
-is.not.arraylike({})
-is.not.arraylike(null)
-is.not.arraylike(false)
-is.not.arraylike()
-is.not.arraylike({ length: -1 })
-is.not.arraylike({ length: NaN })
-is.not.arraylike({ length: 'foo' })
-is.not.arraylike({ length: '' })
-//=> true
-```
-
 > type.is.numeric
 
 ```javascript
@@ -180,16 +162,6 @@ type.is.numeric('0')
 type.is.numeric('1')
 type.is.numeric('1.2')
 type.is.numeric(1)
-//=> true
-```
-
-> type.is.not.numeric
-
-```javascript
-var type = require('describe-type');
-
-type.is.not.numeric('1.2a')
-type.is.not.numeric('a1.2')
 //=> true
 ```
 
@@ -203,16 +175,6 @@ type.is.int(12)
 //=> true
 ```
 
-> type.is.not.int
-
-```javascript
-var { is } = require('describe-type');
-
-is.not.int(1.2);
-is.not.int(-1.2);
-//=> true
-```
-
 > type.is.uint
 
 ```javascript
@@ -220,16 +182,6 @@ var type = require('describe-type');
 
 type.is.int(0)
 type.is.uint(1)
-//=> true
-```
-
-> type.is.not.uint
-
-```javascript
-var type = require('describe-type');
-
-type.is.not.int(1.2)
-type.is.not.int(-1.2)
 //=> true
 ```
 
@@ -250,17 +202,6 @@ is.primitive(global.Symbol('foo'))
 //=> true
 ```
 
-> type.is.not.primitive
-
-```javascript
-const type = require('describe-type');
-
-type.is.not.primitive({}))
-type.is.not.primitive([]))
-type.is.not.primitive(Object.create(null)))
-//=> true
-```
-
 > type.is.json
 
 ```javascript
@@ -271,18 +212,6 @@ type.is.json(JSON.stringify([]));
 //=> true
 ```
 
-> type.is.not.json
-
-```javascript
-const type = require('describe-type');
-
-type.is.not.json(JSON.stringify('')))
-type.is.not.json({}))
-type.is.not.json([]))
-type.is.not.json(0))
-//=> true
-```
-
 > type.is.buffer
 
 ```javascript
@@ -290,19 +219,6 @@ const { is } = require('describe-type');
 
 is.buffer(new Buffer(1))
 //=> true
-```
-
-> type.is.not.buffer
-
-```javascript
-const { is } = require('describe-type');
-
-is.not.buffer(new (function Buffer(){})())
-is.not.buffer(new Uint8Array(1))
-//=> true
-
-is.not.buffer(new Buffer(1))
-//=> false
 ```
 
 > type.as

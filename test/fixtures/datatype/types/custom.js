@@ -3,7 +3,7 @@ const originalName = Custom.name;
 const toStr = Object.prototype.toString;
 
 function Custom(name) {
-	name = toStr.call(name).slice(8, -1) === 'String' ? name : originalName;
+	name = toStr.call(name).slice(8, -1) === 'String' && name.length ? name : originalName;
 	try {
 		Object.defineProperty(Custom, 'name', {
 			value: name,

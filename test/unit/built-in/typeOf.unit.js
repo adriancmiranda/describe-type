@@ -1,4 +1,4 @@
-import Exotic from 'fixtures/exotic.fixture';
+import Custom from 'fixtures/datatype/types/custom';
 import * as type from '~';
 
 describe('#typeOf', function () {
@@ -51,7 +51,7 @@ describe('#typeOf', function () {
 	});
 
 	it('', function () {
-		expect(type.typeOf(new Exotic())).toEqual('Exotic');
+		expect(type.typeOf(new Custom())).toEqual('Custom');
 	});
 
 	it('', function () {
@@ -127,7 +127,7 @@ describe('#typeOf', function () {
 	});
 
 	it('', function () {
-		expect(type.typeOf(Exotic)).toEqual('Function');
+		expect(type.typeOf(Custom)).toEqual('Function');
 	});
 
 	it('', function () {
