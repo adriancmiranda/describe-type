@@ -1,3 +1,5 @@
+import arraylike from '../is/arraylike.js';
+
 /**
  *
  * @function
@@ -7,6 +9,7 @@
  * @returns {Boolean}
  */
 export default function ownValue(context, value) {
+	if (arraylike(context) === false) return false;
 	for (let id = context.length - 1; id > -1; id -= 1) {
 		if (value === context[id]) {
 			return true;

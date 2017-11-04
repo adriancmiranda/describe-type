@@ -1,21 +1,29 @@
 import { Suite } from 'benchmark';
-import slice from '../../../source/@/slice.js';
+import ownValue from '../../../source/has/ownValue.js';
 
 const value = 'Array.prototype.slice() The slice() method returns a shallow copy of a portion of an array into a new array object selected from begin to end ( end not included). The original array will not be modified.'.split('');
-const cachedSlice = Array.prototype.slice;
+const cachedHasOwnProperty = Object.prototype.hasOwnProperty;
 
 new Suite()
 
-.add('Array.prototype.slice.call', () => {
-	Array.prototype.slice.call(value, 24, 42);
+.add('~value.indexOf', () => {
+	~value.indexOf(')');
 })
 
-.add('Array.prototype.slice.call cached', () => {
-	cachedSlice.call(value, 24, 42);
+.add('value.indexOf > -1', () => {
+	value.indexOf(')') > -1;
 })
 
-.add('describeType.slice', () => {
-	slice(value, 24, 42);
+.add('value.indexOf !== -1', () => {
+	value.indexOf(')') !== -1;
+})
+
+.add('value.indexOf != -1', () => {
+	value.indexOf(')') != -1;
+})
+
+.add('describeType.ownValue', () => {
+	ownValue(value, ')');
 })
 
 .on('cycle', ({ target }) => {
