@@ -30,10 +30,10 @@ matrix:
       node_js: "stable"
       env: JOB_PART=test
     - os: linux
-      node_js: "7"
+      node_js: "8"
       env: JOB_PART=test
     - os: linux
-      node_js: "6"
+      node_js: "7"
       env: JOB_PART=test
 
 # Output useful info for debugging.

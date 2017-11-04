@@ -29,9 +29,9 @@ environment:
   matrix:
     - nodejs_version: stable
       job_part: test
-    - nodejs_version: 7
+    - nodejs_version: 8
       job_part: test
-    - nodejs_version: 6
+    - nodejs_version: 7
       job_part: test
 
 # Jobs in the matrix

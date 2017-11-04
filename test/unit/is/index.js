@@ -46,7 +46,7 @@ describe('#is', () => {
 		require('./object.unit');
 		require('./regexp.unit');
 		require('./string.unit');
-		require('./symbol.unit');
+		// require('./symbol.unit');
 		require('./undef.unit');
 	});
 });
