@@ -15,7 +15,7 @@ export default function numeric(value) {
 	if (bool(value)) return true;
 	try {
 		const test = parseFloat(value);
-		return (nan(test) || infinity(value) || arraylike(value)) === false;
+		return (nan(test) || infinity(test) || arraylike(test)) === false;
 	} catch (err) {
 		return false;
 	}

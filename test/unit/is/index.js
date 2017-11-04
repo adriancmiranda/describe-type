@@ -30,7 +30,7 @@ describe('#is', () => {
 		require('./infinity.unit');
 		require('./int.unit');
 		require('./nan.unit');
-		// require('./numeric.unit');
+		require('./numeric.unit');
 		require('./odd.unit');
 		require('./uint.unit');
 	});

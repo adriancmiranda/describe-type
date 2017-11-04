@@ -20,6 +20,8 @@ describe('#numeric', () => {
 		datatypes.all.remove(datatypes.decimal);
 		datatypes.all.remove(datatypes.number);
 		datatypes.all.remove(datatypes.bool);
+		datatypes.all.remove(datatypes.arraylikeNative);
+		datatypes.all.remove(datatypes.arrayFilled);
 		datatypes.all.iterate(datatype => {
 			it(`${datatype.id} • numeric(${datatype.label}); // false`, () => {
 				expect(is.numeric(datatype.value)).toBe(false);
@@ -30,5 +32,7 @@ describe('#numeric', () => {
 		datatypes.all.add(datatypes.decimal);
 		datatypes.all.add(datatypes.number);
 		datatypes.all.add(datatypes.bool);
+		datatypes.all.add(datatypes.arraylikeNative);
+		datatypes.all.add(datatypes.arrayFilled);
 	});
 });
