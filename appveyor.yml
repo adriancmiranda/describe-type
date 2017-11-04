@@ -27,8 +27,6 @@ init:
 # Environment variables
 environment:
   matrix:
-    - nodejs_version: stable
-      job_part: test
     - nodejs_version: 8
       job_part: test
     - nodejs_version: 7

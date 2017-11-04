@@ -27,9 +27,6 @@ matrix:
   # Machines to test
   include:
     - os: linux
-      node_js: "stable"
-      env: JOB_PART=test
-    - os: linux
       node_js: "8"
       env: JOB_PART=test
     - os: linux
@@ -39,7 +36,6 @@ matrix:
 # Output useful info for debugging.
 before_install:
   - npm install -g npm@latest
-  - nvm --version
   - node --version
 
 # Scripts that run after cloning repository and before the tests
