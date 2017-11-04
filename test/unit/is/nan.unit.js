@@ -15,12 +15,12 @@ describe('#nan', () => {
 	});
 
 	describe('false', () => {
-		datatypes.all.remove(datatypes.nan);
-		datatypes.all.iterate(datatype => {
-			it(`${datatype.id} • nan(${datatype.label}); // false`, () => {
+		datatypes.number.remove(datatypes.nan);
+		datatypes.number.iterate(datatype => {
+			it(`${datatype.id} • nan(${datatype.label}); // false`, () => {;
 				expect(is.nan(datatype.value)).toBe(false);
 			});
 		});
-		datatypes.all.add(datatypes.nan);
+		datatypes.number.add(datatypes.nan);
 	});
 });
