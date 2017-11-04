@@ -1,9 +1,0 @@
-export { default as a } from './a.js';
-export { default as an } from './an.js';
-export { default as any } from './any.js';
-export { default as empty } from './empty.js';
-export { default as enumerable } from './enumerable.js';
-export { default as exotic } from './exotic.js';
-export { default as instanceOf } from './instanceOf.js';
-export { default as not } from './not.js';
-export { default as primitive } from './primitive.js';

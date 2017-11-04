@@ -1,7 +1,7 @@
 import slice from '../@/slice.js';
 import ownValue from '../has/ownValue.js';
-import any from '../is/common/any.js';
-import callable from '../is/shortcuts/callable.js';
+import any from '../is/any.js';
+import callable from '../is/callable.js';
 
 /**
  *

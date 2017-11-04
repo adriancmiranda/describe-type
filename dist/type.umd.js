@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v1.0.0-rc.0
  * 
- * @commit e910ae995dfd6372ba35a594d00e6822af92b893
- * @moment Thursday, November 2, 2017 11:40 PM
+ * @commit 5f722ec828420f321b64dd7935f25c855e28fa9e
+ * @moment Saturday, November 4, 2017 1:49 AM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2020 Adrian C. Miranda
@@ -13,6 +13,30 @@
 	typeof define === 'function' && define.amd ? define(['exports'], factory) :
 	(factory((global.type = {})));
 }(this, (function (exports) { 'use strict';
+
+	// pattern(s)
+	var reIsBase64 = /^(data:\w+\/[a-zA-Z+\-.]+;base64,)?([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/;
+	var reFunctionName = /\s*function\s+([^(\s]*)\s*/;
+	var reIsNativeFn = /\[native\scode\]/;
+	var reStringToBoolean = /^true|[1-9]+$/gi;
+	var reToPropName = /^[^a-zA-Z_$]|[^\w|$]|[^\w$]$/g;
+	var reIsHex = /^([A-Fa-f0-9]+|)$/;
+	var reIsHexadecimal = /^((#|0x)?([0-9A-Fa-f]{6}|[0-9A-Fa-f]{3}))?$/;
+	var reIsJsonStart = /^\[|^\{(?!\{)/;
+	var reEndsWithBracket = /\]$/;
+	var reEndsWithBrace = /\}$/;
+	var reIsJsonEnds = { '[': reEndsWithBracket, '{': reEndsWithBrace };
+
+	// prototypes
+	var ObjectProto = Object.prototype;
+
+	// built-in method(s)
+	var objectHasOwnProperty = ObjectProto.hasOwnProperty;
+	var objectToString = ObjectProto.toString;
+
+	// environment
+	var inNode = typeof window === 'undefined';
+	var env = inNode ? global : window;
 
 	/**
 	 *
@@ -30,6 +54,133 @@
 			value.constructor.name === 'GeneratorFunction' ||
 			value.constructor.name === 'AsyncFunction'
 		);
+	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function array(value) {
+		return a(Array, value);
+	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function arraylike(value) {
+		return array(value) || (
+			(!!value && typeof value === 'object' && typeof value.length === 'number') &&
+			(value.length === 0 || (value.length > 0 && (value.length - 1) in value))
+		);
+	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function number(value) {
+		return typeof value === 'number' || value instanceof Number;
+	}
+
+	/**
+	 * The `toFloat()` function parses an argument and returns a floating point number.
+	 *
+	 * @function
+	 * @memberof to
+	 *
+	 * @param {Number|String|Object} value - The value to parse.
+	 * If the string argument is not a string, then it is converted to a string
+	 * (using the ToString abstract operation).
+	 * Leading whitespace in the string argument is ignored.
+	 *
+	 * @returns {Number} A floating point number parsed from the given value.
+	 * If the first character cannot be converted to a number, 0 is returned.
+	 */
+	function toFloat(value) {
+		value = +value;
+		return number(value) ? 0 : value;
+	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof utility
+	 * @param {Object} context
+	 * @param {Boolean} getNum
+	 * @returns {Array}
+	 */
+	function mod(index, min, max) {
+		min = toFloat(min);
+		max = toFloat(max);
+		index = toFloat(index);
+		if ((index + max) == 0) { return 0; }
+		var value = index % max;
+		return value < min ? (value + max) : value;
+	}
+
+	/* eslint-disable no-unused-vars */
+	/**
+	 *
+	 * @function
+	 * @memberof utility
+	 * @param {arraylike} value
+	 * @param {int} startIndex
+	 * @param {int} endIndex
+	 * @returns {Array}
+	 */
+	function slice(list, start, end) {
+		var range = [];
+		if (arraylike(list)) {
+			var size = list.length;
+			start = mod(start, 0, size);
+			end = mod(end, size, size);
+			while (start < end) {
+				range.push(list[start++]);
+			}
+		}
+		return range;
+	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof has
+	 * @param {Object|Function} context
+	 * @param {any} key
+	 * @returns {Boolean}
+	 */
+	function ownProperty(context, key) {
+		if (context == null) { return false; }
+		return objectHasOwnProperty.call(context, key);
+	}
+
+	/* eslint-disable no-restricted-syntax */
+	/**
+	 *
+	 * @function
+	 * @memberof utility
+	 * @param {Object} context
+	 * @param {Boolean} getNum
+	 * @returns {Array}
+	 */
+	function keys(object, getEnum) {
+		var properties = [];
+		for (var key in object) {
+			if (getEnum || ownProperty(object, key)) {
+				properties.push(key);
+			}
+		}
+		return properties;
 	}
 
 	/**
@@ -59,37 +210,6 @@
 		}
 	}
 
-	// prototypes
-	var ObjectProto = Object.prototype;
-
-
-	var prototypes = {
-		ObjectProto: ObjectProto
-	};
-
-	// built-in method(s)
-	var objectHasOwnProperty = ObjectProto.hasOwnProperty;
-	var objectToString = ObjectProto.toString;
-
-
-	var builtIn = {
-		objectHasOwnProperty: objectHasOwnProperty,
-		objectToString: objectToString
-	};
-
-	/**
-	 *
-	 * @function
-	 * @memberof has
-	 * @param {Object|Function} context
-	 * @param {any} key
-	 * @returns {Boolean}
-	 */
-	function ownProperty(context, key) {
-		if (context == null) { return false; }
-		return objectHasOwnProperty.call(context, key);
-	}
-
 	/**
 	 *
 	 * @function
@@ -105,17 +225,6 @@
 			}
 		}
 		return false;
-	}
-
-	/**
-	 *
-	 * @function
-	 * @memberof is
-	 * @param {any} value
-	 * @returns {Boolean}
-	 */
-	function array(value) {
-		return a(Array, value);
 	}
 
 	/**
@@ -158,39 +267,6 @@
 		return a(expected, value);
 	}
 
-	/* eslint-disable no-restricted-syntax */
-	/**
-	 *
-	 * @function
-	 * @memberof utility
-	 * @param {Object} context
-	 * @param {Boolean} getNum
-	 * @returns {Array}
-	 */
-	function keys(object, getEnum) {
-		var properties = [];
-		for (var key in object) {
-			if (getEnum || ownProperty(object, key)) {
-				properties.push(key);
-			}
-		}
-		return properties;
-	}
-
-	/**
-	 *
-	 * @function
-	 * @memberof is
-	 * @param {any} value
-	 * @returns {Boolean}
-	 */
-	function arraylike(value) {
-		return array(value) || (
-			(!!value && typeof value === 'object' && typeof value.length === 'number') &&
-			(value.length === 0 || (value.length > 0 && (value.length - 1) in value))
-		);
-	}
-
 	/**
 	 *
 	 * @function
@@ -220,17 +296,6 @@
 			return !value.valueOf();
 		}
 		return !value;
-	}
-
-	/**
-	 *
-	 * @function
-	 * @memberof is
-	 * @param {any} value
-	 * @returns {Boolean}
-	 */
-	function number(value) {
-		return typeof value === 'number' || value instanceof Number;
 	}
 
 	/**
@@ -303,34 +368,6 @@
 	function not(expected, value) {
 		return any(expected, value) === false;
 	}
-
-	// pattern(s)
-	var reIsBase64 = /^(data:\w+\/[a-zA-Z+\-.]+;base64,)?([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/;
-	var reFunctionName = /\s*function\s+([^(\s]*)\s*/;
-	var reIsNativeFn = /\[native\scode\]/;
-	var reStringToBoolean = /^true|[1-9]+$/gi;
-	var reToPropName = /^[^a-zA-Z_$]|[^\w|$]|[^\w$]$/g;
-	var reIsHex = /^([A-Fa-f0-9]+|)$/;
-	var reIsHexadecimal = /^((#|0x)?([0-9A-Fa-f]{6}|[0-9A-Fa-f]{3}))?$/;
-	var reIsJsonStart = /^\[|^\{(?!\{)/;
-	var reEndsWithBracket = /\]$/;
-	var reEndsWithBrace = /\}$/;
-	var reIsJsonEnds$1 = { '[': reEndsWithBracket, '{': reEndsWithBrace };
-
-
-	var patterns = {
-		reIsBase64: reIsBase64,
-		reFunctionName: reFunctionName,
-		reIsNativeFn: reIsNativeFn,
-		reStringToBoolean: reStringToBoolean,
-		reToPropName: reToPropName,
-		reIsHex: reIsHex,
-		reIsHexadecimal: reIsHexadecimal,
-		reIsJsonStart: reIsJsonStart,
-		reEndsWithBracket: reEndsWithBracket,
-		reEndsWithBrace: reEndsWithBrace,
-		reIsJsonEnds: reIsJsonEnds$1
-	};
 
 	/**
 	 *
@@ -564,10 +601,6 @@
 		return a(RegExp, value);
 	}
 
-	// environment
-	var inNode = typeof window === 'undefined';
-	var env = inNode ? global : window;
-
 	/**
 	 *
 	 * @function
@@ -666,25 +699,6 @@
 	}
 
 	/**
-	 * The `toFloat()` function parses an argument and returns a floating point number.
-	 *
-	 * @function
-	 * @memberof to
-	 *
-	 * @param {Number|String|Object} value - The value to parse.
-	 * If the string argument is not a string, then it is converted to a string
-	 * (using the ToString abstract operation).
-	 * Leading whitespace in the string argument is ignored.
-	 *
-	 * @returns {Number} A floating point number parsed from the given value.
-	 * If the first character cannot be converted to a number, 0 is returned.
-	 */
-	function toFloat(value) {
-		value = parseFloat(value);
-		return numeric(value) ? value : 0;
-	}
-
-	/**
 	 * The `toInt()` function parses a string argument and returns an integer of the
 	 * specified radix (the base in mathematical numeral systems).
 	 *
@@ -753,6 +767,13 @@
 		toUint: toUint
 	};
 
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
 	function args(value) {
 		return (!array(value) && arraylike(value) &&
 			object(value) && unsafeMethod(value, 'callee')
@@ -762,7 +783,7 @@
 	/**
 	 *
 	 * @function
-	 * @memberof of
+	 * @memberof built-in
 	 * @param {any} value
 	 * @returns {String}
 	 */
@@ -776,7 +797,7 @@
 	/**
 	 *
 	 * @function
-	 * @memberof of
+	 * @memberof built-in
 	 * @param {any} value
 	 * @returns {String}
 	 */
@@ -788,7 +809,7 @@
 	/**
 	 *
 	 * @function
-	 * @memberof of
+	 * @memberof built-in
 	 * @param {any} value
 	 * @returns {String}
 	 */
@@ -800,7 +821,7 @@
 	/**
 	 *
 	 * @function
-	 * @memberof of
+	 * @memberof built-in
 	 * @param {any} value
 	 * @param {Boolean} write
 	 * @returns {String}
@@ -814,6 +835,14 @@
 		);
 	}
 
+	/**
+	 *
+	 * @function
+	 * @memberof built-in
+	 * @param {Function|Array.<Function>} expected
+	 * @param {any} value
+	 * @returns {Array}
+	 */
 	function typify(expected, write) {
 		if (arraylike(expected) && expected.length > 0) {
 			for (var i = expected.length - 1; i > -1; i -= 1) {
@@ -822,27 +851,6 @@
 			return expected.join('|');
 		}
 		return name(expected, write);
-	}
-
-	/* eslint-disable no-unused-vars */
-	/**
-	 *
-	 * @function
-	 * @memberof utility
-	 * @param {arraylike} value
-	 * @param {int} startIndex
-	 * @param {int} endIndex
-	 * @returns {Array}
-	 */
-	function slice(value, startIndex, endIndex) {
-		if (arraylike(value) === false) { return []; }
-		var args = [];
-		var index = uint(startIndex) ? startIndex + 1 : 1;
-		var size = value.length - index;
-		for (var id = size; id > -1; id -= 1) {
-			args[id] = value[(id + index) - 1];
-		}
-		return args;
 	}
 
 	/**
@@ -862,18 +870,11 @@
 	exports.has = index;
 	exports.is = index$1;
 	exports.to = index$2;
-	exports.prototypes = prototypes;
-	exports.builtIn = builtIn;
-	exports.patterns = patterns;
+	exports.as = as;
 	exports.constructorNameOf = constructorNameOf;
 	exports.constructorOf = constructorOf;
+	exports.name = name;
 	exports.typeOf = typeOf;
 	exports.typify = typify;
-	exports.name = name;
-	exports.slice = slice;
-	exports.keys = keys;
-	exports.inNode = inNode;
-	exports.env = env;
-	exports.as = as;
 
 })));

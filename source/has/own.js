@@ -1,6 +1,6 @@
 import ownProperty from './ownProperty.js';
 import ownValue from './ownValue.js';
-import array from '../is/shortcuts/array.js';
+import array from '../is/array.js';
 
 /**
  *

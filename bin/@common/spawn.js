@@ -22,7 +22,7 @@ function spawn(cmd, args, options) {
 }
 
 spawn.sync = (cmd, args, options) => {
-  return exit(crossSpawn.sync(cmd, args, Object.assign({ stdio: 'inherit' }, options));
+  return exit(crossSpawn.sync(cmd, args, Object.assign({ stdio: 'inherit' }, options)));
 };
 
 module.exports = spawn;

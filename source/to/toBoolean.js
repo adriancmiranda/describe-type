@@ -1,5 +1,5 @@
 import { reStringToBoolean } from '../@/patterns.js';
-import string from '../is/shortcuts/string.js';
+import string from '../is/string.js';
 
 /**
  *

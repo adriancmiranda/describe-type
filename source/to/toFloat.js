@@ -1,4 +1,4 @@
-import numeric from '../is/numeric/numeric.js';
+import number from '../is/number.js';
 
 /**
  * The `toFloat()` function parses an argument and returns a floating point number.
@@ -15,6 +15,6 @@ import numeric from '../is/numeric/numeric.js';
  * If the first character cannot be converted to a number, 0 is returned.
  */
 export default function toFloat(value) {
-	value = parseFloat(value);
-	return numeric(value) ? value : 0;
+	value = +value;
+	return number(value) ? 0 : value;
 }

@@ -1,4 +1,4 @@
-import callable from '../is/shortcuts/callable.js';
+import callable from '../is/callable.js';
 
 /**
  *
