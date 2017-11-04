@@ -8,11 +8,9 @@ const BrowsersReturnedConfig = {
   get keys() {
     return as(Array, Object.keys(browsers), []);
   },
-
-  getKeys(key) {
+  getBrowserList(key) {
     return Object.keys(this.fetch(key));
   },
-
   test(key) {
     return new RegExp(`^(${this.keys.join('|')})$`).test(key);
   },
@@ -30,7 +28,7 @@ const BrowsersReturnedConfig = {
 module.exports = config => {
   const settings = Object.assign(base, {
     singleRun: true,
-    browsers: BrowsersReturnedConfig.getKeys(argv.env),
+    browsers: BrowsersReturnedConfig.getBrowserList(argv.env),
     customLaunchers: BrowsersReturnedConfig.fetch(argv.env),
     reporters: process.env.CI ? ['dots', 'saucelabs'] : ['progress', 'saucelabs'],
     sauceLabs: {
