@@ -10,10 +10,14 @@ import ownProperty from '../has/ownProperty.js';
  * @returns {Array}
  */
 export default function keys(object, getEnum) {
+	if (object == null) return [];
+	if (Object.keys && !getEnum) {
+		return Object.keys(object);
+	}
 	const properties = [];
 	for (const key in object) {
 		if (getEnum || ownProperty(object, key)) {
-			properties.push(key);
+			properties[properties.length] = key;
 		}
 	}
 	return properties;
