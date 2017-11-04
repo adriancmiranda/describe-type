@@ -38,13 +38,13 @@ matrix:
 
 # Output useful info for debugging.
 before_install:
-  - npm i -g npm@latest
+  - npm install -g npm@latest
   - nvm --version
   - node --version
 
 # Scripts that run after cloning repository and before the tests
 before_script:
-  - npm i
+  - npm install
 
 # To run your custom scripts instead of automatic tests (basically the post-install test scripts)
 script:
