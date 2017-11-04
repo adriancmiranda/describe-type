@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v1.0.0-rc.0
  * 
- * @commit 42c8da7ee670effa96d1ea0897c19785ec347b98
- * @moment Saturday, November 4, 2017 4:19 PM
+ * @commit a5e1a8453740debc122194fafeabdcc6ecd54365
+ * @moment Saturday, November 4, 2017 6:20 PM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2020 Adrian C. Miranda
@@ -304,6 +304,19 @@ var type = (function (exports) {
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
+	function args(value) {
+		return (!array(value) && arraylike(value) &&
+			object(value) && unsafeMethod(value, 'callee')
+		) || objectToString.call(value) === '[object Arguments]';
+	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
 	function empty(value) {
 		if (arraylike(value)) {
 			return value.length === 0;
@@ -592,7 +605,7 @@ var type = (function (exports) {
 		if (bool(value)) { return true; }
 		try {
 			var test = parseFloat(value);
-			return (nan(test) || infinity(value) || arraylike(value)) === false;
+			return (nan(test) || infinity(test) || arraylike(test)) === false;
 		} catch (err) {
 			return false;
 		}
@@ -617,7 +630,7 @@ var type = (function (exports) {
 	 * @returns {Boolean}
 	 */
 	function uint(value) {
-		return int(value) && value > 0;
+		return int(value) && value >= 0;
 	}
 
 	/**
@@ -704,6 +717,7 @@ var type = (function (exports) {
 		a: a,
 		an: a,
 		any: any,
+		args: args,
 		empty: empty,
 		enumerable: enumerable,
 		equal: equal,
@@ -826,19 +840,6 @@ var type = (function (exports) {
 	/**
 	 *
 	 * @function
-	 * @memberof is
-	 * @param {any} value
-	 * @returns {Boolean}
-	 */
-	function args(value) {
-		return (!array(value) && arraylike(value) &&
-			object(value) && unsafeMethod(value, 'callee')
-		) || objectToString.call(value) === '[object Arguments]';
-	}
-
-	/**
-	 *
-	 * @function
 	 * @memberof built-in
 	 * @param {any} value
 	 * @returns {String}
@@ -900,9 +901,9 @@ var type = (function (exports) {
 	 * @returns {Array}
 	 */
 	function typify(expected, write) {
-		if (arraylike(expected) && expected.length > 0) {
+		if (string(expected) === false && arraylike(expected) && expected.length > 0) {
 			for (var i = expected.length - 1; i > -1; i -= 1) {
-				expected[i] = typify(expected[i], write);
+				expected[i] = name(expected[i], write);
 			}
 			return expected.join('|');
 		}
@@ -922,6 +923,8 @@ var type = (function (exports) {
 		}
 		return any(expected, value) ? value : args[0];
 	}
+
+	/* eslint-disable no-unused-vars */
 
 	exports.has = index;
 	exports.is = index$1;

@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v1.0.0-rc.0
  * 
- * @commit 42c8da7ee670effa96d1ea0897c19785ec347b98
- * @moment Saturday, November 4, 2017 4:19 PM
+ * @commit a5e1a8453740debc122194fafeabdcc6ecd54365
+ * @moment Saturday, November 4, 2017 6:20 PM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2020 Adrian C. Miranda
@@ -55,6 +55,94 @@
 
 	// built-in method(s)
 	var objectHasOwnProperty = ObjectProto.hasOwnProperty;
+	var objectToString = ObjectProto.toString;
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function callable(value) {
+		return a(Function, value);
+	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof has
+	 * @param {object} context
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function unsafeMethod(context, methodName) {
+		try {
+			return callable(context[methodName]);
+		} catch (err) {
+			return false;
+		}
+	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function array(value) {
+		return a(Array, value);
+	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function object(value) {
+		return a(Object, value);
+	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function string(value) {
+		return typeof value === 'string' || value instanceof String;
+	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function arraylike(value) {
+		return array(value) || string(value) || (
+			(!!value && typeof value === 'object' && typeof value.length === 'number') &&
+			(value.length === 0 || (value.length > 0 && (value.length - 1) in value))
+		);
+	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function args(value) {
+		return (!array(value) && arraylike(value) &&
+			object(value) && unsafeMethod(value, 'callee')
+		) || objectToString.call(value) === '[object Arguments]';
+	}
 
 	/**
 	 *
@@ -90,64 +178,6 @@
 			}
 		}
 		return properties;
-	}
-
-	/**
-	 *
-	 * @function
-	 * @memberof is
-	 * @param {any} value
-	 * @returns {Boolean}
-	 */
-	function array(value) {
-		return a(Array, value);
-	}
-
-	/**
-	 *
-	 * @function
-	 * @memberof is
-	 * @param {any} value
-	 * @returns {Boolean}
-	 */
-	function string(value) {
-		return typeof value === 'string' || value instanceof String;
-	}
-
-	/**
-	 *
-	 * @function
-	 * @memberof is
-	 * @param {any} value
-	 * @returns {Boolean}
-	 */
-	function arraylike(value) {
-		return array(value) || string(value) || (
-			(!!value && typeof value === 'object' && typeof value.length === 'number') &&
-			(value.length === 0 || (value.length > 0 && (value.length - 1) in value))
-		);
-	}
-
-	/**
-	 *
-	 * @function
-	 * @memberof is
-	 * @param {any} value
-	 * @returns {Boolean}
-	 */
-	function callable(value) {
-		return a(Function, value);
-	}
-
-	/**
-	 *
-	 * @function
-	 * @memberof is
-	 * @param {any} value
-	 * @returns {Boolean}
-	 */
-	function object(value) {
-		return a(Object, value);
 	}
 
 	/**
@@ -458,7 +488,7 @@
 		if (bool(value)) { return true; }
 		try {
 			var test = parseFloat(value);
-			return (nan(test) || infinity(value) || arraylike(value)) === false;
+			return (nan(test) || infinity(test) || arraylike(test)) === false;
 		} catch (err) {
 			return false;
 		}
@@ -483,7 +513,7 @@
 	 * @returns {Boolean}
 	 */
 	function uint(value) {
-		return int(value) && value > 0;
+		return int(value) && value >= 0;
 	}
 
 	/**
@@ -571,6 +601,7 @@
 	exports.a = a;
 	exports.an = a;
 	exports.any = any;
+	exports.args = args;
 	exports.empty = empty;
 	exports.enumerable = enumerable;
 	exports.equal = equal;
