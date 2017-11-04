@@ -31,9 +31,4 @@ module.exports = ([{
 	source: 'source/is/index',
 	output: 'dist/type.is',
 	format: env.FORMATS,
-}, {
-	module: 'type.to',
-	source: 'source/to/index',
-	output: 'dist/type.to',
-	format: env.FORMATS,
 }]).map(file => rollup(file));

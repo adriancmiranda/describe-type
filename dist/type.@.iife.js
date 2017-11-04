@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v1.0.0-rc.0
  * 
- * @commit 5f722ec828420f321b64dd7935f25c855e28fa9e
- * @moment Saturday, November 4, 2017 1:49 AM
+ * @commit 42c8da7ee670effa96d1ea0897c19785ec347b98
+ * @moment Saturday, November 4, 2017 4:19 PM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2020 Adrian C. Miranda
@@ -63,6 +63,51 @@ this.type['@'] = (function (exports) {
 	var env = inNode ? global : window;
 
 	/**
+	 * The `intOf()` function parses a string argument and returns an integer of the
+	 * specified radix (the base in mathematical numeral systems).
+	 *
+	 * @function
+	 * @memberof to
+	 *
+	 * @param {Number|String|Object} value - The value to parse.
+	 * If the string argument is not a string, then it is converted to a string
+	 * (using the ToString abstract operation).
+	 * Leading whitespace in the string argument is ignored.
+	 *
+	 * @param {any} radix - An integer between 2 and 36 that represents
+	 * the radix (the base in mathematical numeral systems) of the above mentioned string.
+	 * Specify 10 for the decimal numeral system commonly used by humans. Always specify
+	 * this parameter to eliminate reader confusion and to guarantee predictable behavior.
+	 * Different implementations produce different results when a radix is not specified,
+	 * usually defaulting the value to 10.
+	 *
+	 * @returns {Number} An integer number parsed from the given string.
+	 * If the first character cannot be converted to a number, 0 is returned.
+	 *
+	 * min: -2147483647
+	 * max: 2147483647
+	 */
+	function intOf(value, radix) {
+		return 0 | parseInt(value, radix);
+	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof utility
+	 * @param {Object} context
+	 * @param {Boolean} getNum
+	 * @returns {Array}
+	 */
+	function mod(index, min, max) {
+		min = intOf(min);
+		max = intOf(max) || min || 1;
+		index = intOf(index);
+		var value = index % max;
+		return value < min ? (value + max) : value;
+	}
+
+	/**
 	 *
 	 * @function
 	 * @memberof is
@@ -98,11 +143,8 @@ this.type['@'] = (function (exports) {
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function arraylike(value) {
-		return array(value) || (
-			(!!value && typeof value === 'object' && typeof value.length === 'number') &&
-			(value.length === 0 || (value.length > 0 && (value.length - 1) in value))
-		);
+	function string(value) {
+		return typeof value === 'string' || value instanceof String;
 	}
 
 	/**
@@ -112,47 +154,13 @@ this.type['@'] = (function (exports) {
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function number(value) {
-		return typeof value === 'number' || value instanceof Number;
+	function arraylike(value) {
+		return array(value) || string(value) || (
+			(!!value && typeof value === 'object' && typeof value.length === 'number') &&
+			(value.length === 0 || (value.length > 0 && (value.length - 1) in value))
+		);
 	}
 
-	/**
-	 * The `toFloat()` function parses an argument and returns a floating point number.
-	 *
-	 * @function
-	 * @memberof to
-	 *
-	 * @param {Number|String|Object} value - The value to parse.
-	 * If the string argument is not a string, then it is converted to a string
-	 * (using the ToString abstract operation).
-	 * Leading whitespace in the string argument is ignored.
-	 *
-	 * @returns {Number} A floating point number parsed from the given value.
-	 * If the first character cannot be converted to a number, 0 is returned.
-	 */
-	function toFloat(value) {
-		value = +value;
-		return number(value) ? 0 : value;
-	}
-
-	/**
-	 *
-	 * @function
-	 * @memberof utility
-	 * @param {Object} context
-	 * @param {Boolean} getNum
-	 * @returns {Array}
-	 */
-	function mod(index, min, max) {
-		min = toFloat(min);
-		max = toFloat(max);
-		index = toFloat(index);
-		if ((index + max) == 0) { return 0; }
-		var value = index % max;
-		return value < min ? (value + max) : value;
-	}
-
-	/* eslint-disable no-unused-vars */
 	/**
 	 *
 	 * @function
@@ -162,14 +170,23 @@ this.type['@'] = (function (exports) {
 	 * @param {int} endIndex
 	 * @returns {Array}
 	 */
-	function slice(list, start, end) {
+	function slice(list, startIndex, endIndex) {
 		var range = [];
 		if (arraylike(list)) {
 			var size = list.length;
-			start = mod(start, 0, size);
-			end = mod(end, size, size);
+			var start = mod(startIndex, 0, size);
+			var end = mod(endIndex, 0, size) || size;
+			if (string(list)) {
+				range = '';
+				while (start < end) {
+					range += list[start];
+					start += 1;
+				}
+				return range;
+			}
 			while (start < end) {
-				range.push(list[start++]);
+				range[range.length] = list[start];
+				start += 1;
 			}
 		}
 		return range;
@@ -198,10 +215,14 @@ this.type['@'] = (function (exports) {
 	 * @returns {Array}
 	 */
 	function keys(object, getEnum) {
+		if (object == null) { return []; }
+		if (Object.keys && !getEnum) {
+			return Object.keys(object);
+		}
 		var properties = [];
 		for (var key in object) {
 			if (getEnum || ownProperty(object, key)) {
-				properties.push(key);
+				properties[properties.length] = key;
 			}
 		}
 		return properties;
@@ -210,9 +231,9 @@ this.type['@'] = (function (exports) {
 	exports.prototypes = prototypes;
 	exports.builtIn = builtIn;
 	exports.patterns = patterns;
+	exports.mod = mod;
 	exports.slice = slice;
 	exports.keys = keys;
-	exports.mod = mod;
 	exports.inNode = inNode;
 	exports.env = env;
 

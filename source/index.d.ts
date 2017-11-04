@@ -71,11 +71,11 @@ declare module type {
     typify(expected: any, write?: boolean): string;
 
     /**
-     * @name toString
+     * @name stringOf
      * @param value:
      * @param force:
-     * @see type.toString
+     * @see type.stringOf
      */
-    toString(value: any, force?: boolean): string;
+    stringOf(value: any, force?: boolean): string;
   }
 }

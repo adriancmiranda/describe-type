@@ -1,5 +1,5 @@
-/* eslint-disable no-unused-vars */
 import arraylike from '../is/arraylike.js';
+import string from '../is/string.js';
 import mod from './mod.js';
 
 /**
@@ -11,14 +11,23 @@ import mod from './mod.js';
  * @param {int} endIndex
  * @returns {Array}
  */
-export default function slice(list, start, end) {
-	const range = [];
+export default function slice(list, startIndex, endIndex) {
+	let range = [];
 	if (arraylike(list)) {
 		const size = list.length;
-		start = mod(start, 0, size) - 1;
-		end = mod(end, size, size) - 1;
-		for (let i = end; i > start; i -= 1) {
-			range.push(list[i]);
+		let start = mod(startIndex, 0, size);
+		const end = mod(endIndex, 0, size) || size;
+		if (string(list)) {
+			range = '';
+			while (start < end) {
+				range += list[start];
+				start += 1;
+			}
+			return range;
+		}
+		while (start < end) {
+			range[range.length] = list[start];
+			start += 1;
 		}
 	}
 	return range;

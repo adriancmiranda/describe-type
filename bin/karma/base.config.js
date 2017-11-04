@@ -1,6 +1,6 @@
 const { resolve } = require('path');
 const { DefinePlugin } = require('webpack');
-const { aliases, env } = require('../config');
+const { aliases, env, pack } = require('../config');
 
 const webpack = {
   plugins: [new DefinePlugin(env)],
@@ -8,7 +8,6 @@ const webpack = {
   resolve: {
     alias: Object.assign({
       fixtures: resolve('test/fixtures'),
-      '~': resolve('source'),
     }, aliases),
   },
   module: {
@@ -23,13 +22,13 @@ const webpack = {
   },
 };
 
-module.exports = {
+const karma = {
   webpack,
   basePath: '../../',
   port: 9876,
   colors: true,
   frameworks: ['jasmine', 'jasmine-matchers', 'sinon', 'fixture', 'phantomjs-shim'],
-  files: ['./index.js', {
+  files: [pack.main, {
     pattern: 'test/fixtures/**/*.fixture.*',
     watched: true,
   }, {
@@ -37,7 +36,6 @@ module.exports = {
     watched: true,
   }],
   preprocessors: {
-    './index.js': ['webpack', 'sourcemap'],
     'test/unit/**/{index,*.unit}.js': ['webpack', 'sourcemap'],
     'test/fixtures/**/{index,*.fixture}.js': ['webpack', 'sourcemap'],
     'test/fixtures/**/*.fixture.html': ['html2js'],
@@ -50,3 +48,6 @@ module.exports = {
     variableName: '__json__',
   },
 };
+
+karma.preprocessors[pack.main] = ['webpack', 'sourcemap'];
+module.exports = karma;

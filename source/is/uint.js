@@ -8,5 +8,5 @@ import int from './int.js';
  * @returns {Boolean}
  */
 export default function uint(value) {
-	return int(value) && value > 0;
+	return int(value) && value >= 0;
 }

@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v1.0.0-rc.0
  * 
- * @commit 5f722ec828420f321b64dd7935f25c855e28fa9e
- * @moment Saturday, November 4, 2017 1:49 AM
+ * @commit 42c8da7ee670effa96d1ea0897c19785ec347b98
+ * @moment Saturday, November 4, 2017 4:19 PM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2020 Adrian C. Miranda
@@ -75,10 +75,14 @@ define(['exports'], function (exports) { 'use strict';
 	 * @returns {Array}
 	 */
 	function keys(object, getEnum) {
+		if (object == null) { return []; }
+		if (Object.keys && !getEnum) {
+			return Object.keys(object);
+		}
 		var properties = [];
 		for (var key in object) {
 			if (getEnum || ownProperty(object, key)) {
-				properties.push(key);
+				properties[properties.length] = key;
 			}
 		}
 		return properties;
@@ -102,8 +106,19 @@ define(['exports'], function (exports) { 'use strict';
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
+	function string(value) {
+		return typeof value === 'string' || value instanceof String;
+	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
 	function arraylike(value) {
-		return array(value) || (
+		return array(value) || string(value) || (
 			(!!value && typeof value === 'object' && typeof value.length === 'number') &&
 			(value.length === 0 || (value.length > 0 && (value.length - 1) in value))
 		);
@@ -171,6 +186,55 @@ define(['exports'], function (exports) { 'use strict';
 	 */
 	function enumerable(value) {
 		return value != null && number(value.length) && callable(value) === false;
+	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {any} valueA
+	 * @param {any} valueB
+	 * @returns {Boolean}
+	 */
+	function equal(valueA, valueB) {
+		if (valueA === valueB) {
+			return true;
+		}
+		var ctorA = valueA != null && valueA.constructor;
+		var ctorB = valueB != null && valueB.constructor;
+		if (ctorA !== ctorB) {
+			return false;
+		} else if (ctorA === Object) {
+			var keysA = keys(valueA);
+			var keysB = keys(valueB);
+			var i = keysA.length;
+			if (i !== keysB.length) {
+				return false;
+			}
+			for (i -= 1; i > -1; i -= 1) {
+				var key = keysA[i];
+				if (!equal(valueA[key], valueB[key])) {
+					return false;
+				}
+			}
+			return true;
+		} else if (ctorA === Array) {
+			var key$1 = valueA.length;
+			if (key$1 !== valueB.length) {
+				return false;
+			}
+			for (key$1 -= 1; key$1 > -1; key$1 -= 1) {
+				if (!equal(valueA[key$1], valueB[key$1])) {
+					return false;
+				}
+			}
+			return true;
+		} else if (ctorA === Function) {
+			return valueA.prototype === valueB.prototype;
+		} else if (ctorA === Date) {
+			return valueA.getTime() === valueB.getTime();
+		}
+		return false;
 	}
 
 	/**
@@ -253,17 +317,6 @@ define(['exports'], function (exports) { 'use strict';
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function string(value) {
-		return typeof value === 'string' || value instanceof String;
-	}
-
-	/**
-	 *
-	 * @function
-	 * @memberof is
-	 * @param {any} value
-	 * @returns {Boolean}
-	 */
 	function base64(value) {
 		return string(value) && reIsBase64.test(value);
 	}
@@ -276,6 +329,13 @@ define(['exports'], function (exports) { 'use strict';
 		return string(value) && reIsHexadecimal.test(value);
 	}
 
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
 	function jsonlike(value) {
 		if (string(value)) {
 			var start = value.match(reIsJsonStart);
@@ -509,6 +569,7 @@ define(['exports'], function (exports) { 'use strict';
 	exports.any = any;
 	exports.empty = empty;
 	exports.enumerable = enumerable;
+	exports.equal = equal;
 	exports.exotic = exotic;
 	exports.instanceOf = instanceOf;
 	exports.not = not;

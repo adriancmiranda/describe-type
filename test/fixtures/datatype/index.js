@@ -104,7 +104,7 @@ DataType.prototype.iterate = function iterate(iterator, start = 1) {
 	});
 };
 
-DataType.prototype.toString = function toString(indent, nodeChar = '••', leafChar = '••') {
+DataType.prototype.toString = function toString(indent, nodeChar = 'â€¢â€¢', leafChar = 'â€¢â€¢') {
 	let tree = '';
 	DataType.walkThrough(this, (node, i, depth) => {
 		if (node.children) {

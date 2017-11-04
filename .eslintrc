@@ -9,6 +9,8 @@ parserOptions:
   sourceType: module
 
 rules:
+  semi: off
+  semi-style: off
   no-tabs: off
   no-debugger: 2
   no-bitwise: off

@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v1.0.0-rc.0
  * 
- * @commit 5f722ec828420f321b64dd7935f25c855e28fa9e
- * @moment Saturday, November 4, 2017 1:49 AM
+ * @commit 42c8da7ee670effa96d1ea0897c19785ec347b98
+ * @moment Saturday, November 4, 2017 4:19 PM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2020 Adrian C. Miranda
@@ -14,27 +14,12 @@
 	(factory((global.type = global.type || {}, global.type.builtIn = {})));
 }(this, (function (exports) { 'use strict';
 
-	/**
-	 *
-	 * @function
-	 * @memberof is
-	 * @param {any} value
-	 * @returns {Boolean}
-	 */
-	function number(value) {
-		return typeof value === 'number' || value instanceof Number;
-	}
+	// pattern(s)
 
-	/**
-	 *
-	 * @function
-	 * @memberof is
-	 * @param {any} value
-	 * @returns {Boolean}
-	 */
-	function infinity(value) {
-		return number(value) && (value - 1) === value;
-	}
+	var reFunctionName = /\s*function\s+([^(\s]*)\s*/;
+
+	var reStringToBoolean = /^true|[1-9]+$/gi;
+	var reToPropName = /^[^a-zA-Z_$]|[^\w|$]|[^\w$]$/g;
 
 	// prototypes
 	var ObjectProto = Object.prototype;
@@ -59,6 +44,234 @@
 			value.constructor.name === 'GeneratorFunction' ||
 			value.constructor.name === 'AsyncFunction'
 		);
+	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function array(value) {
+		return a(Array, value);
+	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function string(value) {
+		return typeof value === 'string' || value instanceof String;
+	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function arraylike(value) {
+		return array(value) || string(value) || (
+			(!!value && typeof value === 'object' && typeof value.length === 'number') &&
+			(value.length === 0 || (value.length > 0 && (value.length - 1) in value))
+		);
+	}
+
+	/**
+	 * The `intOf()` function parses a string argument and returns an integer of the
+	 * specified radix (the base in mathematical numeral systems).
+	 *
+	 * @function
+	 * @memberof to
+	 *
+	 * @param {Number|String|Object} value - The value to parse.
+	 * If the string argument is not a string, then it is converted to a string
+	 * (using the ToString abstract operation).
+	 * Leading whitespace in the string argument is ignored.
+	 *
+	 * @param {any} radix - An integer between 2 and 36 that represents
+	 * the radix (the base in mathematical numeral systems) of the above mentioned string.
+	 * Specify 10 for the decimal numeral system commonly used by humans. Always specify
+	 * this parameter to eliminate reader confusion and to guarantee predictable behavior.
+	 * Different implementations produce different results when a radix is not specified,
+	 * usually defaulting the value to 10.
+	 *
+	 * @returns {Number} An integer number parsed from the given string.
+	 * If the first character cannot be converted to a number, 0 is returned.
+	 *
+	 * min: -2147483647
+	 * max: 2147483647
+	 */
+	function intOf(value, radix) {
+		return 0 | parseInt(value, radix);
+	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof utility
+	 * @param {Object} context
+	 * @param {Boolean} getNum
+	 * @returns {Array}
+	 */
+	function mod(index, min, max) {
+		min = intOf(min);
+		max = intOf(max) || min || 1;
+		index = intOf(index);
+		var value = index % max;
+		return value < min ? (value + max) : value;
+	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof utility
+	 * @param {arraylike} value
+	 * @param {int} startIndex
+	 * @param {int} endIndex
+	 * @returns {Array}
+	 */
+	function slice(list, startIndex, endIndex) {
+		var range = [];
+		if (arraylike(list)) {
+			var size = list.length;
+			var start = mod(startIndex, 0, size);
+			var end = mod(endIndex, 0, size) || size;
+			if (string(list)) {
+				range = '';
+				while (start < end) {
+					range += list[start];
+					start += 1;
+				}
+				return range;
+			}
+			while (start < end) {
+				range[range.length] = list[start];
+				start += 1;
+			}
+		}
+		return range;
+	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof to
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function stringOf(value, force) {
+		var ctor = value != null && value.constructor;
+		if (ctor && force) {
+			if (!ctor.name || ctor.name === 'Object') {
+				var matches = ctor.toString().match(reFunctionName);
+				return matches ? matches[1] : '';
+			}
+			return ctor.name;
+		}
+		return slice(objectToString.call(value), 8, -1);
+	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof to
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function booleanOf(value) {
+		if (string(value)) {
+			return reStringToBoolean.test(value);
+		}
+		return !!value;
+	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function number(value) {
+		return typeof value === 'number' || value instanceof Number;
+	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function nan(value) {
+		var isnum = number(value);
+		return isnum === false || (isnum && value !== value);
+	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function infinity(value) {
+		return number(value) && (value - 1) === value;
+	}
+
+	/**
+	 * The `floatOf()` function parses an argument and returns a floating point number.
+	 *
+	 * @function
+	 * @memberof to
+	 *
+	 * @param {Number|String|Object} value - The value to parse.
+	 * If the string argument is not a string, then it is converted to a string
+	 * (using the ToString abstract operation).
+	 * Leading whitespace in the string argument is ignored.
+	 *
+	 * @returns {Number} A floating point number parsed from the given value.
+	 * If the first character cannot be converted to a number, 0 is returned.
+	 */
+	function floatOf(value) {
+		value = +value;
+		return nan(value) || infinity(value) ? 0 : value;
+	}
+
+	/**
+	 * The `uintOf()` function parses a string argument and returns an unsigned integer
+	 * of the specified radix (the base in mathematical numeral systems).
+	 *
+	 * @function
+	 * @memberof to
+	 *
+	 * @param {Number|String|Object} value - The value to parse.
+	 * If the string argument is not a string, then it is converted to a string
+	 * (using the ToString abstract operation).
+	 * Leading whitespace in the string argument is ignored.
+	 *
+	 * @param {any} radix - An unsigned integer between 2 and 36 that represents
+	 * the radix (the base in mathematical numeral systems) of the above mentioned string.
+	 * Specify 10 for the decimal numeral system commonly used by humans. Always specify
+	 * this parameter to eliminate reader confusion and to guarantee predictable behavior.
+	 * Different implementations produce different results when a radix is not specified,
+	 * usually defaulting the value to 10.
+	 *
+	 * @returns {Number} An unsigned integer number parsed from the given string.
+	 * If the first character cannot be converted to a number, 0 is returned.
+	 *
+	 * min: 0
+	 * max: 0xffffffff
+	 */
+	function uintOf(value, radix) {
+		var num = intOf(value, radix);
+		return num < 0 ? 0 : num;
 	}
 
 	/**
@@ -95,33 +308,8 @@
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function array(value) {
-		return a(Array, value);
-	}
-
-	/**
-	 *
-	 * @function
-	 * @memberof is
-	 * @param {any} value
-	 * @returns {Boolean}
-	 */
 	function object(value) {
 		return a(Object, value);
-	}
-
-	/**
-	 *
-	 * @function
-	 * @memberof is
-	 * @param {any} value
-	 * @returns {Boolean}
-	 */
-	function arraylike(value) {
-		return array(value) || (
-			(!!value && typeof value === 'object' && typeof value.length === 'number') &&
-			(value.length === 0 || (value.length > 0 && (value.length - 1) in value))
-		);
 	}
 
 	/**
@@ -140,53 +328,15 @@
 	/**
 	 *
 	 * @function
-	 * @memberof is
-	 * @param {any} value
-	 * @returns {Boolean}
-	 */
-	function nan(value) {
-		var isnum = number(value);
-		return isnum === false || (isnum && value !== value);
-	}
-
-	// pattern(s)
-
-	var reFunctionName = /\s*function\s+([^(\s]*)\s*/;
-
-
-	var reToPropName = /^[^a-zA-Z_$]|[^\w|$]|[^\w$]$/g;
-
-	/**
-	 *
-	 * @function
-	 * @memberof to
-	 * @param {any} value
-	 * @returns {Boolean}
-	 */
-	function toString(value, force) {
-		var ctor = value && value.constructor;
-		if (ctor && force) {
-			if (!ctor.name || ctor.name === 'Object') {
-				var matches = ctor.toString().match(reFunctionName);
-				return matches ? matches[1] : '';
-			}
-			return ctor.name;
-		}
-		return objectToString.call(value).slice(8, -1);
-	}
-
-	/**
-	 *
-	 * @function
 	 * @memberof built-in
 	 * @param {any} value
 	 * @returns {String}
 	 */
 	function typeOf(value) {
-		if (value == null || infinity(value) || nan(value)) {
+		if (infinity(value) || value == null || (typeof value === 'number' && isNaN(value))) {
 			return String(value);
 		}
-		return args(value) ? 'Arguments' : toString(value, true);
+		return args(value) ? 'Arguments' : stringOf(value, true);
 	}
 
 	/**
@@ -211,17 +361,6 @@
 	function constructorOf(value) {
 		if (value == null) { return value; }
 		return value.constructor || Object;
-	}
-
-	/**
-	 *
-	 * @function
-	 * @memberof is
-	 * @param {any} value
-	 * @returns {Boolean}
-	 */
-	function string(value) {
-		return typeof value === 'string' || value instanceof String;
 	}
 
 	/**
@@ -259,10 +398,15 @@
 		return name(expected, write);
 	}
 
+	exports.stringOf = stringOf;
+	exports.booleanOf = booleanOf;
+	exports.floatOf = floatOf;
+	exports.intOf = intOf;
+	exports.uintOf = uintOf;
 	exports.constructorNameOf = constructorNameOf;
 	exports.constructorOf = constructorOf;
-	exports.name = name;
 	exports.typeOf = typeOf;
 	exports.typify = typify;
+	exports.name = name;
 
 })));

@@ -8,6 +8,7 @@ globals:
   sinon: true
 
 rules:
+  strict: [0]
   new-parens: off
   func-names: off
   max-len: off

@@ -8,7 +8,6 @@ import primitive from './primitive.js';
  * @param {Object|Array|Function} host
  * @returns {Boolean}
  */
-export default (key, host) => {
-	if (host == null) return false;
-	return primitive(host[key]) === false;
+export default function hosted(key, host) {
+	return (host == null || primitive(host[key]) === false) === true;
 }

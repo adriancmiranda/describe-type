@@ -8,7 +8,7 @@ import keys from '../@/keys.js';
  * @param {any} valueB
  * @returns {Boolean}
  */
-export function equal(valueA, valueB) {
+export default function equal(valueA, valueB) {
 	if (valueA === valueB) {
 		return true;
 	}

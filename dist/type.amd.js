@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v1.0.0-rc.0
  * 
- * @commit 5f722ec828420f321b64dd7935f25c855e28fa9e
- * @moment Saturday, November 4, 2017 1:49 AM
+ * @commit 42c8da7ee670effa96d1ea0897c19785ec347b98
+ * @moment Saturday, November 4, 2017 4:19 PM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2020 Adrian C. Miranda
@@ -33,6 +33,51 @@ define(['exports'], function (exports) { 'use strict';
 	// environment
 	var inNode = typeof window === 'undefined';
 	var env = inNode ? global : window;
+
+	/**
+	 * The `intOf()` function parses a string argument and returns an integer of the
+	 * specified radix (the base in mathematical numeral systems).
+	 *
+	 * @function
+	 * @memberof to
+	 *
+	 * @param {Number|String|Object} value - The value to parse.
+	 * If the string argument is not a string, then it is converted to a string
+	 * (using the ToString abstract operation).
+	 * Leading whitespace in the string argument is ignored.
+	 *
+	 * @param {any} radix - An integer between 2 and 36 that represents
+	 * the radix (the base in mathematical numeral systems) of the above mentioned string.
+	 * Specify 10 for the decimal numeral system commonly used by humans. Always specify
+	 * this parameter to eliminate reader confusion and to guarantee predictable behavior.
+	 * Different implementations produce different results when a radix is not specified,
+	 * usually defaulting the value to 10.
+	 *
+	 * @returns {Number} An integer number parsed from the given string.
+	 * If the first character cannot be converted to a number, 0 is returned.
+	 *
+	 * min: -2147483647
+	 * max: 2147483647
+	 */
+	function intOf(value, radix) {
+		return 0 | parseInt(value, radix);
+	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof utility
+	 * @param {Object} context
+	 * @param {Boolean} getNum
+	 * @returns {Array}
+	 */
+	function mod(index, min, max) {
+		min = intOf(min);
+		max = intOf(max) || min || 1;
+		index = intOf(index);
+		var value = index % max;
+		return value < min ? (value + max) : value;
+	}
 
 	/**
 	 *
@@ -70,11 +115,8 @@ define(['exports'], function (exports) { 'use strict';
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function arraylike(value) {
-		return array(value) || (
-			(!!value && typeof value === 'object' && typeof value.length === 'number') &&
-			(value.length === 0 || (value.length > 0 && (value.length - 1) in value))
-		);
+	function string(value) {
+		return typeof value === 'string' || value instanceof String;
 	}
 
 	/**
@@ -84,47 +126,13 @@ define(['exports'], function (exports) { 'use strict';
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function number(value) {
-		return typeof value === 'number' || value instanceof Number;
+	function arraylike(value) {
+		return array(value) || string(value) || (
+			(!!value && typeof value === 'object' && typeof value.length === 'number') &&
+			(value.length === 0 || (value.length > 0 && (value.length - 1) in value))
+		);
 	}
 
-	/**
-	 * The `toFloat()` function parses an argument and returns a floating point number.
-	 *
-	 * @function
-	 * @memberof to
-	 *
-	 * @param {Number|String|Object} value - The value to parse.
-	 * If the string argument is not a string, then it is converted to a string
-	 * (using the ToString abstract operation).
-	 * Leading whitespace in the string argument is ignored.
-	 *
-	 * @returns {Number} A floating point number parsed from the given value.
-	 * If the first character cannot be converted to a number, 0 is returned.
-	 */
-	function toFloat(value) {
-		value = +value;
-		return number(value) ? 0 : value;
-	}
-
-	/**
-	 *
-	 * @function
-	 * @memberof utility
-	 * @param {Object} context
-	 * @param {Boolean} getNum
-	 * @returns {Array}
-	 */
-	function mod(index, min, max) {
-		min = toFloat(min);
-		max = toFloat(max);
-		index = toFloat(index);
-		if ((index + max) == 0) { return 0; }
-		var value = index % max;
-		return value < min ? (value + max) : value;
-	}
-
-	/* eslint-disable no-unused-vars */
 	/**
 	 *
 	 * @function
@@ -134,14 +142,23 @@ define(['exports'], function (exports) { 'use strict';
 	 * @param {int} endIndex
 	 * @returns {Array}
 	 */
-	function slice(list, start, end) {
+	function slice(list, startIndex, endIndex) {
 		var range = [];
 		if (arraylike(list)) {
 			var size = list.length;
-			start = mod(start, 0, size);
-			end = mod(end, size, size);
+			var start = mod(startIndex, 0, size);
+			var end = mod(endIndex, 0, size) || size;
+			if (string(list)) {
+				range = '';
+				while (start < end) {
+					range += list[start];
+					start += 1;
+				}
+				return range;
+			}
 			while (start < end) {
-				range.push(list[start++]);
+				range[range.length] = list[start];
+				start += 1;
 			}
 		}
 		return range;
@@ -170,10 +187,14 @@ define(['exports'], function (exports) { 'use strict';
 	 * @returns {Array}
 	 */
 	function keys(object, getEnum) {
+		if (object == null) { return []; }
+		if (Object.keys && !getEnum) {
+			return Object.keys(object);
+		}
 		var properties = [];
 		for (var key in object) {
 			if (getEnum || ownProperty(object, key)) {
-				properties.push(key);
+				properties[properties.length] = key;
 			}
 		}
 		return properties;
@@ -215,6 +236,7 @@ define(['exports'], function (exports) { 'use strict';
 	 * @returns {Boolean}
 	 */
 	function ownValue(context, value) {
+		if (arraylike(context) === false) { return false; }
 		for (var id = context.length - 1; id > -1; id -= 1) {
 			if (value === context[id]) {
 				return true;
@@ -301,8 +323,68 @@ define(['exports'], function (exports) { 'use strict';
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
+	function number(value) {
+		return typeof value === 'number' || value instanceof Number;
+	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
 	function enumerable(value) {
 		return value != null && number(value.length) && callable(value) === false;
+	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {any} valueA
+	 * @param {any} valueB
+	 * @returns {Boolean}
+	 */
+	function equal(valueA, valueB) {
+		if (valueA === valueB) {
+			return true;
+		}
+		var ctorA = valueA != null && valueA.constructor;
+		var ctorB = valueB != null && valueB.constructor;
+		if (ctorA !== ctorB) {
+			return false;
+		} else if (ctorA === Object) {
+			var keysA = keys(valueA);
+			var keysB = keys(valueB);
+			var i = keysA.length;
+			if (i !== keysB.length) {
+				return false;
+			}
+			for (i -= 1; i > -1; i -= 1) {
+				var key = keysA[i];
+				if (!equal(valueA[key], valueB[key])) {
+					return false;
+				}
+			}
+			return true;
+		} else if (ctorA === Array) {
+			var key$1 = valueA.length;
+			if (key$1 !== valueB.length) {
+				return false;
+			}
+			for (key$1 -= 1; key$1 > -1; key$1 -= 1) {
+				if (!equal(valueA[key$1], valueB[key$1])) {
+					return false;
+				}
+			}
+			return true;
+		} else if (ctorA === Function) {
+			return valueA.prototype === valueB.prototype;
+		} else if (ctorA === Date) {
+			return valueA.getTime() === valueB.getTime();
+		}
+		return false;
 	}
 
 	/**
@@ -372,17 +454,6 @@ define(['exports'], function (exports) { 'use strict';
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function string(value) {
-		return typeof value === 'string' || value instanceof String;
-	}
-
-	/**
-	 *
-	 * @function
-	 * @memberof is
-	 * @param {any} value
-	 * @returns {Boolean}
-	 */
 	function base64(value) {
 		return string(value) && reIsBase64.test(value);
 	}
@@ -395,6 +466,13 @@ define(['exports'], function (exports) { 'use strict';
 		return string(value) && reIsHexadecimal.test(value);
 	}
 
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
 	function jsonlike(value) {
 		if (string(value)) {
 			var start = value.match(reIsJsonStart);
@@ -627,6 +705,7 @@ define(['exports'], function (exports) { 'use strict';
 		any: any,
 		empty: empty,
 		enumerable: enumerable,
+		equal: equal,
 		exotic: exotic,
 		instanceOf: instanceOf,
 		not: not,
@@ -668,8 +747,8 @@ define(['exports'], function (exports) { 'use strict';
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function toString(value, force) {
-		var ctor = value && value.constructor;
+	function stringOf(value, force) {
+		var ctor = value != null && value.constructor;
 		if (ctor && force) {
 			if (!ctor.name || ctor.name === 'Object') {
 				var matches = ctor.toString().match(reFunctionName);
@@ -677,7 +756,7 @@ define(['exports'], function (exports) { 'use strict';
 			}
 			return ctor.name;
 		}
-		return objectToString.call(value).slice(8, -1);
+		return slice(objectToString.call(value), 8, -1);
 	}
 
 	/**
@@ -687,7 +766,7 @@ define(['exports'], function (exports) { 'use strict';
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function toBoolean(value) {
+	function booleanOf(value) {
 		if (string(value)) {
 			return reStringToBoolean.test(value);
 		}
@@ -695,8 +774,7 @@ define(['exports'], function (exports) { 'use strict';
 	}
 
 	/**
-	 * The `toInt()` function parses a string argument and returns an integer of the
-	 * specified radix (the base in mathematical numeral systems).
+	 * The `floatOf()` function parses an argument and returns a floating point number.
 	 *
 	 * @function
 	 * @memberof to
@@ -706,25 +784,16 @@ define(['exports'], function (exports) { 'use strict';
 	 * (using the ToString abstract operation).
 	 * Leading whitespace in the string argument is ignored.
 	 *
-	 * @param {any} radix - An integer between 2 and 36 that represents
-	 * the radix (the base in mathematical numeral systems) of the above mentioned string.
-	 * Specify 10 for the decimal numeral system commonly used by humans. Always specify
-	 * this parameter to eliminate reader confusion and to guarantee predictable behavior.
-	 * Different implementations produce different results when a radix is not specified,
-	 * usually defaulting the value to 10.
-	 *
-	 * @returns {Number} An integer number parsed from the given string.
+	 * @returns {Number} A floating point number parsed from the given value.
 	 * If the first character cannot be converted to a number, 0 is returned.
-	 *
-	 * min: -2147483647
-	 * max: 2147483647
 	 */
-	function toInt(value, radix) {
-		return 0 | parseInt(value, radix);
+	function floatOf(value) {
+		value = +value;
+		return nan(value) || infinity(value) ? 0 : value;
 	}
 
 	/**
-	 * The `toUint()` function parses a string argument and returns an unsigned integer
+	 * The `uintOf()` function parses a string argument and returns an unsigned integer
 	 * of the specified radix (the base in mathematical numeral systems).
 	 *
 	 * @function
@@ -748,20 +817,10 @@ define(['exports'], function (exports) { 'use strict';
 	 * min: 0
 	 * max: 0xffffffff
 	 */
-	function toUint(value, radix) {
-		var num = toInt(value, radix);
+	function uintOf(value, radix) {
+		var num = intOf(value, radix);
 		return num < 0 ? 0 : num;
 	}
-
-
-
-	var index$2 = {
-		toString: toString,
-		toBoolean: toBoolean,
-		toFloat: toFloat,
-		toInt: toInt,
-		toUint: toUint
-	};
 
 	/**
 	 *
@@ -784,10 +843,10 @@ define(['exports'], function (exports) { 'use strict';
 	 * @returns {String}
 	 */
 	function typeOf(value) {
-		if (value == null || infinity(value) || nan(value)) {
+		if (infinity(value) || value == null || (typeof value === 'number' && isNaN(value))) {
 			return String(value);
 		}
-		return args(value) ? 'Arguments' : toString(value, true);
+		return args(value) ? 'Arguments' : stringOf(value, true);
 	}
 
 	/**
@@ -865,12 +924,16 @@ define(['exports'], function (exports) { 'use strict';
 
 	exports.has = index;
 	exports.is = index$1;
-	exports.to = index$2;
 	exports.as = as;
+	exports.stringOf = stringOf;
+	exports.booleanOf = booleanOf;
+	exports.floatOf = floatOf;
+	exports.intOf = intOf;
+	exports.uintOf = uintOf;
 	exports.constructorNameOf = constructorNameOf;
 	exports.constructorOf = constructorOf;
-	exports.name = name;
 	exports.typeOf = typeOf;
 	exports.typify = typify;
+	exports.name = name;
 
 });

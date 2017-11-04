@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v1.0.0-rc.0
  * 
- * @commit 5f722ec828420f321b64dd7935f25c855e28fa9e
- * @moment Saturday, November 4, 2017 1:49 AM
+ * @commit 42c8da7ee670effa96d1ea0897c19785ec347b98
+ * @moment Saturday, November 4, 2017 4:19 PM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2020 Adrian C. Miranda
@@ -77,18 +77,12 @@ define(['exports'], function (exports) { 'use strict';
 	/**
 	 *
 	 * @function
-	 * @memberof has
-	 * @param {String|Array} context
+	 * @memberof is
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function ownValue(context, value) {
-		for (var id = context.length - 1; id > -1; id -= 1) {
-			if (value === context[id]) {
-				return true;
-			}
-		}
-		return false;
+	function array(value) {
+		return a(Array, value);
 	}
 
 	/**
@@ -98,8 +92,40 @@ define(['exports'], function (exports) { 'use strict';
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function array(value) {
-		return a(Array, value);
+	function string(value) {
+		return typeof value === 'string' || value instanceof String;
+	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function arraylike(value) {
+		return array(value) || string(value) || (
+			(!!value && typeof value === 'object' && typeof value.length === 'number') &&
+			(value.length === 0 || (value.length > 0 && (value.length - 1) in value))
+		);
+	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof has
+	 * @param {String|Array} context
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function ownValue(context, value) {
+		if (arraylike(context) === false) { return false; }
+		for (var id = context.length - 1; id > -1; id -= 1) {
+			if (value === context[id]) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/**
