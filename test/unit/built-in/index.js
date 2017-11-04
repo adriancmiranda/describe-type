@@ -7,6 +7,6 @@ describe('type', () => {
 	require('./constructorNameOf.unit');
 	require('./constructorOf.unit');
 	require('./typeOf.unit');
-	// require('./typify.unit');
+	require('./typify.unit');
 	require('./name.unit');
 });

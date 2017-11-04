@@ -1,4 +1,5 @@
 import name from './name.js';
+import string from '../is/string.js';
 import arraylike from '../is/arraylike.js';
 
 /**
@@ -10,9 +11,9 @@ import arraylike from '../is/arraylike.js';
  * @returns {Array}
  */
 export default function typify(expected, write) {
-	if (arraylike(expected) && expected.length > 0) {
+	if (string(expected) === false && arraylike(expected) && expected.length > 0) {
 		for (let i = expected.length - 1; i > -1; i -= 1) {
-			expected[i] = typify(expected[i], write);
+			expected[i] = name(expected[i], write);
 		}
 		return expected.join('|');
 	}

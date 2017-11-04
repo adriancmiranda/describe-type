@@ -6,7 +6,7 @@ describe('#typify', function () {
 	});
 
 	it('Arguments', function () {
-		expect(type.typify('Arguments', (() => arguments)())).toEqual('Arguments');
+		expect(type.typify((() => arguments)())).toEqual('Arguments');
 	});
 
 	it('String|Function|Object|Boolean', function () {
