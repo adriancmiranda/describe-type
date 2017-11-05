@@ -33,10 +33,10 @@ matrix:
       node_js: "7"
       env: JOB_PART=test
 
-# Install the stable or the beta version of browsers but you can’t select a specific numeric version.
+# Install browsers for the tests.
 addons:
   chrome: stable
-  firefox: stable
+  firefox: "49.0"
 
 # Scripts that run after cloning repository and before the tests
 before_script:
