@@ -32,7 +32,7 @@ const BrowsersReturnedConfig = {
  */
 module.exports = config => {
   const settings = Object.assign(base, {
-    hostname: `${pack.name}.sauce.env`,
+    hostname: 'local.sauce.env',
     singleRun: true,
     browsers: BrowsersReturnedConfig.getBrowserList(argv.env),
     customLaunchers: BrowsersReturnedConfig.fetch(argv.env),
@@ -50,8 +50,8 @@ module.exports = config => {
         noSslBumpDomains: 'all',
       },
     },
-    browserDisconnectTimeout: 10000,
     browserDisconnectTolerance: 1,
+    browserDisconnectTimeout: 10000,
     browserNoActivityTimeout: 4*60*1000,
     captureTimeout: 4*60*1000,
     plugins: base.plugins.concat([
