@@ -33,7 +33,7 @@ matrix:
       node_js: "7"
       env: JOB_PART=test
 
-# Install the stable or the beta version of Chrome but you can’t select a specific numeric version.
+# Install the stable or the beta version of browsers but you can’t select a specific numeric version.
 addons:
   chrome: stable
   firefox: stable
