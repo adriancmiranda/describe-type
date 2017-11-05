@@ -1,9 +1,14 @@
 const base = require('./base.config');
 
 module.exports = config => {
-	config.set(Object.assign(base, {
-		browsers: ['Chrome'],
-		reporters: ['progress'],
-		singleRun: true,
-	}));
+  config.set(Object.assign(base, {
+    browsers: ['Chrome', 'Firefox', 'Safari'],
+    reporters: ['progress'],
+    singleRun: true,
+    plugins: base.plugins.concat([
+      'karma-chrome-launcher',
+      'karma-firefox-launcher',
+      'karma-safari-launcher',
+    ]),
+  }));
 };

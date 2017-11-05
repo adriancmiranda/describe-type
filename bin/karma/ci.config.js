@@ -8,5 +8,11 @@ module.exports = config => {
 		concurrency: 2,
 		reporters: ['spec'],
 		singleRun: true,
+    plugins: base.plugins.concat([
+      'karma-chrome-launcher',
+      'karma-firefox-launcher',
+      'karma-safari-launcher',
+      'karma-spec-reporter',
+    ]),
 	}));
 };

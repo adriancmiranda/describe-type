@@ -47,6 +47,17 @@ const karma = {
   jsonFixturesPreprocessor: {
     variableName: '__json__',
   },
+  plugins: [
+    'karma-jasmine',
+    'karma-jasmine-matchers',
+    'karma-sinon',
+    'karma-fixture',
+    'karma-phantomjs-shim',
+    'karma-json-fixtures-preprocessor',
+    'karma-html2js-preprocessor',
+    'karma-sourcemap-loader',
+    'karma-webpack',
+  ],
 };
 
 karma.preprocessors[pack.main] = ['webpack', 'sourcemap'];

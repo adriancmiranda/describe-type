@@ -41,14 +41,14 @@ module.exports = config => {
         Date.now()
       ),
       connectOptions: {
-        'no-ssl-bump-domains': 'all',
+        noSslBumpDomains: 'all',
       },
     },
-    concurrency: 2,
-    browserDisconnectTolerance: 3,
     captureTimeout: 300000,
     browserNoActivityTimeout: 300000,
-    browserDisconnectTimeout: 300000,
+    plugins: base.plugins.concat([
+      'karma-sauce-launcher',
+    ]),
   });
   config.set(settings);
 };
