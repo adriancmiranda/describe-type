@@ -1,9 +1,9 @@
 /*!
  * 
- * ~~~~ describe-type v1.0.0-rc.0
+ * ~~~~ describe-type v0.4.0
  * 
- * @commit fe0b989e95dd53dfffd70e8a3e999c2a620d7f48
- * @moment Saturday, November 4, 2017 11:58 PM
+ * @commit 0788570205a3184b20dbccdfab1f340234ed7a08
+ * @moment Sunday, November 5, 2017 10:14 AM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2020 Adrian C. Miranda
@@ -504,8 +504,8 @@ var type = (function (exports) {
 	 */
 	function element(value) {
 		return value != null && (
-			callable(HTMLElement) &&
-			value instanceof HTMLElement &&
+			callable(env.HTMLElement) &&
+			value instanceof env.HTMLElement &&
 			value.nodeType === 1
 		);
 	}

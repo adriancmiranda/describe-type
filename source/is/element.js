@@ -1,3 +1,4 @@
+import { env } from '../@/env.js';
 import callable from './callable.js';
 
 /**
@@ -9,8 +10,8 @@ import callable from './callable.js';
  */
 export default function element(value) {
 	return value != null && (
-		callable(HTMLElement) &&
-		value instanceof HTMLElement &&
+		callable(env.HTMLElement) &&
+		value instanceof env.HTMLElement &&
 		value.nodeType === 1
 	);
 }
