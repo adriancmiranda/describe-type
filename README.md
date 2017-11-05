@@ -40,9 +40,6 @@ is(Buffer, new Uint8Array(1))
 is(Buffer, new Buffer(1))
 //=> true
 
-is('Arguments', (() => arguments)())
-//=> true
-
 is(Object, {})
 is(Object, new Object())
 is(Object, { foo: 'bar' })
@@ -224,7 +221,7 @@ is.buffer(new Buffer(1))
 > type.as
 
 ```javascript
-const {as} = require('describe-type');
+const { as } = require('describe-type');
 
 as(String, () => 'foo')
 as(String, 'foo')
@@ -241,137 +238,137 @@ as([Number, Function], () => {})
 //=> () => {}
 ```
 
-> type.of
+> typeOf
 
 ```javascript
-const type = require('describe-type');
+const { typeOf } = require('describe-type');
 
-type.of(new Buffer(3))
+typeOf(new Buffer(3))
 //=> 'Buffer'
 
-type.of(new (function Fixture(){})())
+typeOf(new (function Fixture(){})())
 //=> 'Fixture'
 
-type.of((() => arguments)())
-type.of(arguments)
+typeOf((() => arguments)())
+typeOf(arguments)
 //=> 'Arguments'
 
-type.of('ab')
-type.of(new String('foo'))
+typeOf('ab')
+typeOf(new String('foo'))
 //=> 'String'
 
-type.of(/^./g)
-type.of(new RegExp('foo'))
+typeOf(/^./g)
+typeOf(new RegExp('foo'))
 //=> 'RegExp'
 
-type.of(10000)
-type.of(new Number(42))
+typeOf(10000)
+typeOf(new Number(42))
 //=> 'Number'
 
-type.of(Object.create(null))
-type.of({ name: 1 })
-type.of({})
+typeOf(Object.create(null))
+typeOf({ name: 1 })
+typeOf({})
 //=> 'Object'
 
-type.of([])
-type.of([1, 2])
-type.of(new Array())
+typeOf([])
+typeOf([1, 2])
+typeOf(new Array())
 //=> 'Array'
 
-type.of(true)
-type.of(false)
-type.of(new Boolean(true))
+typeOf(true)
+typeOf(false)
+typeOf(new Boolean(true))
 //=> 'Boolean'
 
-type.of(new TypeError('message'))
+typeOf(new TypeError('message'))
 //=> 'TypeError'
 
-type.of(new Error('message'))
+typeOf(new Error('message'))
 //=> 'Error'
 
-type.of(null)
+typeOf(null)
 //=> 'null'
 
-type.of(undefined)
+typeOf(undefined)
 //=> 'undefined'
 
-type.of(Symbol)
-type.of(String)
-type.of(Boolean)
-type.of(RegExp)
-type.of(Number)
-type.of(TypeError)
-type.of(Error)
-type.of(Object)
-type.of(Array)
-type.of(Boolean)
-type.of(Date)
-type.of(ArrayBuffer)
-type.of(Buffer)
-type.of(function ObjectFixture() {})
-type.of(function () {})
-type.of(new Function())
+typeOf(Symbol)
+typeOf(String)
+typeOf(Boolean)
+typeOf(RegExp)
+typeOf(Number)
+typeOf(TypeError)
+typeOf(Error)
+typeOf(Object)
+typeOf(Array)
+typeOf(Boolean)
+typeOf(Date)
+typeOf(ArrayBuffer)
+typeOf(Buffer)
+typeOf(function ObjectFixture() {})
+typeOf(function () {})
+typeOf(new Function())
 //=> 'Function'
 
-type.of(function* () {})
+typeOf(function* () {})
 //=> 'GeneratorFunction'
 
-type.of(Symbol('bar'))
+typeOf(Symbol('bar'))
 //=> 'Symbol'
 
-type.of(new Map())
+typeOf(new Map())
 //=> 'Map'
 
-type.of(new WeakMap())
+typeOf(new WeakMap())
 //=> 'WeakMap'
 
-type.of(new Set())
+typeOf(new Set())
 //=> 'Set'
 
-type.of(new WeakSet())
+typeOf(new WeakSet())
 //=> 'WeakSet'
 
-type.of(new Int8Array())
+typeOf(new Int8Array())
 //=> 'Int8Array'
 
-type.of(new Uint8Array())
+typeOf(new Uint8Array())
 //=> 'Uint8Array'
 
-type.of(new Uint8ClampedArray())
+typeOf(new Uint8ClampedArray())
 //=> 'Uint8ClampedArray'
 
-type.of(new Int16Array())
+typeOf(new Int16Array())
 //=> 'Int16Array'
 
-type.of(new Uint16Array())
+typeOf(new Uint16Array())
 //=> 'Uint16Array'
 
-type.of(new Int32Array())
+typeOf(new Int32Array())
 //=> 'Int32Array'
 
-type.of(new Uint32Array())
+typeOf(new Uint32Array())
 //=> 'Uint32Array'
 
-type.of(new Float32Array())
+typeOf(new Float32Array())
 //=> 'Float32Array'
 
-type.of(new Float64Array())
+typeOf(new Float64Array())
 //=> 'Float64Array'
 
-type.of(new Date())
+typeOf(new Date())
 //=> 'Date'
 
-type.of(new ArrayBuffer(4))
+typeOf(new ArrayBuffer(4))
 //=> 'ArrayBuffer'
 
-type.of(new Promise((resolve) => { resolve(); }))
+typeOf(new Promise((resolve) => { resolve(); }))
 //=> 'Promise'
 ```
 
 > type.constructorOf
 
 ```javascript
-const {constructorOf} = require('describe-type');
+const { constructorOf } = require('describe-type');
 
 constructorOf(new (function Ctor(){})())
 //=> Ctor
@@ -448,7 +445,7 @@ constructorOf(new Promise((resolve) => { resolve(); }))
 > type.constructorNameOf
 
 ```javascript
-const {constructorNameOf} = require('describe-type');
+const { constructorNameOf } = require('describe-type');
 
 constructorNameOf(() => 'foo')
 constructorNameOf(function () { return 'foo'; })
@@ -541,7 +538,7 @@ constructorNameOf(ObjectFixture)
 > type.name
 
 ```javascript
-const {name} = require('describe-type');
+const { name } = require('describe-type');
 
 name((() => arguments)())
 //=> 'Arguments'
@@ -620,7 +617,7 @@ name(Symbol)
 > type.typify
 
 ```javascript
-const {typify} = require('describe-type');
+const { typify } = require('describe-type');
 
 typify('Arguments', (() => arguments)())
 //=> 'Arguments'
@@ -679,81 +676,81 @@ typify(new Promise((resolve) => { resolve(); }))
 //=> 'Promise'
 ```
 
-> type.to.string
+> type.stringOf
 
 ```javascript
-const {to} = require('describe-type');
+const { stringOf } = require('describe-type');
 
-to.string(function Test() {})
+stringOf(function Test() {})
 //=> 'function Test(){}'
 
-to.string(/foo/)
+stringOf(/foo/)
 //=> '/foo/'
 
-to.string({})
+stringOf({})
 //=> '{}'
 
-to.string(1)
+stringOf(1)
 //=> '1'
 ```
 
-> type.to.int
+> type.intOf
 
 ```javascript
 const type = require('describe-type');
 
-type.to.int(-1.2)
+type.intOf(-1.2)
 //=> -1
 
-type.to.int(1.2)
+type.intOf(1.2)
 //=> 1
 
-type.to.int(1)
+type.intOf(1)
 //=> 1
 ```
 
-> type.to.uint
+> type.uintOf
 
 ```javascript
 const type = require('describe-type');
 
-type.to.uint(-1.2)
+type.uintOf(-1.2)
 //=> 0
 
-type.to.uint(1.2)
+type.uintOf(1.2)
 //=> 1
 
-type.to.uint(1)
+type.uintOf(1)
 //=> 1
 ```
 
-> type.to.float
+> type.floatOf
 
 ```javascript
 const type = require('describe-type');
 
-type.to.float('1')
+type.floatOf('1')
 //=> 1
 
-type.to.float('1.2')
+type.floatOf('1.2')
 //=> 1.2
 ```
 
-> type.to.bool
+> type.booleanOf
 
 ```javascript
 const type = require('describe-type');
 
-type.to.bool(1)
-type.to.bool('true')
-type.to.bool(Infinity)
-type.to.bool('1')
+type.booleanOf(1)
+type.booleanOf('true')
+type.booleanOf(Infinity)
+type.booleanOf('1')
 //=> true
 
-type.to.bool(0)
-type.to.bool('false')
-type.to.bool(NaN)
-type.to.bool('0')
+type.booleanOf(0)
+type.booleanOf('false')
+type.booleanOf(NaN)
+type.booleanOf('0')
 //=> false
 ```
 

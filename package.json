@@ -47,7 +47,7 @@
     "test:sauce:modern": "karma start bin/karma/sauce.config.js --env modern",
     "test:sauce:mobile": "karma start bin/karma/sauce.config.js --env mobile",
     "test:sauce:legacy": "karma start bin/karma/sauce.config.js --env legacy",
-    "test:sauce": "karma start bin/karma/sauce.config.js",
+    "test:sauce": "redrun -s test:sauce:*",
     "test:travis": "karma start bin/karma/ci.config.js",
     "test:appveyor": "karma start bin/karma/ci.config.js",
     "test:cover": "cross-env NODE_ENV=test karma start bin/karma/cover.config.js",

@@ -44,13 +44,11 @@ module.exports = config => {
         'no-ssl-bump-domains': 'all',
       },
     },
+    concurrency: 2,
+    browserDisconnectTolerance: 3,
+    captureTimeout: 300000,
+    browserNoActivityTimeout: 300000,
+    browserDisconnectTimeout: 300000,
   });
-  if (argv.env === 'mobile') {
-    settings.concurrency = 2;
-    settings.browserDisconnectTolerance = 3;
-    settings.captureTimeout = 300000;
-    settings.browserNoActivityTimeout = 300000;
-    settings.browserDisconnectTimeout = 300000;
-  }
   config.set(settings);
 };

@@ -33,11 +33,6 @@ matrix:
       node_js: "7"
       env: JOB_PART=test
 
-# Output useful info for debugging.
-before_install:
-  - npm install -g npm@latest
-  - node --version
-
 # Scripts that run after cloning repository and before the tests
 before_script:
   - npm install
