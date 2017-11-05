@@ -8,7 +8,7 @@ module.exports = config => {
     captureTimeout: 4*60*1000,
     browserDisconnectTimeout: 10000,
     browserNoActivityTimeout: 4*60*1000,
-    browserDisconnectTolerance: 3,
+    browserDisconnectTolerance: 1,
     reporters: ['spec'],
     plugins: base.plugins.concat([
       'karma-chrome-launcher',
