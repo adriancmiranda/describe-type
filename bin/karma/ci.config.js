@@ -1,7 +1,7 @@
 const base = require('./base.config');
 
 module.exports = config => {
-  config.set(Object.assign(base, {
+  const settings = Object.assign(base, {
     browsers: ['Chrome', 'Firefox'],
     singleRun: true,
     concurrency: 2,
@@ -15,5 +15,15 @@ module.exports = config => {
       'karma-firefox-launcher',
       'karma-spec-reporter',
     ]),
-  }));
+  });
+  if (process.env.TRAVIS) {
+    settings.browsers = ['Chrome_travis_ci'];
+    settings.customLaunchers = {
+      Chrome_travis_ci: {
+        base: 'Chrome',
+        flags: ['--no-sandbox'],
+      },
+    };
+  }
+  config.set(settings);
 };
