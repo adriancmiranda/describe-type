@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v0.4.0
  * 
- * @commit 0788570205a3184b20dbccdfab1f340234ed7a08
- * @moment Sunday, November 5, 2017 10:14 AM
+ * @commit 1115b6fa27768370136ccdc6e43ea73f71d20ba1
+ * @moment Monday, November 6, 2017 2:59 AM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2020 Adrian C. Miranda
@@ -196,7 +196,7 @@ define(['exports'], function (exports) { 'use strict';
 	function as(expected, value) {
 		var args = slice(arguments, 2);
 		if (callable(value) && (expected === Function || ownValue(expected, Function)) === false) {
-			value = value.apply(undefined, args);
+			value = value.apply(args[0], args);
 		}
 		return any(expected, value) ? value : args[0];
 	}
@@ -231,7 +231,7 @@ define(['exports'], function (exports) { 'use strict';
 	function like(expected, value) {
 		var args = slice(arguments, 2);
 		if (callable(value) && (expected === Function || ownValue(expected, Function)) === false) {
-			value = value.apply(undefined, args);
+			value = value.apply(args[0], args);
 		}
 		return instanceOf(expected, value) ? value : args[0];
 	}

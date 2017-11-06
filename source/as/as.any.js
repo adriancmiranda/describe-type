@@ -12,7 +12,7 @@ import callable from '../is/callable.js';
 export default function as(expected, value) {
 	const args = slice(arguments, 2);
 	if (callable(value) && (expected === Function || ownValue(expected, Function)) === false) {
-		value = value.apply(undefined, args);
+		value = value.apply(args[0], args);
 	}
 	return any(expected, value) ? value : args[0];
 }
