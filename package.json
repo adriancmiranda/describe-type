@@ -4,7 +4,8 @@
   "description": "Evaluates whether an object is compatible with a specific data type.",
   "version": "0.4.0",
   "types": "./source/index.d.ts",
-  "main": "./source/index.js",
+  "main": "./dist/type.umd.js",
+  "module": "./source/index.js",
   "homepage": "https://github.com/adriancmiranda/describe-type",
   "license": "MIT",
   "directories": {

@@ -28,7 +28,7 @@ const karma = {
   port: 9876,
   colors: true,
   frameworks: ['jasmine', 'jasmine-matchers', 'sinon', 'fixture', 'phantomjs-shim'],
-  files: [pack.main, {
+  files: [pack.module, {
     pattern: 'test/fixtures/**/*.fixture.*',
     watched: true,
   }, {
@@ -60,5 +60,5 @@ const karma = {
   ],
 };
 
-karma.preprocessors[pack.main] = ['webpack', 'sourcemap'];
+karma.preprocessors[pack.module] = ['webpack', 'sourcemap'];
 module.exports = karma;
