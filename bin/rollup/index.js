@@ -1,3 +1,4 @@
+const flow = require('rollup-plugin-flow');
 const nodeResolve = require('rollup-plugin-node-resolve');
 const es3 = require('rollup-plugin-es3');
 const cjs = require('rollup-plugin-commonjs');
@@ -22,6 +23,7 @@ module.exports = file => ({
   output: targets(env, file.output, file.format),
   plugins: [
     replace(vars),
+    flow({ all: false, pretty: true }),
     nodeResolve({ jsnext: true, main: true, browser: true }),
     cjs(),
     buble(),

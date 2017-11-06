@@ -42,6 +42,7 @@ Session.vim
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 .*
 !.github
+!.flowconfig
 !.babelrc
 !.sauce.yml
 !.editorconfig
