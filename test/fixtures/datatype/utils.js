@@ -57,12 +57,14 @@ export function constructorNameOf(value) {
 	return type;
 }
 
-export function inherits(ctor, superctor) {
-	ctor.super = superctor;
-	function Ctor() {}
-	Ctor.prototype = superctor.prototype;
-	ctor.prototype = new Ctor();
-	ctor.prototype.constructor = ctor;
+export function inherits(ctor, superCtor) {
+	Object.setPrototypeOf(ctor, superCtor);
+	function Surrogate() { this.constructor = ctor; }
+	ctor.prototype = superCtor === null ? Object.create(null) :
+	(Surrogate.prototype = superCtor.prototype, new Surrogate());
+	if (superCtor != null) {
+		Surrogate.prototype.super = superCtor.prototype;
+	}
 	return ctor.prototype;
 }
 
