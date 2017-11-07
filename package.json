@@ -111,7 +111,6 @@
     "make-arrow-function": "1.1.0",
     "make-generator-function": "1.1.0",
     "moment": "2.19.1",
-    "npm": "5.5.1",
     "npm-check-updates": "2.13.0",
     "pirate-flag": "0.1.0",
     "redrun": "5.9.18",
@@ -135,7 +134,6 @@
     "strip-json-comments": "2.0.1",
     "tosource": "1.0.0",
     "uglify-es": "3.1.6",
-    "uni": "0.0.6",
     "validate-commit-msg": "2.14.0",
     "webpack": "3.8.1"
   },
