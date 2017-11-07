@@ -28,96 +28,96 @@ bower i describe-type -S
 const { is } = require('describe-type');
 
 function Sprite() {}
-is(Sprite, new Sprite())
+is.a(Sprite, new Sprite())
 //=> true
 
-is(Promise, new Promise(function (resolve, reject) { resolve(); }))
+is.a(Promise, new Promise(function (resolve, reject) { resolve(); }))
 //=> true
 
-is(Buffer, new Uint8Array(1))
+is.a(Buffer, new Uint8Array(1))
 //=> false
 
-is(Buffer, new Buffer(1))
+is.a(Buffer, new Buffer(1))
 //=> true
 
-is(Object, {})
-is(Object, new Object())
-is(Object, { foo: 'bar' })
-is(Object, Object.create(null))
+is.an(Object, {})
+is.an(Object, new Object())
+is.an(Object, { foo: 'bar' })
+is.an(Object, Object.create(null))
 //=> true
 
-is(Function, () => {})
-is(Function, function () {})
-is(Function, function* () {})
-is(Function, new Function())
+is.a(Function, () => {})
+is.a(Function, function () {})
+is.a(Function, function* () {})
+is.a(Function, new Function())
 //=> true
 
-is(Array, [])
-is(Array, new Array())
+is.an(Array, [])
+is.an(Array, new Array())
 //=> true
 
-is(Boolean, true)
-is(Boolean, false)
-is(Boolean, new Boolean())
-is(Boolean, !1)
+is.a(Boolean, true)
+is.a(Boolean, false)
+is.a(Boolean, new Boolean())
+is.a(Boolean, !1)
 //=> true
 
-is(Number, 1)
-is(Number, new Number(1))
+is.a(Number, 1)
+is.a(Number, new Number(1))
 //=> true
 
-is(Number, Infinity)
+is.a(Number, Infinity)
 //=> false
 
-is(Number, NaN)
+is.a(Number, NaN)
 //=> false
 
-is(String, new String('foo'))
-is(String, 'foo')
+is.a(String, new String('foo'))
+is.a(String, 'foo')
 //=> true
 
-is(RegExp, new RegExp('foo'))
-is(RegExp, /foo/)
+is.a(RegExp, new RegExp('foo'))
+is.a(RegExp, /foo/)
 //=> true
 
-is(Date, new Date())
+is.a(Date, new Date())
 //=> true
 
-is(Symbol, Symbol('bar'))
+is.a(Symbol, Symbol('bar'))
 //=> true
 
-is(Map, new Map())
-is(WeakMap, new WeakMap())
+is.a(Map, new Map())
+is.a(WeakMap, new WeakMap())
 //=> true
 
-is(Set, new Set())
-is(WeakSet, new WeakSet())
+is.a(Set, new Set())
+is.a(WeakSet, new WeakSet())
 //=> true
 
-is(Int8Array, new Int8Array())
-is(Uint8Array, new Uint8Array())
-is(Uint8ClampedArray, new Uint8ClampedArray())
-is(Int16Array, new Int16Array())
-is(Uint16Array, new Uint16Array())
-is(Int32Array, new Int32Array())
-is(Uint32Array, new Uint32Array())
-is(Float32Array, new Float32Array())
-is(Float64Array, new Float64Array())
-is(ArrayBuffer, new ArrayBuffer())
-is(TypeError, new TypeError())
-is(Error, new Error())
+is.an(Int8Array, new Int8Array())
+is.an(Uint8Array, new Uint8Array())
+is.an(Uint8ClampedArray, new Uint8ClampedArray())
+is.an(Int16Array, new Int16Array())
+is.an(Uint16Array, new Uint16Array())
+is.an(Int32Array, new Int32Array())
+is.an(Uint32Array, new Uint32Array())
+is.a(Float32Array, new Float32Array())
+is.a(Float64Array, new Float64Array())
+is.an(ArrayBuffer, new ArrayBuffer())
+is.a(TypeError, new TypeError())
+is.an(Error, new Error())
 //=> true
 
-is(undefined, undefined)
-is(undefined, undefined)
+is.an(undefined, undefined)
+is.an(undefined, undefined)
 //=> true
 
-is(null, null)
-is(null, null)
+is.a(null, null)
+is.a(null, null)
 //=> true
 
-is([String, Function], () => {})
-is([String, Function], '')
+is.a([String, Function], () => {})
+is.a([String, Function], '')
 //=> true
 ```
 

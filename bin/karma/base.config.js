@@ -1,6 +1,6 @@
 const { resolve } = require('path');
 const { DefinePlugin } = require('webpack');
-const { aliases, env, pack } = require('../config');
+const { aliases, env, pack, source } = require('../config');
 
 const webpack = {
   plugins: [new DefinePlugin(env)],
@@ -12,7 +12,12 @@ const webpack = {
   },
   module: {
     rules: [{
-      test: /\.js$/,
+      test: /\.jsx?$/,
+      enforce: 'pre',
+      use: ['remove-flow-types-loader'],
+      include: source,
+    }, {
+      test: /\.jsx?$/,
       loader: 'babel-loader',
       exclude: /node_modules/,
       options: {

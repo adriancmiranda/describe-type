@@ -5,6 +5,8 @@ const { params } = require('./@common/env');
 const { args } = require('./@common/argv');
 const banner = require('./@common/banner');
 
+exports.source = resolve('source');
+
 exports.git = new Git({ lightweightTags: true, branch: true });
 
 exports.env = params(process.env);
@@ -15,7 +17,7 @@ exports.pack = require('../package.json');
 
 exports.flag = banner(exports.pack, exports.git);
 
-exports.aliases = aliases(resolve('source'));
+exports.aliases = aliases(exports.source);
 
 exports.vars = {
 	__ENV__: exports.env.NODE_ENV || 'development',
