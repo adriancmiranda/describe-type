@@ -116,8 +116,8 @@ is.a(null, null)
 is.a(null, null)
 //=> true
 
-is.a([String, Function], () => {})
-is.a([String, Function], '')
+is.any([String, Function], () => {})
+is.any([String, Function], '')
 //=> true
 ```
 
