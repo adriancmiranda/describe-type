@@ -1,9 +1,9 @@
 /*!
  * 
- * ~~~~ describe-type v0.4.3
+ * ~~~~ describe-type v0.4.4
  * 
- * @commit 27071c11859505615d6ee58eaac9588fbddfbffb
- * @moment Thursday, November 9, 2017 10:18 AM
+ * @commit 96ef04b67c81477a51a745104305e04e060142f3
+ * @moment Thursday, November 9, 2017 5:44 PM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2020 Adrian C. Miranda
@@ -228,12 +228,37 @@ this.type['@'] = (function (exports) {
 		return properties;
 	}
 
+	/**
+	 *
+	 * @param {Function} cmd - .
+	 * @param {any} context - .
+	 * @returns {any}
+	 */
+	function apply(cmd, context, args) {
+		var $ = arraylike(args) ? args : [];
+		switch ($.length) {
+			case 0: return cmd.call(context);
+			case 1: return cmd.call(context, $[0]);
+			case 2: return cmd.call(context, $[0], $[1]);
+			case 3: return cmd.call(context, $[0], $[1], $[2]);
+			case 4: return cmd.call(context, $[0], $[1], $[2], $[3]);
+			case 4: return cmd.call(context, $[0], $[1], $[2], $[3], $[4]);
+			case 5: return cmd.call(context, $[0], $[1], $[2], $[3], $[4], $[5]);
+			case 6: return cmd.call(context, $[0], $[1], $[2], $[3], $[4], $[5], $[6]);
+			case 7: return cmd.call(context, $[0], $[1], $[2], $[3], $[4], $[5], $[6], $[7]);
+			case 8: return cmd.call(context, $[0], $[1], $[2], $[3], $[4], $[5], $[6], $[7], $[8]);
+			case 9: return cmd.call(context, $[0], $[1], $[2], $[3], $[4], $[5], $[6], $[7], $[8], $[9]);
+			default: return cmd.apply(context, $);
+		}
+	}
+
 	exports.prototypes = prototypes;
 	exports.builtIn = builtIn;
 	exports.patterns = patterns;
 	exports.mod = mod;
 	exports.slice = slice;
 	exports.keys = keys;
+	exports.apply = apply;
 	exports.inNode = inNode;
 	exports.env = env;
 
