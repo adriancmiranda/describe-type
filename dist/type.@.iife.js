@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v0.4.4
  * 
- * @commit 96ef04b67c81477a51a745104305e04e060142f3
- * @moment Thursday, November 9, 2017 5:44 PM
+ * @commit b4c4ae4bca3fa5b86eab89bb2cb80ce9364c8c5e
+ * @moment Thursday, November 9, 2017 5:49 PM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2020 Adrian C. Miranda
@@ -242,12 +242,11 @@ this.type['@'] = (function (exports) {
 			case 2: return cmd.call(context, $[0], $[1]);
 			case 3: return cmd.call(context, $[0], $[1], $[2]);
 			case 4: return cmd.call(context, $[0], $[1], $[2], $[3]);
-			case 4: return cmd.call(context, $[0], $[1], $[2], $[3], $[4]);
-			case 5: return cmd.call(context, $[0], $[1], $[2], $[3], $[4], $[5]);
-			case 6: return cmd.call(context, $[0], $[1], $[2], $[3], $[4], $[5], $[6]);
-			case 7: return cmd.call(context, $[0], $[1], $[2], $[3], $[4], $[5], $[6], $[7]);
-			case 8: return cmd.call(context, $[0], $[1], $[2], $[3], $[4], $[5], $[6], $[7], $[8]);
-			case 9: return cmd.call(context, $[0], $[1], $[2], $[3], $[4], $[5], $[6], $[7], $[8], $[9]);
+			case 5: return cmd.call(context, $[0], $[1], $[2], $[3], $[4]);
+			case 6: return cmd.call(context, $[0], $[1], $[2], $[3], $[4], $[5]);
+			case 7: return cmd.call(context, $[0], $[1], $[2], $[3], $[4], $[5], $[6]);
+			case 8: return cmd.call(context, $[0], $[1], $[2], $[3], $[4], $[5], $[6], $[7]);
+			case 9: return cmd.call(context, $[0], $[1], $[2], $[3], $[4], $[5], $[6], $[7], $[8]);
 			default: return cmd.apply(context, $);
 		}
 	}
