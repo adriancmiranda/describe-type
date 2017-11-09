@@ -1,7 +1,6 @@
 # describe-type
 > Evaluates whether an object is compatible with a specific data type.
 
-[![npm][npm]][npm-url]
 [![travis][travis]][travis-url]
 [![appveyor][appveyor]][appveyor-url]
 [![codecov][codecov]][codecov-url]
