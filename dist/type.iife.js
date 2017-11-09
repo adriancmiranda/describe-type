@@ -1,9 +1,9 @@
 /*!
  * 
- * ~~~~ describe-type v0.4.1
+ * ~~~~ describe-type v0.4.3
  * 
- * @commit d39af217b0e80ac124188ca0b795e951b0876f69
- * @moment Monday, November 6, 2017 10:28 PM
+ * @commit 27071c11859505615d6ee58eaac9588fbddfbffb
+ * @moment Thursday, November 9, 2017 10:18 AM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2020 Adrian C. Miranda
@@ -640,6 +640,17 @@ var type = (function (exports) {
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
+	function buffer(value) {
+		return a(env.Buffer, value);
+	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
 	function date(value) {
 		return a(Date, value);
 	}
@@ -742,6 +753,7 @@ var type = (function (exports) {
 		uint: uint,
 		array: array,
 		bool: bool,
+		buffer: buffer,
 		callable: callable,
 		date: date,
 		error: error,

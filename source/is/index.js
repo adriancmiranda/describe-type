@@ -26,6 +26,7 @@ export { default as odd } from './odd.js';
 export { default as uint } from './uint.js';
 export { default as array } from './array.js';
 export { default as bool } from './bool.js';
+export { default as buffer } from './buffer.js';
 export { default as callable } from './callable.js';
 export { default as date } from './date.js';
 export { default as error } from './error.js';
