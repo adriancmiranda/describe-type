@@ -7,7 +7,7 @@ const banner = require('./@common/banner');
 
 exports.pack = require('../package.json');
 
-exports.source = resolve(dirname(pack.module));
+exports.source = resolve(dirname(exports.pack.module));
 
 exports.git = new Git({ lightweightTags: true, branch: true });
 
