@@ -13,8 +13,8 @@ import mod from './mod.js';
  */
 export default function slice(list, startIndex, endIndex) {
 	let range = [];
-	if (arraylike(list)) {
-		const size = list.length;
+	const size = arraylike(list) && list.length;
+	if (size) {
 		let start = mod(startIndex, 0, size);
 		const end = mod(endIndex, 0, size) || size;
 		if (string(list)) {
