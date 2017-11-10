@@ -1,19 +1,19 @@
 const Git = require('git-revision-webpack-plugin');
-const { resolve } = require('path');
+const { resolve, dirname } = require('path');
 const { aliases } = require('./@common/aliases');
 const { params } = require('./@common/env');
 const { args } = require('./@common/argv');
 const banner = require('./@common/banner');
 
-exports.source = resolve('source');
+exports.pack = require('../package.json');
+
+exports.source = resolve(dirname(pack.module));
 
 exports.git = new Git({ lightweightTags: true, branch: true });
 
 exports.env = params(process.env);
 
 exports.argv = args(process.argv);
-
-exports.pack = require('../package.json');
 
 exports.flag = banner(exports.pack, exports.git);
 
