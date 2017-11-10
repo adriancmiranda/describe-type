@@ -1,6 +1,8 @@
 # describe-type
 > Evaluates whether an object is compatible with a specific data type.
 
+[![NPM][nodei_status_image]][nodei_status_url]
+
 [![travis][travis]][travis-url]
 [![appveyor][appveyor]][appveyor-url]
 [![codecov][codecov]][codecov-url]
@@ -796,6 +798,8 @@ type.booleanOf('0')
 [saucelabs]: https://saucelabs.com/browser-matrix/adriancmiranda.svg
 [saucelabs-url]: https://saucelabs.com/u/adriancmiranda
 
+[nodei_status_image]: https://nodei.co/npm/describe-type.png?downloads=true&downloadRank=true&stars=true
+[nodei_status_url]: https://nodei.co/npm/describe-type/
 
 <!-- utils -->
 
