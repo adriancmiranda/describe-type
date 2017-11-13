@@ -110,10 +110,8 @@ is.an(Error, new Error())
 //=> true
 
 is.an(undefined, undefined)
-is.an(undefined, undefined)
 //=> true
 
-is.a(null, null)
 is.a(null, null)
 //=> true
 
