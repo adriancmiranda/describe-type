@@ -3,18 +3,22 @@ const datatypes = require('../../fixtures/datatypes.fixture').default;
 const { is } = require('../../../source');
 
 datatypes.forEach((datatype) => {
+	const name = datatype.name;
+	const type = datatype.type;
+	const data = datatype.data;
+	const seal = datatype.seal;
 	const suite = new Suite();
 
-	suite.add(`is.a(${datatype.name})`, () => {
-		return is.a(datatype.type, datatype.data);
+	suite.add(`is.a(${name})`, () => {
+		return is.a(type, data);
 	});
 
-	suite.add(`is.any(${datatype.name})`, () => {
-		return is.any(datatype.type, datatype.data);
+	suite.add(`is.any(${name})`, () => {
+		return is.any(type, data);
 	});
 
-	suite.add(`Object.prototype.toString.call(${datatype.name})`, () => {
-		return Object.prototype.toString.call(datatype.data) === datatype.seal;
+	suite.add(`Object.prototype.toString.call(${name})`, () => {
+		return Object.prototype.toString.call(data) === seal;
 	});
 
 	suite.on('cycle', (evt) => {
