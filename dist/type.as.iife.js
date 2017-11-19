@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v0.4.4
  * 
- * @commit b4c4ae4bca3fa5b86eab89bb2cb80ce9364c8c5e
- * @moment Thursday, November 9, 2017 5:49 PM
+ * @commit 268c36ebb0c0cc19a02eccef31e130cf3769a1ca
+ * @moment Sunday, November 19, 2017 4:50 PM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2020 Adrian C. Miranda
@@ -72,20 +72,27 @@ this.type.as = (function (exports) {
 	 * @param {any} context - .
 	 * @returns {any}
 	 */
-	function apply(cmd, context, args) {
-		var $ = arraylike(args) ? args : [];
-		switch ($.length) {
-			case 0: return cmd.call(context);
-			case 1: return cmd.call(context, $[0]);
-			case 2: return cmd.call(context, $[0], $[1]);
-			case 3: return cmd.call(context, $[0], $[1], $[2]);
-			case 4: return cmd.call(context, $[0], $[1], $[2], $[3]);
-			case 5: return cmd.call(context, $[0], $[1], $[2], $[3], $[4]);
-			case 6: return cmd.call(context, $[0], $[1], $[2], $[3], $[4], $[5]);
-			case 7: return cmd.call(context, $[0], $[1], $[2], $[3], $[4], $[5], $[6]);
-			case 8: return cmd.call(context, $[0], $[1], $[2], $[3], $[4], $[5], $[6], $[7]);
-			case 9: return cmd.call(context, $[0], $[1], $[2], $[3], $[4], $[5], $[6], $[7], $[8]);
-			default: return cmd.apply(context, $);
+	function apply(cmd, context, args, blindly) {
+		try {
+			var $ = arraylike(args) ? args : [];
+			switch ($.length) {
+				case 0: return cmd.call(context);
+				case 1: return cmd.call(context, $[0]);
+				case 2: return cmd.call(context, $[0], $[1]);
+				case 3: return cmd.call(context, $[0], $[1], $[2]);
+				case 4: return cmd.call(context, $[0], $[1], $[2], $[3]);
+				case 5: return cmd.call(context, $[0], $[1], $[2], $[3], $[4]);
+				case 6: return cmd.call(context, $[0], $[1], $[2], $[3], $[4], $[5]);
+				case 7: return cmd.call(context, $[0], $[1], $[2], $[3], $[4], $[5], $[6]);
+				case 8: return cmd.call(context, $[0], $[1], $[2], $[3], $[4], $[5], $[6], $[7]);
+				case 9: return cmd.call(context, $[0], $[1], $[2], $[3], $[4], $[5], $[6], $[7], $[8]);
+				default: return cmd.apply(context, $);
+			}
+		} catch (err) {
+			if (blindly) {
+				return err;
+			}
+			throw err;
 		}
 	}
 
@@ -145,8 +152,8 @@ this.type.as = (function (exports) {
 	 */
 	function slice(list, startIndex, endIndex) {
 		var range = [];
-		if (arraylike(list)) {
-			var size = list.length;
+		var size = arraylike(list) && list.length;
+		if (size) {
 			var start = mod(startIndex, 0, size);
 			var end = mod(endIndex, 0, size) || size;
 			if (string(list)) {
@@ -221,7 +228,7 @@ this.type.as = (function (exports) {
 	function as(expected, value) {
 		var args = slice(arguments, 2);
 		if (callable(value) && (expected === Function || ownValue(expected, Function)) === false) {
-			value = apply(value, args[0], args);
+			value = apply(value, args[0], args, true);
 		}
 		return any(expected, value) ? value : args[0];
 	}
@@ -256,7 +263,7 @@ this.type.as = (function (exports) {
 	function like(expected, value) {
 		var args = slice(arguments, 2);
 		if (callable(value) && (expected === Function || ownValue(expected, Function)) === false) {
-			value = apply(value, args[0], args);
+			value = apply(value, args[0], args, true);
 		}
 		return instanceOf(expected, value) ? value : args[0];
 	}
