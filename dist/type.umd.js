@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v0.4.4
  * 
- * @commit 268c36ebb0c0cc19a02eccef31e130cf3769a1ca
- * @moment Sunday, November 19, 2017 4:50 PM
+ * @commit f9dc70bd3833cb31406b502df8fe9c63cccc2a7f
+ * @moment Sunday, November 19, 2017 6:14 PM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2020 Adrian C. Miranda
@@ -27,12 +27,38 @@
 	var reEndsWithBrace = /\}$/;
 	var reIsJsonEnds = { '[': reEndsWithBracket, '{': reEndsWithBrace };
 
+
+	var patterns = {
+		reIsBase64: reIsBase64,
+		reFunctionName: reFunctionName,
+		reIsNativeFn: reIsNativeFn,
+		reStringToBoolean: reStringToBoolean,
+		reToPropName: reToPropName,
+		reIsHex: reIsHex,
+		reIsHexadecimal: reIsHexadecimal,
+		reIsJsonStart: reIsJsonStart,
+		reEndsWithBracket: reEndsWithBracket,
+		reEndsWithBrace: reEndsWithBrace,
+		reIsJsonEnds: reIsJsonEnds
+	};
+
 	// prototypes
 	var ObjectProto = Object.prototype;
+
+
+	var prototypes = {
+		ObjectProto: ObjectProto
+	};
 
 	// built-in method(s)
 	var objectHasOwnProperty = ObjectProto.hasOwnProperty;
 	var objectToString = ObjectProto.toString;
+
+
+	var builtIn = {
+		objectHasOwnProperty: objectHasOwnProperty,
+		objectToString: objectToString
+	};
 
 	// environment
 	var inNode = typeof window === 'undefined';
@@ -234,6 +260,20 @@
 		}
 	}
 
+
+
+	var index = {
+		prototypes: prototypes,
+		builtIn: builtIn,
+		patterns: patterns,
+		mod: mod,
+		slice: slice,
+		keys: keys,
+		apply: apply,
+		inNode: inNode,
+		env: env
+	};
+
 	/**
 	 *
 	 * @function
@@ -294,7 +334,7 @@
 
 
 
-	var index = {
+	var index$1 = {
 		unsafeMethod: unsafeMethod,
 		ownProperty: ownProperty,
 		ownValue: ownValue,
@@ -757,7 +797,7 @@
 
 
 
-	var index$1 = {
+	var index$2 = {
 		a: a,
 		an: a,
 		any: any,
@@ -971,8 +1011,9 @@
 
 	/* eslint-disable no-unused-vars */
 
-	exports.has = index;
-	exports.is = index$1;
+	exports.has = index$1;
+	exports.is = index$2;
+	exports.internal = index;
 	exports.as = as;
 	exports.stringOf = stringOf;
 	exports.booleanOf = booleanOf;
