@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import intOf from '../built-in/intOf.js';
 
 /**
@@ -16,10 +17,10 @@ export default function mod(n, a, b) {
 	let rem;
 	if (a < 0 || b < 0) {
 		const places = (b - a);
-		rem = (n - a) % places;
-		rem = rem < (a + 1) ? (rem + places) : rem === 0 ? 0 : rem - 1;
+		rem = (n - a) % (places + 1);
+		rem = rem < 0 ? (rem + (places + 1)) : rem === 0 ? 0 : rem;
 		return rem - (places - b);
 	}
 	rem = n % (b || 1);
-	return rem < a ? (rem + b) : rem === 0 ? 0 : rem;
+	return rem < a ? (rem + b) : rem;
 }

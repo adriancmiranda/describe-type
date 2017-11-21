@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v0.4.4
  * 
- * @commit 8b7cf79bcde78401d39936eb7ac37a998df8d89e
- * @moment Tuesday, November 21, 2017 2:35 AM
+ * @commit 51e57175b48cf3ba37df721ffc4c5d5d583d5e9a
+ * @moment Tuesday, November 21, 2017 3:00 AM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2020 Adrian C. Miranda
@@ -93,19 +93,7 @@
 		return 0 | parseInt(value, radix);
 	}
 
-	/**
-	 * The remainder operator % gives the remainder of the division of two numbers.
-	 *
-	 * Note:
-	 * The remainder operator is sometimes incorrectly referred to as the "modulus"
-	 * operator. It is very similar to modulus, but does not work properly with
-	 * negative numbers.
-	 *
-	 * @param {Number} a - Any integer number
-	 * @param {Number} b - The modulus of division
-	 * @returns {Number}
-	 */
-
+	/* eslint-disable no-nested-ternary */
 	/**
 	 *
 	 * @function
@@ -119,15 +107,15 @@
 		n = intOf(n);
 		a = intOf(a);
 		b = intOf(b);
-		var rem$$1;
+		var rem;
 		if (a < 0 || b < 0) {
 			var places = (b - a);
-			rem$$1 = (n - a) % places;
-			rem$$1 = rem$$1 < (a + 1) ? (rem$$1 + places) : rem$$1 === 0 ? 0 : rem$$1 - 1;
-			return rem$$1 - (places - b);
+			rem = (n - a) % (places + 1);
+			rem = rem < 0 ? (rem + (places + 1)) : rem === 0 ? 0 : rem;
+			return rem - (places - b);
 		}
-		rem$$1 = n % (b || 1);
-		return rem$$1 < a ? (rem$$1 + b) : rem$$1 === 0 ? 0 : rem$$1;
+		rem = n % (b || 1);
+		return rem < a ? (rem + b) : rem;
 	}
 
 	/**
@@ -213,12 +201,12 @@
 				size = mod(endIndex, 0, size);
 			}
 			if (string(list)) {
-	      range = '';
-	      while (size > start) {
-	        range += list[start];
-	        start -= 1;
-	      }
-	      return range;
+				range = '';
+				while (size > start) {
+					range += list[start];
+					start -= 1;
+				}
+				return range;
 			}
 			while (size > start) {
 				range[size - start] = list[size];
