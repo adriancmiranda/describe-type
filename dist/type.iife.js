@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v0.4.4
  * 
- * @commit f9dc70bd3833cb31406b502df8fe9c63cccc2a7f
- * @moment Sunday, November 19, 2017 6:14 PM
+ * @commit 8b7cf79bcde78401d39936eb7ac37a998df8d89e
+ * @moment Tuesday, November 21, 2017 2:35 AM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2020 Adrian C. Miranda
@@ -91,19 +91,40 @@ var type = (function (exports) {
 	}
 
 	/**
+	 * The remainder operator % gives the remainder of the division of two numbers.
+	 *
+	 * Note:
+	 * The remainder operator is sometimes incorrectly referred to as the "modulus"
+	 * operator. It is very similar to modulus, but does not work properly with
+	 * negative numbers.
+	 *
+	 * @param {Number} a - Any integer number
+	 * @param {Number} b - The modulus of division
+	 * @returns {Number}
+	 */
+
+	/**
 	 *
 	 * @function
 	 * @memberof utility
-	 * @param {Object} context
-	 * @param {Boolean} getNum
-	 * @returns {Array}
+	 * @param {Number} n - index
+	 * @param {Number} a - divident
+	 * @param {Number} b - divisor
+	 * @returns {Number}
 	 */
-	function mod(index, min, max) {
-		min = intOf(min);
-		max = intOf(max) || min || 1;
-		index = intOf(index);
-		var value = index % max;
-		return value < min ? (value + max) : value;
+	function mod(n, a, b) {
+		n = intOf(n);
+		a = intOf(a);
+		b = intOf(b);
+		var rem$$1;
+		if (a < 0 || b < 0) {
+			var places = (b - a);
+			rem$$1 = (n - a) % places;
+			rem$$1 = rem$$1 < (a + 1) ? (rem$$1 + places) : rem$$1 === 0 ? 0 : rem$$1 - 1;
+			return rem$$1 - (places - b);
+		}
+		rem$$1 = n % (b || 1);
+		return rem$$1 < a ? (rem$$1 + b) : rem$$1 === 0 ? 0 : rem$$1;
 	}
 
 	/**
@@ -163,6 +184,17 @@ var type = (function (exports) {
 	/**
 	 *
 	 * @function
+	 * @memberof is
+	 * @param {any}
+	 * @returns {Boolean}
+	 */
+	function undef(value) {
+		return value === undefined;
+	}
+
+	/**
+	 *
+	 * @function
 	 * @memberof utility
 	 * @param {arraylike} value
 	 * @param {int} startIndex
@@ -171,21 +203,23 @@ var type = (function (exports) {
 	 */
 	function slice(list, startIndex, endIndex) {
 		var range = [];
-		var size = arraylike(list) && list.length;
-		if (size) {
+		var size = arraylike(list) && list.length - 1;
+		if (size > -1) {
 			var start = mod(startIndex, 0, size);
-			var end = mod(endIndex, 0, size) || size;
-			if (string(list)) {
-				range = '';
-				while (start < end) {
-					range += list[start];
-					start += 1;
-				}
-				return range;
+			if (undef(endIndex) === false) {
+				size = mod(endIndex, 0, size);
 			}
-			while (start < end) {
-				range[range.length] = list[start];
-				start += 1;
+			if (string(list)) {
+	      range = '';
+	      while (size > start) {
+	        range += list[start];
+	        start -= 1;
+	      }
+	      return range;
+			}
+			while (size > start) {
+				range[size - start] = list[size];
+				size -= 1;
 			}
 		}
 		return range;
@@ -250,9 +284,7 @@ var type = (function (exports) {
 				default: return cmd.apply(context, $);
 			}
 		} catch (err) {
-			if (blindly) {
-				return err;
-			}
+			if (blindly) { return err; }
 			throw err;
 		}
 	}
@@ -779,17 +811,6 @@ var type = (function (exports) {
 	 */
 	function symbol(value) {
 		return a(env.Symbol, value);
-	}
-
-	/**
-	 *
-	 * @function
-	 * @memberof is
-	 * @param {any}
-	 * @returns {Boolean}
-	 */
-	function undef(value) {
-		return value === undefined;
 	}
 
 

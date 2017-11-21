@@ -18,6 +18,14 @@ describe('#mod', function () {
 	});
 
 	it('empty range', function () {
+		expect(mod(1, 0, 0)).toEqual(0);
+	});
+
+	it('empty range', function () {
+		expect(mod(2, 0, 0)).toEqual(0);
+	});
+
+	it('empty range', function () {
 		expect(mod()).toEqual(0);
 	});
 });

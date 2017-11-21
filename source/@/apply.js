@@ -23,9 +23,7 @@ export default function apply(cmd, context, args, blindly) {
 			default: return cmd.apply(context, $);
 		}
 	} catch (err) {
-		if (blindly) {
-			return err;
-		}
+		if (blindly) return err;
 		throw err;
 	}
 }
