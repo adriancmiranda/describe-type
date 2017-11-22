@@ -1,5 +1,6 @@
 import * as type from '~';
 
+// TODO:
 describe('as', function () {
 	// it('exposed', function () {
 	// 	expect(type.as).toEqual(jasmine.any(Function));

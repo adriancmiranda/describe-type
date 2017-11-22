@@ -20,7 +20,7 @@ describe('#is', () => {
 	describe('iterable', () => {
 		require('./args.unit');
 		require('./arraylike.unit');
-		// require('./element.unit');
+		// require('./element.unit'); // TODO:
 		require('./vector.unit');
 	});
 
@@ -46,7 +46,7 @@ describe('#is', () => {
 		require('./object.unit');
 		require('./regexp.unit');
 		require('./string.unit');
-		// require('./symbol.unit');
+		// require('./symbol.unit'); // TODO:
 		require('./undef.unit');
 	});
 });
