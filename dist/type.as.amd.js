@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v0.4.4
  * 
- * @commit 2bda11bc9b4f4b28e666f0d1da763d50743dc43f
- * @moment Wednesday, November 22, 2017 1:05 AM
+ * @commit c4ab101ebdeb1fe89441866b0a7de1775349c070
+ * @moment Wednesday, November 22, 2017 1:35 AM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2020 Adrian C. Miranda
@@ -186,8 +186,8 @@ define(['exports'], function (exports) { 'use strict';
 					}
 					return range;
 				}
-				for (var i = start; i < size; i += 1) {
-					range[range.length] = list[i];
+				for (var i = size - 1; i > start - 1; i -= 1) {
+					range[i - start] = list[i];
 				}
 			}
 		}

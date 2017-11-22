@@ -24,7 +24,7 @@ export default function mod(n, a, b) {
 	if (n === b) return n;
 	if (n === b + 1) return a;
 	if (n === a - 1) return b;
-	rem = n % b;
+	rem = n % (b || 1);
 	rem = rem < a ? (rem + b) : rem === 0 ? 0 : rem;
 	return rem;
 }

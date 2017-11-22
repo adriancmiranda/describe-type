@@ -28,8 +28,8 @@ export default function slice(list, startIndex, endIndex) {
 				}
 				return range;
 			}
-			for (let i = start; i < size; i += 1) {
-				range[range.length] = list[i];
+			for (let i = size - 1; i > start - 1; i -= 1) {
+				range[i - start] = list[i];
 			}
 		}
 	}

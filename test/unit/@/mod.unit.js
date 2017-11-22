@@ -23,7 +23,7 @@ describe('#mod', function () {
 	});
 
 	it('positive range (9, 0, 9) -> 9', function () {
-		expect(mod(9, 0, 9)).toEqual(0);
+		expect(mod(9, 0, 9)).toEqual(9);
 	});
 
 	it('positive range (-1, 0, 9) -> 9', function () {
