@@ -21,10 +21,22 @@ describe('#slice', function () {
 		expect(slice('Test with array value'.split(''), 10, 15)).toEqual('array'.split(''));
 	});
 
-	it('arguments', function () {
+	it('arguments value', function () {
 		expect((function() {
 			return slice(arguments, 10);
 		}).apply(this, 'Test with arguments value'.split(''))).toEqual('arguments value'.split(''));
+	});
+
+	it('no arguments', function () {
+		expect((function() {
+			return slice(arguments);
+		}).apply(this, [])).toEqual([]);
+	});
+
+	it('no extra arguments', function () {
+		expect((function(a, b) {
+			return slice(arguments, 2);
+		}).apply(this, ['a', 'b'])).toEqual([]);
 	});
 
 	it('arguments range', function () {
