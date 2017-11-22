@@ -21,6 +21,10 @@ export default function mod(n, a, b) {
 		rem = rem < 0 ? (rem + (places + 1)) : rem === 0 ? 0 : rem;
 		return rem - (places - b);
 	}
-	rem = n % (b || 1);
-	return rem < a ? (rem + b) : rem;
+	if (n === b) return n;
+	if (n === b + 1) return a;
+	if (n === a - 1) return b;
+	rem = n % b;
+	rem = rem < a ? (rem + b) : rem === 0 ? 0 : rem;
+	return rem;
 }

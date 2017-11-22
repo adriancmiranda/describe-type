@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v0.4.4
  * 
- * @commit 51e57175b48cf3ba37df721ffc4c5d5d583d5e9a
- * @moment Tuesday, November 21, 2017 3:00 AM
+ * @commit 2bda11bc9b4f4b28e666f0d1da763d50743dc43f
+ * @moment Wednesday, November 22, 2017 1:05 AM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2020 Adrian C. Miranda
@@ -110,8 +110,12 @@ define(['exports'], function (exports) { 'use strict';
 			rem = rem < 0 ? (rem + (places + 1)) : rem === 0 ? 0 : rem;
 			return rem - (places - b);
 		}
-		rem = n % (b || 1);
-		return rem < a ? (rem + b) : rem;
+		if (n === b) { return n; }
+		if (n === b + 1) { return a; }
+		if (n === a - 1) { return b; }
+		rem = n % b;
+		rem = rem < a ? (rem + b) : rem === 0 ? 0 : rem;
+		return rem;
 	}
 
 	/**
@@ -172,11 +176,11 @@ define(['exports'], function (exports) { 'use strict';
 	 *
 	 * @function
 	 * @memberof is
-	 * @param {any}
+	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function undef(value) {
-		return value === undefined;
+	function number(value) {
+		return typeof value === 'number' || value instanceof Number;
 	}
 
 	/**
@@ -190,23 +194,23 @@ define(['exports'], function (exports) { 'use strict';
 	 */
 	function slice(list, startIndex, endIndex) {
 		var range = [];
-		var size = arraylike(list) && list.length - 1;
-		if (size > -1) {
-			var start = mod(startIndex, 0, size);
-			if (undef(endIndex) === false) {
-				size = mod(endIndex, 0, size);
+		var size = arraylike(list) && list.length;
+		if (size) {
+			var start = mod(startIndex, 0, size + 1);
+			if (number(endIndex)) {
+				size = mod(endIndex, 0, size - 1);
 			}
-			if (string(list)) {
-				range = '';
-				while (size > start) {
-					range += list[start];
-					start -= 1;
+			if (start < size) {
+				if (string(list)) {
+					range = '';
+					for (var c = start; c < size; c += 1) {
+						range += list[c];
+					}
+					return range;
 				}
-				return range;
-			}
-			while (size > start) {
-				range[size - start] = list[size];
-				size -= 1;
+				for (var i = start; i < size; i += 1) {
+					range[range.length] = list[i];
+				}
 			}
 		}
 		return range;

@@ -1,6 +1,6 @@
 import arraylike from '../is/arraylike.js';
 import string from '../is/string.js';
-import undef from '../is/undef.js';
+import number from '../is/number.js';
 import mod from './mod.js';
 
 /**
@@ -14,23 +14,23 @@ import mod from './mod.js';
  */
 export default function slice(list, startIndex, endIndex) {
 	let range = [];
-	let size = arraylike(list) && list.length - 1;
-	if (size > -1) {
-		let start = mod(startIndex, 0, size);
-		if (undef(endIndex) === false) {
-			size = mod(endIndex, 0, size);
+	let size = arraylike(list) && list.length;
+	if (size) {
+		let start = mod(startIndex, 0, size + 1);
+		if (number(endIndex)) {
+			size = mod(endIndex, 0, size - 1);
 		}
-		if (string(list)) {
-			range = '';
-			while (size > start) {
-				range += list[start];
-				start -= 1;
+		if (start < size) {
+			if (string(list)) {
+				range = '';
+				for (let c = start; c < size; c += 1) {
+					range += list[c];
+				}
+				return range;
 			}
-			return range;
-		}
-		while (size > start) {
-			range[size - start] = list[size];
-			size -= 1;
+			for (let i = start; i < size; i += 1) {
+				range[range.length] = list[i];
+			}
 		}
 	}
 	return range;
