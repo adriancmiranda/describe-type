@@ -18,11 +18,9 @@ export default function asVectorOf(expected, value) {
 	if (expected == null) return vector(expected, value);
 	if (expected.constructor === Array && expected.length > 0) {
 		for (let i = expected.length - 1; i > -1; i -= 1) {
-			if (vector(expected[i], value) === false) {
-				return false;
-			}
+			if (vector(expected[i], value)) return value;
 		}
-		return true;
+		return args[0];
 	}
 	return vector(expected, value) ? value : args[0];
 }
