@@ -9,4 +9,8 @@ describe('as.instanceOf', function () {
 	// it('alike method is exposed', function () {
 	// 	expect(type.alike).toEqual(jasmine.any(Function));
 	// });
+
+	// it('asInstanceOf method is exposed', function () {
+	// 	expect(type.asInstanceOf).toEqual(jasmine.any(Function));
+	// });
 });

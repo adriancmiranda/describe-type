@@ -4,5 +4,5 @@ import * as has from './has/index.js';
 import * as is from './is/index.js';
 
 export * from './built-in/index.js';
-export { default as as } from './as/as.any.js';
+export * from './as/index.js';
 export { has, is, internal };
