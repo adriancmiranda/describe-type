@@ -1,9 +1,9 @@
 /*!
  * 
- * ~~~~ describe-type v0.4.4
+ * ~~~~ describe-type v0.6.0
  * 
- * @commit c4ab101ebdeb1fe89441866b0a7de1775349c070
- * @moment Wednesday, November 22, 2017 1:35 AM
+ * @commit c2850cb1274a773f734be37959870443ac55a05d
+ * @moment Saturday, November 25, 2017 11:10 PM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2020 Adrian C. Miranda
@@ -156,7 +156,7 @@ define(['exports'], function (exports) { 'use strict';
 		if (n === b) { return n; }
 		if (n === b + 1) { return a; }
 		if (n === a - 1) { return b; }
-		rem = n % b;
+		rem = n % (b || 1);
 		rem = rem < a ? (rem + b) : rem === 0 ? 0 : rem;
 		return rem;
 	}
@@ -282,7 +282,7 @@ define(['exports'], function (exports) { 'use strict';
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function like(expected, value) {
+	function asInstanceOf(expected, value) {
 		var args = slice(arguments, 2);
 		if (callable(value) && (expected === Function || ownValue(expected, Function)) === false) {
 			value = apply(value, args[0], args, true);
@@ -290,8 +290,61 @@ define(['exports'], function (exports) { 'use strict';
 		return instanceOf(expected, value) ? value : args[0];
 	}
 
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {Function|Array.<Function>} expected
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function not(expected, value) {
+		return any(expected, value) === false;
+	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {Function|Array.<Function>} expected
+	 * @param {arraylike} value
+	 * @returns {Boolean}
+	 */
+	function vector(expected, value) {
+		if (arraylike(value) === false) { return false; }
+		for (var i = value.length - 1; i > -1; i -= 1) {
+			if (not(expected, value[i])) { return false; }
+		}
+		return true;
+	}
+
+	/**
+	 *
+	 * @param {Function|Array.<Function>} expected
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function asVectorOf(expected, value) {
+		var args = slice(arguments, 2);
+		if (callable(value) && (expected === Function || ownValue(expected, Function)) === false) {
+			value = apply(value, args[0], args, true);
+		}
+		if (expected == null) { return vector(expected, value); }
+		if (expected.constructor === Array && expected.length > 0) {
+			for (var i = expected.length - 1; i > -1; i -= 1) {
+				if (vector(expected[i], value) === false) {
+					return false;
+				}
+			}
+			return true;
+		}
+		return vector(expected, value) ? value : args[0];
+	}
+
 	exports.as = as;
-	exports.like = like;
-	exports.alike = like;
+	exports.like = asInstanceOf;
+	exports.alike = asInstanceOf;
+	exports.asInstanceOf = asInstanceOf;
+	exports.asVectorOf = asVectorOf;
 
 });

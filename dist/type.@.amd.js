@@ -1,9 +1,9 @@
 /*!
  * 
- * ~~~~ describe-type v0.4.4
+ * ~~~~ describe-type v0.6.0
  * 
- * @commit c4ab101ebdeb1fe89441866b0a7de1775349c070
- * @moment Wednesday, November 22, 2017 1:35 AM
+ * @commit c2850cb1274a773f734be37959870443ac55a05d
+ * @moment Saturday, November 25, 2017 11:10 PM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2020 Adrian C. Miranda
@@ -113,7 +113,7 @@ define(['exports'], function (exports) { 'use strict';
 		if (n === b) { return n; }
 		if (n === b + 1) { return a; }
 		if (n === a - 1) { return b; }
-		rem = n % b;
+		rem = n % (b || 1);
 		rem = rem < a ? (rem + b) : rem === 0 ? 0 : rem;
 		return rem;
 	}
