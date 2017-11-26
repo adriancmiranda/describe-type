@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v0.6.0
  * 
- * @commit c2850cb1274a773f734be37959870443ac55a05d
- * @moment Saturday, November 25, 2017 11:10 PM
+ * @commit fe769676ea7a07a171c3bd512057a3b7291d0b5d
+ * @moment Sunday, November 26, 2017 4:14 PM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2020 Adrian C. Miranda
@@ -334,11 +334,9 @@ this.type.as = (function (exports) {
 		if (expected == null) { return vector(expected, value); }
 		if (expected.constructor === Array && expected.length > 0) {
 			for (var i = expected.length - 1; i > -1; i -= 1) {
-				if (vector(expected[i], value) === false) {
-					return false;
-				}
+				if (vector(expected[i], value)) { return value; }
 			}
-			return true;
+			return args[0];
 		}
 		return vector(expected, value) ? value : args[0];
 	}
