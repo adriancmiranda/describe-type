@@ -18,18 +18,18 @@ module.exports = file => ({
   indent: env.INDENT,
   name: !!file.module && file.module,
   banner: env.SIGN ? flag : '',
-  input: `${file.source}.js`,
+  input: file.source,
   sourcemap: env.MINIFY,
   output: targets(env, file.output, file.format),
   plugins: [
     replace(vars),
     flow({ all: false, pretty: true }),
-    nodeResolve({ jsnext: true, main: true, browser: true }),
+    nodeResolve({ jsnext: true, main: true, browser: targets.noCjs }),
     cjs(),
     buble(),
     es3(['defineProperty', 'freeze']),
     alias(Object.assign({ resolve: ['.js', '.json'] }, aliases)),
-  ].concat(file.plugins || []).concat(env.MINIFY ? [
+  ]).concat(file.plugins || []).concat(env.MINIFY ? [
     uglify({ output: { preamble: flag, ascii_only: true } }, minify),
     optimizeJs(),
   ].concat(env.GZIP ? [gzip()] : []) : []),
