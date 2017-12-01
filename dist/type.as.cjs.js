@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v0.6.1
  * 
- * @commit e2bdbb752d80b305d15e647a8493553a61d0c482
- * @moment Tuesday, November 28, 2017 9:44 PM
+ * @commit da65222ab508618876d2ee62923ddd666e3af76b
+ * @moment Friday, December 1, 2017 8:30 PM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2020 Adrian C. Miranda
@@ -104,6 +104,17 @@ function number(value) {
 }
 
 /**
+ *
+ * @function
+ * @memberof is
+ * @param {any} value
+ * @returns {Boolean}
+ */
+function int(value) {
+	return number(value) && value === value && value % 1 === 0;
+}
+
+/**
  * The `intOf()` function parses a string argument and returns an integer of the
  * specified radix (the base in mathematical numeral systems).
  *
@@ -129,7 +140,8 @@ function number(value) {
  * max: 2147483647
  */
 function intOf(value, radix) {
-	return 0 | parseInt(value, radix);
+	value = (radix == null ? value : parseInt(value, radix));
+	return int(value) ? value : 0 | value;
 }
 
 /* eslint-disable no-nested-ternary */

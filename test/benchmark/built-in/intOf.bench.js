@@ -1,18 +1,22 @@
 import { Suite } from 'benchmark';
 import intOf from '../../../source/built-in/intOf.js';
 
-const value = ['0xfff', 10.4, Math.PI];
+const value = [
+	{ value: '0xfff', radix: 16 },
+	{ value: 10.4, radix: 10 },
+	{ value: Math.PI, radix: 10 },
+];
 
 const cachedKeys = Object.keys;
 
 new Suite()
 
 .add('parseInt', () => {
-	value.map(parseInt);
+	value.map(i => parseInt(i.value, i.radix));
 })
 
 .add('intOf', () => {
-	value.map(intOf);
+	value.map(i => intOf(i.value, i.radix));
 })
 
 .on('cycle', ({ target }) => {

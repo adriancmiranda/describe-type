@@ -29,7 +29,7 @@ module.exports = file => ({
     buble(),
     es3(['defineProperty', 'freeze']),
     alias(Object.assign({ resolve: ['.js', '.json'] }, aliases)),
-  ]).concat(file.plugins || []).concat(env.MINIFY ? [
+  ].concat(file.plugins || []).concat(env.MINIFY ? [
     uglify({ output: { preamble: flag, ascii_only: true } }, minify),
     optimizeJs(),
   ].concat(env.GZIP ? [gzip()] : []) : []),

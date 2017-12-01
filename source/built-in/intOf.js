@@ -1,3 +1,5 @@
+import int from '../is/int.js';
+
 /**
  * The `intOf()` function parses a string argument and returns an integer of the
  * specified radix (the base in mathematical numeral systems).
@@ -24,5 +26,6 @@
  * max: 2147483647
  */
 export default function intOf(value, radix) {
-	return 0 | parseInt(value, radix);
+	value = (radix == null ? value : parseInt(value, radix));
+	return int(value) ? value : 0 | value;
 }
