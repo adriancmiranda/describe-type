@@ -5,9 +5,9 @@ const value = [
 	{ value: '0xfff', radix: 16 },
 	{ value: 10.4, radix: 10 },
 	{ value: Math.PI, radix: 10 },
+	{ value: Math.SQRT2 },
+	{ value: Math.E },
 ];
-
-const cachedKeys = Object.keys;
 
 new Suite()
 

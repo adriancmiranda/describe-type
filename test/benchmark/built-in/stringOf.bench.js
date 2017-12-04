@@ -3,8 +3,6 @@ import stringOf from '../../../source/built-in/stringOf.js';
 
 const value = /toString|stringOf/mig;
 
-const cachedKeys = Object.keys;
-
 new Suite()
 
 .add('toString', () => {
@@ -13,6 +11,10 @@ new Suite()
 
 .add('describeType.stringOf', () => {
 	stringOf(value);
+})
+
+.add('describeType.stringOf(true)', () => {
+	stringOf(value, true);
 })
 
 .on('cycle', ({ target }) => {
