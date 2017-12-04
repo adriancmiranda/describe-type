@@ -6,6 +6,7 @@
 [![travis][travis]][travis-url]
 [![appveyor][appveyor]][appveyor-url]
 [![codecov][codecov]][codecov-url]
+[![codacy][codacy]][codacy-url]
 
 [![saucelabs][saucelabs]][saucelabs-url]
 
@@ -792,6 +793,9 @@ type.booleanOf('0')
 
 [codecov]: https://codecov.io/gh/adriancmiranda/describe-type/branch/master/graph/badge.svg
 [codecov-url]: https://codecov.io/gh/adriancmiranda/describe-type
+
+[codacy]: https://api.codacy.com/project/badge/Grade/22600fdddef64b20a7fb8f7a7ffaf00e
+[codacy-url]: https://www.codacy.com/app/adriancmiranda/describe-type?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=adriancmiranda/describe-type&amp;utm_campaign=Badge_Grade
 
 [saucelabs]: https://saucelabs.com/browser-matrix/adriancmiranda.svg
 [saucelabs-url]: https://saucelabs.com/u/adriancmiranda
