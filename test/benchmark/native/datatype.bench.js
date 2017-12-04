@@ -1,4 +1,5 @@
 const { Suite } = require('benchmark');
+
 const value = /foo/;
 
 new Suite()
