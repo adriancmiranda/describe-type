@@ -1,12 +1,12 @@
 const { Suite } = require('benchmark');
-const datatypes = require('../../fixtures/datatypes.fixture').number;
+const { number } = require('../../fixtures/datatypes.fixture');
 const vendor = require('../../fixtures/vendor.fixture');
 const { is } = require('../../../source');
 
 const nan1 = is.nan;
 const nan2 = vendor.nan;
 
-datatypes.forEach((datatype) => {
+number.iterate((datatype) => {
 	const suite = new Suite();
 
 	suite.add(`is.nan(${datatype.name})`, () => {

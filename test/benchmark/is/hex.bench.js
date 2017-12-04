@@ -1,11 +1,11 @@
 const { Suite } = require('benchmark');
-const datatypes = require('../../fixtures/datatypes.fixture').numbers;
+const { numbers } = require('../../fixtures/datatypes.fixture');
 const { is } = require('../../../source');
 
 const hex0 = is.hex;
 const hex1 = h => parseInt(h, 16).toString(16) === h.toLowerCase();
 
-datatypes.forEach((datatype) => {
+numbers.iterate((datatype) => {
 	const suite = new Suite();
 
 	suite.add(`is.hex(${datatype.name})`, () => {

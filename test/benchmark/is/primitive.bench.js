@@ -1,5 +1,5 @@
 const { Suite } = require('benchmark');
-const datatypes = require('../../fixtures/datatypes.fixture').default;
+const { all } = require('../../fixtures/datatypes.fixture');
 const vendor = require('../../fixtures/vendor.fixture');
 const { is } = require('../../../source');
 
@@ -8,7 +8,7 @@ const primitive0 = (value) => !exotic(value);
 const primitive1 = is.primitive;
 const primitive2 = vendor.primitive;
 
-datatypes.forEach((datatype) => {
+all.iterate((datatype) => {
 	const suite = new Suite();
 
 	suite.add(`!is.exotic(${datatype.name})`, () => {

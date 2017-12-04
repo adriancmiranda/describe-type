@@ -13,7 +13,7 @@ function exit(result) {
 			'Someone might have called `kill` or `killall`, or the system could',
 			'be shutting down.',
 		].join(' ')); return process.exit(1);
-		default: return process.exit(result.status);
+		default: return result;
 	}
 }
 

@@ -117,7 +117,7 @@ arraylikeObject.add('{{source}}', new String('foo'));
 arraylikeObject.add('{{source}}', { 0: NaN, length: 0 });
 arraylikeObject.add('{{source}}', { 0: 'foo', length: 1 });
 arraylikeObject.add('{{source}}', { length: 0 });
-if (typeof global.document === 'undefined') {
+if (typeof global.document !== 'undefined') {
 	arraylikeObject.add('document.body.children', global.document.body.children);
 }
 

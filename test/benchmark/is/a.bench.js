@@ -1,8 +1,8 @@
 const { Suite } = require('benchmark');
-const datatypes = require('../../fixtures/datatypes.fixture').default;
+const { all } = require('../../fixtures/datatypes.fixture');
 const { is } = require('../../../source');
 
-datatypes.forEach((datatype) => {
+all.iterate((datatype) => {
 	const name = datatype.name;
 	const type = datatype.type;
 	const data = datatype.data;
