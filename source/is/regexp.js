@@ -1,5 +1,3 @@
-import a from './a.js';
-
 /**
  *
  * @function
@@ -8,5 +6,6 @@ import a from './a.js';
  * @returns {Boolean}
  */
 export default function regexp(value) {
-	return a(RegExp, value);
+	if (value == null) return false;
+	return value.constructor === RegExp;
 }

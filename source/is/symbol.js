@@ -1,5 +1,4 @@
 import { env } from '../@/env.js';
-import a from './a.js';
 
 /**
  *
@@ -9,5 +8,6 @@ import a from './a.js';
  * @returns {Boolean}
  */
 export default function symbol(value) {
-	return a(env.Symbol, value);
+	if (value == null) return false;
+	return value.constructor === env.Symbol;
 }
