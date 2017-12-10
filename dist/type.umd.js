@@ -1,9 +1,9 @@
 /*!
  * 
- * ~~~~ describe-type v0.6.1
+ * ~~~~ describe-type v0.6.3
  * 
- * @commit da65222ab508618876d2ee62923ddd666e3af76b
- * @moment Friday, December 1, 2017 8:30 PM
+ * @commit 85178c82514f849528c5616212a52336e666b8d5
+ * @moment Sunday, December 10, 2017 3:23 PM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2020 Adrian C. Miranda
@@ -403,7 +403,9 @@
 	 * @returns {Boolean}
 	 */
 	function object(value) {
-		return a(Object, value);
+		if (value == null) { return false; }
+		if (value.constructor === Object) { return true; }
+		return value.constructor === undefined;
 	}
 
 	/**
@@ -739,7 +741,8 @@
 	 * @returns {Boolean}
 	 */
 	function date(value) {
-		return a(Date, value);
+		if (value == null) { return false; }
+		return value.constructor === Date;
 	}
 
 	/**
@@ -784,7 +787,8 @@
 	 * @returns {Boolean}
 	 */
 	function regexp(value) {
-		return a(RegExp, value);
+		if (value == null) { return false; }
+		return value.constructor === RegExp;
 	}
 
 	/**
@@ -795,7 +799,8 @@
 	 * @returns {Boolean}
 	 */
 	function symbol(value) {
-		return a(env.Symbol, value);
+		if (value == null) { return false; }
+		return value.constructor === env.Symbol;
 	}
 
 	/**
