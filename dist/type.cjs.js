@@ -1,9 +1,9 @@
 /*!
  * 
- * ~~~~ describe-type v0.6.3
+ * ~~~~ describe-type v0.6.4
  * 
- * @commit 85178c82514f849528c5616212a52336e666b8d5
- * @moment Sunday, December 10, 2017 3:23 PM
+ * @commit a262085a45bd1b93e4925e5732a342e055ab7294
+ * @moment Sunday, December 10, 2017 3:56 PM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2020 Adrian C. Miranda
@@ -145,29 +145,12 @@ function mod(n, a, b) {
  *
  * @function
  * @memberof is
- * @param {Function} expect
- * @param {any} value
- * @returns {Boolean}
- */
-function a(expected, value) {
-	if (expected == null || value == null) { return value === expected; }
-	if (value.constructor === expected) { return true; }
-	if (value.constructor === undefined) { return expected === Object; }
-	return expected === Function && (
-		value.constructor.name === 'GeneratorFunction' ||
-		value.constructor.name === 'AsyncFunction'
-	);
-}
-
-/**
- *
- * @function
- * @memberof is
  * @param {any} value
  * @returns {Boolean}
  */
 function array(value) {
-	return a(Array, value);
+	if (value == null) { return false; }
+	return value.constructor === Array;
 }
 
 /**
@@ -314,7 +297,7 @@ var index = {
  * @returns {Boolean}
  */
 function callable(value) {
-	return a(Function, value);
+	return typeof value === 'function';
 }
 
 /**
@@ -372,6 +355,24 @@ var index$1 = {
 	ownValue: ownValue,
 	own: own
 };
+
+/**
+ *
+ * @function
+ * @memberof is
+ * @param {Function} expect
+ * @param {any} value
+ * @returns {Boolean}
+ */
+function a(expected, value) {
+	if (expected == null || value == null) { return value === expected; }
+	if (value.constructor === expected) { return true; }
+	if (value.constructor === undefined) { return expected === Object; }
+	return expected === Function && (
+		value.constructor.name === 'GeneratorFunction' ||
+		value.constructor.name === 'AsyncFunction'
+	);
+}
 
 /**
  *
@@ -538,11 +539,11 @@ function instanceOf(expected, value) {
 		for (var i = expected.length - 1; i > -1; i -= 1) {
 			var ctor = expected[i];
 			if (ctor === Number) { return a(ctor, value); }
-			if (callable(ctor) && value instanceof ctor) { return true; }
+			if (typeof ctor === 'function' && value instanceof ctor) { return true; }
 		}
 	}
 	if (expected === Number) { return a(expected, value); }
-	return callable(expected) && value instanceof expected;
+	return typeof expected === 'function' && value instanceof expected;
 }
 
 /**
@@ -726,7 +727,8 @@ function uint(value) {
  * @returns {Boolean}
  */
 function buffer(value) {
-	return a(env.Buffer, value);
+	if (value == null) { return false; }
+	return value.constructor === env.Buffer;
 }
 
 /**

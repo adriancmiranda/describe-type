@@ -1,4 +1,3 @@
-import callable from './callable.js';
 import a from './a.js';
 import an from './a.js';
 
@@ -16,9 +15,9 @@ export default function instanceOf(expected, value) {
 		for (let i = expected.length - 1; i > -1; i -= 1) {
 			const ctor = expected[i];
 			if (ctor === Number) return a(ctor, value);
-			if (callable(ctor) && value instanceof ctor) return true;
+			if (typeof ctor === 'function' && value instanceof ctor) return true;
 		}
 	}
 	if (expected === Number) return an(expected, value);
-	return callable(expected) && value instanceof expected;
+	return typeof expected === 'function' && value instanceof expected;
 }
