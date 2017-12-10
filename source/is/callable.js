@@ -1,5 +1,3 @@
-import a from './a.js';
-
 /**
  *
  * @function
@@ -8,5 +6,5 @@ import a from './a.js';
  * @returns {Boolean}
  */
 export default function callable(value) {
-	return a(Function, value);
+	return typeof value === 'function';
 }
