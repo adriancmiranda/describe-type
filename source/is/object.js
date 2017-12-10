@@ -7,5 +7,6 @@
  */
 export default function object(value) {
 	if (value == null) return false;
-	return value.constructor === Object;
+	if (value.constructor === Object) return true;
+	return value.constructor === undefined;
 }
