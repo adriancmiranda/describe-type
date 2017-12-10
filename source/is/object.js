@@ -1,5 +1,3 @@
-import an from './a.js';
-
 /**
  *
  * @function
@@ -8,5 +6,6 @@ import an from './a.js';
  * @returns {Boolean}
  */
 export default function object(value) {
-	return an(Object, value);
+	if (value == null) return false;
+	return value.constructor === Object;
 }
