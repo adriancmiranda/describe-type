@@ -63,10 +63,7 @@
     "upgrade": "ncu -a --loglevel verbose --packageFile package.json && npm i",
     "precommit": "npm run test",
     "commitmsg": "validate-commit-msg",
-    "release": "standard-version",
-    "untest": "rimraf *.log test/unit/coverage",
-    "unbuild": "rimraf dist/*.{js,map,gz}",
-    "uninstall": "rimraf -rf node_modules package-lock.json"
+    "release": "standard-version"
   },
   "devDependencies": {
     "babel-cli": "6.26.0",
@@ -115,7 +112,6 @@
     "pirate-flag": "0.1.0",
     "redrun": "5.10.0",
     "remove-flow-types-loader": "1.1.0",
-    "rimraf": "2.6.2",
     "rollup": "0.52.0",
     "rollup-plugin-alias": "1.4.0",
     "rollup-plugin-buble": "0.18.0",
