@@ -16,15 +16,12 @@ const watch = require('./watch');
 module.exports = file => ({
   watch,
   indent: env.INDENT,
-  name: !!file.module && file.module,
-  banner: env.SIGN ? flag : '',
   input: file.source,
-  sourcemap: env.MINIFY,
-  output: targets(env, file.output, file.format),
+  output: targets.parseOutput(file),
   plugins: [
     replace(vars),
     flow({ all: false, pretty: true }),
-    nodeResolve({ jsnext: true, main: true, browser: targets.noCjs }),
+    nodeResolve({ jsnext: true, main: true, browser: !targets.hasFormat(file, 'cjs') }),
     cjs(),
     buble(),
     es3(['defineProperty', 'freeze']),
