@@ -22,6 +22,20 @@ npm i describe-type -S
 bower i describe-type -S 
 ```
 
+### Links to CDN
+
+Use this URL for dev/testing
+
+```html
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/type.umd.js"></script>
+```
+
+Use this URL in production
+
+```html
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/type.umd.min.js"></script>
+```
+
 ## 🏴 Usage
 
 > type.is
