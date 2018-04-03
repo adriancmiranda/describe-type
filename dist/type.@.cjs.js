@@ -1,12 +1,12 @@
 /*!
  * 
- * ~~~~ describe-type v0.6.4
+ * ~~~~ describe-type v0.6.5
  * 
- * @commit a262085a45bd1b93e4925e5732a342e055ab7294
- * @moment Sunday, December 10, 2017 3:56 PM
+ * @commit 31cfede09340c44895116f0579793d7f2717f012
+ * @moment Tuesday, April 3, 2018 6:02 PM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
- * @license (c) 2016-2020 Adrian C. Miranda
+ * @license (c) 2016-2021 Adrian C. Miranda
  */
 'use strict';
 
@@ -23,8 +23,7 @@ var reEndsWithBracket = /\]$/;
 var reEndsWithBrace = /\}$/;
 var reIsJsonEnds = { '[': reEndsWithBracket, '{': reEndsWithBrace };
 
-
-var patterns = {
+var patterns = /*#__PURE__*/{
 	reIsBase64: reIsBase64,
 	reFunctionName: reFunctionName,
 	reIsNativeFn: reIsNativeFn,
@@ -41,8 +40,7 @@ var patterns = {
 // prototypes
 var ObjectProto = Object.prototype;
 
-
-var prototypes = {
+var prototypes = /*#__PURE__*/{
 	ObjectProto: ObjectProto
 };
 
@@ -50,8 +48,7 @@ var prototypes = {
 var objectHasOwnProperty = ObjectProto.hasOwnProperty;
 var objectToString = ObjectProto.toString;
 
-
-var builtIn = {
+var builtIn = /*#__PURE__*/{
 	objectHasOwnProperty: objectHasOwnProperty,
 	objectToString: objectToString
 };
@@ -113,6 +110,7 @@ function intOf(value, radix) {
 }
 
 /* eslint-disable no-nested-ternary */
+
 /**
  *
  * @function
@@ -225,6 +223,7 @@ function ownProperty(context, key) {
 }
 
 /* eslint-disable no-restricted-syntax */
+
 /**
  *
  * @function

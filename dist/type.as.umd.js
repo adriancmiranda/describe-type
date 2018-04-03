@@ -1,12 +1,12 @@
 /*!
  * 
- * ~~~~ describe-type v0.6.4
+ * ~~~~ describe-type v0.6.5
  * 
- * @commit a262085a45bd1b93e4925e5732a342e055ab7294
- * @moment Sunday, December 10, 2017 3:56 PM
+ * @commit 31cfede09340c44895116f0579793d7f2717f012
+ * @moment Tuesday, April 3, 2018 6:02 PM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
- * @license (c) 2016-2020 Adrian C. Miranda
+ * @license (c) 2016-2021 Adrian C. Miranda
  */
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
@@ -132,6 +132,7 @@
 	}
 
 	/* eslint-disable no-nested-ternary */
+
 	/**
 	 *
 	 * @function
@@ -285,12 +286,12 @@
 		if (expected.constructor === Array && expected.length > 0) {
 			for (var i = expected.length - 1; i > -1; i -= 1) {
 				var ctor = expected[i];
-				if (ctor === Number) { return a(ctor, value); }
-				if (typeof ctor === 'function' && value instanceof ctor) { return true; }
+				if (ctor === Number) { return a(ctor, value); } // ... should normalize?!
+				if (callable(ctor) && value instanceof ctor) { return true; }
 			}
 		}
-		if (expected === Number) { return a(expected, value); }
-		return typeof expected === 'function' && value instanceof expected;
+		if (expected === Number) { return a(expected, value); } // ... should normalize?!
+		return callable(expected) && value instanceof expected;
 	}
 
 	/**
