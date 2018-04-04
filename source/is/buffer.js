@@ -1,3 +1,4 @@
+import { env } from '../@/env.js';
 import callable from './callable.js';
 
 /**
@@ -9,6 +10,6 @@ import callable from './callable.js';
  */
 export default function buffer(value) {
 	if (value == null) return false;
-	if (value.constructor == null) return false;
-	return callable(value.constructor.isBuffer) && value.constructor.isBuffer(value);
+	const isBuffer = value.constructor === env.Buffer && callable(value.constructor.isBuffer);
+	return isBuffer && value.constructor.isBuffer(value);
 }
