@@ -1,9 +1,9 @@
 /*!
  * 
- * ~~~~ describe-type v0.6.5
+ * ~~~~ describe-type v0.6.6
  * 
- * @commit 31cfede09340c44895116f0579793d7f2717f012
- * @moment Tuesday, April 3, 2018 6:02 PM
+ * @commit 98e28232b38cf8ca054e4dc992149855175f0479
+ * @moment Sunday, April 15, 2018 3:25 PM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2021 Adrian C. Miranda
@@ -727,8 +727,8 @@ function uint(value) {
  */
 function buffer(value) {
 	if (value == null) { return false; }
-	if (value.constructor == null) { return false; }
-	return callable(value.constructor.isBuffer) && value.constructor.isBuffer(value);
+	var isBuffer = value.constructor === env.Buffer && callable(value.constructor.isBuffer);
+	return isBuffer && value.constructor.isBuffer(value);
 }
 
 /**
@@ -812,6 +812,18 @@ function undef(value) {
 	return value === undefined;
 }
 
+/**
+ *
+ * @function
+ * @memberof is
+ * @param {String|Number} key
+ * @param {Object|Array|Function} host
+ * @returns {Boolean}
+ */
+function hosted(key, host) {
+	return (host == null || primitive(host[key]) === false) === true;
+}
+
 
 
 var index$2 = /*#__PURE__*/{
@@ -854,7 +866,8 @@ var index$2 = /*#__PURE__*/{
 	regexp: regexp,
 	string: string,
 	symbol: symbol,
-	undef: undef
+	undef: undef,
+	hosted: hosted
 };
 
 /**
