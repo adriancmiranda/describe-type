@@ -39,3 +39,4 @@ export { default as string } from './string.js';
 export { default as symbol } from './symbol.js';
 export { default as undef } from './undef.js';
 export { default as hosted } from './hosted.js';
+export { default as stream } from './stream.js';
