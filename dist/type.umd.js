@@ -1,9 +1,9 @@
 /*!
  * 
- * ~~~~ describe-type v0.6.6
+ * ~~~~ describe-type v0.7.0
  * 
- * @commit 98e28232b38cf8ca054e4dc992149855175f0479
- * @moment Sunday, April 15, 2018 3:25 PM
+ * @commit d567e211302ac5bb7b3c0676bd2287880b1acc21
+ * @moment Monday, April 16, 2018 9:39 PM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2021 Adrian C. Miranda
@@ -828,6 +828,43 @@
 		return (host == null || primitive(host[key]) === false) === true;
 	}
 
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function stream(value) {
+		if (value == null || value._events == null) { return false; }
+		return callable(value.pipe);
+	}
+
+	stream.writable = function isStreamWritable(value) {
+		return stream(value) &&
+		value.writable !== false &&
+		stream._writableState != null && 
+		callable(stream._write)
+	};
+
+	stream.readable = function isStreamReadable(value) { 
+		return stream(value) &&
+		value.readable !== false &&
+		value._readableState != null &&
+		callable(value._read);
+	};
+
+	stream.duplex = function isStreamDuplex(value) {
+		return stream.writable(value) &&
+		stream.readable(value);
+	};
+
+	stream.transform = function isStreamTransform(value) {
+		return stream.duplex(stream) &&
+		stream._transformState != null &&
+		callable(stream._transform);
+	};
+
 
 
 	var index$2 = /*#__PURE__*/{
@@ -871,7 +908,8 @@
 		string: string,
 		symbol: symbol,
 		undef: undef,
-		hosted: hosted
+		hosted: hosted,
+		stream: stream
 	};
 
 	/**

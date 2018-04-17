@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import callable from './callable.js';
 
 /**
@@ -12,29 +13,29 @@ function stream(value) {
 	return callable(value.pipe);
 }
 
-stream.writable = (value) =>
-	stream(value) &&
+stream.writable = function isStreamWritable(value) {
+	return stream(value) &&
 	value.writable !== false &&
-	stream._writableState != null && 
-	callable(stream._write)
-;
+	value._writableState != null &&
+	callable(value._write);
+};
 
-stream.readable = (value) => 
-	stream(value) &&
+stream.readable = function isStreamReadable(value) {
+	return stream(value) &&
 	value.readable !== false &&
 	value._readableState != null &&
-	callable(value._read)
-;
+	callable(value._read);
+};
 
-stream.duplex = (value) => 
-	stream.writable(value) &&
-	stream.readable(value)
-;
+stream.duplex = function isStreamDuplex(value) {
+	return stream.writable(value) &&
+	stream.readable(value);
+};
 
-stream.transform = (value) =>
-	stream.duplex(stream) &&
-	stream._transformState != null &&
-	callable(stream._transform)
-;
+stream.transform = function isStreamTransform(value) {
+	return stream.duplex(value) &&
+	value._transformState != null &&
+	callable(value._transform);
+};
 
 export default stream;
