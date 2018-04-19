@@ -1,4 +1,4 @@
-import own from '~/has/own.js';
+import own from '../../../has/own.js';
 
 describe('#own', () => {
 	it('exposed', function () {

@@ -1,4 +1,4 @@
-import mod from '~/@/mod.js';
+import mod from '../../../@/mod.js';
 
 describe('#mod', function () {
 	it('exposed', function () {

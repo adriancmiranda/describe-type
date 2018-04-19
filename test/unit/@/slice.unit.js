@@ -1,4 +1,4 @@
-import slice from '~/@/slice.js';
+import slice from '../../../@/slice.js';
 
 describe('#slice', function () {
 	it('exposed', function () {

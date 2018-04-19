@@ -1,5 +1,5 @@
 import { toSource, constructorNameOf } from 'fixtures/datatype/utils';
-import * as is from '~/is';
+import * as is from '../../../is';
 
 describe('#vector', () => {
 	it('O método "vector" deve existir no escopo do módulo "is"', () => {

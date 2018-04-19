@@ -1,5 +1,5 @@
 import { toSource } from 'fixtures/datatype/utils';
-import * as is from '~/is';
+import * as is from '../../../is';
 
 describe('#min', () => {
 	it('O método "min" deve existir no escopo do módulo "is"', () => {

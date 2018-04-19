@@ -1,4 +1,4 @@
-import ownValue from '~/has/ownValue.js';
+import ownValue from '../../../has/ownValue.js';
 
 describe('#ownValue', () => {
 	it('exposed', function () {

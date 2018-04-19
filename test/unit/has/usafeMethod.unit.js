@@ -1,4 +1,4 @@
-import unsafeMethod from '~/has/unsafeMethod.js';
+import unsafeMethod from '../../../has/unsafeMethod.js';
 
 describe('#unsafeMethod', () => {
 	it('exposed', function () {

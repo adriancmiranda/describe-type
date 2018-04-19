@@ -1,4 +1,4 @@
-import ownProperty from '~/has/ownProperty.js';
+import ownProperty from '../../../has/ownProperty.js';
 
 describe('#ownProperty', () => {
 	it('exposed', function () {

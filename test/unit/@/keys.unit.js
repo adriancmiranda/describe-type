@@ -1,4 +1,4 @@
-import keys from '~/@/keys.js';
+import keys from '../../../@/keys.js';
 
 // getFoo is property which isn't enumerable
 const myObj = Object.create({}, {

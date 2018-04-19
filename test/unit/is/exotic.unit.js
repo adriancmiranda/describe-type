@@ -1,5 +1,5 @@
 import * as datatypes from 'fixtures/datatypes.fixture';
-import * as is from '~/is';
+import * as is from '../../../is';
 
 describe('#exotic', () => {
 	it('O método "exotic" deve existir no escopo do módulo "is"', () => {

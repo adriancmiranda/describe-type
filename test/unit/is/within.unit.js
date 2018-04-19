@@ -1,4 +1,4 @@
-import * as is from '~/is';
+import * as is from '../../../is';
 
 describe('#within', () => {
 	it('O método "within" deve existir no escopo do módulo "is"', () => {

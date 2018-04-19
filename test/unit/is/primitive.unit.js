@@ -1,5 +1,5 @@
 import * as datatypes from 'fixtures/datatypes.fixture';
-import * as is from '~/is';
+import * as is from '../../../is';
 
 describe('#primitive', () => {
 	it('O método "primitive" deve existir no escopo do módulo "is"', () => {

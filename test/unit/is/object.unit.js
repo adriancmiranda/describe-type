@@ -1,5 +1,5 @@
 import * as datatypes from 'fixtures/datatypes.fixture.js';
-import * as is from '~/is';
+import * as is from '../../../is';
 
 describe('#object', () => {
 	it('O método "object" deve existir no escopo do módulo "is"', () => {

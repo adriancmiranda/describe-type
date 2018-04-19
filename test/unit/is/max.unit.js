@@ -1,5 +1,5 @@
 import { toSource } from 'fixtures/datatype/utils';
-import * as is from '~/is';
+import * as is from '../../../is';
 
 describe('#max', () => {
 	it('O método "max" deve existir no escopo do módulo "is"', () => {
