@@ -1,8 +1,8 @@
 const base = require('./base.config');
 const browsers = require('./browsers.json');
 const { argv, pack } = require('../config');
-const is = require('../@common/is');
-const as = require('../@common/as');
+const is = require('../@/is');
+const as = require('../@/as');
 
 const BrowsersReturnedConfig = {
   get keys() {

@@ -1,7 +1,7 @@
 const { join, resolve } = require('path');
 const { sync } = require('glob');
 const { argv } = require('../config');
-const spawn = require('../@common/spawn');
+const spawn = require('../@/spawn');
 
 const context = typeof argv.c === 'string' ? argv.c : 'test/benchmark/**';
 const files = Array.isArray(argv.f) ? `{${argv.f.join(',')}}` : argv.f || '*';

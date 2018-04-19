@@ -1,9 +1,9 @@
 const Git = require('git-revision-webpack-plugin');
 const { resolve, dirname } = require('path');
-const { aliases } = require('./@common/aliases');
-const { params } = require('./@common/env');
-const { args } = require('./@common/argv');
-const banner = require('./@common/banner');
+const { aliases } = require('./@/aliases');
+const { params } = require('./@/env');
+const { args } = require('./@/argv');
+const banner = require('./@/banner');
 
 exports.pack = require('../package.json');
 
