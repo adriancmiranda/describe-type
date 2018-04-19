@@ -1,12 +1,10 @@
 const base = require('./base.config');
 const browsers = require('./browsers.json');
 const { argv, pack } = require('../config');
-const is = require('../@/is');
-const as = require('../@/as');
 
 const BrowsersReturnedConfig = {
   get keys() {
-    return as(Array, Object.keys(browsers), []);
+    return Object.keys(browsers);
   },
   getBrowserList(key) {
     return Object.keys(this.fetch(key));
@@ -21,7 +19,8 @@ const BrowsersReturnedConfig = {
     return Object.assign.apply(Object, this.keys.map(key => browsers[key]));
   },
   fetch(key) {
-    return as(Object, is(String, key) && this.getOne(key), this.getAll());
+    const one = typeof key === 'string' && this.getOne(key);
+    return one == null ? this.getAll() : one;
   },
 };
 
