@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v0.7.0
  * 
- * @commit c5caf7d03834e6f0206806b32bb59a9c1ed46b88
- * @moment Friday, April 20, 2018 4:26 PM
+ * @commit 2ddc3f5b733b12c6b99f7e26ac3d69dbbbed7fa6
+ * @moment Friday, April 20, 2018 6:04 PM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2021 Adrian C. Miranda
@@ -387,6 +387,18 @@ function a(expected, value) {
  * @param {any} value
  * @returns {Boolean}
  */
+function notA(expected, value) {
+	return a(expected, value) === false;
+}
+
+/**
+ *
+ * @function
+ * @memberof is
+ * @param {Function|Array.<Function>} expected
+ * @param {any} value
+ * @returns {Boolean}
+ */
 function any(expected, value) {
 	if (expected == null) { return expected === value; }
 	if (expected.constructor === Array && expected.length > 0) {
@@ -396,6 +408,161 @@ function any(expected, value) {
 	}
 	return a(expected, value);
 }
+
+/**
+ *
+ * @function
+ * @memberof is
+ * @param {Function|Array.<Function>} expected
+ * @param {any} value
+ * @returns {Boolean}
+ */
+function notAny(expected, value) {
+	return any(expected, value) === false;
+}
+
+/**
+ * TODO: a,an,any
+ * @function
+ * @memberof is
+ * @param {Function|Array.<Function>} expected
+ * @param {any} value
+ * @returns {Boolean}
+ */
+function instanceOf(expected, value) {
+	if (expected == null) { return expected === value; }
+	if (expected.constructor === Array && expected.length > 0) {
+		for (var i = expected.length - 1; i > -1; i -= 1) {
+			var ctor = expected[i];
+			if (ctor === Number) { return a(ctor, value); } // ... should normalize?!
+			if (callable(ctor) && value instanceof ctor) { return true; }
+		}
+	}
+	if (expected === Number) { return a(expected, value); } // ... should normalize?!
+	return callable(expected) && value instanceof expected;
+}
+
+/**
+ *
+ * @function
+ * @memberof is
+ * @param {Function|Array.<Function>} expected
+ * @param {any} value
+ * @returns {Boolean}
+ */
+function notInstanceOf(expected, value) {
+	return instanceOf(expected, value) === false;
+}
+
+/**
+ * TODO: a,an,any
+ * @function
+ * @memberof is
+ * @param {Function|Array.<Function>} expected
+ * @param {arraylike} value
+ * @returns {Boolean}
+ */
+function vector(expected, value) {
+	if (arraylike(value) === false) { return false; }
+	for (var i = value.length - 1; i > -1; i -= 1) {
+		if (notAny(expected, value[i])) { return false; }
+	}
+	return true;
+}
+
+/**
+ *
+ * @function
+ * @memberof is
+ * @param {Function|Array.<Function>} expected
+ * @param {any} value
+ * @returns {Boolean}
+ */
+function notVectorOf(expected, value) {
+	return vector(expected, value) === false;
+}
+
+notA.a = notA.an = notA.type = notA;
+notA.any = notAny;
+notA.instanceOf = notInstanceOf;
+notA.vectorOf = notVectorOf;
+
+/* eslint-disable no-underscore-dangle */
+
+/**
+ *
+ * @function
+ * @memberof is
+ * @param {any} value
+ * @returns {Boolean}
+ */
+function stream(value) {
+	if (value == null || value._events == null) { return false; }
+	return callable(value.pipe);
+}
+
+/* eslint-disable no-underscore-dangle */
+
+/**
+ *
+ * @function
+ * @memberof is
+ * @param {any} value
+ * @returns {Boolean}
+ */
+function isStreamWritable(value) {
+	return stream(value) &&
+	value.writable !== false &&
+	value._writableState != null &&
+	callable(value._write);
+}
+
+/* eslint-disable no-underscore-dangle */
+
+/**
+ *
+ * @function
+ * @memberof is
+ * @param {any} value
+ * @returns {Boolean}
+ */
+function isStreamReadable(value) {
+	return stream(value) &&
+	value.readable !== false &&
+	value._readableState != null &&
+	callable(value._read);
+}
+
+/**
+ *
+ * @function
+ * @memberof is
+ * @param {any} value
+ * @returns {Boolean}
+ */
+function isStreamDuplex(value) {
+	return isStreamWritable(value) && isStreamReadable(value);
+}
+
+/* eslint-disable no-underscore-dangle */
+
+/**
+ *
+ * @function
+ * @memberof is
+ * @param {any} value
+ * @returns {Boolean}
+ */
+function isStreamTransform(value) {
+	return isStreamDuplex(value) &&
+	value._transformState != null &&
+	callable(value._transform);
+}
+
+stream.writable = isStreamWritable;
+stream.readable = isStreamReadable;
+stream.duplex = isStreamDuplex;
+stream.transform = isStreamTransform;
 
 /**
  *
@@ -421,6 +588,112 @@ function args(value) {
 	return (!array(value) && arraylike(value) &&
 		object(value) && unsafeMethod(value, 'callee')
 	) || objectToString.call(value) === '[object Arguments]';
+}
+
+/**
+ *
+ * @function
+ * @memberof is
+ * @param {any} value
+ * @returns {Boolean}
+ */
+function base64(value) {
+	return string(value) && reIsBase64.test(value);
+}
+
+/**
+ *
+ * @function
+ * @memberof is
+ * @param {any} value
+ * @returns {Boolean}
+ */
+function bool(value) {
+	return value === true || value === false || value instanceof Boolean;
+}
+
+/**
+ *
+ * @function
+ * @memberof is
+ * @param {any} value
+ * @returns {Boolean}
+ */
+function buffer(value) {
+	if (value == null) { return false; }
+	var isBuffer = value.constructor === env.Buffer && callable(value.constructor.isBuffer);
+	return isBuffer && value.constructor.isBuffer(value);
+}
+
+/**
+ *
+ * @function
+ * @memberof is
+ * @param {any} value
+ * @returns {Boolean}
+ */
+function date(value) {
+	if (value == null) { return false; }
+	return value.constructor === Date;
+}
+
+/**
+ *
+ * @function
+ * @memberof is
+ * @param {any} value
+ * @returns {Boolean}
+ */
+function infinity(value) {
+	return number(value) && (value - 1) === value;
+}
+
+/**
+ *
+ * @function
+ * @memberof is
+ * @param {any} value
+ * @returns {Boolean}
+ */
+function decimal(value) {
+	return number(value) && value === value && infinity(value) === false && value % 1 !== 0;
+}
+
+/**
+ *
+ * @function
+ * @memberof is
+ * @param {any}
+ * @returns {Boolean}
+ */
+function undef(value) {
+	return value === undefined;
+}
+
+/**
+ *
+ * @function
+ * @memberof is
+ * @param {any}
+ * @returns {Boolean}
+ */
+function defined(value) {
+	return undef(value) === false;
+}
+
+/**
+ *
+ * @function
+ * @memberof is
+ * @param {any} value
+ * @returns {Boolean}
+ */
+function element(value) {
+	return value != null && (
+		callable(env.HTMLElement) &&
+		value instanceof env.HTMLElement &&
+		value.nodeType === 1
+	);
 }
 
 /**
@@ -507,6 +780,29 @@ function equal(valueA, valueB) {
  *
  * @function
  * @memberof is
+ * @param {any}
+ * @returns {Boolean}
+ */
+function error(value) {
+	if (value == null) { return false; }
+	return value instanceof Error;
+}
+
+/**
+ *
+ * @function
+ * @memberof is
+ * @param {any} value
+ * @returns {Boolean}
+ */
+function even(value) {
+	return infinity(value) || (number(value) && value === value && value % 2 === 0);
+}
+
+/**
+ *
+ * @function
+ * @memberof is
  * @param {any} value
  * @returns {Boolean}
  */
@@ -530,96 +826,24 @@ function exotic(value) {
 	return primitive(value) === false;
 }
 
-/**
- *
- * @function
- * @memberof is
- * @param {Function|Array.<Function>} expected
- * @param {any} value
- * @returns {Boolean}
- */
-function instanceOf(expected, value) {
-	if (expected == null) { return expected === value; }
-	if (expected.constructor === Array && expected.length > 0) {
-		for (var i = expected.length - 1; i > -1; i -= 1) {
-			var ctor = expected[i];
-			if (ctor === Number) { return a(ctor, value); } // ... should normalize?!
-			if (callable(ctor) && value instanceof ctor) { return true; }
-		}
-	}
-	if (expected === Number) { return a(expected, value); } // ... should normalize?!
-	return callable(expected) && value instanceof expected;
-}
-
-/**
- *
- * @function
- * @memberof is
- * @param {Function|Array.<Function>} expected
- * @param {any} value
- * @returns {Boolean}
- */
-function not(expected, value) {
-	return any(expected, value) === false;
-}
-
-/**
- *
- * @function
- * @memberof is
- * @param {Function|Array.<Function>} expected
- * @param {any} value
- * @returns {Boolean}
- */
-function notInstanceOf(expected, value) {
-	return instanceOf(expected, value) === false;
-}
-
-/**
- *
- * @function
- * @memberof is
- * @param {Function|Array.<Function>} expected
- * @param {arraylike} value
- * @returns {Boolean}
- */
-function vector(expected, value) {
-	if (arraylike(value) === false) { return false; }
-	for (var i = value.length - 1; i > -1; i -= 1) {
-		if (not(expected, value[i])) { return false; }
-	}
-	return true;
-}
-
-/**
- *
- * @function
- * @memberof is
- * @param {Function|Array.<Function>} expected
- * @param {any} value
- * @returns {Boolean}
- */
-function notVectorOf(expected, value) {
-	return vector(expected, value) === false;
-}
-
-/**
- *
- * @function
- * @memberof is
- * @param {any} value
- * @returns {Boolean}
- */
-function base64(value) {
-	return string(value) && reIsBase64.test(value);
-}
-
 function hex(value) {
 	return typeof value === 'string' && reIsHex.test(value);
 }
 
 function hexadecimal(value) {
 	return string(value) && reIsHexadecimal.test(value);
+}
+
+/**
+ *
+ * @function
+ * @memberof is
+ * @param {String|Number} key
+ * @param {Object|Array|Function} host
+ * @returns {Boolean}
+ */
+function hosted(key, host) {
+	return (host == null || primitive(host[key]) === false) === true;
 }
 
 /**
@@ -641,48 +865,48 @@ function jsonlike(value) {
  *
  * @function
  * @memberof is
- * @param {any} value
+ * @param {Number} value
+ * @param {arraylike} others
  * @returns {Boolean}
  */
-function element(value) {
-	return value != null && (
-		callable(env.HTMLElement) &&
-		value instanceof env.HTMLElement &&
-		value.nodeType === 1
-	);
+function max(value, others) {
+	if (value !== value) {
+		throw new TypeError('NaN is not a valid value');
+	} else if (arraylike(others) === false) {
+		throw new TypeError('Second argument must be array-like');
+	} else if (others.length === 0) {
+		return false;
+	}
+	for (var i = others.length - 1; i > -1; i -= 1) {
+		if (value > others[i]) {
+			return false;
+		}
+	}
+	return true;
 }
 
 /**
  *
  * @function
  * @memberof is
- * @param {any} value
+ * @param {Number} value
+ * @param {arraylike} others
  * @returns {Boolean}
  */
-function infinity(value) {
-	return number(value) && (value - 1) === value;
-}
-
-/**
- *
- * @function
- * @memberof is
- * @param {any} value
- * @returns {Boolean}
- */
-function decimal(value) {
-	return number(value) && value === value && infinity(value) === false && value % 1 !== 0;
-}
-
-/**
- *
- * @function
- * @memberof is
- * @param {any} value
- * @returns {Boolean}
- */
-function even(value) {
-	return infinity(value) || (number(value) && value === value && value % 2 === 0);
+function min(value, others) {
+	if (value !== value) {
+		throw new TypeError('NaN is not a valid value');
+	} else if (arraylike(others) === false) {
+		throw new TypeError('Second argument must be array-like');
+	} else if (others.length === 0) {
+		return false;
+	}
+	for (var i = others.length - 1; i > -1; i -= 1) {
+		if (value > others[i]) {
+			return false;
+		}
+	}
+	return true;
 }
 
 /**
@@ -701,11 +925,22 @@ function nan(value) {
  *
  * @function
  * @memberof is
- * @param {any} value
+ * @param {any}
  * @returns {Boolean}
  */
-function bool(value) {
-	return value === true || value === false || value instanceof Boolean;
+function nativeFunction(value) {
+	return callable(value) && reIsNativeFn.test(value.toString());
+}
+
+/**
+ *
+ * @function
+ * @memberof is
+ * @param {any}
+ * @returns {Boolean}
+ */
+function nil(value) {
+	return value === null;
 }
 
 /**
@@ -744,76 +979,6 @@ function odd(value) {
  * @param {any} value
  * @returns {Boolean}
  */
-function uint(value) {
-	return int(value) && value >= 0;
-}
-
-/**
- *
- * @function
- * @memberof is
- * @param {any} value
- * @returns {Boolean}
- */
-function buffer(value) {
-	if (value == null) { return false; }
-	var isBuffer = value.constructor === env.Buffer && callable(value.constructor.isBuffer);
-	return isBuffer && value.constructor.isBuffer(value);
-}
-
-/**
- *
- * @function
- * @memberof is
- * @param {any} value
- * @returns {Boolean}
- */
-function date(value) {
-	if (value == null) { return false; }
-	return value.constructor === Date;
-}
-
-/**
- *
- * @function
- * @memberof is
- * @param {any}
- * @returns {Boolean}
- */
-function error(value) {
-	if (value == null) { return false; }
-	return value instanceof Error;
-}
-
-/**
- *
- * @function
- * @memberof is
- * @param {any}
- * @returns {Boolean}
- */
-function nativeFunction(value) {
-	return callable(value) && reIsNativeFn.test(value.toString());
-}
-
-/**
- *
- * @function
- * @memberof is
- * @param {any}
- * @returns {Boolean}
- */
-function nil(value) {
-	return value === null;
-}
-
-/**
- *
- * @function
- * @memberof is
- * @param {any} value
- * @returns {Boolean}
- */
 function regexp(value) {
 	if (value == null) { return false; }
 	return value.constructor === RegExp;
@@ -835,63 +1000,12 @@ function symbol(value) {
  *
  * @function
  * @memberof is
- * @param {any}
- * @returns {Boolean}
- */
-function undef(value) {
-	return value === undefined;
-}
-
-/**
- *
- * @function
- * @memberof is
- * @param {String|Number} key
- * @param {Object|Array|Function} host
- * @returns {Boolean}
- */
-function hosted(key, host) {
-	return (host == null || primitive(host[key]) === false) === true;
-}
-
-/* eslint-disable no-underscore-dangle */
-
-/**
- *
- * @function
- * @memberof is
  * @param {any} value
  * @returns {Boolean}
  */
-function stream(value) {
-	if (value == null || value._events == null) { return false; }
-	return callable(value.pipe);
+function uint(value) {
+	return int(value) && value >= 0;
 }
-
-stream.writable = function isStreamWritable(value) {
-	return stream(value) &&
-	value.writable !== false &&
-	value._writableState != null &&
-	callable(value._write);
-};
-
-stream.readable = function isStreamReadable(value) {
-	return stream(value) &&
-	value.readable !== false &&
-	value._readableState != null &&
-	callable(value._read);
-};
-
-stream.duplex = function isStreamDuplex(value) {
-	return stream.writable(value) &&
-	stream.readable(value);
-};
-
-stream.transform = function isStreamTransform(value) {
-	return stream.duplex(value) &&
-	value._transformState != null &&
-	callable(value._transform);
-};
 
 /**
  * The `floatOf()` function parses an argument and returns a floating point number.
@@ -930,104 +1044,62 @@ function within(value, start, finish) {
 	;
 }
 
-/**
- *
- * @function
- * @memberof is
- * @param {Number} value
- * @param {arraylike} others
- * @returns {Boolean}
- */
-function min(value, others) {
-	if (value !== value) {
-		throw new TypeError('NaN is not a valid value');
-	} else if (arraylike(others) === false) {
-		throw new TypeError('Second argument must be array-like');
-	} else if (others.length === 0) {
-		return false;
-	}
-	for (var i = others.length - 1; i > -1; i -= 1) {
-		if (value > others[i]) {
-			return false;
-		}
-	}
-	return true;
-}
-
-/**
- *
- * @function
- * @memberof is
- * @param {Number} value
- * @param {arraylike} others
- * @returns {Boolean}
- */
-function max(value, others) {
-	if (value !== value) {
-		throw new TypeError('NaN is not a valid value');
-	} else if (arraylike(others) === false) {
-		throw new TypeError('Second argument must be array-like');
-	} else if (others.length === 0) {
-		return false;
-	}
-	for (var i = others.length - 1; i > -1; i -= 1) {
-		if (value > others[i]) {
-			return false;
-		}
-	}
-	return true;
-}
-
 
 
 var index$2 = /*#__PURE__*/{
+	not: notA,
+	notInstanceOf: notInstanceOf,
+	notVectorOf: notVectorOf,
+	stream: stream,
+	streamWritable: isStreamWritable,
+	streamReadable: isStreamReadable,
+	streamDuplex: isStreamDuplex,
+	streamTransform: isStreamTransform,
 	a: a,
 	an: a,
 	any: any,
 	args: args,
-	empty: empty,
-	enumerable: enumerable,
-	equal: equal,
-	exotic: exotic,
-	instanceOf: instanceOf,
-	not: not,
-	notInstanceOf: notInstanceOf,
-	notVectorOf: notVectorOf,
-	primitive: primitive,
-	base64: base64,
-	hex: hex,
-	hexadecimal: hexadecimal,
-	jsonlike: jsonlike,
-	arraylike: arraylike,
-	element: element,
-	vector: vector,
-	decimal: decimal,
-	even: even,
-	infinity: infinity,
-	int: int,
-	nan: nan,
-	numeric: numeric,
-	odd: odd,
-	uint: uint,
 	array: array,
+	arraylike: arraylike,
+	base64: base64,
 	bool: bool,
 	buffer: buffer,
 	callable: callable,
 	date: date,
+	decimal: decimal,
+	defined: defined,
+	element: element,
+	empty: empty,
+	enumerable: enumerable,
+	equal: equal,
 	error: error,
+	even: even,
+	exotic: exotic,
+	hex: hex,
+	hexadecimal: hexadecimal,
+	hosted: hosted,
+	infinity: infinity,
+	instanceOf: instanceOf,
+	int: int,
+	jsonlike: jsonlike,
+	max: max,
+	min: min,
+	nan: nan,
 	nativeFunction: nativeFunction,
 	nil: nil,
 	number: number,
+	numeric: numeric,
 	object: object,
+	odd: odd,
+	primitive: primitive,
 	regexp: regexp,
 	string: string,
 	symbol: symbol,
+	type: a,
+	uint: uint,
 	undef: undef,
-	hosted: hosted,
-	stream: stream,
-	within: within,
-	min: min,
-	max: max
+	vector: vector,
+	within: within
 };
 
 /**
@@ -1182,6 +1254,17 @@ function getExpectedValue(expected, value, args) {
  */
 function as(expected, value) {
 	value = getExpectedValue(expected, value, arguments);
+	return a(expected, value) ? value : arguments[2];
+}
+
+/**
+ *
+ * @param {Function|Array.<Function>} expected
+ * @param {any} value
+ * @returns {Boolean}
+ */
+function as$1(expected, value) {
+	value = getExpectedValue(expected, value, arguments);
 	return any(expected, value) ? value : arguments[2];
 }
 
@@ -1213,6 +1296,11 @@ function asVectorOf(expected, value) {
 	}
 	return vector(expected, value) ? value : arguments[2];
 }
+
+as.a = as.an = as.type = as;
+as.any = as$1;
+as.instanceOf = asInstanceOf;
+as.vectorOf = asVectorOf;
 
 // import { env } from '../@/env.js';
 // import reduce from '../@/reduce.js';
@@ -1264,6 +1352,7 @@ function schematize(pattern, settings) {
 exports.has = index$1;
 exports.is = index$2;
 exports.internal = index;
+exports.as = as;
 exports.schema = schematize;
 exports.stringOf = stringOf;
 exports.booleanOf = booleanOf;
@@ -1275,8 +1364,3 @@ exports.constructorOf = constructorOf;
 exports.typeOf = typeOf;
 exports.typify = typify;
 exports.name = name;
-exports.as = as;
-exports.like = asInstanceOf;
-exports.alike = asInstanceOf;
-exports.asInstanceOf = asInstanceOf;
-exports.asVectorOf = asVectorOf;

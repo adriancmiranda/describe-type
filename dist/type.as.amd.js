@@ -2,13 +2,13 @@
  * 
  * ~~~~ describe-type v0.7.0
  * 
- * @commit c5caf7d03834e6f0206806b32bb59a9c1ed46b88
- * @moment Friday, April 20, 2018 4:26 PM
+ * @commit 2ddc3f5b733b12c6b99f7e26ac3d69dbbbed7fa6
+ * @moment Friday, April 20, 2018 6:04 PM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2021 Adrian C. Miranda
  */
-define(['exports'], function (exports) { 'use strict';
+define(function () { 'use strict';
 
 	/**
 	 *
@@ -142,6 +142,17 @@ define(['exports'], function (exports) { 'use strict';
 
 	/**
 	 *
+	 * @param {Function|Array.<Function>} expected
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function as(expected, value) {
+		value = getExpectedValue(expected, value, arguments);
+		return a(expected, value) ? value : arguments[2];
+	}
+
+	/**
+	 *
 	 * @function
 	 * @memberof is
 	 * @param {Function|Array.<Function>} expected
@@ -164,13 +175,13 @@ define(['exports'], function (exports) { 'use strict';
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function as(expected, value) {
+	function as$1(expected, value) {
 		value = getExpectedValue(expected, value, arguments);
 		return any(expected, value) ? value : arguments[2];
 	}
 
 	/**
-	 *
+	 * TODO: a,an,any
 	 * @function
 	 * @memberof is
 	 * @param {Function|Array.<Function>} expected
@@ -209,12 +220,12 @@ define(['exports'], function (exports) { 'use strict';
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function not(expected, value) {
+	function notAny(expected, value) {
 		return any(expected, value) === false;
 	}
 
 	/**
-	 *
+	 * TODO: a,an,any
 	 * @function
 	 * @memberof is
 	 * @param {Function|Array.<Function>} expected
@@ -224,7 +235,7 @@ define(['exports'], function (exports) { 'use strict';
 	function vector(expected, value) {
 		if (arraylike(value) === false) { return false; }
 		for (var i = value.length - 1; i > -1; i -= 1) {
-			if (not(expected, value[i])) { return false; }
+			if (notAny(expected, value[i])) { return false; }
 		}
 		return true;
 	}
@@ -247,10 +258,11 @@ define(['exports'], function (exports) { 'use strict';
 		return vector(expected, value) ? value : arguments[2];
 	}
 
-	exports.as = as;
-	exports.like = asInstanceOf;
-	exports.alike = asInstanceOf;
-	exports.asInstanceOf = asInstanceOf;
-	exports.asVectorOf = asVectorOf;
+	as.a = as.an = as.type = as;
+	as.any = as$1;
+	as.instanceOf = asInstanceOf;
+	as.vectorOf = asVectorOf;
+
+	return as;
 
 });

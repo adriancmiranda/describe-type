@@ -2,17 +2,17 @@
  * 
  * ~~~~ describe-type v0.7.0
  * 
- * @commit c5caf7d03834e6f0206806b32bb59a9c1ed46b88
- * @moment Friday, April 20, 2018 4:26 PM
+ * @commit 2ddc3f5b733b12c6b99f7e26ac3d69dbbbed7fa6
+ * @moment Friday, April 20, 2018 6:04 PM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2021 Adrian C. Miranda
  */
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
-	typeof define === 'function' && define.amd ? define(['exports'], factory) :
-	(factory((global.type = global.type || {}, global.type.as = {})));
-}(this, (function (exports) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+	typeof define === 'function' && define.amd ? define(factory) :
+	(global.type = global.type || {}, global.type.as = factory());
+}(this, (function () { 'use strict';
 
 	/**
 	 *
@@ -146,6 +146,17 @@
 
 	/**
 	 *
+	 * @param {Function|Array.<Function>} expected
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function as(expected, value) {
+		value = getExpectedValue(expected, value, arguments);
+		return a(expected, value) ? value : arguments[2];
+	}
+
+	/**
+	 *
 	 * @function
 	 * @memberof is
 	 * @param {Function|Array.<Function>} expected
@@ -168,13 +179,13 @@
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function as(expected, value) {
+	function as$1(expected, value) {
 		value = getExpectedValue(expected, value, arguments);
 		return any(expected, value) ? value : arguments[2];
 	}
 
 	/**
-	 *
+	 * TODO: a,an,any
 	 * @function
 	 * @memberof is
 	 * @param {Function|Array.<Function>} expected
@@ -213,12 +224,12 @@
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function not(expected, value) {
+	function notAny(expected, value) {
 		return any(expected, value) === false;
 	}
 
 	/**
-	 *
+	 * TODO: a,an,any
 	 * @function
 	 * @memberof is
 	 * @param {Function|Array.<Function>} expected
@@ -228,7 +239,7 @@
 	function vector(expected, value) {
 		if (arraylike(value) === false) { return false; }
 		for (var i = value.length - 1; i > -1; i -= 1) {
-			if (not(expected, value[i])) { return false; }
+			if (notAny(expected, value[i])) { return false; }
 		}
 		return true;
 	}
@@ -251,10 +262,11 @@
 		return vector(expected, value) ? value : arguments[2];
 	}
 
-	exports.as = as;
-	exports.like = asInstanceOf;
-	exports.alike = asInstanceOf;
-	exports.asInstanceOf = asInstanceOf;
-	exports.asVectorOf = asVectorOf;
+	as.a = as.an = as.type = as;
+	as.any = as$1;
+	as.instanceOf = asInstanceOf;
+	as.vectorOf = asVectorOf;
+
+	return as;
 
 })));
