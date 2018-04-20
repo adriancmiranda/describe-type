@@ -11,8 +11,9 @@ import callable from '../is/callable.js';
  * @returns {Boolean}
  */
 export default function asVectorOf(expected, value) {
-	const args = slice(arguments, 2);
+	let args = arguments;
 	if (callable(value) && (expected === Function || ownValue(expected, Function)) === false) {
+		args = slice(args, 2);
 		value = apply(value, args[0], args, true);
 	}
 	if (expected == null) return vector(expected, value);
@@ -20,7 +21,7 @@ export default function asVectorOf(expected, value) {
 		for (let i = expected.length - 1; i > -1; i -= 1) {
 			if (vector(expected[i], value)) return value;
 		}
-		return args[0];
+		return args[2];
 	}
-	return vector(expected, value) ? value : args[0];
+	return vector(expected, value) ? value : args[2];
 }

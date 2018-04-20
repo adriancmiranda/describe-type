@@ -11,9 +11,10 @@ import callable from '../is/callable.js';
  * @returns {Boolean}
  */
 export default function asInstanceOf(expected, value) {
-	const args = slice(arguments, 2);
+	let args = arguments;
 	if (callable(value) && (expected === Function || ownValue(expected, Function)) === false) {
+		args = slice(args, 2);
 		value = apply(value, args[0], args, true);
 	}
-	return instanceOf(expected, value) ? value : args[0];
-}
+	return instanceOf(expected, value) ? value : args[2];
+};
