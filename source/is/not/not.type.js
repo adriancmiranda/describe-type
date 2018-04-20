@@ -1,4 +1,4 @@
-import notA from './notA.js';
+import notA from './not.a.js';
 
 /**
  * @memberof is

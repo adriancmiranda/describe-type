@@ -1,6 +1,6 @@
 export { default as not } from './not/index.js';
 export { default as notInstanceOf } from './not/not.instanceOf.js';
-export { default as notVectorOf } from './not.vectorOf.js';
+export { default as notVectorOf } from './not/not.vectorOf.js';
 export { default as stream } from './stream/index.js';
 export { default as streamWritable } from './stream/stream.writable.js';
 export { default as streamReadable } from './stream/stream.readable.js';

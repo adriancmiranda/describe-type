@@ -1,4 +1,4 @@
-import not from './not.js';
+import notAny from './not/not.any.js';
 import arraylike from './arraylike.js';
 
 /**
@@ -12,7 +12,7 @@ import arraylike from './arraylike.js';
 export default function vector(expected, value) {
 	if (arraylike(value) === false) return false;
 	for (let i = value.length - 1; i > -1; i -= 1) {
-		if (not(expected, value[i])) return false;
+		if (notAny(expected, value[i])) return false;
 	}
 	return true;
 }
