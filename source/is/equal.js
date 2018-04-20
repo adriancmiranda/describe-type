@@ -12,6 +12,7 @@ export default function equal(valueA, valueB) {
 	if (valueA === valueB) {
 		return true;
 	}
+	let key;
 	const ctorA = valueA != null && valueA.constructor;
 	const ctorB = valueB != null && valueB.constructor;
 	if (ctorA !== ctorB) {
@@ -24,14 +25,14 @@ export default function equal(valueA, valueB) {
 			return false;
 		}
 		for (i -= 1; i > -1; i -= 1) {
-			const key = keysA[i];
+			key = keysA[i];
 			if (!equal(valueA[key], valueB[key])) {
 				return false;
 			}
 		}
 		return true;
 	} else if (ctorA === Array) {
-		let key = valueA.length;
+		key = valueA.length;
 		if (key !== valueB.length) {
 			return false;
 		}

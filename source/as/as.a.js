@@ -7,7 +7,7 @@ import a from '../is/a.js';
  * @param {any} value
  * @returns {Boolean}
  */
-export default function as(expected, value) {
+export default function asA(expected, value) {
 	value = getExpectedValue(expected, value, arguments);
 	return a(expected, value) ? value : arguments[2];
 }

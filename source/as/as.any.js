@@ -7,7 +7,7 @@ import any from '../is/any.js';
  * @param {any} value
  * @returns {Boolean}
  */
-export default function as(expected, value) {
+export default function asAny(expected, value) {
 	value = getExpectedValue(expected, value, arguments);
 	return any(expected, value) ? value : arguments[2];
 }
