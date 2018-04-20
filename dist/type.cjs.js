@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v0.7.0
  * 
- * @commit 1d5d8c6ec81eb62639d094020fb3b9cb8e183ccd
- * @moment Friday, April 20, 2018 6:19 PM
+ * @commit 452b26b7bc87d456056dd61c1a430b52ed13d26e
+ * @moment Friday, April 20, 2018 6:31 PM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2021 Adrian C. Miranda
@@ -188,7 +188,7 @@ function arraylike(value) {
  * @param {int} endIndex
  * @returns {Array}
  */
-function slice(list, startIndex, endIndex) {
+function slice$1(list, startIndex, endIndex) {
 	var range = [];
 	var size = arraylike(list) && list.length;
 	if (size) {
@@ -284,7 +284,7 @@ var index = /*#__PURE__*/{
 	builtIn: builtIn,
 	patterns: patterns,
 	mod: mod,
-	slice: slice,
+	slice: slice$1,
 	keys: keys,
 	apply: apply,
 	isBrowser: isBrowser,
@@ -584,7 +584,7 @@ function object(value) {
  * @param {any} value
  * @returns {Boolean}
  */
-function args(value) {
+function args$1(value) {
 	return (!array(value) && arraylike(value) &&
 		object(value) && unsafeMethod(value, 'callee')
 	) || objectToString.call(value) === '[object Arguments]';
@@ -1059,7 +1059,7 @@ var index$2 = /*#__PURE__*/{
 	a: type,
 	an: type,
 	any: any,
-	args: args,
+	args: args$1,
 	array: array,
 	arraylike: arraylike,
 	base64: base64,
@@ -1119,7 +1119,7 @@ function stringOf(value, force) {
 		}
 		return ctor.name;
 	}
-	return slice(objectToString.call(value), 8, -1);
+	return slice$1(objectToString.call(value), 8, -1);
 }
 
 /**
@@ -1177,7 +1177,7 @@ function typeOf(value) {
 	if (infinity(value) || value == null || (typeof value === 'number' && isNaN(value))) {
 		return String(value);
 	}
-	return args(value) ? 'Arguments' : stringOf(value, true);
+	return args$1(value) ? 'Arguments' : stringOf(value, true);
 }
 
 /**
@@ -1303,24 +1303,18 @@ asA.any = asAny;
 asA.instanceOf = asInstanceOf;
 asA.vectorOf = asVectorOf;
 
-// import { env } from '../@/env.js';
-// import filter from '../@/filter.js';
-// import keys from '../@/keys.js';
-// import create from '../@/create.js';
-// import assign from '../@/assign.js';
-// import stringify from '../@/stringify';
+/* eslint-disable no-restricted-syntax */
 
-// import typify from '../built-in/typify.js';
+/**
+ *
+ * @function
+ * @param {Array|arraylike} value
+ * @param {Function} cmd
+ * @param {any} context
+ * @returns {?}
+ */
 
-// import any from '../is/any.js';
-// import object from '../is/object.js';
-// import string from '../is/string.js';
-// import array from '../is/array.js';
-// import not from '../is/not.js';
-// import notInstanceOf from '../is/not.instanceOf.js';
-
-// import asAny from '../as/as.any.js';
-// import asInstanceOf from '../as/as.instanceOf.js';
+/* eslint-disable no-restricted-syntax */
 
 // import SchemaError from './SchemaError';
 
