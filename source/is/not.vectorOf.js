@@ -1,4 +1,4 @@
-const vector = require('./vector.js');
+import vector from './vector.js';
 
 /**
  *
@@ -8,6 +8,6 @@ const vector = require('./vector.js');
  * @param {any} value
  * @returns {Boolean}
  */
-module.exports = function not(expected, value) {
+export default function notVectorOf(expected, value) {
 	return vector(expected, value) === false;
 }

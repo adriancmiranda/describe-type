@@ -1,4 +1,4 @@
-const instanceOf = require('./instanceOf.js');
+import instanceOf from './instanceOf.js';
 
 /**
  *
@@ -8,6 +8,6 @@ const instanceOf = require('./instanceOf.js');
  * @param {any} value
  * @returns {Boolean}
  */
-module.exports = function not(expected, value) {
+export default function notInstanceOf(expected, value) {
 	return instanceOf(expected, value) === false;
 }
