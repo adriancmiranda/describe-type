@@ -1,7 +1,6 @@
 import test from 'ava';
-import * as datatypes from '../../fixtures/datatypes.fixture.js';
-import * as is from '../../../is';
-
+import * as datatypes from '../../fixtures/datatypes.fixture';
+import * as is from '../../../source/is';
 
 // describe('#^a(n)?$', () => {
 // 	it('O método "a" deve existir no escopo do módulo "is"', () => {

@@ -1,7 +1,7 @@
 require('babel-polyfill');
 require('babel-register')({
 	babelrc: false,
-	ignore: ['node_modules/*', 'test/*'],
+	only: ['source/*', 'test/fixtures/*', 'test/unit/**/index.js'],
 	presets: [
 		['env'],
 		['flow'],
