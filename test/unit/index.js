@@ -2,7 +2,7 @@ import test from 'ava';
 import * as describeType from '../../source';
 import './is';
 
-test('describe-type', t => {
+test('describe-type exposure', t => {
 	t.is(toString.call(describeType), '[object Object]');
 });
 

@@ -26,11 +26,11 @@
     "report-coverage": "codecov -f test/coverage.lcov --token=CODECOV_TOKEN",
     "test:fixture": "cross-env NODE_ENV=test node bin/fixture",
     "test:speed": "cross-env NODE_ENV=test node bin/benchmark",
-    "test:appveyor": "npm test -- --no-cache --verbose",
-    "test:travis": "npm test -- --no-cache --verbose",
+    "test:appveyor": "npm run test:unit -- --no-cache --verbose",
+    "test:travis": "npm run test:unit -- --no-cache --verbose",
     "test:unit": "cross-env NODE_ENV=test ava test/unit/index.js source/**/*.unit.js --color",
     "test": "redrun -s flow test:unit",
-    "dev": "cross-env NODE_ENV=test npm test -- --watch",
+    "dev": "cross-env NODE_ENV=test npm run test:unit -- --watch",
     "watch": "npm run bin -- -w --environment=NODE_ENV:development",
     "bin": "rollup -c bin/index.js",
     "unbuild": "rimraf dist/*.{js,map,gz}",
@@ -111,7 +111,7 @@
     "validate-commit-msg": "2.14.0"
   },
   "ava": {
-    "tap": true,
+    "tap": false,
     "failFast": true,
     "powerAssert": false,
     "failWithoutAssertions": false,

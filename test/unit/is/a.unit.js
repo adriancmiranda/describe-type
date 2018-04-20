@@ -2,7 +2,7 @@ import test from 'ava';
 import * as datatypes from '../../fixtures/datatypes.fixture';
 import * as is from '../../../source/is';
 
-test('#a', t => {
+test('#a exposure', t => {
 	t.is(toString.call(is), '[object Object]');
 	t.is(toString.call(is.a), '[object Function]');
 });
