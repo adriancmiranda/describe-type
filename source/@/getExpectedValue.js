@@ -3,10 +3,10 @@ import ownValue from '../has/ownValue.js';
 import slice from './slice.js';
 import apply from './apply.js';
 
-export default function getExpectedValue(expected, value) {
+export default function getExpectedValue(expected, value, args) {
 	if (callable(value) && (expected === Function || ownValue(expected, Function)) === false) {
-		const args = slice(arguments, 2);
-		return apply(value, args[0], args, true);
+		const context = args ? args[0] : null;
+		return apply(value, context, args, true);
 	}
 	return value;
 }
