@@ -1,4 +1,4 @@
-import floatOf from './built-in/floatOf.js';
+import floatOf from '../built-in/floatOf.js';
 import infinity from './infinity.js';
 
 /**

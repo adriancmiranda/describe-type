@@ -42,3 +42,6 @@ export { default as symbol } from './symbol.js';
 export { default as undef } from './undef.js';
 export { default as hosted } from './hosted.js';
 export { default as stream } from './stream.js';
+export { default as within } from './within.js';
+export { default as min } from './min.js';
+export { default as max } from './max.js';
