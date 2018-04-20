@@ -3,7 +3,7 @@ import a from './a.js';
 import an from './a.js';
 
 /**
- *
+ * TODO: a,an,any
  * @function
  * @memberof is
  * @param {Function|Array.<Function>} expected

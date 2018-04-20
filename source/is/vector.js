@@ -2,7 +2,7 @@ import notAny from './not/not.any.js';
 import arraylike from './arraylike.js';
 
 /**
- *
+ * TODO: a,an,any
  * @function
  * @memberof is
  * @param {Function|Array.<Function>} expected
