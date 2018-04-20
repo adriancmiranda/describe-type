@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
-const streamDuplex = require('./stream.duplex.js');
-const callable = require('./callable.js');
+import streamDuplex from './stream.duplex.js';
+import callable from './callable.js';
 
 /**
  *
@@ -9,8 +9,8 @@ const callable = require('./callable.js');
  * @param {any} value
  * @returns {Boolean}
  */
-module.exports = function isStreamTransform(value) {
+export default function isStreamTransform(value) {
 	return streamDuplex(value) &&
 	value._transformState != null &&
 	callable(value._transform);
-};
+}

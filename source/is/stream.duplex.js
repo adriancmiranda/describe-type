@@ -1,5 +1,5 @@
-const streamWritable = require('./stream.writable.js');
-const streamReadable = require('./stream.readable.js');
+import streamWritable from './stream.writable.js';
+import streamReadable from './stream.readable.js';
 
 /**
  *
@@ -8,6 +8,6 @@ const streamReadable = require('./stream.readable.js');
  * @param {any} value
  * @returns {Boolean}
  */
-module.exports = function isStreamDuplex(value) {
+export default function isStreamDuplex(value) {
 	return streamWritable(value) && streamReadable(value);
-};
+}

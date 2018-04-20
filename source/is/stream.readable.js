@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
-const stream = require('./stream.js');
-const callable = require('./callable.js');
+import stream from './stream.js';
+import callable from './callable.js';
 
 /**
  *
@@ -9,9 +9,9 @@ const callable = require('./callable.js');
  * @param {any} value
  * @returns {Boolean}
  */
-module.exports = function isStreamReadable(value) {
+export default function isStreamReadable(value) {
 	return stream(value) &&
 	value.readable !== false &&
 	value._readableState != null &&
 	callable(value._read);
-};
+}
