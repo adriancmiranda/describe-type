@@ -1,4 +1,4 @@
-import vector from './vector.js';
+import vector from '../vector.js';
 
 /**
  *

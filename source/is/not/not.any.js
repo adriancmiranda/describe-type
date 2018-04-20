@@ -1,4 +1,4 @@
-import any from './any.js';
+import any from '../any.js';
 
 /**
  *
@@ -8,6 +8,6 @@ import any from './any.js';
  * @param {any} value
  * @returns {Boolean}
  */
-export default function not(expected, value) {
+export default function notAny(expected, value) {
 	return any(expected, value) === false;
 }

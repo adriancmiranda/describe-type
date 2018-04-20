@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import streamDuplex from './stream.duplex.js';
-import callable from './callable.js';
+import callable from '../callable.js';
 
 /**
  *

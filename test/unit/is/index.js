@@ -1,5 +1,12 @@
 import test from 'ava';
-import './a.unit';
+// import './a.unit';
+// import './any.unit';
+// import './empty.unit';
+// import './equal.unit';
+// import './nativeFunction.unit';
+// import './not.unit';
+// import './primitive.unit';
+// import './exotic.unit';
 
 // describe('#is', () => {
 // 	describe('common', () => {

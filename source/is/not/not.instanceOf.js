@@ -1,4 +1,4 @@
-import instanceOf from './instanceOf.js';
+import instanceOf from '../instanceOf.js';
 
 /**
  *
