@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v0.7.0
  * 
- * @commit d567e211302ac5bb7b3c0676bd2287880b1acc21
- * @moment Monday, April 16, 2018 9:39 PM
+ * @commit c5caf7d03834e6f0206806b32bb59a9c1ed46b88
+ * @moment Friday, April 20, 2018 4:26 PM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2021 Adrian C. Miranda
@@ -199,7 +199,7 @@ define(['exports'], function (exports) { 'use strict';
 	 * @returns {Boolean}
 	 */
 	function booleanOf(value) {
-		if (string(value)) {
+		if (string(value) && value.length) {
 			return reStringToBoolean.test(value);
 		}
 		return !!value;

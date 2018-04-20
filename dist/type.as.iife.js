@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v0.7.0
  * 
- * @commit d567e211302ac5bb7b3c0676bd2287880b1acc21
- * @moment Monday, April 16, 2018 9:39 PM
+ * @commit c5caf7d03834e6f0206806b32bb59a9c1ed46b88
+ * @moment Friday, April 20, 2018 4:26 PM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2021 Adrian C. Miranda
@@ -11,6 +11,17 @@
 this.type = this.type || {};
 this.type.as = (function (exports) {
 	'use strict';
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function callable(value) {
+		return typeof value === 'function';
+	}
 
 	/**
 	 *
@@ -51,6 +62,34 @@ this.type.as = (function (exports) {
 
 	/**
 	 *
+	 * @function
+	 * @memberof has
+	 * @param {String|Array} context
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function ownValue(context, value) {
+		if (arraylike(context) === false) { return false; }
+		for (var id = context.length - 1; id > -1; id -= 1) {
+			if (value === context[id]) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+
+	/* eslint-disable no-nested-ternary */
+
+	/**
+	 *
 	 * @param {Function} cmd - .
 	 * @param {any} context - .
 	 * @returns {any}
@@ -77,137 +116,12 @@ this.type.as = (function (exports) {
 		}
 	}
 
-	/**
-	 *
-	 * @function
-	 * @memberof is
-	 * @param {any} value
-	 * @returns {Boolean}
-	 */
-	function number(value) {
-		return typeof value === 'number' || value instanceof Number;
-	}
-
-	/**
-	 *
-	 * @function
-	 * @memberof is
-	 * @param {any} value
-	 * @returns {Boolean}
-	 */
-	function int(value) {
-		return number(value) && value === value && value % 1 === 0;
-	}
-
-	/**
-	 * The `intOf()` function parses a string argument and returns an integer of the
-	 * specified radix (the base in mathematical numeral systems).
-	 *
-	 * @function
-	 * @memberof to
-	 *
-	 * @param {Number|String|Object} value - The value to parse.
-	 * If the string argument is not a string, then it is converted to a string
-	 * (using the ToString abstract operation).
-	 * Leading whitespace in the string argument is ignored.
-	 *
-	 * @param {any} radix - An integer between 2 and 36 that represents
-	 * the radix (the base in mathematical numeral systems) of the above mentioned string.
-	 * Specify 10 for the decimal numeral system commonly used by humans. Always specify
-	 * this parameter to eliminate reader confusion and to guarantee predictable behavior.
-	 * Different implementations produce different results when a radix is not specified,
-	 * usually defaulting the value to 10.
-	 *
-	 * @returns {Number} An integer number parsed from the given string.
-	 * If the first character cannot be converted to a number, 0 is returned.
-	 *
-	 * min: -2147483647
-	 * max: 2147483647
-	 */
-	function intOf(value, radix) {
-		value = (radix == null ? value : parseInt(value, radix));
-		return int(value) ? value : 0 | value;
-	}
-
-	/* eslint-disable no-nested-ternary */
-
-	/**
-	 *
-	 * @function
-	 * @memberof utility
-	 * @param {Number} n - index
-	 * @param {Number} a - divident
-	 * @param {Number} b - divisor
-	 * @returns {Number}
-	 */
-	function mod(n, a, b) {
-		n = intOf(n);
-		a = intOf(a);
-		b = intOf(b);
-		var rem;
-		if (a < 0 || b < 0) {
-			var places = (b - a);
-			rem = (n - a) % (places + 1);
-			rem = rem < 0 ? (rem + (places + 1)) : rem === 0 ? 0 : rem;
-			return rem - (places - b);
+	function getExpectedValue(expected, value, args) {
+		if (callable(value) && (expected === Function || ownValue(expected, Function)) === false) {
+			var context = args ? args[0] : null;
+			return apply(value, context, args, true);
 		}
-		if (n === b) { return n; }
-		if (n === b + 1) { return a; }
-		if (n === a - 1) { return b; }
-		rem = n % (b || 1);
-		rem = rem < a ? (rem + b) : rem === 0 ? 0 : rem;
-		return rem;
-	}
-
-	/**
-	 *
-	 * @function
-	 * @memberof utility
-	 * @param {arraylike} value
-	 * @param {int} startIndex
-	 * @param {int} endIndex
-	 * @returns {Array}
-	 */
-	function slice(list, startIndex, endIndex) {
-		var range = [];
-		var size = arraylike(list) && list.length;
-		if (size) {
-			var start = mod(startIndex, 0, size + 1);
-			if (number(endIndex)) {
-				size = mod(endIndex, 0, size - 1);
-			}
-			if (start < size) {
-				if (string(list)) {
-					range = '';
-					for (var c = start; c < size; c += 1) {
-						range += list[c];
-					}
-					return range;
-				}
-				for (var i = size - 1; i > start - 1; i -= 1) {
-					range[i - start] = list[i];
-				}
-			}
-		}
-		return range;
-	}
-
-	/**
-	 *
-	 * @function
-	 * @memberof has
-	 * @param {String|Array} context
-	 * @param {any} value
-	 * @returns {Boolean}
-	 */
-	function ownValue(context, value) {
-		if (arraylike(context) === false) { return false; }
-		for (var id = context.length - 1; id > -1; id -= 1) {
-			if (value === context[id]) {
-				return true;
-			}
-		}
-		return false;
+		return value;
 	}
 
 	/**
@@ -248,27 +162,13 @@ this.type.as = (function (exports) {
 
 	/**
 	 *
-	 * @function
-	 * @memberof is
-	 * @param {any} value
-	 * @returns {Boolean}
-	 */
-	function callable(value) {
-		return typeof value === 'function';
-	}
-
-	/**
-	 *
 	 * @param {Function|Array.<Function>} expected
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
 	function as(expected, value) {
-		var args = slice(arguments, 2);
-		if (callable(value) && (expected === Function || ownValue(expected, Function)) === false) {
-			value = apply(value, args[0], args, true);
-		}
-		return any(expected, value) ? value : args[0];
+		value = getExpectedValue(expected, value, arguments);
+		return any(expected, value) ? value : arguments[2];
 	}
 
 	/**
@@ -299,11 +199,8 @@ this.type.as = (function (exports) {
 	 * @returns {Boolean}
 	 */
 	function asInstanceOf(expected, value) {
-		var args = slice(arguments, 2);
-		if (callable(value) && (expected === Function || ownValue(expected, Function)) === false) {
-			value = apply(value, args[0], args, true);
-		}
-		return instanceOf(expected, value) ? value : args[0];
+		value = getExpectedValue(expected, value, arguments);
+		return instanceOf(expected, value) ? value : arguments[2];
 	}
 
 	/**
@@ -341,18 +238,15 @@ this.type.as = (function (exports) {
 	 * @returns {Boolean}
 	 */
 	function asVectorOf(expected, value) {
-		var args = slice(arguments, 2);
-		if (callable(value) && (expected === Function || ownValue(expected, Function)) === false) {
-			value = apply(value, args[0], args, true);
-		}
+		value = getExpectedValue(expected, value, arguments);
 		if (expected == null) { return vector(expected, value); }
 		if (expected.constructor === Array && expected.length > 0) {
 			for (var i = expected.length - 1; i > -1; i -= 1) {
 				if (vector(expected[i], value)) { return value; }
 			}
-			return args[0];
+			return arguments[2];
 		}
-		return vector(expected, value) ? value : args[0];
+		return vector(expected, value) ? value : arguments[2];
 	}
 
 	exports.as = as;

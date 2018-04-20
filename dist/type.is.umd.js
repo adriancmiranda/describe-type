@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v0.7.0
  * 
- * @commit d567e211302ac5bb7b3c0676bd2287880b1acc21
- * @moment Monday, April 16, 2018 9:39 PM
+ * @commit c5caf7d03834e6f0206806b32bb59a9c1ed46b88
+ * @moment Friday, April 20, 2018 4:26 PM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2021 Adrian C. Miranda
@@ -335,6 +335,46 @@
 		return any(expected, value) === false;
 	}
 
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {Function|Array.<Function>} expected
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function notInstanceOf(expected, value) {
+		return instanceOf(expected, value) === false;
+	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {Function|Array.<Function>} expected
+	 * @param {arraylike} value
+	 * @returns {Boolean}
+	 */
+	function vector(expected, value) {
+		if (arraylike(value) === false) { return false; }
+		for (var i = value.length - 1; i > -1; i -= 1) {
+			if (not(expected, value[i])) { return false; }
+		}
+		return true;
+	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {Function|Array.<Function>} expected
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function notVectorOf(expected, value) {
+		return vector(expected, value) === false;
+	}
+
 	// pattern(s)
 	var reIsBase64 = /^(data:\w+\/[a-zA-Z+\-.]+;base64,)?([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/;
 	var reIsNativeFn = /\[native\scode\]/;
@@ -380,7 +420,10 @@
 	}
 
 	// environment
-	var inNode = typeof window === 'undefined';
+	var isBrowser = new Function('try{return this===window;}catch(err){return false;}');
+	var isNode = new Function('try{return this===global;}catch(err){return false;}');
+	var inBrowser = isBrowser();
+	var inNode = isNode();
 	var env = inNode ? global : window;
 
 	/**
@@ -396,22 +439,6 @@
 			value instanceof env.HTMLElement &&
 			value.nodeType === 1
 		);
-	}
-
-	/**
-	 *
-	 * @function
-	 * @memberof is
-	 * @param {Function|Array.<Function>} expected
-	 * @param {arraylike} value
-	 * @returns {Boolean}
-	 */
-	function vector(expected, value) {
-		if (arraylike(value) === false) { return false; }
-		for (var i = value.length - 1; i > -1; i -= 1) {
-			if (not(expected, value[i])) { return false; }
-		}
-		return true;
 	}
 
 	/**
@@ -627,6 +654,8 @@
 		return (host == null || primitive(host[key]) === false) === true;
 	}
 
+	/* eslint-disable no-underscore-dangle */
+
 	/**
 	 *
 	 * @function
@@ -642,11 +671,11 @@
 	stream.writable = function isStreamWritable(value) {
 		return stream(value) &&
 		value.writable !== false &&
-		stream._writableState != null && 
-		callable(stream._write)
+		value._writableState != null &&
+		callable(value._write);
 	};
 
-	stream.readable = function isStreamReadable(value) { 
+	stream.readable = function isStreamReadable(value) {
 		return stream(value) &&
 		value.readable !== false &&
 		value._readableState != null &&
@@ -659,10 +688,95 @@
 	};
 
 	stream.transform = function isStreamTransform(value) {
-		return stream.duplex(stream) &&
-		stream._transformState != null &&
-		callable(stream._transform);
+		return stream.duplex(value) &&
+		value._transformState != null &&
+		callable(value._transform);
 	};
+
+	/**
+	 * The `floatOf()` function parses an argument and returns a floating point number.
+	 *
+	 * @function
+	 * @memberof to
+	 *
+	 * @param {Number|String|Object} value - The value to parse.
+	 * If the string argument is not a string, then it is converted to a string
+	 * (using the ToString abstract operation).
+	 * Leading whitespace in the string argument is ignored.
+	 *
+	 * @returns {Number} A floating point number parsed from the given value.
+	 * If the first character cannot be converted to a number, 0 is returned.
+	 */
+	function floatOf(value) {
+		value = +value;
+		return nan(value) || infinity(value) ? 0 : value;
+	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {Number} value
+	 * @param {Number} start
+	 * @param {Number} finish
+	 * @returns {Boolean}
+	 */
+	function within(value, start, finish) {
+		value = floatOf(value);
+		start = floatOf(start);
+		finish = floatOf(finish);
+		return infinity(value) || infinity(start) || infinity(finish) ||
+			(value >= start && value <= finish)
+		;
+	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {Number} value
+	 * @param {arraylike} others
+	 * @returns {Boolean}
+	 */
+	function min(value, others) {
+		if (value !== value) {
+			throw new TypeError('NaN is not a valid value');
+		} else if (arraylike(others) === false) {
+			throw new TypeError('Second argument must be array-like');
+		} else if (others.length === 0) {
+			return false;
+		}
+		for (var i = others.length - 1; i > -1; i -= 1) {
+			if (value > others[i]) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {Number} value
+	 * @param {arraylike} others
+	 * @returns {Boolean}
+	 */
+	function max(value, others) {
+		if (value !== value) {
+			throw new TypeError('NaN is not a valid value');
+		} else if (arraylike(others) === false) {
+			throw new TypeError('Second argument must be array-like');
+		} else if (others.length === 0) {
+			return false;
+		}
+		for (var i = others.length - 1; i > -1; i -= 1) {
+			if (value > others[i]) {
+				return false;
+			}
+		}
+		return true;
+	}
 
 	exports.a = a;
 	exports.an = a;
@@ -674,6 +788,8 @@
 	exports.exotic = exotic;
 	exports.instanceOf = instanceOf;
 	exports.not = not;
+	exports.notInstanceOf = notInstanceOf;
+	exports.notVectorOf = notVectorOf;
 	exports.primitive = primitive;
 	exports.base64 = base64;
 	exports.hex = hex;
@@ -706,5 +822,8 @@
 	exports.undef = undef;
 	exports.hosted = hosted;
 	exports.stream = stream;
+	exports.within = within;
+	exports.min = min;
+	exports.max = max;
 
 })));

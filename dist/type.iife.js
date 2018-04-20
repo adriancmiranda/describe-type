@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v0.7.0
  * 
- * @commit d567e211302ac5bb7b3c0676bd2287880b1acc21
- * @moment Monday, April 16, 2018 9:39 PM
+ * @commit c5caf7d03834e6f0206806b32bb59a9c1ed46b88
+ * @moment Friday, April 20, 2018 4:26 PM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2021 Adrian C. Miranda
@@ -55,7 +55,10 @@ var type = (function (exports) {
 	};
 
 	// environment
-	var inNode = typeof window === 'undefined';
+	var isBrowser = new Function('try{return this===window;}catch(err){return false;}');
+	var isNode = new Function('try{return this===global;}catch(err){return false;}');
+	var inBrowser = isBrowser();
+	var inNode = isNode();
 	var env = inNode ? global : window;
 
 	/**
@@ -285,6 +288,9 @@ var type = (function (exports) {
 		slice: slice,
 		keys: keys,
 		apply: apply,
+		isBrowser: isBrowser,
+		isNode: isNode,
+		inBrowser: inBrowser,
 		inNode: inNode,
 		env: env
 	};
@@ -562,6 +568,46 @@ var type = (function (exports) {
 	 *
 	 * @function
 	 * @memberof is
+	 * @param {Function|Array.<Function>} expected
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function notInstanceOf(expected, value) {
+		return instanceOf(expected, value) === false;
+	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {Function|Array.<Function>} expected
+	 * @param {arraylike} value
+	 * @returns {Boolean}
+	 */
+	function vector(expected, value) {
+		if (arraylike(value) === false) { return false; }
+		for (var i = value.length - 1; i > -1; i -= 1) {
+			if (not(expected, value[i])) { return false; }
+		}
+		return true;
+	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {Function|Array.<Function>} expected
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function notVectorOf(expected, value) {
+		return vector(expected, value) === false;
+	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
@@ -605,22 +651,6 @@ var type = (function (exports) {
 			value instanceof env.HTMLElement &&
 			value.nodeType === 1
 		);
-	}
-
-	/**
-	 *
-	 * @function
-	 * @memberof is
-	 * @param {Function|Array.<Function>} expected
-	 * @param {arraylike} value
-	 * @returns {Boolean}
-	 */
-	function vector(expected, value) {
-		if (arraylike(value) === false) { return false; }
-		for (var i = value.length - 1; i > -1; i -= 1) {
-			if (not(expected, value[i])) { return false; }
-		}
-		return true;
 	}
 
 	/**
@@ -825,6 +855,8 @@ var type = (function (exports) {
 		return (host == null || primitive(host[key]) === false) === true;
 	}
 
+	/* eslint-disable no-underscore-dangle */
+
 	/**
 	 *
 	 * @function
@@ -840,11 +872,11 @@ var type = (function (exports) {
 	stream.writable = function isStreamWritable(value) {
 		return stream(value) &&
 		value.writable !== false &&
-		stream._writableState != null && 
-		callable(stream._write)
+		value._writableState != null &&
+		callable(value._write);
 	};
 
-	stream.readable = function isStreamReadable(value) { 
+	stream.readable = function isStreamReadable(value) {
 		return stream(value) &&
 		value.readable !== false &&
 		value._readableState != null &&
@@ -857,10 +889,95 @@ var type = (function (exports) {
 	};
 
 	stream.transform = function isStreamTransform(value) {
-		return stream.duplex(stream) &&
-		stream._transformState != null &&
-		callable(stream._transform);
+		return stream.duplex(value) &&
+		value._transformState != null &&
+		callable(value._transform);
 	};
+
+	/**
+	 * The `floatOf()` function parses an argument and returns a floating point number.
+	 *
+	 * @function
+	 * @memberof to
+	 *
+	 * @param {Number|String|Object} value - The value to parse.
+	 * If the string argument is not a string, then it is converted to a string
+	 * (using the ToString abstract operation).
+	 * Leading whitespace in the string argument is ignored.
+	 *
+	 * @returns {Number} A floating point number parsed from the given value.
+	 * If the first character cannot be converted to a number, 0 is returned.
+	 */
+	function floatOf(value) {
+		value = +value;
+		return nan(value) || infinity(value) ? 0 : value;
+	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {Number} value
+	 * @param {Number} start
+	 * @param {Number} finish
+	 * @returns {Boolean}
+	 */
+	function within(value, start, finish) {
+		value = floatOf(value);
+		start = floatOf(start);
+		finish = floatOf(finish);
+		return infinity(value) || infinity(start) || infinity(finish) ||
+			(value >= start && value <= finish)
+		;
+	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {Number} value
+	 * @param {arraylike} others
+	 * @returns {Boolean}
+	 */
+	function min(value, others) {
+		if (value !== value) {
+			throw new TypeError('NaN is not a valid value');
+		} else if (arraylike(others) === false) {
+			throw new TypeError('Second argument must be array-like');
+		} else if (others.length === 0) {
+			return false;
+		}
+		for (var i = others.length - 1; i > -1; i -= 1) {
+			if (value > others[i]) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {Number} value
+	 * @param {arraylike} others
+	 * @returns {Boolean}
+	 */
+	function max(value, others) {
+		if (value !== value) {
+			throw new TypeError('NaN is not a valid value');
+		} else if (arraylike(others) === false) {
+			throw new TypeError('Second argument must be array-like');
+		} else if (others.length === 0) {
+			return false;
+		}
+		for (var i = others.length - 1; i > -1; i -= 1) {
+			if (value > others[i]) {
+				return false;
+			}
+		}
+		return true;
+	}
 
 
 
@@ -875,6 +992,8 @@ var type = (function (exports) {
 		exotic: exotic,
 		instanceOf: instanceOf,
 		not: not,
+		notInstanceOf: notInstanceOf,
+		notVectorOf: notVectorOf,
 		primitive: primitive,
 		base64: base64,
 		hex: hex,
@@ -906,7 +1025,10 @@ var type = (function (exports) {
 		symbol: symbol,
 		undef: undef,
 		hosted: hosted,
-		stream: stream
+		stream: stream,
+		within: within,
+		min: min,
+		max: max
 	};
 
 	/**
@@ -936,29 +1058,10 @@ var type = (function (exports) {
 	 * @returns {Boolean}
 	 */
 	function booleanOf(value) {
-		if (string(value)) {
+		if (string(value) && value.length) {
 			return reStringToBoolean.test(value);
 		}
 		return !!value;
-	}
-
-	/**
-	 * The `floatOf()` function parses an argument and returns a floating point number.
-	 *
-	 * @function
-	 * @memberof to
-	 *
-	 * @param {Number|String|Object} value - The value to parse.
-	 * If the string argument is not a string, then it is converted to a string
-	 * (using the ToString abstract operation).
-	 * Leading whitespace in the string argument is ignored.
-	 *
-	 * @returns {Number} A floating point number parsed from the given value.
-	 * If the first character cannot be converted to a number, 0 is returned.
-	 */
-	function floatOf(value) {
-		value = +value;
-		return nan(value) || infinity(value) ? 0 : value;
 	}
 
 	/**
@@ -1064,6 +1167,14 @@ var type = (function (exports) {
 		return name(expected, write);
 	}
 
+	function getExpectedValue(expected, value, args) {
+		if (callable(value) && (expected === Function || ownValue(expected, Function)) === false) {
+			var context = args ? args[0] : null;
+			return apply(value, context, args, true);
+		}
+		return value;
+	}
+
 	/**
 	 *
 	 * @param {Function|Array.<Function>} expected
@@ -1071,11 +1182,8 @@ var type = (function (exports) {
 	 * @returns {Boolean}
 	 */
 	function as(expected, value) {
-		var args = slice(arguments, 2);
-		if (callable(value) && (expected === Function || ownValue(expected, Function)) === false) {
-			value = apply(value, args[0], args, true);
-		}
-		return any(expected, value) ? value : args[0];
+		value = getExpectedValue(expected, value, arguments);
+		return any(expected, value) ? value : arguments[2];
 	}
 
 	/**
@@ -1085,11 +1193,8 @@ var type = (function (exports) {
 	 * @returns {Boolean}
 	 */
 	function asInstanceOf(expected, value) {
-		var args = slice(arguments, 2);
-		if (callable(value) && (expected === Function || ownValue(expected, Function)) === false) {
-			value = apply(value, args[0], args, true);
-		}
-		return instanceOf(expected, value) ? value : args[0];
+		value = getExpectedValue(expected, value, arguments);
+		return instanceOf(expected, value) ? value : arguments[2];
 	}
 
 	/**
@@ -1099,18 +1204,60 @@ var type = (function (exports) {
 	 * @returns {Boolean}
 	 */
 	function asVectorOf(expected, value) {
-		var args = slice(arguments, 2);
-		if (callable(value) && (expected === Function || ownValue(expected, Function)) === false) {
-			value = apply(value, args[0], args, true);
-		}
+		value = getExpectedValue(expected, value, arguments);
 		if (expected == null) { return vector(expected, value); }
 		if (expected.constructor === Array && expected.length > 0) {
 			for (var i = expected.length - 1; i > -1; i -= 1) {
 				if (vector(expected[i], value)) { return value; }
 			}
-			return args[0];
+			return arguments[2];
 		}
-		return vector(expected, value) ? value : args[0];
+		return vector(expected, value) ? value : arguments[2];
+	}
+
+	// import { env } from '../@/env.js';
+	// import reduce from '../@/reduce.js';
+	// import startsWith from '../@/startsWith.js';
+	// import filter from '../@/filter.js';
+	// import keys from '../@/keys.js';
+	// import create from '../@/create.js';
+	// import assign from '../@/assign.js';
+	// import stringify from '../@/stringify';
+
+	// import typify from '../built-in/typify.js';
+
+	// import any from '../is/any.js';
+	// import object from '../is/object.js';
+	// import string from '../is/string.js';
+	// import array from '../is/array.js';
+	// import not from '../is/not.js';
+	// import notInstanceOf from '../is/not.instanceOf.js';
+
+	// import asAny from '../as/as.any.js';
+	// import asInstanceOf from '../as/as.instanceOf.js';
+
+	// import SchemaError from './SchemaError';
+
+	// const SCHEMA_PROPS = {
+	// 	type: true,
+	// 	required: true,
+	// 	strict: false,
+	// 	default: false,
+	// };
+
+	function schematize(pattern, settings) {
+	// 	const schema = as(Object, patterns) || create(null);
+	// 	const object = as(Object, settings) || create(null);
+	// 	return reduce(internal.keys(schema), (copy, key) => {
+	// 		if (startsWith(key, '$')) {
+	// 			const slug = key.substring(1);
+	// 			const assert = { key, data: schema[key] };
+	// 			const config = { key: slug, data: object[slug] };
+	// 			const result = parseProperty(assert, config, copy);
+	// 			copy[result.key] = result.data;
+	// 		}
+	// 		return copy;
+	// 	}, create(null));
 	}
 
 	/* eslint-disable no-unused-vars */
@@ -1118,6 +1265,7 @@ var type = (function (exports) {
 	exports.has = index$1;
 	exports.is = index$2;
 	exports.internal = index;
+	exports.schema = schematize;
 	exports.stringOf = stringOf;
 	exports.booleanOf = booleanOf;
 	exports.floatOf = floatOf;
