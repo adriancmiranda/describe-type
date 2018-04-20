@@ -9,7 +9,7 @@ import string from '../is/string.js';
  * @returns {Boolean}
  */
 export default function booleanOf(value) {
-	if (string(value)) {
+	if (string(value) && value.length) {
 		return reStringToBoolean.test(value);
 	}
 	return !!value;
