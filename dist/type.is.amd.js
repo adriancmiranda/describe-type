@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v0.7.0
  * 
- * @commit 2ddc3f5b733b12c6b99f7e26ac3d69dbbbed7fa6
- * @moment Friday, April 20, 2018 6:04 PM
+ * @commit 1d5d8c6ec81eb62639d094020fb3b9cb8e183ccd
+ * @moment Friday, April 20, 2018 6:19 PM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2021 Adrian C. Miranda
@@ -18,7 +18,7 @@ define(['exports'], function (exports) { 'use strict';
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function a(expected, value) {
+	function type(expected, value) {
 		if (expected == null || value == null) { return value === expected; }
 		if (value.constructor === expected) { return true; }
 		if (value.constructor === undefined) { return expected === Object; }
@@ -37,7 +37,7 @@ define(['exports'], function (exports) { 'use strict';
 	 * @returns {Boolean}
 	 */
 	function notA(expected, value) {
-		return a(expected, value) === false;
+		return type(expected, value) === false;
 	}
 
 	/**
@@ -52,10 +52,10 @@ define(['exports'], function (exports) { 'use strict';
 		if (expected == null) { return expected === value; }
 		if (expected.constructor === Array && expected.length > 0) {
 			for (var i = expected.length - 1; i > -1; i -= 1) {
-				if (a(expected[i], value)) { return true; }
+				if (type(expected[i], value)) { return true; }
 			}
 		}
-		return a(expected, value);
+		return type(expected, value);
 	}
 
 	/**
@@ -94,11 +94,11 @@ define(['exports'], function (exports) { 'use strict';
 		if (expected.constructor === Array && expected.length > 0) {
 			for (var i = expected.length - 1; i > -1; i -= 1) {
 				var ctor = expected[i];
-				if (ctor === Number) { return a(ctor, value); } // ... should normalize?!
+				if (ctor === Number) { return type(ctor, value); } // ... should normalize?!
 				if (callable(ctor) && value instanceof ctor) { return true; }
 			}
 		}
-		if (expected === Number) { return a(expected, value); } // ... should normalize?!
+		if (expected === Number) { return type(expected, value); } // ... should normalize?!
 		return callable(expected) && value instanceof expected;
 	}
 
@@ -524,6 +524,7 @@ define(['exports'], function (exports) { 'use strict';
 		if (valueA === valueB) {
 			return true;
 		}
+		var key;
 		var ctorA = valueA != null && valueA.constructor;
 		var ctorB = valueB != null && valueB.constructor;
 		if (ctorA !== ctorB) {
@@ -536,19 +537,19 @@ define(['exports'], function (exports) { 'use strict';
 				return false;
 			}
 			for (i -= 1; i > -1; i -= 1) {
-				var key = keysA[i];
+				key = keysA[i];
 				if (!equal(valueA[key], valueB[key])) {
 					return false;
 				}
 			}
 			return true;
 		} else if (ctorA === Array) {
-			var key$1 = valueA.length;
-			if (key$1 !== valueB.length) {
+			key = valueA.length;
+			if (key !== valueB.length) {
 				return false;
 			}
-			for (key$1 -= 1; key$1 > -1; key$1 -= 1) {
-				if (!equal(valueA[key$1], valueB[key$1])) {
+			for (key -= 1; key > -1; key -= 1) {
+				if (!equal(valueA[key], valueB[key])) {
 					return false;
 				}
 			}
@@ -848,8 +849,8 @@ define(['exports'], function (exports) { 'use strict';
 	exports.streamReadable = isStreamReadable;
 	exports.streamDuplex = isStreamDuplex;
 	exports.streamTransform = isStreamTransform;
-	exports.a = a;
-	exports.an = a;
+	exports.a = type;
+	exports.an = type;
 	exports.any = any;
 	exports.args = args;
 	exports.array = array;
@@ -888,7 +889,7 @@ define(['exports'], function (exports) { 'use strict';
 	exports.regexp = regexp;
 	exports.string = string;
 	exports.symbol = symbol;
-	exports.type = a;
+	exports.type = type;
 	exports.uint = uint;
 	exports.undef = undef;
 	exports.vector = vector;

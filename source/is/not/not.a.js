@@ -1,4 +1,4 @@
-import a from '../a.js';
+import type from '../type.js';
 
 /**
  *
@@ -9,5 +9,5 @@ import a from '../a.js';
  * @returns {Boolean}
  */
 export default function notA(expected, value) {
-	return a(expected, value) === false;
+	return type(expected, value) === false;
 }

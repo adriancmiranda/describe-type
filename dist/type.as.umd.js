@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v0.7.0
  * 
- * @commit 2ddc3f5b733b12c6b99f7e26ac3d69dbbbed7fa6
- * @moment Friday, April 20, 2018 6:04 PM
+ * @commit 1d5d8c6ec81eb62639d094020fb3b9cb8e183ccd
+ * @moment Friday, April 20, 2018 6:19 PM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2021 Adrian C. Miranda
@@ -134,7 +134,7 @@
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function a(expected, value) {
+	function type(expected, value) {
 		if (expected == null || value == null) { return value === expected; }
 		if (value.constructor === expected) { return true; }
 		if (value.constructor === undefined) { return expected === Object; }
@@ -150,9 +150,9 @@
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function as(expected, value) {
+	function asA(expected, value) {
 		value = getExpectedValue(expected, value, arguments);
-		return a(expected, value) ? value : arguments[2];
+		return type(expected, value) ? value : arguments[2];
 	}
 
 	/**
@@ -167,10 +167,10 @@
 		if (expected == null) { return expected === value; }
 		if (expected.constructor === Array && expected.length > 0) {
 			for (var i = expected.length - 1; i > -1; i -= 1) {
-				if (a(expected[i], value)) { return true; }
+				if (type(expected[i], value)) { return true; }
 			}
 		}
-		return a(expected, value);
+		return type(expected, value);
 	}
 
 	/**
@@ -179,7 +179,7 @@
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function as$1(expected, value) {
+	function asAny(expected, value) {
 		value = getExpectedValue(expected, value, arguments);
 		return any(expected, value) ? value : arguments[2];
 	}
@@ -197,11 +197,11 @@
 		if (expected.constructor === Array && expected.length > 0) {
 			for (var i = expected.length - 1; i > -1; i -= 1) {
 				var ctor = expected[i];
-				if (ctor === Number) { return a(ctor, value); } // ... should normalize?!
+				if (ctor === Number) { return type(ctor, value); } // ... should normalize?!
 				if (callable(ctor) && value instanceof ctor) { return true; }
 			}
 		}
-		if (expected === Number) { return a(expected, value); } // ... should normalize?!
+		if (expected === Number) { return type(expected, value); } // ... should normalize?!
 		return callable(expected) && value instanceof expected;
 	}
 
@@ -262,11 +262,11 @@
 		return vector(expected, value) ? value : arguments[2];
 	}
 
-	as.a = as.an = as.type = as;
-	as.any = as$1;
-	as.instanceOf = asInstanceOf;
-	as.vectorOf = asVectorOf;
+	asA.a = asA.an = asA.type = asA;
+	asA.any = asAny;
+	asA.instanceOf = asInstanceOf;
+	asA.vectorOf = asVectorOf;
 
-	return as;
+	return asA;
 
 })));

@@ -1,6 +1,5 @@
 import callable from './callable.js';
-import a from './a.js';
-import an from './a.js';
+import type from './type.js';
 
 /**
  * TODO: a,an,any
@@ -15,10 +14,10 @@ export default function instanceOf(expected, value) {
 	if (expected.constructor === Array && expected.length > 0) {
 		for (let i = expected.length - 1; i > -1; i -= 1) {
 			const ctor = expected[i];
-			if (ctor === Number) return a(ctor, value); // ... should normalize?!
+			if (ctor === Number) return type(ctor, value); // ... should normalize?!
 			if (callable(ctor) && value instanceof ctor) return true;
 		}
 	}
-	if (expected === Number) return an(expected, value); // ... should normalize?!
+	if (expected === Number) return type(expected, value); // ... should normalize?!
 	return callable(expected) && value instanceof expected;
 }

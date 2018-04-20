@@ -1,5 +1,5 @@
 import mod from './mod.js';
-import as from '../as/as.any.js';
+import as from '../as/as.type.js';
 
 /**
  *

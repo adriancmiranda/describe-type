@@ -1,7 +1,7 @@
-import a from './a.js';
+import type from './type.js';
 
 /**
  * @memberof is
  * @alias a
  */
-export default a;
+export default type;

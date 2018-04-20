@@ -1,7 +1,7 @@
-import asA from './as.a.js';
+import asType from './as.type.js';
 
 /**
  * @memberof is
- * @alias asA
+ * @alias asType
  */
-export default asA;
+export default asType;
