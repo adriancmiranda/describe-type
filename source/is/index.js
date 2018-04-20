@@ -8,6 +8,8 @@ export { default as equal } from './equal.js';
 export { default as exotic } from './exotic.js';
 export { default as instanceOf } from './instanceOf.js';
 export { default as not } from './not.js';
+export { default as notInstanceOf } from './not.instanceOf.js';
+export { default as notVectorOf } from './not.vectorOf.js';
 export { default as primitive } from './primitive.js';
 export { default as base64 } from './base64.js';
 export { default as hex } from './hex.js';
