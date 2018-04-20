@@ -65,12 +65,14 @@
   "devDependencies": {
     "ava": "0.25.0",
     "ava-spec": "1.1.1",
-    "browser-env": "3.2.5",
     "babel-cli": "6.26.0",
     "babel-loader": "7.1.4",
+    "babel-polyfill": "6.26.0",
     "babel-preset-env": "1.6.1",
     "babel-preset-flow": "6.23.0",
+    "babel-register": "6.26.0",
     "benchmark": "2.1.4",
+    "browser-env": "3.2.5",
     "chokidar": "2.0.3",
     "codecov": "3.0.0",
     "conventional-commit-types": "2.2.0",
@@ -113,9 +115,11 @@
   "ava": {
     "tap": true,
     "failFast": true,
-    "concurrency": 5,
+    "powerAssert": false,
     "failWithoutAssertions": false,
+    "concurrency": 5,
     "require": [
+      "./test/helpers/setup-next-support.js",
       "./test/helpers/setup-browser-env.js"
     ]
   },

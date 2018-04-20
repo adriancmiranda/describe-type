@@ -1,7 +1,6 @@
-import 'buble/register';
 import test from 'ava';
 import schema from '../../../source/schema';
-import PLError from '../../../source/schema/error';
+// import PLError from '../../../source/schema/error';
 
 function sprop(schema, value) {
 	return schema({ $foo: schema }, { foo: value }).foo;
