@@ -1,23 +1,25 @@
-// import { env } from '../@/env.js';
-// import reduce from '../@/reduce.js';
+import { env } from '../@/env.js';
 import startsWith from '../@/startsWith.js';
+import keys from '../@/keys.js';
+import create from '../@/create.js';
+import assign from '../@/assign.js';
+// import reduce from '../@/reduce.js';
 // import filter from '../@/filter.js';
-// import keys from '../@/keys.js';
-// import create from '../@/create.js';
-// import assign from '../@/assign.js';
 // import stringify from '../@/stringify';
 
-// import typify from '../built-in/typify.js';
+import typify from '../built-in/typify.js';
 
-// import any from '../is/any.js';
-// import object from '../is/object.js';
-// import string from '../is/string.js';
-// import array from '../is/array.js';
-// import not from '../is/not.js';
-// import notInstanceOf from '../is/not.instanceOf.js';
+import any from '../is/any.js';
+import object from '../is/object.js';
+import string from '../is/string.js';
+import array from '../is/array.js';
+import notType from '../is/not/not.type.js';
+import notAny from '../is/not/not.any.js';
+import notInstanceOf from '../is/not/not.instanceOf.js';
 
-// import asAny from '../as/as.any.js';
-// import asInstanceOf from '../as/as.instanceOf.js';
+import asType from '../as/as.type.js';
+import asAny from '../as/as.any.js';
+import asInstanceOf from '../as/as.instanceOf.js';
 
 // import SchemaError from './SchemaError';
 

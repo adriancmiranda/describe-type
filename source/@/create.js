@@ -1,5 +1,4 @@
-import not from '../is/not.js';
-import callable from '../is/callable.js';
+import notType from '../is/not/not.type.js';
 import each from './each.js';
 
 /**
@@ -13,12 +12,9 @@ import each from './each.js';
  * the second argument of `Object.defineProperties()`.
  * @returns {Object}
  */
-export default function create(proto, properties) {
-	if (callable(Object.create)) {
-		return Object.create(proto, properties);
-	}
+export default Object.create || function create(proto, properties) {
 	if (proto === null) return {};
-	if (not(Object, proto)) {
+	if (notType(Object, proto)) {
 		throw new TypeError('Object prototype may only be an Object or null: ' + (typeof proto));
 	}
 	const Instance = function () {};
