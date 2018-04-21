@@ -12,14 +12,14 @@ test('regexp exposure', (t) => {
 });
 
 datatypes.regexp.iterate(datatype => {
-	test(`${datatype.id} • regexp(${datatype.label}); // true`, (t) => {
+	test(`${datatype.id} • regexp(${datatype.label});`, (t) => {
 		t.is(regexp(datatype.value), true, 'should be true');
 	});
 });
 
 datatypes.all.iterate(datatype => {
 	if (regexp(datatype.value) === false) {
-		test(`${datatype.id} • regexp(${datatype.label}); // false`, (t) => {
+		test(`${datatype.id} • regexp(${datatype.label});`, (t) => {
 			t.is(regexp(datatype.value), false, 'should be false');
 		});
 	}

@@ -12,13 +12,13 @@ test('empty exposure', (t) => {
 });
 
 datatypes.empty.iterate(datatype => {
-	test(`${datatype.id} • empty(${datatype.label}); // true`, (t) => {
+	test(`${datatype.id} • empty(${datatype.label});`, (t) => {
 		t.is(empty(datatype.value), true, 'should be true');
 	});
 });
 
 datatypes.filled.iterate(datatype => {
-	test(`${datatype.id} • empty(${datatype.label}); // false`, (t) => {
+	test(`${datatype.id} • empty(${datatype.label});`, (t) => {
 		t.is(empty(datatype.value), false, 'should be false');
 	});
 });

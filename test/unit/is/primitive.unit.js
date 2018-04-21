@@ -12,14 +12,14 @@ test('primitive exposure', (t) => {
 });
 
 datatypes.primitive.iterate(datatype => {
-	test(`${datatype.id} • primitive(${datatype.label}); // true`, (t) => {
+	test(`${datatype.id} • primitive(${datatype.label});`, (t) => {
 		t.is(primitive(datatype.value), true, 'should be true');
 	});
 });
 
 datatypes.all.iterate(datatype => {
 	if (primitive(datatype.value) === false) {
-		test(`${datatype.id} • primitive(${datatype.label}); // false`, (t) => {
+		test(`${datatype.id} • primitive(${datatype.label});`, (t) => {
 			t.is(primitive(datatype.value), false, 'should be false');
 		});
 	}

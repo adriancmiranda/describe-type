@@ -14,14 +14,14 @@ test('any exposure', (t) => {
 const errorCtors = datatypes.error.extract('ctor');
 const errorNames = datatypes.error.extract('name');
 datatypes.error.iterate(datatype => {
-	test(`${datatype.id} • any([${errorNames}], ${datatype.label}); // true`, (t) => {
+	test(`${datatype.id} • any([${errorNames}], ${datatype.label});`, (t) => {
 		t.is(any(errorCtors, datatype.value), true, 'should be true');
 	});
 });
 
 datatypes.all.remove(datatypes.error);
 datatypes.all.iterate(datatype => {
-	test(`${datatype.id} • any([${errorNames}], ${datatype.label}); // false`, (t) => {
+	test(`${datatype.id} • any([${errorNames}], ${datatype.label});`, (t) => {
 		t.is(any(errorCtors, datatype.value), false, 'should be false');
 	});
 });

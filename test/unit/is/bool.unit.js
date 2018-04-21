@@ -12,14 +12,14 @@ test('bool exposure', (t) => {
 });
 
 datatypes.bool.iterate(datatype => {
-	test(`${datatype.id} • bool(${datatype.label}); // true`, (t) => {
+	test(`${datatype.id} • bool(${datatype.label});`, (t) => {
 		t.is(bool(datatype.value), true, 'should be true');
 	});
 });
 
 datatypes.all.iterate(datatype => {
 	if (bool(datatype.value) === false) {
-		test(`${datatype.id} • bool(${datatype.label}); // false`, (t) => {
+		test(`${datatype.id} • bool(${datatype.label});`, (t) => {
 			t.is(bool(datatype.value), false, 'should be false');
 		});
 	}

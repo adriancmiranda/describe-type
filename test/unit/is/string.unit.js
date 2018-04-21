@@ -12,14 +12,14 @@ test('string exposure', (t) => {
 });
 
 datatypes.string.iterate(datatype => {
-	test(`${datatype.id} • string(${datatype.label}); // true`, (t) => {
+	test(`${datatype.id} • string(${datatype.label});`, (t) => {
 		t.is(string(datatype.value), true, 'should be true');
 	});
 });
 
 datatypes.all.remove(datatypes.string);
 datatypes.all.iterate(datatype => {
-	test(`${datatype.id} • string(${datatype.label}); // false`, (t) => {
+	test(`${datatype.id} • string(${datatype.label});`, (t) => {
 		t.is(string(datatype.value), false, 'should be false');
 	});
 });

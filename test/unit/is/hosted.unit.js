@@ -13,14 +13,14 @@ test('hosted exposure', (t) => {
 
 datatypes.all.iterate(datatype => {
 	if (datatype.value != null) {
-		test(`${datatype.id} • hosted("foo", { foo: ${datatype.label} }); // true`, (t) => {
+		test(`${datatype.id} • hosted("foo", { foo: ${datatype.label} });`, (t) => {
 			t.is(hosted('foo', { foo: datatype.value }), true);
 		});
 	}
 });
 
 datatypes.primitive.iterate(datatype => {
-	test(`${datatype.id} • hosted("foo", { foo: ${datatype.label} }); // true`, (t) => {
+	test(`${datatype.id} • hosted("foo", { foo: ${datatype.label} });`, (t) => {
 		t.is(hosted('foo', { foo: datatype.value }), false);
 	});
 });

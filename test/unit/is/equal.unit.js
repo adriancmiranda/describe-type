@@ -24,7 +24,7 @@ const others = datatypes.all.extract(['label', 'value']).reverse();
 datatypes.all.iterate(datatype => {
 	const other = others[i];
 	if (equal(datatype.value, other.value) === false) {
-		test(`${datatype.id} • equal(${datatype.label}, ${other.label}); // false`, (t) => {
+		test(`${datatype.id} • equal(${datatype.label}, ${other.label});`, (t) => {
 			t.is(equal(datatype.value, other.value), false, 'should be false');
 		});
 	}

@@ -12,14 +12,14 @@ test('number exposure', (t) => {
 });
 
 datatypes.number.iterate(datatype => {
-	test(`${datatype.id} • number(${datatype.label}); // true`, (t) => {
+	test(`${datatype.id} • number(${datatype.label});`, (t) => {
 		t.is(number(datatype.value), true, 'should be true');
 	});
 });
 
 datatypes.all.iterate(datatype => {
 	if (number(datatype.value) === false) {
-		test(`${datatype.id} • number(${datatype.label}); // false`, (t) => {
+		test(`${datatype.id} • number(${datatype.label});`, (t) => {
 			t.is(number(datatype.value), false, 'should be false');
 		});
 	}

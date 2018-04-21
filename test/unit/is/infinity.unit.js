@@ -12,14 +12,14 @@ test('infinity exposure', (t) => {
 });
 
 datatypes.infinity.iterate(datatype => {
-	test(`${datatype.id} • infinity(${datatype.label}); // true`, (t) => {
+	test(`${datatype.id} • infinity(${datatype.label});`, (t) => {
 		t.is(infinity(datatype.value), true, 'should be true');
 	});
 });
 
 datatypes.all.remove(datatypes.infinity);
 datatypes.all.iterate(datatype => {
-	test(`${datatype.id} • infinity(${datatype.label}); // false`, (t) => {
+	test(`${datatype.id} • infinity(${datatype.label});`, (t) => {
 		t.is(infinity(datatype.value), false, 'should be false');
 	});
 });

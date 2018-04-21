@@ -12,13 +12,13 @@ test('jsonlike exposure', (t) => {
 });
 
 datatypes.jsonlike.iterate(datatype => {
-	test(`jsonlike(${datatype.label}); // true`, (t) => {
+	test(`jsonlike(${datatype.label});`, (t) => {
 		t.is(jsonlike(datatype.value), true, 'should be true');
 	});
 });
 
 datatypes.all.iterate(datatype => {
-	test(`jsonlike(${datatype.label}); // false`, (t) => {
+	test(`jsonlike(${datatype.label});`, (t) => {
 		t.is(jsonlike(datatype.value), false, 'should be false');
 	});
 });

@@ -14,7 +14,7 @@ test('within exposure', (t) => {
 	{ value: -2, start: -10, finish: -1 },
 	{ value: 4, start: 0, finish: 9 },
 ].forEach(datatype => {
-	test(`within(${String(datatype.value)}, ${String(datatype.start)}, ${String(datatype.finish)}); // true`, (t) => {
+	test(`within(${String(datatype.value)}, ${String(datatype.start)}, ${String(datatype.finish)});`, (t) => {
 		t.is(within(datatype.value, datatype.start, datatype.finish), true, 'should be true');
 	});
 });
@@ -23,7 +23,7 @@ test('within exposure', (t) => {
 	{ value: 0, start: -10, finish: -1 },
 	{ value: 10, start: 0, finish: 9 },
 ].forEach(datatype => {
-	test(`within(${String(datatype.value)}, ${String(datatype.start)}, ${String(datatype.finish)}); // false`, (t) => {
+	test(`within(${String(datatype.value)}, ${String(datatype.start)}, ${String(datatype.finish)});`, (t) => {
 		t.is(within(datatype.value, datatype.start, datatype.finish), false, 'should be false');
 	});
 });

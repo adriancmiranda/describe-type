@@ -12,14 +12,14 @@ test('hex exposure', (t) => {
 });
 
 datatypes.hex.iterate(datatype => {
-	test(`${datatype.id} • hex(${datatype.label}); // true`, (t) => {
+	test(`${datatype.id} • hex(${datatype.label});`, (t) => {
 		t.is(hex(datatype.value), true, 'should be true');
 	});
 });
 
 datatypes.all.remove(datatypes.string);
 datatypes.all.iterate(datatype => {
-	test(`${datatype.id} • hex(${datatype.label}); // false`, (t) => {
+	test(`${datatype.id} • hex(${datatype.label});`, (t) => {
 		t.is(hex(datatype.value), false, 'should be false');
 	});
 });

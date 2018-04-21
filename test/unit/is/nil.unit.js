@@ -12,14 +12,14 @@ test('nil exposure', (t) => {
 });
 
 datatypes.nil.iterate(datatype => {
-	test(`${datatype.id} • nil(${datatype.label}); // true`, (t) => {
+	test(`${datatype.id} • nil(${datatype.label});`, (t) => {
 		t.is(nil(datatype.value), true, 'should be true');
 	});
 });
 
 datatypes.all.iterate(datatype => {
 	if (nil(datatype.value) === false) {
-		test(`${datatype.id} • nil(${datatype.label}); // false`, (t) => {
+		test(`${datatype.id} • nil(${datatype.label});`, (t) => {
 			t.is(nil(datatype.value), false, 'should be false');
 		});
 	}

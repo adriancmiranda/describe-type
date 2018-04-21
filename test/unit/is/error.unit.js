@@ -12,14 +12,14 @@ test('error exposure', (t) => {
 });
 
 datatypes.error.iterate(datatype => {
-	test(`${datatype.id} • error(${datatype.label}); // true`, (t) => {
+	test(`${datatype.id} • error(${datatype.label});`, (t) => {
 		t.is(error(datatype.value), true, 'should be true');
 	});
 });
 
 datatypes.all.iterate(datatype => {
 	if (error(datatype.value) === false) {
-		test(`${datatype.id} • error(${datatype.label}); // false`, (t) => {
+		test(`${datatype.id} • error(${datatype.label});`, (t) => {
 			t.is(error(datatype.value), false, 'should be false');
 		});
 	}

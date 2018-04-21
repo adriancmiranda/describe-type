@@ -12,13 +12,13 @@ test('nativeFunction exposure', (t) => {
 });
 
 datatypes.nativeFunction.iterate(datatype => {
-	test(`${datatype.id} • nativeFunction(${datatype.label}); // true`, (t) => {
+	test(`${datatype.id} • nativeFunction(${datatype.label});`, (t) => {
 		t.is(nativeFunction(datatype.value), true, 'should be true');
 	});
 });
 
 datatypes.all.iterate(datatype => {
-	test(`${datatype.id} • nativeFunction(${datatype.label}); // false`, (t) => {
+	test(`${datatype.id} • nativeFunction(${datatype.label});`, (t) => {
 		t.is(nativeFunction(datatype.value), false, 'should be false');
 	});
 });

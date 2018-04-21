@@ -12,14 +12,14 @@ test('symbol exposure', (t) => {
 });
 
 datatypes.symbol.iterate(datatype => {
-	test(`${datatype.id} • symbol(${datatype.label}); // true`, (t) => {
+	test(`${datatype.id} • symbol(${datatype.label});`, (t) => {
 		t.is(symbol(datatype.value), true, 'should be true');
 	});
 });
 
 datatypes.all.remove(datatypes.symbol);
 datatypes.all.iterate(datatype => {
-	test(`${datatype.id} • symbol(${datatype.label}); // false`, (t) => {
+	test(`${datatype.id} • symbol(${datatype.label});`, (t) => {
 		t.is(symbol(datatype.value), false, 'should be false');
 	});
 });

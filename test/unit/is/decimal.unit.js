@@ -12,14 +12,14 @@ test('decimal exposure', (t) => {
 });
 
 datatypes.decimal.iterate(datatype => {
-	test(`${datatype.id} • decimal(${datatype.label}); // true`, (t) => {
+	test(`${datatype.id} • decimal(${datatype.label});`, (t) => {
 		t.is(decimal(datatype.value), true, 'should be true');
 	});
 });
 
 datatypes.all.remove(datatypes.decimal);
 datatypes.all.iterate(datatype => {
-	test(`${datatype.id} • decimal(${datatype.label}); // false`, (t) => {
+	test(`${datatype.id} • decimal(${datatype.label});`, (t) => {
 		t.is(decimal(datatype.value), false, 'should be false');
 	});
 });

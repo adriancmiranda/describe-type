@@ -12,14 +12,14 @@ test('object exposure', (t) => {
 });
 
 datatypes.object.iterate(datatype => {
-	test(`${datatype.id} • object(${datatype.label}); // true`, (t) => {
+	test(`${datatype.id} • object(${datatype.label});`, (t) => {
 		t.is(object(datatype.value), true, 'should be true');
 	});
 });
 
 datatypes.all.iterate(datatype => {
 	if (object(datatype.value) === false) {
-		test(`${datatype.id} • object(${datatype.label}); // false`, (t) => {
+		test(`${datatype.id} • object(${datatype.label});`, (t) => {
 			t.is(object(datatype.value), false, 'should be false');
 		});
 	}

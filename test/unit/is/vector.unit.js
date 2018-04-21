@@ -23,7 +23,7 @@ test('vector exposure', (t) => {
 	{ type: Boolean, value: [true, false, true] },
 	{ type: RegExp, value: [/foo/, /bar/, /baz/] },
 ].forEach(datatype => {
-	test(`vector(${constructorNameOf(datatype.type)}, ${toSource(datatype.value)}); // true`, (t) => {
+	test(`vector(${constructorNameOf(datatype.type)}, ${toSource(datatype.value)});`, (t) => {
 		t.is(vector(datatype.type, datatype.value), true, 'should be true');
 	});
 });
@@ -36,7 +36,7 @@ test('vector exposure', (t) => {
 	{ type: Object, value: [true, false, true] },
 	{ type: Boolean, value: [/foo/, /bar/, /baz/] },
 ].forEach(datatype => {
-	test(`vector(${constructorNameOf(datatype.type)}, ${toSource(datatype.value)}); // false`, (t) => {
+	test(`vector(${constructorNameOf(datatype.type)}, ${toSource(datatype.value)});`, (t) => {
 		t.is(vector(datatype.value), false, 'should be false');
 	});
 });

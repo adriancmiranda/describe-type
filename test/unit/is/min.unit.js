@@ -16,7 +16,7 @@ test('min exposure', (t) => {
 	{ valueA: -3, valueB: [-2, -1, -3] },
 	{ valueA: 2, valueB: [2, 3, 14, 9] },
 ].forEach(datatype => {
-	test(`min(${String(datatype.valueA)}, ${toSource(datatype.valueB)}); // true`, (t) => {
+	test(`min(${String(datatype.valueA)}, ${toSource(datatype.valueB)});`, (t) => {
 		t.is(min(datatype.valueA, datatype.valueB), true);
 	});
 });
@@ -26,7 +26,7 @@ test('min exposure', (t) => {
 	{ valueA: 0, valueB: [] },
 	{ valueA: 4, valueB: [2, 3, 4, 0] },
 ].forEach(datatype => {
-	test(`min(${String(datatype.valueA)}, ${toSource(datatype.valueB)}); // false`, (t) => {
+	test(`min(${String(datatype.valueA)}, ${toSource(datatype.valueB)});`, (t) => {
 		t.is(min(datatype.valueA, datatype.valueB), false);
 	});
 });

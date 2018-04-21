@@ -12,7 +12,7 @@ test('odd exposure', (t) => {
 });
 
 datatypes.odd.iterate(datatype => {
-	test(`${datatype.id} • odd(${datatype.label}); // true`, (t) => {
+	test(`${datatype.id} • odd(${datatype.label});`, (t) => {
 		t.is(odd(datatype.value), true, 'should be true');
 	});
 });
@@ -22,7 +22,7 @@ datatypes.all.remove(datatypes.decimal);
 datatypes.all.remove(datatypes.number);
 datatypes.all.add(datatypes.even);
 datatypes.all.iterate(datatype => {
-	test(`${datatype.id} • odd(${datatype.label}); // false`, (t) => {
+	test(`${datatype.id} • odd(${datatype.label});`, (t) => {
 		t.is(odd(datatype.value), false, 'should be false');
 	});
 });

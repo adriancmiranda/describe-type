@@ -13,14 +13,14 @@ test('exotic exposure', (t) => {
 
 datatypes.all.iterate(datatype => {
 	if (datatype.value != null) {
-		test(`${datatype.id} • exotic(${datatype.label}); // true`, (t) => {
+		test(`${datatype.id} • exotic(${datatype.label});`, (t) => {
 			t.is(exotic(datatype.value), true, 'should be true');
 		});
 	}
 });
 
 datatypes.primitive.iterate(datatype => {
-	test(`${datatype.id} • exotic(${datatype.label}); // false`, (t) => {
+	test(`${datatype.id} • exotic(${datatype.label});`, (t) => {
 		t.is(exotic(datatype.value), false, 'should be false');
 	});
 });

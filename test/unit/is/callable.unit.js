@@ -12,14 +12,14 @@ test('callable exposure', (t) => {
 });
 
 datatypes.callable.iterate(datatype => {
-	test(`${datatype.id} • callable(${datatype.label}); // true`, (t) => {
+	test(`${datatype.id} • callable(${datatype.label});`, (t) => {
 		t.is(callable(datatype.value), true, 'should be true');
 	});
 });
 
 datatypes.all.iterate(datatype => {
 	if (callable(datatype.value) === false) {
-		test(`${datatype.id} • callable(${datatype.label}); // false`, (t) => {
+		test(`${datatype.id} • callable(${datatype.label});`, (t) => {
 			t.is(callable(datatype.value), false, 'should be false');
 		});
 	}

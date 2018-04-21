@@ -12,14 +12,14 @@ test('date exposure', (t) => {
 });
 
 datatypes.date.iterate(datatype => {
-	test(`${datatype.id} • date(${datatype.label}); // true`, (t) => {
+	test(`${datatype.id} • date(${datatype.label});`, (t) => {
 		t.is(date(datatype.value), true, 'should be true');
 	});
 });
 
 datatypes.all.iterate(datatype => {
 	if (date(datatype.value) === false) {
-		test(`${datatype.id} • date(${datatype.label}); // false`, (t) => {
+		test(`${datatype.id} • date(${datatype.label});`, (t) => {
 			t.is(date(datatype.value), false, 'should be false');
 		});
 	}

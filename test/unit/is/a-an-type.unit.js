@@ -42,14 +42,14 @@ test('/^(a(n)?|type)$/ aliases', t => {
 
 // datatypes.all.iterate(datatype => {
 // 	const fnName = /^-?[aeiouy]/i.test(datatype.slug) ? 'an' : 'a';
-// 	test(`${datatype.id} • ${fnName}(${datatype.slug}, ${datatype.label}); // true`, (t) => {
+// 	test(`${datatype.id} • ${fnName}(${datatype.slug}, ${datatype.label});`, (t) => {
 // 		t.is(is[fnName](datatype.ctor, datatype.value), true, 'should be true');
 // 	});
 // });
 
 // 	datatypes.all.remove(datatypes.undef);
 // 	datatypes.all.iterate(datatype => {
-// 		test(`${datatype.id} • an(undefined, ${datatype.label}); // false`, (t) => {
+// 		test(`${datatype.id} • an(undefined, ${datatype.label});`, (t) => {
 // 			t.is(is.an(undefined, datatype.value), false, 'should be false');
 // 		});
 // 	});
@@ -57,7 +57,7 @@ test('/^(a(n)?|type)$/ aliases', t => {
 
 // 	datatypes.all.remove(datatypes.nil);
 // 	datatypes.all.iterate(datatype => {
-// 		test(`${datatype.id} • a(null, ${datatype.label}); // false`, (t) => {
+// 		test(`${datatype.id} • a(null, ${datatype.label});`, (t) => {
 // 			t.is(is.a(null, datatype.value), false, 'should be false');
 // 		});
 // 	});
@@ -65,7 +65,7 @@ test('/^(a(n)?|type)$/ aliases', t => {
 
 // 	datatypes.all.remove(datatypes.bool);
 // 	datatypes.all.iterate(datatype => {
-// 		test(`${datatype.id} • a(Boolean, ${datatype.label}); // false`, (t) => {
+// 		test(`${datatype.id} • a(Boolean, ${datatype.label});`, (t) => {
 // 			t.is(is.a(Boolean, datatype.value), false, 'should be false');
 // 		});
 // 	});
@@ -73,7 +73,7 @@ test('/^(a(n)?|type)$/ aliases', t => {
 
 // 	datatypes.all.remove(datatypes.string);
 // 	datatypes.all.iterate(datatype => {
-// 		test(`${datatype.id} • a(String, ${datatype.label}); // false`, (t) => {
+// 		test(`${datatype.id} • a(String, ${datatype.label});`, (t) => {
 // 			t.is(is.a(String, datatype.value), false, 'should be false');
 // 		});
 // 	});
@@ -82,7 +82,7 @@ test('/^(a(n)?|type)$/ aliases', t => {
 // 	datatypes.all.remove(datatypes.args);
 // 	datatypes.all.remove(datatypes.object);
 // 	datatypes.all.iterate(datatype => {
-// 		test(`${datatype.id} • an(Object, ${datatype.label}); // false`, (t) => {
+// 		test(`${datatype.id} • an(Object, ${datatype.label});`, (t) => {
 // 			t.is(is.an(Object, datatype.value), false, 'should be false');
 // 		});
 // 	});
@@ -91,7 +91,7 @@ test('/^(a(n)?|type)$/ aliases', t => {
 
 // 	datatypes.all.remove(datatypes.array);
 // 	datatypes.all.iterate(datatype => {
-// 		test(`${datatype.id} • an(Array, ${datatype.label}); // false`, (t) => {
+// 		test(`${datatype.id} • an(Array, ${datatype.label});`, (t) => {
 // 			t.is(is.an(Array, datatype.value), false, 'should be false');
 // 		});
 // 	});
@@ -99,7 +99,7 @@ test('/^(a(n)?|type)$/ aliases', t => {
 
 // 	datatypes.all.remove(datatypes.callable);
 // 	datatypes.all.iterate(datatype => {
-// 		test(`${datatype.id} • a(Function, ${datatype.label}); // false`, (t) => {
+// 		test(`${datatype.id} • a(Function, ${datatype.label});`, (t) => {
 // 			t.is(is.a(Function, datatype.value), false, 'should be false');
 // 		});
 // 	});
@@ -107,7 +107,7 @@ test('/^(a(n)?|type)$/ aliases', t => {
 
 // 	datatypes.all.remove(datatypes.number);
 // 	datatypes.all.iterate(datatype => {
-// 		test(`${datatype.id} • a(Number, ${datatype.label}); // false`, (t) => {
+// 		test(`${datatype.id} • a(Number, ${datatype.label});`, (t) => {
 // 			t.is(is.a(Number, datatype.value), false, 'should be false');
 // 		});
 // 	});
@@ -115,7 +115,7 @@ test('/^(a(n)?|type)$/ aliases', t => {
 
 // 	datatypes.all.remove(datatypes.regexp);
 // 	datatypes.all.iterate(datatype => {
-// 		test(`${datatype.id} • a(RegExp, ${datatype.label}); // false`, (t) => {
+// 		test(`${datatype.id} • a(RegExp, ${datatype.label});`, (t) => {
 // 			t.is(is.a(RegExp, datatype.value), false, 'should be false');
 // 		});
 // 	});
@@ -123,7 +123,7 @@ test('/^(a(n)?|type)$/ aliases', t => {
 
 // 	datatypes.all.remove(datatypes.date);
 // 	datatypes.all.iterate(datatype => {
-// 		test(`${datatype.id} • a(Date, ${datatype.label}); // false`, (t) => {
+// 		test(`${datatype.id} • a(Date, ${datatype.label});`, (t) => {
 // 			t.is(is.a(Date, datatype.value), false, 'should be false');
 // 		});
 // 	});

@@ -16,17 +16,17 @@ test('stream exposure', (t) => {
 });
 
 test('stream.writable exposure', (t) => {
-	t.is(stream.writable, '[object Function]', 'should be a function');
+	t.is(toString.call(stream.writable), '[object Function]', 'should be a function');
 });
 
 test('stream.readable exposure', (t) => {
-	t.is(stream.readable, '[object Function]', 'should be a function');
+	t.is(toString.call(stream.readable), '[object Function]', 'should be a function');
 });
 
 test('stream.duplex exposure', (t) => {
-	t.is(stream.duplex, '[object Function]', 'should be a function');
+	t.is(toString.call(stream.duplex), '[object Function]', 'should be a function');
 });
 
 test('stream.transform exposure', (t) => {
-	t.is(stream.transform, '[object Function]', 'should be a function');
+	t.is(toString.call(stream.transform), '[object Function]', 'should be a function');
 });

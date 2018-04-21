@@ -12,14 +12,14 @@ test('base64 exposure', (t) => {
 });
 
 datatypes.base64.iterate(datatype => {
-	test(`${datatype.id} • base64(${datatype.label}); // true`, (t) => {
+	test(`${datatype.id} • base64(${datatype.label});`, (t) => {
 		t.is(base64(datatype.value), true, 'should be true');
 	});
 });
 
 datatypes.all.remove(datatypes.string);
 datatypes.all.iterate(datatype => {
-	test(`${datatype.id} • base64(${datatype.label}); // false`, (t) => {
+	test(`${datatype.id} • base64(${datatype.label});`, (t) => {
 		t.is(base64(datatype.value), false, 'should be false');
 	});
 });

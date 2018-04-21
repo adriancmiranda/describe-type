@@ -12,7 +12,7 @@ test('even exposure', (t) => {
 });
 
 datatypes.even.iterate(datatype => {
-	test(`${datatype.id} • even(${datatype.label}); // true`, (t) => {
+	test(`${datatype.id} • even(${datatype.label});`, (t) => {
 		t.is(even(datatype.value), true, 'should be true');
 	});
 });
@@ -20,7 +20,7 @@ datatypes.even.iterate(datatype => {
 datatypes.all.remove(datatypes.number);
 datatypes.all.add(datatypes.odd);
 datatypes.all.iterate(datatype => {
-	test(`${datatype.id} • even(${datatype.label}); // false`, (t) => {
+	test(`${datatype.id} • even(${datatype.label});`, (t) => {
 		t.is(even(datatype.value), false, 'should be false');
 	});
 });

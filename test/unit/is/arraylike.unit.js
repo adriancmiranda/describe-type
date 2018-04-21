@@ -12,13 +12,13 @@ test('arraylike exposure', (t) => {
 });
 
 datatypes.arraylike.iterate(datatype => {
-	test(`${datatype.id} • arraylike(${datatype.label}); // true`, (t) => {
+	test(`${datatype.id} • arraylike(${datatype.label});`, (t) => {
 		t.is(arraylike(datatype.value), true, 'should be true');
 	});
 });
 
 datatypes.notArraylike.iterate(datatype => {
-	test(`${datatype.id} • arraylike(${datatype.label}); // false`, (t) => {
+	test(`${datatype.id} • arraylike(${datatype.label});`, (t) => {
 		t.is(arraylike(datatype.value), false, 'should be false');
 	});
 });

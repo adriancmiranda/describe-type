@@ -12,14 +12,14 @@ test('array exposure', (t) => {
 });
 
 datatypes.array.iterate(datatype => {
-	test(`${datatype.id} • array(${datatype.label}); // true`, (t) => {
+	test(`${datatype.id} • array(${datatype.label});`, (t) => {
 		t.is(array(datatype.value), true, 'should be true');
 	});
 });
 
 datatypes.all.iterate(datatype => {
 	if (array(datatype.value) === false) {
-		test(`${datatype.id} • array(${datatype.label}); // false`, (t) => {
+		test(`${datatype.id} • array(${datatype.label});`, (t) => {
 			t.is(array(datatype.value), false, 'should be false');
 		});
 	}

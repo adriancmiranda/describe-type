@@ -12,7 +12,7 @@ test('numeric exposure', (t) => {
 });
 
 datatypes.numeric.iterate(datatype => {
-	test(`${datatype.id} • numeric(${datatype.label}); // true`, (t) => {
+	test(`${datatype.id} • numeric(${datatype.label});`, (t) => {
 		t.is(numeric(datatype.value), true, 'should be true');
 	});
 });
@@ -25,7 +25,7 @@ datatypes.all.remove(datatypes.bool);
 datatypes.all.remove(datatypes.arraylikeNative);
 datatypes.all.remove(datatypes.arrayFilled);
 datatypes.all.iterate(datatype => {
-	test(`${datatype.id} • numeric(${datatype.label}); // false`, (t) => {
+	test(`${datatype.id} • numeric(${datatype.label});`, (t) => {
 		t.is(numeric(datatype.value), false, 'should be false');
 	});
 });
