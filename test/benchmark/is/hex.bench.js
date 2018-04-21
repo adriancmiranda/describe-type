@@ -8,7 +8,7 @@ const hex1 = h => parseInt(h, 16).toString(16) === h.toLowerCase();
 numbers.iterate((datatype) => {
 	const suite = new Suite();
 
-	suite.add(`is.hex(${datatype.name})`, () => {
+	suite.add(`describeType.is.hex(${datatype.name})`, () => {
 		return hex0(datatype.data);
 	});
 

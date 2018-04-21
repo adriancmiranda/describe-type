@@ -1,6 +1,7 @@
+import test from 'ava';
 import * as type from '~';
 
-describe('#stringOf', function () {
+test('#stringOf', function () {
 	it('exposed', function () {
 		expect(type.stringOf).toEqual(jasmine.any(Function));
 	});

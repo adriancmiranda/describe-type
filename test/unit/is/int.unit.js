@@ -1,12 +1,13 @@
+import test from 'ava';
 import * as datatypes from 'fixtures/datatypes.fixture.js';
 import * as is from '../../../is';
 
-describe('#int', () => {
+test('#int', () => {
 	it('O método "int" deve existir no escopo do módulo "is"', () => {
 		expect(is.int).toEqual(jasmine.any(Function));
 	});
 
-	describe('true', () => {
+	test('true', () => {
 		datatypes.int.add(datatypes.zero);
 		datatypes.int.iterate(datatype => {
 			it(`${datatype.id} • int(${datatype.label}); // true`, () => {
@@ -16,7 +17,7 @@ describe('#int', () => {
 		datatypes.int.remove(datatypes.zero);
 	});
 
-	describe('false', () => {
+	test('false', () => {
 		datatypes.decimal.iterate(datatype => {
 			it(`${datatype.id} • int(${datatype.label}); // true`, () => {
 				expect(is.int(datatype.value)).toBe(false);

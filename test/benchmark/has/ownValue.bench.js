@@ -22,7 +22,7 @@ new Suite()
 	value.indexOf(')') != -1;
 })
 
-.add('describeType.ownValue', () => {
+.add('describeType.has.ownValue', () => {
 	ownValue(value, ')');
 })
 

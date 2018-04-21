@@ -9,7 +9,7 @@ new Suite()
 	value.map(parseFloat);
 })
 
-.add('floatOf', () => {
+.add('describeType.floatOf', () => {
 	value.map(floatOf);
 })
 

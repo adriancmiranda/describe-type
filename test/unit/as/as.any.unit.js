@@ -1,7 +1,8 @@
+import test from 'ava';
 import * as type from '~';
 
 // TODO:
-describe('as', function () {
+test('as', function () {
 	// it('exposed', function () {
 	// 	expect(type.as).toEqual(jasmine.any(Function));
 	// });

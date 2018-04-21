@@ -1,7 +1,8 @@
+import test from 'ava';
 import Custom from 'fixtures/datatype/types/custom';
 import * as type from '~';
 
-describe('#typeOf', function () {
+test('#typeOf', function () {
 	it('exposed', function () {
 		expect(type.typeOf).toEqual(jasmine.any(Function));
 	});
@@ -259,7 +260,7 @@ describe('#typeOf', function () {
 	}
 });
 
-describe('typeOf.generatorFunction', function () {
+test('typeOf.generatorFunction', function () {
 	it('', function () {
 		// const genFn = function* () { yield 2; return Infinity; };
 		// expect(type.typeOf(genFn)).toEqual('GeneratorFunction');

@@ -1,12 +1,13 @@
+import test from 'ava';
 import * as datatypes from 'fixtures/datatypes.fixture.js';
 import * as is from '../../../is';
 
-describe('#not', () => {
+test('#not', () => {
 	it('O método "not" deve existir no escopo do módulo "is"', () => {
 		expect(is.not).toEqual(jasmine.any(Function));
 	});
 
-	describe('true', () => {
+	test('true', () => {
 		datatypes.all.remove(datatypes.undef);
 		datatypes.all.iterate(datatype => {
 			it(`${datatype.id} • not(undefined, ${datatype.label}); // true`, () => {
@@ -89,7 +90,7 @@ describe('#not', () => {
 		datatypes.all.add(datatypes.date);
 	});
 
-	describe('false', () => {
+	test('false', () => {
 	});
 });
 

@@ -1,12 +1,13 @@
+import test from 'ava';
 import * as datatypes from 'fixtures/datatypes.fixture.js';
 import * as is from '../../../is';
 
-describe('#even', () => {
+test('#even', () => {
 	it('O método "even" deve existir no escopo do módulo "is"', () => {
 		expect(is.even).toEqual(jasmine.any(Function));
 	});
 
-	describe('true', () => {
+	test('true', () => {
 		datatypes.even.iterate(datatype => {
 			it(`${datatype.id} • even(${datatype.label}); // true`, () => {
 				expect(is.even(datatype.value)).toBe(true);
@@ -14,7 +15,7 @@ describe('#even', () => {
 		});
 	});
 
-	describe('false', () => {
+	test('false', () => {
 		datatypes.all.remove(datatypes.number);
 		datatypes.all.add(datatypes.odd);
 		datatypes.all.iterate(datatype => {

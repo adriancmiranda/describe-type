@@ -3,11 +3,11 @@ const { is } = require('../../../source');
 
 new Suite()
 
-.add('is.not.infinity', () => {
+.add('describeType.is.not.infinity', () => {
 	return is.not.infinity(Infinity);
 })
 
-.add('is.infinity', () => {
+.add('describeType.is.infinity', () => {
 	return is.infinity(Infinity);
 })
 

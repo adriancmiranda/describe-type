@@ -23,7 +23,7 @@ new Suite()
 	cachedSlice2.call(value, 24, 42);
 })
 
-.add('describeType.slice', () => {
+.add('describeType.internal.slice', () => {
 	slice(value, 24, 42);
 })
 

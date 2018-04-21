@@ -1,7 +1,8 @@
+import test from 'ava';
 import Custom from 'fixtures/datatype/types/custom';
 import * as type from '~';
 
-describe('#name', function () {
+test('#name', function () {
 	it('exposed', function () {
 		expect(type.name).toEqual(jasmine.any(Function));
 	});

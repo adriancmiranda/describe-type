@@ -1,12 +1,13 @@
+import test from 'ava';
 import * as datatypes from 'fixtures/datatypes.fixture.js';
 import * as is from '../../../is';
 
-describe('#error', () => {
+test('#error', () => {
 	it('O método "error" deve existir no escopo do módulo "is"', () => {
 		expect(is.error).toEqual(jasmine.any(Function));
 	});
 
-	describe('true', () => {
+	test('true', () => {
 		datatypes.error.iterate(datatype => {
 			it(`${datatype.id} • error(${datatype.label}); // true`, () => {
 				expect(is.error(datatype.value)).toBe(true);
@@ -14,7 +15,7 @@ describe('#error', () => {
 		});
 	});
 
-	describe('false', () => {
+	test('false', () => {
 		datatypes.all.iterate(datatype => {
 			if (!is.error(datatype.value)) {
 				it(`${datatype.id} • error(${datatype.label}); // false`, () => {

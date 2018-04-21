@@ -1,12 +1,13 @@
+import test from 'ava';
 import { toSource, constructorNameOf } from 'fixtures/datatype/utils';
 import * as is from '../../../is';
 
-describe('#vector', () => {
+test('#vector', () => {
 	it('O método "vector" deve existir no escopo do módulo "is"', () => {
 		expect(is.vector).toEqual(jasmine.any(Function));
 	});
 
-	describe('true', () => {
+	test('true', () => {
 		[
 			{ type: Number, value: [1, 2, 3, 4.5, 2] },
 			{ type: Number, value: [0, -1, -2, -4.5, -20] },
@@ -25,7 +26,7 @@ describe('#vector', () => {
 		});
 	});
 
-	describe('false', () => {
+	test('false', () => {
 		[
 			{ type: String, value: [1, 2, 3, 4.5, 2] },
 			{ type: Array, value: [0, -1, -2, -4.5, -20] },

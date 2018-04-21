@@ -3,7 +3,7 @@ const { is } = require('../../../source');
 
 new Suite()
 
-.add('is.an(undefined, undefined)', () => {
+.add('describeType.is.an(undefined, undefined)', () => {
 	return is.an(undefined, undefined);
 })
 

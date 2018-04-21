@@ -9,7 +9,7 @@ const nan2 = vendor.nan;
 number.iterate((datatype) => {
 	const suite = new Suite();
 
-	suite.add(`is.nan(${datatype.name})`, () => {
+	suite.add(`describeType.is.nan(${datatype.name})`, () => {
 		return nan1(datatype.data);
 	});
 

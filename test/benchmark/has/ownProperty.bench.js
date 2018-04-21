@@ -43,7 +43,7 @@ new Suite()
 	cachedHasOwnProperty.call(value, ')');
 })
 
-.add('describeType.ownProperty', () => {
+.add('describeType.has.ownProperty', () => {
 	ownProperty(value, ')');
 })
 

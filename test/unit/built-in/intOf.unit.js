@@ -1,6 +1,7 @@
+import test from 'ava';
 import * as type from '~';
 
-describe('#intOf', function () {
+test('#intOf', function () {
 	it('exposed', function () {
 		expect(type.intOf).toEqual(jasmine.any(Function));
 	});

@@ -9,11 +9,11 @@ all.iterate((datatype) => {
 	const seal = datatype.seal;
 	const suite = new Suite();
 
-	suite.add(`is.a(${name})`, () => {
+	suite.add(`describeType.is.a(${name})`, () => {
 		return is.a(type, data);
 	});
 
-	suite.add(`is.any(${name})`, () => {
+	suite.add(`describeType.is.any(${name})`, () => {
 		return is.any(type, data);
 	});
 

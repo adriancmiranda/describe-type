@@ -7,7 +7,29 @@ test('#a exposure', t => {
 	t.is(toString.call(is.a), '[object Function]');
 });
 
-// describe('#^a(n)?$', () => {
+test('#a.type special cases', t => {
+	t.is(is.a(Object, { constructor: 'foo' }), true);
+	t.is(is.a(Object, { constructor: () => {} }), true);
+	t.is(is.a(Object, { constructor: function() {} }), true);
+	t.is(is.a(Object, { constructor: function unit() {} }), true);
+	t.is(is.a(Object, { constructor: Object }), true;
+	t.is(is.a(Object, { constructor: Number }), true);
+	t.is(is.a(Object, { constructor: Function }), true);
+	t.is(is.a(Object, new Number(666)), false);
+	t.is(is.a(Object, 'nop'), false);
+	t.is(is.a(Object, Math), false);
+	t.is(is.a(Math, Math), true);
+
+	// In global scope
+	const inNode = new Function('try{return this===global;}catch(err){return false;}')();
+	const env = inNode ? global : window;
+	const envCtor = env.constructor;
+	env.constructor = Object;
+	t.is(is.a(Object, this), false); // should be global type yet.
+	env.constructor = envCtor;
+});
+
+// test('#^a(n)?$', () => {
 // 	it('O método "a" deve existir no escopo do módulo "is"', () => {
 // 		expect(is.a).toEqual(jasmine.any(Function));
 // 	});
@@ -16,7 +38,7 @@ test('#a exposure', t => {
 // 		expect(is.an).toEqual(is.a);
 // 	});
 
-// 	describe('true', () => {
+// 	test('true', () => {
 // 		datatypes.all.iterate(datatype => {
 // 			const fnName = /^-?[aeiou]/i.test(datatype.slug) ? 'an' : 'a';
 // 			it(`${datatype.id} • ${fnName}(${datatype.slug}, ${datatype.label}); // true`, () => {
@@ -25,7 +47,7 @@ test('#a exposure', t => {
 // 		});
 // 	});
 
-// 	describe('false', () => {
+// 	test('false', () => {
 // 		datatypes.all.remove(datatypes.undef);
 // 		datatypes.all.iterate(datatype => {
 // 			it(`${datatype.id} • an(undefined, ${datatype.label}); // false`, () => {

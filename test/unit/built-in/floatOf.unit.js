@@ -1,6 +1,7 @@
+import test from 'ava';
 import * as type from '~';
 
-describe('#floatOf', function () {
+test('#floatOf', function () {
 	it('exposed', function () {
 		expect(type.floatOf).toEqual(jasmine.any(Function));
 	});

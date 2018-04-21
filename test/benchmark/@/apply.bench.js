@@ -10,7 +10,7 @@ new Suite()
 	fn.apply(this, value);
 })
 
-.add('apply(fn)', () => {
+.add('describeType.internal.apply(fn)', () => {
 	apply(fn, this, value);
 })
 

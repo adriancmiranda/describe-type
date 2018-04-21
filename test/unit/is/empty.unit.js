@@ -1,8 +1,9 @@
+import test from 'ava';
 import * as datatypes from 'fixtures/datatypes.fixture';
 import * as is from '../../../is';
 
-describe('#empty', () => {
-	describe('true', () => {
+test('#empty', () => {
+	test('true', () => {
 		datatypes.empty.iterate(datatype => {
 			it(`${datatype.id} • empty(${datatype.label}); // true`, () => {
 				expect(is.empty(datatype.value)).toBe(true);
@@ -10,7 +11,7 @@ describe('#empty', () => {
 		});
 	});
 
-	describe('false', () => {
+	test('false', () => {
 		datatypes.filled.iterate(datatype => {
 			it(`${datatype.id} • empty(${datatype.label}); // false`, () => {
 				expect(is.empty(datatype.value)).toBe(false);

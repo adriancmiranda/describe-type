@@ -1,12 +1,13 @@
+import test from 'ava';
 import { toSource } from 'fixtures/datatype/utils';
 import * as is from '../../../is';
 
-describe('#max', () => {
+test('#max', () => {
 	it('O método "max" deve existir no escopo do módulo "is"', () => {
 		expect(is.max).toEqual(jasmine.any(Function));
 	});
 
-	describe('true', () => {
+	test('true', () => {
 		[
 			{ valueA: 1, valueB: [0, -1, 1] },
 			{ valueA: -1, valueB: [-2, -1, -3] },
@@ -18,7 +19,7 @@ describe('#max', () => {
 		});
 	});
 
-	describe('false', () => {
+	test('false', () => {
 		[
 			{ valueA: 1, valueB: [] },
 			{ valueA: 0, valueB: [] },

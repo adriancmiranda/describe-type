@@ -1,7 +1,8 @@
+import test from 'ava';
 import * as datatypes from 'fixtures/datatypes.fixture.js';
 import * as is from '../../../is';
 
-describe('#stream', () => {
+test('#stream', () => {
 	it('O método "stream" deve existir no escopo do módulo "is"', () => {
 		expect(is.stream).toEqual(jasmine.any(Function));
 	});

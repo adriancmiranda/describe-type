@@ -1,12 +1,13 @@
+import test from 'ava';
 import * as datatypes from 'fixtures/datatypes.fixture.js';
 import * as is from '../../../is';
 
-describe('#args', () => {
+test('#args', () => {
 	it('O método "args" deve existir no escopo do módulo "is"', () => {
 		expect(is.args).toEqual(jasmine.any(Function));
 	});
 
-	describe('true', () => {
+	test('true', () => {
 		datatypes.args.iterate(datatype => {
 			it(`${datatype.id} • args(${datatype.label}); // true`, () => {
 				expect(is.args(datatype.value)).toBe(true);
@@ -14,7 +15,7 @@ describe('#args', () => {
 		});
 	});
 
-	describe('false', () => {
+	test('false', () => {
 		datatypes.all.add(datatypes.arraylikeObject);
 		datatypes.all.add(datatypes.arraylikeNative);
 		datatypes.all.remove(datatypes.args);

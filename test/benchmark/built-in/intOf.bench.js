@@ -15,7 +15,7 @@ new Suite()
 	value.map(i => parseInt(i.value, i.radix));
 })
 
-.add('intOf', () => {
+.add('describeType.intOf', () => {
 	value.map(i => intOf(i.value, i.radix));
 })
 

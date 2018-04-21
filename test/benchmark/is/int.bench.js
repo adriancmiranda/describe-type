@@ -11,7 +11,7 @@ new Suite()
 	return integer(Infinity);
 })
 
-.add('is.integer', () => {
+.add('describeType.is.integer', () => {
 	return is.integer(Infinity);
 })
 

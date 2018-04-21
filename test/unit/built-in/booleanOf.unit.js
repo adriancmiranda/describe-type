@@ -1,6 +1,7 @@
+import test from 'ava';
 import * as type from '~';
 
-describe('#booleanOf', function () {
+test('#booleanOf', function () {
 	it('exposed', function () {
 		expect(type.booleanOf).toEqual(jasmine.any(Function));
 	});

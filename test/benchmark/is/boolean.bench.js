@@ -3,11 +3,11 @@ const { is } = require('../../../source');
 
 new Suite()
 
-.add('is.a(Boolean, true)', () => {
+.add('describeType.is.a(Boolean, true)', () => {
 	return is.a(Boolean, true);
 })
 
-.add('is.bool(true)', () => {
+.add('describeType.is.bool(true)', () => {
 	return is.bool(true);
 })
 

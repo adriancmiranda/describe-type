@@ -3,7 +3,7 @@ const { is } = require('../../../source');
 
 new Suite()
 
-.add('is.a(String, "foo")', () => {
+.add('describeType.is.a(String, "foo")', () => {
 	return is.a(String, 'foo');
 })
 

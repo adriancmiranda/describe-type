@@ -1,11 +1,12 @@
+import test from 'ava';
 import * as is from '../../../is';
 
-describe('#within', () => {
+test('#within', () => {
 	it('O método "within" deve existir no escopo do módulo "is"', () => {
 		expect(is.within).toEqual(jasmine.any(Function));
 	});
 
-	describe('true', () => {
+	test('true', () => {
 		[
 			{ value: -2, start: -10, finish: -1 },
 			{ value: 4, start: 0, finish: 9 },
@@ -16,7 +17,7 @@ describe('#within', () => {
 		});
 	});
 
-	describe('false', () => {
+	test('false', () => {
 		[
 			{ value: 0, start: -10, finish: -1 },
 			{ value: 10, start: 0, finish: 9 },

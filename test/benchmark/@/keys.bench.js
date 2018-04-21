@@ -43,7 +43,7 @@ new Suite()
 	cachedKeys(value);
 })
 
-.add('describeType.keys', () => {
+.add('describeType.internal.keys', () => {
 	keys(value);
 })
 

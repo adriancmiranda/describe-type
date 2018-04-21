@@ -1,7 +1,8 @@
+import test from 'ava';
 import Custom from 'fixtures/datatype/types/custom';
 import * as type from '~';
 
-describe('constructorOf', function () {
+test('constructorOf', function () {
 	it('exposed', function () {
 		expect(type.constructorOf).toEqual(jasmine.any(Function));
 	});

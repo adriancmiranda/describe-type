@@ -1,12 +1,13 @@
+import test from 'ava';
 import * as datatypes from 'fixtures/datatypes.fixture';
 import * as is from '../../../is';
 
-describe('#equal', () => {
+test('#equal', () => {
 	it('O método "equal" deve existir no escopo do módulo "is"', () => {
 		expect(is.primitive).toEqual(jasmine.any(Function));
 	});
 
-	describe('true', () => {
+	test('true', () => {
 		datatypes.all.remove(datatypes.nan);
 		datatypes.all.iterate(datatype => {
 			it(`${datatype.id} • equal(${datatype.label}, ${datatype.label}) // true`, () => {
@@ -16,7 +17,7 @@ describe('#equal', () => {
 		datatypes.all.add(datatypes.nan);
 	});
 
-	describe('false', () => {
+	test('false', () => {
 		let i = 0;
 		const others = datatypes.all.extract(['label', 'value']).reverse();
 		datatypes.all.iterate(datatype => {

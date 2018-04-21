@@ -11,11 +11,11 @@ const primitive2 = vendor.primitive;
 all.iterate((datatype) => {
 	const suite = new Suite();
 
-	suite.add(`!is.exotic(${datatype.name})`, () => {
+	suite.add(`!describeType.is.exotic(${datatype.name})`, () => {
 		return primitive0(datatype);
 	});
 
-	suite.add(`is.primitive(${datatype.name})`, () => {
+	suite.add(`describeType.is.primitive(${datatype.name})`, () => {
 		return primitive1(datatype);
 	});
 

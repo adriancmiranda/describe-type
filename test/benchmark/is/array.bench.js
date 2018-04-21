@@ -3,11 +3,11 @@ const { is } = require('../../../source');
 
 new Suite()
 
-.add('is.an(Array, ["str", 1, { foo: "bar" }])', () => {
+.add('describeType.is.an(Array, ["str", 1, { foo: "bar" }])', () => {
 	return is.an(Array, ['str', 1, { foo: 'bar' }]);
 })
 
-.add('is.array(["str", 1, { foo: "bar" }])', () => {
+.add('describeType.is.array(["str", 1, { foo: "bar" }])', () => {
 	return is.array(['str', 1, { foo: 'bar' }]);
 })
 
