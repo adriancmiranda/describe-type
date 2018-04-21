@@ -1,5 +1,5 @@
-import array from './array.js';
-import string from './string.js';
+import array from '../array/array.js';
+import string from './string/string.js';
 
 /**
  *

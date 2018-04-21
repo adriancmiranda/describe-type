@@ -1,5 +1,5 @@
 import notAny from './not/not.any.js';
-import arraylike from './arraylike.js';
+import arraylike from './arraylike/arraylike.js';
 
 /**
  * TODO: a,an,any

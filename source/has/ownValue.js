@@ -1,4 +1,4 @@
-import arraylike from '../is/arraylike.js';
+import arraylike from '../is/arraylike/arraylike.js';
 
 /**
  *

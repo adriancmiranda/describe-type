@@ -1,6 +1,6 @@
+import arraylike from '../is/arraylike/arraylike.js';
+import string from '../is/string/string.js';
 import name from './name.js';
-import string from '../is/string.js';
-import arraylike from '../is/arraylike.js';
 
 /**
  *

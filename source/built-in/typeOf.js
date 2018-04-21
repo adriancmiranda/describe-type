@@ -1,5 +1,5 @@
 import infinity from '../is/infinity.js';
-import args from '../is/args.js';
+import args from '../is/args/args.js';
 import stringOf from '../built-in/stringOf.js';
 
 /**

@@ -1,6 +1,6 @@
 import { reToPropName } from '../@/patterns.js';
-import string from '../is/string.js';
-import object from '../is/object.js';
+import string from '../is/string/string.js';
+import object from '../is/object/object.js';
 import constructorNameOf from './constructorNameOf.js';
 import typeOf from './typeOf.js';
 

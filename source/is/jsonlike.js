@@ -1,5 +1,5 @@
 import { reIsJsonStart, reIsJsonEnds } from '../@/patterns.js';
-import string from './string.js';
+import string from './string/string.js';
 
 /**
  *

@@ -10,9 +10,9 @@ import assign from '../@/assign.js';
 import typify from '../built-in/typify.js';
 
 import any from '../is/any.js';
-import object from '../is/object.js';
-import string from '../is/string.js';
-import array from '../is/array.js';
+import object from '../is/object/object.js';
+import string from '../is/string/string.js';
+import array from '../is/array/array.js';
 import notType from '../is/not/not.type.js';
 import notAny from '../is/not/not.any.js';
 import notInstanceOf from '../is/not/not.instanceOf.js';

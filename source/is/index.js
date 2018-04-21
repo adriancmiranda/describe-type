@@ -1,17 +1,13 @@
+export { default as args } from './args/index.js';
+export { default as array } from './array/index.js';
+export { default as arraylike } from './arraylike/index.js';
 export { default as not } from './not/index.js';
-export { default as notInstanceOf } from './not/not.instanceOf.js';
-export { default as notVectorOf } from './not/not.vectorOf.js';
+export { default as object } from './object/index.js';
 export { default as stream } from './stream/index.js';
-export { default as streamWritable } from './stream/stream.writable.js';
-export { default as streamReadable } from './stream/stream.readable.js';
-export { default as streamDuplex } from './stream/stream.duplex.js';
-export { default as streamTransform } from './stream/stream.transform.js';
+export { default as string } from './string/index.js';
 export { default as a } from './a.js';
 export { default as an } from './an.js';
 export { default as any } from './any.js';
-export { default as args } from './args.js'; // args.empty
-export { default as array } from './array.js'; // array.empty
-export { default as arraylike } from './arraylike.js'; // arraylike.empty
 export { default as base64 } from './base64.js';
 export { default as bool } from './bool.js';
 export { default as buffer } from './buffer.js';
@@ -40,11 +36,9 @@ export { default as nativeFunction } from './nativeFunction.js';
 export { default as nil } from './nil.js';
 export { default as number } from './number.js';
 export { default as numeric } from './numeric.js';
-export { default as object } from './object.js'; // object.empty
 export { default as odd } from './odd.js';
 export { default as primitive } from './primitive.js';
 export { default as regexp } from './regexp.js';
-export { default as string } from './string.js'; // string.empty
 export { default as symbol } from './symbol.js';
 export { default as type } from './type.js';
 export { default as uint } from './uint.js';

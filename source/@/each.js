@@ -1,5 +1,5 @@
 /* eslint-disable no-restricted-syntax */
-import arraylike from '../is/arraylike.js';
+import arraylike from '../is/arraylike/arraylike.js';
 import eachProperty from './eachProperty.js';
 import eachValue from './eachValue.js';
 

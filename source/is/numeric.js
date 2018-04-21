@@ -1,4 +1,4 @@
-import arraylike from './arraylike.js';
+import arraylike from './arraylike/arraylike.js';
 import bool from './bool.js';
 import nan from './nan.js';
 import infinity from './infinity.js';

@@ -1,8 +1,8 @@
-import { objectToString } from '../@/built-in.js';
-import unsafeMethod from '../has/unsafeMethod.js';
-import array from './array.js';
-import object from './object.js';
-import arraylike from './arraylike.js';
+import { objectToString } from '../../@/built-in.js';
+import unsafeMethod from '../../has/unsafeMethod.js';
+import array from '../array/array.js';
+import object from '../object/object.js';
+import arraylike from '../arraylike/arraylike.js';
 
 /**
  *

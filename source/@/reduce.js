@@ -1,5 +1,5 @@
-import arraylike from '../is/arraylike.js';
-import string from '../is/string.js';
+import arraylike from '../is/arraylike/arraylike.js';
+import string from '../is/string/string.js';
 import number from '../is/number.js';
 import mod from './mod.js';
 

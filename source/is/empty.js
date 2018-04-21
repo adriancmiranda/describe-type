@@ -1,7 +1,7 @@
 import keys from '../@/keys.js';
-import arraylike from './arraylike.js';
+import arraylike from './arraylike/arraylike.js';
+import object from './object/object.js';
 import callable from './callable.js';
-import object from './object.js';
 
 /**
  *
