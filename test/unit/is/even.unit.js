@@ -1,32 +1,28 @@
 import test from 'ava';
-import * as datatypes from 'fixtures/datatypes.fixture.js';
-import * as is from '../../../is';
+import * as datatypes from '../../fixtures/datatypes.fixture.js';
+import * as describeType from '../../../source';
+import even from '../../../source/is/even';
 
-test('foo', t => {
-	t.pass();
+test('describeType.is.even exposure', (t) => {
+	t.is(toString.call(describeType.is.even), '[object Function]', 'should be a function');
 });
-// test('#even', () => {
-// 	it('O método "even" deve existir no escopo do módulo "is"', () => {
-// 		t.is(toString.call(is.even), '[object Function]');
-// 	});
 
-// 	test('true', () => {
+test('even exposure', (t) => {
+	t.is(toString.call(even), '[object Function]', 'should be a function');
+});
+
 // 		datatypes.even.iterate(datatype => {
-// 			it(`${datatype.id} • even(${datatype.label}); // true`, () => {
-// 				t.is(is.even(datatype.value), true);
+// 			test(`${datatype.id} • even(${datatype.label}); // true`, (t) => {
+// 				t.is(even(datatype.value), true, 'should be true');
 // 			});
 // 		});
-// 	});
 
-// 	test('false', () => {
 // 		datatypes.all.remove(datatypes.number);
 // 		datatypes.all.add(datatypes.odd);
 // 		datatypes.all.iterate(datatype => {
-// 			it(`${datatype.id} • even(${datatype.label}); // false`, () => {
-// 				t.is(is.even(datatype.value), false);
+// 			test(`${datatype.id} • even(${datatype.label}); // false`, (t) => {
+// 				t.is(even(datatype.value), false, 'should be false');
 // 			});
 // 		});
 // 		datatypes.all.add(datatypes.number);
 // 		datatypes.all.remove(datatypes.odd);
-// 	});
-// });

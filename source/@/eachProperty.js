@@ -9,14 +9,14 @@ import resolveProperty from './resolveProperty.js';
  * @param {any} value
  * @param {Function} cmd
  * @param {any} context
- * @param {Boolean} getEnum
+ * @param {Boolean} getInheritedProps
  * @returns {?}
  */
-export default function eachProperty(value, cmd, context, getEnum) {
+export default function eachProperty(value, cmd, context, getInheritedProps) {
 	let i = 0;
 	const readStatics = callable(value) === false;
 	for (const key in value) {
-		if (getEnum || ownProperty(value, key)) {
+		if (getInheritedProps || ownProperty(value, key)) {
 			const response = resolveProperty(value, key, readStatics, cmd, context, i += 1);
 			if (response !== undefined) {
 				return response;

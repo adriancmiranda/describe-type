@@ -6,7 +6,7 @@ test('foo', t => {
 });
 // test('#intOf', (t) => {
 // 	it('exposed', (t) => {
-// 		t.is(toString.call(type.intOf), '[object Function]');
+// 		t.is(toString.call(type.intOf), '[object Function]', 'should be a function');;
 // 	});
 
 // 	it('', (t) => {

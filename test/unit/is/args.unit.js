@@ -1,35 +1,30 @@
 import test from 'ava';
-import * as datatypes from 'fixtures/datatypes.fixture.js';
-import * as is from '../../../is';
+import * as datatypes from '../../fixtures/datatypes.fixture.js';
+import * as describeType from '../../../source';
+import args from '../../../source/is/args';
 
-test('foo', t => {
-	t.pass();
+test('describeType.is.args exposure', (t) => {
+	t.is(toString.call(describeType.is.args), '[object Function]', 'should be a function');
 });
-// test('#args', () => {
-// 	it('O método "args" deve existir no escopo do módulo "is"', () => {
-// 		t.is(toString.call(is.args), '[object Function]');
-// 	});
 
-// 	test('true', () => {
+test('args exposure', (t) => {
+	t.is(toString.call(args), '[object Function]', 'should be a function');
+});
+
 // 		datatypes.args.iterate(datatype => {
-// 			it(`${datatype.id} • args(${datatype.label}); // true`, () => {
-// 				t.is(is.args(datatype.value), true);
+// 			test(`${datatype.id} • args(${datatype.label}); // true`, (t) => {
+// 				t.is(args(datatype.value), true, 'should be true');
 // 			});
 // 		});
-// 	});
 
-// 	test('false', () => {
 // 		datatypes.all.add(datatypes.arraylikeObject);
 // 		datatypes.all.add(datatypes.arraylikeNative);
 // 		datatypes.all.remove(datatypes.args);
 // 		datatypes.all.iterate(datatype => {
-// 			it(`${datatype.id} • args(${datatype.label}); // false`, () => {
-// 				t.is(is.args(datatype.value), false);
+// 			test(`${datatype.id} • args(${datatype.label}); // false`, (t) => {
+// 				t.is(args(datatype.value), false, 'should be false');
 // 			});
 // 		});
 // 		datatypes.all.remove(datatypes.arraylikeObject);
 // 		datatypes.all.remove(datatypes.arraylikeNative);
 // 		datatypes.all.add(datatypes.args);
-// 	});
-// });
-

@@ -1,28 +1,24 @@
 import test from 'ava';
-import * as datatypes from 'fixtures/datatypes.fixture.js';
-import * as is from '../../../is';
+import * as datatypes from '../../fixtures/datatypes.fixture.js';
+import * as describeType from '../../../source';
+import nativeFunction from '../../../source/is/nativeFunction';
 
-test('foo', t => {
-	t.pass();
+test('describeType.is.nativeFunction exposure', (t) => {
+	t.is(toString.call(describeType.is.nativeFunction), '[object Function]', 'should be a function');
 });
-// test('#nativeFunction', () => {
-// 	it('O método "nativeFunction" deve existir no escopo do módulo "is"', () => {
-// 		t.is(toString.call(is.nativeFunction), '[object Function]');
-// 	});
 
-// 	test('true', () => {
+test('nativeFunction exposure', (t) => {
+	t.is(toString.call(nativeFunction), '[object Function]', 'should be a function');
+});
+
 // 		datatypes.nativeFunction.iterate(datatype => {
-// 			it(`${datatype.id} • nativeFunction(${datatype.label}); // true`, () => {
-// 				t.is(is.nativeFunction(datatype.value), true);
+// 			test(`${datatype.id} • nativeFunction(${datatype.label}); // true`, (t) => {
+// 				t.is(nativeFunction(datatype.value), true, 'should be true');
 // 			});
 // 		});
-// 	});
 
-// 	test('false', () => {
 // 		datatypes.all.iterate(datatype => {
-// 			it(`${datatype.id} • nativeFunction(${datatype.label}); // false`, () => {
-// 				t.is(is.nativeFunction(datatype.value), false);
+// 			test(`${datatype.id} • nativeFunction(${datatype.label}); // false`, (t) => {
+// 				t.is(nativeFunction(datatype.value), false, 'should be false');
 // 			});
 // 		});
-// 	});
-// });

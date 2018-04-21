@@ -1,30 +1,26 @@
 import test from 'ava';
-import * as datatypes from 'fixtures/datatypes.fixture.js';
-import * as is from '../../../is';
+import * as datatypes from '../../fixtures/datatypes.fixture.js';
+import * as describeType from '../../../source';
+import callable from '../../../source/is/callable';
 
-test('foo', t => {
-	t.pass();
+test('describeType.is.callable exposure', (t) => {
+	t.is(toString.call(describeType.is.callable), '[object Function]', 'should be a function');
 });
-// test('#callable', () => {
-// 	it('O método "callable" deve existir no escopo do módulo "is"', () => {
-// 		t.is(toString.call(is.callable), '[object Function]');
-// 	});
 
-// 	test('true', () => {
+test('callable exposure', (t) => {
+	t.is(toString.call(callable), '[object Function]', 'should be a function');
+});
+
 // 		datatypes.callable.iterate(datatype => {
-// 			it(`${datatype.id} • callable(${datatype.label}); // true`, () => {
-// 				t.is(is.callable(datatype.value), true);
+// 			test(`${datatype.id} • callable(${datatype.label}); // true`, (t) => {
+// 				t.is(callable(datatype.value), true, 'should be true');
 // 			});
 // 		});
-// 	});
 
-// 	test('false', () => {
 // 		datatypes.all.iterate(datatype => {
 // 			if (!is.callable(datatype.value)) {
-// 				it(`${datatype.id} • callable(${datatype.label}); // false`, () => {
-// 					t.is(is.callable(datatype.value), false);
+// 				test(`${datatype.id} • callable(${datatype.label}); // false`, (t) => {
+// 					t.is(callable(datatype.value), false, 'should be false');
 // 				});
 // 			}
 // 		});
-// 	});
-// });

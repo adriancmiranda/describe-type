@@ -1,24 +1,24 @@
 import test from 'ava';
-import * as datatypes from 'fixtures/datatypes.fixture';
-import * as is from '../../../is';
+import * as datatypes from '../../fixtures/datatypes.fixture.js';
+import * as describeType from '../../../source';
+import empty from '../../../source/is/empty';
 
-test('foo', t => {
-	t.pass();
+test('describeType.is.empty exposure', (t) => {
+	t.is(toString.call(describeType.is.empty), '[object Function]', 'should be a function');
 });
-// test('#empty', () => {
-// 	test('true', () => {
-// 		datatypes.empty.iterate(datatype => {
-// 			it(`${datatype.id} • empty(${datatype.label}); // true`, () => {
-// 				t.is(is.empty(datatype.value), true);
-// 			});
-// 		});
-// 	});
 
-// 	test('false', () => {
-// 		datatypes.filled.iterate(datatype => {
-// 			it(`${datatype.id} • empty(${datatype.label}); // false`, () => {
-// 				t.is(is.empty(datatype.value), false);
+test('empty exposure', (t) => {
+	t.is(toString.call(empty), '[object Function]', 'should be a function');
+});
+
+// 		datatypes.empty.iterate(datatype => {
+// 			test(`${datatype.id} • empty(${datatype.label}); // true`, (t) => {
+// 				t.is(empty(datatype.value), true, 'should be true');
 // 			});
 // 		});
-// 	});
-// });
+
+// 		datatypes.filled.iterate(datatype => {
+// 			test(`${datatype.id} • empty(${datatype.label}); // false`, (t) => {
+// 				t.is(empty(datatype.value), false, 'should be false');
+// 			});
+// 		});

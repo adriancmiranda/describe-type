@@ -1,30 +1,26 @@
 import test from 'ava';
-import * as datatypes from 'fixtures/datatypes.fixture.js';
-import * as is from '../../../is';
+import * as datatypes from '../../fixtures/datatypes.fixture.js';
+import * as describeType from '../../../source';
+import bool from '../../../source/is/bool';
 
-test('foo', t => {
-	t.pass();
+test('describeType.is.bool exposure', (t) => {
+	t.is(toString.call(describeType.is.bool), '[object Function]', 'should be a function');
 });
-// test('#bool', () => {
-// 	it('O método "bool" deve existir no escopo do módulo "is"', () => {
-// 		t.is(toString.call(is.bool), '[object Function]');
-// 	});
 
-// 	test('true', () => {
+test('bool exposure', (t) => {
+	t.is(toString.call(bool), '[object Function]', 'should be a function');
+});
+
 // 		datatypes.bool.iterate(datatype => {
-// 			it(`${datatype.id} • bool(${datatype.label}); // true`, () => {
-// 				t.is(is.bool(datatype.value), true);
+// 			test(`${datatype.id} • bool(${datatype.label}); // true`, (t) => {
+// 				t.is(bool(datatype.value), true, 'should be true');
 // 			});
 // 		});
-// 	});
 
-// 	test('false', () => {
 // 		datatypes.all.iterate(datatype => {
 // 			if (!is.bool(datatype.value)) {
-// 				it(`${datatype.id} • bool(${datatype.label}); // false`, () => {
-// 					t.is(is.bool(datatype.value), false);
+// 				test(`${datatype.id} • bool(${datatype.label}); // false`, (t) => {
+// 					t.is(bool(datatype.value), false, 'should be false');
 // 				});
 // 			}
 // 		});
-// 	});
-// });

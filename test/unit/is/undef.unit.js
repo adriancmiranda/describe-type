@@ -1,30 +1,26 @@
 import test from 'ava';
-import * as datatypes from 'fixtures/datatypes.fixture.js';
-import * as is from '../../../is';
+import * as datatypes from '../../fixtures/datatypes.fixture.js';
+import * as describeType from '../../../source';
+import undef from '../../../source/is/undef';
 
-test('foo', t => {
-	t.pass();
+test('describeType.is.undef exposure', (t) => {
+	t.is(toString.call(describeType.is.undef), '[object Function]', 'should be a function');
 });
-// test('#undef', () => {
-// 	it('O método "undef" deve existir no escopo do módulo "is"', () => {
-// 		t.is(toString.call(is.undef), '[object Function]');
-// 	});
 
-// 	test('true', () => {
-// 		datatypes.undef.iterate(datatype => {
-// 			it(`${datatype.id} • undef(${datatype.label}); // true`, () => {
-// 				t.is(is.undef(datatype.value), true);
-// 			});
-// 		});
-// 	});
+test('undef exposure', (t) => {
+	t.is(toString.call(undef), '[object Function]', 'should be a function');
+});
 
-// 	test('false', () => {
-// 		datatypes.all.iterate(datatype => {
-// 			if (!is.undef(datatype.value)) {
-// 				it(`${datatype.id} • undef(${datatype.label}); // false`, () => {
-// 					t.is(is.undef(datatype.value), false);
-// 				});
-// 			}
-// 		});
-// 	});
-// });
+datatypes.undef.iterate(datatype => {
+	test(`${datatype.id} • undef(${datatype.label}); // true`, (t) => {
+		t.is(undef(datatype.value), true, 'should be a true');
+	});
+});
+
+datatypes.all.iterate(datatype => {
+	if (undef(datatype.value) === false) {
+		test(`${datatype.id} • undef(${datatype.label}); // false`, (t) => {
+			t.is(undef(datatype.value), false, 'should be a false');
+		});
+	}
+});

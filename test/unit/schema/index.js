@@ -46,7 +46,7 @@ test('foo', t => {
 // }
 
 // test('lib/data/parse exists', t => {
-// 	t.is(toString.call(schema), '[object Function]');
+// 	t.is(toString.call(schema), '[object Function]', 'should be a function');;
 // });
 
 // test('lib/data/parse // simple conflicts', t => {

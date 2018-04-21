@@ -1,33 +1,29 @@
 import test from 'ava';
-import * as is from '../../../is';
+import * as describeType from '../../../source';
+import within from '../../../source/is/within';
 
-test('foo', t => {
-	t.pass();
+test('describeType.is.within exposure', (t) => {
+	t.is(toString.call(describeType.is.within), '[object Function]', 'should be a function');
 });
-// test('#within', () => {
-// 	it('O método "within" deve existir no escopo do módulo "is"', () => {
-// 		t.is(toString.call(is.within), '[object Function]');
-// 	});
 
-// 	test('true', () => {
-// 		[
-// 			{ value: -2, start: -10, finish: -1 },
-// 			{ value: 4, start: 0, finish: 9 },
-// 		].forEach(datatype => {
-// 			it(`within(${String(datatype.value)}, ${String(datatype.start)}, ${String(datatype.finish)}); // true`, () => {
-// 				t.is(is.within(datatype.value, datatype.start, datatype.finish), true);
-// 			});
-// 		});
-// 	});
+test('within exposure', (t) => {
+	t.is(toString.call(within), '[object Function]', 'should be a function');
+});
 
-// 	test('false', () => {
-// 		[
-// 			{ value: 0, start: -10, finish: -1 },
-// 			{ value: 10, start: 0, finish: 9 },
-// 		].forEach(datatype => {
-// 			it(`within(${String(datatype.value)}, ${String(datatype.start)}, ${String(datatype.finish)}); // false`, () => {
-// 				t.is(is.within(datatype.value, datatype.start, datatype.finish), false);
-// 			});
-// 		});
-// 	});
-// });
+[
+	{ value: -2, start: -10, finish: -1 },
+	{ value: 4, start: 0, finish: 9 },
+].forEach(datatype => {
+	test(`within(${String(datatype.value)}, ${String(datatype.start)}, ${String(datatype.finish)}); // true`, (t) => {
+		t.is(within(datatype.value, datatype.start, datatype.finish), true, 'should be true');
+	});
+});
+
+[
+	{ value: 0, start: -10, finish: -1 },
+	{ value: 10, start: 0, finish: 9 },
+].forEach(datatype => {
+	test(`within(${String(datatype.value)}, ${String(datatype.start)}, ${String(datatype.finish)}); // false`, (t) => {
+		t.is(within(datatype.value, datatype.start, datatype.finish), false, 'should be false');
+	});
+});

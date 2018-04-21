@@ -1,30 +1,26 @@
 import test from 'ava';
-import * as datatypes from 'fixtures/datatypes.fixture.js';
-import * as is from '../../../is';
+import * as datatypes from '../../fixtures/datatypes.fixture.js';
+import * as describeType from '../../../source';
+import regexp from '../../../source/is/regexp';
 
-test('foo', t => {
-	t.pass();
+test('describeType.is.regexp exposure', (t) => {
+	t.is(toString.call(describeType.is.regexp), '[object Function]', 'should be a function');
 });
-// test('#regexp', () => {
-// 	it('O método "regexp" deve existir no escopo do módulo "is"', () => {
-// 		t.is(toString.call(is.regexp), '[object Function]');
-// 	});
 
-// 	test('true', () => {
+test('regexp exposure', (t) => {
+	t.is(toString.call(regexp), '[object Function]', 'should be a function');
+});
+
 // 		datatypes.regexp.iterate(datatype => {
-// 			it(`${datatype.id} • regexp(${datatype.label}); // true`, () => {
-// 				t.is(is.regexp(datatype.value), true);
+// 			test(`${datatype.id} • regexp(${datatype.label}); // true`, (t) => {
+// 				t.is(regexp(datatype.value), true, 'should be true');
 // 			});
 // 		});
-// 	});
 
-// 	test('false', () => {
 // 		datatypes.all.iterate(datatype => {
-// 			if (!is.regexp(datatype.value)) {
-// 				it(`${datatype.id} • regexp(${datatype.label}); // false`, () => {
-// 					t.is(is.regexp(datatype.value), false);
+// 			if (regexp(datatype.value) === false) {
+// 				test(`${datatype.id} • regexp(${datatype.label}); // false`, (t) => {
+// 					t.is(regexp(datatype.value), false, 'should be false');
 // 				});
 // 			}
 // 		});
-// 	});
-// });

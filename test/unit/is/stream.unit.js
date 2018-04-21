@@ -1,28 +1,33 @@
 import test from 'ava';
-import * as datatypes from 'fixtures/datatypes.fixture.js';
-import * as is from '../../../is';
+import * as datatypes from '../../fixtures/datatypes.fixture.js';
+import * as describeType from '../../../source';
+import stream from '../../../source/is/stream';
 
-test('foo', t => {
-	t.pass();
+test('describeType.is.stream exposure', (t) => {
+	t.is(toString.call(describeType.is.stream), '[object Function]', 'should be a function');
 });
-// test('#stream', () => {
+
+test('stream exposure', (t) => {
+	t.is(toString.call(stream), '[object Function]', 'should be a function');
+});
+
 // 	it('O método "stream" deve existir no escopo do módulo "is"', () => {
-// 		t.is(toString.call(is.stream), '[object Function]');
+// 		t.is(toString.call(is.stream), '[object Function]', 'should be a function');;
 // 	});
 
 // 	it('O método "stream.writable" deve existir no escopo do módulo "is"', () => {
-// 		t.is(is.stream.writable, '[object Function]');
+// 		t.is(stream.writable, '[object Function]', 'should be a function');;
 // 	});
 
 // 	it('O método "stream.readable" deve existir no escopo do módulo "is"', () => {
-// 		t.is(is.stream.readable, '[object Function]');
+// 		t.is(stream.readable, '[object Function]', 'should be a function');;
 // 	});
 
 // 	it('O método "stream.duplex" deve existir no escopo do módulo "is"', () => {
-// 		t.is(is.stream.duplex, '[object Function]');
+// 		t.is(stream.duplex, '[object Function]', 'should be a function');;
 // 	});
 
 // 	it('O método "stream.transform" deve existir no escopo do módulo "is"', () => {
-// 		t.is(is.stream.transform, '[object Function]');
+// 		t.is(stream.transform, '[object Function]', 'should be a function');;
 // 	});
 // });

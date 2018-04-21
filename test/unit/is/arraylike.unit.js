@@ -1,29 +1,24 @@
 import test from 'ava';
-import * as datatypes from 'fixtures/datatypes.fixture.js';
-import * as is from '../../../is';
+import * as datatypes from '../../fixtures/datatypes.fixture.js';
+import * as describeType from '../../../source';
+import arraylike from '../../../source/is/arraylike';
 
-test('foo', t => {
-	t.pass();
+test('describeType.is.arraylike exposure', (t) => {
+	t.is(toString.call(describeType.is.arraylike), '[object Function]', 'should be a function');
 });
-// test('#arraylike', () => {
-// 	it('O método "arraylike" deve existir no escopo do módulo "is"', () => {
-// 		t.is(toString.call(is.arraylike), '[object Function]');
-// 	});
 
-// 	test('true', () => {
+test('arraylike exposure', (t) => {
+	t.is(toString.call(arraylike), '[object Function]', 'should be a function');
+});
+
 // 		datatypes.arraylike.iterate(datatype => {
-// 			it(`${datatype.id} • arraylike(${datatype.label}); // true`, () => {
-// 				t.is(is.arraylike(datatype.value), true);
+// 			test(`${datatype.id} • arraylike(${datatype.label}); // true`, (t) => {
+// 				t.is(arraylike(datatype.value), true, 'should be true');
 // 			});
 // 		});
-// 	});
 
-// 	test('false', () => {
 // 		datatypes.notArraylike.iterate(datatype => {
-// 			it(`${datatype.id} • arraylike(${datatype.label}); // false`, () => {
-// 				t.is(is.arraylike(datatype.value), false);
+// 			test(`${datatype.id} • arraylike(${datatype.label}); // false`, (t) => {
+// 				t.is(arraylike(datatype.value), false, 'should be false');
 // 			});
 // 		});
-// 	});
-// });
-

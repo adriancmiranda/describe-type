@@ -1,30 +1,26 @@
 import test from 'ava';
-import * as datatypes from 'fixtures/datatypes.fixture.js';
-import * as is from '../../../is';
+import * as datatypes from '../../fixtures/datatypes.fixture.js';
+import * as describeType from '../../../source';
+import nan from '../../../source/is/nan';
 
-test('foo', t => {
-	t.pass();
+test('describeType.is.nan exposure', (t) => {
+	t.is(toString.call(describeType.is.nan), '[object Function]', 'should be a function');
 });
-// test('#nan', () => {
-// 	it('O método "nan" deve existir no escopo do módulo "is"', () => {
-// 		t.is(toString.call(is.nan), '[object Function]');
-// 	});
 
-// 	test('true', () => {
+test('nan exposure', (t) => {
+	t.is(toString.call(nan), '[object Function]', 'should be a function');
+});
+
 // 		datatypes.nan.iterate(datatype => {
-// 			it(`${datatype.id} • nan(${datatype.label}); // true`, () => {
-// 				t.is(is.nan(datatype.value), true);
+// 			test(`${datatype.id} • nan(${datatype.label}); // true`, (t) => {
+// 				t.is(nan(datatype.value), true, 'should be true');
 // 			});
 // 		});
-// 	});
 
-// 	test('false', () => {
 // 		datatypes.number.remove(datatypes.nan);
 // 		datatypes.number.iterate(datatype => {
-// 			it(`${datatype.id} • nan(${datatype.label}); // false`, () => {;
-// 				t.is(is.nan(datatype.value), false);
+// 			test(`${datatype.id} • nan(${datatype.label}); // false`, (t) => {;
+// 				t.is(nan(datatype.value), false, 'should be false');
 // 			});
 // 		});
 // 		datatypes.number.add(datatypes.nan);
-// 	});
-// });

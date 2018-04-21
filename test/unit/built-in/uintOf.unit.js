@@ -2,7 +2,7 @@ import test from 'ava';
 import uintOf from '../../../source/built-in/uintOf';
 
 test('uintOf exposed', (t) => {
-	t.is(toString.call(uintOf), '[object Function]');
+	t.is(toString.call(uintOf), '[object Function]', 'should be a function');;
 });
 
 test('', (t) => {

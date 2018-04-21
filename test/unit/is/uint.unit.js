@@ -1,30 +1,26 @@
 import test from 'ava';
-import * as datatypes from 'fixtures/datatypes.fixture.js';
-import * as is from '../../../is';
+import * as datatypes from '../../fixtures/datatypes.fixture.js';
+import * as describeType from '../../../source';
+import uint from '../../../source/is/uint';
 
-test('foo', t => {
-	t.pass();
+test('describeType.is.uint exposure', (t) => {
+	t.is(toString.call(describeType.is.uint), '[object Function]', 'should be a function');
 });
-// test('#uint', () => {
-// 	it('O método "uint" deve existir no escopo do módulo "is"', () => {
-// 		t.is(toString.call(is.uint), '[object Function]');
-// 	});
 
-// 	test('true', () => {
-// 		datatypes.uint.add(datatypes.zeroPositiveInteger);
-// 		datatypes.uint.iterate(datatype => {
-// 			it(`${datatype.id} • uint(${datatype.label}); // true`, () => {
-// 				t.is(is.uint(datatype.value), true);
-// 			});
-// 		});
-// 		datatypes.uint.remove(datatypes.zeroPositiveInteger);
-// 	});
+test('uint exposure', (t) => {
+	t.is(toString.call(uint), '[object Function]', 'should be a function');
+});
 
-// 	test('false', () => {
-// 		datatypes.decimal.iterate(datatype => {
-// 			it(`${datatype.id} • uint(${datatype.label}); // false`, () => {
-// 				t.is(is.uint(datatype.value), false);
-// 			});
-// 		});
-// 	});
-// });
+datatypes.uint.add(datatypes.zeroPositiveInteger);
+datatypes.uint.iterate(datatype => {
+	test(`${datatype.id} • uint(${datatype.label}); // true`, (t) => {
+		t.is(uint(datatype.value), true, 'should be true');
+	});
+});
+datatypes.uint.remove(datatypes.zeroPositiveInteger);
+
+datatypes.decimal.iterate(datatype => {
+	test(`${datatype.id} • uint(${datatype.label}); // false`, (t) => {
+		t.is(uint(datatype.value), false, 'should be false');
+	});
+});

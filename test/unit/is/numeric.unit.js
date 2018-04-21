@@ -1,24 +1,22 @@
 import test from 'ava';
-import * as datatypes from 'fixtures/datatypes.fixture.js';
-import * as is from '../../../is';
+import * as datatypes from '../../fixtures/datatypes.fixture.js';
+import * as describeType from '../../../source';
+import numeric from '../../../source/is/numeric';
 
-test('foo', t => {
-	t.pass();
+test('describeType.is.numeric exposure', (t) => {
+	t.is(toString.call(describeType.is.numeric), '[object Function]', 'should be a function');
 });
-// test('#numeric', () => {
-// 	it('O método "numeric" deve existir no escopo do módulo "is"', () => {
-// 		t.is(toString.call(is.numeric), '[object Function]');
-// 	});
 
-// 	test('true', () => {
+test('numeric exposure', (t) => {
+	t.is(toString.call(numeric), '[object Function]', 'should be a function');
+});
+
 // 		datatypes.numeric.iterate(datatype => {
-// 			it(`${datatype.id} • numeric(${datatype.label}); // true`, () => {
-// 				t.is(is.numeric(datatype.value), true);
+// 			test(`${datatype.id} • numeric(${datatype.label}); // true`, (t) => {
+// 				t.is(numeric(datatype.value), true, 'should be true');
 // 			});
 // 		});
-// 	});
 
-// 	test('false', () => {
 // 		datatypes.all.remove(datatypes.nan);
 // 		datatypes.all.remove(datatypes.infinity);
 // 		datatypes.all.remove(datatypes.decimal);
@@ -27,8 +25,8 @@ test('foo', t => {
 // 		datatypes.all.remove(datatypes.arraylikeNative);
 // 		datatypes.all.remove(datatypes.arrayFilled);
 // 		datatypes.all.iterate(datatype => {
-// 			it(`${datatype.id} • numeric(${datatype.label}); // false`, () => {
-// 				t.is(is.numeric(datatype.value), false);
+// 			test(`${datatype.id} • numeric(${datatype.label}); // false`, (t) => {
+// 				t.is(numeric(datatype.value), false, 'should be false');
 // 			});
 // 		});
 // 		datatypes.all.add(datatypes.nan);
@@ -38,5 +36,3 @@ test('foo', t => {
 // 		datatypes.all.add(datatypes.bool);
 // 		datatypes.all.add(datatypes.arraylikeNative);
 // 		datatypes.all.add(datatypes.arrayFilled);
-// 	});
-// });

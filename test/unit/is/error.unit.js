@@ -1,30 +1,26 @@
 import test from 'ava';
-import * as datatypes from 'fixtures/datatypes.fixture.js';
-import * as is from '../../../is';
+import * as datatypes from '../../fixtures/datatypes.fixture.js';
+import * as describeType from '../../../source';
+import error from '../../../source/is/error';
 
-test('foo', t => {
-	t.pass();
+test('describeType.is.error exposure', (t) => {
+	t.is(toString.call(describeType.is.error), '[object Function]', 'should be a function');
 });
-// test('#error', () => {
-// 	it('O método "error" deve existir no escopo do módulo "is"', () => {
-// 		t.is(toString.call(is.error), '[object Function]');
-// 	});
 
-// 	test('true', () => {
+test('error exposure', (t) => {
+	t.is(toString.call(error), '[object Function]', 'should be a function');
+});
+
 // 		datatypes.error.iterate(datatype => {
-// 			it(`${datatype.id} • error(${datatype.label}); // true`, () => {
-// 				t.is(is.error(datatype.value), true);
+// 			test(`${datatype.id} • error(${datatype.label}); // true`, (t) => {
+// 				t.is(error(datatype.value), true, 'should be true');
 // 			});
 // 		});
-// 	});
 
-// 	test('false', () => {
 // 		datatypes.all.iterate(datatype => {
 // 			if (!is.error(datatype.value)) {
-// 				it(`${datatype.id} • error(${datatype.label}); // false`, () => {
-// 					t.is(is.error(datatype.value), false);
+// 				test(`${datatype.id} • error(${datatype.label}); // false`, (t) => {
+// 					t.is(error(datatype.value), false, 'should be false');
 // 				});
 // 			}
 // 		});
-// 	});
-// });

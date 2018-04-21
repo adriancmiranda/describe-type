@@ -1,30 +1,26 @@
 import test from 'ava';
-import * as datatypes from 'fixtures/datatypes.fixture.js';
-import * as is from '../../../is';
+import * as datatypes from '../../fixtures/datatypes.fixture.js';
+import * as describeType from '../../../source';
+import nil from '../../../source/is/nil';
 
-test('foo', t => {
-	t.pass();
+test('describeType.is.nil exposure', (t) => {
+	t.is(toString.call(describeType.is.nil), '[object Function]', 'should be a function');
 });
-// test('#nil', () => {
-// 	it('O método "nil" deve existir no escopo do módulo "is"', () => {
-// 		t.is(toString.call(is.nil), '[object Function]');
-// 	});
 
-// 	test('true', () => {
+test('nil exposure', (t) => {
+	t.is(toString.call(nil), '[object Function]', 'should be a function');
+});
+
 // 		datatypes.nil.iterate(datatype => {
-// 			it(`${datatype.id} • nil(${datatype.label}); // true`, () => {
-// 				t.is(is.nil(datatype.value), true);
+// 			test(`${datatype.id} • nil(${datatype.label}); // true`, (t) => {
+// 				t.is(nil(datatype.value), true, 'should be true');
 // 			});
 // 		});
-// 	});
 
-// 	test('false', () => {
 // 		datatypes.all.iterate(datatype => {
 // 			if (!is.nil(datatype.value)) {
-// 				it(`${datatype.id} • nil(${datatype.label}); // false`, () => {
-// 					t.is(is.nil(datatype.value), false);
+// 				test(`${datatype.id} • nil(${datatype.label}); // false`, (t) => {
+// 					t.is(nil(datatype.value), false, 'should be false');
 // 				});
 // 			}
 // 		});
-// 	});
-// });

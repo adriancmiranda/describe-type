@@ -9,10 +9,10 @@ import eachValue from './eachValue.js';
  * @param {any} value
  * @param {Function} cmd
  * @param {Object} context
- * @param {Boolean} keepReverseOrGetEnum
+ * @param {Boolean} keepReverseOrGetInheritedProps
  * @returns {?}
  */
-export default function each(value, cmd, context, keepReverseOrGetEnum) {
-	if (arraylike(value)) return eachValue(value, cmd, context, keepReverseOrGetEnum);
-	return eachProperty(value, cmd, context, keepReverseOrGetEnum);
+export default function each(value, cmd, context, keepReverseOrGetInheritedProps) {
+	if (arraylike(value)) return eachValue(value, cmd, context, keepReverseOrGetInheritedProps);
+	return eachProperty(value, cmd, context, keepReverseOrGetInheritedProps);
 }

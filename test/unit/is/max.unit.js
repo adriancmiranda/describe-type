@@ -1,14 +1,15 @@
 import test from 'ava';
-import { toSource } from 'fixtures/datatype/utils';
-import * as is from '../../../is';
+import { toSource } from '../../fixtures/datatypes.fixture';
+import * as describeType from '../../../source';
+import max from '../../../source/is/max';
 
-test('foo', t => {
-	t.pass();
+test('describeType.is.max exposure', (t) => {
+	t.is(toString.call(describeType.is.max), '[object Function]', 'should be a function');
 });
-// test('#max', () => {
-// 	it('O método "max" deve existir no escopo do módulo "is"', () => {
-// 		t.is(toString.call(is.max), '[object Function]');
-// 	});
+
+test('max exposure', (t) => {
+	t.is(toString.call(max), '[object Function]', 'should be a function');
+});
 
 // 	test('true', () => {
 // 		[
@@ -16,8 +17,8 @@ test('foo', t => {
 // 			{ valueA: -1, valueB: [-2, -1, -3] },
 // 			{ valueA: 14, valueB: [2, 3, 14, 9] },
 // 		].forEach(datatype => {
-// 			it(`max(${String(datatype.valueA)}, ${toSource(datatype.valueB)}); // true`, () => {
-// 				t.is(is.max(datatype.valueA, datatype.valueB), true);
+// 			test(`max(${String(datatype.valueA)}, ${toSource(datatype.valueB)}); // true`, (t) => {
+// 				t.is(max(datatype.valueA, datatype.valueB), true);
 // 			});
 // 		});
 // 	});
@@ -28,8 +29,8 @@ test('foo', t => {
 // 			{ valueA: 0, valueB: [] },
 // 			{ valueA: 0, valueB: [2, 3, 4, 0] },
 // 		].forEach(datatype => {
-// 			it(`max(${String(datatype.valueA)}, ${toSource(datatype.valueB)}); // false`, () => {
-// 				t.is(is.max(datatype.valueA, datatype.valueB), false);
+// 			test(`max(${String(datatype.valueA)}, ${toSource(datatype.valueB)}); // false`, (t) => {
+// 				t.is(max(datatype.valueA, datatype.valueB), false);
 // 			});
 // 		});
 // 	});

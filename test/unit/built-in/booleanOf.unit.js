@@ -6,7 +6,7 @@ test('foo', t => {
 });
 // test('#booleanOf', (t) => {
 // 	it('exposed', (t) => {
-// 		t.is(toString.call(type.booleanOf), '[object Function]');
+// 		t.is(toString.call(type.booleanOf), '[object Function]', 'should be a function');;
 // 	});
 
 // 	it('0 should be false', (t) => {

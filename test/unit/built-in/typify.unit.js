@@ -6,7 +6,7 @@ test('foo', t => {
 });
 // test('#typify', (t) => {
 // 	it('exposed', (t) => {
-// 		t.is(toString.call(type.typify), '[object Function]');
+// 		t.is(toString.call(type.typify), '[object Function]', 'should be a function');;
 // 	});
 
 // 	it('Arguments', (t) => {

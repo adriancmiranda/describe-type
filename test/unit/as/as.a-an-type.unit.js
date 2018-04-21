@@ -17,16 +17,3 @@ test('as.an method is exposed', (t) => {
 test('as.type method is exposed', (t) => {
 	t.is(toString.call(describeType.as.type), '[object Function]', 'should be a function');;
 });
-
-test('as.any method is exposed', (t) => {
-	t.is(toString.call(describeType.as.any), '[object Function]', 'should be a function');;
-});
-
-test('as.instanceOf method is exposed', (t) => {
-	t.is(toString.call(describeType.as.instanceOf), '[object Function]', 'should be a function');;
-});
-
-test('as.vectorOf method is exposed', (t) => {
-	t.is(toString.call(describeType.as.vectorOf), '[object Function]', 'should be a function');;
-});
-

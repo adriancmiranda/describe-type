@@ -1,30 +1,26 @@
 import test from 'ava';
-import * as datatypes from 'fixtures/datatypes.fixture.js';
-import * as is from '../../../is';
+import * as datatypes from '../../fixtures/datatypes.fixture.js';
+import * as describeType from '../../../source';
+import hosted from '../../../source/is/hosted';
 
-test('foo', t => {
-	t.pass();
+test('describeType.is.hosted exposure', (t) => {
+	t.is(toString.call(describeType.is.hosted), '[object Function]', 'should be a function');
 });
-// test('#hosted', () => {
-// 	it('O método "hosted" deve existir no escopo do módulo "is"', () => {
-// 		t.is(toString.call(is.hosted), '[object Function]');
-// 	});
 
-// 	test('true', () => {
+test('hosted exposure', (t) => {
+	t.is(toString.call(hosted), '[object Function]', 'should be a function');
+});
+
 // 		datatypes.all.iterate(datatype => {
 // 			if (!is.primitive(datatype.value)) {
-// 				it(`${datatype.id} • hosted("foo", { foo: ${datatype.label} }); // true`, () => {
-// 					t.is(is.hosted('foo', { foo: datatype.value }), true);
+// 				test(`${datatype.id} • hosted("foo", { foo: ${datatype.label} }); // true`, (t) => {
+// 					t.is(hosted('foo', { foo: datatype.value }), true);
 // 				});
 // 			}
 // 		});
-// 	});
 
-// 	test('false', () => {
 // 		datatypes.primitive.iterate(datatype => {
-// 			it(`${datatype.id} • hosted("foo", { foo: ${datatype.label} }); // true`, () => {
-// 				t.is(is.hosted('foo', { foo: datatype.value }), false);
+// 			test(`${datatype.id} • hosted("foo", { foo: ${datatype.label} }); // true`, (t) => {
+// 				t.is(hosted('foo', { foo: datatype.value }), false);
 // 			});
 // 		});
-// 	});
-// });

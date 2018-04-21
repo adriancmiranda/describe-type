@@ -1,30 +1,26 @@
 import test from 'ava';
-import * as datatypes from 'fixtures/datatypes.fixture.js';
-import * as is from '../../../is';
+import * as datatypes from '../../fixtures/datatypes.fixture.js';
+import * as describeType from '../../../source';
+import string from '../../../source/is/string';
 
-test('foo', t => {
-	t.pass();
+test('describeType.is.string exposure', (t) => {
+	t.is(toString.call(describeType.is.string), '[object Function]', 'should be a function');
 });
-// test('#string', () => {
-// 	it('O método "string" deve existir no escopo do módulo "is"', () => {
-// 		t.is(toString.call(is.string), '[object Function]');
-// 	});
 
-// 	test('true', () => {
+test('string exposure', (t) => {
+	t.is(toString.call(string), '[object Function]', 'should be a function');
+});
+
 // 		datatypes.string.iterate(datatype => {
-// 			it(`${datatype.id} • string(${datatype.label}); // true`, () => {
-// 				t.is(is.string(datatype.value), true);
+// 			test(`${datatype.id} • string(${datatype.label}); // true`, (t) => {
+// 				t.is(string(datatype.value), true, 'should be true');
 // 			});
 // 		});
-// 	});
 
-// 	test('false', () => {
 // 		datatypes.all.remove(datatypes.string);
 // 		datatypes.all.iterate(datatype => {
-// 			it(`${datatype.id} • string(${datatype.label}); // false`, () => {
-// 				t.is(is.string(datatype.value), false);
+// 			test(`${datatype.id} • string(${datatype.label}); // false`, (t) => {
+// 				t.is(string(datatype.value), false, 'should be false');
 // 			});
 // 		});
 // 		datatypes.all.add(datatypes.string);
-// 	});
-// });

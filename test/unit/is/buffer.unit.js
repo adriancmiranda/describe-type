@@ -1,13 +1,12 @@
 import test from 'ava';
-import * as datatypes from 'fixtures/datatypes.fixture.js';
-import * as is from '../../../is';
+import * as datatypes from '../../fixtures/datatypes.fixture.js';
+import * as describeType from '../../../source';
+import buffer from '../../../source/is/buffer';
 
-test('foo', t => {
-	t.pass();
+test('describeType.is.buffer exposure', (t) => {
+	t.is(toString.call(describeType.is.buffer), '[object Function]', 'should be a function');
 });
-// test('#buffer', () => {
-// 	it('O método "buffer" deve existir no escopo do módulo "is"', () => {
-// 		t.is(toString.call(is.buffer), '[object Function]');
-// 	});
-// });
 
+test('buffer exposure', (t) => {
+	t.is(toString.call(buffer), '[object Function]', 'should be a function');
+});

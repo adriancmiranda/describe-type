@@ -6,7 +6,7 @@ test('foo', t => {
 });
 // test('#stringOf', (t) => {
 // 	it('exposed', (t) => {
-// 		t.is(toString.call(type.stringOf), '[object Function]');
+// 		t.is(toString.call(type.stringOf), '[object Function]', 'should be a function');;
 // 	});
 
 // 	it('RegExp', (t) => {

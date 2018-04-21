@@ -2,7 +2,7 @@ import test from 'ava';
 import slice from '../../../source/@/slice.js';
 
 test('exposed', (t) => {
-	t.is(toString.call(slice), '[object Function]');
+	t.is(toString.call(slice), '[object Function]', 'should be a function');;
 });
 
 test('string', (t) => {

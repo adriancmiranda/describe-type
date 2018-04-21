@@ -1,5 +1,5 @@
 import test from 'ava';
-import Custom from 'fixtures/datatype/types/custom';
+import Custom from '../../fixtures/datatype/types/custom';
 import * as type from '../../../source';
 
 test('foo', t => {
@@ -7,7 +7,7 @@ test('foo', t => {
 });
 // test('constructorNameOf', (t) => {
 // 	it('exposed', (t) => {
-// 		t.is(toString.call(type.constructorNameOf), '[object Function]');
+// 		t.is(toString.call(type.constructorNameOf), '[object Function]', 'should be a function');;
 // 	});
 
 // 	it('Arguments', (t) => {

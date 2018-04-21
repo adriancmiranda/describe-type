@@ -9,14 +9,14 @@ import ownProperty from '../has/ownProperty.js';
  * @param {Boolean} getNum
  * @returns {Array}
  */
-export default function keys(object, getEnum) {
+export default function keys(object, getInheritedProps) {
 	if (object == null) return [];
-	if (Object.keys && !getEnum) {
+	if (Object.keys && !getInheritedProps) {
 		return Object.keys(object);
 	}
 	const properties = [];
 	for (const key in object) {
-		if (getEnum || ownProperty(object, key)) {
+		if (getInheritedProps || ownProperty(object, key)) {
 			properties[properties.length] = key;
 		}
 	}

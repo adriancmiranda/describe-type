@@ -1,5 +1,5 @@
 import test from 'ava';
-import Custom from 'fixtures/datatype/types/custom';
+import Custom from '../../fixtures/datatype/types/custom';
 import * as type from '../../../source';
 
 test('foo', t => {
@@ -7,7 +7,7 @@ test('foo', t => {
 });
 // test('#typeOf', (t) => {
 // 	it('exposed', (t) => {
-// 		t.is(toString.call(type.typeOf), '[object Function]');
+// 		t.is(toString.call(type.typeOf), '[object Function]', 'should be a function');;
 // 	});
 
 // 	it('', (t) => {
