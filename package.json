@@ -28,7 +28,7 @@
     "test:speed": "cross-env NODE_ENV=test node bin/benchmark",
     "test:appveyor": "npm run test:unit -- --no-cache --verbose",
     "test:travis": "npm run test:unit -- --no-cache --verbose",
-    "test:unit": "cross-env NODE_ENV=test ava test/unit/index.js source/**/*.unit.js --color",
+    "test:unit": "cross-env NODE_ENV=test ava test/unit/**/*.unit.js --color",
     "test": "npm run flow && npm run test:unit",
     "dev": "cross-env NODE_ENV=test npm run test:unit -- --watch",
     "watch": "npm run bin -- -w --environment=NODE_ENV:development",
