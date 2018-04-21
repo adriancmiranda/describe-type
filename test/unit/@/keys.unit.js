@@ -1,45 +1,48 @@
 import test from 'ava';
-import * as describeType from '../../source';
-import keys from '../../../@/keys.js';
+import * as describeType from '../../../source';
+import keys from '../../../source/@/keys.js';
 
-// getFoo is property which isn't enumerable
-const myObj = Object.create({}, {
-	getFoo: {
-		value() { return this.foo; }
+test.beforeEach('Kidnap Object.keys native method', (t) => {
+	t.context.nativeKeys = Object.keys;
+	delete Object.keys;
+	function Vec3() {
+		this.x = 0;
+		this.y = 0;
+		this.z = 0;
 	}
-});
-myObj.foo = 1;
-
-test('describeType.internal.keys exposure', () => {
-	t.is(toString.call(describeType), '[object Object]');
+	Vec3.prototype = { theta: 2 };
+	t.context.vec3 = new Vec3();
 });
 
-test('describeType.internal.keys exposure', () => {
-	t.is(toString.call(keys), '[object Function]');
+test('describeType.internal.keys exposure', (t) => {
+	t.is(toString.call(describeType), '[object Object]', 'should be an object as a namespace');
+	t.is(toString.call(describeType.internal.keys), '[object Function]', 'should be a function');
 });
 
-// test('#keys', () => {
-// 	it('exposed', () => {
-// 		expect(keys).toEqual(jasmine.any(Function));
-// 	});
+test('keys', (t) => {
+	t.is(toString.call(keys), '[object Function]', 'should be a function');
+});
 
-// 	it('array', () => {
-// 		expect(keys(['a', 'b', 'c'])).toEqual(['0', '1', '2']);
-// 	});
+test('array', (t) => {
+	t.deepEqual(keys(['a', 'b', 'c']), ['0', '1', '2'], 'should return the indexes');
+});
 
-// 	it('array like object', () => {
-// 		expect(keys({ 0: 'a', 1: 'b', 2: 'c' })).toEqual(['0', '1', '2']);
-// 	});
+test('arraylike object', (t) => {
+	t.deepEqual(keys({ 0: 'a', 1: 'b', 2: 'c' }), ['0', '1', '2'], 'should return the indexes');
+});
 
-// 	it('array like object with random key ordering', () => {
-// 		expect(keys({ 100: 'a', 2: 'b', 7: 'c' })).toEqual(['2', '7', '100']);
-// 	});
+test.serial('arraylike object with random key ordering', (t) => {
+	t.deepEqual(keys({ 100: 'a', 2: 'b', 7: 'c' }), ['2', '7', '100'], 'should bring it ordered');
+});
 
-// 	it('ignoring enumerables', () => {
-// 		expect(keys(myObj)).toEqual(['foo']);
-// 	});
+test.serial('ignoring enumerables', (t) => {
+	t.deepEqual(keys(t.context.vec3), ['x', 'y', 'z'], 'should ignore `getFoo` method');
+});
 
-// 	it('reading enumerables', () => {
-// 		expect(keys(myObj), true).toEqual(['foo']);
-// 	});
-// });
+test.serial('reading enumerables', (t) => {
+	t.deepEqual(keys(t.context.vec3, true), ['x', 'y', 'z', 'theta'], 'should read `theta` method');
+});
+
+test.afterEach.always('put Object.keys method back', (t) => {
+	Object.keys = t.context.nativeKeys;
+});

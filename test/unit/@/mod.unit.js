@@ -1,57 +1,65 @@
 import test from 'ava';
+import * as describeType from '../../../source';
 import mod from '../../../source/@/mod.js';
 
-test('#mod', function () {
-	// it('exposed', function () {
-	// 	expect(mod).toEqual(jasmine.any(Function));
-	// });
+function range(t, a, b) {
+	for (let i = a; i <= b; i += 1) {
+		t.is(mod(i, a, b), i, `index:${i}, divident:${a}, divisor:${b} should be ${i}`);
+	}
+}
 
-	// it('negative range', function () {
-	// 	expect(mod(-10, -9, 0)).toEqual(0);
-	// });
+test('describeType.internal.mod exposure', (t) => {
+	t.is(toString.call(describeType), '[object Object]', 'should be an object as a namespace');
+	t.is(toString.call(describeType.internal.mod), '[object Function]', 'should be a function');
+});
 
-	// it('negative start and negative end', function () {
-	// 	expect(mod(-4, -3, -1)).toEqual(-1);
-	// });
+test('mod', (t) => {
+	t.is(toString.call(mod), '[object Function]', 'should be a function');
+});
 
-	// it('negative start and positive end', function () {
-	// 	for (let i = -12; i <= 12; i += 1) {
-	// 		expect(mod(i, -12, 12)).toEqual(i);
-	// 	}
-	// 	expect(mod(-13, -12, 12)).toEqual(12);
-	// 	expect(mod(-14, -12, 12)).toEqual(11);
-	// 	expect(mod(-15, -12, 12)).toEqual(10);
-	// });
+test('negative range', (t) => {
+	t.is(mod(-10, -9, 0), 0);
+});
 
-	// it('positive range (9, 0, 9) -> 9', function () {
-	// 	expect(mod(9, 0, 9)).toEqual(9);
-	// });
+test('negative start and negative end', (t) => {
+	t.is(mod(-4, -3, -1), -1);
+});
 
-	// it('positive range (-1, 0, 9) -> 9', function () {
-	// 	expect(mod(-1, 0, 9)).toEqual(9);
-	// });
+test('negative start and positive end', (t) => {
+	range(t, -12, 12);
+	t.is(mod(-13, -12, 12), 12);
+	t.is(mod(-14, -12, 12), 11);
+	t.is(mod(-15, -12, 12), 10);
+});
 
-	// it('positive range (5, 0, 9) -> 9', function () {
-	// 	expect(mod(5, 0, 9)).toEqual(5);
-	// });
+test('positive range (9, 0, 9) -> 9', (t) => {
+	t.is(mod(9, 0, 9), 9);
+});
 
-	// it('positive range (10, 0, 9) -> 0', function () {
-	// 	expect(mod(10, 0, 9)).toEqual(0);
-	// });
+test('positive range (-1, 0, 9) -> 9', (t) => {
+	t.is(mod(-1, 0, 9), 9);
+});
 
-	// it('no sense range (1, 0, 0) -> 0', function () {
-	// 	expect(mod(1, 0, 0)).toEqual(0);
-	// });
+test('positive range (5, 0, 9) -> 9', (t) => {
+	t.is(mod(5, 0, 9), 5);
+});
 
-	// it('no sense range (2, 0, 0) -> 0', function () {
-	// 	expect(mod(2, 0, 0)).toEqual(0);
-	// });
+test('positive range (10, 0, 9) -> 0', (t) => {
+	t.is(mod(10, 0, 9), 0);
+});
 
-	// it('no sense range (3, 0, 0) -> 0', function () {
-	// 	expect(mod(3, 0, 0)).toEqual(0);
-	// });
+test('no sense range (1, 0, 0) -> 0', (t) => {
+	t.is(mod(1, 0, 0), 0);
+});
 
-	// it('empty range', function () {
-	// 	expect(mod()).toEqual(0);
-	// });
+test('no sense range (2, 0, 0) -> 0', (t) => {
+	t.is(mod(2, 0, 0), 0);
+});
+
+test('no sense range (3, 0, 0) -> 0', (t) => {
+	t.is(mod(3, 0, 0), 0);
+});
+
+test('empty range', (t) => {
+	t.is(mod(), 0);
 });
