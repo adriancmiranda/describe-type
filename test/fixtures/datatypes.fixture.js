@@ -67,6 +67,9 @@ objectFilled.add('{{source}}', { length: 'foo' });
 objectFilled.add('{{source}}', { length: '' });
 objectFilled.add('{{source}}', { length: /abc/g });
 objectFilled.add('{{source}}', { nodeType: 1, nodeName: 'div' });
+objectFilled.add('{{source}}', { constructor: 'foo' }); // *special case
+objectFilled.add('{{source}}', { constructor: () => {} }); // *special case
+objectFilled.add('{{source}}', { constructor: function unit() {} }); // *special case
 
 export const objectEmpty = new DataType('object.empty');
 objectEmpty.add('Object.create(null)', Object.create(null));
