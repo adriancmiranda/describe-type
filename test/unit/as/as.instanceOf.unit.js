@@ -1,17 +1,17 @@
 import test from 'ava';
 import * as type from '~';
 
-// TODO:
-test('as.instanceOf', function () {
-	// it('like method is exposed', function () {
-	// 	expect(type.like).toEqual(jasmine.any(Function));
-	// });
-
-	// it('alike method is exposed', function () {
-	// 	expect(type.alike).toEqual(jasmine.any(Function));
-	// });
-
-	// it('asInstanceOf method is exposed', function () {
-	// 	expect(type.asInstanceOf).toEqual(jasmine.any(Function));
-	// });
+test('foo', t => {
+	t.pass();
 });
+// it('like method is exposed', (t) => {
+// 	t.is(toString.call(type.like), '[object Function]');
+// });
+
+// it('alike method is exposed', (t) => {
+// 	t.is(type.alike, '[object Function]');
+// });
+
+// it('asInstanceOf method is exposed', (t) => {
+// 	t.is(type.asInstanceOf, '[object Function]');
+// });

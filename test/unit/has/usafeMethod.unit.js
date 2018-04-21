@@ -1,8 +1,6 @@
 import test from 'ava';
-import unsafeMethod from '../../../has/unsafeMethod.js';
+import unsafeMethod from '../../../source/has/unsafeMethod.js';
 
-test('#unsafeMethod', () => {
-	it('exposed', function () {
-		expect(unsafeMethod).toEqual(jasmine.any(Function));
-	});
+test('unsafeMethod exposed', (t) => {
+	t.is(toString.call(unsafeMethod), '[object Function]');
 });

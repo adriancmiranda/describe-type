@@ -1,58 +1,59 @@
 import test from 'ava';
 import * as type from '~';
 
-// TODO:
-test('as', function () {
-	// it('exposed', function () {
-	// 	expect(type.as).toEqual(jasmine.any(Function));
-	// });
-
-	// it('Number|Function', function () {
-	// 	function foo() {}
-	// 	expect(type.as([Number, Function], foo)).toEqual(foo);
-	// });
-
-	it('Number', function () {
-		expect(type.as(Number, function bar(a, b) { return a + b; }, 1, 2)).toEqual(3);
-	});
-
-	// it('String', function () {
-	// 	expect(type.as(String, function baz() {})).toEqual(undefined);
-	// });
-
-	// it('Number', function () {
-	// 	expect(type.as(Number, () => 'foo')).toEqual(undefined);
-	// });
-
-	// it('String', function () {
-	// 	expect(type.as(String, () => 'foo')).toEqual('foo');
-	// });
-
-	// it('String', function () {
-	// 	expect(type.as(String, () => '')).toEqual('');
-	// });
-
-	// it('"Number"', function () {
-	// 	expect(type.as(Number, 'foo')).toEqual(undefined);
-	// });
-
-	// it('String', function () {
-	// 	expect(type.as(String, 'foo')).toEqual('foo');
-	// });
-
-	// it('undefined', function () {
-	// 	expect(type.as(undefined, undefined)).toEqual(undefined);
-	// });
-
-	// it('null', function () {
-	// 	expect(type.as(null, null)).toEqual(null);
-	// });
-
-	// it('String', function () {
-	// 	expect(type.as(String, undefined)).toEqual(undefined);
-	// });
-
-	// it('String', function () {
-	// 	expect(type.as(String, '')).toEqual('');
-	// });
+test('foo', t => {
+	t.pass();
 });
+
+// test('exposed', (t) => {
+// 	t.is(toString.call(type.as), '[object Function]');
+// });
+
+// test('Number|Function', (t) => {
+// 	function foo() {}
+// 	t.is(type.as([Number, Function], foo), foo);
+// });
+
+test('Number', (t) => {
+	t.is(type.as(Number, function bar(a, b) { return a + b; }, 1, 2), 3);
+});
+
+// test('String', (t) => {
+// 	t.is(type.as(String, function baz() {}), undefined);
+// });
+
+// test('Number', (t) => {
+// 	t.is(type.as(Number, () => 'foo'), undefined);
+// });
+
+// test('String', (t) => {
+// 	t.is(type.as(String, () => 'foo'), 'foo');
+// });
+
+// test('String', (t) => {
+// 	t.is(type.as(String, () => ''), '');
+// });
+
+// test('"Number"', (t) => {
+// 	t.is(type.as(Number, 'foo'), undefined);
+// });
+
+// test('String', (t) => {
+// 	t.is(type.as(String, 'foo'), 'foo');
+// });
+
+// test('undefined', (t) => {
+// 	t.is(type.as(undefined, undefined), undefined);
+// });
+
+// test('null', (t) => {
+// 	t.is(type.as(null, null), null);
+// });
+
+// test('String', (t) => {
+// 	t.is(type.as(String, undefined), undefined);
+// });
+
+// test('String', (t) => {
+// 	t.is(type.as(String, ''), '');
+// });

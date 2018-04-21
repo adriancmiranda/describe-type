@@ -1,9 +1,12 @@
 import test from 'ava';
 import * as type from '~';
 
-// TODO:
-test('as.vectorOf', function () {
-	// it('asVectorOf method is exposed', function () {
-	// 	expect(type.asVectorOf).toEqual(jasmine.any(Function));
-	// });
+test('foo', t => {
+	t.pass();
 });
+// // TODO:
+// test('as.vectorOf', (t) => {
+// 	// it('asVectorOf method is exposed', (t) => {
+// 	// 	t.is(toString.call(type.asVectorOf), '[object Function]');
+// 	// });
+// });

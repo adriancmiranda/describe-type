@@ -1,20 +1,18 @@
 import test from 'ava';
-import * as type from '~';
+import uintOf from '../../../source/built-in/uintOf';
 
-test('#uintOf', function () {
-	it('exposed', function () {
-		expect(type.uintOf).toEqual(jasmine.any(Function));
-	});
+test('uintOf exposed', (t) => {
+	t.is(toString.call(uintOf), '[object Function]');
+});
 
-	it('', function () {
-		expect(type.uintOf(-1.2)).toEqual(0);
-	});
+test('', (t) => {
+	t.is(uintOf(-1.2), 0);
+});
 
-	it('', function () {
-		expect(type.uintOf(1.2)).toEqual(1);
-	});
+test('', (t) => {
+	t.is(uintOf(1.2), 1);
+});
 
-	it('', function () {
-		expect(type.uintOf(1)).toEqual(1);
-	});
+test('', (t) => {
+	t.is(uintOf(1), 1);
 });

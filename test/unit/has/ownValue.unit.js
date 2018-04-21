@@ -1,8 +1,6 @@
 import test from 'ava';
-import ownValue from '../../../has/ownValue.js';
+import ownValue from '../../../source/has/ownValue.js';
 
-test('#ownValue', () => {
-	it('exposed', function () {
-		expect(ownValue).toEqual(jasmine.any(Function));
-	});
+test('ownValue exposed', (t) => {
+	t.is(toString.call(ownValue), '[object Function]');
 });
