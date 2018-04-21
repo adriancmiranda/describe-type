@@ -1,6 +1,6 @@
 import test from 'ava';
 import Custom from 'fixtures/datatype/types/custom';
-import * as type from '~';
+import * as type from '../../../source';
 
 test('foo', t => {
 	t.pass();

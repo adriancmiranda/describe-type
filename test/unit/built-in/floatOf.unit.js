@@ -1,5 +1,5 @@
 import test from 'ava';
-import * as type from '~';
+import * as type from '../../../source';
 
 test('foo', t => {
 	t.pass();
