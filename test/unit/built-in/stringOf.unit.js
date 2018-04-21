@@ -1,72 +1,73 @@
 import test from 'ava';
-import * as type from '../../../source';
+import * as describeType from '../../../source';
+import stringOf from '../../../source/built-in/stringOf';
 
-test('foo', t => {
-	t.pass();
+test('describeType.stringOf exposure', (t) => {
+	t.is(toString.call(describeType.stringOf), '[object Function]', 'should be a function');
 });
-// test('#stringOf', (t) => {
-// 	it('exposed', (t) => {
-// 		t.is(toString.call(type.stringOf), '[object Function]', 'should be a function');;
+
+test('stringOf exposure', (t) => {
+	t.is(toString.call(stringOf), '[object Function]', 'should be a function');
+});
+
+// 	test('RegExp', (t) => {
+// 		t.is(stringOf(/foo/), 'RegExp');
 // 	});
 
-// 	it('RegExp', (t) => {
-// 		t.is(type.stringOf(/foo/), 'RegExp');
+// 	test('Function', (t) => {
+// 		t.is(stringOf((t) => {}), 'Function');
 // 	});
 
-// 	it('Function', (t) => {
-// 		t.is(type.stringOf((t) => {}), 'Function');
+// 	test('Function', (t) => {
+// 		t.is(stringOf((t) => {}, true), 'Function');
 // 	});
 
-// 	it('Function', (t) => {
-// 		t.is(type.stringOf((t) => {}, true), 'Function');
+// 	test('Function', (t) => {
+// 		t.is(stringOf(function Test() {}), 'Function');
 // 	});
 
-// 	it('Function', (t) => {
-// 		t.is(type.stringOf(function Test() {}), 'Function');
+// 	test('Function', (t) => {
+// 		t.is(stringOf(function Test() {}, true), 'Function');
 // 	});
 
-// 	it('Function', (t) => {
-// 		t.is(type.stringOf(function Test() {}, true), 'Function');
+// 	test('Test', (t) => {
+// 		t.is(stringOf(new (function Test() {}), true), 'Test');
 // 	});
 
-// 	it('Test', (t) => {
-// 		t.is(type.stringOf(new (function Test() {}), true), 'Test');
+// 	test('Object', (t) => {
+// 		t.is(stringOf(Object.create(null), true), 'Object');
 // 	});
 
-// 	it('Object', (t) => {
-// 		t.is(type.stringOf(Object.create(null), true), 'Object');
+// 	test('Object', (t) => {
+// 		t.is(stringOf(Object.create(null)), 'Object');
 // 	});
 
-// 	it('Object', (t) => {
-// 		t.is(type.stringOf(Object.create(null)), 'Object');
+// 	test('Object', (t) => {
+// 		t.is(stringOf({}), 'Object');
 // 	});
 
-// 	it('Object', (t) => {
-// 		t.is(type.stringOf({}), 'Object');
+// 	test('Number', (t) => {
+// 		t.is(stringOf(1), 'Number');
 // 	});
 
-// 	it('Number', (t) => {
-// 		t.is(type.stringOf(1), 'Number');
-// 	});
-
-// 	it('Date', (t) => {
-// 		t.is(type.stringOf(new Date()), 'Date');
+// 	test('Date', (t) => {
+// 		t.is(stringOf(new Date()), 'Date');
 // 	});
 
 // 	if (global.ArrayBuffer) {
-// 		it('ArrayBuffer', (t) => {
-// 			t.is(type.stringOf(new global.ArrayBuffer(4)), 'ArrayBuffer');
+// 		test('ArrayBuffer', (t) => {
+// 			t.is(stringOf(new global.ArrayBuffer(4)), 'ArrayBuffer');
 // 		});
 // 	}
 // 	if (global.Buffer) {
-// 		it('Buffer', (t) => {
-// 			t.is(type.stringOf(new Buffer(3)), 'Buffer');
+// 		test('Buffer', (t) => {
+// 			t.is(stringOf(new Buffer(3)), 'Buffer');
 // 		});
 // 	}
 
 // 	if (global.Promise) {
-// 		it('Promise', (t) => {
-// 			t.is(type.stringOf(new global.Promise((resolve) => { resolve(); })), 'Promise');
+// 		test('Promise', (t) => {
+// 			t.is(stringOf(new global.Promise((resolve) => { resolve(); })), 'Promise');
 // 		});
 // 	}
 // });

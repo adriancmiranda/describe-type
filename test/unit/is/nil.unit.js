@@ -11,16 +11,16 @@ test('nil exposure', (t) => {
 	t.is(toString.call(nil), '[object Function]', 'should be a function');
 });
 
-// 		datatypes.nil.iterate(datatype => {
-// 			test(`${datatype.id} • nil(${datatype.label}); // true`, (t) => {
-// 				t.is(nil(datatype.value), true, 'should be true');
-// 			});
-// 		});
+datatypes.nil.iterate(datatype => {
+	test(`${datatype.id} • nil(${datatype.label}); // true`, (t) => {
+		t.is(nil(datatype.value), true, 'should be true');
+	});
+});
 
-// 		datatypes.all.iterate(datatype => {
-// 			if (!is.nil(datatype.value)) {
-// 				test(`${datatype.id} • nil(${datatype.label}); // false`, (t) => {
-// 					t.is(nil(datatype.value), false, 'should be false');
-// 				});
-// 			}
-// 		});
+datatypes.all.iterate(datatype => {
+	if (nil(datatype.value) === false) {
+		test(`${datatype.id} • nil(${datatype.label}); // false`, (t) => {
+			t.is(nil(datatype.value), false, 'should be false');
+		});
+	}
+});

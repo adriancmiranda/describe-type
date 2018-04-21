@@ -13,7 +13,7 @@ test('undef exposure', (t) => {
 
 datatypes.undef.iterate(datatype => {
 	test(`${datatype.id} • undef(${datatype.label}); // true`, (t) => {
-		t.is(undef(datatype.value), true, 'should be a true');
+		t.is(undef(datatype.value), true, 'should be true');
 	});
 });
 

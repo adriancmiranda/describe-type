@@ -1,148 +1,149 @@
 import test from 'ava';
 import Custom from '../../fixtures/datatype/types/custom';
-import * as type from '../../../source';
+import * as describeType from '../../../source';
+import name from '../../../source/built-in/name';
 
-test('foo', t => {
-	t.pass();
+test('describeType.name exposure', (t) => {
+	t.is(toString.call(describeType.name), '[object Function]', 'should be a function');
 });
-// test('#name', (t) => {
-// 	it('exposed', (t) => {
-// 		t.is(toString.call(type.name), '[object Function]', 'should be a function');;
+
+test('name exposure', (t) => {
+	t.is(toString.call(name), '[object Function]', 'should be a function');
+});
+
+// 	test('Arguments', (t) => {
+// 		t.is(name((() => arguments)()), 'Arguments');
 // 	});
 
-// 	it('Arguments', (t) => {
-// 		t.is(type.name((() => arguments)()), 'Arguments');
+// 	test('String', (t) => {
+// 		t.is(name(String), 'String');
 // 	});
 
-// 	it('String', (t) => {
-// 		t.is(type.name(String), 'String');
+// 	test('RegExp', (t) => {
+// 		t.is(name(RegExp), 'RegExp');
 // 	});
 
-// 	it('RegExp', (t) => {
-// 		t.is(type.name(RegExp), 'RegExp');
+// 	test('Number', (t) => {
+// 		t.is(name(Number), 'Number');
 // 	});
 
-// 	it('Number', (t) => {
-// 		t.is(type.name(Number), 'Number');
+// 	test('TypeError', (t) => {
+// 		t.is(name(TypeError), 'TypeError');
 // 	});
 
-// 	it('TypeError', (t) => {
-// 		t.is(type.name(TypeError), 'TypeError');
+// 	test('Error', (t) => {
+// 		t.is(name(Error), 'Error');
 // 	});
 
-// 	it('Error', (t) => {
-// 		t.is(type.name(Error), 'Error');
+// 	test('Object', (t) => {
+// 		t.is(name(Object), 'Object');
 // 	});
 
-// 	it('Object', (t) => {
-// 		t.is(type.name(Object), 'Object');
+// 	test('Array', (t) => {
+// 		t.is(name(Array), 'Array');
 // 	});
 
-// 	it('Array', (t) => {
-// 		t.is(type.name(Array), 'Array');
+// 	test('Boolean', (t) => {
+// 		t.is(name(Boolean), 'Boolean');
 // 	});
 
-// 	it('Boolean', (t) => {
-// 		t.is(type.name(Boolean), 'Boolean');
+// 	test('Date', (t) => {
+// 		t.is(name(Date), 'Date');
 // 	});
 
-// 	it('Date', (t) => {
-// 		t.is(type.name(Date), 'Date');
+// 	test('null', (t) => {
+// 		t.is(name(null), 'null');
 // 	});
 
-// 	it('null', (t) => {
-// 		t.is(type.name(null), 'null');
+// 	test('undefined', (t) => {
+// 		t.is(name(undefined), 'undefined');
 // 	});
 
-// 	it('undefined', (t) => {
-// 		t.is(type.name(undefined), 'undefined');
+// 	test('NaN', (t) => {
+// 		t.is(name(NaN), 'NaN');
 // 	});
 
-// 	it('NaN', (t) => {
-// 		t.is(type.name(NaN), 'NaN');
+// 	test('_a_b|b_a_', (t) => {
+// 		t.is(name('|a-b|b>a|', true), '_a_b|b_a_');
 // 	});
 
-// 	it('_a_b|b_a_', (t) => {
-// 		t.is(type.name('|a-b|b>a|', true), '_a_b|b_a_');
+// 	test('ab|ba', (t) => {
+// 		t.is(name('ab|ba', true), 'ab|ba');
 // 	});
 
-// 	it('ab|ba', (t) => {
-// 		t.is(type.name('ab|ba', true), 'ab|ba');
+// 	test('String', (t) => {
+// 		t.is(name('ab|ba'), 'String');
 // 	});
 
-// 	it('String', (t) => {
-// 		t.is(type.name('ab|ba'), 'String');
+// 	test('Array', (t) => {
+// 		t.is(name([1, 2]), 'Array');
 // 	});
 
-// 	it('Array', (t) => {
-// 		t.is(type.name([1, 2]), 'Array');
+// 	test('RegExp', (t) => {
+// 		t.is(name(/^./g), 'RegExp');
 // 	});
 
-// 	it('RegExp', (t) => {
-// 		t.is(type.name(/^./g), 'RegExp');
+// 	test('Number', (t) => {
+// 		t.is(name(10000), 'Number');
 // 	});
 
-// 	it('Number', (t) => {
-// 		t.is(type.name(10000), 'Number');
+// 	test('Object', (t) => {
+// 		t.is(name({ name: 1 }), 'Object');
 // 	});
 
-// 	it('Object', (t) => {
-// 		t.is(type.name({ name: 1 }), 'Object');
+// 	test('Boolean', (t) => {
+// 		t.is(name(false), 'Boolean');
 // 	});
 
-// 	it('Boolean', (t) => {
-// 		t.is(type.name(false), 'Boolean');
-// 	});
-
-// 	it('Date', (t) => {
-// 		t.is(type.name(new Date()), 'Date');
+// 	test('Date', (t) => {
+// 		t.is(name(new Date()), 'Date');
 // 	});
 
 // 	if (Custom.supportsCustomization) {
-// 		it('FixtureTest', (t) => {
-// 			t.is(type.name(new Custom('FixtureTest')), 'FixtureTest');
+// 		test('FixtureTest', (t) => {
+// 			t.is(name(new Custom('FixtureTest')), 'FixtureTest');
 // 		});
 
-// 		it('FixtureTest', (t) => {
-// 			t.is(type.name(Custom), 'FixtureTest');
+// 		test('FixtureTest', (t) => {
+// 			t.is(name(Custom), 'FixtureTest');
 // 		});
 // 	}
 
 // 	if (global.Symbol) {
-// 		it('Symbol', (t) => {
-// 			t.is(type.name(global.Symbol), 'Symbol');
+// 		test('Symbol', (t) => {
+// 			t.is(name(global.Symbol), 'Symbol');
 // 		});
 // 	}
 
 // 	if (global.Promise) {
-// 		it('Promise', (t) => {
-// 			t.is(type.name(global.Promise), 'Promise');
+// 		test('Promise', (t) => {
+// 			t.is(name(global.Promise), 'Promise');
 // 		});
 // 	}
 
 // 	if (global.ArrayBuffer) {
-// 		it('ArrayBuffer', (t) => {
-// 			t.is(type.name(global.ArrayBuffer), 'ArrayBuffer');
+// 		test('ArrayBuffer', (t) => {
+// 			t.is(name(global.ArrayBuffer), 'ArrayBuffer');
 // 		});
 
-// 		it('ArrayBuffer', (t) => {
-// 			t.is(type.name(new global.ArrayBuffer(4)), 'ArrayBuffer');
+// 		test('ArrayBuffer', (t) => {
+// 			t.is(name(new global.ArrayBuffer(4)), 'ArrayBuffer');
 // 		});
 // 	}
 
 // 	if (global.Int32Array && global.ArrayBuffer) {
-// 		it('Int32Array', (t) => {
-// 			t.is(type.name(new global.Int32Array(new global.ArrayBuffer(8))), 'Int32Array');
+// 		test('Int32Array', (t) => {
+// 			t.is(name(new global.Int32Array(new global.ArrayBuffer(8))), 'Int32Array');
 // 		});
 // 	}
 
 // 	if (global.Buffer) {
-// 		it('Buffer', (t) => {
-// 			t.is(type.name(global.Buffer), 'Buffer');
+// 		test('Buffer', (t) => {
+// 			t.is(name(global.Buffer), 'Buffer');
 // 		});
 
-// 		it('Buffer', (t) => {
-// 			t.is(type.name(new global.Buffer('ab')), 'Buffer');
+// 		test('Buffer', (t) => {
+// 			t.is(name(new global.Buffer('ab')), 'Buffer');
 // 		});
 // 	}
 // });

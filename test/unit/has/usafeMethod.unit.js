@@ -1,6 +1,11 @@
 import test from 'ava';
-import unsafeMethod from '../../../source/has/unsafeMethod.js';
+import * as describeType from '../../../source';
+import unsafeMethod from '../../../source/has/unsafeMethod';
 
-test('unsafeMethod exposed', (t) => {
-	t.is(toString.call(unsafeMethod), '[object Function]', 'should be a function');;
+test('describeType.has.unsafeMethod exposure', (t) => {
+	t.is(toString.call(describeType.has.unsafeMethod), '[object Function]', 'should be a function');
+});
+
+test('unsafeMethod exposure', (t) => {
+	t.is(toString.call(unsafeMethod), '[object Function]', 'should be a function');
 });

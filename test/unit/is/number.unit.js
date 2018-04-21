@@ -11,16 +11,16 @@ test('number exposure', (t) => {
 	t.is(toString.call(number), '[object Function]', 'should be a function');
 });
 
-// 		datatypes.number.iterate(datatype => {
-// 			test(`${datatype.id} • number(${datatype.label}); // true`, (t) => {
-// 				t.is(number(datatype.value), true, 'should be true');
-// 			});
-// 		});
+datatypes.number.iterate(datatype => {
+	test(`${datatype.id} • number(${datatype.label}); // true`, (t) => {
+		t.is(number(datatype.value), true, 'should be true');
+	});
+});
 
-// 		datatypes.all.iterate(datatype => {
-// 			if (!is.number(datatype.value)) {
-// 				test(`${datatype.id} • number(${datatype.label}); // false`, (t) => {
-// 					t.is(number(datatype.value), false, 'should be false');
-// 				});
-// 			}
-// 		});
+datatypes.all.iterate(datatype => {
+	if (number(datatype.value) === false) {
+		test(`${datatype.id} • number(${datatype.label}); // false`, (t) => {
+			t.is(number(datatype.value), false, 'should be false');
+		});
+	}
+});

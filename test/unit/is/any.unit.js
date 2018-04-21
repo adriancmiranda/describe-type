@@ -11,19 +11,18 @@ test('any exposure', (t) => {
 	t.is(toString.call(any), '[object Function]', 'should be a function');
 });
 
-// 	const errorCtors = datatypes.error.extract('ctor');
-// 	const errorNames = datatypes.error.extract('name');
+const errorCtors = datatypes.error.extract('ctor');
+const errorNames = datatypes.error.extract('name');
+datatypes.error.iterate(datatype => {
+	test(`${datatype.id} • any([${errorNames}], ${datatype.label}); // true`, (t) => {
+		t.is(any(errorCtors, datatype.value), true, 'should be true');
+	});
+});
 
-// 		datatypes.error.iterate(datatype => {
-// 			test(`${datatype.id} • any([${errorNames}], ${datatype.label}); // true`, (t) => {
-// 				t.is(any(errorCtors, datatype.value), true, 'should be true');
-// 			});
-// 		});
-
-// 		datatypes.all.remove(datatypes.error);
-// 		datatypes.all.iterate(datatype => {
-// 			test(`${datatype.id} • any([${errorNames}], ${datatype.label}); // false`, (t) => {
-// 				t.is(any(errorCtors, datatype.value), false, 'should be false');
-// 			});
-// 		});
-// 		datatypes.all.add(datatypes.error);
+datatypes.all.remove(datatypes.error);
+datatypes.all.iterate(datatype => {
+	test(`${datatype.id} • any([${errorNames}], ${datatype.label}); // false`, (t) => {
+		t.is(any(errorCtors, datatype.value), false, 'should be false');
+	});
+});
+datatypes.all.add(datatypes.error);

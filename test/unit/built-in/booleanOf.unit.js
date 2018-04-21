@@ -1,43 +1,43 @@
 import test from 'ava';
-import * as type from '../../../source';
+import * as describeType from '../../../source';
+import booleanOf from '../../../source/built-in/booleanOf';
 
-test('foo', t => {
-	t.pass();
+test('describeType.booleanOf exposure', (t) => {
+	t.is(toString.call(describeType.booleanOf), '[object Function]', 'should be a function');
 });
-// test('#booleanOf', (t) => {
-// 	it('exposed', (t) => {
-// 		t.is(toString.call(type.booleanOf), '[object Function]', 'should be a function');;
-// 	});
 
-// 	it('0 should be false', (t) => {
-// 		t.is(type.booleanOf(0), false);
-// 	});
+test('booleanOf exposure', (t) => {
+	t.is(toString.call(booleanOf), '[object Function]', 'should be a function');
+});
 
-// 	it('1 should be true', (t) => {
-// 		t.is(type.booleanOf(1), true);
-// 	});
+test('0 should be false', (t) => {
+	t.is(booleanOf(0), false);
+});
 
-// 	it('"true" should be true', (t) => {
-// 		t.is(type.booleanOf('true'), true);
-// 	});
+test('1 should be true', (t) => {
+	t.is(booleanOf(1), true);
+});
 
-// 	it('"false" should be false', (t) => {
-// 		t.is(type.booleanOf('false'), false);
-// 	});
+test('"true" should be true', (t) => {
+	t.is(booleanOf('true'), true);
+});
 
-// 	it('NaN should be false', (t) => {
-// 		t.is(type.booleanOf(NaN), false);
-// 	});
+test('"false" should be false', (t) => {
+	t.is(booleanOf('false'), false);
+});
 
-// 	it('Infinity should be true', (t) => {
-// 		t.is(type.booleanOf(Infinity), true);
-// 	});
+test('NaN should be false', (t) => {
+	t.is(booleanOf(NaN), false);
+});
 
-// 	it('"0" should be false', (t) => {
-// 		t.is(type.booleanOf('0'), false);
-// 	});
+test('Infinity should be true', (t) => {
+	t.is(booleanOf(Infinity), true);
+});
 
-// 	it('"1" should be true', (t) => {
-// 		t.is(type.booleanOf('1'), true);
-// 	});
-// });
+test('"0" should be false', (t) => {
+	t.is(booleanOf('0'), false);
+});
+
+test('"1" should be true', (t) => {
+	t.is(booleanOf('1'), true);
+});

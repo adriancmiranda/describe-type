@@ -11,16 +11,16 @@ test('callable exposure', (t) => {
 	t.is(toString.call(callable), '[object Function]', 'should be a function');
 });
 
-// 		datatypes.callable.iterate(datatype => {
-// 			test(`${datatype.id} • callable(${datatype.label}); // true`, (t) => {
-// 				t.is(callable(datatype.value), true, 'should be true');
-// 			});
-// 		});
+datatypes.callable.iterate(datatype => {
+	test(`${datatype.id} • callable(${datatype.label}); // true`, (t) => {
+		t.is(callable(datatype.value), true, 'should be true');
+	});
+});
 
-// 		datatypes.all.iterate(datatype => {
-// 			if (!is.callable(datatype.value)) {
-// 				test(`${datatype.id} • callable(${datatype.label}); // false`, (t) => {
-// 					t.is(callable(datatype.value), false, 'should be false');
-// 				});
-// 			}
-// 		});
+datatypes.all.iterate(datatype => {
+	if (callable(datatype.value) === false) {
+		test(`${datatype.id} • callable(${datatype.label}); // false`, (t) => {
+			t.is(callable(datatype.value), false, 'should be false');
+		});
+	}
+});

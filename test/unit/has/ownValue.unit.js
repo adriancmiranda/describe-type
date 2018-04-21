@@ -1,6 +1,11 @@
 import test from 'ava';
-import ownValue from '../../../source/has/ownValue.js';
+import * as describeType from '../../../source';
+import ownValue from '../../../source/has/ownValue';
 
-test('ownValue exposed', (t) => {
-	t.is(toString.call(ownValue), '[object Function]', 'should be a function');;
+test('describeType.has.ownValue exposure', (t) => {
+	t.is(toString.call(describeType.has.ownValue), '[object Function]', 'should be a function');
+});
+
+test('ownValue exposure', (t) => {
+	t.is(toString.call(ownValue), '[object Function]', 'should be a function');
 });

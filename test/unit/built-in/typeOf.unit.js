@@ -1,271 +1,272 @@
 import test from 'ava';
 import Custom from '../../fixtures/datatype/types/custom';
-import * as type from '../../../source';
+import * as describeType from '../../../source';
+import typeOf from '../../../source/built-in/typeOf';
 
-test('foo', t => {
-	t.pass();
+test('describeType.typeOf exposure', (t) => {
+	t.is(toString.call(describeType.typeOf), '[object Function]', 'should be a function');
 });
-// test('#typeOf', (t) => {
-// 	it('exposed', (t) => {
-// 		t.is(toString.call(type.typeOf), '[object Function]', 'should be a function');;
+
+test('typeOf exposure', (t) => {
+	t.is(toString.call(typeOf), '[object Function]', 'should be a function');
+});
+
+// 	test('', (t) => {
+// 		t.is(typeOf((() => arguments)()), 'Arguments');
 // 	});
 
-// 	it('', (t) => {
-// 		t.is(type.typeOf((() => arguments)()), 'Arguments');
+// 	test('', (t) => {
+// 		t.is(typeOf(arguments), 'Arguments');
 // 	});
 
-// 	it('', (t) => {
-// 		t.is(type.typeOf(arguments), 'Arguments');
+// 	test('', (t) => {
+// 		t.is(typeOf('ab'), 'String');
 // 	});
 
-// 	it('', (t) => {
-// 		t.is(type.typeOf('ab'), 'String');
+// 	test('', (t) => {
+// 		t.is(typeOf(new String('foo')), 'String');
 // 	});
 
-// 	it('', (t) => {
-// 		t.is(type.typeOf(new String('foo')), 'String');
+// 	test('', (t) => {
+// 		t.is(typeOf(/^./g), 'RegExp');
 // 	});
 
-// 	it('', (t) => {
-// 		t.is(type.typeOf(/^./g), 'RegExp');
+// 	test('', (t) => {
+// 		t.is(typeOf(new RegExp('foo')), 'RegExp');
 // 	});
 
-// 	it('', (t) => {
-// 		t.is(type.typeOf(new RegExp('foo')), 'RegExp');
+// 	test('', (t) => {
+// 		t.is(typeOf(10000), 'Number');
 // 	});
 
-// 	it('', (t) => {
-// 		t.is(type.typeOf(10000), 'Number');
+// 	test('', (t) => {
+// 		t.is(typeOf(new Number(42)), 'Number');
 // 	});
 
-// 	it('', (t) => {
-// 		t.is(type.typeOf(new Number(42)), 'Number');
+// 	test('', (t) => {
+// 		t.is(typeOf({ name: 1 }), 'Object');
 // 	});
 
-// 	it('', (t) => {
-// 		t.is(type.typeOf({ name: 1 }), 'Object');
+// 	test('', (t) => {
+// 		t.is(typeOf({}), 'Object');
 // 	});
 
-// 	it('', (t) => {
-// 		t.is(type.typeOf({}), 'Object');
+// 	test('', (t) => {
+// 		t.is(typeOf(Object.create(null)), 'Object');
 // 	});
 
-// 	it('', (t) => {
-// 		t.is(type.typeOf(Object.create(null)), 'Object');
+// 	test('', (t) => {
+// 		t.is(typeOf(new Custom()), 'Custom');
 // 	});
 
-// 	it('', (t) => {
-// 		t.is(type.typeOf(new Custom()), 'Custom');
+// 	test('', (t) => {
+// 		t.is(typeOf([]), 'Array');
 // 	});
 
-// 	it('', (t) => {
-// 		t.is(type.typeOf([]), 'Array');
+// 	test('', (t) => {
+// 		t.is(typeOf([1, 2]), 'Array');
 // 	});
 
-// 	it('', (t) => {
-// 		t.is(type.typeOf([1, 2]), 'Array');
+// 	test('', (t) => {
+// 		t.is(typeOf(new Array()), 'Array');
 // 	});
 
-// 	it('', (t) => {
-// 		t.is(type.typeOf(new Array()), 'Array');
+// 	test('', (t) => {
+// 		t.is(typeOf(true), 'Boolean');
 // 	});
 
-// 	it('', (t) => {
-// 		t.is(type.typeOf(true), 'Boolean');
+// 	test('', (t) => {
+// 		t.is(typeOf(false), 'Boolean');
 // 	});
 
-// 	it('', (t) => {
-// 		t.is(type.typeOf(false), 'Boolean');
+// 	test('', (t) => {
+// 		t.is(typeOf(new Boolean(true)), 'Boolean');
 // 	});
 
-// 	it('', (t) => {
-// 		t.is(type.typeOf(new Boolean(true)), 'Boolean');
+// 	test('', (t) => {
+// 		t.is(typeOf(null), 'null');
 // 	});
 
-// 	it('', (t) => {
-// 		t.is(type.typeOf(null), 'null');
+// 	test('', (t) => {
+// 		t.is(typeOf(undefined), 'undefined');
 // 	});
 
-// 	it('', (t) => {
-// 		t.is(type.typeOf(undefined), 'undefined');
+// 	test('', (t) => {
+// 		t.is(typeOf(String), 'Function');
 // 	});
 
-// 	it('', (t) => {
-// 		t.is(type.typeOf(String), 'Function');
+// 	test('', (t) => {
+// 		t.is(typeOf(Boolean), 'Function');
 // 	});
 
-// 	it('', (t) => {
-// 		t.is(type.typeOf(Boolean), 'Function');
+// 	test('', (t) => {
+// 		t.is(typeOf(Number), 'Function');
 // 	});
 
-// 	it('', (t) => {
-// 		t.is(type.typeOf(Number), 'Function');
+// 	test('', (t) => {
+// 		t.is(typeOf(RegExp), 'Function');
 // 	});
 
-// 	it('', (t) => {
-// 		t.is(type.typeOf(RegExp), 'Function');
+// 	test('', (t) => {
+// 		t.is(typeOf(TypeError), 'Function');
 // 	});
 
-// 	it('', (t) => {
-// 		t.is(type.typeOf(TypeError), 'Function');
+// 	test('', (t) => {
+// 		t.is(typeOf(Error), 'Function');
 // 	});
 
-// 	it('', (t) => {
-// 		t.is(type.typeOf(Error), 'Function');
+// 	test('', (t) => {
+// 		t.is(typeOf(Object), 'Function');
 // 	});
 
-// 	it('', (t) => {
-// 		t.is(type.typeOf(Object), 'Function');
+// 	test('', (t) => {
+// 		t.is(typeOf(Array), 'Function');
 // 	});
 
-// 	it('', (t) => {
-// 		t.is(type.typeOf(Array), 'Function');
+// 	test('', (t) => {
+// 		t.is(typeOf(Boolean), 'Function');
 // 	});
 
-// 	it('', (t) => {
-// 		t.is(type.typeOf(Boolean), 'Function');
+// 	test('', (t) => {
+// 		t.is(typeOf(Date), 'Function');
 // 	});
 
-// 	it('', (t) => {
-// 		t.is(type.typeOf(Date), 'Function');
+// 	test('', (t) => {
+// 		t.is(typeOf(Custom), 'Function');
 // 	});
 
-// 	it('', (t) => {
-// 		t.is(type.typeOf(Custom), 'Function');
+// 	test('', (t) => {
+// 		t.is(typeOf((t) => {}), 'Function');
 // 	});
 
-// 	it('', (t) => {
-// 		t.is(type.typeOf((t) => {}), 'Function');
-// 	});
-
-// 	it('', (t) => {
-// 		t.is(type.typeOf(new Function()), 'Function');
+// 	test('', (t) => {
+// 		t.is(typeOf(new Function()), 'Function');
 // 	});
 
 // 	if (global.Symbol) {
-// 		it('', (t) => {
-// 			t.is(type.typeOf(global.Symbol('bar')), 'Symbol');
+// 		test('', (t) => {
+// 			t.is(typeOf(global.Symbol('bar')), 'Symbol');
 // 		});
 
-// 		it('', (t) => {
-// 			t.is(type.typeOf(global.Symbol), 'Function');
+// 		test('', (t) => {
+// 			t.is(typeOf(global.Symbol), 'Function');
 // 		});
 // 	}
 
 // 	if (global.Map) {
-// 		it('', (t) => {
-// 			t.is(type.typeOf(new global.Map()), 'Map');
+// 		test('', (t) => {
+// 			t.is(typeOf(new global.Map()), 'Map');
 // 		});
 // 	}
 
 // 	if (global.WeakMap) {
-// 		it('', (t) => {
-// 			t.is(type.typeOf(new global.WeakMap()), 'WeakMap');
+// 		test('', (t) => {
+// 			t.is(typeOf(new global.WeakMap()), 'WeakMap');
 // 		});
 // 	}
 
 // 	if (global.Set) {
-// 		it('', (t) => {
-// 			t.is(type.typeOf(new global.Set()), 'Set');
+// 		test('', (t) => {
+// 			t.is(typeOf(new global.Set()), 'Set');
 // 		});
 // 	}
 
 // 	if (global.WeakSet) {
-// 		it('', (t) => {
-// 			t.is(type.typeOf(new global.WeakSet()), 'WeakSet');
+// 		test('', (t) => {
+// 			t.is(typeOf(new global.WeakSet()), 'WeakSet');
 // 		});
 // 	}
 
 // 	if (global.Int8Array) {
-// 		it('', (t) => {
-// 			t.is(type.typeOf(new global.Int8Array()), 'Int8Array');
+// 		test('', (t) => {
+// 			t.is(typeOf(new global.Int8Array()), 'Int8Array');
 // 		});
 // 	}
 
 // 	if (global.Uint8Array) {
-// 		it('', (t) => {
-// 			t.is(type.typeOf(new global.Uint8Array()), 'Uint8Array');
+// 		test('', (t) => {
+// 			t.is(typeOf(new global.Uint8Array()), 'Uint8Array');
 // 		});
 // 	}
 
 // 	if (global.Uint8ClampedArray) {
-// 		it('', (t) => {
-// 			t.is(type.typeOf(new global.Uint8ClampedArray()), 'Uint8ClampedArray');
+// 		test('', (t) => {
+// 			t.is(typeOf(new global.Uint8ClampedArray()), 'Uint8ClampedArray');
 // 		});
 // 	}
 
 // 	if (global.Int16Array) {
-// 		it('', (t) => {
-// 			t.is(type.typeOf(new global.Int16Array()), 'Int16Array');
+// 		test('', (t) => {
+// 			t.is(typeOf(new global.Int16Array()), 'Int16Array');
 // 		});
 // 	}
 
 // 	if (global.Uint16Array) {
-// 		it('', (t) => {
-// 			t.is(type.typeOf(new global.Uint16Array()), 'Uint16Array');
+// 		test('', (t) => {
+// 			t.is(typeOf(new global.Uint16Array()), 'Uint16Array');
 // 		});
 // 	}
 
 // 	if (global.Int32Array) {
-// 		it('', (t) => {
-// 			t.is(type.typeOf(new global.Int32Array()), 'Int32Array');
+// 		test('', (t) => {
+// 			t.is(typeOf(new global.Int32Array()), 'Int32Array');
 // 		});
 // 	}
 
 // 	if (global.Uint32Array) {
-// 		it('', (t) => {
-// 			t.is(type.typeOf(new global.Uint32Array()), 'Uint32Array');
+// 		test('', (t) => {
+// 			t.is(typeOf(new global.Uint32Array()), 'Uint32Array');
 // 		});
 // 	}
 
 // 	if (global.Float32Array) {
-// 		it('', (t) => {
-// 			t.is(type.typeOf(new global.Float32Array()), 'Float32Array');
+// 		test('', (t) => {
+// 			t.is(typeOf(new global.Float32Array()), 'Float32Array');
 // 		});
 // 	}
 
 // 	if (global.Float64Array) {
-// 		it('', (t) => {
-// 			t.is(type.typeOf(new global.Float64Array()), 'Float64Array');
+// 		test('', (t) => {
+// 			t.is(typeOf(new global.Float64Array()), 'Float64Array');
 // 		});
 // 	}
 
-// 	it('', (t) => {
-// 		t.is(type.typeOf(new Date()), 'Date');
+// 	test('', (t) => {
+// 		t.is(typeOf(new Date()), 'Date');
 // 	});
 
 // 	if (global.ArrayBuffer) {
-// 		it('', (t) => {
-// 			t.is(type.typeOf(global.ArrayBuffer), 'Function');
+// 		test('', (t) => {
+// 			t.is(typeOf(global.ArrayBuffer), 'Function');
 // 		});
 // 	}
 
 // 	if (global.ArrayBuffer) {
-// 		it('', (t) => {
-// 			t.is(type.typeOf(new global.ArrayBuffer(4)), 'ArrayBuffer');
+// 		test('', (t) => {
+// 			t.is(typeOf(new global.ArrayBuffer(4)), 'ArrayBuffer');
 // 		});
 // 	}
 
 // 	if (global.Buffer) {
-// 		it('', (t) => {
-// 			t.is(type.typeOf(global.Buffer), 'Function');
+// 		test('', (t) => {
+// 			t.is(typeOf(global.Buffer), 'Function');
 // 		});
 
-// 		it('Buffer', (t) => {
-// 			t.is(type.typeOf(new Buffer(3)), 'Buffer');
+// 		test('Buffer', (t) => {
+// 			t.is(typeOf(new Buffer(3)), 'Buffer');
 // 		});
 // 	}
 
 // 	if (global.Promise) {
-// 		it('Promise', (t) => {
-// 			t.is(type.typeOf(new global.Promise((resolve) => { resolve(); })), 'Promise');
+// 		test('Promise', (t) => {
+// 			t.is(typeOf(new global.Promise((resolve) => { resolve(); })), 'Promise');
 // 		});
 // 	}
 // });
 
 // test('typeOf.generatorFunction', (t) => {
-// 	it('', (t) => {
+// 	test('', (t) => {
 // 		// const genFn = function* () { yield 2; return Infinity; };
-// 		// t.is(type.typeOf(genFn), 'GeneratorFunction');
+// 		// t.is(typeOf(genFn), 'GeneratorFunction');
 // 	});
 // });

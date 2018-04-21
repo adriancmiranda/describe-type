@@ -11,16 +11,16 @@ test('hosted exposure', (t) => {
 	t.is(toString.call(hosted), '[object Function]', 'should be a function');
 });
 
-// 		datatypes.all.iterate(datatype => {
-// 			if (!is.primitive(datatype.value)) {
-// 				test(`${datatype.id} • hosted("foo", { foo: ${datatype.label} }); // true`, (t) => {
-// 					t.is(hosted('foo', { foo: datatype.value }), true);
-// 				});
-// 			}
-// 		});
+datatypes.all.iterate(datatype => {
+	if (datatype.value != null) {
+		test(`${datatype.id} • hosted("foo", { foo: ${datatype.label} }); // true`, (t) => {
+			t.is(hosted('foo', { foo: datatype.value }), true);
+		});
+	}
+});
 
-// 		datatypes.primitive.iterate(datatype => {
-// 			test(`${datatype.id} • hosted("foo", { foo: ${datatype.label} }); // true`, (t) => {
-// 				t.is(hosted('foo', { foo: datatype.value }), false);
-// 			});
-// 		});
+datatypes.primitive.iterate(datatype => {
+	test(`${datatype.id} • hosted("foo", { foo: ${datatype.label} }); // true`, (t) => {
+		t.is(hosted('foo', { foo: datatype.value }), false);
+	});
+});

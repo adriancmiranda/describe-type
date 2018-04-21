@@ -1,19 +1,19 @@
 import test from 'ava';
-import * as type from '../../../source';
+import * as describeType from '../../../source';
+import floatOf from '../../../source/built-in/floatOf';
 
-test('foo', t => {
-	t.pass();
+test('describeType.floatOf exposure', (t) => {
+	t.is(toString.call(describeType.floatOf), '[object Function]', 'should be a function');
 });
-// test('#floatOf', (t) => {
-// 	it('exposed', (t) => {
-// 		t.is(toString.call(type.floatOf), '[object Function]', 'should be a function');;
-// 	});
 
-// 	it('', (t) => {
-// 		t.is(type.floatOf('1'), 1);
-// 	});
+test('floatOf exposure', (t) => {
+	t.is(toString.call(floatOf), '[object Function]', 'should be a function');
+});
 
-// 	it('', (t) => {
-// 		t.is(type.floatOf('1.2'), 1.2);
-// 	});
+// test('', (t) => {
+// 	t.is(floatOf('1'), 1);
+// });
+
+// test('', (t) => {
+// 	t.is(floatOf('1.2'), 1.2);
 // });

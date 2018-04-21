@@ -11,14 +11,14 @@ test('jsonlike exposure', (t) => {
 	t.is(toString.call(jsonlike), '[object Function]', 'should be a function');
 });
 
-// 		datatypes.jsonlike.iterate(datatype => {
-// 			test(`jsonlike(${datatype.label}); // true`, (t) => {
-// 				t.is(jsonlike(datatype.value), true, 'should be true');
-// 			});
-// 		});
+datatypes.jsonlike.iterate(datatype => {
+	test(`jsonlike(${datatype.label}); // true`, (t) => {
+		t.is(jsonlike(datatype.value), true, 'should be true');
+	});
+});
 
-// 		datatypes.all.iterate(datatype => {
-// 			test(`jsonlike(${datatype.label}); // false`, (t) => {
-// 				t.is(jsonlike(datatype.value), false, 'should be false');
-// 			});
-// 		});
+datatypes.all.iterate(datatype => {
+	test(`jsonlike(${datatype.label}); // false`, (t) => {
+		t.is(jsonlike(datatype.value), false, 'should be false');
+	});
+});

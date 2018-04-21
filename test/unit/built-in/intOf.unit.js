@@ -1,23 +1,23 @@
 import test from 'ava';
-import * as type from '../../../source';
+import * as describeType from '../../../source';
+import intOf from '../../../source/built-in/intOf';
 
-test('foo', t => {
-	t.pass();
+test('describeType.intOf exposure', (t) => {
+	t.is(toString.call(describeType.intOf), '[object Function]', 'should be a function');
 });
-// test('#intOf', (t) => {
-// 	it('exposed', (t) => {
-// 		t.is(toString.call(type.intOf), '[object Function]', 'should be a function');;
-// 	});
 
-// 	it('', (t) => {
-// 		t.is(type.intOf(-1.2), -1);
-// 	});
+test('intOf exposure', (t) => {
+	t.is(toString.call(intOf), '[object Function]', 'should be a function');
+});
 
-// 	it('', (t) => {
-// 		t.is(type.intOf(1.2), 1);
-// 	});
+// test('', (t) => {
+// 	t.is(intOf(-1.2), -1);
+// });
 
-// 	it('', (t) => {
-// 		t.is(type.intOf(1), 1);
-// 	});
+// test('', (t) => {
+// 	t.is(intOf(1.2), 1);
+// });
+
+// test('', (t) => {
+// 	t.is(intOf(1), 1);
 // });

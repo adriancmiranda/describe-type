@@ -1,5 +1,5 @@
 import test from 'ava';
-import { toSource, constructorNameOf } from '../../fixtures/datatypes.fixture';
+import { toSource, constructorNameOf } from '../../fixtures/datatype/utils';
 import * as describeType from '../../../source';
 import vector from '../../../source/is/vector';
 
@@ -24,7 +24,7 @@ test('vector exposure', (t) => {
 	{ type: RegExp, value: [/foo/, /bar/, /baz/] },
 ].forEach(datatype => {
 	test(`vector(${constructorNameOf(datatype.type)}, ${toSource(datatype.value)}); // true`, (t) => {
-		t.is(vector(datatype.type, datatype.value), true, 'should be a true');
+		t.is(vector(datatype.type, datatype.value), true, 'should be true');
 	});
 });
 

@@ -11,14 +11,14 @@ test('nativeFunction exposure', (t) => {
 	t.is(toString.call(nativeFunction), '[object Function]', 'should be a function');
 });
 
-// 		datatypes.nativeFunction.iterate(datatype => {
-// 			test(`${datatype.id} • nativeFunction(${datatype.label}); // true`, (t) => {
-// 				t.is(nativeFunction(datatype.value), true, 'should be true');
-// 			});
-// 		});
+datatypes.nativeFunction.iterate(datatype => {
+	test(`${datatype.id} • nativeFunction(${datatype.label}); // true`, (t) => {
+		t.is(nativeFunction(datatype.value), true, 'should be true');
+	});
+});
 
-// 		datatypes.all.iterate(datatype => {
-// 			test(`${datatype.id} • nativeFunction(${datatype.label}); // false`, (t) => {
-// 				t.is(nativeFunction(datatype.value), false, 'should be false');
-// 			});
-// 		});
+datatypes.all.iterate(datatype => {
+	test(`${datatype.id} • nativeFunction(${datatype.label}); // false`, (t) => {
+		t.is(nativeFunction(datatype.value), false, 'should be false');
+	});
+});

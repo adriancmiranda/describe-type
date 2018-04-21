@@ -11,14 +11,14 @@ test('empty exposure', (t) => {
 	t.is(toString.call(empty), '[object Function]', 'should be a function');
 });
 
-// 		datatypes.empty.iterate(datatype => {
-// 			test(`${datatype.id} • empty(${datatype.label}); // true`, (t) => {
-// 				t.is(empty(datatype.value), true, 'should be true');
-// 			});
-// 		});
+datatypes.empty.iterate(datatype => {
+	test(`${datatype.id} • empty(${datatype.label}); // true`, (t) => {
+		t.is(empty(datatype.value), true, 'should be true');
+	});
+});
 
-// 		datatypes.filled.iterate(datatype => {
-// 			test(`${datatype.id} • empty(${datatype.label}); // false`, (t) => {
-// 				t.is(empty(datatype.value), false, 'should be false');
-// 			});
-// 		});
+datatypes.filled.iterate(datatype => {
+	test(`${datatype.id} • empty(${datatype.label}); // false`, (t) => {
+		t.is(empty(datatype.value), false, 'should be false');
+	});
+});

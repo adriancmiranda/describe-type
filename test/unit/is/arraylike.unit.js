@@ -11,14 +11,14 @@ test('arraylike exposure', (t) => {
 	t.is(toString.call(arraylike), '[object Function]', 'should be a function');
 });
 
-// 		datatypes.arraylike.iterate(datatype => {
-// 			test(`${datatype.id} • arraylike(${datatype.label}); // true`, (t) => {
-// 				t.is(arraylike(datatype.value), true, 'should be true');
-// 			});
-// 		});
+datatypes.arraylike.iterate(datatype => {
+	test(`${datatype.id} • arraylike(${datatype.label}); // true`, (t) => {
+		t.is(arraylike(datatype.value), true, 'should be true');
+	});
+});
 
-// 		datatypes.notArraylike.iterate(datatype => {
-// 			test(`${datatype.id} • arraylike(${datatype.label}); // false`, (t) => {
-// 				t.is(arraylike(datatype.value), false, 'should be false');
-// 			});
-// 		});
+datatypes.notArraylike.iterate(datatype => {
+	test(`${datatype.id} • arraylike(${datatype.label}); // false`, (t) => {
+		t.is(arraylike(datatype.value), false, 'should be false');
+	});
+});

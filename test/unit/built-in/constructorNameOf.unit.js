@@ -1,192 +1,197 @@
 import test from 'ava';
 import Custom from '../../fixtures/datatype/types/custom';
-import * as type from '../../../source';
+import * as describeType from '../../../source';
+import constructorNameOf from '../../../source/built-in/constructorNameOf';
 
-test('foo', t => {
-	t.pass();
+test('describeType.constructorNameOf exposure', (t) => {
+	t.is(toString.call(describeType.constructorNameOf), '[object Function]', 'should be a function');
 });
-// test('constructorNameOf', (t) => {
-// 	it('exposed', (t) => {
-// 		t.is(toString.call(type.constructorNameOf), '[object Function]', 'should be a function');;
+
+test('constructorNameOf exposure', (t) => {
+	t.is(toString.call(constructorNameOf), '[object Function]', 'should be a function');
+});
+
+// 	test('exposed', (t) => {
+// 		t.is(toString.call(constructorNameOf), '[object Function]', 'should be a function');
 // 	});
 
-// 	it('Arguments', (t) => {
-// 		t.is(type.constructorNameOf((() => arguments)()), 'Arguments');
+// 	test('Arguments', (t) => {
+// 		t.is(constructorNameOf((() => arguments)()), 'Arguments');
 // 	});
 
-// 	it('Function', (t) => {
-// 		t.is(type.constructorNameOf(() => 'foo'), 'Function');
+// 	test('Function', (t) => {
+// 		t.is(constructorNameOf(() => 'foo'), 'Function');
 // 	});
 
-// 	it('Function', (t) => {
-// 		t.is(type.constructorNameOf((t) => { return 'foo'; }), 'Function');
+// 	test('Function', (t) => {
+// 		t.is(constructorNameOf((t) => { return 'foo'; }), 'Function');
 // 	});
 
-// 	it('String', (t) => {
-// 		t.is(type.constructorNameOf(String), 'String');
+// 	test('String', (t) => {
+// 		t.is(constructorNameOf(String), 'String');
 // 	});
 
-// 	it('String', (t) => {
-// 		t.is(type.constructorNameOf(String.name), 'String');
+// 	test('String', (t) => {
+// 		t.is(constructorNameOf(String.name), 'String');
 // 	});
 
-// 	it('RegExp', (t) => {
-// 		t.is(type.constructorNameOf(RegExp), 'RegExp');
+// 	test('RegExp', (t) => {
+// 		t.is(constructorNameOf(RegExp), 'RegExp');
 // 	});
 
-// 	it('String', (t) => {
-// 		t.is(type.constructorNameOf(RegExp.name), 'String');
+// 	test('String', (t) => {
+// 		t.is(constructorNameOf(RegExp.name), 'String');
 // 	});
 
-// 	it('Number', (t) => {
-// 		t.is(type.constructorNameOf(Number), 'Number');
+// 	test('Number', (t) => {
+// 		t.is(constructorNameOf(Number), 'Number');
 // 	});
 
-// 	it('String', (t) => {
-// 		t.is(type.constructorNameOf(Number.name), 'String');
+// 	test('String', (t) => {
+// 		t.is(constructorNameOf(Number.name), 'String');
 // 	});
 
-// 	it('TypeError', (t) => {
-// 		t.is(type.constructorNameOf(TypeError), 'TypeError');
+// 	test('TypeError', (t) => {
+// 		t.is(constructorNameOf(TypeError), 'TypeError');
 // 	});
 
-// 	it('String', (t) => {
-// 		t.is(type.constructorNameOf(TypeError.name), 'String');
+// 	test('String', (t) => {
+// 		t.is(constructorNameOf(TypeError.name), 'String');
 // 	});
 
-// 	it('Error', (t) => {
-// 		t.is(type.constructorNameOf(Error), 'Error');
+// 	test('Error', (t) => {
+// 		t.is(constructorNameOf(Error), 'Error');
 // 	});
 
-// 	it('String', (t) => {
-// 		t.is(type.constructorNameOf(Error.name), 'String');
+// 	test('String', (t) => {
+// 		t.is(constructorNameOf(Error.name), 'String');
 // 	});
 
-// 	it('Object', (t) => {
-// 		t.is(type.constructorNameOf(Object), 'Object');
+// 	test('Object', (t) => {
+// 		t.is(constructorNameOf(Object), 'Object');
 // 	});
 
-// 	it('String', (t) => {
-// 		t.is(type.constructorNameOf(Object.name), 'String');
+// 	test('String', (t) => {
+// 		t.is(constructorNameOf(Object.name), 'String');
 // 	});
 
-// 	it('Array', (t) => {
-// 		t.is(type.constructorNameOf(Array), 'Array');
+// 	test('Array', (t) => {
+// 		t.is(constructorNameOf(Array), 'Array');
 // 	});
 
-// 	it('String', (t) => {
-// 		t.is(type.constructorNameOf(Array.name), 'String');
+// 	test('String', (t) => {
+// 		t.is(constructorNameOf(Array.name), 'String');
 // 	});
 
-// 	it('Boolean', (t) => {
-// 		t.is(type.constructorNameOf(Boolean), 'Boolean');
+// 	test('Boolean', (t) => {
+// 		t.is(constructorNameOf(Boolean), 'Boolean');
 // 	});
 
-// 	it('String', (t) => {
-// 		t.is(type.constructorNameOf(Boolean.name), 'String');
+// 	test('String', (t) => {
+// 		t.is(constructorNameOf(Boolean.name), 'String');
 // 	});
 
-// 	it('Date', (t) => {
-// 		t.is(type.constructorNameOf(Date), 'Date');
+// 	test('Date', (t) => {
+// 		t.is(constructorNameOf(Date), 'Date');
 // 	});
 
-// 	it('String', (t) => {
-// 		t.is(type.constructorNameOf(Date.name), 'String');
+// 	test('String', (t) => {
+// 		t.is(constructorNameOf(Date.name), 'String');
 // 	});
 
-// 	it('null', (t) => {
-// 		t.is(type.constructorNameOf(null), 'null');
+// 	test('null', (t) => {
+// 		t.is(constructorNameOf(null), 'null');
 // 	});
 
-// 	it('undefined', (t) => {
-// 		t.is(type.constructorNameOf(undefined), 'undefined');
+// 	test('undefined', (t) => {
+// 		t.is(constructorNameOf(undefined), 'undefined');
 // 	});
 
-// 	it('Infinity', (t) => {
-// 		t.is(type.constructorNameOf(Infinity), 'Infinity');
+// 	test('Infinity', (t) => {
+// 		t.is(constructorNameOf(Infinity), 'Infinity');
 // 	});
 
-// 	it('NaN', (t) => {
-// 		t.is(type.constructorNameOf(NaN), 'NaN');
+// 	test('NaN', (t) => {
+// 		t.is(constructorNameOf(NaN), 'NaN');
 // 	});
 
-// 	it('undefined', (t) => {
-// 		t.is(type.constructorNameOf(NaN.name), 'undefined');
+// 	test('undefined', (t) => {
+// 		t.is(constructorNameOf(NaN.name), 'undefined');
 // 	});
 
-// 	it('String', (t) => {
-// 		t.is(type.constructorNameOf('ab|ba'), 'String');
+// 	test('String', (t) => {
+// 		t.is(constructorNameOf('ab|ba'), 'String');
 // 	});
 
-// 	it('Custom', (t) => {
-// 		t.is(type.constructorNameOf(new Custom()), 'Custom');
+// 	test('Custom', (t) => {
+// 		t.is(constructorNameOf(new Custom()), 'Custom');
 // 	});
 
-// 	it('Custom', (t) => {
-// 		t.is(type.constructorNameOf(Custom), 'Custom');
+// 	test('Custom', (t) => {
+// 		t.is(constructorNameOf(Custom), 'Custom');
 // 	});
 
-// 	it('String', (t) => {
-// 		t.is(type.constructorNameOf(Custom.name), 'String');
+// 	test('String', (t) => {
+// 		t.is(constructorNameOf(Custom.name), 'String');
 // 	});
 
-// 	it('Array', (t) => {
-// 		t.is(type.constructorNameOf([1, 2]), 'Array');
+// 	test('Array', (t) => {
+// 		t.is(constructorNameOf([1, 2]), 'Array');
 // 	});
 
-// 	it('RegExp', (t) => {
-// 		t.is(type.constructorNameOf(/^./g), 'RegExp');
+// 	test('RegExp', (t) => {
+// 		t.is(constructorNameOf(/^./g), 'RegExp');
 // 	});
 
-// 	it('Number', (t) => {
-// 		t.is(type.constructorNameOf(10000), 'Number');
+// 	test('Number', (t) => {
+// 		t.is(constructorNameOf(10000), 'Number');
 // 	});
 
-// 	it('Object', (t) => {
-// 		t.is(type.constructorNameOf({ name: 1 }), 'Object');
+// 	test('Object', (t) => {
+// 		t.is(constructorNameOf({ name: 1 }), 'Object');
 // 	});
 
-// 	it('Boolean', (t) => {
-// 		t.is(type.constructorNameOf(false), 'Boolean');
+// 	test('Boolean', (t) => {
+// 		t.is(constructorNameOf(false), 'Boolean');
 // 	});
 
-// 	it('Date', (t) => {
-// 		t.is(type.constructorNameOf(new Date()), 'Date');
+// 	test('Date', (t) => {
+// 		t.is(constructorNameOf(new Date()), 'Date');
 // 	});
 
 // 	if (global.Symbol) {
-// 		it('Symbol', (t) => {
-// 			t.is(type.constructorNameOf(global.Symbol), 'Symbol');
+// 		test('Symbol', (t) => {
+// 			t.is(constructorNameOf(global.Symbol), 'Symbol');
 // 		});
 // 	}
 
 // 	if (global.ArrayBuffer) {
-// 		it('ArrayBuffer', (t) => {
-// 			t.is(type.constructorNameOf(global.ArrayBuffer), 'ArrayBuffer');
+// 		test('ArrayBuffer', (t) => {
+// 			t.is(constructorNameOf(global.ArrayBuffer), 'ArrayBuffer');
 // 		});
 // 	}
 
 // 	if (global.Buffer) {
-// 		it('Buffer', (t) => {
-// 			t.is(type.constructorNameOf(global.Buffer), 'Buffer');
+// 		test('Buffer', (t) => {
+// 			t.is(constructorNameOf(global.Buffer), 'Buffer');
 // 		});
 
-// 		it('String', (t) => {
-// 			t.is(type.constructorNameOf(global.Buffer.name), 'String');
+// 		test('String', (t) => {
+// 			t.is(constructorNameOf(global.Buffer.name), 'String');
 // 		});
 
-// 		it('Buffer', (t) => {
-// 			t.is(type.constructorNameOf(new global.Buffer('ab')), 'Buffer');
+// 		test('Buffer', (t) => {
+// 			t.is(constructorNameOf(new global.Buffer('ab')), 'Buffer');
 // 		});
 // 	}
 
 // 	if (global.Promise) {
-// 		it('Promise', (t) => {
-// 			t.is(type.constructorNameOf(global.Promise), 'Promise');
+// 		test('Promise', (t) => {
+// 			t.is(constructorNameOf(global.Promise), 'Promise');
 // 		});
 
-// 		it('Promise', (t) => {
-// 			t.is(type.constructorNameOf(new global.Promise((resolve) => { resolve(); })), 'Promise');
+// 		test('Promise', (t) => {
+// 			t.is(constructorNameOf(new global.Promise((resolve) => { resolve(); })), 'Promise');
 // 		});
 // 	}
 // });

@@ -11,16 +11,16 @@ test('decimal exposure', (t) => {
 	t.is(toString.call(decimal), '[object Function]', 'should be a function');
 });
 
-// 		datatypes.decimal.iterate(datatype => {
-// 			test(`${datatype.id} • decimal(${datatype.label}); // true`, (t) => {
-// 				t.is(decimal(datatype.value), true, 'should be true');
-// 			});
-// 		});
+datatypes.decimal.iterate(datatype => {
+	test(`${datatype.id} • decimal(${datatype.label}); // true`, (t) => {
+		t.is(decimal(datatype.value), true, 'should be true');
+	});
+});
 
-// 		datatypes.all.remove(datatypes.decimal);
-// 		datatypes.all.iterate(datatype => {
-// 			test(`${datatype.id} • decimal(${datatype.label}); // false`, (t) => {
-// 				t.is(decimal(datatype.value), false, 'should be false');
-// 			});
-// 		});
-// 		datatypes.all.add(datatypes.decimal);
+datatypes.all.remove(datatypes.decimal);
+datatypes.all.iterate(datatype => {
+	test(`${datatype.id} • decimal(${datatype.label}); // false`, (t) => {
+		t.is(decimal(datatype.value), false, 'should be false');
+	});
+});
+datatypes.all.add(datatypes.decimal);

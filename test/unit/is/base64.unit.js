@@ -11,16 +11,16 @@ test('base64 exposure', (t) => {
 	t.is(toString.call(base64), '[object Function]', 'should be a function');
 });
 
-// 		datatypes.base64.iterate(datatype => {
-// 			test(`${datatype.id} • base64(${datatype.label}); // true`, (t) => {
-// 				t.is(base64(datatype.value), true, 'should be true');
-// 			});
-// 		});
+datatypes.base64.iterate(datatype => {
+	test(`${datatype.id} • base64(${datatype.label}); // true`, (t) => {
+		t.is(base64(datatype.value), true, 'should be true');
+	});
+});
 
-// 		datatypes.all.remove(datatypes.string);
-// 		datatypes.all.iterate(datatype => {
-// 			test(`${datatype.id} • base64(${datatype.label}); // false`, (t) => {
-// 				t.is(base64(datatype.value), false, 'should be false');
-// 			});
-// 		});
-// 		datatypes.all.add(datatypes.string);
+datatypes.all.remove(datatypes.string);
+datatypes.all.iterate(datatype => {
+	test(`${datatype.id} • base64(${datatype.label}); // false`, (t) => {
+		t.is(base64(datatype.value), false, 'should be false');
+	});
+});
+datatypes.all.add(datatypes.string);

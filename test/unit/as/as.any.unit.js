@@ -1,56 +1,60 @@
 import test from 'ava';
 import * as describeType from '../../../source';
-import as from '../../../source/as/index.js';
+import asAny from '../../../source/as/as.any';
 
-test('as exposed', (t) => {
-	t.is(toString.call(describeType.as), '[object Function]', 'should be a function');;
+test('describeType.as.any method is exposed', (t) => {
+	t.is(toString.call(describeType.as.any), '[object Function]', 'should be a function');
 });
 
-// test('Number|Function', (t) => {
-// 	function foo() {}
-// 	t.is(describeType.as([Number, Function], foo), foo);
-// });
+test('asAny exposed', (t) => {
+	t.is(toString.call(asAny), '[object Function]', 'should be a function');
+});
 
-// test('Number', (t) => {
-// 	t.is(describeType.as(Number, function bar(a, b) { return a + b; }, 1, 2), 3);
-// });
+test('Number|Function', (t) => {
+	function foo() {}
+	t.is(asAny([Number, Function], foo), foo);
+});
 
-// test('String', (t) => {
-// 	t.is(describeType.as(String, function baz() {}), undefined);
-// });
+test('Number', (t) => {
+	t.is(asAny(Number, function bar(a, b) { return a + b; }, 1, 2), 3);
+});
 
-// test('Number', (t) => {
-// 	t.is(describeType.as(Number, () => 'foo'), undefined);
-// });
+test('String', (t) => {
+	t.is(asAny(String, function baz() {}), undefined);
+});
 
-// test('String', (t) => {
-// 	t.is(describeType.as(String, () => 'foo'), 'foo');
-// });
+test('Number', (t) => {
+	t.is(asAny(Number, () => 'foo'), undefined);
+});
 
-// test('String', (t) => {
-// 	t.is(describeType.as(String, () => ''), '');
-// });
+test('String', (t) => {
+	t.is(asAny(String, () => 'foo'), 'foo');
+});
 
-// test('"Number"', (t) => {
-// 	t.is(describeType.as(Number, 'foo'), undefined);
-// });
+test('String', (t) => {
+	t.is(asAny(String, () => ''), '');
+});
 
-// test('String', (t) => {
-// 	t.is(describeType.as(String, 'foo'), 'foo');
-// });
+test('"Number"', (t) => {
+	t.is(asAny(Number, 'foo'), undefined);
+});
 
-// test('undefined', (t) => {
-// 	t.is(describeType.as(undefined, undefined), undefined);
-// });
+test('String', (t) => {
+	t.is(asAny(String, 'foo'), 'foo');
+});
 
-// test('null', (t) => {
-// 	t.is(describeType.as(null, null), null);
-// });
+test('undefined', (t) => {
+	t.is(asAny(undefined, undefined), undefined);
+});
 
-// test('String', (t) => {
-// 	t.is(describeType.as(String, undefined), undefined);
-// });
+test('null', (t) => {
+	t.is(asAny(null, null), null);
+});
 
-// test('String', (t) => {
-// 	t.is(describeType.as(String, ''), '');
-// });
+test('String', (t) => {
+	t.is(asAny(String, undefined), undefined);
+});
+
+test('String', (t) => {
+	t.is(asAny(String, ''), '');
+});

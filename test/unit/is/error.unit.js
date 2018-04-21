@@ -11,16 +11,16 @@ test('error exposure', (t) => {
 	t.is(toString.call(error), '[object Function]', 'should be a function');
 });
 
-// 		datatypes.error.iterate(datatype => {
-// 			test(`${datatype.id} • error(${datatype.label}); // true`, (t) => {
-// 				t.is(error(datatype.value), true, 'should be true');
-// 			});
-// 		});
+datatypes.error.iterate(datatype => {
+	test(`${datatype.id} • error(${datatype.label}); // true`, (t) => {
+		t.is(error(datatype.value), true, 'should be true');
+	});
+});
 
-// 		datatypes.all.iterate(datatype => {
-// 			if (!is.error(datatype.value)) {
-// 				test(`${datatype.id} • error(${datatype.label}); // false`, (t) => {
-// 					t.is(error(datatype.value), false, 'should be false');
-// 				});
-// 			}
-// 		});
+datatypes.all.iterate(datatype => {
+	if (error(datatype.value) === false) {
+		test(`${datatype.id} • error(${datatype.label}); // false`, (t) => {
+			t.is(error(datatype.value), false, 'should be false');
+		});
+	}
+});

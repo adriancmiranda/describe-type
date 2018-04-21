@@ -11,16 +11,16 @@ test('int exposure', (t) => {
 	t.is(toString.call(int), '[object Function]', 'should be a function');
 });
 
-// 		datatypes.int.add(datatypes.zero);
-// 		datatypes.int.iterate(datatype => {
-// 			test(`${datatype.id} • int(${datatype.label}); // true`, (t) => {
-// 				t.is(int(datatype.value), true, 'should be true');
-// 			});
-// 		});
-// 		datatypes.int.remove(datatypes.zero);
+datatypes.int.add(datatypes.zero);
+datatypes.int.iterate(datatype => {
+	test(`${datatype.id} • int(${datatype.label}); // true`, (t) => {
+		t.is(int(datatype.value), true, 'should be true');
+	});
+});
+datatypes.int.remove(datatypes.zero);
 
-// 		datatypes.decimal.iterate(datatype => {
-// 			test(`${datatype.id} • int(${datatype.label}); // true`, (t) => {
-// 				t.is(int(datatype.value), false, 'should be false');
-// 			});
-// 		});
+datatypes.decimal.iterate(datatype => {
+	test(`${datatype.id} • int(${datatype.label}); // true`, (t) => {
+		t.is(int(datatype.value), false, 'should be false');
+	});
+});

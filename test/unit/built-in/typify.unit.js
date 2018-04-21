@@ -1,101 +1,102 @@
 import test from 'ava';
-import * as type from '../../../source';
+import * as describeType from '../../../source';
+import typify from '../../../source/built-in/typify';
 
-test('foo', t => {
-	t.pass();
+test('describeType.typify exposure', (t) => {
+	t.is(toString.call(describeType.typify), '[object Function]', 'should be a function');
 });
-// test('#typify', (t) => {
-// 	it('exposed', (t) => {
-// 		t.is(toString.call(type.typify), '[object Function]', 'should be a function');;
+
+test('typify exposure', (t) => {
+	t.is(toString.call(typify), '[object Function]', 'should be a function');
+});
+
+// 	test('Arguments', (t) => {
+// 		t.is(typify((() => arguments)()), 'Arguments');
 // 	});
 
-// 	it('Arguments', (t) => {
-// 		t.is(type.typify((() => arguments)()), 'Arguments');
+// 	test('String|Function|Object|Boolean', (t) => {
+// 		t.is(typify([String, Function, Object, Boolean]), 'String|Function|Object|Boolean');
 // 	});
 
-// 	it('String|Function|Object|Boolean', (t) => {
-// 		t.is(type.typify([String, Function, Object, Boolean]), 'String|Function|Object|Boolean');
+// 	test('String|Function|Object|Boolean', (t) => {
+// 		t.is(typify([String, Function, Object, global.Boolean,]), 'String|Function|Object|Boolean'); // should be 'Symbol|String|Function|Object|Boolean|Undefined'?
 // 	});
 
-// 	it('String|Function|Object|Boolean', (t) => {
-// 		t.is(type.typify([String, Function, Object, global.Boolean,]), 'String|Function|Object|Boolean'); // should be 'Symbol|String|Function|Object|Boolean|Undefined'?
+// 	test('Symbol|String|Function|Object|Boolean', (t) => {
+// 		t.is(typify('Symbol|String|Function|Object|Boolean', true), 'Symbol|String|Function|Object|Boolean');
 // 	});
 
-// 	it('Symbol|String|Function|Object|Boolean', (t) => {
-// 		t.is(type.typify('Symbol|String|Function|Object|Boolean', true), 'Symbol|String|Function|Object|Boolean');
+// 	test('Number|Array', (t) => {
+// 		t.is(typify([1, []]), 'Number|Array');
 // 	});
 
-// 	it('Number|Array', (t) => {
-// 		t.is(type.typify([1, []]), 'Number|Array');
+// 	test('Number|String|Object', (t) => {
+// 		t.is(typify([1, 'Custom', {}]), 'Number|String|Object');
 // 	});
 
-// 	it('Number|String|Object', (t) => {
-// 		t.is(type.typify([1, 'Custom', {}]), 'Number|String|Object');
+// 	test('Number', (t) => {
+// 		t.is(typify([1, 'Custom', {}], true), 'Number|Custom|Object');
 // 	});
 
-// 	it('Number', (t) => {
-// 		t.is(type.typify([1, 'Custom', {}], true), 'Number|Custom|Object');
+// 	test('Custom', (t) => {
+// 		t.is(typify('Custom', true), 'Custom');
 // 	});
 
-// 	it('Custom', (t) => {
-// 		t.is(type.typify('Custom', true), 'Custom');
+// 	test('Array', (t) => {
+// 		t.is(typify([]), 'Array');
 // 	});
 
-// 	it('Array', (t) => {
-// 		t.is(type.typify([]), 'Array');
+// 	test('Number', (t) => {
+// 		t.is(typify(1), 'Number');
 // 	});
 
-// 	it('Number', (t) => {
-// 		t.is(type.typify(1), 'Number');
+// 	test('Object', (t) => {
+// 		t.is(typify({}), 'Object');
 // 	});
 
-// 	it('Object', (t) => {
-// 		t.is(type.typify({}), 'Object');
+// 	test('Object', (t) => {
+// 		t.is(typify({ name: 1 }), 'Object');
 // 	});
 
-// 	it('Object', (t) => {
-// 		t.is(type.typify({ name: 1 }), 'Object');
+// 	test('RegExp', (t) => {
+// 		t.is(typify(/^./g), 'RegExp');
 // 	});
 
-// 	it('RegExp', (t) => {
-// 		t.is(type.typify(/^./g), 'RegExp');
+// 	test('Boolean', (t) => {
+// 		t.is(typify(false), 'Boolean');
 // 	});
 
-// 	it('Boolean', (t) => {
-// 		t.is(type.typify(false), 'Boolean');
+// 	test('Date', (t) => {
+// 		t.is(typify(new Date()), 'Date');
 // 	});
 
-// 	it('Date', (t) => {
-// 		t.is(type.typify(new Date()), 'Date');
-// 	});
-
-// 	it('Date', (t) => {
-// 		t.is(type.typify(Date), 'Date');
+// 	test('Date', (t) => {
+// 		t.is(typify(Date), 'Date');
 // 	});
 
 // 	if (global.ArrayBuffer) {
-// 		it('ArrayBuffer', (t) => {
-// 			t.is(type.typify(global.ArrayBuffer), 'ArrayBuffer');
+// 		test('ArrayBuffer', (t) => {
+// 			t.is(typify(global.ArrayBuffer), 'ArrayBuffer');
 // 		});
 // 	}
 
-// 	it('ArrayBuffer', (t) => {
-// 		t.is(type.typify(new global.ArrayBuffer(4)), 'ArrayBuffer');
+// 	test('ArrayBuffer', (t) => {
+// 		t.is(typify(new global.ArrayBuffer(4)), 'ArrayBuffer');
 // 	});
 
 // 	if (global.Buffer) {
-// 		it('Buffer', (t) => {
-// 			t.is(type.typify(global.Buffer), 'Buffer');
+// 		test('Buffer', (t) => {
+// 			t.is(typify(global.Buffer), 'Buffer');
 // 		});
 
-// 		it('Buffer', (t) => {
-// 			t.is(type.typify(new global.Buffer('ab')), 'Buffer');
+// 		test('Buffer', (t) => {
+// 			t.is(typify(new global.Buffer('ab')), 'Buffer');
 // 		});
 // 	}
 
 // 	if (global.Promise) {
-// 		it('Promise', (t) => {
-// 			t.is(type.typify(new global.Promise((resolve) => { resolve(); })), 'Promise');
+// 		test('Promise', (t) => {
+// 			t.is(typify(new global.Promise((resolve) => { resolve(); })), 'Promise');
 // 		});
 // 	}
 // });

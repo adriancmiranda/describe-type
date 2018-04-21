@@ -1,6 +1,11 @@
 import test from 'ava';
-import own from '../../../source/has/own.js';
+import * as describeType from '../../../source';
+import own from '../../../source/has/own';
 
-test('own exposed', (t) => {
-	t.is(toString.call(own), '[object Function]', 'should be a function');;
+test('describeType.has.own exposure', (t) => {
+	t.is(toString.call(describeType.has.own), '[object Function]', 'should be a function');
+});
+
+test('own exposure', (t) => {
+	t.is(toString.call(own), '[object Function]', 'should be a function');
 });

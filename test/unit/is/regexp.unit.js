@@ -11,16 +11,16 @@ test('regexp exposure', (t) => {
 	t.is(toString.call(regexp), '[object Function]', 'should be a function');
 });
 
-// 		datatypes.regexp.iterate(datatype => {
-// 			test(`${datatype.id} • regexp(${datatype.label}); // true`, (t) => {
-// 				t.is(regexp(datatype.value), true, 'should be true');
-// 			});
-// 		});
+datatypes.regexp.iterate(datatype => {
+	test(`${datatype.id} • regexp(${datatype.label}); // true`, (t) => {
+		t.is(regexp(datatype.value), true, 'should be true');
+	});
+});
 
-// 		datatypes.all.iterate(datatype => {
-// 			if (regexp(datatype.value) === false) {
-// 				test(`${datatype.id} • regexp(${datatype.label}); // false`, (t) => {
-// 					t.is(regexp(datatype.value), false, 'should be false');
-// 				});
-// 			}
-// 		});
+datatypes.all.iterate(datatype => {
+	if (regexp(datatype.value) === false) {
+		test(`${datatype.id} • regexp(${datatype.label}); // false`, (t) => {
+			t.is(regexp(datatype.value), false, 'should be false');
+		});
+	}
+});
