@@ -29,12 +29,12 @@ DataType.prototype.add = function add(label, ctor, ...args) {
 		}
 	} else if (labelCtor === DataType) {
 		label.parent = this;
-		this.children.push(label);
+		this.children[this.children.length] = label;
 	} else if (labelCtor === DataTypeValue) {
 		this.add(label.label, label.value);
 	} else if (labelCtor === String) {
 		if (arguments.length === 2 || typeof ctor === 'function') {
-			this.children.push(new DataTypeValue(this, label, ctor, ...args));
+			this.children[this.children.length] = new DataTypeValue(this, label, ctor, ...args);
 		}
 	}
 	return this;
@@ -47,9 +47,9 @@ DataType.prototype.remove = function remove(child) {
 			if (nodeIndex > -1) {
 				return node.children.splice(nodeIndex, 1);
 			} else if (child === node) {
-				const childIndex = child.parent.children.indexOf(child);
+				const childIndex = this.children.indexOf(child);
 				if (childIndex > -1) {
-					return child.parent.children.splice(childIndex, 1);
+					return this.children.splice(childIndex, 1);
 				}
 			}
 		}
@@ -104,13 +104,13 @@ DataType.prototype.iterate = function iterate(iterator, start = 1) {
 	});
 };
 
-DataType.prototype.toString = function toString(indent, nodeChar = 'â€¢â€¢', leafChar = 'â€¢â€¢') {
+DataType.prototype.toString = function toString(indent, nodeChar = '• ', leafChar = '- ') {
 	let tree = '';
 	DataType.walkThrough(this, (node, i, depth) => {
 		if (node.children) {
-			tree += `${Array(depth).join(nodeChar)} #${node.name}\n`;
+			tree += `${Array(depth).join(nodeChar)}#${node.name}\n`;
 		} else {
-			tree += `${Array(depth).join(leafChar)} ${node.slug}\n`;
+			tree += `${Array(depth).join(leafChar)}${node.slug}\n`;
 		}
 	}, indent);
 	return tree;
