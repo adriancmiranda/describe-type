@@ -8,7 +8,7 @@
 [![codecov][codecov]][codecov-url]
 [![codacy][codacy]][codacy-url]
 
-[![saucelabs][saucelabs]][saucelabs-url]
+<!-- [![saucelabs][saucelabs]][saucelabs-url] -->
 
 ## 🏴 Installation
 
