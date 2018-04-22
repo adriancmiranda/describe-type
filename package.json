@@ -29,7 +29,7 @@
     "test:appveyor": "npm test -- --verbose",
     "test:travis": "npm test -- --verbose",
     "test:unit": "cross-env NODE_ENV=test node bin/ava --color --no-cache --watch",
-    "test": "npm run flow && npm run test:unit -- --watch=false *.unit.js",
+    "test": "npm run flow && npm run test:unit -- --watch=false **/*.unit.js",
     "dev": "cross-env NODE_ENV=test npm run test:unit",
     "watch": "npm run bin -- -w --environment=NODE_ENV:development",
     "bin": "rollup -c bin/index.js",

@@ -7,10 +7,25 @@ no-new-wrappers,
 no-new-object,
 no-undef
 */
+import fs from 'fs';
+import Stream from 'stream';
+import net from 'net';
+import tempy from 'tempy';
 import makeArrowFn from 'make-arrow-function';
 import generatorFn from 'make-generator-function';
 import Custom from './datatype/types/custom';
 import DataType from './datatype';
+
+export const stream = new DataType('stream');
+stream.add('new Stream.Stream()', new Stream.Stream());
+stream.add('new Stream.Readable()', new Stream.Readable());
+stream.add('new Stream.Writable()', new Stream.Writable());
+stream.add('new Stream.Duplex()', new Stream.Duplex());
+stream.add('new Stream.Transform()', new Stream.Transform());
+stream.add('new Stream.PassThrough()', new Stream.PassThrough());
+stream.add('new net.Socket()', new net.Socket());
+stream.add('fs.createReadStream(\'datatypes.fixture.js\')', fs.createReadStream('datatypes.fixture.js'));
+stream.add('fs.createWriteStream(tempy.file())', fs.createWriteStream(tempy.file()));
 
 export const argsFilled = new DataType('args.filled');
 argsFilled.add('(function args() { return arguments; }("a", "b"))', (function argsFn() { return arguments; }('a', 'b')));
