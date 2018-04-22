@@ -829,5 +829,5 @@ type.booleanOf('0')
 	typeof new Number(1) // => 'object' 'cause typeof new Number(1).valueOf() // => 'number'
 	typeof new String('foo') // => 'object' cause typeof new String('foo').valueOf() // => 'string'
 	typeof new Date() // => object and typeof new Date().valueOf() // => 'number'
-	typeof Math // => Object
+	typeof Math // => 'object' also Math instanceof Math // => TypeError
 -->
