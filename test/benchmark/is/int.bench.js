@@ -1,5 +1,7 @@
-const { Suite } = require('benchmark');
-const { is } = require('../../../source');
+import chalk from 'chalk';
+import { Suite } from 'benchmark';
+import { benchmarkFatestStatus } from '../../fixtures/colors';
+import { is } from '../../../source';
 
 function integer(value) {
 	return parseFloat(value) === parseInt(value, 10);

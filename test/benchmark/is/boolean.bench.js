@@ -1,5 +1,7 @@
-const { Suite } = require('benchmark');
-const { is } = require('../../../source');
+import chalk from 'chalk';
+import { Suite } from 'benchmark';
+import { benchmarkFatestStatus } from '../../fixtures/colors';
+import { is } from '../../../source';
 
 new Suite()
 
@@ -24,7 +26,9 @@ new Suite()
 })
 
 .on('complete', function onComplete() {
-	console.log('\nFastest is', this.filter('fastest').map('name'));
+	const fastest = this.filter('fastest').map('name');
+	const color = benchmarkFatestStatus(fastest, /toString/);
+	console.log(`\nFastest is:\n${color(fastest.join('\n'))}`);
 })
 
 .run({ async: true });

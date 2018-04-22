@@ -1,7 +1,9 @@
-const { Suite } = require('benchmark');
-const { all } = require('../../fixtures/datatypes.fixture');
-const vendor = require('../../fixtures/vendor.fixture');
-const { is } = require('../../../source');
+import chalk from 'chalk';
+import { Suite } from 'benchmark';
+import { benchmarkFatestStatus } from '../../fixtures/colors';
+import { all } from '../../fixtures/datatypes.fixture';
+import vendor from '../../fixtures/vendor.fixture';
+import { is } from '../../../source';
 
 const exotic = is.exotic;
 const primitive0 = (value) => !exotic(value);

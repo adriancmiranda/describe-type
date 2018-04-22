@@ -1,3 +1,4 @@
+import chalk from 'chalk';
 import { Suite } from 'benchmark';
 import keys from '../../../source/@/keys.js';
 

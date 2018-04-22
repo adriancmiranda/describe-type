@@ -1,4 +1,5 @@
-const { Suite } = require('benchmark');
+import chalk from 'chalk';
+import { Suite } from 'benchmark';
 
 const value = /foo/;
 

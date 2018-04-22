@@ -7,6 +7,8 @@ export default function DataType(name) {
 	this.children = [];
 }
 
+DataType.size = 0;
+DataType.prototype.size = () => DataType.size;
 DataType.walkThrough = (dataType, walk, indentation = 0) => {
 	indentation += 1;
 	for (let i = 0; dataType && dataType.children && i < dataType.children.length; i += 1) {
@@ -37,6 +39,7 @@ DataType.prototype.add = function add(label, ctor, ...args) {
 			this.children[this.children.length] = new DataTypeValue(this, label, ctor, ...args);
 		}
 	}
+	DataType.size += this.children.length;
 	return this;
 };
 
@@ -45,10 +48,12 @@ DataType.prototype.remove = function remove(child) {
 		if (node.children) {
 			const nodeIndex = node.children.indexOf(child);
 			if (nodeIndex > -1) {
+				DataType.size -= child.length;
 				return node.children.splice(nodeIndex, 1);
 			} else if (child === node) {
 				const childIndex = this.children.indexOf(child);
 				if (childIndex > -1) {
+					DataType.size -= child.length;
 					return this.children.splice(childIndex, 1);
 				}
 			}

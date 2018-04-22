@@ -1,6 +1,8 @@
-const { Suite } = require('benchmark');
-const { numbers } = require('../../fixtures/datatypes.fixture');
-const { is } = require('../../../source');
+import chalk from 'chalk';
+import { Suite } from 'benchmark';
+import { benchmarkFatestStatus } from '../../fixtures/colors';
+import { numbers } from '../../fixtures/datatypes.fixture';
+import { is } from '../../../source';
 
 const hex0 = is.hex;
 const hex1 = h => parseInt(h, 16).toString(16) === h.toLowerCase();

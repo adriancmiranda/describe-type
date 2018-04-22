@@ -1,7 +1,9 @@
-const { Suite } = require('benchmark');
-const { number } = require('../../fixtures/datatypes.fixture');
-const vendor = require('../../fixtures/vendor.fixture');
-const { is } = require('../../../source');
+import chalk from 'chalk';
+import { Suite } from 'benchmark';
+import { benchmarkFatestStatus } from '../../fixtures/colors';
+import { number } from '../../fixtures/datatypes.fixture';
+import vendor from '../../fixtures/vendor.fixture';
+import { is } from '../../../source';
 
 const nan1 = is.nan;
 const nan2 = vendor.nan;
