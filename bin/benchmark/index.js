@@ -3,8 +3,8 @@ const { sync } = require('glob');
 const { argv } = require('../config');
 const spawn = require('../@/spawn');
 
-const context = typeof argv.c === 'string' ? argv.c : 'test/benchmark/**';
-const files = Array.isArray(argv.f) ? `{${argv.f.join(',')}}` : argv.f || '*';
-sync(resolve(`${join(context, files)}.bench.js`)).forEach(file => {
+const context = typeof argv.dir === 'string' ? argv.dir : 'test/benchmark/**';
+const files = argv.$0.length > 1 ? `{${argv.$0.join(',')}}` : argv.$0[0] || '*';
+sync(resolve(`${join(context, files)}?(.bench).js`)).forEach(file => {
   spawn.sync('babel-node', ['--presets', 'env,flow', file]);
 });
