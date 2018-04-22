@@ -820,3 +820,14 @@ type.booleanOf('0')
 <!-- utils -->
 
 [ecma-type]: https://www.ecma-international.org/ecma-262/#sec-type
+
+
+<!-- awful
+	typeof null // => 'object'
+	typeof [] // => 'object' also typeof [].valueOf() // => 'object'
+	typeof /abc/ // => 'object' or 'function' also typeof /abc/.valueOf() // => 'object' or 'function'
+	typeof new Number(1) // => 'object' 'cause typeof new Number(1).valueOf() // => 'number'
+	typeof new String('foo') // => 'object' cause typeof new String('foo').valueOf() // => 'string'
+	typeof new Date() // => object and typeof new Date().valueOf() // => 'number'
+	typeof Math // => Object
+-->
