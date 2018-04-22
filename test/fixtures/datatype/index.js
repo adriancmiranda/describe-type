@@ -3,7 +3,7 @@ import { alias } from './utils';
 import DataTypeValue from './value';
 
 export default function DataType(name) {
-	this.name = name && name.constructor === String ? name : 'general';
+	this.name = typeof name === 'string' || name instanceof String ? name : 'general';
 	this.children = [];
 }
 
@@ -22,24 +22,27 @@ DataType.walkThrough = (dataType, walk, indentation = 0) => {
 };
 
 DataType.prototype.add = function add(label, ctor, ...args) {
-	const labelCtor = label && label.constructor;
-	if (labelCtor === Array) {
+	const labelSeal = label && toString.call(label).slice(8, -1);
+	if (labelSeal === 'Array') {
 		const values = label.slice();
 		while (values.length) {
 			const item = values.shift();
 			this.add(item.label, item.value);
 		}
-	} else if (labelCtor === DataType) {
+		DataType.size += this.children.length;
+	} else if (labelSeal === 'DataType') {
 		label.parent = this;
 		this.children[this.children.length] = label;
-	} else if (labelCtor === DataTypeValue) {
+		DataType.size += this.children.length;
+	} else if (labelSeal === DataTypeValue) {
 		this.add(label.label, label.value);
-	} else if (labelCtor === String) {
+		DataType.size += this.children.length;
+	} else if (labelSeal === 'String') {
 		if (arguments.length === 2 || typeof ctor === 'function') {
 			this.children[this.children.length] = new DataTypeValue(this, label, ctor, ...args);
 		}
+		DataType.size += this.children.length;
 	}
-	DataType.size += this.children.length;
 	return this;
 };
 
@@ -63,7 +66,7 @@ DataType.prototype.remove = function remove(child) {
 };
 
 DataType.prototype.extract = function extract(key) {
-	const isSimple = typeof key === 'string';
+	const isSimple = typeof key === 'string' || key instanceof String;
 	const props = Array.isArray(key) ? key : (isSimple ? [key] : []);
 	const values = [];
 	this.iterate(node => {
@@ -95,7 +98,7 @@ DataType.prototype.valueOf = function valueOf(index) {
 };
 
 DataType.prototype.hasChildren = function hasChildren() {
-	return this.children && this.children.constructor === Array && this.children.length > 0;
+	return this.children && Array.isArray(this.children) && this.children.length > 0;
 };
 
 DataType.prototype.iterate = function iterate(iterator, start = 1) {
