@@ -15,27 +15,27 @@ test('Number|Function', (t) => {
 	t.is(asAny([Number, Function], foo), foo);
 });
 
-test('Number', (t) => {
+test.only('sum method', (t) => {
 	t.is(asAny(Number, function bar(a, b) { return a + b; }, 1, 2), 3);
 });
 
-test('String', (t) => {
+test('invalid string', (t) => {
 	t.is(asAny(String, function baz() {}), undefined);
 });
 
-test('Number', (t) => {
+test('invalid number', (t) => {
 	t.is(asAny(Number, () => 'foo'), undefined);
 });
 
-test('String', (t) => {
+test('valid string', (t) => {
 	t.is(asAny(String, () => 'foo'), 'foo');
 });
 
-test('String', (t) => {
+test('empty string', (t) => {
 	t.is(asAny(String, () => ''), '');
 });
 
-test('"Number"', (t) => {
+test('invalid number', (t) => {
 	t.is(asAny(Number, 'foo'), undefined);
 });
 
