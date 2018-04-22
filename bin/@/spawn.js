@@ -1,28 +1,25 @@
-const crossSpawn = require('cross-spawn');
-
-function exit(result) {
-  const tooEarly = 'The build failed because the process exited too early.';
-	switch (result.signal) {
-		case 'SIGKILL': console.error([
-			tooEarly,
-			'This probably means the system ran out of memory or someone called',
-			'"kill -9" on the process.',
-		].join(' ')); return process.exit(1);
-		case 'SIGTERM': console.error([
-			tooEarly,
-			'Someone might have called `kill` or `killall`, or the system could',
-			'be shutting down.',
-		].join(' ')); return process.exit(1);
-		default: return result;
-	}
-}
+const cross = require('cross-spawn');
+const parse = require('cross-spawn/lib/parse');
+const enoent = require('cross-spawn/lib/enoent');
+const processExit = require('./processExit');
 
 function spawn(cmd, args, options) {
-	return exit(crossSpawn(cmd, args, Object.assign({ stdio: 'inherit' }, options)));
+	const opts = options == null ? { stdio: 'inherit' } : options;
+	const childProcess = cross(cmd, args, opts);
+	return childProcess;
 }
 
-spawn.sync = (cmd, args, options) => {
-  return exit(crossSpawn.sync(cmd, args, Object.assign({ stdio: 'inherit' }, options)));
-};
+function spawnSync(cmd, args, options) {
+	const opts = options == null ? { stdio: 'inherit' } : options;
+	const result = cross.sync(cmd, args, opts);
+	const error = processExit(result.code, result.signal);
+	if (error) throw error;
+	return result;
+}
 
 module.exports = spawn;
+module.exports.spawn = spawn;
+module.exports.sync = spawnSync;
+module.exports._processExit = processExit;
+module.exports._parse = parse;
+module.exports._enoent = enoent;
