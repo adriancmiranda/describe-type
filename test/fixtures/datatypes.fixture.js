@@ -16,16 +16,31 @@ import generatorFn from 'make-generator-function';
 import Custom from './datatype/types/custom';
 import DataType from './datatype';
 
+export const streamWritable = new DataType('stream.writable');
+streamWritable.add('new Stream.Writable()', new Stream.Writable());
+streamWritable.add('fs.createWriteStream(tempy.file())', fs.createWriteStream(tempy.file()));
+
+export const streamReadable = new DataType('stream.readable');
+streamReadable.add('new Stream.Readable()', new Stream.Readable());
+streamReadable.add(`fs.createReadStream('${__filename}')`, fs.createReadStream(`${__filename}`));
+
+export const streamTransform = new DataType('stream.transform');
+streamTransform.add('new Stream.Transform()', new Stream.Transform());
+
+export const streamPassThrough = new DataType('stream.passthrough');
+streamPassThrough.add('new Stream.PassThrough()', new Stream.PassThrough());
+
+export const streamDuplex = new DataType('stream.duplex');
+streamDuplex.add('new Stream.Duplex()', new Stream.Duplex());
+
 export const stream = new DataType('stream');
 stream.add('new Stream.Stream()', new Stream.Stream());
-stream.add('new Stream.Readable()', new Stream.Readable());
-stream.add('new Stream.Writable()', new Stream.Writable());
-stream.add('new Stream.Duplex()', new Stream.Duplex());
-stream.add('new Stream.Transform()', new Stream.Transform());
-stream.add('new Stream.PassThrough()', new Stream.PassThrough());
 stream.add('new net.Socket()', new net.Socket());
-stream.add('fs.createReadStream(\'datatypes.fixture.js\')', fs.createReadStream('datatypes.fixture.js'));
-stream.add('fs.createWriteStream(tempy.file())', fs.createWriteStream(tempy.file()));
+stream.add(streamWritable);
+stream.add(streamReadable);
+stream.add(streamTransform);
+stream.add(streamPassThrough);
+stream.add(streamDuplex);
 
 export const argsFilled = new DataType('args.filled');
 argsFilled.add('(function args() { return arguments; }("a", "b"))', (function argsFn() { return arguments; }('a', 'b')));
@@ -448,3 +463,4 @@ all.add(arraylikeNative);
 all.add(symbol);
 all.add(buffer);
 all.add(args);
+all.add(stream);
