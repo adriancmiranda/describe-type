@@ -5,7 +5,6 @@ const spawn = require('../@/spawn');
 
 const args = process.argv.slice(3);
 const context = typeof argv.dir === 'string' ? argv.dir : 'test/unit/**';
-const files = argv.$0.length > 1 ? `{${argv.$0.join(',')}}` : argv.$0[0] || '*';
-sync(resolve(`${join(context, files)}?(.unit).js`)).forEach(file => {
-	spawn.sync('node', ['node_modules/ava/cli.js', file].concat(args));
-});
+const pattern = argv.$0.length > 1 ? `{${argv.$0.join(',')}}` : argv.$0[0] || '*';
+const files = resolve(`${join(context, pattern)}?(.unit).js`);
+spawn.sync('node', ['node_modules/ava/cli.js', files].concat(args));
