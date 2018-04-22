@@ -7,7 +7,7 @@ export default function DataTypeValue(parent, label, ctor, ...args) {
 	this.parent = parent;
 	this.id = pad(idIndex += 1, 3, '0');
 	this.name = constructorNameOf(ctor);
-	this.slug = ctor == null ? String(ctor) : (this.name === 'GeneratorFunction' ? 'Function' : this.name);
+	this.slug = ctor == null ? String(ctor) : (/^(AsyncFunction|GeneratorFunction)$/.test(this.name) ? 'Function' : this.name);
 	this.args = args;
 	this.ctor = Ctor;
 	this.seal = `[object ${this.name}]`;

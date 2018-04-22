@@ -7,8 +7,12 @@ export default function DataType(name) {
 	this.children = [];
 }
 
-// DataType.prototype.size = () => DataType.size;
-// DataType.prototype.size = () => DataType.size;
+DataType.prototype.size = function() {
+	let total = 0;
+	this.iterate(node => { total++; });
+	return total;
+};
+
 DataType.walkThrough = (dataType, walk, indentation = 0) => {
 	indentation += 1;
 	for (let i = 0; dataType && dataType.children && i < dataType.children.length; i += 1) {
@@ -22,6 +26,7 @@ DataType.walkThrough = (dataType, walk, indentation = 0) => {
 };
 
 DataType.prototype.add = function add(label, ctor, ...args) {
+	const labelCtor = label && label.constructor;
 	const labelSeal = label && toString.call(label).slice(8, -1);
 	if (labelSeal === 'Array') {
 		const values = label.slice();
@@ -29,10 +34,10 @@ DataType.prototype.add = function add(label, ctor, ...args) {
 			const item = values.shift();
 			this.add(item.label, item.value);
 		}
-	} else if (labelSeal === 'DataType') {
+	} else if (labelCtor === DataType) {
 		label.parent = this;
 		this.children[this.children.length] = label;
-	} else if (labelSeal === DataTypeValue) {
+	} else if (labelCtor === DataTypeValue) {
 		this.add(label.label, label.value);
 	} else if (labelSeal === 'String') {
 		if (arguments.length === 2 || typeof ctor === 'function') {

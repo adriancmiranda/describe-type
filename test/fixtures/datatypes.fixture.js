@@ -54,6 +54,15 @@ export const string = new DataType('string');
 string.add(stringFilled);
 string.add(stringEmpty);
 
+export const objectSpecialCases = new DataType('object.special');
+objectSpecialCases.add('{ constructor: \'foo\' }', { constructor: 'foo' });
+objectSpecialCases.add('{ constructor: () => {} }', { constructor: () => {} });
+objectSpecialCases.add('{ constructor: function() {} }', { constructor: function() {} });
+objectSpecialCases.add('{ constructor: function unit() {} }', { constructor: function unit() {} });
+objectSpecialCases.add('{ constructor: Object }', { constructor: Object });
+objectSpecialCases.add('{ constructor: Number }', { constructor: Number });
+objectSpecialCases.add('{ constructor: Function }', { constructor: Function });
+
 export const objectFilled = new DataType('object.filled');
 objectFilled.add('new Object({{source}})', new Object({ foo: 'bar' }));
 objectFilled.add('{{source}}', { foo: 'bar' });
@@ -67,13 +76,6 @@ objectFilled.add('{{source}}', { length: 'foo' });
 objectFilled.add('{{source}}', { length: '' });
 objectFilled.add('{{source}}', { length: /abc/g });
 objectFilled.add('{{source}}', { nodeType: 1, nodeName: 'div' });
-objectFilled.add('{ constructor: \'foo\' }', { constructor: 'foo' }); // *special case
-objectFilled.add('{ constructor: () => {} }', { constructor: () => {} }); // *special case
-objectFilled.add('{ constructor: function() {} }', { constructor: function() {} }); // *special case
-objectFilled.add('{ constructor: function unit() {} }', { constructor: function unit() {} }); // *special case
-objectFilled.add('{ constructor: Object }', { constructor: Object }); // *special case
-objectFilled.add('{ constructor: Number }', { constructor: Number }); // *special case
-objectFilled.add('{ constructor: Function }', { constructor: Function }); // *special case
 
 export const objectEmpty = new DataType('object.empty');
 objectEmpty.add('Object.create(null)', Object.create(null));
@@ -82,6 +84,7 @@ objectEmpty.add('new Object()', new Object());
 objectEmpty.add('{{source}}', {});
 
 export const object = new DataType('object');
+// object.add(objectSpecialCases);
 object.add(objectFilled);
 object.add(objectEmpty);
 
@@ -430,4 +433,3 @@ all.add(arraylikeNative);
 all.add(symbol);
 all.add(buffer);
 all.add(args);
-
