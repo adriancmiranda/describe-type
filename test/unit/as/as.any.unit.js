@@ -15,7 +15,7 @@ test('Number|Function', (t) => {
 	t.is(asAny([Number, Function], foo), foo);
 });
 
-test.only('sum method', (t) => {
+test('sum method', (t) => {
 	t.is(asAny(Number, function bar(a, b) { return a + b; }, 1, 2), 3);
 });
 
