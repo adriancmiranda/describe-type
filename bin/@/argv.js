@@ -2,7 +2,6 @@ const reArg = /^--?(.+)/;
 const reParam = /=/;
 
 module.exports = (argv) => {
-	argv = Array.prototype.slice.call(argv);
 	return argv.reduce((keys, key, index) => {
 		if (reArg.test(key)) {
 			const argvalues = key.split(reParam);
