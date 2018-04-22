@@ -1,6 +1,6 @@
 import chalk from 'chalk';
 import { Suite } from 'benchmark';
-import { benchmarkFatestStatus } from '../../fixtures/colors';
+import { benchmarkFatestStatus } from '../../fixtures/speed';
 import { number } from '../../fixtures/datatypes.fixture';
 import { is } from '../../../source';
 
@@ -33,11 +33,7 @@ number.iterate((datatype) => {
 		console.log(String(evt.target));
 	})
 
-	.on('complete', function () {
-		const fastest = this.filter('fastest').map('name');
-		const color = benchmarkFatestStatus(fastest, /^Object\.prototype\.toString/);
-		console.log(`\nFastest is:\n${color(fastest.join('\n'))}\n${chalk.underline(`${progress}% - ${loaded} de ${total}`)}\n`);
-	})
+	.on('complete', benchmarkFatestStatus(/toString/, progress, loaded, total))
 
 	.run();
 });

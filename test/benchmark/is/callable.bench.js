@@ -1,6 +1,6 @@
 import chalk from 'chalk';
 import { Suite } from 'benchmark';
-import { benchmarkFatestStatus } from '../../fixtures/colors';
+import { benchmarkFatestStatus } from '../../fixtures/speed';
 import { is } from '../../../source';
 
 new Suite()
@@ -21,10 +21,6 @@ new Suite()
 	console.log(String(target));
 })
 
-.on('complete', function onComplete() {
-	const fastest = this.filter('fastest').map('name');
-	const color = benchmarkFatestStatus(fastest, /toString/);
-	console.log(`\nFastest is:\n${color(fastest.join('\n'))}`);
-})
+.on('complete', benchmarkFatestStatus(/[^describeType]/))
 
 .run({ async: true });

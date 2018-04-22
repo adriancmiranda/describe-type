@@ -32,8 +32,6 @@ new Suite()
 	console.log(String(target));
 })
 
-.on('complete', function () {
-	console.log('\nFastest is ' + this.filter('fastest').map('name'), '\n');
-})
+.on('complete', benchmarkFatestStatus(/[^describeType]/))
 
 .run({ async: true });

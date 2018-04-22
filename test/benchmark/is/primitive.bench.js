@@ -1,6 +1,6 @@
 import chalk from 'chalk';
 import { Suite } from 'benchmark';
-import { benchmarkFatestStatus } from '../../fixtures/colors';
+import { benchmarkFatestStatus } from '../../fixtures/speed';
 import { all } from '../../fixtures/datatypes.fixture';
 import vendor from '../../fixtures/vendor.fixture';
 import { is } from '../../../source';
@@ -11,27 +11,25 @@ const primitive1 = is.primitive;
 const primitive2 = vendor.primitive;
 
 all.iterate((datatype) => {
-	const suite = new Suite();
+	new Suite()
 
-	suite.add(`!describeType.is.exotic(${datatype.name})`, () => {
+	.add(`!describeType.is.exotic(${datatype.name})`, () => {
 		return primitive0(datatype);
-	});
+	})
 
-	suite.add(`describeType.is.primitive(${datatype.name})`, () => {
+	.add(`describeType.is.primitive(${datatype.name})`, () => {
 		return primitive1(datatype);
-	});
+	})
 
-	suite.add(`vendor.primitive(${datatype.name})`, () => {
+	.add(`vendor.primitive(${datatype.name})`, () => {
 		return primitive2(datatype);
-	});
+	})
 
-	suite.on('cycle', (evt) => {
+	.on('cycle', (evt) => {
 		console.log(String(evt.target));
-	});
+	})
 
-	suite.on('complete', function () {
-		console.log('\nFastest is', this.filter('fastest').map('name'), '\n');
-	});
+	.on('complete', benchmarkFatestStatus(/vendor/))
 
-	suite.run();
+	.run();
 });
