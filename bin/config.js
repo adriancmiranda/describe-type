@@ -2,7 +2,7 @@ const Git = require('git-revision-webpack-plugin');
 const { resolve, dirname } = require('path');
 const { aliases } = require('./@/aliases');
 const { params } = require('./@/env');
-const { args } = require('./@/argv');
+const argv = require('./@/argv');
 const banner = require('./@/banner');
 
 exports.pack = require('../package.json');
@@ -13,7 +13,7 @@ exports.git = new Git({ lightweightTags: true, branch: true });
 
 exports.env = params(process.env);
 
-exports.argv = args(process.argv);
+exports.argv = argv(process.argv);
 
 exports.flag = banner(exports.pack, exports.git);
 
