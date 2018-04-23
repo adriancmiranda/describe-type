@@ -92,6 +92,7 @@ objectSpecialCases.add('{ constructor: function unit() {} }', { constructor: fun
 objectSpecialCases.add('{ constructor: Object }', { constructor: Object });
 objectSpecialCases.add('{ constructor: Number }', { constructor: Number });
 objectSpecialCases.add('{ constructor: Function }', { constructor: Function });
+objectSpecialCases.add('{ constructor: undefined }', { constructor: undefined });
 
 export const objectFilled = new DataType('object.filled');
 objectFilled.add('new Object({{source}})', new Object({ foo: 'bar' }));
