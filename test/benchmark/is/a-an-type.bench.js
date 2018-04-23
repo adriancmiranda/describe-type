@@ -14,7 +14,7 @@ datatypes.all.iterate((datatype) => {
 	const loaded = ++i;
 	const total = datatypes.all.size();
 	const progress = Math.round((loaded / total) * 100);
-	
+
 	new Suite()
 
 	.add(`describeType.is.a(${name}, ${label})`, () => {
