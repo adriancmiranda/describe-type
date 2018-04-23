@@ -27,4 +27,4 @@ new Suite()
 
 .on('complete', benchmarkFatestStatus(/toString/))
 
-.run({ async: true });
+.run({ async: false });

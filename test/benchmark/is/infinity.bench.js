@@ -31,4 +31,4 @@ new Suite()
 
 .on('complete', benchmarkFatestStatus(/[^describeType]/))
 
-.run({ async: true });
+.run({ async: false });
