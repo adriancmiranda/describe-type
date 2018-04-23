@@ -35,5 +35,5 @@ all.iterate((datatype) => {
 
 	.on('complete', benchmarkFatestStatus(/toString/))
 
-	.run();
+	.run({ async: false });
 });

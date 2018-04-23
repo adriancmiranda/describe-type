@@ -41,5 +41,5 @@ number.iterate((datatype) => {
 
 	.on('complete', benchmarkFatestStatus(/[^describeType]/))
 
-	.run();
+	.run({ async: false });
 });

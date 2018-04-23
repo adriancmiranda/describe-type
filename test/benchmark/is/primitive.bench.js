@@ -31,5 +31,5 @@ all.iterate((datatype) => {
 
 	.on('complete', benchmarkFatestStatus(/vendor/))
 
-	.run();
+	.run({ async: false });
 });
