@@ -17,6 +17,42 @@ test('/^(a(n)?|type)$/ aliases', t => {
 	t.is(is.an, is.type, '"an" should be equal "type"');
 });
 
+test('#a.type special cases', t => {
+	t.is(is.a(Object, { constructor: 'foo' }), true);
+	t.is(is.a(Object, { constructor: () => {} }), true);
+	t.is(is.a(Object, { constructor: function() {} }), true);
+	t.is(is.a(Object, { constructor: function unit() {} }), true);
+	t.is(is.a(Object, { constructor: Object }), true);
+	t.is(is.a(Object, { constructor: Number }), true);
+	t.is(is.a(Object, { constructor: Function }), true);
+
+	t.is(is.a(Function, { constructor: 'foo' }), false);
+	t.is(is.a(Function, { constructor: () => {} }), false);
+	t.is(is.a(Function, { constructor: function() {} }), false);
+	t.is(is.a(Function, { constructor: function unit() {} }), false);
+	t.is(is.a(Function, { constructor: Object }), false);
+	t.is(is.a(Function, { constructor: Number }), false);
+	t.is(is.a(Function, { constructor: Function }), false);
+	t.is(is.a(undefined, { constructor: undefined }), false);
+	t.is(is.a(null, { constructor: null }), false);
+
+	t.is(is.a(Object, new Number(666)), false);
+	t.is(is.a(Object, 'nop'), false);
+
+	// 4 performance reasons this treatment was ignored.
+	// t.is(is.a(Object, Math), false);
+	// t.is(is.a(Math, Object), false);
+	// t.is(is.a(Math, Math), true);
+
+	// In global scope
+	const inNode = new Function('try{return this===global;}catch(err){return false;}')();
+	const env = inNode ? global : window;
+	const envCtor = env.constructor;
+	env.constructor = Object;
+	t.is(is.a(Object, this), false); // should be global type yet.
+	env.constructor = envCtor;
+});
+
 datatypes.all.iterate(datatype => {
 	const fnName = /^-?[aeiouy]/i.test(datatype.slug) ? 'an' : 'a';
 	test(`${datatype.id} • ${fnName}(${datatype.slug}, ${datatype.label});`, (t) => {
