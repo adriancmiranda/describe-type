@@ -1,6 +1,7 @@
 import arraylike from '../is/arraylike/arraylike.js';
 import string from '../is/string/string.js';
 import number from '../is/number.js';
+import keys from './keys.js';
 import mod from './mod.js';
 
 /**
@@ -12,10 +13,12 @@ import mod from './mod.js';
  * @param {int} endIndex
  * @returns {Array}
  */
-export default function reduce(list, callback, initialValue, context) {
+export default function reduce(list, cmd, initialValue, context) {
 	let size = arraylike(list) && list.length;
 	if (size) {
-		// TODO
+		for (size; i < size; i += 1) {
+			initialValue = cmd.call(context, initialValue, list[key], keys[i], list);
+		}
 	}
 	return initialValue;
 }
