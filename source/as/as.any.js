@@ -8,6 +8,6 @@ import any from '../is/any.js';
  * @returns {Boolean}
  */
 export default function asAny(expected, value) {
-	value = getExpectedValue(expected, value, arguments);
+	value = getExpectedValue(expected, value, arguments, 2);
 	return any(expected, value) ? value : arguments[2];
 }

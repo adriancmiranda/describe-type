@@ -2,8 +2,8 @@ import chalk from 'chalk';
 import { Suite } from 'benchmark';
 import { benchmarkFatestStatus } from '../../fixtures/speed';
 import * as datatypes from '../../fixtures/datatypes.fixture';
-import * as deprecatedIs from '../../fixtures/deprecated/is';
-import * as is from '../../../source/is';
+import deprecatedAsAny from '../../fixtures/deprecated/as/as.any';
+import asAny from '../../../source/as/as.any';
 
 let i = 0;
 datatypes.all.iterate((datatype) => {
@@ -18,20 +18,20 @@ datatypes.all.iterate((datatype) => {
 
 	new Suite()
 
-	.add(`${name}: describeType.is.a(${name}, ${label})`, () => {
-		is.type(ctor, value);
+	.add(`${name}: as(${name}, () => ${label})`, () => {
+		asAny(ctor, () => value);
 	})
 
-	.add(`${name}: deprecated.is.a(${name}, ${label})`, () => {
-		deprecatedIs.a(ctor, value);
+	.add(`${name}: deprecated.as(${name}, () => ${label})`, () => {
+		deprecatedAsAny(ctor, () => value);
 	})
 
-	.add(`${name}: describeType.is.not.a(${name}, ${label})`, () => {
-		is.not.type(ctor, value) === true;
+	.add(`${name}: as(${name}, ${label})`, () => {
+		asAny(ctor, value);
 	})
 
-	.add(`${name}: Object.prototype.toString.call(${label}) === ${seal}`, () => {
-		Object.prototype.toString.call(value) === seal;
+	.add(`${name}: deprecated.as(${name}, ${label})`, () => {
+		deprecatedAsAny(ctor, value);
 	})
 
 	.on('cycle', (evt) => {

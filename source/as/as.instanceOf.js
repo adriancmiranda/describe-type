@@ -8,6 +8,6 @@ import instanceOf from '../is/instanceOf.js';
  * @returns {Boolean}
  */
 export default function asInstanceOf(expected, value) {
-	value = getExpectedValue(expected, value, arguments);
+	value = getExpectedValue(expected, value, arguments, 2);
 	return instanceOf(expected, value) ? value : arguments[2];
-};
+}

@@ -8,7 +8,7 @@ import vector from '../is/vector.js';
  * @returns {Boolean}
  */
 export default function asVectorOf(expected, value) {
-	value = getExpectedValue(expected, value, arguments);
+	value = getExpectedValue(expected, value, arguments, 2);
 	if (expected == null) return vector(expected, value);
 	if (expected.constructor === Array && expected.length > 0) {
 		for (let i = expected.length - 1; i > -1; i -= 1) {

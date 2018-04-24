@@ -19,6 +19,6 @@ datatypes.arraylike.iterate(datatype => {
 
 datatypes.notArraylike.iterate(datatype => {
 	test(`${datatype.id} • arraylike(${datatype.label});`, (t) => {
-		t.is(arraylike(datatype.value), false, 'should be false');
+		t.is(arraylike(datatype.value), false, `"${datatype.label}" shouldn't be an arraylike`);
 	});
 });

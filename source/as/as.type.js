@@ -8,6 +8,6 @@ import type from '../is/type.js';
  * @returns {Boolean}
  */
 export default function asA(expected, value) {
-	value = getExpectedValue(expected, value, arguments);
+	value = getExpectedValue(expected, value, arguments, 2);
 	return type(expected, value) ? value : arguments[2];
 }
