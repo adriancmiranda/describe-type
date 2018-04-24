@@ -2,7 +2,8 @@ import chalk from 'chalk';
 import { Suite } from 'benchmark';
 import { benchmarkFatestStatus } from '../../fixtures/speed';
 import * as datatypes from '../../fixtures/datatypes.fixture';
-import { is } from '../../../source';
+import * as deprecatedIs from '../../fixtures/deprecated/is';
+import * as is from '../../../source/is';
 
 let i = 0;
 datatypes.all.iterate((datatype) => {
@@ -17,15 +18,19 @@ datatypes.all.iterate((datatype) => {
 
 	new Suite()
 
-	.add(`describeType.is.a(${name}, ${label})`, () => {
+	.add(`${name}: describeType.is.a(${name}, ${label})`, () => {
 		return is.type(ctor, value);
 	})
 
-	.add(`describeType.is.not.a(${name}, ${label})`, () => {
+	.add(`${name}: deprecated.is.a(${name}, ${label})`, () => {
+		return deprecatedIs.a(ctor, value);
+	})
+
+	.add(`${name}: describeType.is.not.a(${name}, ${label})`, () => {
 		return is.not.type(ctor, value) === true;
 	})
 
-	.add(`Object.prototype.toString.call(${label}) === ${seal}`, () => {
+	.add(`${name}: Object.prototype.toString.call(${label}) === ${seal}`, () => {
 		return Object.prototype.toString.call(value) === seal;
 	})
 

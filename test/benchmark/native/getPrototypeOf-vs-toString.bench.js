@@ -30,9 +30,8 @@ datatypes.object.iterate((datatype) => {
 		value.prototype === value.__proto__;
 	})
 
-	.add(`${label}.__proto__.isPrototypeOf === 'function'`, () => {
-		if (value.__proto__ === undefined) return false;
-		return typeof value.__proto__.isPrototypeOf === 'function';
+	.add(`${label}.constructor === ${label}.__proto__.constructor`, () => {
+		return value.constructor === value.__proto__.constructor;
 	})
 
 	.on('cycle', ({ target }) => {

@@ -26,6 +26,8 @@ test('#a.type special cases', t => {
 	t.is(is.a(Object, { constructor: Number }), true);
 	t.is(is.a(Object, { constructor: Function }), true);
 	t.is(is.a(Object, { constructor: undefined }), true);
+	t.is(is.a(Object, { constructor: undefined }), true);
+	t.is(is.a(Object, { constructor: Function, getPrototypeOf: 'foo', __proto__: 'foo' }), true);
 
 	t.is(is.a(Function, { constructor: 'foo' }), false);
 	t.is(is.a(Function, { constructor: () => {} }), false);
