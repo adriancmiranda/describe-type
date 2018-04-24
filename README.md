@@ -768,6 +768,40 @@ type.booleanOf('0')
 //=> false
 ```
 
+## 🏴 Knowed limitations
+
+The describe-type validations are made by avoiding the `toString` method that although more precise, is very little performatic. The describe-type are focused in performance and have these limitations yet:
+
+```javascript
+const {is} = require('describe-type');
+
+is.a(Object, { constructor: 'foo' }); // === false
+is.a(Object, { constructor: () => {} }); // === false
+is.a(Object, { constructor: function() {} }); // === false
+is.a(Object, { constructor: function unit() {} }); // === false
+is.a(Object, { constructor: Object }); // === true (only 'cause Object is strictly equal to Object from property value named as `constructor`)
+
+is.a(Object, { constructor: Number }); // === false
+is.a(Object, { constructor: Function }); // === false
+is.a(Object, { constructor: undefined }); // === true (only 'cause Object.create(null) has no prototype too)
+
+is.a(Function, { constructor: 'foo' }); // === false
+is.a(Function, { constructor: () => {} }); // === false
+is.a(Function, { constructor: function() {} }); // === false
+is.a(Function, { constructor: function unit() {} }); // === false
+is.a(Function, { constructor: Object }); // === false
+is.a(Function, { constructor: Number }); // === false
+is.a(Function, { constructor: Function }); // === false
+is.a(undefined, { constructor: undefined }); // === false ('cause undefined has no constructor to compare)
+is.a(null, { constructor: null }); // === false
+
+is.a(Object, Math); // === true
+is.a(Math, Object); // === false
+is.a(Math, Math); // === false
+```
+
+I mative to things as they are for performance reasons for now but they will be better :wink:. For while, if you wish to have more precisely results use the methods `is.a.safe`, `is.an.safe`, `is.type.safe` or `is.any.safe`.
+
 ## 🏴 License
 
 [![licenses][licenses]][licenses-url]
