@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v0.7.0
  * 
- * @commit 452b26b7bc87d456056dd61c1a430b52ed13d26e
- * @moment Friday, April 20, 2018 6:31 PM
+ * @commit b2170c3b7af743a4211094d683695d44e4955c54
+ * @moment Tuesday, April 24, 2018 7:55 PM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2021 Adrian C. Miranda
@@ -11,6 +11,52 @@
 this.type = this.type || {};
 this.type.is = (function (exports) {
 	'use strict';
+
+	// prototypes
+	var ObjectProto = Object.prototype;
+
+	// built-in method(s)
+	var objectHasOwnProperty = ObjectProto.hasOwnProperty;
+	var objectToString = ObjectProto.toString;
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function callable(value) {
+		return typeof value === 'function';
+	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof has
+	 * @param {object} context
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function unsafeMethod(context, methodName) {
+		try {
+			return callable(context[methodName]);
+		} catch (err) {
+			return false;
+		}
+	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function array(value) {
+		if (value == null) { return false; }
+		return value.constructor === Array;
+	}
 
 	/**
 	 *
@@ -20,8 +66,10 @@ this.type.is = (function (exports) {
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function type(expected, value) {
+	function type(expected, value, safe) {
 		if (expected == null || value == null) { return value === expected; }
+		if (typeof value === 'number' || value instanceof Number) { return expected === Number; }
+		if (safe) { value = value.__proto__ || value; }
 		if (value.constructor === expected) { return true; }
 		if (value.constructor === undefined) { return expected === Object; }
 		return expected === Function && (
@@ -29,6 +77,94 @@ this.type.is = (function (exports) {
 			value.constructor.name === 'AsyncFunction'
 		);
 	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function object(value) {
+		return type(Object, value);
+	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function string(value) {
+		return typeof value === 'string' || value instanceof String;
+	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function arraylike(value) {
+		return array(value) || string(value) || (
+			(!!value && typeof value === 'object' && typeof value.length === 'number') &&
+			(value.length === 0 || (value.length > 0 && (value.length - 1) in value))
+		);
+	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function args(value) {
+		return (!array(value) && arraylike(value) &&
+			object(value) && unsafeMethod(value, 'callee')
+		) || objectToString.call(value) === '[object Arguments]';
+	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function isEmptyArgs(value) {
+		return args(value) && value.length === 0;
+	}
+
+	args.empty = isEmptyArgs;
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function isEmptyArray(value) {
+		return array(value) && value.length === 0;
+	}
+
+	array.empty = isEmptyArray;
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function isEmptyArraylike(value) {
+		return arraylike(value) || value.length === 0;
+	}
+
+	arraylike.empty = isEmptyArraylike;
 
 	/**
 	 *
@@ -73,17 +209,6 @@ this.type.is = (function (exports) {
 	}
 
 	/**
-	 *
-	 * @function
-	 * @memberof is
-	 * @param {any} value
-	 * @returns {Boolean}
-	 */
-	function callable(value) {
-		return typeof value === 'function';
-	}
-
-	/**
 	 * TODO: a,an,any
 	 * @function
 	 * @memberof is
@@ -114,43 +239,6 @@ this.type.is = (function (exports) {
 	 */
 	function notInstanceOf(expected, value) {
 		return instanceOf(expected, value) === false;
-	}
-
-	/**
-	 *
-	 * @function
-	 * @memberof is
-	 * @param {any} value
-	 * @returns {Boolean}
-	 */
-	function array(value) {
-		if (value == null) { return false; }
-		return value.constructor === Array;
-	}
-
-	/**
-	 *
-	 * @function
-	 * @memberof is
-	 * @param {any} value
-	 * @returns {Boolean}
-	 */
-	function string(value) {
-		return typeof value === 'string' || value instanceof String;
-	}
-
-	/**
-	 *
-	 * @function
-	 * @memberof is
-	 * @param {any} value
-	 * @returns {Boolean}
-	 */
-	function arraylike(value) {
-		return array(value) || string(value) || (
-			(!!value && typeof value === 'object' && typeof value.length === 'number') &&
-			(value.length === 0 || (value.length > 0 && (value.length - 1) in value))
-		);
 	}
 
 	/**
@@ -185,6 +273,56 @@ this.type.is = (function (exports) {
 	notA.any = notAny;
 	notA.instanceOf = notInstanceOf;
 	notA.vectorOf = notVectorOf;
+
+	/**
+	 *
+	 * @function
+	 * @memberof has
+	 * @param {Object|Function} context
+	 * @param {any} key
+	 * @returns {Boolean}
+	 */
+	function ownProperty(context, key) {
+		if (context == null) { return false; }
+		return objectHasOwnProperty.call(context, key);
+	}
+
+	/* eslint-disable no-restricted-syntax */
+
+	/**
+	 *
+	 * @function
+	 * @memberof utility
+	 * @param {Object} context
+	 * @param {Boolean} getNum
+	 * @returns {Array}
+	 */
+	function keys(object, getInheritedProps) {
+		if (object == null) { return []; }
+		if (Object.keys && !getInheritedProps) {
+			return Object.keys(object);
+		}
+		var properties = [];
+		for (var key in object) {
+			if (getInheritedProps || ownProperty(object, key)) {
+				properties[properties.length] = key;
+			}
+		}
+		return properties;
+	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function isEmptyObject(value) {
+		return object(value) && keys(value).length === 0;
+	}
+
+	object.empty = isEmptyObject;
 
 	/* eslint-disable no-underscore-dangle */
 
@@ -263,29 +401,6 @@ this.type.is = (function (exports) {
 	stream.duplex = isStreamDuplex;
 	stream.transform = isStreamTransform;
 
-	// prototypes
-	var ObjectProto = Object.prototype;
-
-	// built-in method(s)
-	var objectHasOwnProperty = ObjectProto.hasOwnProperty;
-	var objectToString = ObjectProto.toString;
-
-	/**
-	 *
-	 * @function
-	 * @memberof has
-	 * @param {object} context
-	 * @param {any} value
-	 * @returns {Boolean}
-	 */
-	function unsafeMethod(context, methodName) {
-		try {
-			return callable(context[methodName]);
-		} catch (err) {
-			return false;
-		}
-	}
-
 	/**
 	 *
 	 * @function
@@ -293,24 +408,11 @@ this.type.is = (function (exports) {
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function object(value) {
-		if (value == null) { return false; }
-		if (value.constructor === Object) { return true; }
-		return value.constructor === undefined;
+	function isEmptyString(value) {
+		return string(value) && value.length === 0;
 	}
 
-	/**
-	 *
-	 * @function
-	 * @memberof is
-	 * @param {any} value
-	 * @returns {Boolean}
-	 */
-	function args(value) {
-		return (!array(value) && arraylike(value) &&
-			object(value) && unsafeMethod(value, 'callee')
-		) || objectToString.call(value) === '[object Arguments]';
-	}
+	string.empty = isEmptyString;
 
 	// pattern(s)
 	var reIsBase64 = /^(data:\w+\/[a-zA-Z+\-.]+;base64,)?([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/;
@@ -444,43 +546,6 @@ this.type.is = (function (exports) {
 			value instanceof env.HTMLElement &&
 			value.nodeType === 1
 		);
-	}
-
-	/**
-	 *
-	 * @function
-	 * @memberof has
-	 * @param {Object|Function} context
-	 * @param {any} key
-	 * @returns {Boolean}
-	 */
-	function ownProperty(context, key) {
-		if (context == null) { return false; }
-		return objectHasOwnProperty.call(context, key);
-	}
-
-	/* eslint-disable no-restricted-syntax */
-
-	/**
-	 *
-	 * @function
-	 * @memberof utility
-	 * @param {Object} context
-	 * @param {Boolean} getNum
-	 * @returns {Array}
-	 */
-	function keys(object, getEnum) {
-		if (object == null) { return []; }
-		if (Object.keys && !getEnum) {
-			return Object.keys(object);
-		}
-		var properties = [];
-		for (var key in object) {
-			if (getEnum || ownProperty(object, key)) {
-				properties[properties.length] = key;
-			}
-		}
-		return properties;
 	}
 
 	/**
@@ -677,7 +742,7 @@ this.type.is = (function (exports) {
 			return false;
 		}
 		for (var i = others.length - 1; i > -1; i -= 1) {
-			if (value > others[i]) {
+			if (value < others[i]) {
 				return false;
 			}
 		}
@@ -843,20 +908,16 @@ this.type.is = (function (exports) {
 		;
 	}
 
-	exports.not = notA;
-	exports.notInstanceOf = notInstanceOf;
-	exports.notVectorOf = notVectorOf;
-	exports.stream = stream;
-	exports.streamWritable = isStreamWritable;
-	exports.streamReadable = isStreamReadable;
-	exports.streamDuplex = isStreamDuplex;
-	exports.streamTransform = isStreamTransform;
-	exports.a = type;
-	exports.an = type;
-	exports.any = any;
 	exports.args = args;
 	exports.array = array;
 	exports.arraylike = arraylike;
+	exports.not = notA;
+	exports.object = object;
+	exports.stream = stream;
+	exports.string = string;
+	exports.a = type;
+	exports.an = type;
+	exports.any = any;
 	exports.base64 = base64;
 	exports.bool = bool;
 	exports.buffer = buffer;
@@ -885,11 +946,9 @@ this.type.is = (function (exports) {
 	exports.nil = nil;
 	exports.number = number;
 	exports.numeric = numeric;
-	exports.object = object;
 	exports.odd = odd;
 	exports.primitive = primitive;
 	exports.regexp = regexp;
-	exports.string = string;
 	exports.symbol = symbol;
 	exports.type = type;
 	exports.uint = uint;

@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v0.7.0
  * 
- * @commit 452b26b7bc87d456056dd61c1a430b52ed13d26e
- * @moment Friday, April 20, 2018 6:31 PM
+ * @commit b2170c3b7af743a4211094d683695d44e4955c54
+ * @moment Tuesday, April 24, 2018 7:55 PM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2021 Adrian C. Miranda
@@ -239,14 +239,14 @@
 	 * @param {Boolean} getNum
 	 * @returns {Array}
 	 */
-	function keys(object, getEnum) {
+	function keys(object, getInheritedProps) {
 		if (object == null) { return []; }
-		if (Object.keys && !getEnum) {
+		if (Object.keys && !getInheritedProps) {
 			return Object.keys(object);
 		}
 		var properties = [];
 		for (var key in object) {
-			if (getEnum || ownProperty(object, key)) {
+			if (getInheritedProps || ownProperty(object, key)) {
 				properties[properties.length] = key;
 			}
 		}
@@ -356,13 +356,27 @@
 		return ownProperty(context, value);
 	}
 
+	/**
+	 *
+	 * @function
+	 * @memberof has
+	 * @param {Object|Function} context
+	 * @param {any} key
+	 * @returns {Boolean}
+	 */
+	function at(context, key) {
+		if (context == null) { return false; }
+		return context[key] === undefined === false;
+	}
+
 
 
 	var index$1 = /*#__PURE__*/{
 		unsafeMethod: unsafeMethod,
 		ownProperty: ownProperty,
 		ownValue: ownValue,
-		own: own
+		own: own,
+		at: at
 	};
 
 	/**
@@ -373,8 +387,10 @@
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function type(expected, value) {
+	function type(expected, value, safe) {
 		if (expected == null || value == null) { return value === expected; }
+		if (typeof value === 'number' || value instanceof Number) { return expected === Number; }
+		if (safe) { value = value.__proto__ || value; }
 		if (value.constructor === expected) { return true; }
 		if (value.constructor === undefined) { return expected === Object; }
 		return expected === Function && (
@@ -382,6 +398,69 @@
 			value.constructor.name === 'AsyncFunction'
 		);
 	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function object(value) {
+		return type(Object, value);
+	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function args$1(value) {
+		return (!array(value) && arraylike(value) &&
+			object(value) && unsafeMethod(value, 'callee')
+		) || objectToString.call(value) === '[object Arguments]';
+	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function isEmptyArgs(value) {
+		return args$1(value) && value.length === 0;
+	}
+
+	args$1.empty = isEmptyArgs;
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function isEmptyArray(value) {
+		return array(value) && value.length === 0;
+	}
+
+	array.empty = isEmptyArray;
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function isEmptyArraylike(value) {
+		return arraylike(value) || value.length === 0;
+	}
+
+	arraylike.empty = isEmptyArraylike;
 
 	/**
 	 *
@@ -491,6 +570,19 @@
 	notA.instanceOf = notInstanceOf;
 	notA.vectorOf = notVectorOf;
 
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function isEmptyObject(value) {
+		return object(value) && keys(value).length === 0;
+	}
+
+	object.empty = isEmptyObject;
+
 	/* eslint-disable no-underscore-dangle */
 
 	/**
@@ -575,24 +667,11 @@
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function object(value) {
-		if (value == null) { return false; }
-		if (value.constructor === Object) { return true; }
-		return value.constructor === undefined;
+	function isEmptyString(value) {
+		return string(value) && value.length === 0;
 	}
 
-	/**
-	 *
-	 * @function
-	 * @memberof is
-	 * @param {any} value
-	 * @returns {Boolean}
-	 */
-	function args$1(value) {
-		return (!array(value) && arraylike(value) &&
-			object(value) && unsafeMethod(value, 'callee')
-		) || objectToString.call(value) === '[object Arguments]';
-	}
+	string.empty = isEmptyString;
 
 	/**
 	 *
@@ -883,7 +962,7 @@
 			return false;
 		}
 		for (var i = others.length - 1; i > -1; i -= 1) {
-			if (value > others[i]) {
+			if (value < others[i]) {
 				return false;
 			}
 		}
@@ -1052,20 +1131,16 @@
 
 
 	var index$2 = /*#__PURE__*/{
-		not: notA,
-		notInstanceOf: notInstanceOf,
-		notVectorOf: notVectorOf,
-		stream: stream,
-		streamWritable: isStreamWritable,
-		streamReadable: isStreamReadable,
-		streamDuplex: isStreamDuplex,
-		streamTransform: isStreamTransform,
-		a: type,
-		an: type,
-		any: any,
 		args: args$1,
 		array: array,
 		arraylike: arraylike,
+		not: notA,
+		object: object,
+		stream: stream,
+		string: string,
+		a: type,
+		an: type,
+		any: any,
 		base64: base64,
 		bool: bool,
 		buffer: buffer,
@@ -1094,11 +1169,9 @@
 		nil: nil,
 		number: number,
 		numeric: numeric,
-		object: object,
 		odd: odd,
 		primitive: primitive,
 		regexp: regexp,
-		string: string,
 		symbol: symbol,
 		type: type,
 		uint: uint,
@@ -1243,10 +1316,10 @@
 		return name(expected, write);
 	}
 
-	function getExpectedValue(expected, value, args) {
+	function getExpectedValue(expected, value, args, sliceIndex) {
 		if (callable(value) && (expected === Function || ownValue(expected, Function)) === false) {
-			var context = args ? args[0] : null;
-			return apply(value, context, args, true);
+			args = slice$1(args, sliceIndex);
+			return apply(value, args[0], args, true);
 		}
 		return value;
 	}
@@ -1258,7 +1331,7 @@
 	 * @returns {Boolean}
 	 */
 	function asA(expected, value) {
-		value = getExpectedValue(expected, value, arguments);
+		value = getExpectedValue(expected, value, arguments, 2);
 		return type(expected, value) ? value : arguments[2];
 	}
 
@@ -1269,7 +1342,7 @@
 	 * @returns {Boolean}
 	 */
 	function asAny(expected, value) {
-		value = getExpectedValue(expected, value, arguments);
+		value = getExpectedValue(expected, value, arguments, 2);
 		return any(expected, value) ? value : arguments[2];
 	}
 
@@ -1280,7 +1353,7 @@
 	 * @returns {Boolean}
 	 */
 	function asInstanceOf(expected, value) {
-		value = getExpectedValue(expected, value, arguments);
+		value = getExpectedValue(expected, value, arguments, 2);
 		return instanceOf(expected, value) ? value : arguments[2];
 	}
 
@@ -1291,7 +1364,7 @@
 	 * @returns {Boolean}
 	 */
 	function asVectorOf(expected, value) {
-		value = getExpectedValue(expected, value, arguments);
+		value = getExpectedValue(expected, value, arguments, 2);
 		if (expected == null) { return vector(expected, value); }
 		if (expected.constructor === Array && expected.length > 0) {
 			for (var i = expected.length - 1; i > -1; i -= 1) {

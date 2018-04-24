@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v0.7.0
  * 
- * @commit 452b26b7bc87d456056dd61c1a430b52ed13d26e
- * @moment Friday, April 20, 2018 6:31 PM
+ * @commit b2170c3b7af743a4211094d683695d44e4955c54
+ * @moment Tuesday, April 24, 2018 7:55 PM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2021 Adrian C. Miranda
@@ -83,8 +83,113 @@ function ownValue(context, value) {
  * @param {any} value
  * @returns {Boolean}
  */
+function number(value) {
+	return typeof value === 'number' || value instanceof Number;
+}
+
+/**
+ *
+ * @function
+ * @memberof is
+ * @param {any} value
+ * @returns {Boolean}
+ */
+function int(value) {
+	return number(value) && value === value && value % 1 === 0;
+}
+
+/**
+ * The `intOf()` function parses a string argument and returns an integer of the
+ * specified radix (the base in mathematical numeral systems).
+ *
+ * @function
+ * @memberof to
+ *
+ * @param {Number|String|Object} value - The value to parse.
+ * If the string argument is not a string, then it is converted to a string
+ * (using the ToString abstract operation).
+ * Leading whitespace in the string argument is ignored.
+ *
+ * @param {any} radix - An integer between 2 and 36 that represents
+ * the radix (the base in mathematical numeral systems) of the above mentioned string.
+ * Specify 10 for the decimal numeral system commonly used by humans. Always specify
+ * this parameter to eliminate reader confusion and to guarantee predictable behavior.
+ * Different implementations produce different results when a radix is not specified,
+ * usually defaulting the value to 10.
+ *
+ * @returns {Number} An integer number parsed from the given string.
+ * If the first character cannot be converted to a number, 0 is returned.
+ *
+ * min: -2147483647
+ * max: 2147483647
+ */
+function intOf(value, radix) {
+	value = (radix == null ? value : parseInt(value, radix));
+	return int(value) ? value : 0 | value;
+}
 
 /* eslint-disable no-nested-ternary */
+
+/**
+ *
+ * @function
+ * @memberof utility
+ * @param {Number} n - index
+ * @param {Number} a - divident
+ * @param {Number} b - divisor
+ * @returns {Number}
+ */
+function mod(n, a, b) {
+	n = intOf(n);
+	a = intOf(a);
+	b = intOf(b);
+	var rem;
+	if (a < 0 || b < 0) {
+		var places = (b - a);
+		rem = (n - a) % (places + 1);
+		rem = rem < 0 ? (rem + (places + 1)) : rem === 0 ? 0 : rem;
+		return rem - (places - b);
+	}
+	if (n === b) { return n; }
+	if (n === b + 1) { return a; }
+	if (n === a - 1) { return b; }
+	rem = n % (b || 1);
+	rem = rem < a ? (rem + b) : rem === 0 ? 0 : rem;
+	return rem;
+}
+
+/**
+ *
+ * @function
+ * @memberof utility
+ * @param {arraylike} value
+ * @param {int} startIndex
+ * @param {int} endIndex
+ * @returns {Array}
+ */
+function slice(list, startIndex, endIndex) {
+	var range = [];
+	var size = arraylike(list) && list.length;
+	if (size) {
+		var start = mod(startIndex, 0, size + 1);
+		if (number(endIndex)) {
+			size = mod(endIndex, 0, size - 1);
+		}
+		if (start < size) {
+			if (string(list)) {
+				range = '';
+				for (var c = start; c < size; c += 1) {
+					range += list[c];
+				}
+				return range;
+			}
+			for (var i = size - 1; i > start - 1; i -= 1) {
+				range[i - start] = list[i];
+			}
+		}
+	}
+	return range;
+}
 
 /**
  *
@@ -114,10 +219,10 @@ function apply(cmd, context, args, blindly) {
 	}
 }
 
-function getExpectedValue(expected, value, args) {
+function getExpectedValue(expected, value, args, sliceIndex) {
 	if (callable(value) && (expected === Function || ownValue(expected, Function)) === false) {
-		var context = args ? args[0] : null;
-		return apply(value, context, args, true);
+		args = slice(args, sliceIndex);
+		return apply(value, args[0], args, true);
 	}
 	return value;
 }
@@ -130,8 +235,10 @@ function getExpectedValue(expected, value, args) {
  * @param {any} value
  * @returns {Boolean}
  */
-function type(expected, value) {
+function type(expected, value, safe) {
 	if (expected == null || value == null) { return value === expected; }
+	if (typeof value === 'number' || value instanceof Number) { return expected === Number; }
+	if (safe) { value = value.__proto__ || value; }
 	if (value.constructor === expected) { return true; }
 	if (value.constructor === undefined) { return expected === Object; }
 	return expected === Function && (
@@ -147,7 +254,7 @@ function type(expected, value) {
  * @returns {Boolean}
  */
 function asA(expected, value) {
-	value = getExpectedValue(expected, value, arguments);
+	value = getExpectedValue(expected, value, arguments, 2);
 	return type(expected, value) ? value : arguments[2];
 }
 
@@ -176,7 +283,7 @@ function any(expected, value) {
  * @returns {Boolean}
  */
 function asAny(expected, value) {
-	value = getExpectedValue(expected, value, arguments);
+	value = getExpectedValue(expected, value, arguments, 2);
 	return any(expected, value) ? value : arguments[2];
 }
 
@@ -208,7 +315,7 @@ function instanceOf(expected, value) {
  * @returns {Boolean}
  */
 function asInstanceOf(expected, value) {
-	value = getExpectedValue(expected, value, arguments);
+	value = getExpectedValue(expected, value, arguments, 2);
 	return instanceOf(expected, value) ? value : arguments[2];
 }
 
@@ -247,7 +354,7 @@ function vector(expected, value) {
  * @returns {Boolean}
  */
 function asVectorOf(expected, value) {
-	value = getExpectedValue(expected, value, arguments);
+	value = getExpectedValue(expected, value, arguments, 2);
 	if (expected == null) { return vector(expected, value); }
 	if (expected.constructor === Array && expected.length > 0) {
 		for (var i = expected.length - 1; i > -1; i -= 1) {

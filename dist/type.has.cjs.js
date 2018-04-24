@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v0.7.0
  * 
- * @commit 452b26b7bc87d456056dd61c1a430b52ed13d26e
- * @moment Friday, April 20, 2018 6:31 PM
+ * @commit b2170c3b7af743a4211094d683695d44e4955c54
+ * @moment Tuesday, April 24, 2018 7:55 PM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2021 Adrian C. Miranda
@@ -124,7 +124,21 @@ function own(context, value) {
 	return ownProperty(context, value);
 }
 
+/**
+ *
+ * @function
+ * @memberof has
+ * @param {Object|Function} context
+ * @param {any} key
+ * @returns {Boolean}
+ */
+function at(context, key) {
+	if (context == null) { return false; }
+	return context[key] === undefined === false;
+}
+
 exports.unsafeMethod = unsafeMethod;
 exports.ownProperty = ownProperty;
 exports.ownValue = ownValue;
 exports.own = own;
+exports.at = at;

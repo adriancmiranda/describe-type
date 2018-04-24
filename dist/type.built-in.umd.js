@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v0.7.0
  * 
- * @commit 452b26b7bc87d456056dd61c1a430b52ed13d26e
- * @moment Friday, April 20, 2018 6:31 PM
+ * @commit b2170c3b7af743a4211094d683695d44e4955c54
+ * @moment Tuesday, April 24, 2018 7:55 PM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2021 Adrian C. Miranda
@@ -312,13 +312,31 @@
 	 *
 	 * @function
 	 * @memberof is
+	 * @param {Function} expect
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function type(expected, value, safe) {
+		if (expected == null || value == null) { return value === expected; }
+		if (typeof value === 'number' || value instanceof Number) { return expected === Number; }
+		if (safe) { value = value.__proto__ || value; }
+		if (value.constructor === expected) { return true; }
+		if (value.constructor === undefined) { return expected === Object; }
+		return expected === Function && (
+			value.constructor.name === 'GeneratorFunction' ||
+			value.constructor.name === 'AsyncFunction'
+		);
+	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
 	function object(value) {
-		if (value == null) { return false; }
-		if (value.constructor === Object) { return true; }
-		return value.constructor === undefined;
+		return type(Object, value);
 	}
 
 	/**

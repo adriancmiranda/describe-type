@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v0.7.0
  * 
- * @commit 452b26b7bc87d456056dd61c1a430b52ed13d26e
- * @moment Friday, April 20, 2018 6:31 PM
+ * @commit b2170c3b7af743a4211094d683695d44e4955c54
+ * @moment Tuesday, April 24, 2018 7:55 PM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2021 Adrian C. Miranda
@@ -237,14 +237,14 @@ this.type['@'] = (function (exports) {
 	 * @param {Boolean} getNum
 	 * @returns {Array}
 	 */
-	function keys(object, getEnum) {
+	function keys(object, getInheritedProps) {
 		if (object == null) { return []; }
-		if (Object.keys && !getEnum) {
+		if (Object.keys && !getInheritedProps) {
 			return Object.keys(object);
 		}
 		var properties = [];
 		for (var key in object) {
-			if (getEnum || ownProperty(object, key)) {
+			if (getInheritedProps || ownProperty(object, key)) {
 				properties[properties.length] = key;
 			}
 		}
