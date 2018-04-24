@@ -17,7 +17,7 @@ export default function max(value, others) {
 		return false;
 	}
 	for (let i = others.length - 1; i > -1; i -= 1) {
-		if (value > others[i]) {
+		if (value < others[i]) {
 			return false;
 		}
 	}
