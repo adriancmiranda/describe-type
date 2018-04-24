@@ -1,5 +1,3 @@
-import is from '../@/is.js';
-
 /**
  *
  * @function
@@ -8,10 +6,10 @@ import is from '../@/is.js';
  * @param {any} value
  * @returns {Boolean}
  */
-export default function a(expected, value, safe) {
-	if (expected == null) return value === expected;
-	if (value == null) return value === expected;
+export default function type(expected, value, safe) {
+	if (expected == null || value == null) return value === expected;
 	if (typeof value === 'number' || value instanceof Number) return expected === Number;
+	if (safe) value = value.__proto__ || value;
 	if (value.constructor === expected) return true;
 	if (value.constructor === undefined) return expected === Object;
 	return expected === Function && (
