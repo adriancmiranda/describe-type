@@ -333,7 +333,6 @@ notArraylike.add(callable);
 notArraylike.add(regexp);
 notArraylike.add(symbol);
 notArraylike.add(map);
-notArraylike.add(buffer);
 notArraylike.add(error);
 notArraylike.add(date);
 notArraylike.add(number);
