@@ -6,8 +6,14 @@ test('describe-type exposure', t => {
 	t.is(toString.call(describeType), '[object Object]');
 });
 
-test('describe-type/@ expusure', t => {
+test('describe-type/internal expusure', t => {
+	const $global = toString.call(describeType.internal.env);
 	t.is(toString.call(describeType.internal), '[object Object]');
+});
+
+test('describe-type/internal modules expusure', t => {
+	const $global = toString.call(describeType.internal.env);
+	t.is($global === '[object global]' || $global === '[object Window]', true);
 	t.is(toString.call(describeType.internal.mod), '[object Function]', 'should be a function');
 	t.is(toString.call(describeType.internal.slice), '[object Function]', 'should be a function');
 	t.is(toString.call(describeType.internal.keys), '[object Function]', 'should be a function');
@@ -35,7 +41,6 @@ test('describe-type/@ expusure', t => {
 	t.is(toString.call(describeType.internal.inBrowser), '[object Boolean]');
 	t.is(toString.call(describeType.internal.isNode), '[object Function]', 'should be a function');
 	t.is(toString.call(describeType.internal.inNode), '[object Boolean]');
-	t.is(toString.call(describeType.internal.env), '[object global]');
 });
 
 test('describe-type/as expusure', t => {

@@ -5,10 +5,8 @@ import create from '../@/create.js';
 import assign from '../@/assign.js';
 import reduce from '../@/reduce.js';
 import filter from '../@/filter.js';
-// import stringify from '../@/stringify';
-
+import stringify from '../@/stringify';
 import typify from '../built-in/typify.js';
-
 import any from '../is/any.js';
 import object from '../is/object/object.js';
 import string from '../is/string/string.js';
@@ -16,11 +14,9 @@ import array from '../is/array/array.js';
 import notType from '../is/not/not.type.js';
 import notAny from '../is/not/not.any.js';
 import notInstanceOf from '../is/not/not.instanceOf.js';
-
 import asType from '../as/as.type.js';
 import asAny from '../as/as.any.js';
 import asInstanceOf from '../as/as.instanceOf.js';
-
 // import SchemaError from './SchemaError';
 
 // const SCHEMA_PROPS = {

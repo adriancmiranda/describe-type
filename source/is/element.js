@@ -10,8 +10,8 @@ import callable from './callable.js';
  */
 export default function element(value) {
 	return value != null && (
-		callable(env.HTMLElement) &&
-		value instanceof env.HTMLElement &&
+		callable(env.window.HTMLElement) &&
+		value instanceof env.window.HTMLElement &&
 		value.nodeType === 1
 	);
 }
