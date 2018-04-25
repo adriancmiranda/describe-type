@@ -1,8 +1,4 @@
-import arraylike from '../is/arraylike/arraylike.js';
-import string from '../is/string/string.js';
-import number from '../is/number.js';
 import keys from './keys.js';
-import mod from './mod.js';
 
 /**
  *
@@ -14,10 +10,16 @@ import mod from './mod.js';
  * @returns {Array}
  */
 export default function reduce(list, cmd, initialValue, context) {
-	let size = arraylike(list) && list.length;
+	if (list == null) return undefined;
+	const size = (0 | list.length);
 	if (size) {
-		for (size; i < size; i += 1) {
-			initialValue = cmd.call(context, initialValue, list[key], keys[i], list);
+		let index = 0;
+		if (arguments.length === 2) {
+			initialValue = list[index];
+			index = 1;
+		}
+		for (index; index < size; index += 1) {
+			initialValue = cmd.call(context || null, initialValue, list[index], index, list);
 		}
 	}
 	return initialValue;

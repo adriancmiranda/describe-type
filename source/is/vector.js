@@ -9,10 +9,10 @@ import arraylike from './arraylike/arraylike.js';
  * @param {arraylike} value
  * @returns {Boolean}
  */
-export default function vector(expected, value) {
+export default function vector(expected, value, safe) {
 	if (arraylike(value) === false) return false;
 	for (let i = value.length - 1; i > -1; i -= 1) {
-		if (notAny(expected, value[i])) return false;
+		if (notAny(expected, value[i], safe)) return false;
 	}
 	return true;
 }

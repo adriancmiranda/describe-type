@@ -6,7 +6,7 @@
  * @param {any} value
  * @returns {Boolean}
  */
-export default function type(expected, value, safe) {
+function type(expected, value, safe) {
 	if (expected == null || value == null) return value === expected;
 	if (typeof value === 'number' || value instanceof Number) return expected === Number;
 	if (safe) value = value.__proto__ || value;
@@ -17,3 +17,9 @@ export default function type(expected, value, safe) {
 		value.constructor.name === 'AsyncFunction'
 	);
 }
+
+type.safe = function typeSafe(expected, value) {
+	return type(expected, value, true);
+};
+
+export default type;

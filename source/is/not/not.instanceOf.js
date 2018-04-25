@@ -8,6 +8,6 @@ import instanceOf from '../instanceOf.js';
  * @param {any} value
  * @returns {Boolean}
  */
-export default function notInstanceOf(expected, value) {
-	return instanceOf(expected, value) === false;
+export default function notInstanceOf(expected, value, safe) {
+	return instanceOf(expected, value, safe) === false;
 }

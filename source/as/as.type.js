@@ -7,7 +7,7 @@ import type from '../is/type.js';
  * @param {any} value
  * @returns {Boolean}
  */
-export default function asA(expected, value) {
+export default function asA(expected, value, safe) {
 	value = getExpectedValue(expected, value, arguments, 2);
-	return type(expected, value) ? value : arguments[2];
+	return type(expected, value, safe) ? value : arguments[2];
 }

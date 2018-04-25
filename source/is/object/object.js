@@ -7,6 +7,12 @@ import type from '../type.js';
  * @param {any} value
  * @returns {Boolean}
  */
-export default function object(value) {
-	return type(Object, value);
+function object(value, safe) {
+	return type(Object, value, safe);
 }
+
+object.safe = function objectSafe(value) {
+	return object(value, true);
+};
+
+export default object;
