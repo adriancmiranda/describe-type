@@ -14,7 +14,7 @@ import mod from './mod.js';
  */
 export default function slice(list, startIndex, endIndex) {
 	let range = [];
-	let size = arraylike(list) && list.length;
+	let size = list == null ? 0 : 0 | list.length;
 	if (size) {
 		let start = mod(startIndex, 0, size + 1);
 		if (number(endIndex)) {

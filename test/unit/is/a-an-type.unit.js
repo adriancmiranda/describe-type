@@ -53,6 +53,26 @@ test('#a.type special cases', t => {
 	env.constructor = envCtor;
 });
 
+datatypes.objectEvil.iterate(datatype => {
+	const fnName = /^-?[aeiouy]/i.test(datatype.slug) ? 'an' : 'a';
+	test(`${datatype.id} • ${fnName}(${datatype.slug}, ${datatype.label});`, (t) => {
+		t.is(is[fnName](Object, datatype.value, true), true, `${datatype.label} should be Object`);
+	});
+});
+
+datatypes.objectEvil.iterate(datatype => {
+	const fnName = /^-?[aeiouy]/i.test(datatype.slug) ? 'an' : 'a';
+	test(`${datatype.id} • ${fnName}(${datatype.slug}, ${datatype.label});`, (t) => {
+		t.is(is[fnName](Function, datatype.value, true), false, `${datatype.label} should be Function`);
+	});
+	test(`${datatype.id} • ${fnName}(${datatype.slug}, ${datatype.label});`, (t) => {
+		t.is(is[fnName](undefined, datatype.value, true), false, `${datatype.label} should be undefined`);
+	});
+	test(`${datatype.id} • ${fnName}(${datatype.slug}, ${datatype.label});`, (t) => {
+		t.is(is[fnName](null, datatype.value, true), false, `${datatype.label} should be null`);
+	});
+});
+
 datatypes.all.iterate(datatype => {
 	const fnName = /^-?[aeiouy]/i.test(datatype.slug) ? 'an' : 'a';
 	test(`${datatype.id} • ${fnName}(${datatype.slug}, ${datatype.label});`, (t) => {
