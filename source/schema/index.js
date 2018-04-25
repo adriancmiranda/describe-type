@@ -3,8 +3,8 @@ import startsWith from '../@/startsWith.js';
 import keys from '../@/keys.js';
 import create from '../@/create.js';
 import assign from '../@/assign.js';
-// import reduce from '../@/reduce.js';
-// import filter from '../@/filter.js';
+import reduce from '../@/reduce.js';
+import filter from '../@/filter.js';
 // import stringify from '../@/stringify';
 
 import typify from '../built-in/typify.js';

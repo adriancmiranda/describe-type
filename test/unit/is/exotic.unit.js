@@ -1,9 +1,11 @@
 import test from 'ava';
 import * as datatypes from '../../fixtures/datatypes.fixture.js';
 import * as describeType from '../../../source';
+import primitive from '../../../source/is/primitive';
 import exotic from '../../../source/is/exotic';
 
 test('describeType.is.exotic exposure', (t) => {
+	t.is(toString.call(describeType.is), '[object Object]', 'should be a namespace');
 	t.is(toString.call(describeType.is.exotic), '[object Function]', 'should be a function');
 });
 
@@ -12,7 +14,7 @@ test('exotic exposure', (t) => {
 });
 
 datatypes.all.iterate(datatype => {
-	if (datatype.value != null) {
+	if (primitive(datatype.value) === false) {
 		test(`${datatype.id} • exotic(${datatype.label});`, (t) => {
 			t.is(exotic(datatype.value), true, 'should be true');
 		});
