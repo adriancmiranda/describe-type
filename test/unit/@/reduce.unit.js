@@ -5,6 +5,7 @@ import reduce from '../../../source/@/reduce.js';
 
 test('internal exposure', t => {
 	t.is(toString.call(internal), '[object Object]', 'should be a namespace');
+	t.is(toString.call(internal.reduce), '[object Function]', 'should be Function');
 });
 
 test('exposed', (t) => {

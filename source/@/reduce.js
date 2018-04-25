@@ -1,4 +1,4 @@
-import callable from '../is/callable/callable.js';
+import callable from '../is/callable.js';
 import keys from './keys.js';
 
 /**

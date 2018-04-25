@@ -1,5 +1,5 @@
-import arraylike from '../is/arraylike/arraylike.js';
-import apply from './apply.js';
+import callable from '../is/callable.js';
+import { objectHasOwnProperty } from './built-in.js';
 
 /**
  *
@@ -10,11 +10,16 @@ import apply from './apply.js';
  * @param {int} endIndex
  * @returns {Array}
  */
-export default function filter(list, callback, context) {
-	let range = [];
-	let size = arraylike(list) && list.length;
-	if (size) {
-		// TODO
-	}
-	return range;
+export default function filter(list, cmd, context) {
+  if (list == null) throw new TypeError;
+  if (callable(cmd) === false) throw new TypeError;
+  const result = [];
+  for (let index = 0; index < list.length; index += 1) {
+    if (objectHasOwnProperty.call(list, index) === false) continue;
+    const value = list[index];
+    if (cmd.call(context, value, index, list)) {
+    	result[result.length] = value;
+    }
+  }
+  return result;
 }
