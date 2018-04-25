@@ -1,5 +1,6 @@
 import chalk from 'chalk';
 import { Suite } from 'benchmark';
+import { benchmarkFatestStatus } from '../../fixtures/speed';
 import keys from '../../../source/@/keys.js';
 
 const value = {

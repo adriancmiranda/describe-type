@@ -19,12 +19,12 @@ export const benchmarkFatestStatus = (reVendorMethod, progress, loaded, total) =
 			timeline = `\n${timeline}`;
 		}
 		console.log(`\nFastest is:\n${statusColor(fastestList.join('\n'))}${timeline}\n`);
-		if (loaded === total) {
+		if (loaded && total && loaded === total) {
 			console.log(`--`);
 			console.log(chalk.yellow(`warnings: ${benchmarkFatestStatus.warnings}`));
 			console.log(chalk.red(`fails: ${benchmarkFatestStatus.fails}`));
 			console.log(chalk.inverse(`total: ${total}`));
-			console.log(chalk.inverse(`perf: ${Math.round((benchmarkFatestStatus.fails/total) * 100)}`));
+			console.log(chalk.inverse(`perf: ${Math.round((benchmarkFatestStatus.fails/total) * 100)}\n`));
 			benchmarkFatestStatus.fails = 0;
 			benchmarkFatestStatus.warnings = 0;
 		}

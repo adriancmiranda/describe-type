@@ -1,5 +1,6 @@
 import chalk from 'chalk';
 import { Suite } from 'benchmark';
+import { benchmarkFatestStatus } from '../../fixtures/speed';
 import apply from '../../../source/@/apply.js';
 
 const value = '~ apply ~'.split('');

@@ -1,5 +1,6 @@
 import chalk from 'chalk';
 import { Suite } from 'benchmark';
+import { benchmarkFatestStatus } from '../../fixtures/speed';
 import ownProperty from '../../../source/has/ownProperty.js';
 
 const value = {
