@@ -8,6 +8,6 @@ import type from '../type.js';
  * @param {any} value
  * @returns {Boolean}
  */
-export default function notA(expected, value, safe) {
-	return type(expected, value, safe) === false;
+export default function notA(expected, value) {
+	return type(expected, value) === false;
 }

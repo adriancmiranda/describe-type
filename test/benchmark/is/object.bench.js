@@ -1,26 +1,63 @@
 import chalk from 'chalk';
 import { Suite } from 'benchmark';
+import * as datatypes from '../../fixtures/datatypes.fixture';
 import { benchmarkFatestStatus } from '../../fixtures/speed';
-import { is } from '../../../source';
+import { objectToString } from '../../../source/@/built-in';
+import getPrototypeOf from '../../../source/@/getPrototypeOf';
+import { type, object } from '../../../source/is';
 
-new Suite()
+function isAny(expected, value) {
+	return new RegExp(`(${expected})`).test(Object.prototype.toString.call(value));
+}
 
-.add('describeType.is.an(Object, Object.create(null))', () => {
-	return is.an(Object, Object.create(null));
-})
+function isType(expected, value) {
+	return objectToString.call(value) === `[object ${expected}]`;
+}
 
-.add('typeof Object.create(null) === "object"', () => {
-	return typeof Object.create(null) === 'object';
-})
+let i = 0;
+datatypes.object.iterate((datatype) => {
+	const name = datatype.name;
+	const seal = datatype.seal;
+	const label = datatype.label;
+	const ctor = datatype.ctor;
+	const value = datatype.value;
+	const loaded = ++i;
+	const total = datatypes.object.size();
+	const progress = Math.round((loaded / total) * 100);
 
-.add('toString.call(object.create(null)) === "[object Object]"', () => {
-	return Object.prototype.toString.call(Object.create(null)) === '[object Object]';
-})
+	new Suite()
 
-.on('cycle', ({ target }) => {
-	console.log(String(target));
-})
+	.add(`describeType.is.an(Object, ${label})`, () => {
+		try{
+			type(ctor, value);
+		} catch(e){console.log(e)};
+	})
 
-.on('complete', benchmarkFatestStatus(/toString/))
+	.add(`describeType.is.object(${label})`, () => {
+		return object(value);
+	})
 
-.run({ async: false });
+	.add(`isAny("Object", ${label})`, () => {
+		return isAny('Object', value);
+	})
+
+	.add(`isType("Object", ${label})`, () => {
+		return isType('Object', value);
+	})
+
+	.add(`isA(Object, ${label})`, () => {
+		return isA(ctor, value);
+	})
+
+	.add(`toString.call(${label}) === ${seal}`, () => {
+		return objectToString.call(value) === seal;
+	})
+
+	.on('cycle', ({ target }) => {
+		console.log(String(target));
+	})
+
+	.on('complete', benchmarkFatestStatus(/toString/))
+
+	.run({ async: false });
+});

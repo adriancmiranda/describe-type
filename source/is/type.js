@@ -1,3 +1,5 @@
+import getPrototypeOf from '../@/getPrototypeOf.js';
+
 /**
  *
  * @function
@@ -6,20 +8,12 @@
  * @param {any} value
  * @returns {Boolean}
  */
-function type(expected, value, safe) {
-	if (expected == null || value == null) return value === expected;
-	if (typeof value === 'number' || value instanceof Number) return expected === Number;
-	if (safe) value = value.__proto__ || value;
-	if (value.constructor === expected) return true;
+export default function type(expected, value) {
+	if (value == null) return value === expected;
 	if (value.constructor === undefined) return expected === Object;
+	if (getPrototypeOf(value).constructor === expected) return true;
 	return expected === Function && (
 		value.constructor.name === 'GeneratorFunction' ||
 		value.constructor.name === 'AsyncFunction'
 	);
 }
-
-type.safe = function typeSafe(expected, value) {
-	return type(expected, value, true);
-};
-
-export default type;

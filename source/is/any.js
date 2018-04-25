@@ -8,12 +8,12 @@ import type from './type.js';
  * @param {any} value
  * @returns {Boolean}
  */
-export default function any(expected, value, safe) {
+export default function any(expected, value) {
 	if (expected == null) return expected === value;
 	if (expected.constructor === Array && expected.length > 0) {
 		for (let i = expected.length - 1; i > -1; i -= 1) {
-			if (type(expected[i], value, safe)) return true;
+			if (type(expected[i], value)) return true;
 		}
 	}
-	return type(expected, value, safe);
+	return type(expected, value);
 }

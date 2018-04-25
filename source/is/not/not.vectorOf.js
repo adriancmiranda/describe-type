@@ -8,6 +8,6 @@ import vector from '../vector.js';
  * @param {any} value
  * @returns {Boolean}
  */
-export default function notVectorOf(expected, value, safe) {
-	return vector(expected, value, safe) === false;
+export default function notVectorOf(expected, value) {
+	return vector(expected, value) === false;
 }

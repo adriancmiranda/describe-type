@@ -5,8 +5,8 @@ import ownProperty from '../has/ownProperty.js';
  *
  * @function
  * @memberof utility
- * @param {Object} context
- * @param {Boolean} getNum
+ * @param {Object} keys -
+ * @param {Boolean} getInheritedProps -
  * @returns {Array}
  */
 export default function keys(object, getInheritedProps) {

@@ -5,9 +5,9 @@ import as from '../as/as.type.js';
  *
  * @function
  * @memberof utility
- * @param {String} value
- * @param {String} search
- * @param {uint} position
+ * @param {String} value -
+ * @param {String} search -
+ * @param {uint} position -
  * @returns {Boolean}
  */
 export default function startsWith(value, search, position) {
