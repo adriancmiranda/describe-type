@@ -1,3 +1,5 @@
+import create from './create.js';
+
 /**
  *
  * @name Object.getPrototypeOf
@@ -10,5 +12,5 @@ export default function getPrototypeOf(value) {
 	if (value == null) {
 		throw new TypeError('Uncaught TypeError: Cannot convert undefined or null to object');
 	}
-	return value.__proto__ || Object.getPrototypeOf(value);
+	return value.__proto__ || Object.getPrototypeOf(value) || create(null);
 }

@@ -1,20 +1,23 @@
+import is from '../@/is.js';
 import keys from '../@/keys.js';
+import getPrototypeOf from '../@/getPrototypeOf.js';
 
 /**
- *
+ * The equal() method determines whether two values are the same value.
  * @function
  * @memberof is
- * @param {any} valueA
- * @param {any} valueB
- * @returns {Boolean}
+ * @param {any} valueA - The first value to compare.
+ * @param {any} valueB - The second value to compare.
+ * @returns {Boolean} A Boolean indicating whether or not the two arguments are
+ * the same value.
  */
 export default function equal(valueA, valueB) {
-	if (valueA === valueB) {
+	if (is(valueA, valueB)) {
 		return true;
 	}
 	let key;
-	const ctorA = valueA != null && valueA.constructor;
-	const ctorB = valueB != null && valueB.constructor;
+	const ctorA = valueA != null && getPrototypeOf(valueA).constructor;
+	const ctorB = valueB != null && getPrototypeOf(valueB).constructor;
 	if (ctorA !== ctorB) {
 		return false;
 	} else if (ctorA === Object) {
