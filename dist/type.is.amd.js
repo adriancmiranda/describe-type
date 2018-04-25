@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v0.7.0
  * 
- * @commit b2170c3b7af743a4211094d683695d44e4955c54
- * @moment Tuesday, April 24, 2018 7:55 PM
+ * @commit 2a605f1d308c84ebc7cb0d99edb7a373fb29bc4f
+ * @moment Wednesday, April 25, 2018 2:48 PM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2021 Adrian C. Miranda
@@ -58,18 +58,31 @@ define(['exports'], function (exports) { 'use strict';
 
 	/**
 	 *
+	 * @name Object.getPrototypeOf
+	 * @function
+	 * @global
+	 * @param {value}
+	 * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getPrototypeOf
+	 */
+	function getPrototypeOf(value) {
+		if (value == null) {
+			throw new TypeError('Uncaught TypeError: Cannot convert undefined or null to object');
+		}
+		return value.__proto__ || Object.getPrototypeOf(value);
+	}
+
+	/**
+	 *
 	 * @function
 	 * @memberof is
 	 * @param {Function} expect
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function type(expected, value, safe) {
-		if (expected == null || value == null) { return value === expected; }
-		if (typeof value === 'number' || value instanceof Number) { return expected === Number; }
-		if (safe) { value = value.__proto__ || value; }
-		if (value.constructor === expected) { return true; }
+	function type(expected, value) {
+		if (value == null) { return value === expected; }
 		if (value.constructor === undefined) { return expected === Object; }
+		if (getPrototypeOf(value).constructor === expected) { return true; }
 		return expected === Function && (
 			value.constructor.name === 'GeneratorFunction' ||
 			value.constructor.name === 'AsyncFunction'
@@ -291,8 +304,8 @@ define(['exports'], function (exports) { 'use strict';
 	 *
 	 * @function
 	 * @memberof utility
-	 * @param {Object} context
-	 * @param {Boolean} getNum
+	 * @param {Object} keys -
+	 * @param {Boolean} getInheritedProps -
 	 * @returns {Array}
 	 */
 	function keys(object, getInheritedProps) {
