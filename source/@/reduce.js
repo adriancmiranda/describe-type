@@ -1,3 +1,4 @@
+import callable from '../is/callable/callable.js';
 import keys from './keys.js';
 
 /**
@@ -11,6 +12,7 @@ import keys from './keys.js';
  */
 export default function reduce(list, cmd, initialValue, context) {
 	if (list == null) return undefined;
+	if (callable(cmd) === false) throw new TypeError;
 	const size = (0 | list.length);
 	if (size) {
 		let index = 0;

@@ -84,15 +84,16 @@ export const string = new DataType('string');
 string.add(stringFilled);
 string.add(stringEmpty);
 
-export const objectSpecialCases = new DataType('object.special');
-objectSpecialCases.add('{ constructor: \'foo\' }', { constructor: 'foo' });
-objectSpecialCases.add('{ constructor: () => {} }', { constructor: () => {} });
-objectSpecialCases.add('{ constructor: function() {} }', { constructor: function() {} });
-objectSpecialCases.add('{ constructor: function unit() {} }', { constructor: function unit() {} });
-objectSpecialCases.add('{ constructor: Object }', { constructor: Object });
-objectSpecialCases.add('{ constructor: Number }', { constructor: Number });
-objectSpecialCases.add('{ constructor: Function }', { constructor: Function });
-objectSpecialCases.add('{ constructor: undefined }', { constructor: undefined });
+export const objectEvil = new DataType('object.evil');
+objectEvil.add('{ constructor: \'foo\' }', { constructor: 'foo' });
+objectEvil.add('{ constructor: () => {} }', { constructor: () => {} });
+objectEvil.add('{ constructor: function() {} }', { constructor: function() {} });
+objectEvil.add('{ constructor: function evil() {} }', { constructor: function evil() {} });
+objectEvil.add('{ constructor: Object }', { constructor: Object });
+objectEvil.add('{ constructor: Number }', { constructor: Number });
+objectEvil.add('{ constructor: Function }', { constructor: Function });
+objectEvil.add('{ constructor: undefined }', { constructor: undefined });
+objectEvil.add('{ constructor: undefined }', { constructor: Function, getPrototypeOf: 'foo', __proto__: 'foo' });
 
 export const objectFilled = new DataType('object.filled');
 objectFilled.add('new Object({{source}})', new Object({ foo: 'bar' }));
@@ -115,7 +116,7 @@ objectEmpty.add('new Object()', new Object());
 objectEmpty.add('{{source}}', {});
 
 export const object = new DataType('object');
-// object.add(objectSpecialCases);
+// object.add(objectEvil);
 object.add(objectFilled);
 object.add(objectEmpty);
 
