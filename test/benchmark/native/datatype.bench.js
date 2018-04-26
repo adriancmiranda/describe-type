@@ -1,5 +1,7 @@
 import chalk from 'chalk';
 import { Suite } from 'benchmark';
+import { benchmarkFatestStatus } from '../../fixtures/speed';
+import type from '../../../source/is/type';
 
 const value = /foo/;
 
@@ -7,6 +9,10 @@ new Suite()
 
 .add('typeof value:RegExp', () => {
 	typeof value === 'object';
+})
+
+.add('type(RegExp, value)', () => {
+	type(RegExp, value);
 })
 
 .add('value instanceof RegExp', () => {
