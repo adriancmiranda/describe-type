@@ -13,6 +13,10 @@ new Suite()
 	return is.array(['str', 1, { foo: 'bar' }]);
 })
 
+.add('["str", 1, { foo: "bar" }] instanceof Array', () => {
+	return ['str', 1, { foo: 'bar' }] instanceof Array;
+})
+
 .add('Array.isArray(["str", 1, { foo: "bar" }])', () => {
 	return Array.isArray(['str', 1, { foo: 'bar' }]);
 })

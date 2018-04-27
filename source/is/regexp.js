@@ -6,6 +6,5 @@
  * @returns {Boolean}
  */
 export default function regexp(value) {
-	if (value == null) return false;
-	return value.constructor === RegExp;
+	return value instanceof RegExp;
 }

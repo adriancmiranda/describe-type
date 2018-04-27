@@ -1,7 +1,7 @@
-import notA from './not.a.js';
+import notType from './not.type.js';
 
 /**
  * @memberof is
  * @alias notA
  */
-export default notA;
+export default notType;
