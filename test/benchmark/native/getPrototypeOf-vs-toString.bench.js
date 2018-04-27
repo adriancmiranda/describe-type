@@ -1,7 +1,7 @@
 import { Suite } from 'benchmark';
-import { benchmarkFatestStatus } from '../../fixtures/speed';
+import { benchmarkFatestStatus, benchmarkCycle } from '../../fixtures/speed';
 import * as datatypes from '../../fixtures/datatypes.fixture';
-import { objectToString } from '../../../source/@/built-in.js';
+import { objectToString, objectHasOwnProperty } from '../../../source/@/built-in.js';
 import getPrototypeOf from '../../../source/@/getPrototypeOf.js';
 
 let i = 0;
@@ -23,10 +23,10 @@ datatypes.object.iterate((datatype) => {
 
 	.add(`getPrototypeOf(${label}).constructor === ${name}`, () => {
 		getPrototypeOf(value).constructor === ctor;
-	});
+	})
 
-	.add(`objectToString.call(${label}) === [object Object]`, () => {
-		objectToString.call(value) === '[object Object]';
+	.add(`objectToString.call(${label}) === ${seal}`, () => {
+		objectToString.call(value) === seal;
 	})
 
 	.add(`${label}.prototype === ${label}.__proto__`, () => {
@@ -37,9 +37,11 @@ datatypes.object.iterate((datatype) => {
 		value.constructor === value.__proto__.constructor;
 	})
 
-	.on('cycle', ({ target }) => {
-		console.log(String(target));
+	.add(`objectHasOwnProperty(${label}, 'constructor')`, () => {
+		objectHasOwnProperty.call(value, 'constructor');
 	})
+
+	.on('cycle', benchmarkCycle())
 
 	.on('complete', benchmarkFatestStatus(/toString/, progress, loaded, total))
 

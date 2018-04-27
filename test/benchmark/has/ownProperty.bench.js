@@ -1,5 +1,5 @@
 import { Suite } from 'benchmark';
-import { benchmarkFatestStatus } from '../../fixtures/speed';
+import { benchmarkFatestStatus, benchmarkCycle } from '../../fixtures/speed';
 import ownProperty from '../../../source/has/ownProperty.js';
 
 const value = {
@@ -48,9 +48,7 @@ new Suite()
 	ownProperty(value, ')');
 })
 
-.on('cycle', ({ target }) => {
-	console.log(String(target));
-})
+.on('cycle', benchmarkCycle())
 
 .on('complete', benchmarkFatestStatus(/[^describeType]/))
 

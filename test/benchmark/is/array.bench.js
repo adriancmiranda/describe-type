@@ -1,6 +1,6 @@
 import { Suite } from 'benchmark';
-import { benchmarkFatestStatus } from '../../fixtures/speed';
-import { is } from '../../../source';
+import { benchmarkFatestStatus, benchmarkCycle } from '../../fixtures/speed';
+import * as is from '../../../source/is';
 
 new Suite()
 
@@ -24,9 +24,7 @@ new Suite()
 	Object.prototype.toString.call(['str', 1, { foo: 'bar' }]) === '[object Array]';
 })
 
-.on('cycle', ({ target }) => {
-	console.log(String(target));
-})
+.on('cycle', benchmarkCycle())
 
 .on('complete', benchmarkFatestStatus(/[^describeType]/))
 

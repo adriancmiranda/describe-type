@@ -1,5 +1,5 @@
 import { Suite } from 'benchmark';
-import { benchmarkFatestStatus } from '../../fixtures/speed';
+import { benchmarkFatestStatus, benchmarkCycle } from '../../fixtures/speed';
 import intOf from '../../../source/built-in/intOf.js';
 
 const value = [
@@ -20,9 +20,7 @@ new Suite()
 	value.map(i => intOf(i.value, i.radix));
 })
 
-.on('cycle', ({ target }) => {
-	console.log(String(target));
-})
+.on('cycle', benchmarkCycle())
 
 .on('complete', benchmarkFatestStatus(/[^describeType]/))
 

@@ -1,5 +1,5 @@
 import { Suite } from 'benchmark';
-import { benchmarkFatestStatus } from '../../fixtures/speed';
+import { benchmarkFatestStatus, benchmarkCycle } from '../../fixtures/speed';
 import { is } from '../../../source';
 
 new Suite()
@@ -20,9 +20,7 @@ new Suite()
 	Object.prototype.toString.call(undefined) === '[object Undefined]';
 })
 
-.on('cycle', ({ target }) => {
-	console.log(String(target));
-})
+.on('cycle', benchmarkCycle())
 
 .on('complete', benchmarkFatestStatus(/toString/))
 

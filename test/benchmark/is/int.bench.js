@@ -1,5 +1,5 @@
 import { Suite } from 'benchmark';
-import { benchmarkFatestStatus } from '../../fixtures/speed';
+import { benchmarkFatestStatus, benchmarkCycle } from '../../fixtures/speed';
 import { is } from '../../../source';
 
 function integer(value) {
@@ -16,9 +16,7 @@ new Suite()
 	is.integer(Infinity);
 })
 
-.on('cycle', ({ target }) => {
-	console.log(String(target));
-})
+.on('cycle', benchmarkCycle())
 
 .on('complete', benchmarkFatestStatus(/[^describeType]/))
 

@@ -1,5 +1,5 @@
 import { Suite } from 'benchmark';
-import { benchmarkFatestStatus } from '../../fixtures/speed';
+import { benchmarkFatestStatus, benchmarkCycle } from '../../fixtures/speed';
 import { all } from '../../fixtures/datatypes.fixture';
 import vendor from '../../fixtures/vendor.fixture';
 import { is } from '../../../source';
@@ -24,9 +24,7 @@ all.iterate((datatype) => {
 		primitive2(datatype);
 	})
 
-	.on('cycle', (evt) => {
-		console.log(String(evt.target));
-	})
+	.on('cycle', benchmarkCycle())
 
 	.on('complete', benchmarkFatestStatus(/vendor/))
 

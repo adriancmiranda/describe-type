@@ -1,5 +1,5 @@
 import { Suite } from 'benchmark';
-import { benchmarkFatestStatus } from '../../fixtures/speed';
+import { benchmarkFatestStatus, benchmarkCycle } from '../../fixtures/speed';
 import * as datatypes from '../../fixtures/datatypes.fixture';
 import deprecatedAsAny from '../../fixtures/deprecated/as/as.any';
 import asAny from '../../../source/as/as.any';
@@ -33,9 +33,7 @@ datatypes.all.iterate((datatype) => {
 		deprecatedAsAny(ctor, value);
 	})
 
-	.on('cycle', (evt) => {
-		console.log(String(evt.target));
-	})
+	.on('cycle', benchmarkCycle())
 
 	.on('complete', benchmarkFatestStatus(/toString/, progress, loaded, total))
 

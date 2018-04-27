@@ -1,5 +1,5 @@
 import { Suite } from 'benchmark';
-import { benchmarkFatestStatus } from '../../fixtures/speed';
+import { benchmarkFatestStatus, benchmarkCycle } from '../../fixtures/speed';
 import { number } from '../../fixtures/datatypes.fixture';
 import vendor from '../../fixtures/vendor.fixture';
 import { is } from '../../../source';
@@ -34,9 +34,7 @@ number.iterate((datatype) => {
 		datatype.data === datatype.data;
 	})
 
-	.on('cycle', (evt) => {
-		console.log(String(evt.target));
-	})
+	.on('cycle', benchmarkCycle())
 
 	.on('complete', benchmarkFatestStatus(/[^describeType]/))
 

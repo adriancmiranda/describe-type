@@ -18,7 +18,7 @@ export const benchmarkFatestStatus = (reVendorMethod, progress, loaded, total) =
 			timeline = colors.underline(`${progress}% - ${loaded} de ${total}`);
 			timeline = `\n${timeline}`;
 		}
-		console.log(`\nFastest is:${fastestList.length > 1 ? '\n' : ''}${statusColor(fastestList.join('\n'))}${timeline}\n`);
+		console.log(`\nFastest is: ${fastestList.length > 1 ? '\n' : ''}${statusColor(fastestList.join('\n'))}${timeline}\n`);
 		if (loaded && total && loaded === total) {
 			console.log(`--`);
 			console.log(colors.yellow(`warnings: ${benchmarkFatestStatus.warnings}`));
@@ -28,5 +28,11 @@ export const benchmarkFatestStatus = (reVendorMethod, progress, loaded, total) =
 			benchmarkFatestStatus.fails = 0;
 			benchmarkFatestStatus.warnings = 0;
 		}
+	};
+};
+
+export const benchmarkCycle = () => {
+	return function ({ target }) {
+		console.log(String(target).replace(/(\d{1,3},\d{1,3},\d{1,3})/, colors.underline('$1')));
 	};
 };

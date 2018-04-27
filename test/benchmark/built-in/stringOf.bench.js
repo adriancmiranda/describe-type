@@ -1,5 +1,5 @@
 import { Suite } from 'benchmark';
-import { benchmarkFatestStatus } from '../../fixtures/speed';
+import { benchmarkFatestStatus, benchmarkCycle } from '../../fixtures/speed';
 import stringOf from '../../../source/built-in/stringOf.js';
 
 const value = /toString|stringOf/mig;
@@ -18,9 +18,7 @@ new Suite()
 	stringOf(value, true);
 })
 
-.on('cycle', ({ target }) => {
-	console.log(String(target));
-})
+.on('cycle', benchmarkCycle())
 
 .on('complete', benchmarkFatestStatus(/[^describeType]/))
 
