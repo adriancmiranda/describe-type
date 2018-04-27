@@ -184,6 +184,9 @@ if (arrowFn) {
 	callable.add('{{source}}', arrowFn);
 }
 
+export const classes = new DataType('classes');
+classes.add('{{source}}', class Foo { constructor() {} });
+
 export const zeroNegativeInteger = new DataType('zero.negativeInteger');
 zeroNegativeInteger.add('-0', -0);
 

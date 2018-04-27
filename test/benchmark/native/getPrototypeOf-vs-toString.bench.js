@@ -17,10 +17,14 @@ datatypes.object.iterate((datatype) => {
 	const progress = Math.round((loaded / total) * 100);
 
 	new Suite()
-	
+
 	.add(`${label}.prototype === getPrototypeOf(${label})`, () => {
 		value.prototype === getPrototypeOf(value);
 	})
+
+	.add(`getPrototypeOf(${label}).constructor === ${name}`, () => {
+		getPrototypeOf(value).constructor === ctor;
+	});
 
 	.add(`objectToString.call(${label}) === [object Object]`, () => {
 		objectToString.call(value) === '[object Object]';
@@ -31,7 +35,7 @@ datatypes.object.iterate((datatype) => {
 	})
 
 	.add(`${label}.constructor === ${label}.__proto__.constructor`, () => {
-		return value.constructor === value.__proto__.constructor;
+		value.constructor === value.__proto__.constructor;
 	})
 
 	.on('cycle', ({ target }) => {
