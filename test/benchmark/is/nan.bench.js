@@ -1,4 +1,3 @@
-import chalk from 'chalk';
 import { Suite } from 'benchmark';
 import { benchmarkFatestStatus } from '../../fixtures/speed';
 import { number } from '../../fixtures/datatypes.fixture';
@@ -12,27 +11,27 @@ number.iterate((datatype) => {
 	new Suite()
 
 	.add(`describeType.is.nan(${datatype.name})`, () => {
-		return nan1(datatype.data);
+		nan1(datatype.data);
 	})
 
 	.add(`vendor.nan(${datatype.name})`, () => {
-		return nan2(datatype.data);
+		nan2(datatype.data);
 	})
 
 	.add(`isNan(${datatype.name})`, () => {
-		return isNaN(datatype.data);
+		isNaN(datatype.data);
 	})
 
 	.add(`${datatype.name} !== ${datatype.name}`, () => {
-		return datatype.data !== datatype.data;
+		datatype.data !== datatype.data;
 	})
 
 	.add(`!(${datatype.name} === ${datatype.name})`, () => {
-		return !(datatype.data === datatype.data);
+		!(datatype.data === datatype.data);
 	})
 
 	.add(`${datatype.name} === ${datatype.name}`, () => {
-		return datatype.data === datatype.data;
+		datatype.data === datatype.data;
 	})
 
 	.on('cycle', (evt) => {

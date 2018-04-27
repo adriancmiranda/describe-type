@@ -1,4 +1,3 @@
-import chalk from 'chalk';
 import { Suite } from 'benchmark';
 import { benchmarkFatestStatus } from '../../fixtures/speed';
 import * as datatypes from '../../fixtures/datatypes.fixture';
@@ -19,23 +18,23 @@ datatypes.bool.iterate((datatype) => {
 	new Suite()
 
 	.add(`describeType.is.a(Boolean, true)`, () => {
-		return is.a(Boolean, true);
+		is.a(Boolean, true);
 	})
 
 	.add(`describeType.is.bool(${label})`, () => {
-		return is.bool(true);
+		is.bool(true);
 	})
 
 	.add(`typeof ${label} === "boolean"`, () => {
-		return typeof value === 'boolean';
+		typeof value === 'boolean';
 	})
 
 	.add(`${label} instanceof ${name}`, () => {
-		return value instanceof ctor;
+		value instanceof ctor;
 	})
 
 	.add(`toString.call(${label}) === "${seal}"`, () => {
-		return Object.prototype.toString.call(value) === seal;
+		Object.prototype.toString.call(value) === seal;
 	})
 
 	.on('cycle', ({ target }) => {

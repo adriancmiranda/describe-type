@@ -1,4 +1,3 @@
-import chalk from 'chalk';
 import { Suite } from 'benchmark';
 import { benchmarkFatestStatus } from '../../fixtures/speed';
 import { all } from '../../fixtures/datatypes.fixture';
@@ -14,15 +13,15 @@ all.iterate((datatype) => {
 	new Suite()
 
 	.add(`!describeType.is.exotic(${datatype.name})`, () => {
-		return primitive0(datatype);
+		primitive0(datatype);
 	})
 
 	.add(`describeType.is.primitive(${datatype.name})`, () => {
-		return primitive1(datatype);
+		primitive1(datatype);
 	})
 
 	.add(`vendor.primitive(${datatype.name})`, () => {
-		return primitive2(datatype);
+		primitive2(datatype);
 	})
 
 	.on('cycle', (evt) => {

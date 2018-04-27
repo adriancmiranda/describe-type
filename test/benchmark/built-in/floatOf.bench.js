@@ -1,4 +1,3 @@
-import chalk from 'chalk';
 import { Suite } from 'benchmark';
 import { benchmarkFatestStatus } from '../../fixtures/speed';
 import floatOf from '../../../source/built-in/floatOf.js';

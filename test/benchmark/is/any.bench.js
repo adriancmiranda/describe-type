@@ -1,4 +1,3 @@
-import chalk from 'chalk';
 import { Suite } from 'benchmark';
 import { benchmarkFatestStatus } from '../../fixtures/speed';
 import { all } from '../../fixtures/datatypes.fixture';
@@ -14,19 +13,19 @@ all.iterate((datatype) => {
 	const loaded = ++i;
 	const total = all.size();
 	const progress = Math.round((loaded / total) * 100);
-	
+
 	new Suite()
 
 	.add(`describeType.is.any(${name}, ${label})`, () => {
-		return is.any(ctor, value);
+		is.any(ctor, value);
 	})
 
 	.add(`describeType.is.not.any(${name}, ${label})`, () => {
-		return is.not.any(ctor, value) === true;
+		is.not.any(ctor, value) === true;
 	})
 
 	.add(`Object.prototype.toString.call(${label}) === ${seal}`, () => {
-		return Object.prototype.toString.call(value) === seal;
+		Object.prototype.toString.call(value) === seal;
 	})
 
 	.on('cycle', (evt) => {

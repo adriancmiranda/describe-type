@@ -1,4 +1,3 @@
-import chalk from 'chalk';
 import { Suite } from 'benchmark';
 import * as datatypes from '../../fixtures/datatypes.fixture';
 import { benchmarkFatestStatus } from '../../fixtures/speed';
@@ -15,6 +14,7 @@ function isType(expected, value) {
 }
 
 let i = 0;
+datatypes.object.add(datatypes.objectEvil);
 datatypes.object.iterate((datatype) => {
 	const name = datatype.name;
 	const seal = datatype.seal;
@@ -28,29 +28,27 @@ datatypes.object.iterate((datatype) => {
 	new Suite()
 
 	.add(`describeType.is.an(Object, ${label})`, () => {
-		try{
-			type(ctor, value);
-		} catch(e){console.log(e)};
+		type(ctor, value);
 	})
 
 	.add(`describeType.is.object(${label})`, () => {
-		return object(value);
+		object(value);
 	})
 
 	.add(`isAny("Object", ${label})`, () => {
-		return isAny('Object', value);
+		isAny('Object', value);
 	})
 
 	.add(`isType("Object", ${label})`, () => {
-		return isType('Object', value);
+		isType('Object', value);
 	})
 
 	.add(`isA(Object, ${label})`, () => {
-		return isA(ctor, value);
+		isA(ctor, value);
 	})
 
 	.add(`toString.call(${label}) === ${seal}`, () => {
-		return objectToString.call(value) === seal;
+		objectToString.call(value) === seal;
 	})
 
 	.on('cycle', ({ target }) => {

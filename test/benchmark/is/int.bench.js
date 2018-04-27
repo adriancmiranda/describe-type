@@ -1,4 +1,3 @@
-import chalk from 'chalk';
 import { Suite } from 'benchmark';
 import { benchmarkFatestStatus } from '../../fixtures/speed';
 import { is } from '../../../source';
@@ -10,11 +9,11 @@ function integer(value) {
 new Suite()
 
 .add('integer', () => {
-	return integer(Infinity);
+	integer(Infinity);
 })
 
 .add('describeType.is.integer', () => {
-	return is.integer(Infinity);
+	is.integer(Infinity);
 })
 
 .on('cycle', ({ target }) => {

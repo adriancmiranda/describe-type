@@ -1,4 +1,3 @@
-import chalk from 'chalk';
 import { Suite } from 'benchmark';
 import { benchmarkFatestStatus } from '../../fixtures/speed';
 import { numbers } from '../../fixtures/datatypes.fixture';
@@ -11,11 +10,11 @@ numbers.iterate((datatype) => {
 	new Suite()
 
 	.add(`describeType.is.hex(${datatype.name})`, () => {
-		return hex0(datatype.data);
+		hex0(datatype.data);
 	})
 
 	.add(`hex(${datatype.name})`, () => {
-		return hex1(datatype.data);
+		hex1(datatype.data);
 	})
 
 	.on('cycle', (evt) => {

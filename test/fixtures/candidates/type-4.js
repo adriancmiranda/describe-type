@@ -12,6 +12,9 @@ import getPrototypeOf from '../@/getPrototypeOf.js';
 export default function type(expected, value) {
 	if (value == null || expected == null) return value === expected;
 	if (value.constructor === undefined) return expected === Object;
+	// if (value instanceof Array) return expected === Array;
+	// if (value instanceof RegExp) return expected === RegExp;
+	// if (value instanceof Date) return expected === Date;
 	const type = typeof value;
 	if (type === 'boolean' || value instanceof Boolean) return expected === Boolean;
 	if (type === 'number' || value instanceof Number) return expected === Number;

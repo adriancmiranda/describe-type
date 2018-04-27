@@ -16,6 +16,8 @@ import generatorFn from 'make-generator-function';
 import Custom from './datatype/types/custom';
 import DataType from './datatype';
 
+const supportES6 = new Function('try{eval(\'"use strict";class foo{}\');return true;}catch(e){return false;}');
+
 export const streamWritable = new DataType('stream.writable');
 streamWritable.add('new Stream.Writable()', new Stream.Writable());
 streamWritable.add('fs.createWriteStream(tempy.file())', fs.createWriteStream(tempy.file()));
@@ -183,6 +185,8 @@ if (generatorFn) {
 if (arrowFn) {
 	callable.add('{{source}}', arrowFn);
 }
+
+
 
 export const classes = new DataType('classes');
 classes.add('{{source}}', class Foo { constructor() {} });
