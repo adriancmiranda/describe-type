@@ -1,13 +1,7 @@
-import type from '../type.js';
+import notType from './not.type.js';
 
 /**
- *
- * @function
  * @memberof is
- * @param {Function|Array.<Function>} expected
- * @param {any} value
- * @returns {Boolean}
+ * @alias notType
  */
-export default function notA(expected, value) {
-	return type(expected, value) === false;
-}
+export default notType;

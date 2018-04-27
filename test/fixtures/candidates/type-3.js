@@ -10,19 +10,21 @@ import getPrototypeOf from '../@/getPrototypeOf.js';
  */
 export default function type(expected, value) {
 	if (value == null) return value === expected;
-	if (typeof expected === 'function' === false) return value === expected;
-	if (value instanceof Array) return expected === Array;
-	if (typeof value.constructor === 'function' === false || objectHasOwnProperty.call(value, 'constructor')) {
-		return expected === Object;
+	if (value.constructor === undefined) return expected === Object;
+	if (value.constructor === expected) {
+		switch(value.constructor) {
+			case Number: return expected === Number;
+			case String: return expected === String;
+			case Boolean: return expected === Boolean;
+			case Array: return expected === Array;
+			case Symbol: return expected === Symbol;
+		}
+		if (value instanceof expected) return true;
+		if (typeof value === 'object') return expected === Object;
+		return true;
 	}
-	const type = typeof value;
-	if (type === 'number' || value instanceof Number) return expected === Number;
-	if (type === 'string' || value instanceof String) return expected === String;
-	if (type === 'boolean' || value instanceof Boolean) return expected === Boolean;
-	if (type === 'symbol') return expected === Symbol;
-	if (type === 'function') return expected === Function;
-	if (expected === Object === false) return value instanceof expected;
-	if (value.constructor === expected) return true;
-	return false;
+	return expected === Function && (
+		value.constructor.name === 'GeneratorFunction' ||
+		value.constructor.name === 'AsyncFunction'
+	) || getPrototypeOf(value).constructor === expected;
 }
-

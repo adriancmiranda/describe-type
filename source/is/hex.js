@@ -1,5 +1,6 @@
 import { reIsHex } from '../@/patterns.js';
+import string from './string/string.js';
 
 export default function hex(value) {
-	return typeof value === 'string' && reIsHex.test(value);
+	return string(value) && reIsHex.test(value);
 }

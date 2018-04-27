@@ -1,7 +1,13 @@
-import notA from './not.a.js';
+import type from '../type.js';
 
 /**
+ *
+ * @function
  * @memberof is
- * @alias notA
+ * @param {Function|Array.<Function>} expected
+ * @param {any} value
+ * @returns {Boolean}
  */
-export default notA;
+export default function notType(expected, value) {
+	return type(expected, value) === false;
+}

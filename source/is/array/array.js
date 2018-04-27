@@ -6,6 +6,5 @@
  * @returns {Boolean}
  */
 export default function array(value) {
-	if (value == null) return false;
-	return value.constructor === Array;
+	return value instanceof Array;
 }

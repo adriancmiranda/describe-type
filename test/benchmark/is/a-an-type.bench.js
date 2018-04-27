@@ -22,21 +22,21 @@ datatypes.all.iterate((datatype) => {
 		is.type(ctor, value);
 	})
 
-	// .add(`${name}: deprecated.is.a(${name}, ${label})`, () => {
-	// 	deprecatedIs.a(ctor, value);
-	// })
+	.add(`${name}: deprecated.is.a(${name}, ${label})`, () => {
+		deprecatedIs.a(ctor, value);
+	})
 
-	// .add(`${name}: describeType.is.not.a(${name}, ${label})`, () => {
-	// 	is.not.type(ctor, value) === true;
-	// })
+	.add(`${name}: describeType.is.not.a(${name}, ${label})`, () => {
+		is.not.type(ctor, value) === true;
+	})
 
 	.add(`${name}: Object.prototype.toString.call(${label}) === ${seal}`, () => {
 		Object.prototype.toString.call(value) === seal;
 	})
 
-	// .on('cycle', (evt) => {
-	// 	console.log(String(evt.target));
-	// })
+	.on('cycle', (evt) => {
+		console.log(String(evt.target));
+	})
 
 	.on('complete', benchmarkFatestStatus(/toString/, progress, loaded, total))
 

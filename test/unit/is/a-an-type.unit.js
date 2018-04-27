@@ -28,27 +28,27 @@ test('#a.type special cases', t => {
 	const env = inNode ? global : window;
 	const envCtor = env.constructor;
 	env.constructor = Object;
-	t.is(is.a(Object, this), false); // should be global type yet.
+	t.is(is.a(Object, this), false, '"this" should be a "global" type yet');
 	env.constructor = envCtor;
 });
 
 datatypes.objectEvil.iterate(datatype => {
 	const fnName = /^-?[aeiouy]/i.test(datatype.slug) ? 'an' : 'a';
-	test(`${datatype.id} • ${fnName}(${datatype.slug}, ${datatype.label});`, (t) => {
+	test(`${datatype.id} • ${fnName}(Object, ${datatype.label});`, (t) => {
 		t.is(is[fnName](Object, datatype.value, true), true, `${datatype.label} should be Object`);
 	});
 });
 
 datatypes.objectEvil.iterate(datatype => {
 	const fnName = /^-?[aeiouy]/i.test(datatype.slug) ? 'an' : 'a';
-	test(`${datatype.id} • ${fnName}(${datatype.slug}, ${datatype.label});`, (t) => {
-		t.is(is[fnName](Function, datatype.value, true), false, `${datatype.label} should be Function`);
+	test(`${datatype.id} • ${fnName}(Function, ${datatype.label});`, (t) => {
+		t.is(is[fnName](Function, datatype.value, true), false, `${datatype.label} should not be Function`);
 	});
-	test(`${datatype.id} • ${fnName}(${datatype.slug}, ${datatype.label});`, (t) => {
-		t.is(is[fnName](undefined, datatype.value, true), false, `${datatype.label} should be undefined`);
+	test(`${datatype.id} • ${fnName}(undefined, ${datatype.label});`, (t) => {
+		t.is(is[fnName](undefined, datatype.value, true), false, `${datatype.label} should not be undefined`);
 	});
-	test(`${datatype.id} • ${fnName}(${datatype.slug}, ${datatype.label});`, (t) => {
-		t.is(is[fnName](null, datatype.value, true), false, `${datatype.label} should be null`);
+	test(`${datatype.id} • ${fnName}(null, ${datatype.label});`, (t) => {
+		t.is(is[fnName](null, datatype.value, true), false, `${datatype.label} should not be null`);
 	});
 });
 
