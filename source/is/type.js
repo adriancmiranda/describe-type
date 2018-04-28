@@ -1,5 +1,8 @@
+import is from '../@/is.js';
 import getPrototypeOf from '../@/getPrototypeOf.js';
 import { objectHasOwnProperty } from '../@/built-in.js';
+import { NUMBER, BOOLEAN, FUNCTION, STRING, SYMBOL } from '../@/env.js';
+
 
 /**
  *
@@ -9,14 +12,9 @@ import { objectHasOwnProperty } from '../@/built-in.js';
  * @param {any} value
  * @returns {Boolean}
  */
-const NUMBER = 'number';
-const BOOLEAN = 'boolean';
-const FUNCTION = 'function';
-const STRING = 'string';
-const SYMBOL = 'symbol';
 export default function type(expected, value) {
-	if (value == null) { return expected === value };
-	if (expected == null) { return expected === value };
+	if (value == null) { return expected === value; };
+	if (expected == null) { return expected === value; };
 	if (value.constructor === undefined) { return expected === Object };
 	switch(typeof value) {
 		case NUMBER: return expected === Number;
