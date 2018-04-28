@@ -16,31 +16,31 @@ export default function equal(valueA, valueB) {
 		return true;
 	}
 	let key;
-	const ctorA = valueA != null && getPrototypeOf(valueA).constructor;
-	const ctorB = valueB != null && getPrototypeOf(valueB).constructor;
-	if (ctorA !== ctorB) {
+	const ctorA = valueA == null === false && getPrototypeOf(valueA).constructor;
+	const ctorB = valueB == null === false && getPrototypeOf(valueB).constructor;
+	if (ctorA === ctorB === false) {
 		return false;
 	} else if (ctorA === Object) {
 		const keysA = keys(valueA);
 		const keysB = keys(valueB);
 		let i = keysA.length;
-		if (i !== keysB.length) {
+		if (i === keysB.length === false) {
 			return false;
 		}
 		for (i -= 1; i > -1; i -= 1) {
 			key = keysA[i];
-			if (!equal(valueA[key], valueB[key])) {
+			if (equal(valueA[key], valueB[key]) === false) {
 				return false;
 			}
 		}
 		return true;
 	} else if (ctorA === Array) {
 		key = valueA.length;
-		if (key !== valueB.length) {
+		if (key === valueB.length === false) {
 			return false;
 		}
 		for (key -= 1; key > -1; key -= 1) {
-			if (!equal(valueA[key], valueB[key])) {
+			if (equal(valueA[key], valueB[key]) === false) {
 				return false;
 			}
 		}
