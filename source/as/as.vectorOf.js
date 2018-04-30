@@ -1,4 +1,4 @@
-import getExpectedValue from '../@/getExpectedValue.js';
+import getExpectedValue from '../internal/getExpectedValue.js';
 import vector from '../is/vector.js';
 
 /**
@@ -9,8 +9,8 @@ import vector from '../is/vector.js';
  */
 export default function asVectorOf(expected, value) {
 	value = getExpectedValue(expected, value, arguments, 2);
-	if (expected == null) return vector(expected, value);
-	if (expected.constructor === Array && expected.length > 0) {
+	if (expected === undefined || expected === null) return vector(expected, value);
+	if (expected instanceof Array && expected.length > 0) {
 		for (let i = expected.length - 1; i > -1; i -= 1) {
 			if (vector(expected[i], value)) return value;
 		}

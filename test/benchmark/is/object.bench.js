@@ -1,8 +1,7 @@
 import { Suite } from 'benchmark';
 import * as datatypes from '../../fixtures/datatypes.fixture';
 import { benchmarkFatestStatus, benchmarkCycle } from '../../fixtures/speed';
-import { objectToString } from '../../../source/@/built-in';
-import getPrototypeOf from '../../../source/@/getPrototypeOf';
+import { objectToString } from '../../../source/internal/built-in';
 import { type, object } from '../../../source/is';
 
 function isAny(expected, value) {

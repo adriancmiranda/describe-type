@@ -1,4 +1,4 @@
-import { objectHasOwnProperty } from '../@/built-in.js';
+import { objectHasOwnProperty } from '../internal/built-in.js';
 
 /**
  *
@@ -9,6 +9,6 @@ import { objectHasOwnProperty } from '../@/built-in.js';
  * @returns {Boolean}
  */
 export default function ownProperty(context, key) {
-	if (context == null) return false;
+	if (context === undefined || context === null) return false;
 	return objectHasOwnProperty.call(context, key);
 }

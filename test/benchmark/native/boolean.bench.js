@@ -1,8 +1,7 @@
 import { Suite } from 'benchmark';
 import { benchmarkFatestStatus, benchmarkCycle } from '../../fixtures/speed';
 import * as datatypes from '../../fixtures/datatypes.fixture';
-import { objectToString } from '../../../source/@/built-in.js';
-import getPrototypeOf from '../../../source/@/getPrototypeOf.js';
+import { objectToString } from '../../../source/internal/built-in';
 
 let i = 0;
 datatypes.bool.iterate((datatype) => {
@@ -34,7 +33,7 @@ datatypes.bool.iterate((datatype) => {
 	})
 
 	.add(`toString.call(${label}) === "${seal}"`, () => {
-		Object.prototype.toString.call(value) === seal;
+		objectToString.call(value) === seal;
 	})
 
 	.on('cycle', benchmarkCycle())

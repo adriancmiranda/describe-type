@@ -19,7 +19,9 @@ datatypes.all.iterate(datatype => {
 });
 datatypes.all.add(datatypes.equal);
 
+
 let i = 0;
+datatypes.all.add(datatypes.objectEvil);
 const others = datatypes.all.extract(['label', 'value']).reverse();
 datatypes.all.iterate(datatype => {
 	const other = others[i];
@@ -30,3 +32,4 @@ datatypes.all.iterate(datatype => {
 	}
 	i += 1;
 });
+datatypes.all.remove(datatypes.objectEvil);

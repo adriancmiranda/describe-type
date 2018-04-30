@@ -1,34 +1,43 @@
 import colors from 'colors';
 
 export const benchmarkFatestStatus = (reVendorMethod, progress, loaded, total) => {
-	benchmarkFatestStatus.fails = benchmarkFatestStatus.fails || 0;
-	benchmarkFatestStatus.warnings = benchmarkFatestStatus.warnings || 0;
+	start.call(benchmarkFatestStatus);
 	return function () {
-		let statusColor = colors.green;
-		const fastestList = this.filter('fastest').map('name');
-		if (reVendorMethod.test(fastestList[0])) {
-			statusColor = colors.red;
-			benchmarkFatestStatus.fails += 1;
-		} else if (reVendorMethod.test(fastestList[1])) {
-			statusColor = colors.yellow;
-			benchmarkFatestStatus.warnings += 1;
-		}
-		let timeline = '';
-		if (progress && loaded && total) {
-			timeline = colors.underline(`${progress}% - ${loaded} de ${total}`);
-			timeline = `\n${timeline}`;
-		}
-		console.log(`\nFastest is: ${fastestList.length > 1 ? '\n' : ''}${statusColor(fastestList.join('\n'))}${timeline}\n`);
-		if (loaded && total && loaded === total) {
-			console.log(`--`);
-			console.log(colors.yellow(`warnings: ${benchmarkFatestStatus.warnings}`));
-			console.log(colors.red(`fails: ${benchmarkFatestStatus.fails}`));
-			console.log(colors.inverse(`total: ${total}`));
-			console.log(colors.inverse(`perf: ${Math.round((benchmarkFatestStatus.fails/total) * 100)}\n`));
-			benchmarkFatestStatus.fails = 0;
-			benchmarkFatestStatus.warnings = 0;
-		}
+		const status = next.call(benchmarkFatestStatus, this);
+		const fastestLength = status.fastest.length;
+		const fastestResult = status.color(status.fastest.join('\n'));
+		const prefix = fastestLength > 1 ? '\n' : '';
+		console.log(`\nFastest is: ${prefix}${fastestResult}${status.timeline}\n`);
+		if (loaded && total && loaded === total) done.call(benchmarkFatestStatus);
 	};
+
+	function start() {
+		this.success = this.success || 0
+		this.warnings = this.warnings || 0;
+		this.fails = this.fails || 0;
+	}
+
+	function next(data) {
+		const fastest = data.filter('fastest').map('name');
+		const isFailedHard = reVendorMethod.test(fastest[0]);
+		const isFailedSoft = reVendorMethod.test(fastest[1]);
+		const color = colors[isFailedHard ? 'red' : isFailedSoft ? 'yellow' : 'green'];
+		const showProgress = !!(progress && loaded && total);
+		const progressLabel = `${progress}% - ${loaded} de ${total}`;
+		const timeline = showProgress ? `\n${colors.underline(progressLabel)}` : '';
+		isFailedHard ? this.fails++ : isFailedSoft ? this.warnings++ : this.success++;
+		return { color, fastest, timeline };
+	}
+
+	function done() {
+		console.log(`--`);
+		console.log(colors.green(`success: ${this.success}`));
+		console.log(colors.yellow(`warnings: ${this.warnings}`));
+		console.log(colors.red(`fails: ${this.fails}`));
+		console.log(colors.underline(`total: ${total}`));
+		console.log(colors.underline(`perf: ${100 - Math.round((this.fails / total) * 100)}%\n`));
+		this.success = this.warnings = this.fails = 0;
+	}
 };
 
 export const benchmarkCycle = () => {

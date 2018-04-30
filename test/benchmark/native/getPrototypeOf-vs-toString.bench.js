@@ -1,8 +1,9 @@
 import { Suite } from 'benchmark';
 import { benchmarkFatestStatus, benchmarkCycle } from '../../fixtures/speed';
 import * as datatypes from '../../fixtures/datatypes.fixture';
-import { objectToString, objectHasOwnProperty } from '../../../source/@/built-in.js';
-import getPrototypeOf from '../../../source/@/getPrototypeOf.js';
+import { objectToString, objectHasOwnProperty } from '../../../source/internal/built-in';
+import getPrototypeOf from '../../../source/polyfill/Object.getPrototypeOf';
+import constructorOf from '../../../source/built-in/constructorOf';
 
 let i = 0;
 datatypes.object.iterate((datatype) => {
@@ -34,7 +35,13 @@ datatypes.object.iterate((datatype) => {
 	})
 
 	.add(`${label}.constructor === ${label}.__proto__.constructor`, () => {
-		value.constructor === value.__proto__.constructor;
+		if (value.__proto__) {
+			value.__proto__.constructor === ctor;
+		}
+	})
+
+	.add(`constructorOf(${label}) === ${name}`, () => {
+		constructorOf(value) === ctor;
 	})
 
 	.add(`objectHasOwnProperty(${label}, 'constructor')`, () => {

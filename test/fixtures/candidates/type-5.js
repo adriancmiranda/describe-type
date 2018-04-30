@@ -1,4 +1,4 @@
-import { objectHasOwnProperty } from '../@/built-in.js';
+import { objectHasOwnProperty } from '../internal/built-in.js';
 
 /**
  *

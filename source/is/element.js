@@ -1,4 +1,4 @@
-import { env } from '../@/env.js';
+import { env } from '../internal/env.js';
 import callable from './callable.js';
 
 /**
@@ -9,9 +9,9 @@ import callable from './callable.js';
  * @returns {Boolean}
  */
 export default function element(value) {
-	return value != null && (
-		callable(env.window.HTMLElement) &&
-		value instanceof env.window.HTMLElement &&
-		value.nodeType === 1
-	);
+	if (value === undefined || value === null) return false;
+	if (env.window === undefined || env.window === null) return false;
+	return callable(env.window.HTMLElement) &&
+	value instanceof env.window.HTMLElement &&
+	value.nodeType === 1;
 }

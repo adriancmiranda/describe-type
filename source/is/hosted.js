@@ -9,5 +9,5 @@ import primitive from './primitive.js';
  * @returns {Boolean}
  */
 export default function hosted(key, host) {
-	return (host == null || primitive(host[key]) === false) === true;
+	return (host === undefined || host === null || primitive(host[key]) === false) === true;
 }

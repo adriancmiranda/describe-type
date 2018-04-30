@@ -19,8 +19,8 @@ datatypes.all.iterate((datatype) => {
 		value == null;
 	})
 
-	.add('value === null || value === undefined', () => {
-		value === null || value === undefined;
+	.add('value === undefined || value === null', () => {
+		value === undefined || value === null;
 	})
 
 	.add('typeof value === object', () => {

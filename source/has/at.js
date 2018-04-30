@@ -7,6 +7,6 @@
  * @returns {Boolean}
  */
 export default function at(context, key) {
-	if (context == null) return false;
+	if (context === undefined || context === null) return false;
 	return context[key] === undefined === false;
 }

@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v0.7.0
  * 
- * @commit 2a605f1d308c84ebc7cb0d99edb7a373fb29bc4f
- * @moment Wednesday, April 25, 2018 2:48 PM
+ * @commit 4dac7473de55d8eb664b76469431043943979fcb
+ * @moment Sunday, April 29, 2018 7:35 PM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2021 Adrian C. Miranda
@@ -14,6 +14,18 @@
 	(global.type = global.type || {}, global.type.as = factory());
 }(this, (function () { 'use strict';
 
+	// environment
+	var isBrowser = new Function('try{return this===window;}catch(err){return false;}');
+	var isNode = new Function('try{return this===global;}catch(err){return false;}');
+	var inBrowser = isBrowser();
+	var inNode = isNode();
+	var NUMBER = 'number';
+	var STRING = 'string';
+	var SYMBOL = 'symbol';
+	var OBJECT = 'object';
+	var FUNCTION = 'function';
+	var CONSTRUCTOR = 'constructor';
+
 	/**
 	 *
 	 * @function
@@ -22,7 +34,7 @@
 	 * @returns {Boolean}
 	 */
 	function callable(value) {
-		return typeof value === 'function';
+		return typeof value === FUNCTION;
 	}
 
 	/**
@@ -33,8 +45,7 @@
 	 * @returns {Boolean}
 	 */
 	function array(value) {
-		if (value == null) { return false; }
-		return value.constructor === Array;
+		return value instanceof Array;
 	}
 
 	/**
@@ -45,7 +56,7 @@
 	 * @returns {Boolean}
 	 */
 	function string(value) {
-		return typeof value === 'string' || value instanceof String;
+		return typeof value === STRING || value instanceof String;
 	}
 
 	/**
@@ -57,7 +68,7 @@
 	 */
 	function arraylike(value) {
 		return array(value) || string(value) || (
-			(!!value && typeof value === 'object' && typeof value.length === 'number') &&
+			(!!value && typeof value === OBJECT && typeof value.length === NUMBER) &&
 			(value.length === 0 || (value.length > 0 && (value.length - 1) in value))
 		);
 	}
@@ -88,7 +99,7 @@
 	 * @returns {Boolean}
 	 */
 	function number(value) {
-		return typeof value === 'number' || value instanceof Number;
+		return typeof value === NUMBER || value instanceof Number;
 	}
 
 	/**
@@ -128,7 +139,7 @@
 	 * max: 2147483647
 	 */
 	function intOf(value, radix) {
-		value = (radix == null ? value : parseInt(value, radix));
+		value = (radix === null || radix === undefined ? value : parseInt(value, radix));
 		return int(value) ? value : 0 | value;
 	}
 
@@ -173,7 +184,7 @@
 	 */
 	function slice(list, startIndex, endIndex) {
 		var range = [];
-		var size = list == null ? 0 : 0 | list.length;
+		var size = list === null || list === undefined ? 0 : 0 | list.length;
 		if (size) {
 			var start = mod(startIndex, 0, size + 1);
 			if (number(endIndex)) {
@@ -235,27 +246,19 @@
 	 * @returns {any}
 	 */
 	function getExpectedValue(expected, value, args, startIndex, endIndex) {
-		if (callable(value) && (expected === Function || ownValue(expected, Function)) === false) {
+		if (callable(value) && (expected === Function === false || ownValue(expected, Function) === false)) {
 			args = slice(args, startIndex, endIndex);
 			return apply(value, args[0], args, true);
 		}
 		return value;
 	}
 
-	/**
-	 *
-	 * @name Object.getPrototypeOf
-	 * @function
-	 * @global
-	 * @param {value}
-	 * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getPrototypeOf
-	 */
-	function getPrototypeOf(value) {
-		if (value == null) {
-			throw new TypeError('Uncaught TypeError: Cannot convert undefined or null to object');
-		}
-		return value.__proto__ || Object.getPrototypeOf(value);
-	}
+	// prototypes
+	var ObjectProto = Object.prototype;
+	var getPrototypeOf = Object.getPrototypeOf;
+
+	// built-in method(s)
+	var objectHasOwnProperty = ObjectProto.hasOwnProperty;
 
 	/**
 	 *
@@ -266,13 +269,24 @@
 	 * @returns {Boolean}
 	 */
 	function type(expected, value) {
-		if (value == null) { return value === expected; }
+		if (value === undefined || value === null) { return value === expected; }
+		if (expected === undefined || expected === null) { return expected === value; }
+		if (value === true || value === false) { return expected === Boolean; }
+		var type = typeof value;
+		if (type === STRING) { return expected === String; }
+		if (type === NUMBER) { return expected === Number; }
+		if (type === SYMBOL) { return expected === Symbol; }
+		if (expected === Function) { return type === FUNCTION; }
+		if (value instanceof Array) { return expected === Array; }
+		if (value instanceof RegExp) { return expected === RegExp; }
 		if (value.constructor === undefined) { return expected === Object; }
-		if (getPrototypeOf(value).constructor === expected) { return true; }
-		return expected === Function && (
-			value.constructor.name === 'GeneratorFunction' ||
-			value.constructor.name === 'AsyncFunction'
-		);
+		if (value.__proto__) {
+			return value.__proto__.constructor === expected;
+		}
+		if (typeof getPrototypeOf === FUNCTION) {
+			return getPrototypeOf(value).constructor === expected;
+		}
+		return objectHasOwnProperty.call(value, CONSTRUCTOR);
 	}
 
 	/**
@@ -295,8 +309,8 @@
 	 * @returns {Boolean}
 	 */
 	function any(expected, value) {
-		if (expected == null) { return expected === value; }
-		if (expected.constructor === Array && expected.length > 0) {
+		if (expected === null || expected === undefined) { return expected === value; }
+		if (expected instanceof Array && expected.length > 0) {
 			for (var i = expected.length - 1; i > -1; i -= 1) {
 				if (type(expected[i], value)) { return true; }
 			}
@@ -324,8 +338,8 @@
 	 * @returns {Boolean}
 	 */
 	function instanceOf(expected, value) {
-		if (expected == null) { return expected === value; }
-		if (expected.constructor === Array && expected.length > 0) {
+		if (expected === null || expected === undefined) { return expected === value; }
+		if (expected instanceof Array && expected.length > 0) {
 			for (var i = expected.length - 1; i > -1; i -= 1) {
 				var ctor = expected[i];
 				if (ctor === Number) { return type(ctor, value); } // ... should normalize?!
@@ -383,8 +397,8 @@
 	 */
 	function asVectorOf(expected, value) {
 		value = getExpectedValue(expected, value, arguments, 2);
-		if (expected == null) { return vector(expected, value); }
-		if (expected.constructor === Array && expected.length > 0) {
+		if (expected === null || expected === undefined) { return vector(expected, value); }
+		if (expected instanceof Array && expected.length > 0) {
 			for (var i = expected.length - 1; i > -1; i -= 1) {
 				if (vector(expected[i], value)) { return value; }
 			}

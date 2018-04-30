@@ -1,4 +1,4 @@
-import { reStringToBoolean } from '../@/patterns.js';
+import { reStringToBoolean } from '../internal/patterns.js';
 import string from '../is/string/string.js';
 
 /**

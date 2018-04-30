@@ -15,12 +15,13 @@ test('describe-type/internal modules expusure', t => {
 	const $global = toString.call(describeType.internal.env);
 	t.is($global === '[object global]' || $global === '[object Window]', true);
 	t.is(toString.call(describeType.internal.mod), '[object Function]', 'should be a function');
-	t.is(toString.call(describeType.internal.slice), '[object Function]', 'should be a function');
-	t.is(toString.call(describeType.internal.keys), '[object Function]', 'should be a function');
+	// t.is(toString.call(describeType.polyfill.slice), '[object Function]', 'should be a function');
+	// t.is(toString.call(describeType.polyfill.keys), '[object Function]', 'should be a function');
 	t.is(toString.call(describeType.internal.apply), '[object Function]', 'should be a function');
 	t.is(toString.call(describeType.internal.prototypes), '[object Object]');
 	t.is(toString.call(describeType.internal.prototypes.ObjectProto), '[object Object]');
 	t.is(toString.call(describeType.internal.builtIn), '[object Object]');
+	t.is(toString.call(describeType.internal.builtIn.objectGetPrototypeOf), '[object Function]', 'should be a function');
 	t.is(toString.call(describeType.internal.builtIn.objectHasOwnProperty), '[object Function]', 'should be a function');
 	t.is(toString.call(describeType.internal.builtIn.objectToString), '[object Function]', 'should be a function');
 	t.is(toString.call(describeType.internal.patterns), '[object Object]');

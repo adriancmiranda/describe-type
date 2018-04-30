@@ -1,4 +1,4 @@
-import { reIsHexadecimal } from '../@/patterns.js';
+import { reIsHexadecimal } from '../internal/patterns.js';
 import string from './string/string.js';
 
 export default function hexadecimal(value) {

@@ -26,6 +26,6 @@ import int from '../is/int.js';
  * max: 2147483647
  */
 export default function intOf(value, radix) {
-	value = (radix == null ? value : parseInt(value, radix));
+	value = (radix === undefined || radix === null ? value : parseInt(value, radix));
 	return int(value) ? value : 0 | value;
 }

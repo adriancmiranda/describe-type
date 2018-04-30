@@ -8,5 +8,5 @@ import arraylike from './arraylike.js';
  * @returns {Boolean}
  */
 export default function isEmptyArraylike(value) {
-	return arraylike(value) || value.length === 0;
+	return arraylike(value) && value.length === 0;
 }

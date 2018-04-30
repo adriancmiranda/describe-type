@@ -1,6 +1,6 @@
 import { Suite } from 'benchmark';
 import { benchmarkFatestStatus, benchmarkCycle } from '../../fixtures/speed';
-import apply from '../../../source/@/apply.js';
+import apply from '../../../source/internal/apply';
 
 const value = '~ apply ~'.split('');
 const fn = args => args[Math.max(0, args.length - 1)];

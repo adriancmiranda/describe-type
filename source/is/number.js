@@ -1,3 +1,5 @@
+import { NUMBER } from '../internal/env.js';
+
 /**
  *
  * @function
@@ -6,5 +8,5 @@
  * @returns {Boolean}
  */
 export default function number(value) {
-	return typeof value === 'number' || value instanceof Number;
+	return typeof value === NUMBER || value instanceof Number;
 }

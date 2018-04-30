@@ -9,8 +9,8 @@ import type from './type.js';
  * @returns {Boolean}
  */
 export default function any(expected, value) {
-	if (expected == null) return expected === value;
-	if (expected.constructor === Array && expected.length > 0) {
+	if (expected === undefined || expected === null) return expected === value;
+	if (expected instanceof Array && expected.length > 0) {
 		for (let i = expected.length - 1; i > -1; i -= 1) {
 			if (type(expected[i], value)) return true;
 		}

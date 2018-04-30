@@ -1,5 +1,5 @@
-import apply from '../../../../source/@/apply.js';
-import slice from '../../../../source/@/slice.js';
+import apply from '../../../../source/internal/apply.js';
+import slice from '../../../../source/polyfill/Array.prototype.slice.js';
 import ownValue from '../../../../source/has/ownValue.js';
 import any from '../../../../source/is/any.js';
 import callable from '../../../../source/is/callable.js';

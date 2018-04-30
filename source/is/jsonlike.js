@@ -1,4 +1,4 @@
-import { reIsJsonStart, reIsJsonEnds } from '../@/patterns.js';
+import { reIsJsonStart, reIsJsonEnds } from '../internal/patterns.js';
 import string from './string/string.js';
 
 /**

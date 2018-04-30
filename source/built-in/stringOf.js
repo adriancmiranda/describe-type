@@ -1,6 +1,6 @@
-import { reFunctionName } from '../@/patterns.js';
-import { objectToString } from '../@/built-in.js';
-import slice from '../@/slice.js';
+import { reFunctionName } from '../internal/patterns.js';
+import { objectToString } from '../internal/built-in.js';
+import slice from '../polyfill/Array.prototype.slice.js';
 
 /**
  *

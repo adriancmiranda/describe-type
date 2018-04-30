@@ -1,6 +1,5 @@
-import keys from '../@/keys.js';
-import arraylike from './arraylike/arraylike.js';
-import object from './object/object.js';
+import arraylikeEmpty from './arraylike/arraylike.empty.js';
+import objectEmpty from './object/object.empty.js';
 import callable from './callable.js';
 
 /**
@@ -11,13 +10,16 @@ import callable from './callable.js';
  * @returns {Boolean}
  */
 export default function empty(value) {
-	if (arraylike(value)) {
-		return value.length === 0;
+	if (value === undefined || value === null) {
+		return true;
 	}
-	if (object(value)) {
-		return keys(value).length === 0;
+	if (arraylikeEmpty(value)) {
+		return true;
 	}
-	if (value && typeof value === 'object' && callable(value.valueOf)) {
+	if (objectEmpty(value)) {
+		return true;
+	}
+	if (callable(value.valueOf)) {
 		return !value.valueOf();
 	}
 	return !value;

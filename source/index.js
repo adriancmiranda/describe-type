@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import * as internal from './@/index.js';
+import * as internal from './internal/index.js';
 import * as has from './has/index.js';
 import * as is from './is/index.js';
 

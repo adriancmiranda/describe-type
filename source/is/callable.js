@@ -1,3 +1,5 @@
+import { FUNCTION } from '../internal/env.js';
+
 /**
  *
  * @function
@@ -6,5 +8,5 @@
  * @returns {Boolean}
  */
 export default function callable(value) {
-	return typeof value === 'function';
+	return typeof value === FUNCTION;
 }

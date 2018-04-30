@@ -1,4 +1,4 @@
-import { reIsNativeFn } from '../@/patterns.js';
+import { reIsNativeFn } from '../internal/patterns.js';
 import callable from './callable.js';
 
 /**

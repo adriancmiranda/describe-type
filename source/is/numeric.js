@@ -11,7 +11,7 @@ import infinity from './infinity.js';
  * @returns {Boolean}
  */
 export default function numeric(value) {
-	if (value == null) return false;
+	if (value === undefined || value === null) return false;
 	if (bool(value)) return true;
 	try {
 		const test = parseFloat(value);

@@ -1,8 +1,5 @@
-import is from '../@/is.js';
-import getPrototypeOf from '../@/getPrototypeOf.js';
-import { objectHasOwnProperty } from '../@/built-in.js';
-import { NUMBER, BOOLEAN, FUNCTION, STRING, SYMBOL } from '../@/env.js';
-
+import constructorOf from '../built-in/constructorOf.js';
+import { STRING, NUMBER, SYMBOL, FUNCTION } from '../internal/env.js';
 
 /**
  *
@@ -13,17 +10,15 @@ import { NUMBER, BOOLEAN, FUNCTION, STRING, SYMBOL } from '../@/env.js';
  * @returns {Boolean}
  */
 export default function type(expected, value) {
-	if (value == null) { return expected === value; };
-	if (expected == null) { return expected === value; };
-	if (value.constructor === undefined) { return expected === Object };
-	switch(typeof value) {
-		case NUMBER: return expected === Number;
-		case BOOLEAN: return expected === Boolean;
-		case FUNCTION: return expected === Function;
-		case STRING: return expected === String;
-		case SYMBOL: return expected === Symbol;
-	}
-	if (expected === Object === false) { return value instanceof expected };
-	if (expected === value.constructor) { return true };
-	return expected === getPrototypeOf(value).constructor;
+	if (value === undefined || value === null) return value === expected;
+	if (expected === undefined || expected === null) return expected === value;
+	if (value === true || value === false) return expected === Boolean;
+	const type = typeof value;
+	if (type === STRING) return expected === String;
+	if (type === NUMBER) return expected === Number;
+	if (type === SYMBOL) return expected === Symbol;
+	if (expected === Function) return type === FUNCTION;
+	if (value instanceof Array) return expected === Array;
+	if (value instanceof RegExp) return expected === RegExp;
+	return constructorOf(value) === expected;
 }

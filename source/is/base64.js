@@ -1,4 +1,4 @@
-import { reIsBase64 } from '../@/patterns.js';
+import { reIsBase64 } from '../internal/patterns.js';
 import string from './string/string.js';
 
 /**

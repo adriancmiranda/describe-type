@@ -9,5 +9,6 @@ import callable from './callable.js';
  * @returns {Boolean}
  */
 export default function enumerable(value) {
-	return value != null && number(value.length) && callable(value) === false;
+	if (value === undefined || value === null) return false;
+	return number(value.length) && callable(value) === false;
 }

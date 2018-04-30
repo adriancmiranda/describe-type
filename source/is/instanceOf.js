@@ -10,8 +10,8 @@ import type from './type.js';
  * @returns {Boolean}
  */
 export default function instanceOf(expected, value) {
-	if (expected == null) return expected === value;
-	if (expected.constructor === Array && expected.length > 0) {
+	if (expected === undefined || expected === null) return expected === value;
+	if (expected instanceof Array && expected.length > 0) {
 		for (let i = expected.length - 1; i > -1; i -= 1) {
 			const ctor = expected[i];
 			if (ctor === Number) return type(ctor, value); // ... should normalize?!

@@ -1,4 +1,4 @@
-import getExpectedValue from '../@/getExpectedValue.js';
+import getExpectedValue from '../internal/getExpectedValue.js';
 import instanceOf from '../is/instanceOf.js';
 
 /**

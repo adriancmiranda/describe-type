@@ -24,9 +24,30 @@ export function isArraylike(value) {
 	value.length >= 0;
 }
 
-export function capitalize(value) {
+export function words(string, pattern) {
+	string = String(string);
+	return pattern instanceof RegExp ?
+	string.match(pattern) :
+	string.split(/\s|-|_/g);
+}
+
+export function capitalizeWord(value) {
 	value = String(value);
 	return value.charAt(0).toUpperCase() + value.slice(1);
+}
+
+export function toPascalCase(string) {
+	return words(`${string}`.replace(/['\u2019]/g, '')).reduce((result, word, index) => {
+		word = word.toLowerCase();
+		return result + capitalizeWord(word);
+	}, '');
+}
+
+export function toCamelCase(string) {
+	return words(`${string}`.replace(/['\u2019]/g, '')).reduce((result, word, index) => {
+		word = word.toLowerCase();
+		return result + (index ? capitalizeWord.first(word) : word);
+	}, '');
 }
 
 export function constructorOf(value, selfConstructor) {
@@ -36,7 +57,7 @@ export function constructorOf(value, selfConstructor) {
 }
 
 export function constructorNameOf(value) {
-	if (value == null) return capitalize(value);
+	if (value == null) return toPascalCase(value);
 	if (value.constructor === Function) {
 		if (!value.name || value.name === 'Object') {
 			const match = String(value).match(reFunctionName, '');

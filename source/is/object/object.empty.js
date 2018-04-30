@@ -1,4 +1,4 @@
-import keys from '../../@/keys.js';
+import { objectHasOwnProperty } from '../../internal/built-in.js';
 import object from './object.js';
 
 /**
@@ -9,5 +9,11 @@ import object from './object.js';
  * @returns {Boolean}
  */
 export default function isEmptyObject(value) {
-	return object(value) && keys(value).length === 0;
+	if (object(value) === false) return false;
+	for (const key in value) {
+		if (objectHasOwnProperty.call(value, key)) {
+			return false;
+		}
+	}
+	return true;
 }

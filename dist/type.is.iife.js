@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v0.7.0
  * 
- * @commit 2a605f1d308c84ebc7cb0d99edb7a373fb29bc4f
- * @moment Wednesday, April 25, 2018 2:48 PM
+ * @commit 4dac7473de55d8eb664b76469431043943979fcb
+ * @moment Sunday, April 29, 2018 7:35 PM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2021 Adrian C. Miranda
@@ -14,10 +14,24 @@ this.type.is = (function (exports) {
 
 	// prototypes
 	var ObjectProto = Object.prototype;
+	var getPrototypeOf = Object.getPrototypeOf;
 
 	// built-in method(s)
 	var objectHasOwnProperty = ObjectProto.hasOwnProperty;
 	var objectToString = ObjectProto.toString;
+
+	// environment
+	var isBrowser = new Function('try{return this===window;}catch(err){return false;}');
+	var isNode = new Function('try{return this===global;}catch(err){return false;}');
+	var inBrowser = isBrowser();
+	var inNode = isNode();
+	var env = inNode ? global : window;
+	var NUMBER = 'number';
+	var STRING = 'string';
+	var SYMBOL = 'symbol';
+	var OBJECT = 'object';
+	var FUNCTION = 'function';
+	var CONSTRUCTOR = 'constructor';
 
 	/**
 	 *
@@ -27,7 +41,7 @@ this.type.is = (function (exports) {
 	 * @returns {Boolean}
 	 */
 	function callable(value) {
-		return typeof value === 'function';
+		return typeof value === FUNCTION;
 	}
 
 	/**
@@ -54,23 +68,7 @@ this.type.is = (function (exports) {
 	 * @returns {Boolean}
 	 */
 	function array(value) {
-		if (value == null) { return false; }
-		return value.constructor === Array;
-	}
-
-	/**
-	 *
-	 * @name Object.getPrototypeOf
-	 * @function
-	 * @global
-	 * @param {value}
-	 * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getPrototypeOf
-	 */
-	function getPrototypeOf(value) {
-		if (value == null) {
-			throw new TypeError('Uncaught TypeError: Cannot convert undefined or null to object');
-		}
-		return value.__proto__ || Object.getPrototypeOf(value);
+		return value instanceof Array;
 	}
 
 	/**
@@ -82,13 +80,24 @@ this.type.is = (function (exports) {
 	 * @returns {Boolean}
 	 */
 	function type(expected, value) {
-		if (value == null) { return value === expected; }
+		if (value === undefined || value === null) { return value === expected; }
+		if (expected === undefined || expected === null) { return expected === value; }
+		if (value === true || value === false) { return expected === Boolean; }
+		var type = typeof value;
+		if (type === STRING) { return expected === String; }
+		if (type === NUMBER) { return expected === Number; }
+		if (type === SYMBOL) { return expected === Symbol; }
+		if (expected === Function) { return type === FUNCTION; }
+		if (value instanceof Array) { return expected === Array; }
+		if (value instanceof RegExp) { return expected === RegExp; }
 		if (value.constructor === undefined) { return expected === Object; }
-		if (getPrototypeOf(value).constructor === expected) { return true; }
-		return expected === Function && (
-			value.constructor.name === 'GeneratorFunction' ||
-			value.constructor.name === 'AsyncFunction'
-		);
+		if (value.__proto__) {
+			return value.__proto__.constructor === expected;
+		}
+		if (typeof getPrototypeOf === FUNCTION) {
+			return getPrototypeOf(value).constructor === expected;
+		}
+		return objectHasOwnProperty.call(value, CONSTRUCTOR);
 	}
 
 	/**
@@ -110,7 +119,7 @@ this.type.is = (function (exports) {
 	 * @returns {Boolean}
 	 */
 	function string(value) {
-		return typeof value === 'string' || value instanceof String;
+		return typeof value === STRING || value instanceof String;
 	}
 
 	/**
@@ -122,7 +131,7 @@ this.type.is = (function (exports) {
 	 */
 	function arraylike(value) {
 		return array(value) || string(value) || (
-			(!!value && typeof value === 'object' && typeof value.length === 'number') &&
+			(!!value && typeof value === OBJECT && typeof value.length === NUMBER) &&
 			(value.length === 0 || (value.length > 0 && (value.length - 1) in value))
 		);
 	}
@@ -135,7 +144,7 @@ this.type.is = (function (exports) {
 	 * @returns {Boolean}
 	 */
 	function args(value) {
-		return (!array(value) && arraylike(value) &&
+		return (array(value) === false && arraylike(value) &&
 			object(value) && unsafeMethod(value, 'callee')
 		) || objectToString.call(value) === '[object Arguments]';
 	}
@@ -174,7 +183,7 @@ this.type.is = (function (exports) {
 	 * @returns {Boolean}
 	 */
 	function isEmptyArraylike(value) {
-		return arraylike(value) || value.length === 0;
+		return arraylike(value) && value.length === 0;
 	}
 
 	arraylike.empty = isEmptyArraylike;
@@ -187,7 +196,7 @@ this.type.is = (function (exports) {
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function notA(expected, value) {
+	function notType(expected, value) {
 		return type(expected, value) === false;
 	}
 
@@ -200,8 +209,8 @@ this.type.is = (function (exports) {
 	 * @returns {Boolean}
 	 */
 	function any(expected, value) {
-		if (expected == null) { return expected === value; }
-		if (expected.constructor === Array && expected.length > 0) {
+		if (expected === null || expected === undefined) { return expected === value; }
+		if (expected instanceof Array && expected.length > 0) {
 			for (var i = expected.length - 1; i > -1; i -= 1) {
 				if (type(expected[i], value)) { return true; }
 			}
@@ -230,8 +239,8 @@ this.type.is = (function (exports) {
 	 * @returns {Boolean}
 	 */
 	function instanceOf(expected, value) {
-		if (expected == null) { return expected === value; }
-		if (expected.constructor === Array && expected.length > 0) {
+		if (expected === null || expected === undefined) { return expected === value; }
+		if (expected instanceof Array && expected.length > 0) {
 			for (var i = expected.length - 1; i > -1; i -= 1) {
 				var ctor = expected[i];
 				if (ctor === Number) { return type(ctor, value); } // ... should normalize?!
@@ -282,10 +291,10 @@ this.type.is = (function (exports) {
 		return vector(expected, value) === false;
 	}
 
-	notA.a = notA.an = notA.type = notA;
-	notA.any = notAny;
-	notA.instanceOf = notInstanceOf;
-	notA.vectorOf = notVectorOf;
+	notType.a = notType.an = notType.type = notType;
+	notType.any = notAny;
+	notType.instanceOf = notInstanceOf;
+	notType.vectorOf = notVectorOf;
 
 	/**
 	 *
@@ -296,7 +305,7 @@ this.type.is = (function (exports) {
 	 * @returns {Boolean}
 	 */
 	function ownProperty(context, key) {
-		if (context == null) { return false; }
+		if (context === null || context === undefined) { return false; }
 		return objectHasOwnProperty.call(context, key);
 	}
 
@@ -311,7 +320,7 @@ this.type.is = (function (exports) {
 	 * @returns {Array}
 	 */
 	function keys(object, getInheritedProps) {
-		if (object == null) { return []; }
+		if (object === null || object === undefined) { return []; }
 		if (Object.keys && !getInheritedProps) {
 			return Object.keys(object);
 		}
@@ -347,7 +356,7 @@ this.type.is = (function (exports) {
 	 * @returns {Boolean}
 	 */
 	function stream(value) {
-		if (value == null || value._events == null) { return false; }
+		if (value === null || value === undefined || value._events == null) { return false; }
 		return callable(value.pipe);
 	}
 
@@ -459,13 +468,6 @@ this.type.is = (function (exports) {
 		return value === true || value === false || value instanceof Boolean;
 	}
 
-	// environment
-	var isBrowser = new Function('try{return this===window;}catch(err){return false;}');
-	var isNode = new Function('try{return this===global;}catch(err){return false;}');
-	var inBrowser = isBrowser();
-	var inNode = isNode();
-	var env = inNode ? global : window;
-
 	/**
 	 *
 	 * @function
@@ -474,7 +476,7 @@ this.type.is = (function (exports) {
 	 * @returns {Boolean}
 	 */
 	function buffer(value) {
-		if (value == null) { return false; }
+		if (value === null || value === undefined) { return false; }
 		var isBuffer = value.constructor === env.Buffer && callable(value.constructor.isBuffer);
 		return isBuffer && value.constructor.isBuffer(value);
 	}
@@ -487,8 +489,7 @@ this.type.is = (function (exports) {
 	 * @returns {Boolean}
 	 */
 	function date(value) {
-		if (value == null) { return false; }
-		return value.constructor === Date;
+		return value instanceof Date;
 	}
 
 	/**
@@ -499,7 +500,7 @@ this.type.is = (function (exports) {
 	 * @returns {Boolean}
 	 */
 	function number(value) {
-		return typeof value === 'number' || value instanceof Number;
+		return typeof value === NUMBER || value instanceof Number;
 	}
 
 	/**
@@ -555,8 +556,8 @@ this.type.is = (function (exports) {
 	 */
 	function element(value) {
 		return value != null && (
-			callable(env.HTMLElement) &&
-			value instanceof env.HTMLElement &&
+			callable(env.window.HTMLElement) &&
+			value instanceof env.window.HTMLElement &&
 			value.nodeType === 1
 		);
 	}
@@ -593,43 +594,86 @@ this.type.is = (function (exports) {
 	}
 
 	/**
-	 *
+	 * The Object.is() method determines whether two values are the same value.
 	 * @function
-	 * @memberof is
-	 * @param {any} valueA
-	 * @param {any} valueB
-	 * @returns {Boolean}
+	 * @param {Object} value1 - The first value to compare.
+	 * @param {Object} value2 - The second value to compare.
+	 * @returns {Boolean} The Object.is() method determines whether two values are
+	 * the same value.
 	 */
-	function equal(valueA, valueB) {
+	var is = Object.is || function is(valueA, valueB) {
 		if (valueA === valueB) {
+			if (valueA === 0) { return 1 / valueA === 1 / valueB; }
 			return true;
 		}
+		var $valueA = valueA;
+		var $valueB = valueB;
+		return valueA !== $valueA && valueB !== $valueB;
+	}
+
+	/**
+	 * The equal() method determines whether two values are the same value.
+	 * @function
+	 * @memberof is
+	 * @param {any} valueA - The first value to compare.
+	 * @param {any} valueB - The second value to compare.
+	 * @returns {Boolean} A Boolean indicating whether or not the two arguments are
+	 * the same value.
+	 */
+	function equal(valueA, valueB) {
 		var key;
-		var ctorA = valueA != null && valueA.constructor;
-		var ctorB = valueB != null && valueB.constructor;
-		if (ctorA !== ctorB) {
+		var ctorA;
+		var ctorB;
+		if (valueA === null || valueA === undefined) {
+			return is(valueA, valueB);
+		} else if (valueB === null || valueB === undefined) {
+			return is(valueB, valueA);
+		} else if (is(valueA, valueB)) {
+			return true;
+		}
+		if (valueA.__proto__) {
+			ctorA = valueA.__proto__;
+		} else if (typeof getPrototypeOf === FUNCTION) {
+			ctorA = getPrototypeOf(valueA);
+		} else {
+			ctorA = (valueA.constructor || {}).prototype;
+		}
+		if (valueB.__proto__) {
+			ctorB = valueB.__proto__;
+		} else if (typeof getPrototypeOf === FUNCTION) {
+			ctorB = getPrototypeOf(valueB);
+		} else {
+			ctorB = (valueB.constructor || {}).prototype;
+		}
+		if (ctorA) {
+			ctorA = ctorA.constructor;
+		}
+		if (ctorB) {
+			ctorB = ctorB.constructor;
+		}
+		if (ctorA === ctorB === false) {
 			return false;
 		} else if (ctorA === Object) {
 			var keysA = keys(valueA);
 			var keysB = keys(valueB);
 			var i = keysA.length;
-			if (i !== keysB.length) {
+			if (i === keysB.length === false) {
 				return false;
 			}
 			for (i -= 1; i > -1; i -= 1) {
 				key = keysA[i];
-				if (!equal(valueA[key], valueB[key])) {
+				if (equal(valueA[key], valueB[key]) === false) {
 					return false;
 				}
 			}
 			return true;
 		} else if (ctorA === Array) {
 			key = valueA.length;
-			if (key !== valueB.length) {
+			if (key === valueB.length === false) {
 				return false;
 			}
 			for (key -= 1; key > -1; key -= 1) {
-				if (!equal(valueA[key], valueB[key])) {
+				if (equal(valueA[key], valueB[key]) === false) {
 					return false;
 				}
 			}
@@ -650,7 +694,6 @@ this.type.is = (function (exports) {
 	 * @returns {Boolean}
 	 */
 	function error(value) {
-		if (value == null) { return false; }
 		return value instanceof Error;
 	}
 
@@ -673,7 +716,7 @@ this.type.is = (function (exports) {
 	 * @returns {Boolean}
 	 */
 	function primitive(value) {
-		if (value == null) { return true; }
+		if (value === null || value === undefined) { return true; }
 		if (callable(value.valueOf)) { value = value.valueOf(); }
 		if (callable(value) || typeof value === 'object') {
 			return false;
@@ -693,7 +736,7 @@ this.type.is = (function (exports) {
 	}
 
 	function hex(value) {
-		return typeof value === 'string' && reIsHex.test(value);
+		return string(value) && reIsHex.test(value);
 	}
 
 	function hexadecimal(value) {
@@ -709,7 +752,7 @@ this.type.is = (function (exports) {
 	 * @returns {Boolean}
 	 */
 	function hosted(key, host) {
-		return (host == null || primitive(host[key]) === false) === true;
+		return (host === null || host === undefined || primitive(host[key]) === false) === true;
 	}
 
 	/**
@@ -828,7 +871,7 @@ this.type.is = (function (exports) {
 	 * @returns {Boolean}
 	 */
 	function numeric(value) {
-		if (value == null) { return false; }
+		if (value === null || value === undefined) { return false; }
 		if (bool(value)) { return true; }
 		try {
 			var test = parseFloat(value);
@@ -857,8 +900,7 @@ this.type.is = (function (exports) {
 	 * @returns {Boolean}
 	 */
 	function regexp(value) {
-		if (value == null) { return false; }
-		return value.constructor === RegExp;
+		return value instanceof RegExp;
 	}
 
 	/**
@@ -869,8 +911,7 @@ this.type.is = (function (exports) {
 	 * @returns {Boolean}
 	 */
 	function symbol(value) {
-		if (value == null) { return false; }
-		return value.constructor === env.Symbol;
+		return typeof value === SYMBOL;
 	}
 
 	/**
@@ -924,7 +965,7 @@ this.type.is = (function (exports) {
 	exports.args = args;
 	exports.array = array;
 	exports.arraylike = arraylike;
-	exports.not = notA;
+	exports.not = notType;
 	exports.object = object;
 	exports.stream = stream;
 	exports.string = string;

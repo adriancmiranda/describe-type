@@ -15,6 +15,10 @@ exports.env = params(process.env);
 
 exports.argv = argv(process.argv);
 
+exports.args = exports.argv.$.slice(3);
+
+exports.entry = exports.argv._;
+
 exports.flag = banner(exports.pack, exports.git);
 
 exports.aliases = aliases(exports.source);

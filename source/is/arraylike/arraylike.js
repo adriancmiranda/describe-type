@@ -1,3 +1,4 @@
+import { OBJECT, NUMBER } from '../../internal/env.js';
 import array from '../array/array.js';
 import string from '../string/string.js';
 
@@ -10,7 +11,7 @@ import string from '../string/string.js';
  */
 export default function arraylike(value) {
 	return array(value) || string(value) || (
-		(!!value && typeof value === 'object' && typeof value.length === 'number') &&
+		(!!value && typeof value === OBJECT && typeof value.length === NUMBER) &&
 		(value.length === 0 || (value.length > 0 && (value.length - 1) in value))
 	);
 }

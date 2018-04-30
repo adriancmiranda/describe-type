@@ -2,13 +2,23 @@
  * 
  * ~~~~ describe-type v0.7.0
  * 
- * @commit 2a605f1d308c84ebc7cb0d99edb7a373fb29bc4f
- * @moment Wednesday, April 25, 2018 2:48 PM
+ * @commit 4dac7473de55d8eb664b76469431043943979fcb
+ * @moment Sunday, April 29, 2018 7:35 PM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2021 Adrian C. Miranda
  */
 define(['exports'], function (exports) { 'use strict';
+
+	// environment
+	var isBrowser = new Function('try{return this===window;}catch(err){return false;}');
+	var isNode = new Function('try{return this===global;}catch(err){return false;}');
+	var inBrowser = isBrowser();
+	var inNode = isNode();
+	var NUMBER = 'number';
+	var STRING = 'string';
+	var OBJECT = 'object';
+	var FUNCTION = 'function';
 
 	/**
 	 *
@@ -18,7 +28,7 @@ define(['exports'], function (exports) { 'use strict';
 	 * @returns {Boolean}
 	 */
 	function callable(value) {
-		return typeof value === 'function';
+		return typeof value === FUNCTION;
 	}
 
 	/**
@@ -52,7 +62,7 @@ define(['exports'], function (exports) { 'use strict';
 	 * @returns {Boolean}
 	 */
 	function ownProperty(context, key) {
-		if (context == null) { return false; }
+		if (context === null || context === undefined) { return false; }
 		return objectHasOwnProperty.call(context, key);
 	}
 
@@ -64,8 +74,7 @@ define(['exports'], function (exports) { 'use strict';
 	 * @returns {Boolean}
 	 */
 	function array(value) {
-		if (value == null) { return false; }
-		return value.constructor === Array;
+		return value instanceof Array;
 	}
 
 	/**
@@ -76,7 +85,7 @@ define(['exports'], function (exports) { 'use strict';
 	 * @returns {Boolean}
 	 */
 	function string(value) {
-		return typeof value === 'string' || value instanceof String;
+		return typeof value === STRING || value instanceof String;
 	}
 
 	/**
@@ -88,7 +97,7 @@ define(['exports'], function (exports) { 'use strict';
 	 */
 	function arraylike(value) {
 		return array(value) || string(value) || (
-			(!!value && typeof value === 'object' && typeof value.length === 'number') &&
+			(!!value && typeof value === OBJECT && typeof value.length === NUMBER) &&
 			(value.length === 0 || (value.length > 0 && (value.length - 1) in value))
 		);
 	}
@@ -133,7 +142,7 @@ define(['exports'], function (exports) { 'use strict';
 	 * @returns {Boolean}
 	 */
 	function at(context, key) {
-		if (context == null) { return false; }
+		if (context === null || context === undefined) { return false; }
 		return context[key] === undefined === false;
 	}
 

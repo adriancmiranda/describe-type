@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v0.7.0
  * 
- * @commit 2a605f1d308c84ebc7cb0d99edb7a373fb29bc4f
- * @moment Wednesday, April 25, 2018 2:48 PM
+ * @commit 4dac7473de55d8eb664b76469431043943979fcb
+ * @moment Sunday, April 29, 2018 7:35 PM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2021 Adrian C. Miranda
@@ -39,9 +39,11 @@ var patterns = /*#__PURE__*/{
 
 // prototypes
 var ObjectProto = Object.prototype;
+var getPrototypeOf = Object.getPrototypeOf;
 
 var prototypes = /*#__PURE__*/{
-	ObjectProto: ObjectProto
+	ObjectProto: ObjectProto,
+	getPrototypeOf: getPrototypeOf
 };
 
 // built-in method(s)
@@ -59,6 +61,16 @@ var isNode = new Function('try{return this===global;}catch(err){return false;}')
 var inBrowser = isBrowser();
 var inNode = isNode();
 var env = inNode ? global : window;
+var NUMBER = 'number';
+var BOOLEAN = 'boolean';
+var STRING = 'string';
+var SYMBOL = 'symbol';
+var OBJECT = 'object';
+var FUNCTION = 'function';
+var GENERATOR_FUNCTION = 'GeneratorFunction';
+var ASYNC_FUNCTION = 'AsyncFunction';
+var ARGUMENTS = 'Arguments';
+var CONSTRUCTOR = 'constructor';
 
 /**
  *
@@ -68,8 +80,7 @@ var env = inNode ? global : window;
  * @returns {Boolean}
  */
 function array(value) {
-	if (value == null) { return false; }
-	return value.constructor === Array;
+	return value instanceof Array;
 }
 
 /**
@@ -80,7 +91,7 @@ function array(value) {
  * @returns {Boolean}
  */
 function string(value) {
-	return typeof value === 'string' || value instanceof String;
+	return typeof value === STRING || value instanceof String;
 }
 
 /**
@@ -92,7 +103,7 @@ function string(value) {
  */
 function arraylike(value) {
 	return array(value) || string(value) || (
-		(!!value && typeof value === 'object' && typeof value.length === 'number') &&
+		(!!value && typeof value === OBJECT && typeof value.length === NUMBER) &&
 		(value.length === 0 || (value.length > 0 && (value.length - 1) in value))
 	);
 }
@@ -135,13 +146,13 @@ function apply(cmd, context, args, blindly) {
  * @see https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
  */
 var assign = Object.assign || function assign(target) {
-	if (target == null) {
+	if (target === null || target === undefined) {
 		throw new TypeError('Cannot convert undefined or null to object');
 	}
 	var rest = slice(args, 1);
 	for (var index = 1; index < rest.length; index += 1) {
 		var source = rest[index];
-		if (source != null) {
+		if ((source === null || source === undefined) === false) {
 			for (var key in source) {
 				if (objectHasOwnProperty.call(source, key)) {
 					target[key] = source[key];
@@ -154,21 +165,6 @@ var assign = Object.assign || function assign(target) {
 
 /**
  *
- * @name Object.getPrototypeOf
- * @function
- * @global
- * @param {value}
- * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getPrototypeOf
- */
-function getPrototypeOf(value) {
-	if (value == null) {
-		throw new TypeError('Uncaught TypeError: Cannot convert undefined or null to object');
-	}
-	return value.__proto__ || Object.getPrototypeOf(value);
-}
-
-/**
- *
  * @function
  * @memberof is
  * @param {Function} expect
@@ -176,13 +172,24 @@ function getPrototypeOf(value) {
  * @returns {Boolean}
  */
 function type(expected, value) {
-	if (value == null) { return value === expected; }
+	if (value === undefined || value === null) { return value === expected; }
+	if (expected === undefined || expected === null) { return expected === value; }
+	if (value === true || value === false) { return expected === Boolean; }
+	var type = typeof value;
+	if (type === STRING) { return expected === String; }
+	if (type === NUMBER) { return expected === Number; }
+	if (type === SYMBOL) { return expected === Symbol; }
+	if (expected === Function) { return type === FUNCTION; }
+	if (value instanceof Array) { return expected === Array; }
+	if (value instanceof RegExp) { return expected === RegExp; }
 	if (value.constructor === undefined) { return expected === Object; }
-	if (getPrototypeOf(value).constructor === expected) { return true; }
-	return expected === Function && (
-		value.constructor.name === 'GeneratorFunction' ||
-		value.constructor.name === 'AsyncFunction'
-	);
+	if (value.__proto__) {
+		return value.__proto__.constructor === expected;
+	}
+	if (typeof getPrototypeOf === FUNCTION) {
+		return getPrototypeOf(value).constructor === expected;
+	}
+	return objectHasOwnProperty.call(value, CONSTRUCTOR);
 }
 
 /**
@@ -193,7 +200,7 @@ function type(expected, value) {
  * @param {any} value
  * @returns {Boolean}
  */
-function notA(expected, value) {
+function notType(expected, value) {
 	return type(expected, value) === false;
 }
 
@@ -205,7 +212,7 @@ function notA(expected, value) {
  * @returns {Boolean}
  */
 function callable(value) {
-	return typeof value === 'function';
+	return typeof value === FUNCTION;
 }
 
 /**
@@ -217,7 +224,7 @@ function callable(value) {
  * @returns {Boolean}
  */
 function ownProperty(context, key) {
-	if (context == null) { return false; }
+	if (context === null || context === undefined) { return false; }
 	return objectHasOwnProperty.call(context, key);
 }
 
@@ -272,13 +279,13 @@ function eachProperty(value, cmd, context, getInheritedProps) {
  * @returns {?}
  */
 function eachValue(value, cmd, context, keepReverse) {
-	if (value == null) { return undefined; }
+	if (value === null || value === undefined) { return undefined; }
 	var size = (0 | value.length) - 1;
 	for (var index = size; index > -1; index -= 1) {
 		var i = keepReverse ? index : size - index;
 		var item = value[i];
 		var resolve = cmd.call(context || item, item, i, value, i);
-		if (resolve !== undefined) {
+		if (resolve === undefined === false) {
 			return resolve;
 		}
 	}
@@ -314,7 +321,7 @@ function each(value, cmd, context, keepReverseOrGetInheritedProps) {
  */
 var create = Object.create || function create(proto, properties) {
 	if (proto === null) { return {}; }
-	if (notA(Object, proto)) {
+	if (notType(Object, proto)) {
 		throw new TypeError('Object prototype may only be an Object or null: ' + (typeof proto));
 	}
 	var Instance = function () {};
@@ -344,7 +351,7 @@ var create = Object.create || function create(proto, properties) {
  * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
  */
 function filter(list, cmd, context) {
-  if (list == null) { throw new TypeError; }
+  if (list === null || list === undefined) { throw new TypeError; }
   if (callable(cmd) === false) { throw new TypeError; }
   var result = [];
   for (var index = 0; index < list.length; index += 1) {
@@ -383,7 +390,7 @@ function ownValue(context, value) {
  * @returns {Boolean}
  */
 function number(value) {
-	return typeof value === 'number' || value instanceof Number;
+	return typeof value === NUMBER || value instanceof Number;
 }
 
 /**
@@ -423,7 +430,7 @@ function int(value) {
  * max: 2147483647
  */
 function intOf(value, radix) {
-	value = (radix == null ? value : parseInt(value, radix));
+	value = (radix === null || radix === undefined ? value : parseInt(value, radix));
 	return int(value) ? value : 0 | value;
 }
 
@@ -468,7 +475,7 @@ function mod(n, a, b) {
  */
 function slice$1(list, startIndex, endIndex) {
 	var range = [];
-	var size = list == null ? 0 : 0 | list.length;
+	var size = list === null || list === undefined ? 0 : 0 | list.length;
 	if (size) {
 		var start = mod(startIndex, 0, size + 1);
 		if (number(endIndex)) {
@@ -502,11 +509,30 @@ function slice$1(list, startIndex, endIndex) {
  * @returns {any}
  */
 function getExpectedValue(expected, value, args, startIndex, endIndex) {
-	if (callable(value) && (expected === Function || ownValue(expected, Function)) === false) {
+	if (callable(value) && (expected === Function === false || ownValue(expected, Function) === false)) {
 		args = slice$1(args, startIndex, endIndex);
 		return apply(value, args[0], args, true);
 	}
 	return value;
+}
+
+/**
+ *
+ * @name Object.getPrototypeOf
+ * @function
+ * @global
+ * @param {value}
+ * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/proto
+ * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getPrototypeOf
+ * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect/getPrototypeOf
+ */
+function getPrototypeOf$1 (value) {
+	return value.__proto__ || getPrototypeOf(value) || (function () {
+		if (objectHasOwnProperty.call(value, CONSTRUCTOR)) {
+			return {};
+		}
+		return value.constructor.prototype;
+	})();
 }
 
 /* eslint-disable no-restricted-syntax */
@@ -520,7 +546,7 @@ function getExpectedValue(expected, value, args, startIndex, endIndex) {
  * @returns {Array}
  */
 function keys(object, getInheritedProps) {
-	if (object == null) { return []; }
+	if (object === null || object === undefined) { return []; }
 	if (Object.keys && !getInheritedProps) {
 		return Object.keys(object);
 	}
@@ -555,7 +581,7 @@ function keys(object, getInheritedProps) {
  * @returns {any} The value that results from the reduction.
  */
 function reduce(list, cmd, initialValue, context) {
-	if (list == null) { return undefined; }
+	if (list === null || list === undefined) { return undefined; }
 	if (callable(cmd) === false) { throw new TypeError; }
 	var size = (0 | list.length);
 	if (size) {
@@ -598,7 +624,12 @@ function startsWith(value, search, position) {
 }
 
 // TODO: to implement
-function stringify(value) {
+
+function stringify(value, space, replacer) {
+	if (value === null || value === undefined) { return String(value); }
+	var seal = asA(String, value.toString, value);
+	if (startsWith(seal, '[object ')) { seal = ''; }
+	return seal || JSON.stringify(value, replacer, space);
 }
 
 
@@ -615,7 +646,7 @@ var index = /*#__PURE__*/{
 	eachValue: eachValue,
 	filter: filter,
 	getExpectedValue: getExpectedValue,
-	getPrototypeOf: getPrototypeOf,
+	getPrototypeOf: getPrototypeOf$1,
 	keys: keys,
 	mod: mod,
 	reduce: reduce,
@@ -627,7 +658,17 @@ var index = /*#__PURE__*/{
 	isNode: isNode,
 	inBrowser: inBrowser,
 	inNode: inNode,
-	env: env
+	env: env,
+	NUMBER: NUMBER,
+	BOOLEAN: BOOLEAN,
+	STRING: STRING,
+	SYMBOL: SYMBOL,
+	OBJECT: OBJECT,
+	FUNCTION: FUNCTION,
+	GENERATOR_FUNCTION: GENERATOR_FUNCTION,
+	ASYNC_FUNCTION: ASYNC_FUNCTION,
+	ARGUMENTS: ARGUMENTS,
+	CONSTRUCTOR: CONSTRUCTOR
 };
 
 /**
@@ -668,7 +709,7 @@ function own(context, value) {
  * @returns {Boolean}
  */
 function at(context, key) {
-	if (context == null) { return false; }
+	if (context === null || context === undefined) { return false; }
 	return context[key] === undefined === false;
 }
 
@@ -701,7 +742,7 @@ function object(value) {
  * @returns {Boolean}
  */
 function args$1(value) {
-	return (!array(value) && arraylike(value) &&
+	return (array(value) === false && arraylike(value) &&
 		object(value) && unsafeMethod(value, 'callee')
 	) || objectToString.call(value) === '[object Arguments]';
 }
@@ -740,7 +781,7 @@ array.empty = isEmptyArray;
  * @returns {Boolean}
  */
 function isEmptyArraylike(value) {
-	return arraylike(value) || value.length === 0;
+	return arraylike(value) && value.length === 0;
 }
 
 arraylike.empty = isEmptyArraylike;
@@ -754,8 +795,8 @@ arraylike.empty = isEmptyArraylike;
  * @returns {Boolean}
  */
 function any(expected, value) {
-	if (expected == null) { return expected === value; }
-	if (expected.constructor === Array && expected.length > 0) {
+	if (expected === null || expected === undefined) { return expected === value; }
+	if (expected instanceof Array && expected.length > 0) {
 		for (var i = expected.length - 1; i > -1; i -= 1) {
 			if (type(expected[i], value)) { return true; }
 		}
@@ -784,8 +825,8 @@ function notAny(expected, value) {
  * @returns {Boolean}
  */
 function instanceOf(expected, value) {
-	if (expected == null) { return expected === value; }
-	if (expected.constructor === Array && expected.length > 0) {
+	if (expected === null || expected === undefined) { return expected === value; }
+	if (expected instanceof Array && expected.length > 0) {
 		for (var i = expected.length - 1; i > -1; i -= 1) {
 			var ctor = expected[i];
 			if (ctor === Number) { return type(ctor, value); } // ... should normalize?!
@@ -836,10 +877,10 @@ function notVectorOf(expected, value) {
 	return vector(expected, value) === false;
 }
 
-notA.a = notA.an = notA.type = notA;
-notA.any = notAny;
-notA.instanceOf = notInstanceOf;
-notA.vectorOf = notVectorOf;
+notType.a = notType.an = notType.type = notType;
+notType.any = notAny;
+notType.instanceOf = notInstanceOf;
+notType.vectorOf = notVectorOf;
 
 /**
  *
@@ -864,7 +905,7 @@ object.empty = isEmptyObject;
  * @returns {Boolean}
  */
 function stream(value) {
-	if (value == null || value._events == null) { return false; }
+	if (value === null || value === undefined || value._events == null) { return false; }
 	return callable(value.pipe);
 }
 
@@ -974,7 +1015,7 @@ function bool(value) {
  * @returns {Boolean}
  */
 function buffer(value) {
-	if (value == null) { return false; }
+	if (value === null || value === undefined) { return false; }
 	var isBuffer = value.constructor === env.Buffer && callable(value.constructor.isBuffer);
 	return isBuffer && value.constructor.isBuffer(value);
 }
@@ -987,8 +1028,7 @@ function buffer(value) {
  * @returns {Boolean}
  */
 function date(value) {
-	if (value == null) { return false; }
-	return value.constructor === Date;
+	return value instanceof Date;
 }
 
 /**
@@ -1044,8 +1084,8 @@ function defined(value) {
  */
 function element(value) {
 	return value != null && (
-		callable(env.HTMLElement) &&
-		value instanceof env.HTMLElement &&
+		callable(env.window.HTMLElement) &&
+		value instanceof env.window.HTMLElement &&
 		value.nodeType === 1
 	);
 }
@@ -1082,43 +1122,86 @@ function enumerable(value) {
 }
 
 /**
- *
+ * The Object.is() method determines whether two values are the same value.
  * @function
- * @memberof is
- * @param {any} valueA
- * @param {any} valueB
- * @returns {Boolean}
+ * @param {Object} value1 - The first value to compare.
+ * @param {Object} value2 - The second value to compare.
+ * @returns {Boolean} The Object.is() method determines whether two values are
+ * the same value.
  */
-function equal(valueA, valueB) {
+var is = Object.is || function is(valueA, valueB) {
 	if (valueA === valueB) {
+		if (valueA === 0) { return 1 / valueA === 1 / valueB; }
 		return true;
 	}
+	var $valueA = valueA;
+	var $valueB = valueB;
+	return valueA !== $valueA && valueB !== $valueB;
+}
+
+/**
+ * The equal() method determines whether two values are the same value.
+ * @function
+ * @memberof is
+ * @param {any} valueA - The first value to compare.
+ * @param {any} valueB - The second value to compare.
+ * @returns {Boolean} A Boolean indicating whether or not the two arguments are
+ * the same value.
+ */
+function equal(valueA, valueB) {
 	var key;
-	var ctorA = valueA != null && valueA.constructor;
-	var ctorB = valueB != null && valueB.constructor;
-	if (ctorA !== ctorB) {
+	var ctorA;
+	var ctorB;
+	if (valueA === null || valueA === undefined) {
+		return is(valueA, valueB);
+	} else if (valueB === null || valueB === undefined) {
+		return is(valueB, valueA);
+	} else if (is(valueA, valueB)) {
+		return true;
+	}
+	if (valueA.__proto__) {
+		ctorA = valueA.__proto__;
+	} else if (typeof getPrototypeOf === FUNCTION) {
+		ctorA = getPrototypeOf(valueA);
+	} else {
+		ctorA = (valueA.constructor || {}).prototype;
+	}
+	if (valueB.__proto__) {
+		ctorB = valueB.__proto__;
+	} else if (typeof getPrototypeOf === FUNCTION) {
+		ctorB = getPrototypeOf(valueB);
+	} else {
+		ctorB = (valueB.constructor || {}).prototype;
+	}
+	if (ctorA) {
+		ctorA = ctorA.constructor;
+	}
+	if (ctorB) {
+		ctorB = ctorB.constructor;
+	}
+	if (ctorA === ctorB === false) {
 		return false;
 	} else if (ctorA === Object) {
 		var keysA = keys(valueA);
 		var keysB = keys(valueB);
 		var i = keysA.length;
-		if (i !== keysB.length) {
+		if (i === keysB.length === false) {
 			return false;
 		}
 		for (i -= 1; i > -1; i -= 1) {
 			key = keysA[i];
-			if (!equal(valueA[key], valueB[key])) {
+			if (equal(valueA[key], valueB[key]) === false) {
 				return false;
 			}
 		}
 		return true;
 	} else if (ctorA === Array) {
 		key = valueA.length;
-		if (key !== valueB.length) {
+		if (key === valueB.length === false) {
 			return false;
 		}
 		for (key -= 1; key > -1; key -= 1) {
-			if (!equal(valueA[key], valueB[key])) {
+			if (equal(valueA[key], valueB[key]) === false) {
 				return false;
 			}
 		}
@@ -1139,7 +1222,6 @@ function equal(valueA, valueB) {
  * @returns {Boolean}
  */
 function error(value) {
-	if (value == null) { return false; }
 	return value instanceof Error;
 }
 
@@ -1162,7 +1244,7 @@ function even(value) {
  * @returns {Boolean}
  */
 function primitive(value) {
-	if (value == null) { return true; }
+	if (value === null || value === undefined) { return true; }
 	if (callable(value.valueOf)) { value = value.valueOf(); }
 	if (callable(value) || typeof value === 'object') {
 		return false;
@@ -1182,7 +1264,7 @@ function exotic(value) {
 }
 
 function hex(value) {
-	return typeof value === 'string' && reIsHex.test(value);
+	return string(value) && reIsHex.test(value);
 }
 
 function hexadecimal(value) {
@@ -1198,7 +1280,7 @@ function hexadecimal(value) {
  * @returns {Boolean}
  */
 function hosted(key, host) {
-	return (host == null || primitive(host[key]) === false) === true;
+	return (host === null || host === undefined || primitive(host[key]) === false) === true;
 }
 
 /**
@@ -1306,7 +1388,7 @@ function nil(value) {
  * @returns {Boolean}
  */
 function numeric(value) {
-	if (value == null) { return false; }
+	if (value === null || value === undefined) { return false; }
 	if (bool(value)) { return true; }
 	try {
 		var test = parseFloat(value);
@@ -1335,8 +1417,7 @@ function odd(value) {
  * @returns {Boolean}
  */
 function regexp(value) {
-	if (value == null) { return false; }
-	return value.constructor === RegExp;
+	return value instanceof RegExp;
 }
 
 /**
@@ -1347,8 +1428,7 @@ function regexp(value) {
  * @returns {Boolean}
  */
 function symbol(value) {
-	if (value == null) { return false; }
-	return value.constructor === env.Symbol;
+	return typeof value === SYMBOL;
 }
 
 /**
@@ -1405,7 +1485,7 @@ var index$2 = /*#__PURE__*/{
 	args: args$1,
 	array: array,
 	arraylike: arraylike,
-	not: notA,
+	not: notType,
 	object: object,
 	stream: stream,
 	string: string,
@@ -1522,10 +1602,10 @@ function uintOf(value, radix) {
  * @returns {String}
  */
 function typeOf(value) {
-	if (infinity(value) || value == null || (typeof value === 'number' && isNaN(value))) {
+	if (infinity(value) || value === null || value === undefined || (typeof value === NUMBER && isNaN(value))) {
 		return String(value);
 	}
-	return args$1(value) ? 'Arguments' : stringOf(value, true);
+	return args$1(value) ? ARGUMENTS : stringOf(value, true);
 }
 
 /**
@@ -1548,7 +1628,7 @@ function constructorNameOf(value) {
  * @returns {String}
  */
 function constructorOf(value) {
-	if (value == null) { return value; }
+	if (value === null || value === undefined) { return value; }
 	return value.constructor || Object;
 }
 
@@ -1561,7 +1641,7 @@ function constructorOf(value) {
  * @returns {String}
  */
 function name(value, write) {
-	if (value == null || object(value)) {
+	if (value === null || value === undefined || object(value)) {
 		return typeOf(value);
 	}
 	return value.name || (write &&
@@ -1617,8 +1697,8 @@ function asInstanceOf(expected, value) {
  */
 function asVectorOf(expected, value) {
 	value = getExpectedValue(expected, value, arguments, 2);
-	if (expected == null) { return vector(expected, value); }
-	if (expected.constructor === Array && expected.length > 0) {
+	if (expected === null || expected === undefined) { return vector(expected, value); }
+	if (expected instanceof Array && expected.length > 0) {
 		for (var i = expected.length - 1; i > -1; i -= 1) {
 			if (vector(expected[i], value)) { return value; }
 		}

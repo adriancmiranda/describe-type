@@ -9,6 +9,7 @@ import callable from '../callable.js';
  * @returns {Boolean}
  */
 export default function stream(value) {
-	if (value == null || value._events == null) return false;
+	if (value === undefined || value === null) return false;
+	if (value._events === undefined || value._events === null) return false;
 	return callable(value.pipe);
 }

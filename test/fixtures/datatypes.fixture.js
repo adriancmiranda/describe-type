@@ -87,15 +87,15 @@ string.add(stringFilled);
 string.add(stringEmpty);
 
 export const objectEvil = new DataType('object.evil');
-objectEvil.add('{ constructor: \'foo\' }', { constructor: 'foo' });
-objectEvil.add('{ constructor: () => {} }', { constructor: () => {} });
-objectEvil.add('{ constructor: function() {} }', { constructor: function() {} });
-objectEvil.add('{ constructor: function evil() {} }', { constructor: function evil() {} });
-objectEvil.add('{ constructor: Object }', { constructor: Object });
-objectEvil.add('{ constructor: Number }', { constructor: Number });
-objectEvil.add('{ constructor: Function }', { constructor: Function });
-objectEvil.add('{ constructor: undefined }', { constructor: undefined });
-objectEvil.add('{ constructor: undefined }', { constructor: Function, getPrototypeOf: 'foo', __proto__: 'foo' });
+objectEvil.add('{ constructor: \'foo\' }', { constructor: 'foo', __proto__: 'foo' });
+objectEvil.add('{ constructor: () => {} }', { constructor: () => {}, __proto__: 'foo' });
+objectEvil.add('{ constructor: function() {} }', { constructor: function() {}, __proto__: 'foo' });
+objectEvil.add('{ constructor: function evil() {} }', { constructor: function evil() {}, __proto__: 'foo' });
+objectEvil.add('{ constructor: Object }', { constructor: Object, __proto__: 'foo' });
+objectEvil.add('{ constructor: Number }', { constructor: Number, __proto__: 'foo' });
+objectEvil.add('{ constructor: Function }', { constructor: Function, __proto__: 'foo' });
+objectEvil.add('{ constructor: undefined }', { constructor: undefined, __proto__: 'foo' });
+objectEvil.add('{ constructor: undefined }', { constructor: Function, __proto__: 'foo' });
 
 export const objectFilled = new DataType('object.filled');
 objectFilled.add('new Object({{source}})', new Object({ foo: 'bar' }));
@@ -186,10 +186,10 @@ if (arrowFn) {
 	callable.add('{{source}}', arrowFn);
 }
 
-
-
 export const classes = new DataType('classes');
-classes.add('{{source}}', class Foo { constructor() {} });
+if (supportES6()) {	
+	classes.add('{{source}}', class Foo { constructor() {} });
+}
 
 export const zeroNegativeInteger = new DataType('zero.negativeInteger');
 zeroNegativeInteger.add('-0', -0);
@@ -227,9 +227,13 @@ int.add('{{source}}', -2);
 int.add('{{source}}', -3);
 
 export const decimal = new DataType('decimal');
-decimal.add('{{source}}', 1.1);
+decimal.add('{{source}}', 1.141592653589793);
+decimal.add('{{source}}', 1.2141592653589793);
+decimal.add('{{source}}', 1.3234);
+decimal.add('{{source}}', 1.35);
 decimal.add('{{source}}', 1.2);
-decimal.add('{{source}}', 1.3);
+decimal.add('{{source}}', 0.1);
+decimal.add('{{source}}', Math.PI);
 
 export const nan = new DataType('nan');
 nan.add('0 / 0', 0 / 0);

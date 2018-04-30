@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v0.7.0
  * 
- * @commit 2a605f1d308c84ebc7cb0d99edb7a373fb29bc4f
- * @moment Wednesday, April 25, 2018 2:48 PM
+ * @commit 4dac7473de55d8eb664b76469431043943979fcb
+ * @moment Sunday, April 29, 2018 7:35 PM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2021 Adrian C. Miranda
@@ -17,8 +17,24 @@ define(['exports'], function (exports) { 'use strict';
 
 	// prototypes
 	var ObjectProto = Object.prototype;
+	var getPrototypeOf = Object.getPrototypeOf;
 
+	// built-in method(s)
+	var objectHasOwnProperty = ObjectProto.hasOwnProperty;
 	var objectToString = ObjectProto.toString;
+
+	// environment
+	var isBrowser = new Function('try{return this===window;}catch(err){return false;}');
+	var isNode = new Function('try{return this===global;}catch(err){return false;}');
+	var inBrowser = isBrowser();
+	var inNode = isNode();
+	var NUMBER = 'number';
+	var STRING = 'string';
+	var SYMBOL = 'symbol';
+	var OBJECT = 'object';
+	var FUNCTION = 'function';
+	var ARGUMENTS = 'Arguments';
+	var CONSTRUCTOR = 'constructor';
 
 	/**
 	 *
@@ -28,8 +44,7 @@ define(['exports'], function (exports) { 'use strict';
 	 * @returns {Boolean}
 	 */
 	function array(value) {
-		if (value == null) { return false; }
-		return value.constructor === Array;
+		return value instanceof Array;
 	}
 
 	/**
@@ -40,7 +55,7 @@ define(['exports'], function (exports) { 'use strict';
 	 * @returns {Boolean}
 	 */
 	function string(value) {
-		return typeof value === 'string' || value instanceof String;
+		return typeof value === STRING || value instanceof String;
 	}
 
 	/**
@@ -52,7 +67,7 @@ define(['exports'], function (exports) { 'use strict';
 	 */
 	function arraylike(value) {
 		return array(value) || string(value) || (
-			(!!value && typeof value === 'object' && typeof value.length === 'number') &&
+			(!!value && typeof value === OBJECT && typeof value.length === NUMBER) &&
 			(value.length === 0 || (value.length > 0 && (value.length - 1) in value))
 		);
 	}
@@ -65,7 +80,7 @@ define(['exports'], function (exports) { 'use strict';
 	 * @returns {Boolean}
 	 */
 	function number(value) {
-		return typeof value === 'number' || value instanceof Number;
+		return typeof value === NUMBER || value instanceof Number;
 	}
 
 	/**
@@ -105,7 +120,7 @@ define(['exports'], function (exports) { 'use strict';
 	 * max: 2147483647
 	 */
 	function intOf(value, radix) {
-		value = (radix == null ? value : parseInt(value, radix));
+		value = (radix === null || radix === undefined ? value : parseInt(value, radix));
 		return int(value) ? value : 0 | value;
 	}
 
@@ -150,7 +165,7 @@ define(['exports'], function (exports) { 'use strict';
 	 */
 	function slice(list, startIndex, endIndex) {
 		var range = [];
-		var size = list == null ? 0 : 0 | list.length;
+		var size = list === null || list === undefined ? 0 : 0 | list.length;
 		if (size) {
 			var start = mod(startIndex, 0, size + 1);
 			if (number(endIndex)) {
@@ -285,7 +300,7 @@ define(['exports'], function (exports) { 'use strict';
 	 * @returns {Boolean}
 	 */
 	function callable(value) {
-		return typeof value === 'function';
+		return typeof value === FUNCTION;
 	}
 
 	/**
@@ -306,21 +321,6 @@ define(['exports'], function (exports) { 'use strict';
 
 	/**
 	 *
-	 * @name Object.getPrototypeOf
-	 * @function
-	 * @global
-	 * @param {value}
-	 * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getPrototypeOf
-	 */
-	function getPrototypeOf(value) {
-		if (value == null) {
-			throw new TypeError('Uncaught TypeError: Cannot convert undefined or null to object');
-		}
-		return value.__proto__ || Object.getPrototypeOf(value);
-	}
-
-	/**
-	 *
 	 * @function
 	 * @memberof is
 	 * @param {Function} expect
@@ -328,13 +328,24 @@ define(['exports'], function (exports) { 'use strict';
 	 * @returns {Boolean}
 	 */
 	function type(expected, value) {
-		if (value == null) { return value === expected; }
+		if (value === undefined || value === null) { return value === expected; }
+		if (expected === undefined || expected === null) { return expected === value; }
+		if (value === true || value === false) { return expected === Boolean; }
+		var type = typeof value;
+		if (type === STRING) { return expected === String; }
+		if (type === NUMBER) { return expected === Number; }
+		if (type === SYMBOL) { return expected === Symbol; }
+		if (expected === Function) { return type === FUNCTION; }
+		if (value instanceof Array) { return expected === Array; }
+		if (value instanceof RegExp) { return expected === RegExp; }
 		if (value.constructor === undefined) { return expected === Object; }
-		if (getPrototypeOf(value).constructor === expected) { return true; }
-		return expected === Function && (
-			value.constructor.name === 'GeneratorFunction' ||
-			value.constructor.name === 'AsyncFunction'
-		);
+		if (value.__proto__) {
+			return value.__proto__.constructor === expected;
+		}
+		if (typeof getPrototypeOf === FUNCTION) {
+			return getPrototypeOf(value).constructor === expected;
+		}
+		return objectHasOwnProperty.call(value, CONSTRUCTOR);
 	}
 
 	/**
@@ -356,7 +367,7 @@ define(['exports'], function (exports) { 'use strict';
 	 * @returns {Boolean}
 	 */
 	function args(value) {
-		return (!array(value) && arraylike(value) &&
+		return (array(value) === false && arraylike(value) &&
 			object(value) && unsafeMethod(value, 'callee')
 		) || objectToString.call(value) === '[object Arguments]';
 	}
@@ -369,10 +380,10 @@ define(['exports'], function (exports) { 'use strict';
 	 * @returns {String}
 	 */
 	function typeOf(value) {
-		if (infinity(value) || value == null || (typeof value === 'number' && isNaN(value))) {
+		if (infinity(value) || value === null || value === undefined || (typeof value === NUMBER && isNaN(value))) {
 			return String(value);
 		}
-		return args(value) ? 'Arguments' : stringOf(value, true);
+		return args(value) ? ARGUMENTS : stringOf(value, true);
 	}
 
 	/**
@@ -395,7 +406,7 @@ define(['exports'], function (exports) { 'use strict';
 	 * @returns {String}
 	 */
 	function constructorOf(value) {
-		if (value == null) { return value; }
+		if (value === null || value === undefined) { return value; }
 		return value.constructor || Object;
 	}
 
@@ -408,7 +419,7 @@ define(['exports'], function (exports) { 'use strict';
 	 * @returns {String}
 	 */
 	function name(value, write) {
-		if (value == null || object(value)) {
+		if (value === null || value === undefined || object(value)) {
 			return typeOf(value);
 		}
 		return value.name || (write &&

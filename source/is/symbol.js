@@ -1,4 +1,4 @@
-import { env } from '../@/env.js';
+import { SYMBOL } from '../internal/env.js';
 
 /**
  *
@@ -8,5 +8,5 @@ import { env } from '../@/env.js';
  * @returns {Boolean}
  */
 export default function symbol(value) {
-	return typeof value === 'symbol';
+	return typeof value === SYMBOL;
 }

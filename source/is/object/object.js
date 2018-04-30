@@ -1,4 +1,4 @@
-import type from '../type.js';
+import constructorOf from '../../built-in/constructorOf.js';
 
 /**
  *
@@ -8,5 +8,6 @@ import type from '../type.js';
  * @returns {Boolean}
  */
 export default function object(value) {
-	return type(Object, value);
+	if (value === undefined || value === null) return false;
+	return constructorOf(value) === Object;
 }

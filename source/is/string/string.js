@@ -1,3 +1,5 @@
+import { STRING } from '../../internal/env.js';
+
 /**
  *
  * @function
@@ -6,5 +8,5 @@
  * @returns {Boolean}
  */
 export default function string(value) {
-	return typeof value === 'string' || value instanceof String;
+	return typeof value === STRING || value instanceof String;
 }

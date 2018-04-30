@@ -1,4 +1,4 @@
-import { env } from '../@/env.js';
+import { env } from '../internal/env.js';
 import callable from './callable.js';
 
 /**
@@ -9,7 +9,8 @@ import callable from './callable.js';
  * @returns {Boolean}
  */
 export default function buffer(value) {
-	if (value == null) return false;
-	const isBuffer = value.constructor === env.Buffer && callable(value.constructor.isBuffer);
+	if (value === undefined || value === null) return false;
+	if (callable(env.Buffer) === false) return false;
+	const isBuffer = value instanceof env.Buffer && callable(value.constructor.isBuffer);
 	return isBuffer && value.constructor.isBuffer(value);
 }

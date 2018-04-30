@@ -1,6 +1,6 @@
 import { Suite } from 'benchmark';
 import { benchmarkFatestStatus, benchmarkCycle } from '../../fixtures/speed';
-import slice from '../../../source/@/slice.js';
+import slice from '../../../source/polyfill/Array.prototype.slice';
 
 const value = 'Array.prototype.slice() The slice() method returns a shallow copy of a portion of an array into a new array object selected from begin to end ( end not included). The original array will not be modified.'.split('');
 const cachedSlice1 = Array.prototype.slice;
