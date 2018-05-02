@@ -6,7 +6,12 @@
 .*/test/.*
 
 [include]
-.*/source/.*
+.*/as/.*
+.*/has/.*
+.*/internal/.*
+.*/is/.*
+.*/polyfill/.*
+.*/schema/.*
 
 [libs]
 

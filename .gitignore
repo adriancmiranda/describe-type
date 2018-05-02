@@ -2,7 +2,7 @@
 # library
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 material/
-test/coverage*
+coverage*
 
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -41,10 +41,11 @@ Session.vim
 # dotfiles
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 .*
+!.bin
+!.fixtures
 !.github
 !.flowconfig
 !.babelrc
-!.sauce.yml
 !.editorconfig
 !.gitattributes
 !.gitignore

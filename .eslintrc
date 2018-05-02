@@ -8,6 +8,10 @@ env:
 parserOptions:
   sourceType: module
 
+settings:
+  import/resolver:
+    babel-module: {}
+
 rules:
   semi-style: off
   no-tabs: off
