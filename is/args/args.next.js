@@ -1,5 +1,5 @@
+import { CALLEE, ARGUMENTS_SEAL } from '../../internal/constants.next.js';
 import { objectToString } from '../../internal/built-in.next.js';
-import { CALLEE, ARGUMENTS_SEAL } from '../../internal/env.next.js';
 import unsafeMethod from '../../has/unsafeMethod.next.js';
 import array from '../array/array.next.js';
 import object from '../object/object.next.js';

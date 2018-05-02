@@ -1,4 +1,4 @@
-import { FUNCTION } from '../internal/env.next.js';
+import { FUNCTION } from '../internal/constants.next.js';
 
 /**
  *

@@ -8,7 +8,7 @@ const context = typeof argv.dir === 'string' ? argv.dir : '';
 const files = entry.length > 1 ? `{${entry.join(',')}}` : entry[0] || '*';
 
 glob.sync(resolve(join(context, files))).forEach(file => {
-	spawn.sync('npx', ['babel', file, '--out-file', file.replace('.next', '')], {
+	spawn.sync('babel-node', [file, '--out-file', file.replace('.next', '')], {
 		stdio: ['pipe', 1, 2],
 	});
 });

@@ -1,4 +1,4 @@
-import { OBJECT, NUMBER } from '../../internal/env.next.js';
+import { OBJECT, NUMBER } from '../../internal/constants.next.js';
 import array from '../array/array.next.js';
 import string from '../string/string.next.js';
 

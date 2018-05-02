@@ -1,4 +1,4 @@
-import { SYMBOL } from '../internal/env.next.js';
+import { SYMBOL } from '../internal/constants.next.js';
 
 /**
  *

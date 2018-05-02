@@ -1,4 +1,4 @@
-import { NAN, NUMBER, ARGUMENTS, UNDEFINED, NULL } from '../internal/env.next.js';
+import { NAN, NUMBER, ARGUMENTS, UNDEFINED, NULL } from '../internal/constants.next.js';
 import infinity from '../is/infinity.next.js';
 import nan from '../is/nan.next.js';
 import args from '../is/args/args.next.js';

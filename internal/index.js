@@ -12,7 +12,9 @@ var _builtInJs = require('./built-in.js');
 
 var builtIn = _builtInJs;
 
-var _varsNextJs = require('./vars.next.js');
+var _constantsJs = require('./constants.js');
+
+var constants = _constantsJs;
 
 var _envNextJs = require('./env.next.js');
 
@@ -51,12 +53,6 @@ var _getExpectedValueNextJs = require('./getExpectedValue.next.js');
 var _modNextJs = require('./mod.next.js');
 
 var _stringifyNextJs = require('./stringify.next.js');
-
-for (var _varsNextJs_key in _varsNextJs) {
-  if (_varsNextJs_key !== "default") {
-    exports[_varsNextJs_key] = _varsNextJs[_varsNextJs_key];
-  }
-}
 
 for (var _envNextJs_key in _envNextJs) {
   if (_envNextJs_key !== "default") {

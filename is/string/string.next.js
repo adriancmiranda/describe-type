@@ -1,4 +1,4 @@
-import { STRING } from '../../internal/env.next.js';
+import { STRING } from '../../internal/constants.next.js';
 
 /**
  *

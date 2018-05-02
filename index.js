@@ -12,20 +12,20 @@ var _isIndexJs = require('./is/index.js');
 
 var is = _isIndexJs;
 
-var _internalIndexJs2 = require('./internal/index.js');
+var _internalIndexNextJs = require('./internal/index.next.js');
 
-var _asIndexJs = require('./as/index.js');
+var _asIndexNextJs = require('./as/index.next.js');
 
-var _schemaIndexJs = require('./schema/index.js');
+var _schemaIndexNextJs = require('./schema/index.next.js');
 
-for (var _internalIndexJs2_key in _internalIndexJs2) {
-  if (_internalIndexJs2_key !== "default") {
-    exports[_internalIndexJs2_key] = _internalIndexJs2[_internalIndexJs2_key];
+for (var _internalIndexNextJs_key in _internalIndexNextJs) {
+  if (_internalIndexNextJs_key !== "default") {
+    exports[_internalIndexNextJs_key] = _internalIndexNextJs[_internalIndexNextJs_key];
   }
 } /* eslint-disable no-unused-vars */
 
 
-exports.as = _asIndexJs;
-exports.schema = _schemaIndexJs;
 exports.has = has;
 exports.is = is;
+exports.as = _asIndexNextJs;
+exports.schema = _schemaIndexNextJs;

@@ -1,4 +1,4 @@
-import { OBJECT } from '../internal/env.next.js';
+import { OBJECT } from '../internal/constants.next.js';
 import callable from './callable.next.js';
 
 /**

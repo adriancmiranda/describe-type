@@ -1,5 +1,5 @@
+import { STRING, NUMBER, SYMBOL, FUNCTION } from '../internal/constants.next.js';
 import constructorOf from '../internal/constructorOf.next.js';
-import { STRING, NUMBER, SYMBOL, FUNCTION } from '../internal/env.next.js';
 
 /**
  *

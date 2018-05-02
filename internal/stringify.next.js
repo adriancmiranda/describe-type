@@ -1,8 +1,8 @@
 // TODO: to implement
+import { UNDEFINED, NULL, PREFIX_SEAL } from '../internal/constants.next.js';
+import startsWith from '../polyfill/String.prototype.startsWith.next.js';
 import type from '../is/type.next.js';
 import asType from '../as/as.type.next.js';
-import startsWith from '../polyfill/String.prototype.startsWith.next.js';
-import { UNDEFINED, NULL, PREFIX_SEAL } from '../internal/env.next.js';
 
 export default function stringify(value, replacer, space) {
 	if (value === undefined) return UNDEFINED;

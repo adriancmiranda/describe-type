@@ -1,4 +1,4 @@
-import { NUMBER } from '../internal/env.next.js';
+import { NUMBER } from '../internal/constants.next.js';
 
 /**
  *

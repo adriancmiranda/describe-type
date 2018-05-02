@@ -1,8 +1,8 @@
 import * as patterns from './patterns.next.js';
 import * as prototypes from './prototypes.next.js';
 import * as builtIn from './built-in.next.js';
+import * as constants from './constants.next.js';
 
-export * from './vars.next.js';
 export * from './env.next.js';
 export { default as stringOf } from './stringOf.next.js';
 export { default as booleanOf } from './booleanOf.next.js';
@@ -22,4 +22,4 @@ export { default as resolveProperty } from './resolveProperty.next.js';
 export { default as getExpectedValue } from './getExpectedValue.next.js';
 export { default as mod } from './mod.next.js';
 export { default as stringify } from './stringify.next.js';
-export { prototypes, builtIn, patterns };
+export { prototypes, builtIn, patterns, constants };
