@@ -1,8 +1,8 @@
 import { Suite } from 'benchmark';
-import { benchmarkFatestStatus, benchmarkCycle } from '../.fixtures/benchmark';
-import * as datatypes from '../.fixtures/datatypes.fixture';
-import deprecatedAsAny from '../.fixtures/deprecated/as/as.any';
-import asAny from './as.any';
+import { benchmarkFatestStatus, benchmarkCycle } from '../.fixtures/benchmark/index.js';
+import * as datatypes from '../.fixtures/datatypes.fixture.js';
+import deprecatedAsAny from '../.fixtures/deprecated/as/as.any.js';
+import asAny from './as.any.next.js';
 
 let i = 0;
 datatypes.all.iterate((datatype) => {

@@ -1,12 +1,16 @@
 import test from 'ava';
-import * as describeType from '..';
-import asAny from './as.any';
+import * as describeType from '../index.js';
+import asAny from './as.any.next.js';
+
+test('describeType.as method is exposed', (t) => {
+	t.is(toString.call(describeType.as), '[object Function]', 'should be a function');
+});
 
 test('describeType.as.any method is exposed', (t) => {
 	t.is(toString.call(describeType.as.any), '[object Function]', 'should be a function');
 });
 
-test('asAny exposed', (t) => {
+test('as.any method is exposed', (t) => {
 	t.is(toString.call(asAny), '[object Function]', 'should be a function');
 });
 

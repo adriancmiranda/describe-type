@@ -1,6 +1,6 @@
 import test from 'ava';
 import { toSource } from '../../fixtures/datatype/utils';
-import * as describeType from '..';
+import * as describeType from '../index.js';
 import max from '../../../is/max';
 
 test('describeType.is.max exposure', (t) => {

@@ -1,6 +1,6 @@
 import test from 'ava';
 import * as datatypes from '../../.fixtures/datatypes.fixture.js';
-import * as describeType from '..';
+import * as describeType from '../index.js';
 import nativeFunction from '../../../is/nativeFunction';
 
 test('describeType.is.nativeFunction exposure', (t) => {

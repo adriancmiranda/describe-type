@@ -1,6 +1,6 @@
 import test from 'ava';
 import Custom from '../../fixtures/datatype/types/custom';
-import * as describeType from '..';
+import * as describeType from '../index.js';
 import constructorOf from '../../../internal/constructorOf';
 
 test('describeType.constructorOf exposure', (t) => {

@@ -1,5 +1,5 @@
 import test from 'ava';
-import * as describeType from '..';
+import * as describeType from '../index.js';
 import at from './at';
 
 test('describeType.has.at exposure', (t) => {

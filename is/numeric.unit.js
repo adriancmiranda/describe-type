@@ -1,6 +1,6 @@
 import test from 'ava';
 import * as datatypes from '../../.fixtures/datatypes.fixture.js';
-import * as describeType from '..';
+import * as describeType from '../index.js';
 import numeric from '../../../is/numeric';
 
 test('describeType.is.numeric exposure', (t) => {

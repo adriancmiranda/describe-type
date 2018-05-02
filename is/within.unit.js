@@ -1,5 +1,5 @@
 import test from 'ava';
-import * as describeType from '..';
+import * as describeType from '../index.js';
 import within from '../../../is/within';
 
 test('describeType.is.within exposure', (t) => {

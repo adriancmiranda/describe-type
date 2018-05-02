@@ -1,6 +1,6 @@
 import test from 'ava';
 import { toSource, constructorNameOf } from '../../fixtures/datatype/utils';
-import * as describeType from '..';
+import * as describeType from '../index.js';
 import vector from '../../../is/vector';
 
 test('describeType.is.vector exposure', (t) => {

@@ -1,5 +1,5 @@
 import test from 'ava';
-import * as describeType from '..';
+import * as describeType from '../index.js';
 import ownProperty from './ownProperty';
 
 test('describeType.has.ownProperty exposure', (t) => {

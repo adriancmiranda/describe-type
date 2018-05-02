@@ -1,5 +1,5 @@
 import test from 'ava';
-import * as describeType from '..';
+import * as describeType from '../index.js';
 import booleanOf from '../../../internal/booleanOf';
 
 test('describeType.booleanOf exposure', (t) => {
