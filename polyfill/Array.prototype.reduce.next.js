@@ -24,7 +24,7 @@ import keys from './Object.keys.next.js';
  */
 export default function reduce(list, cmd, initialValue, context) {
 	if (list === undefined || list === null) return undefined;
-	if (callable(cmd) === false) throw new TypeError;
+	if (callable(cmd) === false) throw new TypeError(`The second argument should be a function, received "${typeof cmd}"`);
 	const size = (0 | list.length);
 	if (size) {
 		let index = 0;

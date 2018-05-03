@@ -1,5 +1,5 @@
-import callable from './callable.js';
-import type from './type.js';
+import callable from './callable.next.js';
+import type from './type.next.js';
 
 /**
  * TODO: a,an,any
