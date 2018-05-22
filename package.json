@@ -137,6 +137,7 @@
     "failWithoutAssertions": false,
     "concurrency": 5,
     "require": [
+      "@babel/polyfill",
       "./.bin/ava/babel-register.js",
       "./.bin/ava/browser-env.js"
     ]
