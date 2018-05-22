@@ -1,6 +1,4 @@
-'use strict';
-
-var unfilled = require('./unfilled.js');
+const unfilled = require('./unfilled.js');
 
 /**
  *
@@ -9,7 +7,6 @@ var unfilled = require('./unfilled.js');
  * @param {any}
  * @returns {Boolean}
  */
-module.exports = filled;
-function filled(value) {
-  return unfilled(value) === false;
+module.exports = function filled(value) {
+	return unfilled(value) === false;
 }

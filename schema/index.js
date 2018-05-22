@@ -1,61 +1,39 @@
-'use strict';
+const startsWith = require('../polyfill/String.prototype.startsWith.js');
+const keys = require('../polyfill/Object.keys.js');
+const create = require('../polyfill/Object.create.js');
+const assign = require('../polyfill/Object.assign.js');
+const reduce = require('../polyfill/Array.prototype.reduce.js');
+const filter = require('../polyfill/Array.prototype.filter.js');
+const { env } = require('../internal/env.js');
+const stringify = require('../internal/stringify.js');
+const typify = require('../internal/typify.js');
+const any = require('../is/any.js');
+const object = require('../is/object/object.js');
+const string = require('../is/string/string.js');
+const array = require('../is/array/array.js');
+const notType = require('../is/not/not.type.js');
+const notAny = require('../is/not/not.any.js');
+const notInstanceOf = require('../is/not/not.instanceOf.js');
+const asType = require('../as/as.type.js');
+const asAny = require('../as/as.any.js');
+const asInstanceOf = require('../as/as.instanceOf.js');
 
-var startsWith = require('../polyfill/String.prototype.startsWith.js');
-
-var keys = require('../polyfill/Object.keys.js');
-
-var create = require('../polyfill/Object.create.js');
-
-var assign = require('../polyfill/Object.assign.js');
-
-var reduce = require('../polyfill/Array.prototype.reduce.js');
-
-var filter = require('../polyfill/Array.prototype.filter.js');
-
-var _internalEnvJs = require('../internal/env.js');
-
-var env = _internalEnvJs.env;
-
-var stringify = require('../internal/stringify');
-
-var typify = require('../internal/typify.js');
-
-var any = require('../is/any.js');
-
-var object = require('../is/object/object.js');
-
-var string = require('../is/string/string.js');
-
-var array = require('../is/array/array.js');
-
-var notType = require('../is/not/not.type.js');
-
-var notAny = require('../is/not/not.any.js');
-
-var notInstanceOf = require('../is/not/not.instanceOf.js');
-
-var asType = require('../as/as.type.js');
-
-var asAny = require('../as/as.any.js');
-
-var asInstanceOf = require('../as/as.instanceOf.js');
-
-var PR0PERTIES = {
+const PR0PERTIES = {
 	type: true,
 	required: true,
 	strict: false,
-	default: false
+	default: false,
 };
 
 function schematize(patterns, settings) {
-	var schema = asAny(Object, patterns) || create(null);
-	var object = asAny(Object, settings) || create(null);
-	return reduce(keys(schema), function (copy, key) {
+	const schema = asAny(Object, patterns) || create(null);
+	const object = asAny(Object, settings) || create(null);
+	return reduce(keys(schema), (copy, key) => {
 		if (startsWith(key, '$')) {
-			var slug = key.substring(1);
-			var assert = { key: key, data: schema[key] };
-			var config = { key: slug, data: object[slug] };
-			var result = parseProperty(assert, config, copy);
+			const slug = key.substring(1);
+			const assert = { key, data: schema[key] };
+			const config = { key: slug, data: object[slug] };
+			const result = parseProperty(assert, config, copy);
 			copy[result.key] = result.data;
 		}
 		return copy;
@@ -92,14 +70,12 @@ function parseConfig(assert, config) {
 }
 
 function filterAssertProps(hash, onlyRequired) {
-	return filter(keys(hash), function (key) {
-		return onlyRequired ? hash[key] : key;
-	});
+	return filter(keys(hash), (key) => onlyRequired ? hash[key] : key);
 }
 
 function validateProp(prop, onlyRequired) {
-	var requiredProps = filterAssertProps(PR0PERTIES, onlyRequired).join('|');
-	return new RegExp('^(' + requiredProps + ')$').test(prop);
+	const requiredProps = filterAssertProps(PR0PERTIES, onlyRequired).join('|');
+	return new RegExp(`^(${requiredProps})$`).test(prop);
 }
 
 function validateRequiredProp(prop) {
@@ -107,8 +83,8 @@ function validateRequiredProp(prop) {
 }
 
 function validateAssert(hash) {
-	var objRequired = filter(keys(hash), validateRequiredProp);
-	var allRequired = filterAssertProps(PR0PERTIES, true);
+	const objRequired = filter(keys(hash), validateRequiredProp);
+	const allRequired = filterAssertProps(PR0PERTIES, true);
 	return objRequired.length === allRequired.length;
 }
 

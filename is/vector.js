@@ -1,8 +1,5 @@
-'use strict';
-
-var notAny = require('./not/not.any.js');
-
-var arraylike = require('./arraylike/arraylike.js');
+const notAny = require('./not/not.any.js');
+const arraylike = require('./arraylike/arraylike.js');
 
 /**
  * TODO: a,an,any
@@ -12,11 +9,10 @@ var arraylike = require('./arraylike/arraylike.js');
  * @param {arraylike} value
  * @returns {Boolean}
  */
-module.exports = vector;
-function vector(expected, value) {
-  if (arraylike(value) === false) return false;
-  for (var i = value.length - 1; i > -1; i -= 1) {
-    if (notAny(expected, value[i])) return false;
-  }
-  return true;
+module.exports = function vector(expected, value) {
+	if (arraylike(value) === false) return false;
+	for (let i = value.length - 1; i > -1; i -= 1) {
+		if (notAny(expected, value[i])) return false;
+	}
+	return true;
 }

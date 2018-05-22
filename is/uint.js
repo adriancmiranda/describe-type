@@ -1,6 +1,4 @@
-'use strict';
-
-var int = require('./int.js');
+const int = require('./int.js');
 
 /**
  *
@@ -9,7 +7,6 @@ var int = require('./int.js');
  * @param {any} value
  * @returns {Boolean}
  */
-module.exports = uint;
-function uint(value) {
-  return int(value) && value >= 0;
+module.exports = function uint(value) {
+	return int(value) && value >= 0;
 }

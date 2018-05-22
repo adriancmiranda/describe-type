@@ -1,6 +1,5 @@
-'use strict';
-
-var callable = require('../callable.js');
+/* eslint-disable no-underscore-dangle */
+const callable = require('../callable.js');
 
 /**
  *
@@ -9,9 +8,8 @@ var callable = require('../callable.js');
  * @param {any} value
  * @returns {Boolean}
  */
-module.exports = stream;
-function stream(value) {
-  if (value === undefined || value === null) return false;
-  if (value._events === undefined || value._events === null) return false;
-  return callable(value.pipe);
-} /* eslint-disable no-underscore-dangle */
+module.exports = function stream(value) {
+	if (value === undefined || value === null) return false;
+	if (value._events === undefined || value._events === null) return false;
+	return callable(value.pipe);
+}

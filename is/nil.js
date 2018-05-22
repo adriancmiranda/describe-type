@@ -1,5 +1,3 @@
-"use strict";
-
 /**
  *
  * @function
@@ -7,7 +5,6 @@
  * @param {any}
  * @returns {Boolean}
  */
-module.exports = nil;
-function nil(value) {
-  return value === null;
+module.exports = function nil(value) {
+	return value === null;
 }

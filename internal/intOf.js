@@ -1,6 +1,4 @@
-'use strict';
-
-var int = require('../is/int.js');
+const int = require('../is/int.js');
 
 /**
  * The `intOf()` function parses a string argument and returns an integer of the
@@ -27,8 +25,7 @@ var int = require('../is/int.js');
  * min: -2147483647
  * max: 2147483647
  */
-module.exports = intOf;
-function intOf(value, radix) {
-  value = radix === undefined || radix === null ? value : parseInt(value, radix);
-  return int(value) ? value : 0 | value;
+module.exports = function intOf(value, radix) {
+	value = (radix === undefined || radix === null ? value : parseInt(value, radix));
+	return int(value) ? value : 0 | value;
 }

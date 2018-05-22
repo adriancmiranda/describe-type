@@ -1,8 +1,6 @@
-'use strict';
-
-var callable = require('../callable.js');
-
-var streamDuplex = require('./stream.duplex.js');
+/* eslint-disable no-underscore-dangle */
+const callable = require('../callable.js');
+const streamDuplex = require('./stream.duplex.js');
 
 /**
  *
@@ -11,8 +9,8 @@ var streamDuplex = require('./stream.duplex.js');
  * @param {any} value
  * @returns {Boolean}
  */
-/* eslint-disable no-underscore-dangle */
-module.exports = isStreamTransform;
-function isStreamTransform(value) {
-  return streamDuplex(value) && value._transformState != null && callable(value._transform);
+module.exports = function isStreamTransform(value) {
+	return streamDuplex(value) &&
+	value._transformState != null &&
+	callable(value._transform);
 }

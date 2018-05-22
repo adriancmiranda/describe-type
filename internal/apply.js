@@ -1,6 +1,4 @@
-'use strict';
-
-var arraylike = require('../is/arraylike/arraylike.js');
+const arraylike = require('../is/arraylike/arraylike.js');
 
 /**
  *
@@ -8,33 +6,21 @@ var arraylike = require('../is/arraylike/arraylike.js');
  * @param {any} context - .
  * @returns {any}
  */
-module.exports = apply;
-function apply(cmd, context, args, blindly) {
+module.exports = function apply(cmd, context, args, blindly) {
 	try {
-		var $ = arraylike(args) ? args : [];
+		const $ = arraylike(args) ? args : [];
 		switch ($.length) {
-			case 0:
-				return cmd.call(context);
-			case 1:
-				return cmd.call(context, $[0]);
-			case 2:
-				return cmd.call(context, $[0], $[1]);
-			case 3:
-				return cmd.call(context, $[0], $[1], $[2]);
-			case 4:
-				return cmd.call(context, $[0], $[1], $[2], $[3]);
-			case 5:
-				return cmd.call(context, $[0], $[1], $[2], $[3], $[4]);
-			case 6:
-				return cmd.call(context, $[0], $[1], $[2], $[3], $[4], $[5]);
-			case 7:
-				return cmd.call(context, $[0], $[1], $[2], $[3], $[4], $[5], $[6]);
-			case 8:
-				return cmd.call(context, $[0], $[1], $[2], $[3], $[4], $[5], $[6], $[7]);
-			case 9:
-				return cmd.call(context, $[0], $[1], $[2], $[3], $[4], $[5], $[6], $[7], $[8]);
-			default:
-				return cmd.apply(context, $);
+			case 0: return cmd.call(context);
+			case 1: return cmd.call(context, $[0]);
+			case 2: return cmd.call(context, $[0], $[1]);
+			case 3: return cmd.call(context, $[0], $[1], $[2]);
+			case 4: return cmd.call(context, $[0], $[1], $[2], $[3]);
+			case 5: return cmd.call(context, $[0], $[1], $[2], $[3], $[4]);
+			case 6: return cmd.call(context, $[0], $[1], $[2], $[3], $[4], $[5]);
+			case 7: return cmd.call(context, $[0], $[1], $[2], $[3], $[4], $[5], $[6]);
+			case 8: return cmd.call(context, $[0], $[1], $[2], $[3], $[4], $[5], $[6], $[7]);
+			case 9: return cmd.call(context, $[0], $[1], $[2], $[3], $[4], $[5], $[6], $[7], $[8]);
+			default: return cmd.apply(context, $);
 		}
 	} catch (err) {
 		if (blindly) return err;

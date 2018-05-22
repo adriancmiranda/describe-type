@@ -1,10 +1,7 @@
-'use strict';
-
-var arraylike = require('../is/arraylike/arraylike.js');
-
-var eachProperty = require('./eachProperty.js');
-
-var eachValue = require('./eachValue.js');
+/* eslint-disable no-restricted-syntax */
+const arraylike = require('../is/arraylike/arraylike.js');
+const eachProperty = require('./eachProperty.js');
+const eachValue = require('./eachValue.js');
 
 /**
  *
@@ -15,8 +12,7 @@ var eachValue = require('./eachValue.js');
  * @param {Boolean} keepReverseOrGetInheritedProps
  * @returns {?}
  */
-module.exports = each;
-function each(value, cmd, context, keepReverseOrGetInheritedProps) {
-  if (arraylike(value)) return eachValue(value, cmd, context, keepReverseOrGetInheritedProps);
-  return eachProperty(value, cmd, context, keepReverseOrGetInheritedProps);
-} /* eslint-disable no-restricted-syntax */
+module.exports = function each(value, cmd, context, keepReverseOrGetInheritedProps) {
+	if (arraylike(value)) return eachValue(value, cmd, context, keepReverseOrGetInheritedProps);
+	return eachProperty(value, cmd, context, keepReverseOrGetInheritedProps);
+}

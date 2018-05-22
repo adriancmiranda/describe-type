@@ -1,8 +1,4 @@
-'use strict';
-
-var _internalBuiltInJs = require('../internal/built-in.js');
-
-var objectHasOwnProperty = _internalBuiltInJs.objectHasOwnProperty;
+const { objectHasOwnProperty } = require('../internal/built-in.js');
 
 /**
  *
@@ -17,11 +13,11 @@ module.exports = Object.assign || function assign(target) {
 	if (target === undefined || target === null) {
 		throw new TypeError('Cannot convert undefined or null to object');
 	}
-	var rest = slice(args, 1);
-	for (var index = 1; index < rest.length; index += 1) {
-		var source = rest[index];
+	const rest = slice(args, 1);
+	for (let index = 1; index < rest.length; index += 1) {
+		const source = rest[index];
 		if ((source === undefined || source === null) === false) {
-			for (var key in source) {
+			for (const key in source) {
 				if (objectHasOwnProperty.call(source, key)) {
 					target[key] = source[key];
 				}

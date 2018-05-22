@@ -1,10 +1,5 @@
-'use strict';
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var notType = require('../is/not/not.type.js');
-
-var each = require('../internal/each.js');
+const notType = require('../is/not/not.type.js');
+const each = require('../internal/each.js');
 
 /**
  *
@@ -20,13 +15,13 @@ var each = require('../internal/each.js');
 module.exports = Object.create || function create(proto, properties) {
 	if (proto === null) return {};
 	if (notType(Object, proto)) {
-		throw new TypeError('Object prototype may only be an Object or null: ' + (typeof proto === 'undefined' ? 'undefined' : _typeof(proto)));
+		throw new TypeError('Object prototype may only be an Object or null: ' + (typeof proto));
 	}
-	var Instance = function Instance() {};
+	const Instance = function () {};
 	Instance.prototype = proto;
 	proto = new Instance();
-	each(properties, function (value, property) {
+	each(properties, (value, property) => {
 		proto[property] = value.value;
 	});
 	return proto;
-};
+}

@@ -1,6 +1,4 @@
-'use strict';
-
-var primitive = require('./primitive.js');
+const primitive = require('./primitive.js');
 
 /**
  *
@@ -10,7 +8,6 @@ var primitive = require('./primitive.js');
  * @param {Object|Array|Function} host
  * @returns {Boolean}
  */
-module.exports = hosted;
-function hosted(key, host) {
-  return (host === undefined || host === null || primitive(host[key]) === false) === true;
+module.exports = function hosted(key, host) {
+	return (host === undefined || host === null || primitive(host[key]) === false) === true;
 }

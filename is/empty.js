@@ -1,10 +1,6 @@
-'use strict';
-
-var arraylikeEmpty = require('./arraylike/arraylike.empty.js');
-
-var objectEmpty = require('./object/object.empty.js');
-
-var callable = require('./callable.js');
+const arraylikeEmpty = require('./arraylike/arraylike.empty.js');
+const objectEmpty = require('./object/object.empty.js');
+const callable = require('./callable.js');
 
 /**
  *
@@ -13,8 +9,7 @@ var callable = require('./callable.js');
  * @param {any} value
  * @returns {Boolean}
  */
-module.exports = empty;
-function empty(value) {
+module.exports = function empty(value) {
 	if (value === undefined || value === null) {
 		return true;
 	}

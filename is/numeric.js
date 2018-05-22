@@ -1,12 +1,7 @@
-'use strict';
-
-var arraylike = require('./arraylike/arraylike.js');
-
-var bool = require('./bool.js');
-
-var nan = require('./nan.js');
-
-var infinity = require('./infinity.js');
+const arraylike = require('./arraylike/arraylike.js');
+const bool = require('./bool.js');
+const nan = require('./nan.js');
+const infinity = require('./infinity.js');
 
 /**
  *
@@ -15,12 +10,11 @@ var infinity = require('./infinity.js');
  * @param {any} value
  * @returns {Boolean}
  */
-module.exports = numeric;
-function numeric(value) {
+module.exports = function numeric(value) {
 	if (value === undefined || value === null) return false;
 	if (bool(value)) return true;
 	try {
-		var test = parseFloat(value);
+		const test = parseFloat(value);
 		return (nan(test) || infinity(test) || arraylike(test)) === false;
 	} catch (err) {
 		return false;

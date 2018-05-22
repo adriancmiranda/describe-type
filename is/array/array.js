@@ -1,5 +1,3 @@
-"use strict";
-
 /**
  *
  * @function
@@ -7,7 +5,6 @@
  * @param {any} value
  * @returns {Boolean}
  */
-module.exports = array;
-function array(value) {
-  return value instanceof Array;
+module.exports = function array(value) {
+	return value instanceof Array;
 }

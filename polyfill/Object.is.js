@@ -1,5 +1,3 @@
-"use strict";
-
 /**
  * The Object.is() method determines whether two values are the same value.
  * @function
@@ -9,11 +7,11 @@
  * the same value.
  */
 module.exports = Object.is || function is(valueA, valueB) {
-  if (valueA === valueB) {
-    if (valueA === 0) return 1 / valueA === 1 / valueB;
-    return true;
-  }
-  var a = valueA;
-  var b = valueB;
-  return valueA !== a && valueB !== b;
-};
+	if (valueA === valueB) {
+		if (valueA === 0) return 1 / valueA === 1 / valueB;
+		return true;
+	}
+	const a = valueA;
+	const b = valueB;
+	return valueA !== a && valueB !== b;
+}

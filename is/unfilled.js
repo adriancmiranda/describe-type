@@ -1,5 +1,3 @@
-"use strict";
-
 /**
  *
  * @function
@@ -7,7 +5,6 @@
  * @param {any}
  * @returns {Boolean}
  */
-module.exports = unfilled;
-function unfilled(value) {
-  return value === undefined || value === null;
+module.exports = function unfilled(value) {
+	return value === undefined || value === null;
 }

@@ -1,8 +1,5 @@
-'use strict';
-
-var string = require('./string.js');
-
-var stringEmpty = require('./string.empty.js');
+const string = require('./string.js');
+const stringEmpty = require('./string.empty.js');
 
 string.empty = stringEmpty;
 module.exports = string;

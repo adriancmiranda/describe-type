@@ -1,6 +1,4 @@
-'use strict';
-
-var instanceOf = require('../instanceOf.js');
+const instanceOf = require('../instanceOf.js');
 
 /**
  *
@@ -10,7 +8,6 @@ var instanceOf = require('../instanceOf.js');
  * @param {any} value
  * @returns {Boolean}
  */
-module.exports = notInstanceOf;
-function notInstanceOf(expected, value) {
-  return instanceOf(expected, value) === false;
+module.exports = function notInstanceOf(expected, value) {
+	return instanceOf(expected, value) === false;
 }

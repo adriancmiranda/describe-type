@@ -1,6 +1,4 @@
-'use strict';
-
-var number = require('./number.js');
+const number = require('./number.js');
 
 /**
  *
@@ -9,8 +7,7 @@ var number = require('./number.js');
  * @param {any} value
  * @returns {Boolean}
  */
-module.exports = nan;
-function nan(value) {
-  var isnum = number(value);
-  return isnum === false || isnum && value !== value;
+module.exports = function nan(value) {
+	const isnum = number(value);
+	return isnum === false || (isnum && value !== value);
 }

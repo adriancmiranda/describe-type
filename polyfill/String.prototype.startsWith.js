@@ -1,8 +1,5 @@
-'use strict';
-
-var mod = require('../internal/mod.js');
-
-var asType = require('../as/as.type.js');
+const mod = require('../internal/mod.js');
+const asType = require('../as/as.type.js');
 
 /**
  *
@@ -13,9 +10,8 @@ var asType = require('../as/as.type.js');
  * @param {uint} position -
  * @returns {Boolean}
  */
-module.exports = startsWith;
-function startsWith(value, search, position) {
-  var str = asType(String, value) || '';
-  var startIndex = mod(position, 0, str.length);
-  return str.substr(startIndex, search.length) === search;
+module.exports = function startsWith(value, search, position) {
+	const str = asType(String, value) || '';
+	const startIndex = mod(position, 0, str.length);
+	return str.substr(startIndex, search.length) === search;
 }

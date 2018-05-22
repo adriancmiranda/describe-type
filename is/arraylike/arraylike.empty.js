@@ -1,6 +1,4 @@
-'use strict';
-
-var arraylike = require('./arraylike.js');
+const arraylike = require('./arraylike.js');
 
 /**
  *
@@ -9,7 +7,6 @@ var arraylike = require('./arraylike.js');
  * @param {any} value
  * @returns {Boolean}
  */
-module.exports = isEmptyArraylike;
-function isEmptyArraylike(value) {
-  return arraylike(value) && value.length === 0;
+module.exports = function isEmptyArraylike(value) {
+	return arraylike(value) && value.length === 0;
 }

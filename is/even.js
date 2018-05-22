@@ -1,8 +1,5 @@
-'use strict';
-
-var number = require('./number.js');
-
-var infinity = require('./infinity.js');
+const number = require('./number.js');
+const infinity = require('./infinity.js');
 
 /**
  *
@@ -11,7 +8,6 @@ var infinity = require('./infinity.js');
  * @param {any} value
  * @returns {Boolean}
  */
-module.exports = even;
-function even(value) {
-  return infinity(value) || number(value) && value === value && value % 2 === 0;
+module.exports = function even(value) {
+	return infinity(value) || (number(value) && value === value && value % 2 === 0);
 }

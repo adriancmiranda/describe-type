@@ -1,8 +1,5 @@
-'use strict';
-
-var nan = require('../is/nan.js');
-
-var infinity = require('../is/infinity.js');
+const nan = require('../is/nan.js');
+const infinity = require('../is/infinity.js');
 
 /**
  * The `floatOf()` function parses an argument and returns a floating point number.
@@ -18,8 +15,7 @@ var infinity = require('../is/infinity.js');
  * @returns {Number} A floating point number parsed from the given value.
  * If the first character cannot be converted to a number, 0 is returned.
  */
-module.exports = floatOf;
-function floatOf(value) {
-  value = +value;
-  return nan(value) || infinity(value) ? 0 : value;
+module.exports = function floatOf(value) {
+	value = +value;
+	return nan(value) || infinity(value) ? 0 : value;
 }

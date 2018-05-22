@@ -1,12 +1,7 @@
-'use strict';
-
-var asType = require('./as.type.js');
-
-var asAny = require('./as.any.js');
-
-var asInstanceOf = require('./as.instanceOf.js');
-
-var asVectorOf = require('./as.vectorOf.js');
+const asType = require('./as.type.js');
+const asAny = require('./as.any.js');
+const asInstanceOf = require('./as.instanceOf.js');
+const asVectorOf = require('./as.vectorOf.js');
 
 asType.a = asType.an = asType.type = asType;
 asType.any = asAny;

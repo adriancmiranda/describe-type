@@ -1,6 +1,4 @@
-'use strict';
-
-var array = require('./array.js');
+const array = require('./array.js');
 
 /**
  *
@@ -9,7 +7,6 @@ var array = require('./array.js');
  * @param {any} value
  * @returns {Boolean}
  */
-module.exports = isEmptyArray;
-function isEmptyArray(value) {
-  return array(value) && value.length === 0;
+module.exports = function isEmptyArray(value) {
+	return array(value) && value.length === 0;
 }

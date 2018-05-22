@@ -1,11 +1,5 @@
-'use strict';
-
-var callable = require('../is/callable.js');
-
-var _internalBuiltInJs = require('../internal/built-in.js');
-
-var objectHasOwnProperty = _internalBuiltInJs.objectHasOwnProperty;
-
+const callable = require('../is/callable.js');
+const { objectHasOwnProperty } = require('../internal/built-in.js');
 
 /**
  * Creates a new array with all of the elements of this array for which the
@@ -24,16 +18,15 @@ var objectHasOwnProperty = _internalBuiltInJs.objectHasOwnProperty;
  * If no elements pass the test, an empty array will be returned.
  * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
  */
-module.exports = filter;
-function filter(list, cmd, context) {
-  if (list === undefined || list === null) throw new TypeError();
-  if (callable(cmd) === false) throw new TypeError();
-  var result = [];
-  for (var index = 0; index < list.length; index += 1) {
+module.exports = function filter(list, cmd, context) {
+  if (list === undefined || list === null) throw new TypeError;
+  if (callable(cmd) === false) throw new TypeError;
+  const result = [];
+  for (let index = 0; index < list.length; index += 1) {
     if (objectHasOwnProperty.call(list, index) === false) continue;
-    var value = list[index];
+    const value = list[index];
     if (cmd.call(context, value, index, list)) {
-      result[result.length] = value;
+    	result[result.length] = value;
     }
   }
   return result;

@@ -1,12 +1,6 @@
-'use strict';
+const { reIsHex } = require('../internal/patterns.js');
+const string = require('./string/string.js');
 
-var _internalPatternsJs = require('../internal/patterns.js');
-
-var reIsHex = _internalPatternsJs.reIsHex;
-
-var string = require('./string/string.js');
-
-module.exports = hex;
-function hex(value) {
+module.exports = function hex(value) {
 	return string(value) && reIsHex.test(value);
 }

@@ -1,8 +1,5 @@
-'use strict';
-
-var callable = require('./callable.js');
-
-var type = require('./type.js');
+const callable = require('./callable.js');
+const type = require('./type.js');
 
 /**
  * TODO: a,an,any
@@ -12,12 +9,11 @@ var type = require('./type.js');
  * @param {any} value
  * @returns {Boolean}
  */
-module.exports = instanceOf;
-function instanceOf(expected, value) {
+module.exports = function instanceOf(expected, value) {
 	if (expected === undefined || expected === null) return expected === value;
 	if (expected instanceof Array && expected.length > 0) {
-		for (var i = expected.length - 1; i > -1; i -= 1) {
-			var ctor = expected[i];
+		for (let i = expected.length - 1; i > -1; i -= 1) {
+			const ctor = expected[i];
 			if (ctor === Number) return type(ctor, value); // ... should normalize?!
 			if (callable(ctor) && value instanceof ctor) return true;
 		}

@@ -1,10 +1,6 @@
-'use strict';
-
-var ownProperty = require('./ownProperty.js');
-
-var ownValue = require('./ownValue.js');
-
-var array = require('../is/array/array.js');
+const ownProperty = require('./ownProperty.js');
+const ownValue = require('./ownValue.js');
+const array = require('../is/array/array.js');
 
 /**
  *
@@ -14,8 +10,7 @@ var array = require('../is/array/array.js');
  * @param {any} value
  * @returns {Boolean}
  */
-module.exports = own;
-function own(context, value) {
-  if (array(context)) return ownValue(context, value);
-  return ownProperty(context, value);
+module.exports = function own(context, value) {
+	if (array(context)) return ownValue(context, value);
+	return ownProperty(context, value);
 }

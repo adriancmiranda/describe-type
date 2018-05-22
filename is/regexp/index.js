@@ -1,5 +1,5 @@
-const regexp = require('./regexp.next.js');
-const regexpString = require('./regexp.string.next.js');
+const regexp = require('./regexp.js');
+const regexpString = require('./regexp.string.js');
 
 regexp.empty = regexpString;
 module.exports = regexp;

@@ -1,6 +1,4 @@
-'use strict';
-
-var args = require('./args.js');
+const args = require('./args.js');
 
 /**
  *
@@ -9,7 +7,6 @@ var args = require('./args.js');
  * @param {any} value
  * @returns {Boolean}
  */
-module.exports = isEmptyArgs;
-function isEmptyArgs(value) {
-  return args(value) && value.length === 0;
+module.exports = function isEmptyArgs(value) {
+	return args(value) && value.length === 0;
 }

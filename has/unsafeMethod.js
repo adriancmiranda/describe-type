@@ -1,6 +1,4 @@
-'use strict';
-
-var callable = require('../is/callable.js');
+const callable = require('../is/callable.js');
 
 /**
  *
@@ -10,11 +8,10 @@ var callable = require('../is/callable.js');
  * @param {any} value
  * @returns {Boolean}
  */
-module.exports = unsafeMethod;
-function unsafeMethod(context, methodName) {
-  try {
-    return callable(context[methodName]);
-  } catch (err) {
-    return false;
-  }
+module.exports = function unsafeMethod(context, methodName) {
+	try {
+		return callable(context[methodName]);
+	} catch (err) {
+		return false;
+	}
 }

@@ -1,10 +1,6 @@
-'use strict';
-
-var is = require('../polyfill/Object.is.js');
-
-var keys = require('../polyfill/Object.keys.js');
-
-var constructorOf = require('../internal/constructorOf.js');
+const is = require('../polyfill/Object.is.js');
+const keys = require('../polyfill/Object.keys.js');
+const constructorOf = require('../internal/constructorOf.js');
 
 /**
  * The equal() method determines whether two values are the same value.
@@ -15,9 +11,8 @@ var constructorOf = require('../internal/constructorOf.js');
  * @returns {Boolean} A Boolean indicating whether or not the two arguments are
  * the same value.
  */
-module.exports = equal;
-function equal(valueA, valueB) {
-	var size = void 0;
+module.exports = function equal(valueA, valueB) {
+	let size;
 	if (valueA === undefined || valueA === null) {
 		return is(valueA, valueB);
 	} else if (valueB === undefined || valueB === null) {
@@ -25,19 +20,19 @@ function equal(valueA, valueB) {
 	} else if (is(valueA, valueB)) {
 		return true;
 	}
-	var constructorA = constructorOf(valueA);
-	var constructorB = constructorOf(valueB);
+	const constructorA = constructorOf(valueA);
+	const constructorB = constructorOf(valueB);
 	if (constructorA === constructorB === false) {
 		return false;
 	} else if (constructorA === Object) {
-		var keysA = keys(valueA);
-		var keysB = keys(valueB);
+		const keysA = keys(valueA);
+		const keysB = keys(valueB);
 		size = keysA.length;
 		if (size === keysB.length === false) {
 			return false;
 		}
 		for (size -= 1; size > -1; size -= 1) {
-			var key = keysA[size];
+			const key = keysA[size];
 			if (equal(valueA[key], valueB[key]) === false) {
 				return false;
 			}

@@ -1,6 +1,4 @@
-'use strict';
-
-var asType = require('./as.type.js');
+const asType = require('./as.type.js');
 
 /**
  * @memberof is

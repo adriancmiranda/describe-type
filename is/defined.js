@@ -1,6 +1,4 @@
-'use strict';
-
-var undef = require('./undef.js');
+const undef = require('./undef.js');
 
 /**
  *
@@ -9,7 +7,6 @@ var undef = require('./undef.js');
  * @param {any}
  * @returns {Boolean}
  */
-module.exports = defined;
-function defined(value) {
-  return undef(value) === false;
+module.exports = function defined(value) {
+	return undef(value) === false;
 }

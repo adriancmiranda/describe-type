@@ -1,8 +1,5 @@
-'use strict';
-
-var number = require('./number.js');
-
-var infinity = require('./infinity.js');
+const number = require('./number.js');
+const infinity = require('./infinity.js');
 
 /**
  *
@@ -11,7 +8,6 @@ var infinity = require('./infinity.js');
  * @param {any} value
  * @returns {Boolean}
  */
-module.exports = decimal;
-function decimal(value) {
-  return number(value) && value === value && infinity(value) === false && value % 1 !== 0;
+module.exports = function decimal(value) {
+	return number(value) && value === value && infinity(value) === false && value % 1 !== 0;
 }

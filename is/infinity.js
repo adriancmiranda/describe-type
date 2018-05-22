@@ -1,6 +1,4 @@
-'use strict';
-
-var number = require('./number.js');
+const number = require('./number.js');
 
 /**
  *
@@ -9,7 +7,6 @@ var number = require('./number.js');
  * @param {any} value
  * @returns {Boolean}
  */
-module.exports = infinity;
-function infinity(value) {
-  return number(value) && value - 1 === value;
+module.exports = function infinity(value) {
+	return number(value) && (value - 1) === value;
 }

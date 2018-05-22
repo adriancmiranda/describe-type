@@ -1,8 +1,5 @@
-'use strict';
-
-var number = require('./number.js');
-
-var callable = require('./callable.js');
+const number = require('./number.js');
+const callable = require('./callable.js');
 
 /**
  *
@@ -11,8 +8,7 @@ var callable = require('./callable.js');
  * @param {any} value
  * @returns {Boolean}
  */
-module.exports = enumerable;
-function enumerable(value) {
-  if (value === undefined || value === null) return false;
-  return number(value.length) && callable(value) === false;
+module.exports = function enumerable(value) {
+	if (value === undefined || value === null) return false;
+	return number(value.length) && callable(value) === false;
 }

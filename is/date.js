@@ -1,5 +1,3 @@
-"use strict";
-
 /**
  *
  * @function
@@ -7,7 +5,6 @@
  * @param {any} value
  * @returns {Boolean}
  */
-module.exports = date;
-function date(value) {
-  return value instanceof Date;
+module.exports = function date(value) {
+	return value instanceof Date;
 }

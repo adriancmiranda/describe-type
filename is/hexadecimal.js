@@ -1,12 +1,6 @@
-'use strict';
+const { reIsHexadecimal } = require('../internal/patterns.js');
+const string = require('./string/string.js');
 
-var _internalPatternsJs = require('../internal/patterns.js');
-
-var reIsHexadecimal = _internalPatternsJs.reIsHexadecimal;
-
-var string = require('./string/string.js');
-
-module.exports = hexadecimal;
-function hexadecimal(value) {
+module.exports = function hexadecimal(value) {
 	return string(value) && reIsHexadecimal.test(value);
 }

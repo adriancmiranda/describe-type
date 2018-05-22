@@ -1,10 +1,5 @@
-'use strict';
-
-var _internalPatternsJs = require('../internal/patterns.js');
-
-var reStringToBoolean = _internalPatternsJs.reStringToBoolean;
-
-var string = require('../is/string/string.js');
+const { reStringToBoolean } = require('../internal/patterns.js');
+const string = require('../is/string/string.js');
 
 /**
  *
@@ -13,10 +8,9 @@ var string = require('../is/string/string.js');
  * @param {any} value
  * @returns {Boolean}
  */
-module.exports = booleanOf;
-function booleanOf(value) {
-  if (string(value) && value.length) {
-    return reStringToBoolean.test(value);
-  }
-  return !!value;
+module.exports = function booleanOf(value) {
+	if (string(value) && value.length) {
+		return reStringToBoolean.test(value);
+	}
+	return !!value;
 }

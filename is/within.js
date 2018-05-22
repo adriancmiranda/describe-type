@@ -1,8 +1,5 @@
-'use strict';
-
-var floatOf = require('../internal/floatOf.js');
-
-var infinity = require('./infinity.js');
+const floatOf = require('../internal/floatOf.js');
+const infinity = require('./infinity.js');
 
 /**
  *
@@ -13,10 +10,11 @@ var infinity = require('./infinity.js');
  * @param {Number} finish
  * @returns {Boolean}
  */
-module.exports = within;
-function within(value, start, finish) {
-  value = floatOf(value);
-  start = floatOf(start);
-  finish = floatOf(finish);
-  return infinity(value) || infinity(start) || infinity(finish) || value >= start && value <= finish;
+module.exports = function within(value, start, finish) {
+	value = floatOf(value);
+	start = floatOf(start);
+	finish = floatOf(finish);
+	return infinity(value) || infinity(start) || infinity(finish) ||
+		(value >= start && value <= finish)
+	;
 }

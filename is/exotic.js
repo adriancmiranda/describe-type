@@ -1,6 +1,4 @@
-'use strict';
-
-var primitive = require('./primitive.js');
+const primitive = require('./primitive.js');
 
 /**
  *
@@ -9,7 +7,6 @@ var primitive = require('./primitive.js');
  * @param {any}
  * @returns {Boolean}
  */
-module.exports = exotic;
-function exotic(value) {
-  return primitive(value) === false;
+module.exports = function exotic(value) {
+	return primitive(value) === false;
 }

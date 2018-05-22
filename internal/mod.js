@@ -1,6 +1,5 @@
-'use strict';
-
-var intOf = require('../internal/intOf.js');
+/* eslint-disable no-nested-ternary */
+const intOf = require('../internal/intOf.js');
 
 /**
  *
@@ -11,22 +10,21 @@ var intOf = require('../internal/intOf.js');
  * @param {Number} b - divisor
  * @returns {Number}
  */
-module.exports = mod;
-function mod(n, a, b) {
+module.exports = function mod(n, a, b) {
 	n = intOf(n);
 	a = intOf(a);
 	b = intOf(b);
-	var rem = void 0;
+	let rem;
 	if (a < 0 || b < 0) {
-		var places = b - a;
+		const places = (b - a);
 		rem = (n - a) % (places + 1);
-		rem = rem < 0 ? rem + (places + 1) : rem === 0 ? 0 : rem;
+		rem = rem < 0 ? (rem + (places + 1)) : rem === 0 ? 0 : rem;
 		return rem - (places - b);
 	}
 	if (n === b) return n;
 	if (n === b + 1) return a;
 	if (n === a - 1) return b;
 	rem = n % (b || 1);
-	rem = rem < a ? rem + b : rem === 0 ? 0 : rem;
+	rem = rem < a ? (rem + b) : rem === 0 ? 0 : rem;
 	return rem;
-} /* eslint-disable no-nested-ternary */
+}

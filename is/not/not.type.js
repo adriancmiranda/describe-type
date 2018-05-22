@@ -1,6 +1,4 @@
-'use strict';
-
-var type = require('../type.js');
+const type = require('../type.js');
 
 /**
  *
@@ -10,7 +8,6 @@ var type = require('../type.js');
  * @param {any} value
  * @returns {Boolean}
  */
-module.exports = notType;
-function notType(expected, value) {
-  return type(expected, value) === false;
+module.exports = function notType(expected, value) {
+	return type(expected, value) === false;
 }

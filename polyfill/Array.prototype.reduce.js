@@ -1,8 +1,5 @@
-'use strict';
-
-var callable = require('../is/callable.js');
-
-var keys = require('./Object.keys.js');
+const callable = require('../is/callable.js');
+const keys = require('./Object.keys.js');
 
 /**
  * The reduce() method applies a function against an accumulator and each
@@ -25,20 +22,19 @@ var keys = require('./Object.keys.js');
  * @param {any} context - Value to use as this when executing callback.
  * @returns {any} The value that results from the reduction.
  */
-module.exports = reduce;
-function reduce(list, cmd, initialValue, context) {
-  if (list === undefined || list === null) return undefined;
-  if (callable(cmd) === false) throw new TypeError();
-  var size = 0 | list.length;
-  if (size) {
-    var index = 0;
-    if (arguments.length === 2) {
-      initialValue = list[index];
-      index = 1;
-    }
-    for (index; index < size; index += 1) {
-      initialValue = cmd.call(context || null, initialValue, list[index], index, list);
-    }
-  }
-  return initialValue;
+module.exports = function reduce(list, cmd, initialValue, context) {
+	if (list === undefined || list === null) return undefined;
+	if (callable(cmd) === false) throw new TypeError(`The second argument should be a function, received "${typeof cmd}"`);
+	const size = (0 | list.length);
+	if (size) {
+		let index = 0;
+		if (arguments.length === 2) {
+			initialValue = list[index];
+			index = 1;
+		}
+		for (index; index < size; index += 1) {
+			initialValue = cmd.call(context || null, initialValue, list[index], index, list);
+		}
+	}
+	return initialValue;
 }

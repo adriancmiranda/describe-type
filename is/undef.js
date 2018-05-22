@@ -1,5 +1,3 @@
-"use strict";
-
 /**
  *
  * @function
@@ -7,7 +5,6 @@
  * @param {any}
  * @returns {Boolean}
  */
-module.exports = undef;
-function undef(value) {
-  return value === undefined;
+module.exports = function undef(value) {
+	return value === undefined;
 }

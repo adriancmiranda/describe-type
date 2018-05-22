@@ -1,12 +1,7 @@
-'use strict';
-
-var notType = require('./not.type.js');
-
-var notAny = require('./not.any.js');
-
-var notInstanceOf = require('./not.instanceOf.js');
-
-var notVectorOf = require('./not.vectorOf.js');
+const notType = require('./not.type.js');
+const notAny = require('./not.any.js');
+const notInstanceOf = require('./not.instanceOf.js');
+const notVectorOf = require('./not.vectorOf.js');
 
 notType.a = notType.an = notType.type = notType;
 notType.any = notAny;

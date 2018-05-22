@@ -1,6 +1,5 @@
-'use strict';
-
-var ownProperty = require('../has/ownProperty.js');
+/* eslint-disable no-restricted-syntax */
+const ownProperty = require('../has/ownProperty.js');
 
 /**
  *
@@ -10,17 +9,16 @@ var ownProperty = require('../has/ownProperty.js');
  * @param {Boolean} getInheritedProps -
  * @returns {Array}
  */
-module.exports = keys;
-function keys(object, getInheritedProps) {
+module.exports = function keys(object, getInheritedProps) {
 	if (object === undefined || object === null) return [];
 	if (Object.keys && !getInheritedProps) {
 		return Object.keys(object);
 	}
-	var properties = [];
-	for (var key in object) {
+	const properties = [];
+	for (const key in object) {
 		if (getInheritedProps || ownProperty(object, key)) {
 			properties[properties.length] = key;
 		}
 	}
 	return properties;
-} /* eslint-disable no-restricted-syntax */
+}

@@ -1,6 +1,4 @@
-'use strict';
-
-var notType = require('./not.type.js');
+const notType = require('./not.type.js');
 
 /**
  * @memberof is

@@ -1,31 +1,16 @@
-'use strict';
+/* eslint-disable no-unused-vars */
+const internal = require('./internal/index.js');
+const has = require('./has/index.js');
+const is = require('./is/index.js');
 
-var _internalIndexJs = require('./internal/index.js');
-
-var internal = _internalIndexJs;
-
-var _hasIndexJs = require('./has/index.js');
-
-var has = _hasIndexJs;
-
-var _isIndexJs = require('./is/index.js');
-
-var is = _isIndexJs;
-
-var _internalIndexNextJs = require('./internal/index.next.js');
-
-var _asIndexNextJs = require('./as/index.next.js');
-
-var _schemaIndexNextJs = require('./schema/index.next.js');
-
-for (var _internalIndexNextJs_key in _internalIndexNextJs) {
-  if (_internalIndexNextJs_key !== "default") {
-    exports[_internalIndexNextJs_key] = _internalIndexNextJs[_internalIndexNextJs_key];
-  }
-} /* eslint-disable no-unused-vars */
-
-
+(function (resource) {
+	for (const name in resource) {
+		if (name === 'default' === false) {
+			this[name] = resource[name];
+		}
+	}
+}).call(exports, require('./internal/index.js'));
 exports.has = has;
 exports.is = is;
-exports.as = _asIndexNextJs;
-exports.schema = _schemaIndexNextJs;
+exports.as = require('./as/index.js');
+exports.schema = require('./schema/index.js');

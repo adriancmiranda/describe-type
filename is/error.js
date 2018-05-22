@@ -1,5 +1,3 @@
-"use strict";
-
 /**
  *
  * @function
@@ -7,7 +5,6 @@
  * @param {any}
  * @returns {Boolean}
  */
-module.exports = error;
-function error(value) {
-  return value instanceof Error;
+module.exports = function error(value) {
+	return value instanceof Error;
 }

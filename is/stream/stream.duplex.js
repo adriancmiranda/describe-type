@@ -1,8 +1,5 @@
-'use strict';
-
-var streamWritable = require('./stream.writable.js');
-
-var streamReadable = require('./stream.readable.js');
+const streamWritable = require('./stream.writable.js');
+const streamReadable = require('./stream.readable.js');
 
 /**
  *
@@ -11,7 +8,6 @@ var streamReadable = require('./stream.readable.js');
  * @param {any} value
  * @returns {Boolean}
  */
-module.exports = isStreamDuplex;
-function isStreamDuplex(value) {
-  return streamWritable(value) && streamReadable(value);
+module.exports = function isStreamDuplex(value) {
+	return streamWritable(value) && streamReadable(value);
 }

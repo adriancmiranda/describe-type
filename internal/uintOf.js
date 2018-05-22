@@ -1,6 +1,4 @@
-'use strict';
-
-var intOf = require('./intOf.js');
+const intOf = require('./intOf.js');
 
 /**
  * The `uintOf()` function parses a string argument and returns an unsigned integer
@@ -27,8 +25,7 @@ var intOf = require('./intOf.js');
  * min: 0
  * max: 0xffffffff
  */
-module.exports = uintOf;
-function uintOf(value, radix) {
-  var num = intOf(value, radix);
-  return num < 0 ? 0 : num;
+module.exports = function uintOf(value, radix) {
+	const num = intOf(value, radix);
+	return num < 0 ? 0 : num;
 }

@@ -1,5 +1,5 @@
-const { reRegExp } = require('../../internal/patterns.next.js');
-const string = require('../string/string.next.js');
+const { reRegExp } = require('../../internal/patterns.js');
+const string = require('../string/string.js');
 
 /**
  *

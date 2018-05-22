@@ -1,8 +1,5 @@
-'use strict';
-
-var getExpectedValue = require('../internal/getExpectedValue.js');
-
-var instanceOf = require('../is/instanceOf.js');
+const getExpectedValue = require('../internal/getExpectedValue.js');
+const instanceOf = require('../is/instanceOf.js');
 
 /**
  *
@@ -10,8 +7,7 @@ var instanceOf = require('../is/instanceOf.js');
  * @param {any} value
  * @returns {Boolean}
  */
-module.exports = asInstanceOf;
-function asInstanceOf(expected, value) {
-  value = getExpectedValue(expected, value, arguments, 2);
-  return instanceOf(expected, value) ? value : arguments[2];
+module.exports = function asInstanceOf(expected, value) {
+	value = getExpectedValue(expected, value, arguments, 2);
+	return instanceOf(expected, value) ? value : arguments[2];
 }

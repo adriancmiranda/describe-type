@@ -1,10 +1,5 @@
-'use strict';
-
-var _internalBuiltInJs = require('../../internal/built-in.js');
-
-var objectHasOwnProperty = _internalBuiltInJs.objectHasOwnProperty;
-
-var object = require('./object.js');
+const { objectHasOwnProperty } = require('../../internal/built-in.js');
+const object = require('./object.js');
 
 /**
  *
@@ -13,10 +8,9 @@ var object = require('./object.js');
  * @param {any} value
  * @returns {Boolean}
  */
-module.exports = isEmptyObject;
-function isEmptyObject(value) {
+module.exports = function isEmptyObject(value) {
 	if (object(value) === false) return false;
-	for (var key in value) {
+	for (const key in value) {
 		if (objectHasOwnProperty.call(value, key)) {
 			return false;
 		}

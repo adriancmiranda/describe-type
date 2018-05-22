@@ -1,8 +1,5 @@
-'use strict';
-
-var getExpectedValue = require('../internal/getExpectedValue.js');
-
-var type = require('../is/type.js');
+const getExpectedValue = require('../internal/getExpectedValue.js');
+const type = require('../is/type.js');
 
 /**
  *
@@ -10,8 +7,7 @@ var type = require('../is/type.js');
  * @param {any} value
  * @returns {Boolean}
  */
-module.exports = asA;
-function asA(expected, value) {
-  value = getExpectedValue(expected, value, arguments, 2);
-  return type(expected, value) ? value : arguments[2];
+module.exports = function asA(expected, value) {
+	value = getExpectedValue(expected, value, arguments, 2);
+	return type(expected, value) ? value : arguments[2];
 }

@@ -1,8 +1,6 @@
-'use strict';
-
-var callable = require('../callable.js');
-
-var stream = require('./stream.js');
+/* eslint-disable no-underscore-dangle */
+const callable = require('../callable.js');
+const stream = require('./stream.js');
 
 /**
  *
@@ -11,8 +9,9 @@ var stream = require('./stream.js');
  * @param {any} value
  * @returns {Boolean}
  */
-/* eslint-disable no-underscore-dangle */
-module.exports = isStreamWritable;
-function isStreamWritable(value) {
-  return stream(value) && value.writable !== false && value._writableState != null && callable(value._write);
+module.exports = function isStreamWritable(value) {
+	return stream(value) &&
+	value.writable !== false &&
+	value._writableState != null &&
+	callable(value._write);
 }

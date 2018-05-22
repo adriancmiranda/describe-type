@@ -1,8 +1,5 @@
-'use strict';
-
-var object = require('./object.js');
-
-var objectEmpty = require('./object.empty.js');
+const object = require('./object.js');
+const objectEmpty = require('./object.empty.js');
 
 object.empty = objectEmpty;
 module.exports = object;

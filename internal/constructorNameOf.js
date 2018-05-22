@@ -1,6 +1,4 @@
-'use strict';
-
-var typeOf = require('./typeOf.js');
+const typeOf = require('./typeOf.js');
 
 /**
  *
@@ -9,8 +7,7 @@ var typeOf = require('./typeOf.js');
  * @param {any} value
  * @returns {String}
  */
-module.exports = constructorNameOf;
-function constructorNameOf(value) {
-  var name = typeOf(value);
-  return name === 'Function' && value != null && value.name || name;
+module.exports = function constructorNameOf(value) {
+	const name = typeOf(value);
+	return (name === 'Function' && (value != null && value.name)) || name;
 }

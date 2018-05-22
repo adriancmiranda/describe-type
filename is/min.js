@@ -1,6 +1,4 @@
-'use strict';
-
-var arraylike = require('./arraylike/arraylike.js');
+const arraylike = require('./arraylike/arraylike.js');
 
 /**
  *
@@ -10,8 +8,7 @@ var arraylike = require('./arraylike/arraylike.js');
  * @param {arraylike} others
  * @returns {Boolean}
  */
-module.exports = min;
-function min(value, others) {
+module.exports = function min(value, others) {
 	if (value !== value) {
 		throw new TypeError('NaN is not a valid value');
 	} else if (arraylike(others) === false) {
@@ -19,7 +16,7 @@ function min(value, others) {
 	} else if (others.length === 0) {
 		return false;
 	}
-	for (var i = others.length - 1; i > -1; i -= 1) {
+	for (let i = others.length - 1; i > -1; i -= 1) {
 		if (value > others[i]) {
 			return false;
 		}

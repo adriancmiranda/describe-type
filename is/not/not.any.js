@@ -1,6 +1,4 @@
-'use strict';
-
-var any = require('../any.js');
+const any = require('../any.js');
 
 /**
  *
@@ -10,7 +8,6 @@ var any = require('../any.js');
  * @param {any} value
  * @returns {Boolean}
  */
-module.exports = notAny;
-function notAny(expected, value) {
-  return any(expected, value) === false;
+module.exports = function notAny(expected, value) {
+	return any(expected, value) === false;
 }

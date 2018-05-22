@@ -1,6 +1,4 @@
-'use strict';
-
-var vector = require('../vector.js');
+const vector = require('../vector.js');
 
 /**
  *
@@ -10,7 +8,6 @@ var vector = require('../vector.js');
  * @param {any} value
  * @returns {Boolean}
  */
-module.exports = notVectorOf;
-function notVectorOf(expected, value) {
-  return vector(expected, value) === false;
+module.exports = function notVectorOf(expected, value) {
+	return vector(expected, value) === false;
 }

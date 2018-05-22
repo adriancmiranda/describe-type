@@ -1,6 +1,4 @@
-'use strict';
-
-var string = require('./string.js');
+const string = require('./string.js');
 
 /**
  *
@@ -9,7 +7,6 @@ var string = require('./string.js');
  * @param {any} value
  * @returns {Boolean}
  */
-module.exports = isEmptyString;
-function isEmptyString(value) {
-  return string(value) && value.length === 0;
+module.exports = function isEmptyString(value) {
+	return string(value) && value.length === 0;
 }

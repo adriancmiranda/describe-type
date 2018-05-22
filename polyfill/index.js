@@ -1,29 +1,10 @@
-'use strict';
+exports.filter = require('./Array.prototype.filter.js');
+exports.reduce = require('./Array.prototype.reduce.js');
+exports.slice = require('./Array.prototype.slice.js');
+exports.assign = require('./Object.assign.js');
+exports.create = require('./Object.create.js');
+exports.getPrototypeOf = require('./Object.getPrototypeOf.js');
+exports.is = require('./Object.is.js');
+exports.keys = require('./Object.keys.js');
+exports.startsWith = require('./String.prototype.startsWith.js');
 
-var _ArrayPrototypeFilterNextJs = require('./Array.prototype.filter.next.js');
-
-var _ArrayPrototypeReduceNextJs = require('./Array.prototype.reduce.next.js');
-
-var _ArrayPrototypeSliceNextJs = require('./Array.prototype.slice.next.js');
-
-var _ObjectAssignNextJs = require('./Object.assign.next.js');
-
-var _ObjectCreateNextJs = require('./Object.create.next.js');
-
-var _ObjectGetPrototypeOfNextJs = require('./Object.getPrototypeOf.next.js');
-
-var _ObjectIsNextJs = require('./Object.is.next.js');
-
-var _ObjectKeysNextJs = require('./Object.keys.next.js');
-
-var _StringPrototypeStartsWithNextJs = require('./String.prototype.startsWith.next.js');
-
-exports.filter = _ArrayPrototypeFilterNextJs;
-exports.reduce = _ArrayPrototypeReduceNextJs;
-exports.slice = _ArrayPrototypeSliceNextJs;
-exports.assign = _ObjectAssignNextJs;
-exports.create = _ObjectCreateNextJs;
-exports.getPrototypeOf = _ObjectGetPrototypeOfNextJs;
-exports.is = _ObjectIsNextJs;
-exports.keys = _ObjectKeysNextJs;
-exports.startsWith = _StringPrototypeStartsWithNextJs;
