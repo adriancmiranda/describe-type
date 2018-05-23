@@ -1,12 +1,6 @@
-import string from './string.js';
+import test from 'ava';
+import * as describeType from '../../index.js';
 
-/**
- *
- * @function
- * @memberof is
- * @param {any} value
- * @returns {Boolean}
- */
-export default function isEmptyString(value) {
-	return string(value) && value.length === 0;
-}
+test('[empty]', t => {
+	t.pass();
+});

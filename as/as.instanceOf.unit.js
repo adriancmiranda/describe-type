@@ -1,5 +1,5 @@
 import test from 'ava';
-import * as describeType from '../index.js';
+import * as describeType from '../index.next.js';
 import asInstanceOf from './as.instanceOf.next.js';
 
 test('describeType.as method is exposed', (t) => {

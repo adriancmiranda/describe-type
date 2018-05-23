@@ -1,12 +1,6 @@
-import arraylike from './arraylike.js';
+import test from 'ava';
+import * as describeType from '../../index.js';
 
-/**
- *
- * @function
- * @memberof is
- * @param {any} value
- * @returns {Boolean}
- */
-export default function isEmptyArraylike(value) {
-	return arraylike(value) && value.length === 0;
-}
+test('[empty]', t => {
+	t.pass();
+});

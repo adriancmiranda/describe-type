@@ -1,5 +1,6 @@
-import object from './object.js';
-import objectEmpty from './object.empty.js';
+import test from 'ava';
+import * as describeType from '../../index.js';
 
-object.empty = objectEmpty;
-export default object;
+test('[empty]', t => {
+	t.pass();
+});

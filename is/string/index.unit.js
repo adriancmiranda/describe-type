@@ -1,5 +1,6 @@
-import string from './string.js';
-import stringEmpty from './string.empty.js';
+import test from 'ava';
+import * as describeType from '../../index.js';
 
-string.empty = stringEmpty;
-export default string;
+test('[empty]', t => {
+	t.pass();
+});

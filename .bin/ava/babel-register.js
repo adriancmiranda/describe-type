@@ -1,8 +1,11 @@
-const { dependencies } = require('../../package.json');
-const { keys } = Object;
 require('@babel/register')({
-  only: keys(dependencies).reduce((acc, dependency) => {
-    acc.unshift(`./node_modules/${dependency}/{src,source}/**/*.js`);
-    return acc;
-  }, ['./index.next.js']),
+	only: [
+		'./as/{*,**/*}.next.js',
+		'./has/{*,**/*}.next.js',
+		'./internal/{*,**/*}.next.js',
+		'./is/{*,**/*}.next.js',
+		'./polyfill/{*,**/*}.next.js',
+		'./schema/{*,**/*}.next.js',
+		'./index.next.js',
+	],
 });

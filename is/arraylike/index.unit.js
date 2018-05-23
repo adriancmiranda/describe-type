@@ -1,5 +1,6 @@
-import arraylike from './arraylike.js';
-import arraylikeEmpty from './arraylike.empty.js';
+import test from 'ava';
+import * as describeType from '../../index.js';
 
-arraylike.empty = arraylikeEmpty;
-export default arraylike;
+test('[empty]', t => {
+	t.pass();
+});
