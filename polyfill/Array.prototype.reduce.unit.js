@@ -1,5 +1,4 @@
 import test from 'ava';
-import * as datatypes from '../.fixtures/datatypes.fixture';
 import * as polyfill from './index.next';
 import reduce from './Array.prototype.reduce.next';
 

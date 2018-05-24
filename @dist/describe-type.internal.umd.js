@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v1.0.0
  * 
- * @commit 097bd6cdc9b7ff181443c206103b453ab243b49b
- * @moment Thursday, May 24, 2018 11:15 AM
+ * @commit 6f38201294cf88e450d95b4394288fe1a217b8cb
+ * @moment Thursday, May 24, 2018 5:03 PM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2021
@@ -111,16 +111,15 @@
 		CALLEE: CALLEE
 	};
 
+	var env = createCommonjsModule(function (module, exports) {
 	// environment
-	var inBrowser = new Function('try{return this===window;}catch(err){return false;}')();
-	var inNode_1 = new Function('try{return this===global;}catch(err){return false;}')();
-	var env_1 = inNode ? commonjsGlobal : window;
-
-	var env = {
-		inBrowser: inBrowser,
-		inNode: inNode_1,
-		env: env_1
-	};
+	exports.inBrowser = new Function('try{return this===window;}catch(err){return false;}')();
+	exports.inNode = new Function('try{return this===global;}catch(err){return false;}')();
+	exports.env = exports.inNode ? commonjsGlobal : window;
+	});
+	var env_1 = env.inBrowser;
+	var env_2 = env.inNode;
+	var env_3 = env.env;
 
 	/**
 	 *

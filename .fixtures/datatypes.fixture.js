@@ -187,7 +187,7 @@ if (arrowFn) {
 }
 
 export const classes = new DataType('classes');
-if (supportES6()) {	
+if (supportES6()) {
 	classes.add('{{source}}', class Foo { constructor() {} });
 }
 

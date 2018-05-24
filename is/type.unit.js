@@ -1,5 +1,5 @@
 import test from 'ava';
-import * as datatypes from '../../.fixtures/datatypes.fixture';
+import * as datatypes from '../.fixtures/datatypes.fixture';
 import * as is from './index.next';
 
 test('is exposure', t => {
