@@ -49,7 +49,7 @@
     "build:cjs:is": "unkn is/{*,**/*}.next.js --replace='/.next(.js)?/i,$1'",
     "build:cjs:polyfill": "unkn polyfill/{*,**/*}.next.js --replace='/.next(.js)?/i,$1'",
     "build:cjs:schema": "unkn schema/{*,**/*}.next.js --replace='/.next(.js)?/i,$1'",
-    "build:cjs": "unkn index.next.js {internal,as,has,is,polyfill,schema}/{*,**/*}.next.js --replace='/.next(.js)?/i,$1'",
+    "build:cjs": "unkn index.next.js {internal,as,has,is,polyfill,schema}/{*,**/*}.next.js --replace=\"/.next(.js)?/i,$1\"",
     "build": "redrun -s build:cjs build:concat build:minify build:gzip",
     "analyze:type:amd": "source-map-explorer dist/describe-type.amd.min.js.map",
     "analyze:type:iife": "source-map-explorer dist/describe-type.iife.min.js.map",
