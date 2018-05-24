@@ -1,6 +1,6 @@
 import { Suite } from 'benchmark';
 import { benchmarkFatestStatus, benchmarkCycle } from '../../.fixtures/benchmark';
-import stringOf from '../../../internal/stringOf.js';
+import stringOf from './stringOf.next.js';
 
 const value = /toString|stringOf/mig;
 

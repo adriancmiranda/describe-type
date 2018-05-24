@@ -1,5 +1,6 @@
 require('@babel/register')({
 	only: [
+		'./.fixtures/*',
 		'./as/{*,**/*}.next.js',
 		'./has/{*,**/*}.next.js',
 		'./internal/{*,**/*}.next.js',

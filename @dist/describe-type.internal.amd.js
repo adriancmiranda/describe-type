@@ -2,32 +2,33 @@
  * 
  * ~~~~ describe-type v1.0.0
  * 
- * @commit 1204e947bcd466d7e08675c921d51f6d783b1923
- * @moment Wednesday, May 2, 2018 1:13 PM
+ * @commit 097bd6cdc9b7ff181443c206103b453ab243b49b
+ * @moment Thursday, May 24, 2018 11:15 AM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2021
  */
 define(['exports'], function (exports) { 'use strict';
 
+	var commonjsGlobal = typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
+
 	function createCommonjsModule(fn, module) {
 		return module = { exports: {} }, fn(module, module.exports), module.exports;
 	}
 
 	var patterns = createCommonjsModule(function (module, exports) {
-
 	// pattern(s)
-	var reIsBase64 = exports.reIsBase64 = /^(data:\w+\/[a-zA-Z+\-.]+;base64,)?([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/;
-	var reFunctionName = exports.reFunctionName = /\s*function\s+([^(\s]*)\s*/;
-	var reIsNativeFn = exports.reIsNativeFn = /\[native\scode\]/;
-	var reStringToBoolean = exports.reStringToBoolean = /^true|[1-9]+$/gi;
-	var reToPropName = exports.reToPropName = /^[^a-zA-Z_$]|[^\w|$]|[^\w$]$/g;
-	var reIsHex = exports.reIsHex = /^([A-Fa-f0-9]+|)$/;
-	var reIsHexadecimal = exports.reIsHexadecimal = /^((#|0x)?([0-9A-Fa-f]{6}|[0-9A-Fa-f]{3}))?$/;
-	var reIsJsonStart = exports.reIsJsonStart = /^\[|^\{(?!\{)/;
-	var reEndsWithBracket = exports.reEndsWithBracket = /\]$/;
-	var reEndsWithBrace = exports.reEndsWithBrace = /\}$/;
-	var reIsJsonEnds = exports.reIsJsonEnds = { '[': reEndsWithBracket, '{': reEndsWithBrace };
+	exports.reIsBase64 = /^(data:\w+\/[a-zA-Z+\-.]+;base64,)?([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/;
+	exports.reFunctionName = /\s*function\s+([^(\s]*)\s*/;
+	exports.reIsNativeFn = /\[native\scode\]/;
+	exports.reStringToBoolean = /^true|[1-9]+$/gi;
+	exports.reToPropName = /^[^a-zA-Z_$]|[^\w|$]|[^\w$]$/g;
+	exports.reIsHex = /^([A-Fa-f0-9]+|)$/;
+	exports.reIsHexadecimal = /^((#|0x)?([0-9A-Fa-f]{6}|[0-9A-Fa-f]{3}))?$/;
+	exports.reIsJsonStart = /^\[|^\{(?!\{)/;
+	exports.reEndsWithBracket = /\]$/;
+	exports.reEndsWithBrace = /\}$/;
+	exports.reIsJsonEnds = { '[': exports.reEndsWithBracket, '{': exports.reEndsWithBrace };
 	});
 	var patterns_1 = patterns.reIsBase64;
 	var patterns_2 = patterns.reFunctionName;
@@ -41,112 +42,82 @@ define(['exports'], function (exports) { 'use strict';
 	var patterns_10 = patterns.reEndsWithBrace;
 	var patterns_11 = patterns.reIsJsonEnds;
 
-	var prototypes = createCommonjsModule(function (module, exports) {
-
-	// prototypes
-	var ObjectProto = exports.ObjectProto = Object.prototype;
-	var ArrayProto = exports.ArrayProto = Array.prototype;
-	var StringProto = exports.StringProto = String.prototype;
-	});
-	var prototypes_1 = prototypes.ObjectProto;
-	var prototypes_2 = prototypes.ArrayProto;
-	var prototypes_3 = prototypes.StringProto;
-
-	var builtIn = createCommonjsModule(function (module, exports) {
-
-
-
-	var ObjectProto = prototypes.ObjectProto;
-	var StringProto = prototypes.StringProto;
-
-
-	// built-in method(s)
-	var objectHasOwnProperty = exports.objectHasOwnProperty = ObjectProto.hasOwnProperty;
-	var objectToString = exports.objectToString = ObjectProto.toString;
-	var objectGetPrototypeOf = exports.objectGetPrototypeOf = Object.getPrototypeOf;
-	var objectSupportsProto = exports.objectSupportsProto = StringProto === ''.__proto__;
-	});
-	var builtIn_1 = builtIn.objectHasOwnProperty;
-	var builtIn_2 = builtIn.objectToString;
-	var builtIn_3 = builtIn.objectGetPrototypeOf;
-	var builtIn_4 = builtIn.objectSupportsProto;
-
-	var constants = createCommonjsModule(function (module, exports) {
-
-	var NUMBER = exports.NUMBER = 'number';
-	var BOOLEAN = exports.BOOLEAN = 'boolean';
-	var STRING = exports.STRING = 'string';
-	var SYMBOL = exports.SYMBOL = 'symbol';
-	var OBJECT = exports.OBJECT = 'object';
-	var FUNCTION = exports.FUNCTION = 'function';
-	var NULL = exports.NULL = 'null';
-	var UNDEFINED = exports.UNDEFINED = 'undefined';
-	var GENERATOR_FUNCTION = exports.GENERATOR_FUNCTION = 'GeneratorFunction';
-	var ASYNC_FUNCTION = exports.ASYNC_FUNCTION = 'AsyncFunction';
-	var ARGUMENTS = exports.ARGUMENTS = 'Arguments';
-	var INFINITY = exports.INFINITY = 'Infinity';
-	var NAN = exports.NAN = 'NaN';
-	var CONSTRUCTOR = exports.CONSTRUCTOR = 'constructor';
-	var PREFIX_SEAL = exports.PREFIX_SEAL = '[object ';
-	var ARGUMENTS_SEAL = exports.ARGUMENTS_SEAL = '[object Arguments]';
-	var CALLEE = exports.CALLEE = 'callee';
-	});
-	var constants_1 = constants.NUMBER;
-	var constants_2 = constants.BOOLEAN;
-	var constants_3 = constants.STRING;
-	var constants_4 = constants.SYMBOL;
-	var constants_5 = constants.OBJECT;
-	var constants_6 = constants.FUNCTION;
-	var constants_7 = constants.NULL;
-	var constants_8 = constants.UNDEFINED;
-	var constants_9 = constants.GENERATOR_FUNCTION;
-	var constants_10 = constants.ASYNC_FUNCTION;
-	var constants_11 = constants.ARGUMENTS;
-	var constants_12 = constants.INFINITY;
-	var constants_13 = constants.NAN;
-	var constants_14 = constants.CONSTRUCTOR;
-	var constants_15 = constants.PREFIX_SEAL;
-	var constants_16 = constants.ARGUMENTS_SEAL;
-	var constants_17 = constants.CALLEE;
-
-	// environment
-	var inBrowser = new Function('try{return this===window;}catch(err){return false;}')();
-	var inNode = new Function('try{return this===global;}catch(err){return false;}')();
-	var env = inNode ? global : window;
-
-	var env_next = /*#__PURE__*/{
-		inBrowser: inBrowser,
-		inNode: inNode,
-		env: env
-	};
-
-	// pattern(s)
-	var reFunctionName = /\s*function\s+([^(\s]*)\s*/;
-	var reStringToBoolean = /^true|[1-9]+$/gi;
-	var reToPropName = /^[^a-zA-Z_$]|[^\w|$]|[^\w$]$/g;
-
 	// prototypes
 	var ObjectProto = Object.prototype;
+	var ArrayProto = Array.prototype;
+	var StringProto = String.prototype;
+
+	var prototypes = {
+		ObjectProto: ObjectProto,
+		ArrayProto: ArrayProto,
+		StringProto: StringProto
+	};
+
+	var ObjectProto$1 = prototypes.ObjectProto;
+	var StringProto$1 = prototypes.StringProto;
 
 	// built-in method(s)
-	var objectHasOwnProperty = ObjectProto.hasOwnProperty;
-	var objectToString = ObjectProto.toString;
+	var objectHasOwnProperty = ObjectProto$1.hasOwnProperty;
+	var objectToString = ObjectProto$1.toString;
 	var objectGetPrototypeOf = Object.getPrototypeOf;
+	var objectSupportsProto = StringProto$1 === ''.__proto__;
+
+	var builtIn = {
+		objectHasOwnProperty: objectHasOwnProperty,
+		objectToString: objectToString,
+		objectGetPrototypeOf: objectGetPrototypeOf,
+		objectSupportsProto: objectSupportsProto
+	};
 
 	var NUMBER = 'number';
+	var BOOLEAN = 'boolean';
 	var STRING = 'string';
 	var SYMBOL = 'symbol';
 	var OBJECT = 'object';
 	var FUNCTION = 'function';
 	var NULL = 'null';
 	var UNDEFINED = 'undefined';
+	var GENERATOR_FUNCTION = 'GeneratorFunction';
+	var ASYNC_FUNCTION = 'AsyncFunction';
 	var ARGUMENTS = 'Arguments';
+	var INFINITY$1 = 'Infinity';
 	var NAN = 'NaN';
 	var CONSTRUCTOR = 'constructor';
 	var PREFIX_SEAL = '[object ';
 	var ARGUMENTS_SEAL = '[object Arguments]';
 	var CALLEE = 'callee';
 
+	var constants = {
+		NUMBER: NUMBER,
+		BOOLEAN: BOOLEAN,
+		STRING: STRING,
+		SYMBOL: SYMBOL,
+		OBJECT: OBJECT,
+		FUNCTION: FUNCTION,
+		NULL: NULL,
+		UNDEFINED: UNDEFINED,
+		GENERATOR_FUNCTION: GENERATOR_FUNCTION,
+		ASYNC_FUNCTION: ASYNC_FUNCTION,
+		ARGUMENTS: ARGUMENTS,
+		INFINITY: INFINITY$1,
+		NAN: NAN,
+		CONSTRUCTOR: CONSTRUCTOR,
+		PREFIX_SEAL: PREFIX_SEAL,
+		ARGUMENTS_SEAL: ARGUMENTS_SEAL,
+		CALLEE: CALLEE
+	};
+
+	// environment
+	var inBrowser = new Function('try{return this===window;}catch(err){return false;}')();
+	var inNode_1 = new Function('try{return this===global;}catch(err){return false;}')();
+	var env_1 = inNode ? commonjsGlobal : window;
+
+	var env = {
+		inBrowser: inBrowser,
+		inNode: inNode_1,
+		env: env_1
+	};
+
 	/**
 	 *
 	 * @function
@@ -154,9 +125,11 @@ define(['exports'], function (exports) { 'use strict';
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function array(value) {
+	var array = function array(value) {
 		return value instanceof Array;
-	}
+	};
+
+	var STRING$1 = constants.STRING;
 
 	/**
 	 *
@@ -165,9 +138,14 @@ define(['exports'], function (exports) { 'use strict';
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function string(value) {
-		return typeof value === STRING || value instanceof String;
-	}
+	var string = function string(value) {
+		return typeof value === STRING$1 || value instanceof String;
+	};
+
+	var OBJECT$1 = constants.OBJECT;
+	var NUMBER$1 = constants.NUMBER;
+
+
 
 	/**
 	 *
@@ -176,12 +154,14 @@ define(['exports'], function (exports) { 'use strict';
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function arraylike(value) {
+	var arraylike = function arraylike(value) {
 		return array(value) || string(value) || (
-			(!!value && typeof value === OBJECT && typeof value.length === NUMBER) &&
+			(!!value && typeof value === OBJECT$1 && typeof value.length === NUMBER$1) &&
 			(value.length === 0 || (value.length > 0 && (value.length - 1) in value))
 		);
-	}
+	};
+
+	var NUMBER$2 = constants.NUMBER;
 
 	/**
 	 *
@@ -190,9 +170,9 @@ define(['exports'], function (exports) { 'use strict';
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function number(value) {
-		return typeof value === NUMBER || value instanceof Number;
-	}
+	var number = function number(value) {
+		return typeof value === NUMBER$2 || value instanceof Number;
+	};
 
 	/**
 	 *
@@ -201,9 +181,9 @@ define(['exports'], function (exports) { 'use strict';
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function int(value) {
+	var int_1 = function int(value) {
 		return number(value) && value === value && value % 1 === 0;
-	}
+	};
 
 	/**
 	 * The `intOf()` function parses a string argument and returns an integer of the
@@ -230,16 +210,13 @@ define(['exports'], function (exports) { 'use strict';
 	 * min: -2147483647
 	 * max: 2147483647
 	 */
-	function intOf(value, radix) {
+	var intOf = function intOf(value, radix) {
 		value = (radix === undefined || radix === null ? value : parseInt(value, radix));
-		return int(value) ? value : 0 | value;
-	}
-
-	var intOf_next = /*#__PURE__*/{
-		default: intOf
+		return int_1(value) ? value : 0 | value;
 	};
 
 	/* eslint-disable no-nested-ternary */
+
 
 	/**
 	 *
@@ -250,7 +227,7 @@ define(['exports'], function (exports) { 'use strict';
 	 * @param {Number} b - divisor
 	 * @returns {Number}
 	 */
-	function mod(n, a, b) {
+	var mod = function mod(n, a, b) {
 		n = intOf(n);
 		a = intOf(a);
 		b = intOf(b);
@@ -267,10 +244,6 @@ define(['exports'], function (exports) { 'use strict';
 		rem = n % (b || 1);
 		rem = rem < a ? (rem + b) : rem === 0 ? 0 : rem;
 		return rem;
-	}
-
-	var mod_next = /*#__PURE__*/{
-		default: mod
 	};
 
 	/**
@@ -282,7 +255,7 @@ define(['exports'], function (exports) { 'use strict';
 	 * @param {int} endIndex
 	 * @returns {Array}
 	 */
-	function slice(list, startIndex, endIndex) {
+	var Array_prototype_slice = function slice(list, startIndex, endIndex) {
 		var range = [];
 		var size = list === undefined || list === null ? 0 : 0 | list.length;
 		if (size) {
@@ -304,7 +277,11 @@ define(['exports'], function (exports) { 'use strict';
 			}
 		}
 		return range;
-	}
+	};
+
+	var reFunctionName = patterns.reFunctionName;
+	var objectToString$1 = builtIn.objectToString;
+
 
 	/**
 	 *
@@ -313,7 +290,7 @@ define(['exports'], function (exports) { 'use strict';
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function stringOf(value, force) {
+	var stringOf = function stringOf(value, force) {
 		var ctor = value != null && value.constructor;
 		if (ctor && force) {
 			if (!ctor.name || ctor.name === 'Object') {
@@ -322,12 +299,11 @@ define(['exports'], function (exports) { 'use strict';
 			}
 			return ctor.name;
 		}
-		return slice(objectToString.call(value), 8, -1);
-	}
-
-	var stringOf_next = /*#__PURE__*/{
-		default: stringOf
+		return Array_prototype_slice(objectToString$1.call(value), 8, -1);
 	};
+
+	var reStringToBoolean = patterns.reStringToBoolean;
+
 
 	/**
 	 *
@@ -336,15 +312,11 @@ define(['exports'], function (exports) { 'use strict';
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function booleanOf(value) {
+	var booleanOf = function booleanOf(value) {
 		if (string(value) && value.length) {
 			return reStringToBoolean.test(value);
 		}
 		return !!value;
-	}
-
-	var booleanOf_next = /*#__PURE__*/{
-		default: booleanOf
 	};
 
 	/**
@@ -354,10 +326,10 @@ define(['exports'], function (exports) { 'use strict';
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function nan(value) {
+	var nan = function nan(value) {
 		var isnum = number(value);
 		return isnum === false || (isnum && value !== value);
-	}
+	};
 
 	/**
 	 *
@@ -366,9 +338,9 @@ define(['exports'], function (exports) { 'use strict';
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function infinity(value) {
+	var infinity = function infinity(value) {
 		return number(value) && (value - 1) === value;
-	}
+	};
 
 	/**
 	 * The `floatOf()` function parses an argument and returns a floating point number.
@@ -384,13 +356,9 @@ define(['exports'], function (exports) { 'use strict';
 	 * @returns {Number} A floating point number parsed from the given value.
 	 * If the first character cannot be converted to a number, 0 is returned.
 	 */
-	function floatOf(value) {
+	var floatOf = function floatOf(value) {
 		value = +value;
 		return nan(value) || infinity(value) ? 0 : value;
-	}
-
-	var floatOf_next = /*#__PURE__*/{
-		default: floatOf
 	};
 
 	/**
@@ -418,14 +386,12 @@ define(['exports'], function (exports) { 'use strict';
 	 * min: 0
 	 * max: 0xffffffff
 	 */
-	function uintOf(value, radix) {
+	var uintOf = function uintOf(value, radix) {
 		var num = intOf(value, radix);
 		return num < 0 ? 0 : num;
-	}
-
-	var uintOf_next = /*#__PURE__*/{
-		default: uintOf
 	};
+
+	var FUNCTION$1 = constants.FUNCTION;
 
 	/**
 	 *
@@ -434,9 +400,9 @@ define(['exports'], function (exports) { 'use strict';
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function callable(value) {
-		return typeof value === FUNCTION;
-	}
+	var callable = function callable(value) {
+		return typeof value === FUNCTION$1;
+	};
 
 	/**
 	 *
@@ -446,13 +412,17 @@ define(['exports'], function (exports) { 'use strict';
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function unsafeMethod(context, methodName) {
+	var unsafeMethod = function unsafeMethod(context, methodName) {
 		try {
 			return callable(context[methodName]);
 		} catch (err) {
 			return false;
 		}
-	}
+	};
+
+	var CONSTRUCTOR$1 = constants.CONSTRUCTOR;
+	var objectGetPrototypeOf$1 = builtIn.objectGetPrototypeOf;
+	var objectHasOwnProperty$1 = builtIn.objectHasOwnProperty;
 
 	/**
 	 *
@@ -461,27 +431,23 @@ define(['exports'], function (exports) { 'use strict';
 	 * @param {any} value
 	 * @returns {String}
 	 */
-	function constructorOf(value) {
+	var constructorOf = function constructorOf(value) {
 		if (value.constructor === undefined) { return Object; }
 		var proto = value.__proto__;
 
 		if (proto === null) { return Object; }
 
 		return proto.constructor || getConstructorOf(value) || (function () {
-			if (objectHasOwnProperty.call(value, CONSTRUCTOR)) {
+			if (objectHasOwnProperty$1.call(value, CONSTRUCTOR$1)) {
 				return Object;
 			}
 			return value.constructor.prototype.constructor;
 		})();
 		function getConstructorOf(value) {
-			var proto = objectGetPrototypeOf(value);
+			var proto = objectGetPrototypeOf$1(value);
 			if (proto === null) { return Object; }
 			return proto.constructor;
 		}
-	}
-
-	var constructorOf_next = /*#__PURE__*/{
-		default: constructorOf
 	};
 
 	/**
@@ -491,10 +457,18 @@ define(['exports'], function (exports) { 'use strict';
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function object(value) {
+	var object = function object(value) {
 		if (value === undefined || value === null) { return false; }
 		return constructorOf(value) === Object;
-	}
+	};
+
+	var CALLEE$1 = constants.CALLEE;
+	var ARGUMENTS_SEAL$1 = constants.ARGUMENTS_SEAL;
+	var objectToString$2 = builtIn.objectToString;
+
+
+
+
 
 	/**
 	 *
@@ -503,11 +477,20 @@ define(['exports'], function (exports) { 'use strict';
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function args(value) {
+	var args = function args(value) {
 		return (array(value) === false && arraylike(value) &&
-			object(value) && unsafeMethod(value, CALLEE)
-		) || objectToString.call(value) === ARGUMENTS_SEAL;
-	}
+			object(value) && unsafeMethod(value, CALLEE$1)
+		) || objectToString$2.call(value) === ARGUMENTS_SEAL$1;
+	};
+
+	var NAN$1 = constants.NAN;
+	var ARGUMENTS$1 = constants.ARGUMENTS;
+	var UNDEFINED$1 = constants.UNDEFINED;
+	var NULL$1 = constants.NULL;
+
+
+
+
 
 	/**
 	 *
@@ -516,16 +499,12 @@ define(['exports'], function (exports) { 'use strict';
 	 * @param {any} value
 	 * @returns {String}
 	 */
-	function typeOf(value) {
-		if (value === undefined) { return UNDEFINED; }
-		if (value === null) { return NULL; }
+	var typeOf = function typeOf(value) {
+		if (value === undefined) { return UNDEFINED$1; }
+		if (value === null) { return NULL$1; }
 		if (infinity(value)) { return INFINITY; }
-		if (nan(value)) { return NAN; }
-		return args(value) ? ARGUMENTS : stringOf(value, true);
-	}
-
-	var typeOf_next = /*#__PURE__*/{
-		default: typeOf
+		if (nan(value)) { return NAN$1; }
+		return args(value) ? ARGUMENTS$1 : stringOf(value, true);
 	};
 
 	/**
@@ -535,14 +514,16 @@ define(['exports'], function (exports) { 'use strict';
 	 * @param {any} value
 	 * @returns {String}
 	 */
-	function constructorNameOf(value) {
+	var constructorNameOf = function constructorNameOf(value) {
 		var name = typeOf(value);
 		return (name === 'Function' && (value != null && value.name)) || name;
-	}
-
-	var constructorNameOf_next = /*#__PURE__*/{
-		default: constructorNameOf
 	};
+
+	var reToPropName = patterns.reToPropName;
+
+
+
+
 
 	/**
 	 *
@@ -552,17 +533,13 @@ define(['exports'], function (exports) { 'use strict';
 	 * @param {Boolean} write
 	 * @returns {String}
 	 */
-	function name(value, write) {
+	var name = function name(value, write) {
 		if (value === undefined || value === null || object(value)) {
 			return typeOf(value);
 		}
 		return value.name || (write &&
 			string(value) ? value.replace(reToPropName, '_') : constructorNameOf(value)
 		);
-	}
-
-	var name_next = /*#__PURE__*/{
-		default: name
 	};
 
 	/**
@@ -573,7 +550,7 @@ define(['exports'], function (exports) { 'use strict';
 	 * @param {any} value
 	 * @returns {Array}
 	 */
-	function typify(expected, write) {
+	var typify = function typify(expected, write) {
 		if (string(expected) === false && arraylike(expected) && expected.length > 0) {
 			for (var i = expected.length - 1; i > -1; i -= 1) {
 				expected[i] = name(expected[i], write);
@@ -581,10 +558,6 @@ define(['exports'], function (exports) { 'use strict';
 			return expected.join('|');
 		}
 		return name(expected, write);
-	}
-
-	var typify_next = /*#__PURE__*/{
-		default: typify
 	};
 
 	/**
@@ -593,7 +566,7 @@ define(['exports'], function (exports) { 'use strict';
 	 * @param {any} context - .
 	 * @returns {any}
 	 */
-	function apply(cmd, context, args, blindly) {
+	var apply = function apply(cmd, context, args, blindly) {
 		try {
 			var $ = arraylike(args) ? args : [];
 			switch ($.length) {
@@ -613,11 +586,9 @@ define(['exports'], function (exports) { 'use strict';
 			if (blindly) { return err; }
 			throw err;
 		}
-	}
-
-	var apply_next = /*#__PURE__*/{
-		default: apply
 	};
+
+	var objectHasOwnProperty$2 = builtIn.objectHasOwnProperty;
 
 	/**
 	 *
@@ -627,10 +598,10 @@ define(['exports'], function (exports) { 'use strict';
 	 * @param {any} key
 	 * @returns {Boolean}
 	 */
-	function ownProperty(context, key) {
+	var ownProperty = function ownProperty(context, key) {
 		if (context === undefined || context === null) { return false; }
-		return objectHasOwnProperty.call(context, key);
-	}
+		return objectHasOwnProperty$2.call(context, key);
+	};
 
 	/**
 	 *
@@ -641,19 +612,18 @@ define(['exports'], function (exports) { 'use strict';
 	 * @param {any} args
 	 * @returns {any}
 	 */
-	function resolveProperty(value, key, readStatic, cmd, ctx, args) {
+	var resolveProperty = function resolveProperty(value, key, readStatic, cmd, ctx, args) {
 		if (readStatic || (key !== 'prototype' && key !== 'length' && key !== 'name')) {
 			var item = value[key];
 			return apply(cmd, ctx || item, [item, key, value, args]);
 		}
 		return undefined;
-	}
-
-	var resolveProperty_next = /*#__PURE__*/{
-		default: resolveProperty
 	};
 
 	/* eslint-disable no-restricted-syntax */
+
+
+
 
 	/**
 	 *
@@ -664,7 +634,7 @@ define(['exports'], function (exports) { 'use strict';
 	 * @param {Boolean} getInheritedProps
 	 * @returns {?}
 	 */
-	function eachProperty(value, cmd, context, getInheritedProps) {
+	var eachProperty = function eachProperty(value, cmd, context, getInheritedProps) {
 		var i = 0;
 		var readStatics = callable(value) === false;
 		for (var key in value) {
@@ -676,10 +646,6 @@ define(['exports'], function (exports) { 'use strict';
 			}
 		}
 		return undefined;
-	}
-
-	var eachProperty_next = /*#__PURE__*/{
-		default: eachProperty
 	};
 
 	/**
@@ -690,7 +656,7 @@ define(['exports'], function (exports) { 'use strict';
 	 * @param {any} context
 	 * @returns {?}
 	 */
-	function eachValue(value, cmd, context, keepReverse) {
+	var eachValue = function eachValue(value, cmd, context, keepReverse) {
 		if (value === undefined || value === null) { return undefined; }
 		var size = (0 | value.length) - 1;
 		for (var index = size; index > -1; index -= 1) {
@@ -702,13 +668,12 @@ define(['exports'], function (exports) { 'use strict';
 			}
 		}
 		return undefined;
-	}
-
-	var eachValue_next = /*#__PURE__*/{
-		default: eachValue
 	};
 
 	/* eslint-disable no-restricted-syntax */
+
+
+
 
 	/**
 	 *
@@ -719,13 +684,9 @@ define(['exports'], function (exports) { 'use strict';
 	 * @param {Boolean} keepReverseOrGetInheritedProps
 	 * @returns {?}
 	 */
-	function each(value, cmd, context, keepReverseOrGetInheritedProps) {
+	var each = function each(value, cmd, context, keepReverseOrGetInheritedProps) {
 		if (arraylike(value)) { return eachValue(value, cmd, context, keepReverseOrGetInheritedProps); }
 		return eachProperty(value, cmd, context, keepReverseOrGetInheritedProps);
-	}
-
-	var each_next = /*#__PURE__*/{
-		default: each
 	};
 
 	/**
@@ -736,7 +697,7 @@ define(['exports'], function (exports) { 'use strict';
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function ownValue(context, value) {
+	var ownValue = function ownValue(context, value) {
 		if (arraylike(context) === false) { return false; }
 		for (var id = context.length - 1; id > -1; id -= 1) {
 			if (value === context[id]) {
@@ -744,7 +705,7 @@ define(['exports'], function (exports) { 'use strict';
 			}
 		}
 		return false;
-	}
+	};
 
 	/**
 	 *
@@ -757,17 +718,19 @@ define(['exports'], function (exports) { 'use strict';
 	 * @param {int} endIndex -
 	 * @returns {any}
 	 */
-	function getExpectedValue(expected, value, args, startIndex, endIndex) {
+	var getExpectedValue = function getExpectedValue(expected, value, args, startIndex, endIndex) {
 		if (callable(value) && (expected === Function || ownValue(expected, Function)) === false) {
-			args = slice(args, startIndex, endIndex);
+			args = Array_prototype_slice(args, startIndex, endIndex);
 			return apply(value, args[0], args, true);
 		}
 		return value;
-	}
-
-	var getExpectedValue_next = /*#__PURE__*/{
-		default: getExpectedValue
 	};
+
+	var STRING$2 = constants.STRING;
+	var NUMBER$4 = constants.NUMBER;
+	var SYMBOL$1 = constants.SYMBOL;
+	var FUNCTION$2 = constants.FUNCTION;
+
 
 	/**
 	 *
@@ -777,19 +740,19 @@ define(['exports'], function (exports) { 'use strict';
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function type(expected, value) {
+	var type = function type(expected, value) {
 		if (value === undefined || value === null) { return value === expected; }
 		if (expected === undefined || expected === null) { return expected === value; }
 		if (value === true || value === false) { return expected === Boolean; }
 		var type = typeof value;
-		if (type === STRING) { return expected === String; }
-		if (type === NUMBER) { return expected === Number; }
-		if (type === SYMBOL) { return expected === Symbol; }
-		if (expected === Function) { return type === FUNCTION; }
+		if (type === STRING$2) { return expected === String; }
+		if (type === NUMBER$4) { return expected === Number; }
+		if (type === SYMBOL$1) { return expected === Symbol; }
+		if (expected === Function) { return type === FUNCTION$2; }
 		if (value instanceof Array) { return expected === Array; }
 		if (value instanceof RegExp) { return expected === RegExp; }
 		return constructorOf(value) === expected;
-	}
+	};
 
 	/**
 	 *
@@ -797,10 +760,10 @@ define(['exports'], function (exports) { 'use strict';
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function asA(expected, value) {
+	var as_type = function asA(expected, value) {
 		value = getExpectedValue(expected, value, arguments, 2);
 		return type(expected, value) ? value : arguments[2];
-	}
+	};
 
 	/**
 	 *
@@ -811,141 +774,60 @@ define(['exports'], function (exports) { 'use strict';
 	 * @param {uint} position -
 	 * @returns {Boolean}
 	 */
-	function startsWith(value, search, position) {
-		var str = asA(String, value) || '';
+	var String_prototype_startsWith = function startsWith(value, search, position) {
+		var str = as_type(String, value) || '';
 		var startIndex = mod(position, 0, str.length);
 		return str.substr(startIndex, search.length) === search;
-	}
-
-	// TODO: to implement
-
-	function stringify(value, replacer, space) {
-		if (value === undefined) { return UNDEFINED; }
-		if (value === null) { return NULL; }
-		var seal = asA(String, value.toString, value);
-		if (startsWith(seal, PREFIX_SEAL)) { seal = ''; }
-		return seal || JSON.stringify(value, replacer, space);
-	}
-
-	var stringify_next = /*#__PURE__*/{
-		default: stringify
 	};
 
-	var _stringOfNextJs = ( stringOf_next && stringOf ) || stringOf_next;
+	// TODO: to implement
+	var UNDEFINED$2 = constants.UNDEFINED;
+	var NULL$2 = constants.NULL;
+	var PREFIX_SEAL$1 = constants.PREFIX_SEAL;
 
-	var _booleanOfNextJs = ( booleanOf_next && booleanOf ) || booleanOf_next;
 
-	var _floatOfNextJs = ( floatOf_next && floatOf ) || floatOf_next;
 
-	var _intOfNextJs = ( intOf_next && intOf ) || intOf_next;
 
-	var _uintOfNextJs = ( uintOf_next && uintOf ) || uintOf_next;
-
-	var _constructorNameOfNextJs = ( constructorNameOf_next && constructorNameOf ) || constructorNameOf_next;
-
-	var _constructorOfNextJs = ( constructorOf_next && constructorOf ) || constructorOf_next;
-
-	var _typeOfNextJs = ( typeOf_next && typeOf ) || typeOf_next;
-
-	var _typifyNextJs = ( typify_next && typify ) || typify_next;
-
-	var _nameNextJs = ( name_next && name ) || name_next;
-
-	var _applyNextJs = ( apply_next && apply ) || apply_next;
-
-	var _eachNextJs = ( each_next && each ) || each_next;
-
-	var _eachValueNextJs = ( eachValue_next && eachValue ) || eachValue_next;
-
-	var _eachPropertyNextJs = ( eachProperty_next && eachProperty ) || eachProperty_next;
-
-	var _resolvePropertyNextJs = ( resolveProperty_next && resolveProperty ) || resolveProperty_next;
-
-	var _getExpectedValueNextJs = ( getExpectedValue_next && getExpectedValue ) || getExpectedValue_next;
-
-	var _modNextJs = ( mod_next && mod ) || mod_next;
-
-	var _stringifyNextJs = ( stringify_next && stringify ) || stringify_next;
+	var stringify = function stringify(value, replacer, space) {
+		if (value === undefined) { return UNDEFINED$2; }
+		if (value === null) { return NULL$2; }
+		var seal = as_type(String, value.toString, value);
+		if (String_prototype_startsWith(seal, PREFIX_SEAL$1)) { seal = ''; }
+		return seal || JSON.stringify(value, replacer, space);
+	};
 
 	var internal = createCommonjsModule(function (module, exports) {
+	(function (resource) {
+		var this$1 = this;
 
-
-
-	var patterns$$1 = patterns;
-
-
-
-	var prototypes$$1 = prototypes;
-
-
-
-	var builtIn$$1 = builtIn;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	for (var _envNextJs_key in env_next) {
-	  if (_envNextJs_key !== "default") {
-	    exports[_envNextJs_key] = env_next[_envNextJs_key];
-	  }
-	}
-
-	exports.stringOf = _stringOfNextJs;
-	exports.booleanOf = _booleanOfNextJs;
-	exports.floatOf = _floatOfNextJs;
-	exports.intOf = _intOfNextJs;
-	exports.uintOf = _uintOfNextJs;
-	exports.constructorNameOf = _constructorNameOfNextJs;
-	exports.constructorOf = _constructorOfNextJs;
-	exports.typeOf = _typeOfNextJs;
-	exports.typify = _typifyNextJs;
-	exports.name = _nameNextJs;
-	exports.apply = _applyNextJs;
-	exports.each = _eachNextJs;
-	exports.eachValue = _eachValueNextJs;
-	exports.eachProperty = _eachPropertyNextJs;
-	exports.resolveProperty = _resolvePropertyNextJs;
-	exports.getExpectedValue = _getExpectedValueNextJs;
-	exports.mod = _modNextJs;
-	exports.stringify = _stringifyNextJs;
-	exports.prototypes = prototypes$$1;
-	exports.builtIn = builtIn$$1;
-	exports.patterns = patterns$$1;
+		for (var name$$1 in resource) {
+			if (name$$1 === 'default' === false) {
+				this$1[name$$1] = resource[name$$1];
+			}
+		}
+	}).call(exports, env);
+	exports.stringOf = stringOf;
+	exports.booleanOf = booleanOf;
+	exports.floatOf = floatOf;
+	exports.intOf = intOf;
+	exports.uintOf = uintOf;
+	exports.constructorNameOf = constructorNameOf;
+	exports.constructorOf = constructorOf;
+	exports.typeOf = typeOf;
+	exports.typify = typify;
+	exports.name = name;
+	exports.apply = apply;
+	exports.each = each;
+	exports.eachValue = eachValue;
+	exports.eachProperty = eachProperty;
+	exports.resolveProperty = resolveProperty;
+	exports.getExpectedValue = getExpectedValue;
+	exports.mod = mod;
+	exports.stringify = stringify;
+	exports.prototypes = prototypes;
+	exports.builtIn = builtIn;
+	exports.patterns = patterns;
+	exports.constants = constants;
 	});
 	var internal_1 = internal.stringOf;
 	var internal_2 = internal.booleanOf;
@@ -968,6 +850,7 @@ define(['exports'], function (exports) { 'use strict';
 	var internal_19 = internal.prototypes;
 	var internal_20 = internal.builtIn;
 	var internal_21 = internal.patterns;
+	var internal_22 = internal.constants;
 
 	exports.default = internal;
 	exports.stringOf = internal_1;
@@ -991,5 +874,6 @@ define(['exports'], function (exports) { 'use strict';
 	exports.prototypes = internal_19;
 	exports.builtIn = internal_20;
 	exports.patterns = internal_21;
+	exports.constants = internal_22;
 
 });

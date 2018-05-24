@@ -1,6 +1,6 @@
 import test from 'ava';
-import schema from '../../../schema';
-// import PLError from '../../../schema/error';
+import schema from './index.next';
+// import PLError from './error.next';
 
 function sprop(pattern, value) {
 	return schema({ $foo: pattern }, { foo: value }).foo;

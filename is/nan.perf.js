@@ -1,8 +1,8 @@
 import { Suite } from 'benchmark';
 import { benchmarkFatestStatus, benchmarkCycle } from '../.fixtures/benchmark';
-import { number } from '../../.fixtures/datatypes.fixture';
-import vendor from '../../fixtures/vendor.fixture';
-import { is } from '../../..';
+import { number } from '../.fixtures/datatypes.fixture';
+import vendor from '../.fixtures/vendor.fixture';
+import { is } from './index.next';
 
 const nan1 = is.nan;
 const nan2 = vendor.nan;

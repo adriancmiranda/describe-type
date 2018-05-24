@@ -1,8 +1,8 @@
 import { Suite } from 'benchmark';
 import * as datatypes from '../../.fixtures/datatypes.fixture';
 import { benchmarkFatestStatus, benchmarkCycle } from '../../.fixtures/benchmark';
-import { objectToString } from '../../../internal/built-in';
-import { type, object } from '../../../is';
+import { objectToString } from '../../internal/built-in/index.next';
+import { type, object } from './index.next';
 
 function isAny(expected, value) {
 	return new RegExp(`(${expected})`).test(Object.prototype.toString.call(value));

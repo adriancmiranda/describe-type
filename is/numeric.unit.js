@@ -1,18 +1,18 @@
 import test from 'ava';
 import * as datatypes from '../../.fixtures/datatypes.fixture.js';
-import * as describeType from '../index.js';
-import numeric from '../../../is/numeric';
+import * as describeType from '../index.next.js';
+import numeric from './numeric.next';
 
-test('describeType.is.numeric exposure', (t) => {
+test('describeType.is.numeric exposure', t => {
 	t.is(toString.call(describeType.is.numeric), '[object Function]', 'should be a function');
 });
 
-test('numeric exposure', (t) => {
+test('numeric exposure', t => {
 	t.is(toString.call(numeric), '[object Function]', 'should be a function');
 });
 
 datatypes.numeric.iterate(datatype => {
-	test(`${datatype.id} • numeric(${datatype.label});`, (t) => {
+	test(`${datatype.id} • numeric(${datatype.label});`, t => {
 		t.is(numeric(datatype.value), true, 'should be true');
 	});
 });
@@ -25,7 +25,7 @@ datatypes.all.remove(datatypes.bool);
 datatypes.all.remove(datatypes.arraylikeNative);
 datatypes.all.remove(datatypes.arrayFilled);
 datatypes.all.iterate(datatype => {
-	test(`${datatype.id} • numeric(${datatype.label});`, (t) => {
+	test(`${datatype.id} • numeric(${datatype.label});`, t => {
 		t.is(numeric(datatype.value), false, 'should be false');
 	});
 });

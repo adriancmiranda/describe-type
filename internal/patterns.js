@@ -9,4 +9,4 @@ exports.reIsHexadecimal = /^((#|0x)?([0-9A-Fa-f]{6}|[0-9A-Fa-f]{3}))?$/;
 exports.reIsJsonStart = /^\[|^\{(?!\{)/;
 exports.reEndsWithBracket = /\]$/;
 exports.reEndsWithBrace = /\}$/;
-exports.reIsJsonEnds = { '[': reEndsWithBracket, '{': reEndsWithBrace };
+exports.reIsJsonEnds = { '[': exports.reEndsWithBracket, '{': exports.reEndsWithBrace };

@@ -1,43 +1,43 @@
 import test from 'ava';
-import * as describeType from '../index.js';
-import booleanOf from '../../../internal/booleanOf';
+import * as describeType from '../index.next.js';
+import booleanOf from './booleanOf.next';
 
-test('describeType.booleanOf exposure', (t) => {
+test('describeType.booleanOf exposure', t => {
 	t.is(toString.call(describeType.booleanOf), '[object Function]', 'should be a function');
 });
 
-test('booleanOf exposure', (t) => {
+test('booleanOf exposure', t => {
 	t.is(toString.call(booleanOf), '[object Function]', 'should be a function');
 });
 
-test('0 should be false', (t) => {
+test('0 should be false', t => {
 	t.is(booleanOf(0), false);
 });
 
-test('1 should be true', (t) => {
+test('1 should be true', t => {
 	t.is(booleanOf(1), true);
 });
 
-test('"true" should be true', (t) => {
+test('"true" should be true', t => {
 	t.is(booleanOf('true'), true);
 });
 
-test('"false" should be false', (t) => {
+test('"false" should be false', t => {
 	t.is(booleanOf('false'), false);
 });
 
-test('NaN should be false', (t) => {
+test('NaN should be false', t => {
 	t.is(booleanOf(NaN), false);
 });
 
-test('Infinity should be true', (t) => {
+test('Infinity should be true', t => {
 	t.is(booleanOf(Infinity), true);
 });
 
-test('"0" should be false', (t) => {
+test('"0" should be false', t => {
 	t.is(booleanOf('0'), false);
 });
 
-test('"1" should be true', (t) => {
+test('"1" should be true', t => {
 	t.is(booleanOf('1'), true);
 });

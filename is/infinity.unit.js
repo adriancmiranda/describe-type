@@ -1,25 +1,25 @@
 import test from 'ava';
 import * as datatypes from '../../.fixtures/datatypes.fixture.js';
-import * as describeType from '../index.js';
-import infinity from '../../../is/infinity';
+import * as describeType from '../index.next.js';
+import infinity from './infinity.next';
 
-test('describeType.is.infinity exposure', (t) => {
+test('describeType.is.infinity exposure', t => {
 	t.is(toString.call(describeType.is.infinity), '[object Function]', 'should be a function');
 });
 
-test('infinity exposure', (t) => {
+test('infinity exposure', t => {
 	t.is(toString.call(infinity), '[object Function]', 'should be a function');
 });
 
 datatypes.infinity.iterate(datatype => {
-	test(`${datatype.id} • infinity(${datatype.label});`, (t) => {
+	test(`${datatype.id} • infinity(${datatype.label});`, t => {
 		t.is(infinity(datatype.value), true, 'should be true');
 	});
 });
 
 datatypes.all.remove(datatypes.infinity);
 datatypes.all.iterate(datatype => {
-	test(`${datatype.id} • infinity(${datatype.label});`, (t) => {
+	test(`${datatype.id} • infinity(${datatype.label});`, t => {
 		t.is(infinity(datatype.value), false, 'should be false');
 	});
 });

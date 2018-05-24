@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v1.0.0
  * 
- * @commit 1204e947bcd466d7e08675c921d51f6d783b1923
- * @moment Wednesday, May 2, 2018 1:13 PM
+ * @commit 097bd6cdc9b7ff181443c206103b453ab243b49b
+ * @moment Thursday, May 24, 2018 11:15 AM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2021
@@ -11,9 +11,44 @@
 define(['exports'], function (exports) { 'use strict';
 
 	var NUMBER = 'number';
+	var BOOLEAN = 'boolean';
 	var STRING = 'string';
+	var SYMBOL = 'symbol';
 	var OBJECT = 'object';
 	var FUNCTION = 'function';
+	var NULL = 'null';
+	var UNDEFINED = 'undefined';
+	var GENERATOR_FUNCTION = 'GeneratorFunction';
+	var ASYNC_FUNCTION = 'AsyncFunction';
+	var ARGUMENTS = 'Arguments';
+	var INFINITY = 'Infinity';
+	var NAN = 'NaN';
+	var CONSTRUCTOR = 'constructor';
+	var PREFIX_SEAL = '[object ';
+	var ARGUMENTS_SEAL = '[object Arguments]';
+	var CALLEE = 'callee';
+
+	var constants = {
+		NUMBER: NUMBER,
+		BOOLEAN: BOOLEAN,
+		STRING: STRING,
+		SYMBOL: SYMBOL,
+		OBJECT: OBJECT,
+		FUNCTION: FUNCTION,
+		NULL: NULL,
+		UNDEFINED: UNDEFINED,
+		GENERATOR_FUNCTION: GENERATOR_FUNCTION,
+		ASYNC_FUNCTION: ASYNC_FUNCTION,
+		ARGUMENTS: ARGUMENTS,
+		INFINITY: INFINITY,
+		NAN: NAN,
+		CONSTRUCTOR: CONSTRUCTOR,
+		PREFIX_SEAL: PREFIX_SEAL,
+		ARGUMENTS_SEAL: ARGUMENTS_SEAL,
+		CALLEE: CALLEE
+	};
+
+	var FUNCTION$1 = constants.FUNCTION;
 
 	/**
 	 *
@@ -22,9 +57,9 @@ define(['exports'], function (exports) { 'use strict';
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function callable(value) {
-		return typeof value === FUNCTION;
-	}
+	var callable = function callable(value) {
+		return typeof value === FUNCTION$1;
+	};
 
 	/**
 	 *
@@ -34,23 +69,42 @@ define(['exports'], function (exports) { 'use strict';
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function unsafeMethod(context, methodName) {
+	var unsafeMethod = function unsafeMethod(context, methodName) {
 		try {
 			return callable(context[methodName]);
 		} catch (err) {
 			return false;
 		}
-	}
-
-	var unsafeMethod_next = /*#__PURE__*/{
-		default: unsafeMethod
 	};
 
 	// prototypes
 	var ObjectProto = Object.prototype;
+	var ArrayProto = Array.prototype;
+	var StringProto = String.prototype;
+
+	var prototypes = {
+		ObjectProto: ObjectProto,
+		ArrayProto: ArrayProto,
+		StringProto: StringProto
+	};
+
+	var ObjectProto$1 = prototypes.ObjectProto;
+	var StringProto$1 = prototypes.StringProto;
 
 	// built-in method(s)
-	var objectHasOwnProperty = ObjectProto.hasOwnProperty;
+	var objectHasOwnProperty = ObjectProto$1.hasOwnProperty;
+	var objectToString = ObjectProto$1.toString;
+	var objectGetPrototypeOf = Object.getPrototypeOf;
+	var objectSupportsProto = StringProto$1 === ''.__proto__;
+
+	var builtIn = {
+		objectHasOwnProperty: objectHasOwnProperty,
+		objectToString: objectToString,
+		objectGetPrototypeOf: objectGetPrototypeOf,
+		objectSupportsProto: objectSupportsProto
+	};
+
+	var objectHasOwnProperty$1 = builtIn.objectHasOwnProperty;
 
 	/**
 	 *
@@ -60,13 +114,9 @@ define(['exports'], function (exports) { 'use strict';
 	 * @param {any} key
 	 * @returns {Boolean}
 	 */
-	function ownProperty(context, key) {
+	var ownProperty = function ownProperty(context, key) {
 		if (context === undefined || context === null) { return false; }
-		return objectHasOwnProperty.call(context, key);
-	}
-
-	var ownProperty_next = /*#__PURE__*/{
-		default: ownProperty
+		return objectHasOwnProperty$1.call(context, key);
 	};
 
 	/**
@@ -76,9 +126,11 @@ define(['exports'], function (exports) { 'use strict';
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function array(value) {
+	var array = function array(value) {
 		return value instanceof Array;
-	}
+	};
+
+	var STRING$1 = constants.STRING;
 
 	/**
 	 *
@@ -87,9 +139,14 @@ define(['exports'], function (exports) { 'use strict';
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function string(value) {
-		return typeof value === STRING || value instanceof String;
-	}
+	var string = function string(value) {
+		return typeof value === STRING$1 || value instanceof String;
+	};
+
+	var OBJECT$1 = constants.OBJECT;
+	var NUMBER$1 = constants.NUMBER;
+
+
 
 	/**
 	 *
@@ -98,12 +155,12 @@ define(['exports'], function (exports) { 'use strict';
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function arraylike(value) {
+	var arraylike = function arraylike(value) {
 		return array(value) || string(value) || (
-			(!!value && typeof value === OBJECT && typeof value.length === NUMBER) &&
+			(!!value && typeof value === OBJECT$1 && typeof value.length === NUMBER$1) &&
 			(value.length === 0 || (value.length > 0 && (value.length - 1) in value))
 		);
-	}
+	};
 
 	/**
 	 *
@@ -113,7 +170,7 @@ define(['exports'], function (exports) { 'use strict';
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function ownValue(context, value) {
+	var ownValue = function ownValue(context, value) {
 		if (arraylike(context) === false) { return false; }
 		for (var id = context.length - 1; id > -1; id -= 1) {
 			if (value === context[id]) {
@@ -121,10 +178,6 @@ define(['exports'], function (exports) { 'use strict';
 			}
 		}
 		return false;
-	}
-
-	var ownValue_next = /*#__PURE__*/{
-		default: ownValue
 	};
 
 	/**
@@ -135,13 +188,9 @@ define(['exports'], function (exports) { 'use strict';
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function own(context, value) {
+	var own = function own(context, value) {
 		if (array(context)) { return ownValue(context, value); }
 		return ownProperty(context, value);
-	}
-
-	var own_next = /*#__PURE__*/{
-		default: own
 	};
 
 	/**
@@ -152,30 +201,16 @@ define(['exports'], function (exports) { 'use strict';
 	 * @param {any} key
 	 * @returns {Boolean}
 	 */
-	function at(context, key) {
+	var at = function at(context, key) {
 		if (context === undefined || context === null) { return false; }
 		return context[key] === undefined === false;
-	}
-
-	var at_next = /*#__PURE__*/{
-		default: at
 	};
 
-	var _unsafeMethodNextJs = ( unsafeMethod_next && unsafeMethod ) || unsafeMethod_next;
-
-	var _ownPropertyNextJs = ( ownProperty_next && ownProperty ) || ownProperty_next;
-
-	var _ownValueNextJs = ( ownValue_next && ownValue ) || ownValue_next;
-
-	var _ownNextJs = ( own_next && own ) || own_next;
-
-	var _atNextJs = ( at_next && at ) || at_next;
-
-	var unsafeMethod$1 = _unsafeMethodNextJs;
-	var ownProperty$1 = _ownPropertyNextJs;
-	var ownValue$1 = _ownValueNextJs;
-	var own$1 = _ownNextJs;
-	var at$1 = _atNextJs;
+	var unsafeMethod$1 = unsafeMethod;
+	var ownProperty$1 = ownProperty;
+	var ownValue$1 = ownValue;
+	var own$1 = own;
+	var at$1 = at;
 
 	var has = {
 		unsafeMethod: unsafeMethod$1,

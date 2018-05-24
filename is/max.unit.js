@@ -1,13 +1,13 @@
 import test from 'ava';
-import { toSource } from '../../fixtures/datatype/utils';
-import * as describeType from '../index.js';
-import max from '../../../is/max';
+import { toSource } from '../.fixtures/datatype/utils';
+import * as describeType from '../index.next.js';
+import max from './max.next';
 
-test('describeType.is.max exposure', (t) => {
+test('describeType.is.max exposure', t => {
 	t.is(toString.call(describeType.is.max), '[object Function]', 'should be a function');
 });
 
-test('max exposure', (t) => {
+test('max exposure', t => {
 	t.is(toString.call(max), '[object Function]', 'should be a function');
 });
 
@@ -16,7 +16,7 @@ test('max exposure', (t) => {
 	{ valueA: -1, valueB: [-2, -1, -3] },
 	{ valueA: 14, valueB: [2, 3, 14, 9] },
 ].forEach(datatype => {
-	test(`max(${String(datatype.valueA)}, ${toSource(datatype.valueB)});`, (t) => {
+	test(`max(${String(datatype.valueA)}, ${toSource(datatype.valueB)});`, t => {
 		t.is(max(datatype.valueA, datatype.valueB), true);
 	});
 });
@@ -26,7 +26,7 @@ test('max exposure', (t) => {
 	{ valueA: 0, valueB: [] },
 	{ valueA: 0, valueB: [2, 3, 4, 0] },
 ].forEach(datatype => {
-	test(`max(${String(datatype.valueA)}, ${toSource(datatype.valueB)});`, (t) => {
+	test(`max(${String(datatype.valueA)}, ${toSource(datatype.valueB)});`, t => {
 		t.is(max(datatype.valueA, datatype.valueB), false);
 	});
 });

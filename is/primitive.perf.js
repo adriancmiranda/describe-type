@@ -1,8 +1,8 @@
 import { Suite } from 'benchmark';
 import { benchmarkFatestStatus, benchmarkCycle } from '../.fixtures/benchmark';
-import { all } from '../../.fixtures/datatypes.fixture';
-import vendor from '../../fixtures/vendor.fixture';
-import { is } from '../../..';
+import { all } from '../.fixtures/datatypes.fixture';
+import vendor from '../.fixtures/vendor.fixture';
+import { is } from '../index.next';
 
 const exotic = is.exotic;
 const primitive0 = (value) => !exotic(value);

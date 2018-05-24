@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v1.0.0
  * 
- * @commit 1204e947bcd466d7e08675c921d51f6d783b1923
- * @moment Wednesday, May 2, 2018 1:13 PM
+ * @commit 097bd6cdc9b7ff181443c206103b453ab243b49b
+ * @moment Thursday, May 24, 2018 11:15 AM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2021
@@ -13,21 +13,71 @@ this.describetype.is = (function (exports) {
 	'use strict';
 
 	var NUMBER = 'number';
+	var BOOLEAN = 'boolean';
 	var STRING = 'string';
 	var SYMBOL = 'symbol';
 	var OBJECT = 'object';
 	var FUNCTION = 'function';
+	var NULL = 'null';
+	var UNDEFINED = 'undefined';
+	var GENERATOR_FUNCTION = 'GeneratorFunction';
+	var ASYNC_FUNCTION = 'AsyncFunction';
+	var ARGUMENTS = 'Arguments';
+	var INFINITY = 'Infinity';
+	var NAN = 'NaN';
 	var CONSTRUCTOR = 'constructor';
+	var PREFIX_SEAL = '[object ';
 	var ARGUMENTS_SEAL = '[object Arguments]';
 	var CALLEE = 'callee';
 
+	var constants = {
+		NUMBER: NUMBER,
+		BOOLEAN: BOOLEAN,
+		STRING: STRING,
+		SYMBOL: SYMBOL,
+		OBJECT: OBJECT,
+		FUNCTION: FUNCTION,
+		NULL: NULL,
+		UNDEFINED: UNDEFINED,
+		GENERATOR_FUNCTION: GENERATOR_FUNCTION,
+		ASYNC_FUNCTION: ASYNC_FUNCTION,
+		ARGUMENTS: ARGUMENTS,
+		INFINITY: INFINITY,
+		NAN: NAN,
+		CONSTRUCTOR: CONSTRUCTOR,
+		PREFIX_SEAL: PREFIX_SEAL,
+		ARGUMENTS_SEAL: ARGUMENTS_SEAL,
+		CALLEE: CALLEE
+	};
+
 	// prototypes
 	var ObjectProto = Object.prototype;
+	var ArrayProto = Array.prototype;
+	var StringProto = String.prototype;
+
+	var prototypes = {
+		ObjectProto: ObjectProto,
+		ArrayProto: ArrayProto,
+		StringProto: StringProto
+	};
+
+	var ObjectProto$1 = prototypes.ObjectProto;
+	var StringProto$1 = prototypes.StringProto;
 
 	// built-in method(s)
-	var objectHasOwnProperty = ObjectProto.hasOwnProperty;
-	var objectToString = ObjectProto.toString;
+	var objectHasOwnProperty = ObjectProto$1.hasOwnProperty;
+	var objectToString = ObjectProto$1.toString;
 	var objectGetPrototypeOf = Object.getPrototypeOf;
+	var objectSupportsProto = StringProto$1 === ''.__proto__;
+
+	var builtIn = {
+		objectHasOwnProperty: objectHasOwnProperty,
+		objectToString: objectToString,
+		objectGetPrototypeOf: objectGetPrototypeOf,
+		objectSupportsProto: objectSupportsProto
+	};
+
+	var FUNCTION$1 = constants.FUNCTION;
 
 	/**
 	 *
@@ -36,12 +86,8 @@ this.describetype.is = (function (exports) {
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function callable(value) {
-		return typeof value === FUNCTION;
-	}
-
-	var callable_next = /*#__PURE__*/{
-		default: callable
+	var callable = function callable(value) {
+		return typeof value === FUNCTION$1;
 	};
 
 	/**
@@ -52,13 +98,13 @@ this.describetype.is = (function (exports) {
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function unsafeMethod(context, methodName) {
+	var unsafeMethod = function unsafeMethod(context, methodName) {
 		try {
 			return callable(context[methodName]);
 		} catch (err) {
 			return false;
 		}
-	}
+	};
 
 	/**
 	 *
@@ -67,9 +113,13 @@ this.describetype.is = (function (exports) {
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function array(value) {
+	var array = function array(value) {
 		return value instanceof Array;
-	}
+	};
+
+	var CONSTRUCTOR$1 = constants.CONSTRUCTOR;
+	var objectGetPrototypeOf$1 = builtIn.objectGetPrototypeOf;
+	var objectHasOwnProperty$1 = builtIn.objectHasOwnProperty;
 
 	/**
 	 *
@@ -78,24 +128,24 @@ this.describetype.is = (function (exports) {
 	 * @param {any} value
 	 * @returns {String}
 	 */
-	function constructorOf(value) {
+	var constructorOf = function constructorOf(value) {
 		if (value.constructor === undefined) { return Object; }
 		var proto = value.__proto__;
 
 		if (proto === null) { return Object; }
 
 		return proto.constructor || getConstructorOf(value) || (function () {
-			if (objectHasOwnProperty.call(value, CONSTRUCTOR)) {
+			if (objectHasOwnProperty$1.call(value, CONSTRUCTOR$1)) {
 				return Object;
 			}
 			return value.constructor.prototype.constructor;
 		})();
 		function getConstructorOf(value) {
-			var proto = objectGetPrototypeOf(value);
+			var proto = objectGetPrototypeOf$1(value);
 			if (proto === null) { return Object; }
 			return proto.constructor;
 		}
-	}
+	};
 
 	/**
 	 *
@@ -104,10 +154,12 @@ this.describetype.is = (function (exports) {
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function object(value) {
+	var object = function object(value) {
 		if (value === undefined || value === null) { return false; }
 		return constructorOf(value) === Object;
-	}
+	};
+
+	var STRING$1 = constants.STRING;
 
 	/**
 	 *
@@ -116,9 +168,14 @@ this.describetype.is = (function (exports) {
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function string(value) {
-		return typeof value === STRING || value instanceof String;
-	}
+	var string = function string(value) {
+		return typeof value === STRING$1 || value instanceof String;
+	};
+
+	var OBJECT$1 = constants.OBJECT;
+	var NUMBER$1 = constants.NUMBER;
+
+
 
 	/**
 	 *
@@ -127,12 +184,20 @@ this.describetype.is = (function (exports) {
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function arraylike(value) {
+	var arraylike = function arraylike(value) {
 		return array(value) || string(value) || (
-			(!!value && typeof value === OBJECT && typeof value.length === NUMBER) &&
+			(!!value && typeof value === OBJECT$1 && typeof value.length === NUMBER$1) &&
 			(value.length === 0 || (value.length > 0 && (value.length - 1) in value))
 		);
-	}
+	};
+
+	var CALLEE$1 = constants.CALLEE;
+	var ARGUMENTS_SEAL$1 = constants.ARGUMENTS_SEAL;
+	var objectToString$1 = builtIn.objectToString;
+
+
+
+
 
 	/**
 	 *
@@ -141,11 +206,11 @@ this.describetype.is = (function (exports) {
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function args(value) {
+	var args = function args(value) {
 		return (array(value) === false && arraylike(value) &&
-			object(value) && unsafeMethod(value, CALLEE)
-		) || objectToString.call(value) === ARGUMENTS_SEAL;
-	}
+			object(value) && unsafeMethod(value, CALLEE$1)
+		) || objectToString$1.call(value) === ARGUMENTS_SEAL$1;
+	};
 
 	/**
 	 *
@@ -154,15 +219,12 @@ this.describetype.is = (function (exports) {
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function isEmptyArgs(value) {
+	var args_empty = function isEmptyArgs(value) {
 		return args(value) && value.length === 0;
-	}
-
-	args.empty = isEmptyArgs;
-
-	var index_next = /*#__PURE__*/{
-		default: args
 	};
+
+	args.empty = args_empty;
+	var args_1 = args;
 
 	/**
 	 *
@@ -171,15 +233,12 @@ this.describetype.is = (function (exports) {
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function isEmptyArray(value) {
+	var array_empty = function isEmptyArray(value) {
 		return array(value) && value.length === 0;
-	}
-
-	array.empty = isEmptyArray;
-
-	var index_next$1 = /*#__PURE__*/{
-		default: array
 	};
+
+	array.empty = array_empty;
+	var array_1 = array;
 
 	/**
 	 *
@@ -188,15 +247,18 @@ this.describetype.is = (function (exports) {
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function isEmptyArraylike(value) {
+	var arraylike_empty = function isEmptyArraylike(value) {
 		return arraylike(value) && value.length === 0;
-	}
-
-	arraylike.empty = isEmptyArraylike;
-
-	var index_next$2 = /*#__PURE__*/{
-		default: arraylike
 	};
+
+	arraylike.empty = arraylike_empty;
+	var arraylike_1 = arraylike;
+
+	var STRING$2 = constants.STRING;
+	var NUMBER$2 = constants.NUMBER;
+	var SYMBOL$1 = constants.SYMBOL;
+	var FUNCTION$2 = constants.FUNCTION;
+
 
 	/**
 	 *
@@ -206,22 +268,18 @@ this.describetype.is = (function (exports) {
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function type(expected, value) {
+	var type = function type(expected, value) {
 		if (value === undefined || value === null) { return value === expected; }
 		if (expected === undefined || expected === null) { return expected === value; }
 		if (value === true || value === false) { return expected === Boolean; }
 		var type = typeof value;
-		if (type === STRING) { return expected === String; }
-		if (type === NUMBER) { return expected === Number; }
-		if (type === SYMBOL) { return expected === Symbol; }
-		if (expected === Function) { return type === FUNCTION; }
+		if (type === STRING$2) { return expected === String; }
+		if (type === NUMBER$2) { return expected === Number; }
+		if (type === SYMBOL$1) { return expected === Symbol; }
+		if (expected === Function) { return type === FUNCTION$2; }
 		if (value instanceof Array) { return expected === Array; }
 		if (value instanceof RegExp) { return expected === RegExp; }
 		return constructorOf(value) === expected;
-	}
-
-	var type_next = /*#__PURE__*/{
-		default: type
 	};
 
 	/**
@@ -232,9 +290,9 @@ this.describetype.is = (function (exports) {
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function notType(expected, value) {
+	var not_type = function notType(expected, value) {
 		return type(expected, value) === false;
-	}
+	};
 
 	/**
 	 *
@@ -244,7 +302,7 @@ this.describetype.is = (function (exports) {
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function any(expected, value) {
+	var any = function any(expected, value) {
 		if (expected === undefined || expected === null) { return expected === value; }
 		if (expected instanceof Array && expected.length > 0) {
 			for (var i = expected.length - 1; i > -1; i -= 1) {
@@ -252,10 +310,6 @@ this.describetype.is = (function (exports) {
 			}
 		}
 		return type(expected, value);
-	}
-
-	var any_next = /*#__PURE__*/{
-		default: any
 	};
 
 	/**
@@ -266,149 +320,9 @@ this.describetype.is = (function (exports) {
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function notAny(expected, value) {
+	var not_any = function notAny(expected, value) {
 		return any(expected, value) === false;
-	}
-
-	var commonjsGlobal = typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
-
-	function createCommonjsModule(fn, module) {
-		return module = { exports: {} }, fn(module, module.exports), module.exports;
-	}
-
-	var env_1 = createCommonjsModule(function (module, exports) {
-
-	// environment
-	var inBrowser = exports.inBrowser = new Function('try{return this===window;}catch(err){return false;}')();
-	var inNode = exports.inNode = new Function('try{return this===global;}catch(err){return false;}')();
-	var env = exports.env = inNode ? commonjsGlobal : window;
-	});
-	var env_2 = env_1.inBrowser;
-	var env_3 = env_1.inNode;
-	var env_4 = env_1.env;
-
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-
-
-	var FUNCTION$1 = env_1.FUNCTION;
-
-
-	/**
-	 *
-	 * @function
-	 * @memberof is
-	 * @param {any} value
-	 * @returns {Boolean}
-	 */
-	var callable_1 = callable$1;
-	function callable$1(value) {
-	  return (typeof value === 'undefined' ? 'undefined' : _typeof(value)) === FUNCTION$1;
-	}
-
-	var prototypes = createCommonjsModule(function (module, exports) {
-
-	// prototypes
-	var ObjectProto = exports.ObjectProto = Object.prototype;
-	var ArrayProto = exports.ArrayProto = Array.prototype;
-	var StringProto = exports.StringProto = String.prototype;
-	});
-	var prototypes_1 = prototypes.ObjectProto;
-	var prototypes_2 = prototypes.ArrayProto;
-	var prototypes_3 = prototypes.StringProto;
-
-	var builtIn = createCommonjsModule(function (module, exports) {
-
-
-
-	var ObjectProto = prototypes.ObjectProto;
-	var StringProto = prototypes.StringProto;
-
-
-	// built-in method(s)
-	var objectHasOwnProperty = exports.objectHasOwnProperty = ObjectProto.hasOwnProperty;
-	var objectToString = exports.objectToString = ObjectProto.toString;
-	var objectGetPrototypeOf = exports.objectGetPrototypeOf = Object.getPrototypeOf;
-	var objectSupportsProto = exports.objectSupportsProto = StringProto === ''.__proto__;
-	});
-	var builtIn_1 = builtIn.objectHasOwnProperty;
-	var builtIn_2 = builtIn.objectToString;
-	var builtIn_3 = builtIn.objectGetPrototypeOf;
-	var builtIn_4 = builtIn.objectSupportsProto;
-
-	var ObjectProto$1 = prototypes.ObjectProto;
-
-
-
-	var objectGetPrototypeOf$1 = builtIn.objectGetPrototypeOf;
-	var objectHasOwnProperty$1 = builtIn.objectHasOwnProperty;
-
-
-
-	var CONSTRUCTOR$1 = env_1.CONSTRUCTOR;
-
-
-	/**
-	 *
-	 * @function
-	 * @memberof built-in
-	 * @param {any} value
-	 * @returns {String}
-	 */
-	var constructorOf_1 = constructorOf$1;
-	function constructorOf$1(value) {
-		if (value.constructor === undefined) { return Object; }
-		var proto = value.__proto__;
-
-		if (proto === null) { return Object; }
-
-		return proto.constructor || getConstructorOf(value) || function () {
-			if (objectHasOwnProperty$1.call(value, CONSTRUCTOR$1)) {
-				return Object;
-			}
-			return value.constructor.prototype.constructor;
-		}();
-		function getConstructorOf(value) {
-			var proto = objectGetPrototypeOf$1(value);
-			if (proto === null) { return Object; }
-			return proto.constructor;
-		}
-	}
-
-	var _typeof$1 = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-
-
-
-
-	var STRING$1 = env_1.STRING;
-	var NUMBER$1 = env_1.NUMBER;
-	var SYMBOL$1 = env_1.SYMBOL;
-	var FUNCTION$2 = env_1.FUNCTION;
-
-
-	/**
-	 *
-	 * @function
-	 * @memberof is
-	 * @param {Function} expect
-	 * @param {any} value
-	 * @returns {Boolean}
-	 */
-	var type_1 = type$1;
-	function type$1(expected, value) {
-		if (value === undefined || value === null) { return value === expected; }
-		if (expected === undefined || expected === null) { return expected === value; }
-		if (value === true || value === false) { return expected === Boolean; }
-		var type = typeof value === 'undefined' ? 'undefined' : _typeof$1(value);
-		if (type === STRING$1) { return expected === String; }
-		if (type === NUMBER$1) { return expected === Number; }
-		if (type === SYMBOL$1) { return expected === Symbol; }
-		if (expected === Function) { return type === FUNCTION$2; }
-		if (value instanceof Array) { return expected === Array; }
-		if (value instanceof RegExp) { return expected === RegExp; }
-		return constructorOf_1(value) === expected;
-	}
+	};
 
 	/**
 	 * TODO: a,an,any
@@ -418,21 +332,17 @@ this.describetype.is = (function (exports) {
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function instanceOf(expected, value) {
+	var instanceOf = function instanceOf(expected, value) {
 		if (expected === undefined || expected === null) { return expected === value; }
 		if (expected instanceof Array && expected.length > 0) {
 			for (var i = expected.length - 1; i > -1; i -= 1) {
 				var ctor = expected[i];
-				if (ctor === Number) { return type_1(ctor, value); } // ... should normalize?!
-				if (callable_1(ctor) && value instanceof ctor) { return true; }
+				if (ctor === Number) { return type(ctor, value); } // ... should normalize?!
+				if (callable(ctor) && value instanceof ctor) { return true; }
 			}
 		}
-		if (expected === Number) { return type_1(expected, value); } // ... should normalize?!
-		return callable_1(expected) && value instanceof expected;
-	}
-
-	var instanceOf_next = /*#__PURE__*/{
-		default: instanceOf
+		if (expected === Number) { return type(expected, value); } // ... should normalize?!
+		return callable(expected) && value instanceof expected;
 	};
 
 	/**
@@ -443,9 +353,9 @@ this.describetype.is = (function (exports) {
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function notInstanceOf(expected, value) {
+	var not_instanceOf = function notInstanceOf(expected, value) {
 		return instanceOf(expected, value) === false;
-	}
+	};
 
 	/**
 	 * TODO: a,an,any
@@ -455,16 +365,12 @@ this.describetype.is = (function (exports) {
 	 * @param {arraylike} value
 	 * @returns {Boolean}
 	 */
-	function vector(expected, value) {
+	var vector = function vector(expected, value) {
 		if (arraylike(value) === false) { return false; }
 		for (var i = value.length - 1; i > -1; i -= 1) {
-			if (notAny(expected, value[i])) { return false; }
+			if (not_any(expected, value[i])) { return false; }
 		}
 		return true;
-	}
-
-	var vector_next = /*#__PURE__*/{
-		default: vector
 	};
 
 	/**
@@ -475,18 +381,18 @@ this.describetype.is = (function (exports) {
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function notVectorOf(expected, value) {
+	var not_vectorOf = function notVectorOf(expected, value) {
 		return vector(expected, value) === false;
-	}
-
-	notType.a = notType.an = notType.type = notType;
-	notType.any = notAny;
-	notType.instanceOf = notInstanceOf;
-	notType.vectorOf = notVectorOf;
-
-	var index_next$3 = /*#__PURE__*/{
-		default: notType
 	};
+
+	not_type.a = not_type.an = not_type.type = not_type;
+	not_type.any = not_any;
+	not_type.instanceOf = not_instanceOf;
+	not_type.vectorOf = not_vectorOf;
+	var not = not_type;
+
+	var objectHasOwnProperty$2 = builtIn.objectHasOwnProperty;
+
 
 	/**
 	 *
@@ -495,38 +401,38 @@ this.describetype.is = (function (exports) {
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function isEmptyObject(value) {
+	var object_empty = function isEmptyObject(value) {
 		if (object(value) === false) { return false; }
 		for (var key in value) {
-			if (objectHasOwnProperty.call(value, key)) {
+			if (objectHasOwnProperty$2.call(value, key)) {
 				return false;
 			}
 		}
 		return true;
-	}
+	};
 
-	object.empty = isEmptyObject;
+	object.empty = object_empty;
+	var object_1 = object;
 
-	var index_next$4 = /*#__PURE__*/{
-		default: object
+	/* eslint-disable no-underscore-dangle */
+
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	var stream = function stream(value) {
+		if (value === undefined || value === null) { return false; }
+		if (value._events === undefined || value._events === null) { return false; }
+		return callable(value.pipe);
 	};
 
 	/* eslint-disable no-underscore-dangle */
 
-	/**
-	 *
-	 * @function
-	 * @memberof is
-	 * @param {any} value
-	 * @returns {Boolean}
-	 */
-	function stream(value) {
-		if (value === undefined || value === null) { return false; }
-		if (value._events === undefined || value._events === null) { return false; }
-		return callable(value.pipe);
-	}
 
-	/* eslint-disable no-underscore-dangle */
 
 	/**
 	 *
@@ -535,14 +441,16 @@ this.describetype.is = (function (exports) {
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function isStreamWritable(value) {
+	var stream_writable = function isStreamWritable(value) {
 		return stream(value) &&
 		value.writable !== false &&
 		value._writableState != null &&
 		callable(value._write);
-	}
+	};
 
 	/* eslint-disable no-underscore-dangle */
+
+
 
 	/**
 	 *
@@ -551,12 +459,12 @@ this.describetype.is = (function (exports) {
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function isStreamReadable(value) {
+	var stream_readable = function isStreamReadable(value) {
 		return stream(value) &&
 		value.readable !== false &&
 		value._readableState != null &&
 		callable(value._read);
-	}
+	};
 
 	/**
 	 *
@@ -565,12 +473,14 @@ this.describetype.is = (function (exports) {
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function isStreamDuplex(value) {
-		return isStreamWritable(value) && isStreamReadable(value);
-	}
+	var stream_duplex = function isStreamDuplex(value) {
+		return stream_writable(value) && stream_readable(value);
+	};
 
 	/* eslint-disable no-underscore-dangle */
 
+
+
 	/**
 	 *
 	 * @function
@@ -578,20 +488,17 @@ this.describetype.is = (function (exports) {
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function isStreamTransform(value) {
-		return isStreamDuplex(value) &&
+	var stream_transform = function isStreamTransform(value) {
+		return stream_duplex(value) &&
 		value._transformState != null &&
 		callable(value._transform);
-	}
-
-	stream.writable = isStreamWritable;
-	stream.readable = isStreamReadable;
-	stream.duplex = isStreamDuplex;
-	stream.transform = isStreamTransform;
-
-	var index_next$5 = /*#__PURE__*/{
-		default: stream
 	};
+
+	stream.writable = stream_writable;
+	stream.readable = stream_readable;
+	stream.duplex = stream_duplex;
+	stream.transform = stream_transform;
+	var stream_1 = stream;
 
 	/**
 	 *
@@ -600,37 +507,58 @@ this.describetype.is = (function (exports) {
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function isEmptyString(value) {
+	var string_empty = function isEmptyString(value) {
 		return string(value) && value.length === 0;
+	};
+
+	string.empty = string_empty;
+	var string_1 = string;
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	var regexp = function regexp(value) {
+		return value instanceof RegExp;
+	};
+
+	var commonjsGlobal = typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
+
+	function createCommonjsModule(fn, module) {
+		return module = { exports: {} }, fn(module, module.exports), module.exports;
 	}
 
-	string.empty = isEmptyString;
-
-	var index_next$6 = /*#__PURE__*/{
-		default: string
-	};
-
-
-
-	var a_next = /*#__PURE__*/{
-		default: type
-	};
-
-
-
-	var an_next = /*#__PURE__*/{
-		default: type
-	};
-
+	var patterns = createCommonjsModule(function (module, exports) {
 	// pattern(s)
-	var reIsBase64 = /^(data:\w+\/[a-zA-Z+\-.]+;base64,)?([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/;
-	var reIsNativeFn = /\[native\scode\]/;
-	var reIsHex = /^([A-Fa-f0-9]+|)$/;
-	var reIsHexadecimal = /^((#|0x)?([0-9A-Fa-f]{6}|[0-9A-Fa-f]{3}))?$/;
-	var reIsJsonStart = /^\[|^\{(?!\{)/;
-	var reEndsWithBracket = /\]$/;
-	var reEndsWithBrace = /\}$/;
-	var reIsJsonEnds = { '[': reEndsWithBracket, '{': reEndsWithBrace };
+	exports.reIsBase64 = /^(data:\w+\/[a-zA-Z+\-.]+;base64,)?([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/;
+	exports.reFunctionName = /\s*function\s+([^(\s]*)\s*/;
+	exports.reIsNativeFn = /\[native\scode\]/;
+	exports.reStringToBoolean = /^true|[1-9]+$/gi;
+	exports.reToPropName = /^[^a-zA-Z_$]|[^\w|$]|[^\w$]$/g;
+	exports.reIsHex = /^([A-Fa-f0-9]+|)$/;
+	exports.reIsHexadecimal = /^((#|0x)?([0-9A-Fa-f]{6}|[0-9A-Fa-f]{3}))?$/;
+	exports.reIsJsonStart = /^\[|^\{(?!\{)/;
+	exports.reEndsWithBracket = /\]$/;
+	exports.reEndsWithBrace = /\}$/;
+	exports.reIsJsonEnds = { '[': exports.reEndsWithBracket, '{': exports.reEndsWithBrace };
+	});
+	var patterns_1 = patterns.reIsBase64;
+	var patterns_2 = patterns.reFunctionName;
+	var patterns_3 = patterns.reIsNativeFn;
+	var patterns_4 = patterns.reStringToBoolean;
+	var patterns_5 = patterns.reToPropName;
+	var patterns_6 = patterns.reIsHex;
+	var patterns_7 = patterns.reIsHexadecimal;
+	var patterns_8 = patterns.reIsJsonStart;
+	var patterns_9 = patterns.reEndsWithBracket;
+	var patterns_10 = patterns.reEndsWithBrace;
+	var patterns_11 = patterns.reIsJsonEnds;
+
+	var reRegExp = patterns.reRegExp;
+
 
 	/**
 	 *
@@ -639,12 +567,41 @@ this.describetype.is = (function (exports) {
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function base64(value) {
-		return string(value) && reIsBase64.test(value);
-	}
+	var regexp_string = function isRegExpString(value) {
+		if (string(value)) {
+			reRegExp.lastIndex = 0;
+			return reRegExp.test(value);
+		}
+		return false;
+	};
 
-	var base64_next = /*#__PURE__*/{
-		default: base64
+	regexp.empty = regexp_string;
+	var regexp_1 = regexp;
+
+	/**
+	 * @memberof is
+	 * @alias a
+	 */
+	var a = type;
+
+	/**
+	 * @memberof is
+	 * @alias a
+	 */
+	var an = type;
+
+	var reIsBase64 = patterns.reIsBase64;
+
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	var base64 = function base64(value) {
+		return string(value) && reIsBase64.test(value);
 	};
 
 	/**
@@ -654,18 +611,23 @@ this.describetype.is = (function (exports) {
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function bool(value) {
+	var bool = function bool(value) {
 		return value === true || value === false || value instanceof Boolean;
-	}
-
-	var bool_next = /*#__PURE__*/{
-		default: bool
 	};
 
 	// environment
 	var inBrowser = new Function('try{return this===window;}catch(err){return false;}')();
-	var inNode = new Function('try{return this===global;}catch(err){return false;}')();
-	var env = inNode ? global : window;
+	var inNode_1 = new Function('try{return this===global;}catch(err){return false;}')();
+	var env_1 = inNode ? commonjsGlobal : window;
+
+	var env = {
+		inBrowser: inBrowser,
+		inNode: inNode_1,
+		env: env_1
+	};
+
+	var env$1 = env.env;
+
 
 	/**
 	 *
@@ -674,15 +636,11 @@ this.describetype.is = (function (exports) {
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function buffer(value) {
+	var buffer = function buffer(value) {
 		if (value === undefined || value === null) { return false; }
-		if (callable(env.Buffer) === false) { return false; }
-		var isBuffer = value instanceof env.Buffer && callable(value.constructor.isBuffer);
+		if (callable(env$1.Buffer) === false) { return false; }
+		var isBuffer = value instanceof env$1.Buffer && callable(value.constructor.isBuffer);
 		return isBuffer && value.constructor.isBuffer(value);
-	}
-
-	var buffer_next = /*#__PURE__*/{
-		default: buffer
 	};
 
 	/**
@@ -692,12 +650,21 @@ this.describetype.is = (function (exports) {
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function date(value) {
+	var date = function date(value) {
 		return value instanceof Date;
-	}
+	};
 
-	var date_next = /*#__PURE__*/{
-		default: date
+	var NUMBER$3 = constants.NUMBER;
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	var number = function number(value) {
+		return typeof value === NUMBER$3 || value instanceof Number;
 	};
 
 	/**
@@ -707,27 +674,8 @@ this.describetype.is = (function (exports) {
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function number(value) {
-		return typeof value === NUMBER || value instanceof Number;
-	}
-
-	var number_next = /*#__PURE__*/{
-		default: number
-	};
-
-	/**
-	 *
-	 * @function
-	 * @memberof is
-	 * @param {any} value
-	 * @returns {Boolean}
-	 */
-	function infinity(value) {
+	var infinity = function infinity(value) {
 		return number(value) && (value - 1) === value;
-	}
-
-	var infinity_next = /*#__PURE__*/{
-		default: infinity
 	};
 
 	/**
@@ -737,12 +685,8 @@ this.describetype.is = (function (exports) {
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function decimal(value) {
+	var decimal = function decimal(value) {
 		return number(value) && value === value && infinity(value) === false && value % 1 !== 0;
-	}
-
-	var decimal_next = /*#__PURE__*/{
-		default: decimal
 	};
 
 	/**
@@ -752,12 +696,8 @@ this.describetype.is = (function (exports) {
 	 * @param {any}
 	 * @returns {Boolean}
 	 */
-	function undef(value) {
+	var undef = function undef(value) {
 		return value === undefined;
-	}
-
-	var undef_next = /*#__PURE__*/{
-		default: undef
 	};
 
 	/**
@@ -767,13 +707,12 @@ this.describetype.is = (function (exports) {
 	 * @param {any}
 	 * @returns {Boolean}
 	 */
-	function defined(value) {
+	var defined = function defined(value) {
 		return undef(value) === false;
-	}
-
-	var defined_next = /*#__PURE__*/{
-		default: defined
 	};
+
+	var env$2 = env.env;
+
 
 	/**
 	 *
@@ -782,16 +721,12 @@ this.describetype.is = (function (exports) {
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function element(value) {
+	var element = function element(value) {
 		if (value === undefined || value === null) { return false; }
-		if (env.window === undefined || env.window === null) { return false; }
-		return callable(env.window.HTMLElement) &&
-		value instanceof env.window.HTMLElement &&
+		if (env$2.window === undefined || env$2.window === null) { return false; }
+		return callable(env$2.window.HTMLElement) &&
+		value instanceof env$2.window.HTMLElement &&
 		value.nodeType === 1;
-	}
-
-	var element_next = /*#__PURE__*/{
-		default: element
 	};
 
 	/**
@@ -801,24 +736,20 @@ this.describetype.is = (function (exports) {
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function empty(value) {
+	var empty = function empty(value) {
 		if (value === undefined || value === null) {
 			return true;
 		}
-		if (isEmptyArraylike(value)) {
+		if (arraylike_empty(value)) {
 			return true;
 		}
-		if (isEmptyObject(value)) {
+		if (object_empty(value)) {
 			return true;
 		}
 		if (callable(value.valueOf)) {
 			return !value.valueOf();
 		}
 		return !value;
-	}
-
-	var empty_next = /*#__PURE__*/{
-		default: empty
 	};
 
 	/**
@@ -828,13 +759,9 @@ this.describetype.is = (function (exports) {
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function enumerable(value) {
+	var enumerable = function enumerable(value) {
 		if (value === undefined || value === null) { return false; }
 		return number(value.length) && callable(value) === false;
-	}
-
-	var enumerable_next = /*#__PURE__*/{
-		default: enumerable
 	};
 
 	/**
@@ -845,7 +772,7 @@ this.describetype.is = (function (exports) {
 	 * @returns {Boolean} The Object.is() method determines whether two values are
 	 * the same value.
 	 */
-	var is = Object.is || function is(valueA, valueB) {
+	var Object_is = Object.is || function is(valueA, valueB) {
 		if (valueA === valueB) {
 			if (valueA === 0) { return 1 / valueA === 1 / valueB; }
 			return true;
@@ -853,7 +780,9 @@ this.describetype.is = (function (exports) {
 		var a = valueA;
 		var b = valueB;
 		return valueA !== a && valueB !== b;
-	}
+	};
+
+	var objectHasOwnProperty$3 = builtIn.objectHasOwnProperty;
 
 	/**
 	 *
@@ -863,12 +792,13 @@ this.describetype.is = (function (exports) {
 	 * @param {any} key
 	 * @returns {Boolean}
 	 */
-	function ownProperty(context, key) {
+	var ownProperty = function ownProperty(context, key) {
 		if (context === undefined || context === null) { return false; }
-		return objectHasOwnProperty.call(context, key);
-	}
+		return objectHasOwnProperty$3.call(context, key);
+	};
 
 	/* eslint-disable no-restricted-syntax */
+
 
 	/**
 	 *
@@ -878,7 +808,7 @@ this.describetype.is = (function (exports) {
 	 * @param {Boolean} getInheritedProps -
 	 * @returns {Array}
 	 */
-	function keys(object, getInheritedProps) {
+	var Object_keys = function keys(object, getInheritedProps) {
 		if (object === undefined || object === null) { return []; }
 		if (Object.keys && !getInheritedProps) {
 			return Object.keys(object);
@@ -890,7 +820,7 @@ this.describetype.is = (function (exports) {
 			}
 		}
 		return properties;
-	}
+	};
 
 	/**
 	 * The equal() method determines whether two values are the same value.
@@ -901,13 +831,13 @@ this.describetype.is = (function (exports) {
 	 * @returns {Boolean} A Boolean indicating whether or not the two arguments are
 	 * the same value.
 	 */
-	function equal(valueA, valueB) {
+	var equal = function equal(valueA, valueB) {
 		var size;
 		if (valueA === undefined || valueA === null) {
-			return is(valueA, valueB);
+			return Object_is(valueA, valueB);
 		} else if (valueB === undefined || valueB === null) {
-			return is(valueB, valueA);
-		} else if (is(valueA, valueB)) {
+			return Object_is(valueB, valueA);
+		} else if (Object_is(valueA, valueB)) {
 			return true;
 		}
 		var constructorA = constructorOf(valueA);
@@ -915,8 +845,8 @@ this.describetype.is = (function (exports) {
 		if (constructorA === constructorB === false) {
 			return false;
 		} else if (constructorA === Object) {
-			var keysA = keys(valueA);
-			var keysB = keys(valueB);
+			var keysA = Object_keys(valueA);
+			var keysB = Object_keys(valueB);
 			size = keysA.length;
 			if (size === keysB.length === false) {
 				return false;
@@ -947,10 +877,6 @@ this.describetype.is = (function (exports) {
 			return valueA.source === valueB.source && valueA.flags === valueB.flags;
 		}
 		return false;
-	}
-
-	var equal_next = /*#__PURE__*/{
-		default: equal
 	};
 
 	/**
@@ -960,12 +886,8 @@ this.describetype.is = (function (exports) {
 	 * @param {any}
 	 * @returns {Boolean}
 	 */
-	function error(value) {
+	var error = function error(value) {
 		return value instanceof Error;
-	}
-
-	var error_next = /*#__PURE__*/{
-		default: error
 	};
 
 	/**
@@ -975,13 +897,12 @@ this.describetype.is = (function (exports) {
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function even(value) {
+	var even = function even(value) {
 		return infinity(value) || (number(value) && value === value && value % 2 === 0);
-	}
-
-	var even_next = /*#__PURE__*/{
-		default: even
 	};
+
+	var OBJECT$2 = constants.OBJECT;
+
 
 	/**
 	 *
@@ -990,17 +911,13 @@ this.describetype.is = (function (exports) {
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function primitive(value) {
+	var primitive = function primitive(value) {
 		if (value === undefined || value === null) { return true; }
 		if (callable(value.valueOf)) { value = value.valueOf(); }
-		if (callable(value) || typeof value === OBJECT) {
+		if (callable(value) || typeof value === OBJECT$2) {
 			return false;
 		}
 		return true;
-	}
-
-	var primitive_next = /*#__PURE__*/{
-		default: primitive
 	};
 
 	/**
@@ -1010,28 +927,22 @@ this.describetype.is = (function (exports) {
 	 * @param {any}
 	 * @returns {Boolean}
 	 */
-	function exotic(value) {
+	var exotic = function exotic(value) {
 		return primitive(value) === false;
-	}
-
-	var exotic_next = /*#__PURE__*/{
-		default: exotic
 	};
 
-	function hex(value) {
+	var reIsHex = patterns.reIsHex;
+
+
+	var hex = function hex(value) {
 		return string(value) && reIsHex.test(value);
-	}
-
-	var hex_next = /*#__PURE__*/{
-		default: hex
 	};
 
-	function hexadecimal(value) {
-		return string(value) && reIsHexadecimal.test(value);
-	}
+	var reIsHexadecimal = patterns.reIsHexadecimal;
 
-	var hexadecimal_next = /*#__PURE__*/{
-		default: hexadecimal
+
+	var hexadecimal = function hexadecimal(value) {
+		return string(value) && reIsHexadecimal.test(value);
 	};
 
 	/**
@@ -1042,12 +953,8 @@ this.describetype.is = (function (exports) {
 	 * @param {Object|Array|Function} host
 	 * @returns {Boolean}
 	 */
-	function hosted(key, host) {
+	var hosted = function hosted(key, host) {
 		return (host === undefined || host === null || primitive(host[key]) === false) === true;
-	}
-
-	var hosted_next = /*#__PURE__*/{
-		default: hosted
 	};
 
 	/**
@@ -1057,13 +964,13 @@ this.describetype.is = (function (exports) {
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function int(value) {
+	var int_1 = function int(value) {
 		return number(value) && value === value && value % 1 === 0;
-	}
-
-	var int_next = /*#__PURE__*/{
-		default: int
 	};
+
+	var reIsJsonStart = patterns.reIsJsonStart;
+	var reIsJsonEnds = patterns.reIsJsonEnds;
+
 
 	/**
 	 *
@@ -1072,16 +979,12 @@ this.describetype.is = (function (exports) {
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function jsonlike(value) {
+	var jsonlike = function jsonlike(value) {
 		if (string(value)) {
 			var start = value.match(reIsJsonStart);
 			return !!(start && reIsJsonEnds[start[0]].test(value));
 		}
 		return false;
-	}
-
-	var jsonlike_next = /*#__PURE__*/{
-		default: jsonlike
 	};
 
 	/**
@@ -1092,7 +995,7 @@ this.describetype.is = (function (exports) {
 	 * @param {arraylike} others
 	 * @returns {Boolean}
 	 */
-	function max(value, others) {
+	var max = function max(value, others) {
 		if (value !== value) {
 			throw new TypeError('NaN is not a valid value');
 		} else if (arraylike(others) === false) {
@@ -1106,10 +1009,6 @@ this.describetype.is = (function (exports) {
 			}
 		}
 		return true;
-	}
-
-	var max_next = /*#__PURE__*/{
-		default: max
 	};
 
 	/**
@@ -1120,7 +1019,7 @@ this.describetype.is = (function (exports) {
 	 * @param {arraylike} others
 	 * @returns {Boolean}
 	 */
-	function min(value, others) {
+	var min = function min(value, others) {
 		if (value !== value) {
 			throw new TypeError('NaN is not a valid value');
 		} else if (arraylike(others) === false) {
@@ -1134,10 +1033,6 @@ this.describetype.is = (function (exports) {
 			}
 		}
 		return true;
-	}
-
-	var min_next = /*#__PURE__*/{
-		default: min
 	};
 
 	/**
@@ -1147,14 +1042,13 @@ this.describetype.is = (function (exports) {
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function nan(value) {
+	var nan = function nan(value) {
 		var isnum = number(value);
 		return isnum === false || (isnum && value !== value);
-	}
-
-	var nan_next = /*#__PURE__*/{
-		default: nan
 	};
+
+	var reIsNativeFn = patterns.reIsNativeFn;
+
 
 	/**
 	 *
@@ -1163,12 +1057,8 @@ this.describetype.is = (function (exports) {
 	 * @param {any}
 	 * @returns {Boolean}
 	 */
-	function nativeFunction(value) {
+	var nativeFunction = function nativeFunction(value) {
 		return callable(value) && reIsNativeFn.test(value.toString());
-	}
-
-	var nativeFunction_next = /*#__PURE__*/{
-		default: nativeFunction
 	};
 
 	/**
@@ -1178,12 +1068,8 @@ this.describetype.is = (function (exports) {
 	 * @param {any}
 	 * @returns {Boolean}
 	 */
-	function nil(value) {
+	var nil = function nil(value) {
 		return value === null;
-	}
-
-	var nil_next = /*#__PURE__*/{
-		default: nil
 	};
 
 	/**
@@ -1193,7 +1079,7 @@ this.describetype.is = (function (exports) {
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function numeric(value) {
+	var numeric = function numeric(value) {
 		if (value === undefined || value === null) { return false; }
 		if (bool(value)) { return true; }
 		try {
@@ -1202,10 +1088,6 @@ this.describetype.is = (function (exports) {
 		} catch (err) {
 			return false;
 		}
-	}
-
-	var numeric_next = /*#__PURE__*/{
-		default: numeric
 	};
 
 	/**
@@ -1215,12 +1097,21 @@ this.describetype.is = (function (exports) {
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function odd(value) {
+	var odd = function odd(value) {
 		return infinity(value) || (number(value) && value === value && value % 2 !== 0);
-	}
+	};
 
-	var odd_next = /*#__PURE__*/{
-		default: odd
+	var SYMBOL$2 = constants.SYMBOL;
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	var symbol = function symbol(value) {
+		return typeof value === SYMBOL$2;
 	};
 
 	/**
@@ -1230,42 +1121,8 @@ this.describetype.is = (function (exports) {
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function regexp(value) {
-		return value instanceof RegExp;
-	}
-
-	var regexp_next = /*#__PURE__*/{
-		default: regexp
-	};
-
-	/**
-	 *
-	 * @function
-	 * @memberof is
-	 * @param {any} value
-	 * @returns {Boolean}
-	 */
-	function symbol(value) {
-		return typeof value === SYMBOL;
-	}
-
-	var symbol_next = /*#__PURE__*/{
-		default: symbol
-	};
-
-	/**
-	 *
-	 * @function
-	 * @memberof is
-	 * @param {any} value
-	 * @returns {Boolean}
-	 */
-	function uint(value) {
-		return int(value) && value >= 0;
-	}
-
-	var uint_next = /*#__PURE__*/{
-		default: uint
+	var uint = function uint(value) {
+		return int_1(value) && value >= 0;
 	};
 
 	/**
@@ -1282,10 +1139,10 @@ this.describetype.is = (function (exports) {
 	 * @returns {Number} A floating point number parsed from the given value.
 	 * If the first character cannot be converted to a number, 0 is returned.
 	 */
-	function floatOf(value) {
+	var floatOf = function floatOf(value) {
 		value = +value;
 		return nan(value) || infinity(value) ? 0 : value;
-	}
+	};
 
 	/**
 	 *
@@ -1296,176 +1153,79 @@ this.describetype.is = (function (exports) {
 	 * @param {Number} finish
 	 * @returns {Boolean}
 	 */
-	function within(value, start, finish) {
+	var within = function within(value, start, finish) {
 		value = floatOf(value);
 		start = floatOf(start);
 		finish = floatOf(finish);
 		return infinity(value) || infinity(start) || infinity(finish) ||
 			(value >= start && value <= finish)
 		;
-	}
-
-	var within_next = /*#__PURE__*/{
-		default: within
 	};
 
-	var _argsIndexNextJs = ( index_next && args ) || index_next;
+	var args$1 = args_1;
+	var array$1 = array_1;
+	var arraylike$1 = arraylike_1;
+	var not$1 = not;
+	var object$1 = object_1;
+	var stream$1 = stream_1;
+	var string$1 = string_1;
+	var regexp$1 = regexp_1;
+	var a$1 = a;
+	var an$1 = an;
+	var any$1 = any;
+	var base64$1 = base64;
+	var bool$1 = bool;
+	var buffer$1 = buffer;
+	var callable$1 = callable;
+	var date$1 = date;
+	var decimal$1 = decimal;
+	var defined$1 = defined;
+	var element$1 = element;
+	var empty$1 = empty;
+	var enumerable$1 = enumerable;
+	var equal$1 = equal;
+	var error$1 = error;
+	var even$1 = even;
+	var exotic$1 = exotic;
+	var hex$1 = hex;
+	var hexadecimal$1 = hexadecimal;
+	var hosted$1 = hosted;
+	var infinity$1 = infinity;
+	var instanceOf$1 = instanceOf;
+	var int_1$1 = int_1;
+	var jsonlike$1 = jsonlike;
+	var max$1 = max;
+	var min$1 = min;
+	var nan$1 = nan;
+	var nativeFunction$1 = nativeFunction;
+	var nil$1 = nil;
+	var number$1 = number;
+	var numeric$1 = numeric;
+	var odd$1 = odd;
+	var primitive$1 = primitive;
+	var symbol$1 = symbol;
+	var type$1 = type;
+	var uint$1 = uint;
+	var undef$1 = undef;
+	var vector$1 = vector;
+	var within$1 = within;
 
-	var _arrayIndexNextJs = ( index_next$1 && array ) || index_next$1;
-
-	var _arraylikeIndexNextJs = ( index_next$2 && arraylike ) || index_next$2;
-
-	var _notIndexNextJs = ( index_next$3 && notType ) || index_next$3;
-
-	var _objectIndexNextJs = ( index_next$4 && object ) || index_next$4;
-
-	var _streamIndexNextJs = ( index_next$5 && stream ) || index_next$5;
-
-	var _stringIndexNextJs = ( index_next$6 && string ) || index_next$6;
-
-	var _aNextJs = ( a_next && type ) || a_next;
-
-	var _anNextJs = ( an_next && type ) || an_next;
-
-	var _anyNextJs = ( any_next && any ) || any_next;
-
-	var _base64NextJs = ( base64_next && base64 ) || base64_next;
-
-	var _boolNextJs = ( bool_next && bool ) || bool_next;
-
-	var _bufferNextJs = ( buffer_next && buffer ) || buffer_next;
-
-	var _callableNextJs = ( callable_next && callable ) || callable_next;
-
-	var _dateNextJs = ( date_next && date ) || date_next;
-
-	var _decimalNextJs = ( decimal_next && decimal ) || decimal_next;
-
-	var _definedNextJs = ( defined_next && defined ) || defined_next;
-
-	var _elementNextJs = ( element_next && element ) || element_next;
-
-	var _emptyNextJs = ( empty_next && empty ) || empty_next;
-
-	var _enumerableNextJs = ( enumerable_next && enumerable ) || enumerable_next;
-
-	var _equalNextJs = ( equal_next && equal ) || equal_next;
-
-	var _errorNextJs = ( error_next && error ) || error_next;
-
-	var _evenNextJs = ( even_next && even ) || even_next;
-
-	var _exoticNextJs = ( exotic_next && exotic ) || exotic_next;
-
-	var _hexNextJs = ( hex_next && hex ) || hex_next;
-
-	var _hexadecimalNextJs = ( hexadecimal_next && hexadecimal ) || hexadecimal_next;
-
-	var _hostedNextJs = ( hosted_next && hosted ) || hosted_next;
-
-	var _infinityNextJs = ( infinity_next && infinity ) || infinity_next;
-
-	var _instanceOfNextJs = ( instanceOf_next && instanceOf ) || instanceOf_next;
-
-	var _intNextJs = ( int_next && int ) || int_next;
-
-	var _jsonlikeNextJs = ( jsonlike_next && jsonlike ) || jsonlike_next;
-
-	var _maxNextJs = ( max_next && max ) || max_next;
-
-	var _minNextJs = ( min_next && min ) || min_next;
-
-	var _nanNextJs = ( nan_next && nan ) || nan_next;
-
-	var _nativeFunctionNextJs = ( nativeFunction_next && nativeFunction ) || nativeFunction_next;
-
-	var _nilNextJs = ( nil_next && nil ) || nil_next;
-
-	var _numberNextJs = ( number_next && number ) || number_next;
-
-	var _numericNextJs = ( numeric_next && numeric ) || numeric_next;
-
-	var _oddNextJs = ( odd_next && odd ) || odd_next;
-
-	var _primitiveNextJs = ( primitive_next && primitive ) || primitive_next;
-
-	var _regexpNextJs = ( regexp_next && regexp ) || regexp_next;
-
-	var _symbolNextJs = ( symbol_next && symbol ) || symbol_next;
-
-	var _typeNextJs = ( type_next && type ) || type_next;
-
-	var _uintNextJs = ( uint_next && uint ) || uint_next;
-
-	var _undefNextJs = ( undef_next && undef ) || undef_next;
-
-	var _vectorNextJs = ( vector_next && vector ) || vector_next;
-
-	var _withinNextJs = ( within_next && within ) || within_next;
-
-	var args$1 = _argsIndexNextJs;
-	var array$1 = _arrayIndexNextJs;
-	var arraylike$1 = _arraylikeIndexNextJs;
-	var not = _notIndexNextJs;
-	var object$1 = _objectIndexNextJs;
-	var stream$1 = _streamIndexNextJs;
-	var string$1 = _stringIndexNextJs;
-	var a = _aNextJs;
-	var an = _anNextJs;
-	var any$1 = _anyNextJs;
-	var base64$1 = _base64NextJs;
-	var bool$1 = _boolNextJs;
-	var buffer$1 = _bufferNextJs;
-	var callable$2 = _callableNextJs;
-	var date$1 = _dateNextJs;
-	var decimal$1 = _decimalNextJs;
-	var defined$1 = _definedNextJs;
-	var element$1 = _elementNextJs;
-	var empty$1 = _emptyNextJs;
-	var enumerable$1 = _enumerableNextJs;
-	var equal$1 = _equalNextJs;
-	var error$1 = _errorNextJs;
-	var even$1 = _evenNextJs;
-	var exotic$1 = _exoticNextJs;
-	var hex$1 = _hexNextJs;
-	var hexadecimal$1 = _hexadecimalNextJs;
-	var hosted$1 = _hostedNextJs;
-	var infinity$1 = _infinityNextJs;
-	var instanceOf$1 = _instanceOfNextJs;
-	var int_1 = _intNextJs;
-	var jsonlike$1 = _jsonlikeNextJs;
-	var max$1 = _maxNextJs;
-	var min$1 = _minNextJs;
-	var nan$1 = _nanNextJs;
-	var nativeFunction$1 = _nativeFunctionNextJs;
-	var nil$1 = _nilNextJs;
-	var number$1 = _numberNextJs;
-	var numeric$1 = _numericNextJs;
-	var odd$1 = _oddNextJs;
-	var primitive$1 = _primitiveNextJs;
-	var regexp$1 = _regexpNextJs;
-	var symbol$1 = _symbolNextJs;
-	var type$2 = _typeNextJs;
-	var uint$1 = _uintNextJs;
-	var undef$1 = _undefNextJs;
-	var vector$1 = _vectorNextJs;
-	var within$1 = _withinNextJs;
-
-	var is$1 = {
+	var is = {
 		args: args$1,
 		array: array$1,
 		arraylike: arraylike$1,
-		not: not,
+		not: not$1,
 		object: object$1,
 		stream: stream$1,
 		string: string$1,
-		a: a,
-		an: an,
+		regexp: regexp$1,
+		a: a$1,
+		an: an$1,
 		any: any$1,
 		base64: base64$1,
 		bool: bool$1,
 		buffer: buffer$1,
-		callable: callable$2,
+		callable: callable$1,
 		date: date$1,
 		decimal: decimal$1,
 		defined: defined$1,
@@ -1481,7 +1241,7 @@ this.describetype.is = (function (exports) {
 		hosted: hosted$1,
 		infinity: infinity$1,
 		instanceOf: instanceOf$1,
-		int: int_1,
+		int: int_1$1,
 		jsonlike: jsonlike$1,
 		max: max$1,
 		min: min$1,
@@ -1492,30 +1252,30 @@ this.describetype.is = (function (exports) {
 		numeric: numeric$1,
 		odd: odd$1,
 		primitive: primitive$1,
-		regexp: regexp$1,
 		symbol: symbol$1,
-		type: type$2,
+		type: type$1,
 		uint: uint$1,
 		undef: undef$1,
 		vector: vector$1,
 		within: within$1
 	};
 
-	exports.default = is$1;
+	exports.default = is;
 	exports.args = args$1;
 	exports.array = array$1;
 	exports.arraylike = arraylike$1;
-	exports.not = not;
+	exports.not = not$1;
 	exports.object = object$1;
 	exports.stream = stream$1;
 	exports.string = string$1;
-	exports.a = a;
-	exports.an = an;
+	exports.regexp = regexp$1;
+	exports.a = a$1;
+	exports.an = an$1;
 	exports.any = any$1;
 	exports.base64 = base64$1;
 	exports.bool = bool$1;
 	exports.buffer = buffer$1;
-	exports.callable = callable$2;
+	exports.callable = callable$1;
 	exports.date = date$1;
 	exports.decimal = decimal$1;
 	exports.defined = defined$1;
@@ -1531,7 +1291,7 @@ this.describetype.is = (function (exports) {
 	exports.hosted = hosted$1;
 	exports.infinity = infinity$1;
 	exports.instanceOf = instanceOf$1;
-	exports.int = int_1;
+	exports.int = int_1$1;
 	exports.jsonlike = jsonlike$1;
 	exports.max = max$1;
 	exports.min = min$1;
@@ -1542,9 +1302,8 @@ this.describetype.is = (function (exports) {
 	exports.numeric = numeric$1;
 	exports.odd = odd$1;
 	exports.primitive = primitive$1;
-	exports.regexp = regexp$1;
 	exports.symbol = symbol$1;
-	exports.type = type$2;
+	exports.type = type$1;
 	exports.uint = uint$1;
 	exports.undef = undef$1;
 	exports.vector = vector$1;
