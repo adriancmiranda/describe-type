@@ -1,6 +1,6 @@
 import test from 'ava';
-import * as datatypes from '../../.fixtures/datatypes.fixture.js';
-import * as describeType from '../index.next.js';
+import * as datatypes from '../.fixtures/datatypes.fixture';
+import * as describeType from '../index.next';
 import infinity from './infinity.next';
 
 test('describeType.is.infinity exposure', t => {

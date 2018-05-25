@@ -1,5 +1,5 @@
 import test from 'ava';
-import * as datatypes from '../../.fixtures/datatypes.fixture.js';
+import * as datatypes from '../.fixtures/datatypes.fixture.js';
 import * as describeType from '../index.next.js';
 import primitive from './primitive.next';
 import exotic from './exotic.next';
