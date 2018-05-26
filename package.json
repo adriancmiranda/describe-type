@@ -106,6 +106,7 @@
     "moment": "2.22.1",
     "nyc": "11.8.0",
     "pirate-flag": "0.1.0",
+    "read-argv": "1.0.0",
     "redrun": "6.0.4",
     "rimraf": "2.6.2",
     "rollup": "0.59.3",
