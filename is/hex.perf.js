@@ -1,7 +1,7 @@
 import { Suite } from 'benchmark';
 import { benchmarkFatestStatus, benchmarkCycle } from '../.fixtures/benchmark';
-import { numbers } from '../../.fixtures/datatypes.fixture';
-import { is } from '../../..';
+import { numbers } from '../.fixtures/datatypes.fixture';
+import { is } from '../index.next';
 
 const hex0 = is.hex;
 const hex1 = h => parseInt(h, 16).toString(16) === h.toLowerCase();

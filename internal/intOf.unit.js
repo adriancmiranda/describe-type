@@ -1,23 +1,23 @@
 import test from 'ava';
-import * as describeType from '../index.next.js';
+import * as describeType from '../index.next';
 import intOf from './intOf.next';
 
-test('describeType.intOf exposure', t => {
+test('describeType.intOf exposure', (t) => {
 	t.is(toString.call(describeType.intOf), '[object Function]', 'should be a function');
 });
 
-test('intOf exposure', t => {
+test('intOf exposure', (t) => {
 	t.is(toString.call(intOf), '[object Function]', 'should be a function');
 });
 
-// test('', t => {
+// test('', (t) => {
 // 	t.is(intOf(-1.2), -1);
 // });
 
-// test('', t => {
+// test('', (t) => {
 // 	t.is(intOf(1.2), 1);
 // });
 
-// test('', t => {
+// test('', (t) => {
 // 	t.is(intOf(1), 1);
 // });

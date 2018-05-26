@@ -1,5 +1,5 @@
 import { Suite } from 'benchmark';
-import { benchmarkFatestStatus, benchmarkCycle } from '../../.fixtures/benchmark';
+import { benchmarkFatestStatus, benchmarkCycle } from '../.fixtures/benchmark';
 import apply from './apply.next';
 
 const value = '~ apply ~'.split('');

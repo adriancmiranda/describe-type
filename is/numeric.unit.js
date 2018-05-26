@@ -3,16 +3,16 @@ import * as datatypes from '../.fixtures/datatypes.fixture';
 import * as describeType from '../index.next';
 import numeric from './numeric.next';
 
-test('describeType.is.numeric exposure', t => {
+test('describeType.is.numeric exposure', (t) => {
 	t.is(toString.call(describeType.is.numeric), '[object Function]', 'should be a function');
 });
 
-test('numeric exposure', t => {
+test('numeric exposure', (t) => {
 	t.is(toString.call(numeric), '[object Function]', 'should be a function');
 });
 
-datatypes.numeric.iterate(datatype => {
-	test(`${datatype.id} • numeric(${datatype.label});`, t => {
+datatypes.numeric.iterate((datatype) => {
+	test(`${datatype.id} • numeric(${datatype.label});`, (t) => {
 		t.is(numeric(datatype.value), true, 'should be true');
 	});
 });
@@ -24,8 +24,8 @@ datatypes.all.remove(datatypes.number);
 datatypes.all.remove(datatypes.bool);
 datatypes.all.remove(datatypes.arraylikeNative);
 datatypes.all.remove(datatypes.arrayFilled);
-datatypes.all.iterate(datatype => {
-	test(`${datatype.id} • numeric(${datatype.label});`, t => {
+datatypes.all.iterate((datatype) => {
+	test(`${datatype.id} • numeric(${datatype.label});`, (t) => {
 		t.is(numeric(datatype.value), false, 'should be false');
 	});
 });

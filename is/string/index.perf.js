@@ -1,5 +1,5 @@
-import string from './string.js';
-import stringEmpty from './string.empty.js';
+import string from './string';
+import stringEmpty from './string.empty';
 
 string.empty = stringEmpty;
 export default string;

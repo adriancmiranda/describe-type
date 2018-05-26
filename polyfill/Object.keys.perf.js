@@ -1,6 +1,6 @@
 import { Suite } from 'benchmark';
 import { benchmarkFatestStatus, benchmarkCycle } from '../../.fixtures/benchmark';
-import keys from '../../../polyfill/Object.keys';
+import keys from './Object.keys.next';
 
 const value = {
 	"A": 329.5562145531701,

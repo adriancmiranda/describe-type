@@ -133,7 +133,7 @@
   },
   "ava": {
     "tap": false,
-    "failFast": true,
+    "failFast": false,
     "powerAssert": false,
     "failWithoutAssertions": false,
     "concurrency": 5,

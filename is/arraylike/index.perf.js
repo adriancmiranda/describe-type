@@ -1,5 +1,5 @@
-import arraylike from './arraylike.js';
-import arraylikeEmpty from './arraylike.empty.js';
+import arraylike from './arraylike';
+import arraylikeEmpty from './arraylike.empty';
 
 arraylike.empty = arraylikeEmpty;
 export default arraylike;

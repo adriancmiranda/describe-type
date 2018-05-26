@@ -1,6 +1,6 @@
 import { Suite } from 'benchmark';
 import { benchmarkFatestStatus, benchmarkCycle } from '../.fixtures/benchmark';
-import own from './own.js';
+import own from './own';
 
 const value = {
 	'A': 329.5562145531701,

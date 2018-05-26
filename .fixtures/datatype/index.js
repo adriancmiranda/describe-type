@@ -1,5 +1,5 @@
 /* eslint-disable no-nested-ternary */
-import { alias } from './utils';
+import { alias, applyAndNew } from './utils';
 import DataTypeValue from './value';
 
 export default function DataType(name) {
@@ -41,7 +41,8 @@ DataType.prototype.add = function add(label, ctor, ...args) {
 		this.add(label.label, label.value);
 	} else if (labelSeal === 'String') {
 		if (arguments.length === 2 || typeof ctor === 'function') {
-			this.children[this.children.length] = new DataTypeValue(this, label, ctor, ...args);
+			const DTVWithArguments = applyAndNew(DataTypeValue, [this, label, ctor].concat(args));
+			this.children[this.children.length] = new DTVWithArguments;
 		}
 	}
 	return this;

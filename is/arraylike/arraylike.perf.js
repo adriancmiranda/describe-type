@@ -1,6 +1,6 @@
-import { OBJECT, NUMBER } from '../../internal/env.js';
-import array from '../array/array.js';
-import string from '../string/string.js';
+import { OBJECT, NUMBER } from '../../internal/env';
+import array from '../array/array';
+import string from '../string/string';
 
 /**
  *

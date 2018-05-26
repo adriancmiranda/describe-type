@@ -1,5 +1,5 @@
-import streamWritable from './stream.writable.js';
-import streamReadable from './stream.readable.js';
+import streamWritable from './stream.writable';
+import streamReadable from './stream.readable';
 
 /**
  *

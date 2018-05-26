@@ -1,7 +1,7 @@
 import { Suite } from 'benchmark';
 import { benchmarkFatestStatus, benchmarkCycle } from '../.fixtures/benchmark';
-import { all } from '../../.fixtures/datatypes.fixture';
-import { is } from '../../..';
+import { all } from '../.fixtures/datatypes.fixture';
+import { is } from '../index.next';
 
 let i = 0;
 all.iterate((datatype) => {

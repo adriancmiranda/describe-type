@@ -1,5 +1,5 @@
-import { objectHasOwnProperty } from '../../internal/built-in.js';
-import object from './object.js';
+import { objectHasOwnProperty } from '../../internal/built-in';
+import object from './object';
 
 /**
  *

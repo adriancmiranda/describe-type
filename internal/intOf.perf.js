@@ -1,6 +1,6 @@
 import { Suite } from 'benchmark';
-import { benchmarkFatestStatus, benchmarkCycle } from '../../.fixtures/benchmark';
-import intOf from './intOf.next.js';
+import { benchmarkFatestStatus, benchmarkCycle } from '../.fixtures/benchmark';
+import intOf from './intOf.next';
 
 const value = [
 	{ value: '0xfff', radix: 16 },

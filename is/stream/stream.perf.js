@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-import callable from '../callable.js';
+import callable from '../callable';
 
 /**
  *

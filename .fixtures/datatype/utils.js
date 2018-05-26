@@ -118,3 +118,30 @@ export function format(template, param) {
 		}) : template
 	;
 }
+
+export function init(Ctor, args, context) {
+	return function nu() {
+		switch (args.length) {
+			case 0: return new Ctor();
+			case 1: return new Ctor(args[0]);
+			case 2: return new Ctor(args[0], args[1]);
+			case 3: return new Ctor(args[0], args[1], args[2]);
+			case 4: return new Ctor(args[0], args[1], args[2], args[3]);
+			case 5: return new Ctor(args[0], args[1], args[2], args[3], args[4]);
+			case 6: return new Ctor(args[0], args[1], args[2], args[3], args[4], args[5]);
+			case 7: return new Ctor(args[0], args[1], args[2], args[3], args[4], args[5], args[6]);
+			case 8: return new Ctor(args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7]);
+			case 9: return new Ctor(args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8]);
+			default: return Ctor.apply(context, args);
+		}
+	};
+}
+
+export function applyAndNew(constructor, args) {
+	if (constructor === undefined || constructor === null) return constructor;
+	const partial = init(constructor, args);
+	if (typeof constructor.prototype === 'object') {
+		partial.prototype = Object.create(constructor.prototype);
+	}
+	return partial;
+}

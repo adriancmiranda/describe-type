@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
-import callable from '../callable.js';
-import stream from './stream.js';
+import callable from '../callable';
+import stream from './stream';
 
 /**
  *

@@ -1,5 +1,5 @@
-import object from './object.js';
-import objectEmpty from './object.empty.js';
+import object from './object';
+import objectEmpty from './object.empty';
 
 object.empty = objectEmpty;
 export default object;

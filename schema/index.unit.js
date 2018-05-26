@@ -42,11 +42,11 @@ function throwUnexpectedType(t, pattern, value, err) {
 	throws('UnexpectedType', t, pattern, value, err);
 }
 
-test('lib/data/parse exists', t => {
+test('lib/data/parse exists', (t) => {
 	t.is(toString.call(schema), '[object Function]', 'should be a function');
 });
 
-test('lib/data/parse // simple conflicts', t => {
+test('lib/data/parse // simple conflicts', (t) => {
 	throwUnexpectedType(t, undefined, null);
 	throwUnexpectedType(t, null, undefined);
 	throwUnexpectedType(t, String, undefined);
@@ -56,7 +56,7 @@ test('lib/data/parse // simple conflicts', t => {
 	throwUnexpectedType(t, String, undefined);
 });
 
-test('lib/data/parse // complex conflicts', t => {
+test('lib/data/parse // complex conflicts', (t) => {
 	throwConflictType(t, {
 		type: [Function, String],
 		required: true,
@@ -67,7 +67,7 @@ test('lib/data/parse // complex conflicts', t => {
 	}, { name: 'hello', limit: 1 });
 });
 
-test('lib/data/parse // simple', t => {
+test('lib/data/parse // simple', (t) => {
 	t.is(sprop([Function, String, undefined], undefined), undefined);
 	t.is(sprop([Function, String], 'hello'), 'hello');
 	t.is(sprop(String, 'hello'), 'hello');
@@ -75,7 +75,7 @@ test('lib/data/parse // simple', t => {
 	t.is(sprop(null, null), null);
 });
 
-test('lib/data/parse // complex', t => {
+test('lib/data/parse // complex', (t) => {
 	t.is(sprop({
 		type: [Function, String],
 		required: true,
