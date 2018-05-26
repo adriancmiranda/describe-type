@@ -12,7 +12,7 @@ function spawn(cmd, args, options) {
 function spawnSync(cmd, args, options) {
 	const opts = options == null ? { stdio: 'inherit' } : options;
 	const result = cross.sync(cmd, args, opts);
-	const error = processExit(result.code, result.signal);
+	const error = processExit(result.code, result.signal) || result.error;
 	if (error) throw error;
 	return result;
 }

@@ -1,8 +1,8 @@
+const argv = require('read-argv');
 const Git = require('git-revision-webpack-plugin');
 const { resolve, dirname } = require('path');
 const { aliases } = require('./@/aliases');
 const { params } = require('./@/env');
-const argv = require('./@/argv');
 const banner = require('./@/banner');
 
 exports.pack = require('../package.json');
