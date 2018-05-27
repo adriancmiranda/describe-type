@@ -1,8 +1,10 @@
 import { Suite } from 'benchmark';
 import { benchmarkFatestStatus, benchmarkCycle } from '../.fixtures/benchmark';
 import * as datatypes from '../.fixtures/datatypes.fixture';
-import * as deprecatedIs from '../../.fixtures/deprecated/is';
+// import * as deprecatedIs from '../.fixtures/deprecated/is';
+import * as describeType from '../index.next';
 import * as is from './index.next';
+import type from './type.next';
 
 let i = 0;
 datatypes.all.iterate((datatype) => {
@@ -17,8 +19,16 @@ datatypes.all.iterate((datatype) => {
 
 	new Suite()
 
-	.add(`${name}: describeType.is.a(${name}, ${label})`, () => {
+	.add(`${name}: type(${name}, ${label})`, () => {
+		type(ctor, value);
+	})
+
+	.add(`${name}: is.type(${name}, ${label})`, () => {
 		is.type(ctor, value);
+	})
+
+	.add(`${name}: describeType.is.type(${name}, ${label})`, () => {
+		describeType.is.type(ctor, value);
 	})
 
 	// .add(`${name}: deprecated.is.a(${name}, ${label})`, () => {
@@ -28,6 +38,10 @@ datatypes.all.iterate((datatype) => {
 	// .add(`${name}: describeType.is.not.a(${name}, ${label})`, () => {
 	// 	is.not.type(ctor, value) === true;
 	// })
+
+	.add(`${name}: toString.call(${label}) === ${seal}`, () => {
+		toString.call(value) === seal;
+	})
 
 	.add(`${name}: Object.prototype.toString.call(${label}) === ${seal}`, () => {
 		Object.prototype.toString.call(value) === seal;
