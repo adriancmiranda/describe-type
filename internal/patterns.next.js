@@ -6,6 +6,7 @@ export const reStringToBoolean = /^true|[1-9]+$/gi;
 export const reToPropName = /^[^a-zA-Z_$]|[^\w|$]|[^\w$]$/g;
 export const reIsHex = /^([A-Fa-f0-9]+|)$/;
 export const reIsHexadecimal = /^((#|0x)?([0-9A-Fa-f]{6}|[0-9A-Fa-f]{3}))?$/;
+export const reRegExp = /^\/([\s\S]*)\/((?:([gimuy])(?!.*\3)){0,5})$/;
 export const reIsJsonStart = /^\[|^\{(?!\{)/;
 export const reEndsWithBracket = /\]$/;
 export const reEndsWithBrace = /\}$/;

@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v1.0.0
  * 
- * @commit 6f38201294cf88e450d95b4394288fe1a217b8cb
- * @moment Thursday, May 24, 2018 5:03 PM
+ * @commit 4431abba57b4bf8bcc7ff0bc771253f9ef41588a
+ * @moment Sunday, May 27, 2018 11:28 AM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2021
@@ -15,44 +15,11 @@
 }(this, (function () { 'use strict';
 
 	var NUMBER = 'number';
-	var BOOLEAN = 'boolean';
 	var STRING = 'string';
 	var SYMBOL = 'symbol';
 	var OBJECT = 'object';
 	var FUNCTION = 'function';
-	var NULL = 'null';
-	var UNDEFINED = 'undefined';
-	var GENERATOR_FUNCTION = 'GeneratorFunction';
-	var ASYNC_FUNCTION = 'AsyncFunction';
-	var ARGUMENTS = 'Arguments';
-	var INFINITY = 'Infinity';
-	var NAN = 'NaN';
 	var CONSTRUCTOR = 'constructor';
-	var PREFIX_SEAL = '[object ';
-	var ARGUMENTS_SEAL = '[object Arguments]';
-	var CALLEE = 'callee';
-
-	var constants = {
-		NUMBER: NUMBER,
-		BOOLEAN: BOOLEAN,
-		STRING: STRING,
-		SYMBOL: SYMBOL,
-		OBJECT: OBJECT,
-		FUNCTION: FUNCTION,
-		NULL: NULL,
-		UNDEFINED: UNDEFINED,
-		GENERATOR_FUNCTION: GENERATOR_FUNCTION,
-		ASYNC_FUNCTION: ASYNC_FUNCTION,
-		ARGUMENTS: ARGUMENTS,
-		INFINITY: INFINITY,
-		NAN: NAN,
-		CONSTRUCTOR: CONSTRUCTOR,
-		PREFIX_SEAL: PREFIX_SEAL,
-		ARGUMENTS_SEAL: ARGUMENTS_SEAL,
-		CALLEE: CALLEE
-	};
-
-	var FUNCTION$1 = constants.FUNCTION;
 
 	/**
 	 *
@@ -61,9 +28,9 @@
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	var callable = function callable(value) {
-		return typeof value === FUNCTION$1;
-	};
+	function callable(value) {
+		return typeof value === FUNCTION;
+	}
 
 	/**
 	 *
@@ -72,11 +39,9 @@
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	var array = function array(value) {
+	function array(value) {
 		return value instanceof Array;
-	};
-
-	var STRING$1 = constants.STRING;
+	}
 
 	/**
 	 *
@@ -85,14 +50,9 @@
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	var string = function string(value) {
-		return typeof value === STRING$1 || value instanceof String;
-	};
-
-	var OBJECT$1 = constants.OBJECT;
-	var NUMBER$1 = constants.NUMBER;
-
-
+	function string(value) {
+		return typeof value === STRING || value instanceof String;
+	}
 
 	/**
 	 *
@@ -101,12 +61,12 @@
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	var arraylike = function arraylike(value) {
+	function arraylike(value) {
 		return array(value) || string(value) || (
-			(!!value && typeof value === OBJECT$1 && typeof value.length === NUMBER$1) &&
+			(!!value && typeof value === OBJECT && typeof value.length === NUMBER) &&
 			(value.length === 0 || (value.length > 0 && (value.length - 1) in value))
 		);
-	};
+	}
 
 	/**
 	 *
@@ -116,7 +76,7 @@
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	var ownValue = function ownValue(context, value) {
+	function ownValue(context, value) {
 		if (arraylike(context) === false) { return false; }
 		for (var id = context.length - 1; id > -1; id -= 1) {
 			if (value === context[id]) {
@@ -124,9 +84,7 @@
 			}
 		}
 		return false;
-	};
-
-	var NUMBER$2 = constants.NUMBER;
+	}
 
 	/**
 	 *
@@ -135,9 +93,9 @@
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	var number = function number(value) {
-		return typeof value === NUMBER$2 || value instanceof Number;
-	};
+	function number(value) {
+		return typeof value === NUMBER || value instanceof Number;
+	}
 
 	/**
 	 *
@@ -146,9 +104,9 @@
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	var int_1 = function int(value) {
+	function int(value) {
 		return number(value) && value === value && value % 1 === 0;
-	};
+	}
 
 	/**
 	 * The `intOf()` function parses a string argument and returns an integer of the
@@ -175,13 +133,12 @@
 	 * min: -2147483647
 	 * max: 2147483647
 	 */
-	var intOf = function intOf(value, radix) {
+	function intOf(value, radix) {
 		value = (radix === undefined || radix === null ? value : parseInt(value, radix));
-		return int_1(value) ? value : 0 | value;
-	};
+		return int(value) ? value : 0 | value;
+	}
 
 	/* eslint-disable no-nested-ternary */
-
 
 	/**
 	 *
@@ -192,7 +149,7 @@
 	 * @param {Number} b - divisor
 	 * @returns {Number}
 	 */
-	var mod = function mod(n, a, b) {
+	function mod(n, a, b) {
 		n = intOf(n);
 		a = intOf(a);
 		b = intOf(b);
@@ -209,7 +166,7 @@
 		rem = n % (b || 1);
 		rem = rem < a ? (rem + b) : rem === 0 ? 0 : rem;
 		return rem;
-	};
+	}
 
 	/**
 	 *
@@ -220,7 +177,7 @@
 	 * @param {int} endIndex
 	 * @returns {Array}
 	 */
-	var Array_prototype_slice = function slice(list, startIndex, endIndex) {
+	function slice(list, startIndex, endIndex) {
 		var range = [];
 		var size = list === undefined || list === null ? 0 : 0 | list.length;
 		if (size) {
@@ -242,7 +199,7 @@
 			}
 		}
 		return range;
-	};
+	}
 
 	/**
 	 *
@@ -250,7 +207,7 @@
 	 * @param {any} context - .
 	 * @returns {any}
 	 */
-	var apply = function apply(cmd, context, args, blindly) {
+	function apply(cmd, context, args, blindly) {
 		try {
 			var $ = arraylike(args) ? args : [];
 			switch ($.length) {
@@ -270,7 +227,7 @@
 			if (blindly) { return err; }
 			throw err;
 		}
-	};
+	}
 
 	/**
 	 *
@@ -283,44 +240,20 @@
 	 * @param {int} endIndex -
 	 * @returns {any}
 	 */
-	var getExpectedValue = function getExpectedValue(expected, value, args, startIndex, endIndex) {
+	function getExpectedValue(expected, value, args, startIndex, endIndex) {
 		if (callable(value) && (expected === Function || ownValue(expected, Function)) === false) {
-			args = Array_prototype_slice(args, startIndex, endIndex);
+			args = slice(args, startIndex, endIndex);
 			return apply(value, args[0], args, true);
 		}
 		return value;
-	};
+	}
 
 	// prototypes
 	var ObjectProto = Object.prototype;
-	var ArrayProto = Array.prototype;
-	var StringProto = String.prototype;
-
-	var prototypes = {
-		ObjectProto: ObjectProto,
-		ArrayProto: ArrayProto,
-		StringProto: StringProto
-	};
-
-	var ObjectProto$1 = prototypes.ObjectProto;
-	var StringProto$1 = prototypes.StringProto;
 
 	// built-in method(s)
-	var objectHasOwnProperty = ObjectProto$1.hasOwnProperty;
-	var objectToString = ObjectProto$1.toString;
+	var objectHasOwnProperty = ObjectProto.hasOwnProperty;
 	var objectGetPrototypeOf = Object.getPrototypeOf;
-	var objectSupportsProto = StringProto$1 === ''.__proto__;
-
-	var builtIn = {
-		objectHasOwnProperty: objectHasOwnProperty,
-		objectToString: objectToString,
-		objectGetPrototypeOf: objectGetPrototypeOf,
-		objectSupportsProto: objectSupportsProto
-	};
-
-	var CONSTRUCTOR$1 = constants.CONSTRUCTOR;
-	var objectGetPrototypeOf$1 = builtIn.objectGetPrototypeOf;
-	var objectHasOwnProperty$1 = builtIn.objectHasOwnProperty;
 
 	/**
 	 *
@@ -329,30 +262,24 @@
 	 * @param {any} value
 	 * @returns {String}
 	 */
-	var constructorOf = function constructorOf(value) {
+	function constructorOf(value) {
 		if (value.constructor === undefined) { return Object; }
 		var proto = value.__proto__;
 
 		if (proto === null) { return Object; }
 
 		return proto.constructor || getConstructorOf(value) || (function () {
-			if (objectHasOwnProperty$1.call(value, CONSTRUCTOR$1)) {
+			if (objectHasOwnProperty.call(value, CONSTRUCTOR)) {
 				return Object;
 			}
 			return value.constructor.prototype.constructor;
 		})();
 		function getConstructorOf(value) {
-			var proto = objectGetPrototypeOf$1(value);
+			var proto = objectGetPrototypeOf(value);
 			if (proto === null) { return Object; }
 			return proto.constructor;
 		}
-	};
-
-	var STRING$2 = constants.STRING;
-	var NUMBER$3 = constants.NUMBER;
-	var SYMBOL$1 = constants.SYMBOL;
-	var FUNCTION$2 = constants.FUNCTION;
-
+	}
 
 	/**
 	 *
@@ -362,19 +289,19 @@
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	var type = function type(expected, value) {
+	function type(expected, value) {
 		if (value === undefined || value === null) { return value === expected; }
 		if (expected === undefined || expected === null) { return expected === value; }
 		if (value === true || value === false) { return expected === Boolean; }
 		var type = typeof value;
-		if (type === STRING$2) { return expected === String; }
-		if (type === NUMBER$3) { return expected === Number; }
-		if (type === SYMBOL$1) { return expected === Symbol; }
-		if (expected === Function) { return type === FUNCTION$2; }
+		if (type === STRING) { return expected === String; }
+		if (type === NUMBER) { return expected === Number; }
+		if (type === SYMBOL) { return expected === Symbol; }
+		if (expected === Function) { return type === FUNCTION; }
 		if (value instanceof Array) { return expected === Array; }
 		if (value instanceof RegExp) { return expected === RegExp; }
 		return constructorOf(value) === expected;
-	};
+	}
 
 	/**
 	 *
@@ -382,10 +309,10 @@
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	var as_type = function asA(expected, value) {
+	function asA(expected, value) {
 		value = getExpectedValue(expected, value, arguments, 2);
 		return type(expected, value) ? value : arguments[2];
-	};
+	}
 
 	/**
 	 *
@@ -395,7 +322,7 @@
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	var any = function any(expected, value) {
+	function any(expected, value) {
 		if (expected === undefined || expected === null) { return expected === value; }
 		if (expected instanceof Array && expected.length > 0) {
 			for (var i = expected.length - 1; i > -1; i -= 1) {
@@ -403,7 +330,7 @@
 			}
 		}
 		return type(expected, value);
-	};
+	}
 
 	/**
 	 *
@@ -411,10 +338,10 @@
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	var as_any = function asAny(expected, value) {
+	function asAny(expected, value) {
 		value = getExpectedValue(expected, value, arguments, 2);
 		return any(expected, value) ? value : arguments[2];
-	};
+	}
 
 	/**
 	 * TODO: a,an,any
@@ -424,7 +351,7 @@
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	var instanceOf = function instanceOf(expected, value) {
+	function instanceOf(expected, value) {
 		if (expected === undefined || expected === null) { return expected === value; }
 		if (expected instanceof Array && expected.length > 0) {
 			for (var i = expected.length - 1; i > -1; i -= 1) {
@@ -435,7 +362,7 @@
 		}
 		if (expected === Number) { return type(expected, value); } // ... should normalize?!
 		return callable(expected) && value instanceof expected;
-	};
+	}
 
 	/**
 	 *
@@ -443,10 +370,10 @@
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	var as_instanceOf = function asInstanceOf(expected, value) {
+	function asInstanceOf(expected, value) {
 		value = getExpectedValue(expected, value, arguments, 2);
 		return instanceOf(expected, value) ? value : arguments[2];
-	};
+	}
 
 	/**
 	 *
@@ -456,9 +383,9 @@
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	var not_any = function notAny(expected, value) {
+	function notAny(expected, value) {
 		return any(expected, value) === false;
-	};
+	}
 
 	/**
 	 * TODO: a,an,any
@@ -468,13 +395,13 @@
 	 * @param {arraylike} value
 	 * @returns {Boolean}
 	 */
-	var vector = function vector(expected, value) {
+	function vector(expected, value) {
 		if (arraylike(value) === false) { return false; }
 		for (var i = value.length - 1; i > -1; i -= 1) {
-			if (not_any(expected, value[i])) { return false; }
+			if (notAny(expected, value[i])) { return false; }
 		}
 		return true;
-	};
+	}
 
 	/**
 	 *
@@ -482,7 +409,7 @@
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	var as_vectorOf = function asVectorOf(expected, value) {
+	function asVectorOf(expected, value) {
 		value = getExpectedValue(expected, value, arguments, 2);
 		if (expected === undefined || expected === null) { return vector(expected, value); }
 		if (expected instanceof Array && expected.length > 0) {
@@ -492,14 +419,13 @@
 			return arguments[2];
 		}
 		return vector(expected, value) ? value : arguments[2];
-	};
+	}
 
-	as_type.a = as_type.an = as_type.type = as_type;
-	as_type.any = as_any;
-	as_type.instanceOf = as_instanceOf;
-	as_type.vectorOf = as_vectorOf;
-	var as = as_type;
+	asA.a = asA.an = asA.type = asA;
+	asA.any = asAny;
+	asA.instanceOf = asInstanceOf;
+	asA.vectorOf = asVectorOf;
 
-	return as;
+	return asA;
 
 })));

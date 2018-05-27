@@ -6,6 +6,7 @@ exports.reStringToBoolean = /^true|[1-9]+$/gi;
 exports.reToPropName = /^[^a-zA-Z_$]|[^\w|$]|[^\w$]$/g;
 exports.reIsHex = /^([A-Fa-f0-9]+|)$/;
 exports.reIsHexadecimal = /^((#|0x)?([0-9A-Fa-f]{6}|[0-9A-Fa-f]{3}))?$/;
+exports.reRegExp = /^\/([\s\S]*)\/((?:([gimuy])(?!.*\3)){0,5})$/;
 exports.reIsJsonStart = /^\[|^\{(?!\{)/;
 exports.reEndsWithBracket = /\]$/;
 exports.reEndsWithBrace = /\}$/;

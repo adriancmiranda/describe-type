@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v1.0.0
  * 
- * @commit 6f38201294cf88e450d95b4394288fe1a217b8cb
- * @moment Thursday, May 24, 2018 5:03 PM
+ * @commit 4431abba57b4bf8bcc7ff0bc771253f9ef41588a
+ * @moment Sunday, May 27, 2018 11:28 AM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2021
@@ -12,59 +12,53 @@ this.describetype = this.describetype || {};
 this.describetype.internal = (function (exports) {
 	'use strict';
 
-	var commonjsGlobal = typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
-
-	function createCommonjsModule(fn, module) {
-		return module = { exports: {} }, fn(module, module.exports), module.exports;
-	}
-
-	var patterns = createCommonjsModule(function (module, exports) {
 	// pattern(s)
-	exports.reIsBase64 = /^(data:\w+\/[a-zA-Z+\-.]+;base64,)?([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/;
-	exports.reFunctionName = /\s*function\s+([^(\s]*)\s*/;
-	exports.reIsNativeFn = /\[native\scode\]/;
-	exports.reStringToBoolean = /^true|[1-9]+$/gi;
-	exports.reToPropName = /^[^a-zA-Z_$]|[^\w|$]|[^\w$]$/g;
-	exports.reIsHex = /^([A-Fa-f0-9]+|)$/;
-	exports.reIsHexadecimal = /^((#|0x)?([0-9A-Fa-f]{6}|[0-9A-Fa-f]{3}))?$/;
-	exports.reIsJsonStart = /^\[|^\{(?!\{)/;
-	exports.reEndsWithBracket = /\]$/;
-	exports.reEndsWithBrace = /\}$/;
-	exports.reIsJsonEnds = { '[': exports.reEndsWithBracket, '{': exports.reEndsWithBrace };
-	});
-	var patterns_1 = patterns.reIsBase64;
-	var patterns_2 = patterns.reFunctionName;
-	var patterns_3 = patterns.reIsNativeFn;
-	var patterns_4 = patterns.reStringToBoolean;
-	var patterns_5 = patterns.reToPropName;
-	var patterns_6 = patterns.reIsHex;
-	var patterns_7 = patterns.reIsHexadecimal;
-	var patterns_8 = patterns.reIsJsonStart;
-	var patterns_9 = patterns.reEndsWithBracket;
-	var patterns_10 = patterns.reEndsWithBrace;
-	var patterns_11 = patterns.reIsJsonEnds;
+	var reIsBase64 = /^(data:\w+\/[a-zA-Z+\-.]+;base64,)?([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/;
+	var reFunctionName = /\s*function\s+([^(\s]*)\s*/;
+	var reIsNativeFn = /\[native\scode\]/;
+	var reStringToBoolean = /^true|[1-9]+$/gi;
+	var reToPropName = /^[^a-zA-Z_$]|[^\w|$]|[^\w$]$/g;
+	var reIsHex = /^([A-Fa-f0-9]+|)$/;
+	var reIsHexadecimal = /^((#|0x)?([0-9A-Fa-f]{6}|[0-9A-Fa-f]{3}))?$/;
+	var reRegExp = /^\/([\s\S]*)\/((?:([gimuy])(?!.*\3)){0,5})$/;
+	var reIsJsonStart = /^\[|^\{(?!\{)/;
+	var reEndsWithBracket = /\]$/;
+	var reEndsWithBrace = /\}$/;
+	var reIsJsonEnds = { '[': exports.reEndsWithBracket, '{': exports.reEndsWithBrace };
+
+	var patterns_next = /*#__PURE__*/{
+		reIsBase64: reIsBase64,
+		reFunctionName: reFunctionName,
+		reIsNativeFn: reIsNativeFn,
+		reStringToBoolean: reStringToBoolean,
+		reToPropName: reToPropName,
+		reIsHex: reIsHex,
+		reIsHexadecimal: reIsHexadecimal,
+		reRegExp: reRegExp,
+		reIsJsonStart: reIsJsonStart,
+		reEndsWithBracket: reEndsWithBracket,
+		reEndsWithBrace: reEndsWithBrace,
+		reIsJsonEnds: reIsJsonEnds
+	};
 
 	// prototypes
 	var ObjectProto = Object.prototype;
 	var ArrayProto = Array.prototype;
 	var StringProto = String.prototype;
 
-	var prototypes = {
+	var prototypes_next = /*#__PURE__*/{
 		ObjectProto: ObjectProto,
 		ArrayProto: ArrayProto,
 		StringProto: StringProto
 	};
 
-	var ObjectProto$1 = prototypes.ObjectProto;
-	var StringProto$1 = prototypes.StringProto;
-
 	// built-in method(s)
-	var objectHasOwnProperty = ObjectProto$1.hasOwnProperty;
-	var objectToString = ObjectProto$1.toString;
+	var objectHasOwnProperty = ObjectProto.hasOwnProperty;
+	var objectToString = ObjectProto.toString;
 	var objectGetPrototypeOf = Object.getPrototypeOf;
-	var objectSupportsProto = StringProto$1 === ''.__proto__;
+	var objectSupportsProto = StringProto === ''.__proto__;
 
-	var builtIn = {
+	var builtIn_next = /*#__PURE__*/{
 		objectHasOwnProperty: objectHasOwnProperty,
 		objectToString: objectToString,
 		objectGetPrototypeOf: objectGetPrototypeOf,
@@ -89,7 +83,7 @@ this.describetype.internal = (function (exports) {
 	var ARGUMENTS_SEAL = '[object Arguments]';
 	var CALLEE = 'callee';
 
-	var constants = {
+	var constants_next = /*#__PURE__*/{
 		NUMBER: NUMBER,
 		BOOLEAN: BOOLEAN,
 		STRING: STRING,
@@ -109,15 +103,10 @@ this.describetype.internal = (function (exports) {
 		CALLEE: CALLEE
 	};
 
-	var env = createCommonjsModule(function (module, exports) {
 	// environment
-	exports.inBrowser = new Function('try{return this===window;}catch(err){return false;}')();
-	exports.inNode = new Function('try{return this===global;}catch(err){return false;}')();
-	exports.env = exports.inNode ? commonjsGlobal : window;
-	});
-	var env_1 = env.inBrowser;
-	var env_2 = env.inNode;
-	var env_3 = env.env;
+	var inBrowser = new Function('try{return this===window;}catch(err){return false;}')();
+	var inNode = new Function('try{return this===global;}catch(err){return false;}')();
+	var env = exports.inNode ? global : window;
 
 	/**
 	 *
@@ -126,11 +115,9 @@ this.describetype.internal = (function (exports) {
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	var array = function array(value) {
+	function array(value) {
 		return value instanceof Array;
-	};
-
-	var STRING$1 = constants.STRING;
+	}
 
 	/**
 	 *
@@ -139,14 +126,9 @@ this.describetype.internal = (function (exports) {
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	var string = function string(value) {
-		return typeof value === STRING$1 || value instanceof String;
-	};
-
-	var OBJECT$1 = constants.OBJECT;
-	var NUMBER$1 = constants.NUMBER;
-
-
+	function string(value) {
+		return typeof value === STRING || value instanceof String;
+	}
 
 	/**
 	 *
@@ -155,14 +137,12 @@ this.describetype.internal = (function (exports) {
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	var arraylike = function arraylike(value) {
+	function arraylike(value) {
 		return array(value) || string(value) || (
-			(!!value && typeof value === OBJECT$1 && typeof value.length === NUMBER$1) &&
+			(!!value && typeof value === OBJECT && typeof value.length === NUMBER) &&
 			(value.length === 0 || (value.length > 0 && (value.length - 1) in value))
 		);
-	};
-
-	var NUMBER$2 = constants.NUMBER;
+	}
 
 	/**
 	 *
@@ -171,9 +151,9 @@ this.describetype.internal = (function (exports) {
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	var number = function number(value) {
-		return typeof value === NUMBER$2 || value instanceof Number;
-	};
+	function number(value) {
+		return typeof value === NUMBER || value instanceof Number;
+	}
 
 	/**
 	 *
@@ -182,9 +162,9 @@ this.describetype.internal = (function (exports) {
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	var int_1 = function int(value) {
+	function int(value) {
 		return number(value) && value === value && value % 1 === 0;
-	};
+	}
 
 	/**
 	 * The `intOf()` function parses a string argument and returns an integer of the
@@ -211,13 +191,12 @@ this.describetype.internal = (function (exports) {
 	 * min: -2147483647
 	 * max: 2147483647
 	 */
-	var intOf = function intOf(value, radix) {
+	function intOf(value, radix) {
 		value = (radix === undefined || radix === null ? value : parseInt(value, radix));
-		return int_1(value) ? value : 0 | value;
-	};
+		return int(value) ? value : 0 | value;
+	}
 
 	/* eslint-disable no-nested-ternary */
-
 
 	/**
 	 *
@@ -228,7 +207,7 @@ this.describetype.internal = (function (exports) {
 	 * @param {Number} b - divisor
 	 * @returns {Number}
 	 */
-	var mod = function mod(n, a, b) {
+	function mod(n, a, b) {
 		n = intOf(n);
 		a = intOf(a);
 		b = intOf(b);
@@ -245,7 +224,7 @@ this.describetype.internal = (function (exports) {
 		rem = n % (b || 1);
 		rem = rem < a ? (rem + b) : rem === 0 ? 0 : rem;
 		return rem;
-	};
+	}
 
 	/**
 	 *
@@ -256,7 +235,7 @@ this.describetype.internal = (function (exports) {
 	 * @param {int} endIndex
 	 * @returns {Array}
 	 */
-	var Array_prototype_slice = function slice(list, startIndex, endIndex) {
+	function slice(list, startIndex, endIndex) {
 		var range = [];
 		var size = list === undefined || list === null ? 0 : 0 | list.length;
 		if (size) {
@@ -278,11 +257,7 @@ this.describetype.internal = (function (exports) {
 			}
 		}
 		return range;
-	};
-
-	var reFunctionName = patterns.reFunctionName;
-	var objectToString$1 = builtIn.objectToString;
-
+	}
 
 	/**
 	 *
@@ -291,7 +266,7 @@ this.describetype.internal = (function (exports) {
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	var stringOf = function stringOf(value, force) {
+	function stringOf(value, force) {
 		var ctor = value != null && value.constructor;
 		if (ctor && force) {
 			if (!ctor.name || ctor.name === 'Object') {
@@ -300,11 +275,8 @@ this.describetype.internal = (function (exports) {
 			}
 			return ctor.name;
 		}
-		return Array_prototype_slice(objectToString$1.call(value), 8, -1);
-	};
-
-	var reStringToBoolean = patterns.reStringToBoolean;
-
+		return slice(objectToString.call(value), 8, -1);
+	}
 
 	/**
 	 *
@@ -313,12 +285,12 @@ this.describetype.internal = (function (exports) {
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	var booleanOf = function booleanOf(value) {
+	function booleanOf(value) {
 		if (string(value) && value.length) {
 			return reStringToBoolean.test(value);
 		}
 		return !!value;
-	};
+	}
 
 	/**
 	 *
@@ -327,10 +299,10 @@ this.describetype.internal = (function (exports) {
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	var nan = function nan(value) {
+	function nan(value) {
 		var isnum = number(value);
 		return isnum === false || (isnum && value !== value);
-	};
+	}
 
 	/**
 	 *
@@ -339,9 +311,9 @@ this.describetype.internal = (function (exports) {
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	var infinity = function infinity(value) {
+	function infinity(value) {
 		return number(value) && (value - 1) === value;
-	};
+	}
 
 	/**
 	 * The `floatOf()` function parses an argument and returns a floating point number.
@@ -357,10 +329,10 @@ this.describetype.internal = (function (exports) {
 	 * @returns {Number} A floating point number parsed from the given value.
 	 * If the first character cannot be converted to a number, 0 is returned.
 	 */
-	var floatOf = function floatOf(value) {
+	function floatOf(value) {
 		value = +value;
 		return nan(value) || infinity(value) ? 0 : value;
-	};
+	}
 
 	/**
 	 * The `uintOf()` function parses a string argument and returns an unsigned integer
@@ -387,12 +359,10 @@ this.describetype.internal = (function (exports) {
 	 * min: 0
 	 * max: 0xffffffff
 	 */
-	var uintOf = function uintOf(value, radix) {
+	function uintOf(value, radix) {
 		var num = intOf(value, radix);
 		return num < 0 ? 0 : num;
-	};
-
-	var FUNCTION$1 = constants.FUNCTION;
+	}
 
 	/**
 	 *
@@ -401,9 +371,9 @@ this.describetype.internal = (function (exports) {
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	var callable = function callable(value) {
-		return typeof value === FUNCTION$1;
-	};
+	function callable(value) {
+		return typeof value === FUNCTION;
+	}
 
 	/**
 	 *
@@ -413,17 +383,13 @@ this.describetype.internal = (function (exports) {
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	var unsafeMethod = function unsafeMethod(context, methodName) {
+	function unsafeMethod(context, methodName) {
 		try {
 			return callable(context[methodName]);
 		} catch (err) {
 			return false;
 		}
-	};
-
-	var CONSTRUCTOR$1 = constants.CONSTRUCTOR;
-	var objectGetPrototypeOf$1 = builtIn.objectGetPrototypeOf;
-	var objectHasOwnProperty$1 = builtIn.objectHasOwnProperty;
+	}
 
 	/**
 	 *
@@ -432,24 +398,24 @@ this.describetype.internal = (function (exports) {
 	 * @param {any} value
 	 * @returns {String}
 	 */
-	var constructorOf = function constructorOf(value) {
+	function constructorOf(value) {
 		if (value.constructor === undefined) { return Object; }
 		var proto = value.__proto__;
 
 		if (proto === null) { return Object; }
 
 		return proto.constructor || getConstructorOf(value) || (function () {
-			if (objectHasOwnProperty$1.call(value, CONSTRUCTOR$1)) {
+			if (objectHasOwnProperty.call(value, CONSTRUCTOR)) {
 				return Object;
 			}
 			return value.constructor.prototype.constructor;
 		})();
 		function getConstructorOf(value) {
-			var proto = objectGetPrototypeOf$1(value);
+			var proto = objectGetPrototypeOf(value);
 			if (proto === null) { return Object; }
 			return proto.constructor;
 		}
-	};
+	}
 
 	/**
 	 *
@@ -458,18 +424,10 @@ this.describetype.internal = (function (exports) {
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	var object = function object(value) {
+	function object(value) {
 		if (value === undefined || value === null) { return false; }
 		return constructorOf(value) === Object;
-	};
-
-	var CALLEE$1 = constants.CALLEE;
-	var ARGUMENTS_SEAL$1 = constants.ARGUMENTS_SEAL;
-	var objectToString$2 = builtIn.objectToString;
-
-
-
-
+	}
 
 	/**
 	 *
@@ -478,20 +436,11 @@ this.describetype.internal = (function (exports) {
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	var args = function args(value) {
+	function args(value) {
 		return (array(value) === false && arraylike(value) &&
-			object(value) && unsafeMethod(value, CALLEE$1)
-		) || objectToString$2.call(value) === ARGUMENTS_SEAL$1;
-	};
-
-	var NAN$1 = constants.NAN;
-	var ARGUMENTS$1 = constants.ARGUMENTS;
-	var UNDEFINED$1 = constants.UNDEFINED;
-	var NULL$1 = constants.NULL;
-
-
-
-
+			object(value) && unsafeMethod(value, CALLEE)
+		) || objectToString.call(value) === ARGUMENTS_SEAL;
+	}
 
 	/**
 	 *
@@ -500,13 +449,13 @@ this.describetype.internal = (function (exports) {
 	 * @param {any} value
 	 * @returns {String}
 	 */
-	var typeOf = function typeOf(value) {
-		if (value === undefined) { return UNDEFINED$1; }
-		if (value === null) { return NULL$1; }
+	function typeOf(value) {
+		if (value === undefined) { return UNDEFINED; }
+		if (value === null) { return NULL; }
 		if (infinity(value)) { return INFINITY; }
-		if (nan(value)) { return NAN$1; }
-		return args(value) ? ARGUMENTS$1 : stringOf(value, true);
-	};
+		if (nan(value)) { return NAN; }
+		return args(value) ? ARGUMENTS : stringOf(value, true);
+	}
 
 	/**
 	 *
@@ -515,16 +464,10 @@ this.describetype.internal = (function (exports) {
 	 * @param {any} value
 	 * @returns {String}
 	 */
-	var constructorNameOf = function constructorNameOf(value) {
+	function constructorNameOf(value) {
 		var name = typeOf(value);
 		return (name === 'Function' && (value != null && value.name)) || name;
-	};
-
-	var reToPropName = patterns.reToPropName;
-
-
-
-
+	}
 
 	/**
 	 *
@@ -534,14 +477,14 @@ this.describetype.internal = (function (exports) {
 	 * @param {Boolean} write
 	 * @returns {String}
 	 */
-	var name = function name(value, write) {
+	function name(value, write) {
 		if (value === undefined || value === null || object(value)) {
 			return typeOf(value);
 		}
 		return value.name || (write &&
 			string(value) ? value.replace(reToPropName, '_') : constructorNameOf(value)
 		);
-	};
+	}
 
 	/**
 	 *
@@ -551,7 +494,7 @@ this.describetype.internal = (function (exports) {
 	 * @param {any} value
 	 * @returns {Array}
 	 */
-	var typify = function typify(expected, write) {
+	function typify(expected, write) {
 		if (string(expected) === false && arraylike(expected) && expected.length > 0) {
 			for (var i = expected.length - 1; i > -1; i -= 1) {
 				expected[i] = name(expected[i], write);
@@ -559,7 +502,7 @@ this.describetype.internal = (function (exports) {
 			return expected.join('|');
 		}
 		return name(expected, write);
-	};
+	}
 
 	/**
 	 *
@@ -567,7 +510,7 @@ this.describetype.internal = (function (exports) {
 	 * @param {any} context - .
 	 * @returns {any}
 	 */
-	var apply = function apply(cmd, context, args, blindly) {
+	function apply(cmd, context, args, blindly) {
 		try {
 			var $ = arraylike(args) ? args : [];
 			switch ($.length) {
@@ -587,9 +530,7 @@ this.describetype.internal = (function (exports) {
 			if (blindly) { return err; }
 			throw err;
 		}
-	};
-
-	var objectHasOwnProperty$2 = builtIn.objectHasOwnProperty;
+	}
 
 	/**
 	 *
@@ -599,10 +540,10 @@ this.describetype.internal = (function (exports) {
 	 * @param {any} key
 	 * @returns {Boolean}
 	 */
-	var ownProperty = function ownProperty(context, key) {
+	function ownProperty(context, key) {
 		if (context === undefined || context === null) { return false; }
-		return objectHasOwnProperty$2.call(context, key);
-	};
+		return objectHasOwnProperty.call(context, key);
+	}
 
 	/**
 	 *
@@ -613,18 +554,15 @@ this.describetype.internal = (function (exports) {
 	 * @param {any} args
 	 * @returns {any}
 	 */
-	var resolveProperty = function resolveProperty(value, key, readStatic, cmd, ctx, args) {
+	function resolveProperty(value, key, readStatic, cmd, ctx, args) {
 		if (readStatic || (key !== 'prototype' && key !== 'length' && key !== 'name')) {
 			var item = value[key];
 			return apply(cmd, ctx || item, [item, key, value, args]);
 		}
 		return undefined;
-	};
+	}
 
 	/* eslint-disable no-restricted-syntax */
-
-
-
 
 	/**
 	 *
@@ -635,7 +573,7 @@ this.describetype.internal = (function (exports) {
 	 * @param {Boolean} getInheritedProps
 	 * @returns {?}
 	 */
-	var eachProperty = function eachProperty(value, cmd, context, getInheritedProps) {
+	function eachProperty(value, cmd, context, getInheritedProps) {
 		var i = 0;
 		var readStatics = callable(value) === false;
 		for (var key in value) {
@@ -647,7 +585,7 @@ this.describetype.internal = (function (exports) {
 			}
 		}
 		return undefined;
-	};
+	}
 
 	/**
 	 *
@@ -657,7 +595,7 @@ this.describetype.internal = (function (exports) {
 	 * @param {any} context
 	 * @returns {?}
 	 */
-	var eachValue = function eachValue(value, cmd, context, keepReverse) {
+	function eachValue(value, cmd, context, keepReverse) {
 		if (value === undefined || value === null) { return undefined; }
 		var size = (0 | value.length) - 1;
 		for (var index = size; index > -1; index -= 1) {
@@ -669,12 +607,9 @@ this.describetype.internal = (function (exports) {
 			}
 		}
 		return undefined;
-	};
+	}
 
 	/* eslint-disable no-restricted-syntax */
-
-
-
 
 	/**
 	 *
@@ -685,10 +620,10 @@ this.describetype.internal = (function (exports) {
 	 * @param {Boolean} keepReverseOrGetInheritedProps
 	 * @returns {?}
 	 */
-	var each = function each(value, cmd, context, keepReverseOrGetInheritedProps) {
+	function each(value, cmd, context, keepReverseOrGetInheritedProps) {
 		if (arraylike(value)) { return eachValue(value, cmd, context, keepReverseOrGetInheritedProps); }
 		return eachProperty(value, cmd, context, keepReverseOrGetInheritedProps);
-	};
+	}
 
 	/**
 	 *
@@ -698,7 +633,7 @@ this.describetype.internal = (function (exports) {
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	var ownValue = function ownValue(context, value) {
+	function ownValue(context, value) {
 		if (arraylike(context) === false) { return false; }
 		for (var id = context.length - 1; id > -1; id -= 1) {
 			if (value === context[id]) {
@@ -706,7 +641,7 @@ this.describetype.internal = (function (exports) {
 			}
 		}
 		return false;
-	};
+	}
 
 	/**
 	 *
@@ -719,19 +654,13 @@ this.describetype.internal = (function (exports) {
 	 * @param {int} endIndex -
 	 * @returns {any}
 	 */
-	var getExpectedValue = function getExpectedValue(expected, value, args, startIndex, endIndex) {
+	function getExpectedValue(expected, value, args, startIndex, endIndex) {
 		if (callable(value) && (expected === Function || ownValue(expected, Function)) === false) {
-			args = Array_prototype_slice(args, startIndex, endIndex);
+			args = slice(args, startIndex, endIndex);
 			return apply(value, args[0], args, true);
 		}
 		return value;
-	};
-
-	var STRING$2 = constants.STRING;
-	var NUMBER$4 = constants.NUMBER;
-	var SYMBOL$1 = constants.SYMBOL;
-	var FUNCTION$2 = constants.FUNCTION;
-
+	}
 
 	/**
 	 *
@@ -741,19 +670,19 @@ this.describetype.internal = (function (exports) {
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	var type = function type(expected, value) {
+	function type(expected, value) {
 		if (value === undefined || value === null) { return value === expected; }
 		if (expected === undefined || expected === null) { return expected === value; }
 		if (value === true || value === false) { return expected === Boolean; }
 		var type = typeof value;
-		if (type === STRING$2) { return expected === String; }
-		if (type === NUMBER$4) { return expected === Number; }
-		if (type === SYMBOL$1) { return expected === Symbol; }
-		if (expected === Function) { return type === FUNCTION$2; }
+		if (type === STRING) { return expected === String; }
+		if (type === NUMBER) { return expected === Number; }
+		if (type === SYMBOL) { return expected === Symbol; }
+		if (expected === Function) { return type === FUNCTION; }
 		if (value instanceof Array) { return expected === Array; }
 		if (value instanceof RegExp) { return expected === RegExp; }
 		return constructorOf(value) === expected;
-	};
+	}
 
 	/**
 	 *
@@ -761,10 +690,10 @@ this.describetype.internal = (function (exports) {
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	var as_type = function asA(expected, value) {
+	function asA(expected, value) {
 		value = getExpectedValue(expected, value, arguments, 2);
 		return type(expected, value) ? value : arguments[2];
-	};
+	}
 
 	/**
 	 *
@@ -775,38 +704,26 @@ this.describetype.internal = (function (exports) {
 	 * @param {uint} position -
 	 * @returns {Boolean}
 	 */
-	var String_prototype_startsWith = function startsWith(value, search, position) {
-		var str = as_type(String, value) || '';
+	function startsWith(value, search, position) {
+		var str = asA(String, value) || '';
 		var startIndex = mod(position, 0, str.length);
 		return str.substr(startIndex, search.length) === search;
-	};
+	}
 
 	// TODO: to implement
-	var UNDEFINED$2 = constants.UNDEFINED;
-	var NULL$2 = constants.NULL;
-	var PREFIX_SEAL$1 = constants.PREFIX_SEAL;
 
-
-
-
-	var stringify = function stringify(value, replacer, space) {
-		if (value === undefined) { return UNDEFINED$2; }
-		if (value === null) { return NULL$2; }
-		var seal = as_type(String, value.toString, value);
-		if (String_prototype_startsWith(seal, PREFIX_SEAL$1)) { seal = ''; }
+	function stringify(value, replacer, space) {
+		if (value === undefined) { return UNDEFINED; }
+		if (value === null) { return NULL; }
+		var seal = asA(String, value.toString, value);
+		if (startsWith(seal, PREFIX_SEAL)) { seal = ''; }
 		return seal || JSON.stringify(value, replacer, space);
-	};
+	}
 
-	var internal = createCommonjsModule(function (module, exports) {
-	(function (resource) {
-		var this$1 = this;
-
-		for (var name$$1 in resource) {
-			if (name$$1 === 'default' === false) {
-				this$1[name$$1] = resource[name$$1];
-			}
-		}
-	}).call(exports, env);
+	exports.prototypes = prototypes_next;
+	exports.builtIn = builtIn_next;
+	exports.patterns = patterns_next;
+	exports.constants = constants_next;
 	exports.stringOf = stringOf;
 	exports.booleanOf = booleanOf;
 	exports.floatOf = floatOf;
@@ -825,57 +742,9 @@ this.describetype.internal = (function (exports) {
 	exports.getExpectedValue = getExpectedValue;
 	exports.mod = mod;
 	exports.stringify = stringify;
-	exports.prototypes = prototypes;
-	exports.builtIn = builtIn;
-	exports.patterns = patterns;
-	exports.constants = constants;
-	});
-	var internal_1 = internal.stringOf;
-	var internal_2 = internal.booleanOf;
-	var internal_3 = internal.floatOf;
-	var internal_4 = internal.intOf;
-	var internal_5 = internal.uintOf;
-	var internal_6 = internal.constructorNameOf;
-	var internal_7 = internal.constructorOf;
-	var internal_8 = internal.typeOf;
-	var internal_9 = internal.typify;
-	var internal_10 = internal.name;
-	var internal_11 = internal.apply;
-	var internal_12 = internal.each;
-	var internal_13 = internal.eachValue;
-	var internal_14 = internal.eachProperty;
-	var internal_15 = internal.resolveProperty;
-	var internal_16 = internal.getExpectedValue;
-	var internal_17 = internal.mod;
-	var internal_18 = internal.stringify;
-	var internal_19 = internal.prototypes;
-	var internal_20 = internal.builtIn;
-	var internal_21 = internal.patterns;
-	var internal_22 = internal.constants;
-
-	exports.default = internal;
-	exports.stringOf = internal_1;
-	exports.booleanOf = internal_2;
-	exports.floatOf = internal_3;
-	exports.intOf = internal_4;
-	exports.uintOf = internal_5;
-	exports.constructorNameOf = internal_6;
-	exports.constructorOf = internal_7;
-	exports.typeOf = internal_8;
-	exports.typify = internal_9;
-	exports.name = internal_10;
-	exports.apply = internal_11;
-	exports.each = internal_12;
-	exports.eachValue = internal_13;
-	exports.eachProperty = internal_14;
-	exports.resolveProperty = internal_15;
-	exports.getExpectedValue = internal_16;
-	exports.mod = internal_17;
-	exports.stringify = internal_18;
-	exports.prototypes = internal_19;
-	exports.builtIn = internal_20;
-	exports.patterns = internal_21;
-	exports.constants = internal_22;
+	exports.inBrowser = inBrowser;
+	exports.inNode = inNode;
+	exports.env = env;
 
 	return exports;
 
