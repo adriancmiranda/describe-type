@@ -1,4 +1,4 @@
-const { reRegExp } = require('../../internal/patterns.js');
+const { reRegExpFlags } = require('../../internal/patterns.js');
 const string = require('../string/string.js');
 
 /**
@@ -10,7 +10,7 @@ const string = require('../string/string.js');
  */
 module.exports = function isRegExpString(value) {
 	if (string(value)) {
-		return reRegExp.test(value);
+		return reRegExpFlags.test(value);
 	}
 	return false;
 }
