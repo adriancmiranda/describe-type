@@ -8,7 +8,7 @@ import string from '../string/string.next.js';
  * @param {any} value
  * @returns {Boolean}
  */
-export default function isRegExpString(value) {
+export default function isRegExpFlags(value) {
 	if (string(value)) {
 		return reRegExpFlags.test(value);
 	}

@@ -1,4 +1,4 @@
-const { NAN, NUMBER, ARGUMENTS, UNDEFINED, NULL } = require('../internal/constants.js');
+const { NAN, ARGUMENTS, UNDEFINED, NULL, INFINITY } = require('../internal/constants.js');
 const infinity = require('../is/infinity.js');
 const nan = require('../is/nan.js');
 const args = require('../is/args/args.js');

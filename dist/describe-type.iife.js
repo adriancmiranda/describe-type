@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v1.0.0
  * 
- * @commit bbb68bad3d6f2702224de15b7386f8e720f1633b
- * @moment Monday, May 28, 2018 3:17 PM
+ * @commit f36d4d51c5e3fb7353a5ae25855182b92326ab4e
+ * @moment Monday, May 28, 2018 4:18 PM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2021
@@ -75,7 +75,7 @@ var describetype = (function (exports) {
 	var GENERATOR_FUNCTION = 'GeneratorFunction';
 	var ASYNC_FUNCTION = 'AsyncFunction';
 	var ARGUMENTS = 'Arguments';
-	var INFINITY$1 = 'Infinity';
+	var INFINITY = 'Infinity';
 	var NAN = 'NaN';
 	var CONSTRUCTOR = 'constructor';
 	var PREFIX_SEAL = '[object ';
@@ -94,7 +94,7 @@ var describetype = (function (exports) {
 		GENERATOR_FUNCTION: GENERATOR_FUNCTION,
 		ASYNC_FUNCTION: ASYNC_FUNCTION,
 		ARGUMENTS: ARGUMENTS,
-		INFINITY: INFINITY$1,
+		INFINITY: INFINITY,
 		NAN: NAN,
 		CONSTRUCTOR: CONSTRUCTOR,
 		PREFIX_SEAL: PREFIX_SEAL,
@@ -234,7 +234,7 @@ var describetype = (function (exports) {
 	 * @param {int} endIndex
 	 * @returns {Array}
 	 */
-	function slice$1(list, startIndex, endIndex) {
+	function slice(list, startIndex, endIndex) {
 		var range = [];
 		var size = list === undefined || list === null ? 0 : 0 | list.length;
 		if (size) {
@@ -274,7 +274,7 @@ var describetype = (function (exports) {
 			}
 			return ctor.name;
 		}
-		return slice$1(objectToString.call(value), 8, -1);
+		return slice(objectToString.call(value), 8, -1);
 	}
 
 	/**
@@ -447,7 +447,7 @@ var describetype = (function (exports) {
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function args$1(value) {
+	function args(value) {
 		return (array(value) === false && arraylike(value) &&
 			object(value) && unsafeMethod(value, CALLEE)
 		) || objectToString.call(value) === ARGUMENTS_SEAL;
@@ -465,7 +465,7 @@ var describetype = (function (exports) {
 		if (value === null) { return NULL; }
 		if (infinity(value)) { return INFINITY; }
 		if (nan(value)) { return NAN; }
-		return args$1(value) ? ARGUMENTS : stringOf(value, true);
+		return args(value) ? ARGUMENTS : stringOf(value, true);
 	}
 
 	/**
@@ -667,7 +667,7 @@ var describetype = (function (exports) {
 	 */
 	function getExpectedValue(expected, value, args, startIndex, endIndex) {
 		if (callable(value) && (expected === Function || ownValue(expected, Function)) === false) {
-			args = slice$1(args, startIndex, endIndex);
+			args = slice(args, startIndex, endIndex);
 			return apply(value, args[0], args, true);
 		}
 		return value;
@@ -775,10 +775,10 @@ var describetype = (function (exports) {
 	 * @returns {Boolean}
 	 */
 	function isEmptyArgs(value) {
-		return args$1(value) && value.length === 0;
+		return args(value) && value.length === 0;
 	}
 
-	args$1.empty = isEmptyArgs;
+	args.empty = isEmptyArgs;
 
 	/**
 	 *
@@ -1042,7 +1042,7 @@ var describetype = (function (exports) {
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function isRegExpString(value) {
+	function isRegExpFlags(value) {
 		if (string(value)) {
 			return reRegExpFlags.test(value);
 		}
@@ -1056,15 +1056,15 @@ var describetype = (function (exports) {
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function isRegExpString$1(value) {
+	function isRegExpString(value) {
 		if (string(value)) {
 			return reRegExp.test(value);
 		}
 		return false;
 	}
 
-	regexp.flags = isRegExpString;
-	regexp.string = isRegExpString$1;
+	regexp.flags = isRegExpFlags;
+	regexp.string = isRegExpString;
 
 	/**
 	 *
@@ -1521,7 +1521,7 @@ var describetype = (function (exports) {
 
 
 	var index_next$1 = /*#__PURE__*/{
-		args: args$1,
+		args: args,
 		array: array,
 		arraylike: arraylike,
 		not: notType,

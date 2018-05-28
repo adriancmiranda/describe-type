@@ -1,4 +1,5 @@
 import { objectHasOwnProperty } from '../internal/built-in.next.js';
+import slice from './Array.prototype.slice.next.js';
 
 /**
  *
@@ -13,7 +14,7 @@ export default Object.assign || function assign(target) {
 	if (target === undefined || target === null) {
 		throw new TypeError('Cannot convert undefined or null to object');
 	}
-	const rest = slice(args, 1);
+	const rest = slice(arguments, 1);
 	for (let index = 1; index < rest.length; index += 1) {
 		const source = rest[index];
 		if ((source === undefined || source === null) === false) {

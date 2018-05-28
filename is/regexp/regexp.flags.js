@@ -8,7 +8,7 @@ const string = require('../string/string.js');
  * @param {any} value
  * @returns {Boolean}
  */
-module.exports = function isRegExpString(value) {
+module.exports = function isRegExpFlags(value) {
 	if (string(value)) {
 		return reRegExpFlags.test(value);
 	}
