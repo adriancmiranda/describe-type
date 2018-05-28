@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v1.0.0
  * 
- * @commit f07a46bb926e7468e136c64a54ea138e934abe3d
- * @moment Monday, May 28, 2018 12:15 PM
+ * @commit bbb68bad3d6f2702224de15b7386f8e720f1633b
+ * @moment Monday, May 28, 2018 3:17 PM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2021
@@ -423,12 +423,8 @@ define(['exports'], function (exports) { 'use strict';
 	 */
 	function constructorOf(value) {
 		if (value.constructor === undefined) { return Object; }
-		var proto = value.__proto__;
-		if (proto === null) { return Object; }
-		return proto.constructor || (function () {
-			proto = getPrototypeOf(proto) || Object;
-			return proto.constructor;
-		})();
+		var proto = getPrototypeOf(value) || Object;
+		return proto.constructor;
 	}
 
 	/**
@@ -1685,7 +1681,7 @@ define(['exports'], function (exports) { 'use strict';
 		type: true,
 		required: true,
 		strict: false,
-		default: false,
+		'default': false
 	};
 
 	function schematize(patterns, settings) {
@@ -1714,20 +1710,20 @@ define(['exports'], function (exports) { 'use strict';
 			return { type: assert.data, required: PR0PERTIES.required };
 		}
 		if ('default' in assert.data) {
-			assert.data.default = asAny(assert.data.type, assert.data.default, config, chunk);
+			assert.data['default'] = asAny(assert.data.type, assert.data['default'], config, chunk);
 		}
 		return assert.data;
 	}
 
 	function parseConfig(assert, config) {
-		if (object(assert.data.default)) {
-			config.data = schematize(assert.data.default, config.data);
+		if (object(assert.data['default'])) {
+			config.data = schematize(assert.data['default'], config.data);
 		}
 		if (any(assert.data.type, config.data)) {
 			return config.data;
 		}
 		if ('default' in assert.data || !assert.data.required) {
-			return assert.data.default;
+			return assert.data['default'];
 		}
 		return undefined;
 	}

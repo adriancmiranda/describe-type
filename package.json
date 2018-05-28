@@ -117,10 +117,10 @@
     "unkn": "0.0.3"
   },
   "ava": {
-    "tap": false,
-    "failFast": false,
-    "powerAssert": false,
-    "failWithoutAssertions": false,
+    "tap": true,
+    "failFast": true,
+    "powerAssert": true,
+    "failWithoutAssertions": true,
     "concurrency": 5,
     "require": [
       "@babel/polyfill",

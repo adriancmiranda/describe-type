@@ -11,10 +11,6 @@ const getPrototypeOf = require('../polyfill/Object.getPrototypeOf.js');
  */
 module.exports = function constructorOf(value) {
 	if (value.constructor === undefined) return Object;
-	let proto = value.__proto__;
-	if (proto === null) return Object;
-	return proto.constructor || (() => {
-		proto = getPrototypeOf(proto) || Object;
-		return proto.constructor;
-	})();
+	const proto = getPrototypeOf(value) || Object;
+	return proto.constructor;
 }

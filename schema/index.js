@@ -22,7 +22,7 @@ const PR0PERTIES = {
 	type: true,
 	required: true,
 	strict: false,
-	default: false,
+	'default': false
 };
 
 function schematize(patterns, settings) {
@@ -51,20 +51,20 @@ function parseAssert(assert, config, chunk) {
 		return { type: assert.data, required: PR0PERTIES.required };
 	}
 	if ('default' in assert.data) {
-		assert.data.default = asAny(assert.data.type, assert.data.default, config, chunk);
+		assert.data['default'] = asAny(assert.data.type, assert.data['default'], config, chunk);
 	}
 	return assert.data;
 }
 
 function parseConfig(assert, config) {
-	if (object(assert.data.default)) {
-		config.data = schematize(assert.data.default, config.data);
+	if (object(assert.data['default'])) {
+		config.data = schematize(assert.data['default'], config.data);
 	}
 	if (any(assert.data.type, config.data)) {
 		return config.data;
 	}
 	if ('default' in assert.data || !assert.data.required) {
-		return assert.data.default;
+		return assert.data['default'];
 	}
 	return undefined;
 }

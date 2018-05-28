@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v1.0.0
  * 
- * @commit f07a46bb926e7468e136c64a54ea138e934abe3d
- * @moment Monday, May 28, 2018 12:15 PM
+ * @commit bbb68bad3d6f2702224de15b7386f8e720f1633b
+ * @moment Monday, May 28, 2018 3:17 PM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2021
@@ -102,12 +102,8 @@ this.describetype.is = (function (exports) {
 	 */
 	function constructorOf(value) {
 		if (value.constructor === undefined) { return Object; }
-		var proto = value.__proto__;
-		if (proto === null) { return Object; }
-		return proto.constructor || (function () {
-			proto = getPrototypeOf(proto) || Object;
-			return proto.constructor;
-		})();
+		var proto = getPrototypeOf(value) || Object;
+		return proto.constructor;
 	}
 
 	/**
