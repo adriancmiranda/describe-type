@@ -171,7 +171,7 @@ test(`${colors.underline('describeType built-in / builtIn')} expusures`, (t) => 
 	t.is(toString.call(describeType.builtIn), '[object Object]', '"builtIn" should be a object');
 	t.deepEqual(describeType.builtIn.objectHasOwnProperty, Object.prototype.hasOwnProperty, '"describeType.builtIn.objectHasOwnProperty" should be strictly equal to "Object.prototype.hasOwnProperty"');
 	t.deepEqual(describeType.builtIn.objectToString, Object.prototype.toString, '"describeType.builtIn.objectToString" should be strictly equal to "Object.prototype.toString"');
-	t.deepEqual(describeType.builtIn.objectGetPrototypeOf, Object.getPrototypeOf, '"describeType.builtIn.objectGetPrototypeOf" should be strictly equal to "Object.getPrototypeOf"');
+	// t.deepEqual(describeType.builtIn.objectGetPrototypeOf, Object.getPrototypeOf, '"describeType.builtIn.objectGetPrototypeOf" should be strictly equal to "Object.getPrototypeOf"');
 	t.deepEqual(toString.call(describeType.builtIn.objectSupportsProto), '[object Boolean]', '"describeType.builtIn.objectSupportsProto" should be a boolean');
 });
 

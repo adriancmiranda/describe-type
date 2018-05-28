@@ -1,18 +1,14 @@
 import { Suite } from 'benchmark';
 import { benchmarkFatestStatus, benchmarkCycle } from '../.fixtures/benchmark';
 import * as datatypes from '../.fixtures/datatypes.fixture';
-// import * as deprecatedIs from '../.fixtures/deprecated/is';
+import * as deprecatedIsType from '../.fixtures/obsoleto/is/type';
 import * as describeType from '../index.next';
-import * as is from './index.next';
-import type from './type.next';
+import * as is from './index';
+import typeNext from './type.next';
+import type from './type';
 
 let i = 0;
-datatypes.all.iterate((datatype) => {
-	const name = datatype.name;
-	const seal = datatype.seal;
-	const label = datatype.label;
-	const ctor = datatype.ctor;
-	const value = datatype.value;
+datatypes.all.iterate(({ name, seal, label, ctor, value }) => {
 	const loaded = ++i;
 	const total = datatypes.all.size();
 	const progress = Math.round((loaded / total) * 100);
@@ -23,6 +19,10 @@ datatypes.all.iterate((datatype) => {
 		type(ctor, value);
 	})
 
+	.add(`${name}: typeNext(${name}, ${label})`, () => {
+		typeNext(ctor, value);
+	})
+
 	.add(`${name}: is.type(${name}, ${label})`, () => {
 		is.type(ctor, value);
 	})
@@ -31,13 +31,9 @@ datatypes.all.iterate((datatype) => {
 		describeType.is.type(ctor, value);
 	})
 
-	// .add(`${name}: deprecated.is.a(${name}, ${label})`, () => {
-	// 	deprecatedIs.a(ctor, value);
-	// })
-
-	// .add(`${name}: describeType.is.not.a(${name}, ${label})`, () => {
-	// 	is.not.type(ctor, value) === true;
-	// })
+	.add(`${name}: deprecated.is.type(${name}, ${label})`, () => {
+		deprecatedIsType(ctor, value);
+	})
 
 	.add(`${name}: toString.call(${label}) === ${seal}`, () => {
 		toString.call(value) === seal;

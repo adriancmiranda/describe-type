@@ -1,6 +1,6 @@
 const { CONSTRUCTOR } = require('../internal/constants.js');
 const { ObjectProto } = require('../internal/prototypes.js');
-const { objectGetPrototypeOf, objectHasOwnProperty } = require('../internal/built-in.js');
+const { objectSupportsProto, objectHasOwnProperty } = require('../internal/built-in.js');
 
 /**
  *
@@ -12,22 +12,12 @@ const { objectGetPrototypeOf, objectHasOwnProperty } = require('../internal/buil
  * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getPrototypeOf
  * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect/getPrototypeOf
  */
-module.exports = (value) => {
-	const ctor = value.constructor;
-	if (ctor === undefined) return ObjectProto;
-	return value.__proto__ || objectGetPrototypeOf(value) || (() => {
-		if (objectHasOwnProperty.call(value, CONSTRUCTOR)) {
-			return ObjectProto;
-		}
-		return ctor.prototype;
-	})();
-};
-
-if (typeof Object.getPrototypeOf === 'function' === false) {
-	Object.getPrototypeOf = ''.__proto__ === String.prototype
+let objectGetPrototypeOf = Object.getPrototypeOf;
+if (typeof objectGetPrototypeOf === 'function' === false) {
+	objectGetPrototypeOf = objectSupportsProto
 	? function getPrototypeOf(value) {
-		return value.__proto__;
-	}
+			return value.__proto__;
+		}
 	: function getPrototypeOf(value) {
 		if (objectHasOwnProperty.call(value, CONSTRUCTOR)) {
 			return ObjectProto;
@@ -35,3 +25,4 @@ if (typeof Object.getPrototypeOf === 'function' === false) {
 		return value.constructor.prototype;
 	};
 }
+module.exports = objectGetPrototypeOf;

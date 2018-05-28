@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v1.0.0
  * 
- * @commit c917cadef3b81298a1adcdacf03de28e987051aa
- * @moment Sunday, May 27, 2018 4:55 PM
+ * @commit 087c1caba7d2a9ba123fdc111117e6f87e89bf8c
+ * @moment Monday, May 28, 2018 12:02 AM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2021
@@ -56,13 +56,11 @@ var describetype = (function (exports) {
 	// built-in method(s)
 	var objectHasOwnProperty = ObjectProto.hasOwnProperty;
 	var objectToString = ObjectProto.toString;
-	var objectGetPrototypeOf = Object.getPrototypeOf;
 	var objectSupportsProto = StringProto === ''.__proto__;
 
 	var builtIn_next = /*#__PURE__*/{
 		objectHasOwnProperty: objectHasOwnProperty,
 		objectToString: objectToString,
-		objectGetPrototypeOf: objectGetPrototypeOf,
 		objectSupportsProto: objectSupportsProto
 	};
 
@@ -394,6 +392,31 @@ var describetype = (function (exports) {
 
 	/**
 	 *
+	 * @name Object.getPrototypeOf
+	 * @function
+	 * @global
+	 * @param {value}
+	 * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/proto
+	 * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getPrototypeOf
+	 * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect/getPrototypeOf
+	 */
+	var objectGetPrototypeOf = Object.getPrototypeOf;
+	if (typeof objectGetPrototypeOf === 'function' === false) {
+		objectGetPrototypeOf = objectSupportsProto
+		? function getPrototypeOf(value) {
+				return value.__proto__;
+			}
+		: function getPrototypeOf(value) {
+			if (objectHasOwnProperty.call(value, CONSTRUCTOR)) {
+				return ObjectProto;
+			}
+			return value.constructor.prototype;
+		};
+	}
+	var getPrototypeOf = objectGetPrototypeOf;
+
+	/**
+	 *
 	 * @function
 	 * @memberof built-in
 	 * @param {any} value
@@ -402,20 +425,11 @@ var describetype = (function (exports) {
 	function constructorOf(value) {
 		if (value.constructor === undefined) { return Object; }
 		var proto = value.__proto__;
-
 		if (proto === null) { return Object; }
-
-		return proto.constructor || getConstructorOf(value) || (function () {
-			if (objectHasOwnProperty.call(value, CONSTRUCTOR)) {
-				return Object;
-			}
-			return value.constructor.prototype.constructor;
-		})();
-		function getConstructorOf(value) {
-			var proto = objectGetPrototypeOf(value);
-			if (proto === null) { return Object; }
+		return proto.constructor || (function () {
+			proto = getPrototypeOf(proto) || Object;
 			return proto.constructor;
-		}
+		})();
 	}
 
 	/**
