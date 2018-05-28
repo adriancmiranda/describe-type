@@ -1,6 +1,6 @@
 import { Suite } from 'benchmark';
 import { benchmarkFatestStatus, benchmarkCycle } from '../../.fixtures/benchmark';
-import { is } from '../../..';
+import { is } from '../index.next';
 
 new Suite()
 
