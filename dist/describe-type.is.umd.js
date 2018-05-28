@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v1.0.0
  * 
- * @commit f36d4d51c5e3fb7353a5ae25855182b92326ab4e
- * @moment Monday, May 28, 2018 4:18 PM
+ * @commit 52ec621de3727245f291af7a4d5fcb4a515b4010
+ * @moment Monday, May 28, 2018 4:33 PM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2021

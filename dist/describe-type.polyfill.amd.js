@@ -8,105 +8,139 @@
  * @author Adrian C. Miranda
  * @license (c) 2016-2021
  */
-this.describetype = this.describetype || {};
-this.describetype.internal = (function (exports) {
-	'use strict';
-
-	// pattern(s)
-	var reIsBase64 = /^(data:\w+\/[a-zA-Z+\-.]+;base64,)?([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/;
-	var reFunctionName = /\s*function\s+([^(\s]*)\s*/;
-	var reIsNativeFn = /\[native\scode\]/;
-	var reStringToBoolean = /^true|[1-9]+$/gi;
-	var reToPropName = /^[^a-zA-Z_$]|[^\w|$]|[^\w$]$/g;
-	var reIsHex = /^([A-Fa-f0-9]+|)$/;
-	var reIsHexadecimal = /^((#|0x)?([0-9A-Fa-f]{6}|[0-9A-Fa-f]{3}))?$/;
-	var reRegExpFlags = /^(?:([gimuy])(?!.*\1)){0,5}$/;
-	var reRegExp = /^\/([\s\S]*)\/((?:([gimuy])(?!.*\3)){0,5})$/;
-	var reIsJsonStart = /^\[|^\{(?!\{)/;
-	var reEndsWithBracket = /\]$/;
-	var reEndsWithBrace = /\}$/;
-	var reIsJsonEnds = { '[': exports.reEndsWithBracket, '{': exports.reEndsWithBrace };
-
-	var patterns_next = /*#__PURE__*/{
-		reIsBase64: reIsBase64,
-		reFunctionName: reFunctionName,
-		reIsNativeFn: reIsNativeFn,
-		reStringToBoolean: reStringToBoolean,
-		reToPropName: reToPropName,
-		reIsHex: reIsHex,
-		reIsHexadecimal: reIsHexadecimal,
-		reRegExpFlags: reRegExpFlags,
-		reRegExp: reRegExp,
-		reIsJsonStart: reIsJsonStart,
-		reEndsWithBracket: reEndsWithBracket,
-		reEndsWithBrace: reEndsWithBrace,
-		reIsJsonEnds: reIsJsonEnds
-	};
-
-	// prototypes
-	var ObjectProto = Object.prototype;
-	var ArrayProto = Array.prototype;
-	var StringProto = String.prototype;
-
-	var prototypes_next = /*#__PURE__*/{
-		ObjectProto: ObjectProto,
-		ArrayProto: ArrayProto,
-		StringProto: StringProto
-	};
-
-	// built-in method(s)
-	var objectHasOwnProperty = ObjectProto.hasOwnProperty;
-	var objectToString = ObjectProto.toString;
-	var objectSupportsProto = StringProto === ''.__proto__;
-
-	var builtIn_next = /*#__PURE__*/{
-		objectHasOwnProperty: objectHasOwnProperty,
-		objectToString: objectToString,
-		objectSupportsProto: objectSupportsProto
-	};
+define(['exports'], function (exports) { 'use strict';
 
 	var NUMBER = 'number';
-	var BOOLEAN = 'boolean';
 	var STRING = 'string';
 	var SYMBOL = 'symbol';
 	var OBJECT = 'object';
 	var FUNCTION = 'function';
-	var NULL = 'null';
-	var UNDEFINED = 'undefined';
-	var GENERATOR_FUNCTION = 'GeneratorFunction';
-	var ASYNC_FUNCTION = 'AsyncFunction';
-	var ARGUMENTS = 'Arguments';
-	var INFINITY = 'Infinity';
-	var NAN = 'NaN';
 	var CONSTRUCTOR = 'constructor';
-	var PREFIX_SEAL = '[object ';
-	var ARGUMENTS_SEAL = '[object Arguments]';
-	var CALLEE = 'callee';
 
-	var constants_next = /*#__PURE__*/{
-		NUMBER: NUMBER,
-		BOOLEAN: BOOLEAN,
-		STRING: STRING,
-		SYMBOL: SYMBOL,
-		OBJECT: OBJECT,
-		FUNCTION: FUNCTION,
-		NULL: NULL,
-		UNDEFINED: UNDEFINED,
-		GENERATOR_FUNCTION: GENERATOR_FUNCTION,
-		ASYNC_FUNCTION: ASYNC_FUNCTION,
-		ARGUMENTS: ARGUMENTS,
-		INFINITY: INFINITY,
-		NAN: NAN,
-		CONSTRUCTOR: CONSTRUCTOR,
-		PREFIX_SEAL: PREFIX_SEAL,
-		ARGUMENTS_SEAL: ARGUMENTS_SEAL,
-		CALLEE: CALLEE
-	};
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function callable(value) {
+		return typeof value === FUNCTION;
+	}
 
-	// environment
-	var inBrowser = new Function('try{return this===window;}catch(err){return false;}')();
-	var inNode = new Function('try{return this===global;}catch(err){return false;}')();
-	var env = exports.inNode ? global : window;
+	// prototypes
+	var ObjectProto = Object.prototype;
+	var StringProto = String.prototype;
+
+	// built-in method(s)
+	var objectHasOwnProperty = ObjectProto.hasOwnProperty;
+	var objectSupportsProto = StringProto === ''.__proto__;
+
+	/**
+	 * Creates a new array with all of the elements of this array for which the
+	 * provided filtering function returns true.
+	 * @function
+	 * @memberof utility
+	 * @param {arraylike} list - list of elements.
+	 * @param {Function} cmd - Function is a predicate, to test each element of
+	 * the array. Return true to keep the element, false otherwise, taking three
+	 * arguments:
+	 *  - element: The current element being processed in the array.
+	 *  - index?: The index of the current element being processed in the array.
+	 *  - array?: The array filter was called upon.
+	 * @param {any} context? - Value to use as this when executing callback.
+	 * @returns {Array} - A new array with the elements that pass the test.
+	 * If no elements pass the test, an empty array will be returned.
+	 * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
+	 */
+	function filter(list, cmd, context) {
+	  if (list === undefined || list === null) { throw new TypeError; }
+	  if (callable(cmd) === false) { throw new TypeError; }
+	  var result = [];
+	  for (var index = 0; index < list.length; index += 1) {
+	    if (objectHasOwnProperty.call(list, index) === false) { continue; }
+	    var value = list[index];
+	    if (cmd.call(context, value, index, list)) {
+	    	result[result.length] = value;
+	    }
+	  }
+	  return result;
+	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof has
+	 * @param {Object|Function} context
+	 * @param {any} key
+	 * @returns {Boolean}
+	 */
+	function ownProperty(context, key) {
+		if (context === undefined || context === null) { return false; }
+		return objectHasOwnProperty.call(context, key);
+	}
+
+	/* eslint-disable no-restricted-syntax */
+
+	/**
+	 *
+	 * @function
+	 * @memberof utility
+	 * @param {Object} keys -
+	 * @param {Boolean} getInheritedProps -
+	 * @returns {Array}
+	 */
+	function keys(object, getInheritedProps) {
+		if (object === undefined || object === null) { return []; }
+		if (Object.keys && !getInheritedProps) {
+			return Object.keys(object);
+		}
+		var properties = [];
+		for (var key in object) {
+			if (getInheritedProps || ownProperty(object, key)) {
+				properties[properties.length] = key;
+			}
+		}
+		return properties;
+	}
+
+	/**
+	 * The reduce() method applies a function against an accumulator and each
+	 * element in the array (from left to right) to reduce it to a single value.
+	 * @function
+	 * @memberof utility
+	 * @param {arraylike} list - list of elements.
+	 * @param {Function} cmd - Function to execute on each element in the array,
+	 * taking four arguments:
+	 *  - accumulator: The accumulator accumulates the callback's return values;
+	 *    it is the accumulated value previously returned in the last invocation
+	 *    of the callback, or initialValue, if supplied (see below).
+	 *  - currentIndex?: The index of the current element being processed in the array.
+	 *    Starts at index 0, if an initialValue is provided, and at index 1 otherwise.
+	 *  - array?: The array reduce() was called upon.
+	 * @param {any} initialValue - Value to use as the first argument to the first
+	 * call of the callback. If no initial value is supplied, the first element
+	 * in the array will be used. Calling reduce() on an empty array without an
+	 * initial value is an error.
+	 * @param {any} context - Value to use as this when executing callback.
+	 * @returns {any} The value that results from the reduction.
+	 */
+	function reduce(list, cmd, initialValue, context) {
+		if (list === undefined || list === null) { return undefined; }
+		if (callable(cmd) === false) { throw new TypeError(("The second argument should be a function, received \"" + (typeof cmd) + "\"")); }
+		var size = (0 | list.length);
+		if (size) {
+			var index = 0;
+			if (arguments.length === 2) {
+				initialValue = list[index];
+				index = 1;
+			}
+			for (index; index < size; index += 1) {
+				initialValue = cmd.call(context || null, initialValue, list[index], index, list);
+			}
+		}
+		return initialValue;
+	}
 
 	/**
 	 *
@@ -261,135 +295,30 @@ this.describetype.internal = (function (exports) {
 
 	/**
 	 *
+	 * @name Object.assign
 	 * @function
-	 * @memberof to
-	 * @param {any} value
-	 * @returns {Boolean}
+	 * @global
+	 * @param {target}
+	 * @param {...sources}
+	 * @see https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
 	 */
-	function stringOf(value, force) {
-		var ctor = value != null && value.constructor;
-		if (ctor && force) {
-			if (!ctor.name || ctor.name === 'Object') {
-				var matches = ctor.toString().match(reFunctionName);
-				return matches ? matches[1] : '';
+	var Object_assign_next = Object.assign || function assign(target) {
+		if (target === undefined || target === null) {
+			throw new TypeError('Cannot convert undefined or null to object');
+		}
+		var rest = slice(arguments, 1);
+		for (var index = 1; index < rest.length; index += 1) {
+			var source = rest[index];
+			if ((source === undefined || source === null) === false) {
+				for (var key in source) {
+					if (objectHasOwnProperty.call(source, key)) {
+						target[key] = source[key];
+					}
+				}
 			}
-			return ctor.name;
 		}
-		return slice(objectToString.call(value), 8, -1);
-	}
-
-	/**
-	 *
-	 * @function
-	 * @memberof to
-	 * @param {any} value
-	 * @returns {Boolean}
-	 */
-	function booleanOf(value) {
-		if (string(value) && value.length) {
-			return reStringToBoolean.test(value);
-		}
-		return !!value;
-	}
-
-	/**
-	 *
-	 * @function
-	 * @memberof is
-	 * @param {any} value
-	 * @returns {Boolean}
-	 */
-	function nan(value) {
-		var isnum = number(value);
-		return isnum === false || (isnum && value !== value);
-	}
-
-	/**
-	 *
-	 * @function
-	 * @memberof is
-	 * @param {any} value
-	 * @returns {Boolean}
-	 */
-	function infinity(value) {
-		return number(value) && (value - 1) === value;
-	}
-
-	/**
-	 * The `floatOf()` function parses an argument and returns a floating point number.
-	 *
-	 * @function
-	 * @memberof to
-	 *
-	 * @param {Number|String|Object} value - The value to parse.
-	 * If the string argument is not a string, then it is converted to a string
-	 * (using the ToString abstract operation).
-	 * Leading whitespace in the string argument is ignored.
-	 *
-	 * @returns {Number} A floating point number parsed from the given value.
-	 * If the first character cannot be converted to a number, 0 is returned.
-	 */
-	function floatOf(value) {
-		value = +value;
-		return nan(value) || infinity(value) ? 0 : value;
-	}
-
-	/**
-	 * The `uintOf()` function parses a string argument and returns an unsigned integer
-	 * of the specified radix (the base in mathematical numeral systems).
-	 *
-	 * @function
-	 * @memberof to
-	 *
-	 * @param {Number|String|Object} value - The value to parse.
-	 * If the string argument is not a string, then it is converted to a string
-	 * (using the ToString abstract operation).
-	 * Leading whitespace in the string argument is ignored.
-	 *
-	 * @param {any} radix - An unsigned integer between 2 and 36 that represents
-	 * the radix (the base in mathematical numeral systems) of the above mentioned string.
-	 * Specify 10 for the decimal numeral system commonly used by humans. Always specify
-	 * this parameter to eliminate reader confusion and to guarantee predictable behavior.
-	 * Different implementations produce different results when a radix is not specified,
-	 * usually defaulting the value to 10.
-	 *
-	 * @returns {Number} An unsigned integer number parsed from the given string.
-	 * If the first character cannot be converted to a number, 0 is returned.
-	 *
-	 * min: 0
-	 * max: 0xffffffff
-	 */
-	function uintOf(value, radix) {
-		var num = intOf(value, radix);
-		return num < 0 ? 0 : num;
-	}
-
-	/**
-	 *
-	 * @function
-	 * @memberof is
-	 * @param {any} value
-	 * @returns {Boolean}
-	 */
-	function callable(value) {
-		return typeof value === FUNCTION;
-	}
-
-	/**
-	 *
-	 * @function
-	 * @memberof has
-	 * @param {object} context
-	 * @param {any} value
-	 * @returns {Boolean}
-	 */
-	function unsafeMethod(context, methodName) {
-		try {
-			return callable(context[methodName]);
-		} catch (err) {
-			return false;
-		}
-	}
+		return target;
+	};
 
 	/**
 	 *
@@ -433,87 +362,34 @@ this.describetype.internal = (function (exports) {
 	 *
 	 * @function
 	 * @memberof is
+	 * @param {Function} expect
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function object(value) {
-		if (value === undefined || value === null) { return false; }
-		return constructorOf(value) === Object;
+	function type(expected, value) {
+		if (value === undefined || value === null) { return value === expected; }
+		if (expected === undefined || expected === null) { return expected === value; }
+		if (value === true || value === false) { return expected === Boolean; }
+		var type = typeof value;
+		if (type === STRING) { return expected === String; }
+		if (type === NUMBER) { return expected === Number; }
+		if (type === SYMBOL) { return expected === Symbol; }
+		if (expected === Function) { return type === FUNCTION; }
+		if (value instanceof Array) { return expected === Array; }
+		if (value instanceof RegExp) { return expected === RegExp; }
+		return constructorOf(value) === expected;
 	}
 
 	/**
 	 *
 	 * @function
 	 * @memberof is
+	 * @param {Function|Array.<Function>} expected
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function args(value) {
-		return (array(value) === false && arraylike(value) &&
-			object(value) && unsafeMethod(value, CALLEE)
-		) || objectToString.call(value) === ARGUMENTS_SEAL;
-	}
-
-	/**
-	 *
-	 * @function
-	 * @memberof built-in
-	 * @param {any} value
-	 * @returns {String}
-	 */
-	function typeOf(value) {
-		if (value === undefined) { return UNDEFINED; }
-		if (value === null) { return NULL; }
-		if (infinity(value)) { return INFINITY; }
-		if (nan(value)) { return NAN; }
-		return args(value) ? ARGUMENTS : stringOf(value, true);
-	}
-
-	/**
-	 *
-	 * @function
-	 * @memberof built-in
-	 * @param {any} value
-	 * @returns {String}
-	 */
-	function constructorNameOf(value) {
-		var name = typeOf(value);
-		return (name === 'Function' && (value != null && value.name)) || name;
-	}
-
-	/**
-	 *
-	 * @function
-	 * @memberof built-in
-	 * @param {any} value
-	 * @param {Boolean} write
-	 * @returns {String}
-	 */
-	function name(value, write) {
-		if (value === undefined || value === null || object(value)) {
-			return typeOf(value);
-		}
-		return value.name || (write &&
-			string(value) ? value.replace(reToPropName, '_') : constructorNameOf(value)
-		);
-	}
-
-	/**
-	 *
-	 * @function
-	 * @memberof built-in
-	 * @param {Function|Array.<Function>} expected
-	 * @param {any} value
-	 * @returns {Array}
-	 */
-	function typify(expected, write) {
-		if (string(expected) === false && arraylike(expected) && expected.length > 0) {
-			for (var i = expected.length - 1; i > -1; i -= 1) {
-				expected[i] = name(expected[i], write);
-			}
-			return expected.join('|');
-		}
-		return name(expected, write);
+	function notType(expected, value) {
+		return type(expected, value) === false;
 	}
 
 	/**
@@ -542,19 +418,6 @@ this.describetype.internal = (function (exports) {
 			if (blindly) { return err; }
 			throw err;
 		}
-	}
-
-	/**
-	 *
-	 * @function
-	 * @memberof has
-	 * @param {Object|Function} context
-	 * @param {any} key
-	 * @returns {Boolean}
-	 */
-	function ownProperty(context, key) {
-		if (context === undefined || context === null) { return false; }
-		return objectHasOwnProperty.call(context, key);
 	}
 
 	/**
@@ -640,6 +503,49 @@ this.describetype.internal = (function (exports) {
 	/**
 	 *
 	 * @function
+	 * @param {Object} proto - The object which should be the prototype of the newly-created object.
+	 * @param {Object} properties - Optional. If specified and not undefined, an object whose
+	 * enumerable own properties (that is, those properties defined upon itself and not enumerable
+	 * properties along its prototype chain) specify property descriptors to be added to the
+	 * newly-created object, with the corresponding property names. These properties correspond to
+	 * the second argument of `Object.defineProperties()`.
+	 * @returns {Object}
+	 */
+	var Object_create_next = Object.create || function create(proto, properties) {
+		if (proto === null) { return {}; }
+		if (notType(Object, proto)) {
+			throw new TypeError('Object prototype may only be an Object or null: ' + (typeof proto));
+		}
+		var Instance = function () {};
+		Instance.prototype = proto;
+		proto = new Instance();
+		each(properties, function (value, property) {
+			proto[property] = value.value;
+		});
+		return proto;
+	}
+
+	/**
+	 * The Object.is() method determines whether two values are the same value.
+	 * @function
+	 * @param {Object} valueA - The first value to compare.
+	 * @param {Object} valueB - The second value to compare.
+	 * @returns {Boolean} The Object.is() method determines whether two values are
+	 * the same value.
+	 */
+	var Object_is_next = Object.is || function is(valueA, valueB) {
+		if (valueA === valueB) {
+			if (valueA === 0) { return 1 / valueA === 1 / valueB; }
+			return true;
+		}
+		var a = valueA;
+		var b = valueB;
+		return valueA !== a && valueB !== b;
+	}
+
+	/**
+	 *
+	 * @function
 	 * @memberof has
 	 * @param {String|Array} context
 	 * @param {any} value
@@ -676,28 +582,6 @@ this.describetype.internal = (function (exports) {
 
 	/**
 	 *
-	 * @function
-	 * @memberof is
-	 * @param {Function} expect
-	 * @param {any} value
-	 * @returns {Boolean}
-	 */
-	function type(expected, value) {
-		if (value === undefined || value === null) { return value === expected; }
-		if (expected === undefined || expected === null) { return expected === value; }
-		if (value === true || value === false) { return expected === Boolean; }
-		var type = typeof value;
-		if (type === STRING) { return expected === String; }
-		if (type === NUMBER) { return expected === Number; }
-		if (type === SYMBOL) { return expected === Symbol; }
-		if (expected === Function) { return type === FUNCTION; }
-		if (value instanceof Array) { return expected === Array; }
-		if (value instanceof RegExp) { return expected === RegExp; }
-		return constructorOf(value) === expected;
-	}
-
-	/**
-	 *
 	 * @param {Function|Array.<Function>} expected
 	 * @param {any} value
 	 * @returns {Boolean}
@@ -722,42 +606,14 @@ this.describetype.internal = (function (exports) {
 		return str.substr(startIndex, search.length) === search;
 	}
 
-	// TODO: to implement
+	exports.filter = filter;
+	exports.reduce = reduce;
+	exports.slice = slice;
+	exports.assign = Object_assign_next;
+	exports.create = Object_create_next;
+	exports.getPrototypeOf = getPrototypeOf;
+	exports.is = Object_is_next;
+	exports.keys = keys;
+	exports.startsWith = startsWith;
 
-	function stringify(value, replacer, space) {
-		if (value === undefined) { return UNDEFINED; }
-		if (value === null) { return NULL; }
-		var seal = asA(String, value.toString, value);
-		if (startsWith(seal, PREFIX_SEAL)) { seal = ''; }
-		return seal || JSON.stringify(value, replacer, space);
-	}
-
-	exports.prototypes = prototypes_next;
-	exports.builtIn = builtIn_next;
-	exports.patterns = patterns_next;
-	exports.constants = constants_next;
-	exports.stringOf = stringOf;
-	exports.booleanOf = booleanOf;
-	exports.floatOf = floatOf;
-	exports.intOf = intOf;
-	exports.uintOf = uintOf;
-	exports.constructorNameOf = constructorNameOf;
-	exports.constructorOf = constructorOf;
-	exports.typeOf = typeOf;
-	exports.typify = typify;
-	exports.name = name;
-	exports.apply = apply;
-	exports.each = each;
-	exports.eachValue = eachValue;
-	exports.eachProperty = eachProperty;
-	exports.resolveProperty = resolveProperty;
-	exports.getExpectedValue = getExpectedValue;
-	exports.mod = mod;
-	exports.stringify = stringify;
-	exports.inBrowser = inBrowser;
-	exports.inNode = inNode;
-	exports.env = env;
-
-	return exports;
-
-}({}));
+});
