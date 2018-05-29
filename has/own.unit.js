@@ -9,3 +9,11 @@ test('describeType.has.own exposure', (t) => {
 test('own exposure', (t) => {
 	t.is(toString.call(own), '[object Function]', 'should be a function');
 });
+
+test('own: at list', (t) => {
+	t.true(own(['foobar', 'fubar'], 'fubar'), 'should have "fubar" at list');
+});
+
+test('own: at object', (t) => {
+	t.true(own({ a:'foobar', b:'fubar', c:['foo', 'bar'] }, 'b'), 'should have "b" at object');
+});

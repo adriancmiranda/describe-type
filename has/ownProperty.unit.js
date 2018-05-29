@@ -9,3 +9,7 @@ test('describeType.has.ownProperty exposure', (t) => {
 test('ownProperty exposure', (t) => {
 	t.is(toString.call(ownProperty), '[object Function]', 'should be a function');
 });
+
+test('ownProperty: at plain object', (t) => {
+	t.true(ownProperty({ a:'foobar', b:'fubar', c:['foo', 'bar'] }, 'b'), 'should have "b" at object');
+});
