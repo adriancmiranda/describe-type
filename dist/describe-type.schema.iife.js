@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v1.0.0
  * 
- * @commit 52ec621de3727245f291af7a4d5fcb4a515b4010
- * @moment Monday, May 28, 2018 4:33 PM
+ * @commit d749c87aed79d38ae0c95173d8032f0cb05a8c95
+ * @moment Tuesday, May 29, 2018 5:49 PM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2021
@@ -592,12 +592,12 @@ this.describetype.schema = (function () {
 
 	function schematize(patterns, settings) {
 		var schema = asAny(Object, patterns) || create(null);
-		var object$$1 = asAny(Object, settings) || create(null);
+		var entity = asAny(Object, settings) || create(null);
 		return reduce(keys(schema), function (copy, key) {
 			if (startsWith(key, '$')) {
 				var slug = key.substring(1);
 				var assert = { key: key, data: schema[key] };
-				var config = { key: slug, data: object$$1[slug] };
+				var config = { key: slug, data: entity[slug] };
 				var result = parseProperty(assert, config, copy);
 				copy[result.key] = result.data;
 			}

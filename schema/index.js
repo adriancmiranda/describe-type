@@ -27,12 +27,12 @@ const PR0PERTIES = {
 
 function schematize(patterns, settings) {
 	const schema = asAny(Object, patterns) || create(null);
-	const object = asAny(Object, settings) || create(null);
+	const entity = asAny(Object, settings) || create(null);
 	return reduce(keys(schema), (copy, key) => {
 		if (startsWith(key, '$')) {
 			const slug = key.substring(1);
 			const assert = { key, data: schema[key] };
-			const config = { key: slug, data: object[slug] };
+			const config = { key: slug, data: entity[slug] };
 			const result = parseProperty(assert, config, copy);
 			copy[result.key] = result.data;
 		}

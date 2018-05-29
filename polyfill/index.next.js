@@ -7,4 +7,3 @@ export { default as getPrototypeOf } from './Object.getPrototypeOf.next.js';
 export { default as is } from './Object.is.next.js';
 export { default as keys } from './Object.keys.next.js';
 export { default as startsWith } from './String.prototype.startsWith.next.js';
-

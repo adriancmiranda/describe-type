@@ -7,4 +7,3 @@ exports.getPrototypeOf = require('./Object.getPrototypeOf.js');
 exports.is = require('./Object.is.js');
 exports.keys = require('./Object.keys.js');
 exports.startsWith = require('./String.prototype.startsWith.js');
-
