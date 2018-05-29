@@ -1,23 +1,25 @@
 import test from 'ava';
 import Custom from '../.fixtures/datatype/types/custom';
 import * as describeType from '../index.next';
+import * as internal from './index.next';
 import constructorNameOf from './constructorNameOf.next';
 
 test('describeType.constructorNameOf exposure', (t) => {
 	t.is(toString.call(describeType.constructorNameOf), '[object Function]', 'should be a function');
 });
 
+test('internal.constructorNameOf exposure', (t) => {
+	t.is(toString.call(internal.constructorNameOf), '[object Function]', 'should be a function');
+});
+
+// @todo
 test('constructorNameOf exposure', (t) => {
 	t.is(toString.call(constructorNameOf), '[object Function]', 'should be a function');
 });
 
-// 	test('exposed', (t) => {
-// 		t.is(toString.call(constructorNameOf), '[object Function]', 'should be a function');
-// 	});
-
-// 	test('Arguments', (t) => {
-// 		t.is(constructorNameOf((() => arguments)()), 'Arguments');
-// 	});
+// test('Arguments', (t) => {
+// 	t.is(constructorNameOf((() => arguments)()), 'Arguments');
+// });
 
 // 	test('Function', (t) => {
 // 		t.is(constructorNameOf(() => 'foo'), 'Function');
