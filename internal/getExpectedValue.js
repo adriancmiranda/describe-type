@@ -17,7 +17,7 @@ const apply = require('./apply.js');
 module.exports = function getExpectedValue(expected, value, args, startIndex, endIndex) {
 	if (callable(value) && (expected === Function || ownValue(expected, Function)) === false) {
 		args = slice(args, startIndex, endIndex);
-		return apply(value, args[0], args, true);
+		return apply(value, args[args.length - 1], args, true);
 	}
 	return value;
 }

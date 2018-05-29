@@ -13,4 +13,3 @@ test('describeType.as.an method is exposed', (t) => {
 test('as.an method is exposed', (t) => {
 	t.is(toString.call(asAn), '[object Function]', 'should be a function');
 });
-
