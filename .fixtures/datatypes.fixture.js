@@ -156,6 +156,12 @@ arraylikeNative.add('new Float32Array([6, 4])', global.Float32Array, [6, 4]);
 arraylikeNative.add('new Float64Array(32)', global.Float64Array, 32);
 arraylikeNative.add('new Float64Array([16, 16])', global.Float64Array, [16, 16]);
 
+export const promise = new DataType('promise');
+if (global.Promise) {
+	promise.add('new global.Promise((resolve) => { resolve(); }))', new global.Promise((resolve) => { resolve(); }));
+	promise.add('global.Promise.resolve()', global.Promise.resolve());
+}
+
 export const arraylikeObject = new DataType('arraylikeObject');
 arraylikeObject.add('{{source}}', new String('foo'));
 arraylikeObject.add('{{source}}', { 0: NaN, length: 0 });
@@ -467,6 +473,7 @@ jsonlike.add('{{source}}', JSON.stringify([true, false, true]));
 jsonlike.add('{{source}}', JSON.stringify([/foo/, /bar/, /baz/]));
 
 export const all = new DataType('all');
+all.add(promise);
 all.add(common);
 all.add(element);
 all.add(custom);

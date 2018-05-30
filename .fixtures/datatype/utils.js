@@ -51,20 +51,23 @@ export function constructorOf(value, selfConstructor) {
 
 export function constructorNameOf(value) {
 	if (value == null) return toPascalCase(value);
-	if (value.constructor === Function) {
+	if (value.__proto__ == null) return 'Object';
+	if (value.__proto__.constructor === Function) {
 		if (!value.name || value.name === 'Object') {
 			const match = String(value).match(reFunctionName, '');
 			if (match && match[1]) return match[1];
 		}
-		return value.name || value.constructor.name;
+		return value.name || value.__proto__.constructor.name;
+	} else if (args(value)) {
+		return 'Arguments';
 	} else if (typeof value === 'object') {
-		return constructorNameOf(value.constructor || Object);
+		return value.__proto__.constructor.name;
 	} else if (typeof value === 'number' || value instanceof Number) {
 		return value !== value || value === (value - 1) ? String(value) : 'Number';
 	}
 	const type = toString.call(value).slice(8, -1);
 	if (type === 'Arguments' || (type !== 'Array' && isArraylike(value))) {
-		if (type === 'Object' && typeof value.callee === 'function') {
+		if (type === 'Object' && typeof value['callee'] === 'function') {
 			return 'Arguments';
 		}
 	}
@@ -144,4 +147,26 @@ export function applyAndNew(constructor, args) {
 		partial.prototype = Object.create(constructor.prototype);
 	}
 	return partial;
+}
+
+export function unsafeMethod(context, methodName) {
+	try {
+		return typeof context[methodName] === 'function';
+	} catch (err) {
+		return false;
+	}
+}
+
+export function arraylike(value) {
+	return Array.isArray(value) || typeof value === 'string' || (
+		(!!value && typeof value === 'object' && typeof value.length === 'number') &&
+		(value.length === 0 || (value.length > 0 && (value.length - 1) in value))
+	);
+}
+
+export function args(value) {
+	return (Array.isArray(value) === false && arraylike(value) &&
+		(value && (!value.__proto__ || value.__proto__.constructor === Object)) &&
+		unsafeMethod(value, 'callee')
+	) || toString.call(value) === '[object Arguments]';
 }

@@ -1,5 +1,4 @@
 import test from 'ava';
-import Custom from '../.fixtures/datatype/types/custom';
 import * as datatypes from '../.fixtures/datatypes.fixture';
 import * as describeType from '../index.next';
 import * as internal from './index.next';
