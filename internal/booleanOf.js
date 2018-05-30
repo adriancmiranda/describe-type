@@ -1,4 +1,4 @@
-const { reStringToBoolean } = require('../internal/patterns.js');
+const { reStringToBoolean } = require('./patterns.js');
 const string = require('../is/string/string.js');
 
 /**

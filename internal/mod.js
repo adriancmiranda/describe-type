@@ -1,5 +1,5 @@
 /* eslint-disable no-nested-ternary */
-const intOf = require('../internal/intOf.js');
+const intOf = require('./intOf.js');
 
 /**
  *

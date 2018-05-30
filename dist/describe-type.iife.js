@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v1.0.0-dev.1
  * 
- * @commit a1b137d56f52556d57ff4cd55f3dd8cddb7577dd
- * @moment Wednesday, May 30, 2018 6:01 AM
+ * @commit af75dbeb249a9cde89e6fb9c860c1b56ae1de656
+ * @moment Wednesday, May 30, 2018 2:29 PM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2021
@@ -106,6 +106,25 @@ var describetype = (function (exports) {
 	var inBrowser = new Function('try{return this===window;}catch(err){return false;}')();
 	var inNode = new Function('try{return this===global;}catch(err){return false;}')();
 	var env = exports.inNode ? global : window;
+
+	/**
+	 *
+	 * @name Object.getPrototypeOf
+	 * @function
+	 * @global
+	 * @param {value}
+	 * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/proto
+	 * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getPrototypeOf
+	 * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect/getPrototypeOf
+	 */
+	var getPrototypeOf = objectSupportsProto ? function getPrototypeOf(value) {
+		return value.__proto__ || ObjectProto;
+	} : function getPrototypeOf(value) {
+		if (objectHasOwnProperty.call(value, CONSTRUCTOR)) {
+			return ObjectProto;
+		}
+		return value.constructor.prototype;
+	};
 
 	/**
 	 *
@@ -246,7 +265,7 @@ var describetype = (function (exports) {
 				if (string(list)) {
 					range = '';
 					for (var c = start; c < size; c += 1) {
-						range += list[c];
+						range += list.charAt(c);
 					}
 					return range;
 				}
@@ -266,13 +285,16 @@ var describetype = (function (exports) {
 	 * @returns {Boolean}
 	 */
 	function stringOf(value, force) {
-		var ctor = value != null && value.constructor;
-		if (ctor && force) {
-			if (!ctor.name || ctor.name === 'Object') {
-				var matches = ctor.toString().match(reFunctionName);
-				return matches ? matches[1] : '';
+		if (value === undefined === false && value === null === false) {
+			var proto = getPrototypeOf(value);
+			var ctor = proto.constructor;
+			if (ctor && force) {
+				if (!ctor.name || ctor.name === 'Object') {
+					var matches = ctor.toString().match(reFunctionName);
+					return matches ? matches[1] : '';
+				}
+				return ctor.name;
 			}
-			return ctor.name;
 		}
 		return slice(objectToString.call(value), 8, -1);
 	}
@@ -389,31 +411,6 @@ var describetype = (function (exports) {
 			return false;
 		}
 	}
-
-	/**
-	 *
-	 * @name Object.getPrototypeOf
-	 * @function
-	 * @global
-	 * @param {value}
-	 * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/proto
-	 * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getPrototypeOf
-	 * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect/getPrototypeOf
-	 */
-	var objectGetPrototypeOf = Object.getPrototypeOf;
-	if (typeof objectGetPrototypeOf === 'function' === false) {
-		objectGetPrototypeOf = objectSupportsProto
-		? function getPrototypeOf(value) {
-				return value.__proto__;
-			}
-		: function getPrototypeOf(value) {
-			if (objectHasOwnProperty.call(value, CONSTRUCTOR)) {
-				return ObjectProto;
-			}
-			return value.constructor.prototype;
-		};
-	}
-	var getPrototypeOf = objectGetPrototypeOf;
 
 	/**
 	 *
@@ -721,7 +718,7 @@ var describetype = (function (exports) {
 		return str.substr(startIndex, search.length) === search;
 	}
 
-	// TODO: to implement
+	// @todo: to implement
 
 	function stringify(value, replacer, space) {
 		if (value === undefined) { return UNDEFINED; }

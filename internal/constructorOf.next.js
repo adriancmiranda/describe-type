@@ -1,6 +1,6 @@
 import { CONSTRUCTOR } from './constants.next.js';
 import { objectHasOwnProperty } from './built-in.next.js';
-import getPrototypeOf from '../polyfill/Object.getPrototypeOf.next.js';
+import getPrototypeOf from '../shim/Object.getPrototypeOf.next.js';
 
 /**
  *

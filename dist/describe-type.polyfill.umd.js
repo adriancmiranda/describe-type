@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v1.0.0-dev.1
  * 
- * @commit a1b137d56f52556d57ff4cd55f3dd8cddb7577dd
- * @moment Wednesday, May 30, 2018 6:01 AM
+ * @commit af75dbeb249a9cde89e6fb9c860c1b56ae1de656
+ * @moment Wednesday, May 30, 2018 2:29 PM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2021
@@ -285,7 +285,7 @@
 				if (string(list)) {
 					range = '';
 					for (var c = start; c < size; c += 1) {
-						range += list[c];
+						range += list.charAt(c);
 					}
 					return range;
 				}
@@ -334,20 +334,14 @@
 	 * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getPrototypeOf
 	 * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect/getPrototypeOf
 	 */
-	var objectGetPrototypeOf = Object.getPrototypeOf;
-	if (typeof objectGetPrototypeOf === 'function' === false) {
-		objectGetPrototypeOf = objectSupportsProto
-		? function getPrototypeOf(value) {
-				return value.__proto__;
-			}
-		: function getPrototypeOf(value) {
-			if (objectHasOwnProperty.call(value, CONSTRUCTOR)) {
-				return ObjectProto;
-			}
-			return value.constructor.prototype;
-		};
-	}
-	var getPrototypeOf = objectGetPrototypeOf;
+	var getPrototypeOf = objectSupportsProto ? function getPrototypeOf(value) {
+		return value.__proto__ || ObjectProto;
+	} : function getPrototypeOf(value) {
+		if (objectHasOwnProperty.call(value, CONSTRUCTOR)) {
+			return ObjectProto;
+		}
+		return value.constructor.prototype;
+	};
 
 	/**
 	 *
@@ -615,7 +609,6 @@
 	exports.slice = slice;
 	exports.assign = Object_assign_next;
 	exports.create = Object_create_next;
-	exports.getPrototypeOf = getPrototypeOf;
 	exports.is = Object_is_next;
 	exports.keys = keys;
 	exports.startsWith = startsWith;

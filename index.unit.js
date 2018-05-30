@@ -2,6 +2,7 @@ import test from 'ava';
 import colors from 'colors';
 import * as describeType from './index.next';
 import * as polyfill from './polyfill/index.next';
+import * as shim from './shim/index.next';
 
 function deleteAt(object, property) {
 	if (object == null) return object;
@@ -219,8 +220,11 @@ test(`${colors.underline('describeType polyfill')} expusures`, (t) => {
 	t.is(toString.call(polyfill.slice), '[object Function]', '"polyfill.slice" should be a function');
 	t.is(toString.call(polyfill.assign), '[object Function]', '"polyfill.assign" should be a function');
 	t.is(toString.call(polyfill.create), '[object Function]', '"polyfill.create" should be a function');
-	t.is(toString.call(polyfill.getPrototypeOf), '[object Function]', '"polyfill.getPrototypeOf" should be a function');
 	t.is(toString.call(polyfill.is), '[object Function]', '"polyfill.is" should be a function');
 	t.is(toString.call(polyfill.keys), '[object Function]', '"polyfill.keys" should be a function');
 	t.is(toString.call(polyfill.startsWith), '[object Function]', '"polyfill.startsWith" should be a function');
+});
+
+test(`${colors.underline('describeType shim')} expusures`, (t) => {
+	t.is(toString.call(shim.getPrototypeOf), '[object Function]', '"shim.getPrototypeOf" should be a function');
 });

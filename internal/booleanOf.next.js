@@ -1,4 +1,4 @@
-import { reStringToBoolean } from '../internal/patterns.next.js';
+import { reStringToBoolean } from './patterns.next.js';
 import string from '../is/string/string.next.js';
 
 /**

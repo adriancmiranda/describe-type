@@ -1,6 +1,6 @@
-import { CONSTRUCTOR } from '../internal/constants.next.js';
-import { ObjectProto } from '../internal/prototypes.next.js';
-import { objectGetPrototypeOf, objectHasOwnProperty } from '../internal/built-in.next.js';
+import { CONSTRUCTOR } from './constants.next.js';
+import { ObjectProto } from './prototypes.next.js';
+import { objectGetPrototypeOf, objectHasOwnProperty } from './built-in.next.js';
 
 /**
  *

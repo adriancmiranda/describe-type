@@ -1,6 +1,6 @@
-const { CONSTRUCTOR } = require('../internal/constants.js');
-const { ObjectProto } = require('../internal/prototypes.js');
-const { objectGetPrototypeOf, objectHasOwnProperty } = require('../internal/built-in.js');
+const { CONSTRUCTOR } = require('./constants.js');
+const { ObjectProto } = require('./prototypes.js');
+const { objectGetPrototypeOf, objectHasOwnProperty } = require('./built-in.js');
 
 /**
  *

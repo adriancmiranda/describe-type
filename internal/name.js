@@ -1,7 +1,7 @@
-const { reToPropName } = require('../internal/patterns.js');
 const string = require('../is/string/string.js');
 const object = require('../is/object/object.js');
 const constructorNameOf = require('./constructorNameOf.js');
+const { reToPropName } = require('./patterns.js');
 const typeOf = require('./typeOf.js');
 
 /**

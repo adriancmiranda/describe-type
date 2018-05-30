@@ -24,7 +24,7 @@ module.exports = function slice(list, startIndex, endIndex) {
 			if (string(list)) {
 				range = '';
 				for (let c = start; c < size; c += 1) {
-					range += list[c];
+					range += list.charAt(c);
 				}
 				return range;
 			}

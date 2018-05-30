@@ -1,6 +1,7 @@
-import { reFunctionName } from '../internal/patterns.next.js';
-import { objectToString } from '../internal/built-in.next.js';
+import getPrototypeOf from '../shim/Object.getPrototypeOf.next.js';
 import slice from '../polyfill/Array.prototype.slice.next.js';
+import { reFunctionName } from './patterns.next.js';
+import { objectToString } from './built-in.next.js';
 
 /**
  *
@@ -10,13 +11,16 @@ import slice from '../polyfill/Array.prototype.slice.next.js';
  * @returns {Boolean}
  */
 export default function stringOf(value, force) {
-	const ctor = value != null && value.constructor;
-	if (ctor && force) {
-		if (!ctor.name || ctor.name === 'Object') {
-			const matches = ctor.toString().match(reFunctionName);
-			return matches ? matches[1] : '';
+	if (value === undefined === false && value === null === false) {
+		const proto = getPrototypeOf(value);
+		const ctor = proto.constructor;
+		if (ctor && force) {
+			if (!ctor.name || ctor.name === 'Object') {
+				const matches = ctor.toString().match(reFunctionName);
+				return matches ? matches[1] : '';
+			}
+			return ctor.name;
 		}
-		return ctor.name;
 	}
 	return slice(objectToString.call(value), 8, -1);
 }

@@ -27,6 +27,11 @@ module.exports = ([{
 	output: 'dist/describe-type.polyfill',
 	format: env.FORMATS,
 }, {
+	module: 'describeType.shim',
+	source: 'shim/index.next.js',
+	output: 'dist/describe-type.shim',
+	format: env.FORMATS,
+}, {
 	module: 'describeType.schema',
 	source: 'schema/index.next',
 	output: 'dist/describe-type.schema',

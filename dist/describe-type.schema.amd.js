@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v1.0.0-dev.1
  * 
- * @commit a1b137d56f52556d57ff4cd55f3dd8cddb7577dd
- * @moment Wednesday, May 30, 2018 6:01 AM
+ * @commit af75dbeb249a9cde89e6fb9c860c1b56ae1de656
+ * @moment Wednesday, May 30, 2018 2:29 PM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2021
@@ -185,7 +185,7 @@ define(function () { 'use strict';
 				if (string(list)) {
 					range = '';
 					for (var c = start; c < size; c += 1) {
-						range += list[c];
+						range += list.charAt(c);
 					}
 					return range;
 				}
@@ -262,20 +262,14 @@ define(function () { 'use strict';
 	 * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getPrototypeOf
 	 * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect/getPrototypeOf
 	 */
-	var objectGetPrototypeOf = Object.getPrototypeOf;
-	if (typeof objectGetPrototypeOf === 'function' === false) {
-		objectGetPrototypeOf = objectSupportsProto
-		? function getPrototypeOf(value) {
-				return value.__proto__;
-			}
-		: function getPrototypeOf(value) {
-			if (objectHasOwnProperty.call(value, CONSTRUCTOR)) {
-				return ObjectProto;
-			}
-			return value.constructor.prototype;
-		};
-	}
-	var getPrototypeOf = objectGetPrototypeOf;
+	var getPrototypeOf = objectSupportsProto ? function getPrototypeOf(value) {
+		return value.__proto__ || ObjectProto;
+	} : function getPrototypeOf(value) {
+		if (objectHasOwnProperty.call(value, CONSTRUCTOR)) {
+			return ObjectProto;
+		}
+		return value.constructor.prototype;
+	};
 
 	/**
 	 *
@@ -535,10 +529,7 @@ define(function () { 'use strict';
 	var inNode = new Function('try{return this===global;}catch(err){return false;}')();
 	var env = exports.inNode ? global : window;
 
-	// TODO: to implement
-
-	// pattern(s)
-	var reIsJsonEnds = { '[': exports.reEndsWithBracket, '{': exports.reEndsWithBrace };
+	// @todo: to implement
 
 	/**
 	 *
@@ -551,6 +542,9 @@ define(function () { 'use strict';
 		if (value === undefined || value === null) { return false; }
 		return constructorOf(value) === Object;
 	}
+
+	// pattern(s)
+	var reIsJsonEnds = { '[': exports.reEndsWithBracket, '{': exports.reEndsWithBrace };
 
 	/**
 	 *

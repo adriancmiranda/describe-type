@@ -12,17 +12,11 @@ import { objectSupportsProto, objectHasOwnProperty } from '../internal/built-in.
  * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getPrototypeOf
  * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect/getPrototypeOf
  */
-let objectGetPrototypeOf = Object.getPrototypeOf;
-if (typeof objectGetPrototypeOf === 'function' === false) {
-	objectGetPrototypeOf = objectSupportsProto
-	? function getPrototypeOf(value) {
-			return value.__proto__;
-		}
-	: function getPrototypeOf(value) {
-		if (objectHasOwnProperty.call(value, CONSTRUCTOR)) {
-			return ObjectProto;
-		}
-		return value.constructor.prototype;
-	};
-}
-export default objectGetPrototypeOf;
+export default objectSupportsProto ? function getPrototypeOf(value) {
+	return value.__proto__ || ObjectProto;
+} : function getPrototypeOf(value) {
+	if (objectHasOwnProperty.call(value, CONSTRUCTOR)) {
+		return ObjectProto;
+	}
+	return value.constructor.prototype;
+};

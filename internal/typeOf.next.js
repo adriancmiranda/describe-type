@@ -1,7 +1,7 @@
-import { NAN, ARGUMENTS, UNDEFINED, NULL, INFINITY } from '../internal/constants.next.js';
 import infinity from '../is/infinity.next.js';
 import args from '../is/args/args.next.js';
-import stringOf from '../internal/stringOf.next.js';
+import stringOf from './stringOf.next.js';
+import { NAN, ARGUMENTS, UNDEFINED, NULL, INFINITY } from './constants.next.js';
 
 /**
  *

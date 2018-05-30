@@ -1,6 +1,6 @@
 const { CONSTRUCTOR } = require('./constants.js');
 const { objectHasOwnProperty } = require('./built-in.js');
-const getPrototypeOf = require('../polyfill/Object.getPrototypeOf.js');
+const getPrototypeOf = require('../shim/Object.getPrototypeOf.js');
 
 /**
  *

@@ -1,5 +1,5 @@
 /* eslint-disable no-nested-ternary */
-import intOf from '../internal/intOf.next.js';
+import intOf from './intOf.next.js';
 
 /**
  *

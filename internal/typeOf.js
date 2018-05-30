@@ -1,7 +1,7 @@
-const { NAN, ARGUMENTS, UNDEFINED, NULL, INFINITY } = require('../internal/constants.js');
 const infinity = require('../is/infinity.js');
 const args = require('../is/args/args.js');
-const stringOf = require('../internal/stringOf.js');
+const stringOf = require('./stringOf.js');
+const { NAN, ARGUMENTS, UNDEFINED, NULL, INFINITY } = require('./constants.js');
 
 /**
  *
