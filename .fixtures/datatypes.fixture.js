@@ -219,6 +219,7 @@ export const uint = new DataType('uint');
 uint.add('new Number(92)', new Number(92));
 uint.add('0x12', 0x12);
 uint.add('12e1', 12e1);
+uint.add('421e+0', 421e+0);
 uint.add('{{source}}', 13);
 uint.add('{{source}}', 10);
 uint.add('{{source}}', 5);
@@ -233,6 +234,8 @@ int.add('{{source}}', -2);
 int.add('{{source}}', -3);
 
 export const decimal = new DataType('decimal');
+decimal.add('314e-2', 314e-2);
+decimal.add('0.0314E+2', 0.0314E+2);
 decimal.add('{{source}}', 1.141592653589793);
 decimal.add('{{source}}', 1.2141592653589793);
 decimal.add('{{source}}', 1.3234);
