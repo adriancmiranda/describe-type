@@ -114,7 +114,7 @@ toc:
   - vector / vectorOf?
   - within
 
-  - name: polyfill
+  - name: ponyfill
     description: |
       Evaluates whether an expression specified by the second operand is a
       member of the data type specified by the first operand.

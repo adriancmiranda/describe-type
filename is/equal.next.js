@@ -1,5 +1,5 @@
-import is from '../polyfill/Object.is.next.js';
-import keys from '../polyfill/Object.keys.next.js';
+import is from '../ponyfill/Object.is.next.js';
+import keys from '../ponyfill/Object.keys.next.js';
 import constructorOf from '../internal/constructorOf.next.js';
 
 /**

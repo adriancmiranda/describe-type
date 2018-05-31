@@ -7,3 +7,4 @@ export * from './internal/index.next.js';
 export { has, is };
 export { default as as } from './as/index.next.js';
 export { default as schema } from './schema/index.next.js';
+export const version = '__VERSION__';

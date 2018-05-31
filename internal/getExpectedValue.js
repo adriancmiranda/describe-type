@@ -1,6 +1,6 @@
 const callable = require('../is/callable.js');
 const ownValue = require('../has/ownValue.js');
-const slice = require('../polyfill/Array.prototype.slice.js');
+const slice = require('../ponyfill/Array.prototype.slice.js');
 const apply = require('./apply.js');
 
 /**

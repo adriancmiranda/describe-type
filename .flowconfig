@@ -10,7 +10,7 @@
 .*/has/.*
 .*/internal/.*
 .*/is/.*
-.*/polyfill/.*
+.*/ponyfill/.*
 .*/shim/.*
 .*/schema/.*
 

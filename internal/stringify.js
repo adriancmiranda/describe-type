@@ -1,6 +1,6 @@
 // @todo: to implement
 const { UNDEFINED, NULL, PREFIX_SEAL } = require('./constants.js');
-const startsWith = require('../polyfill/String.prototype.startsWith.js');
+const startsWith = require('../ponyfill/String.prototype.startsWith.js');
 const type = require('../is/type.js');
 const asType = require('../as/as.type.js');
 

@@ -1,5 +1,5 @@
 import getPrototypeOf from '../shim/Object.getPrototypeOf.next.js';
-import slice from '../polyfill/Array.prototype.slice.next.js';
+import slice from '../ponyfill/Array.prototype.slice.next.js';
 import { reFunctionName } from './patterns.next.js';
 import { objectToString } from './built-in.next.js';
 

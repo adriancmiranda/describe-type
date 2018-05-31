@@ -1,9 +1,9 @@
-const startsWith = require('../polyfill/String.prototype.startsWith.js');
-const keys = require('../polyfill/Object.keys.js');
-const create = require('../polyfill/Object.create.js');
-const assign = require('../polyfill/Object.assign.js');
-const reduce = require('../polyfill/Array.prototype.reduce.js');
-const filter = require('../polyfill/Array.prototype.filter.js');
+const startsWith = require('../ponyfill/String.prototype.startsWith.js');
+const keys = require('../ponyfill/Object.keys.js');
+const create = require('../ponyfill/Object.create.js');
+const assign = require('../ponyfill/Object.assign.js');
+const reduce = require('../ponyfill/Array.prototype.reduce.js');
+const filter = require('../ponyfill/Array.prototype.filter.js');
 const { env } = require('../internal/env.js');
 const stringify = require('../internal/stringify.js');
 const typify = require('../internal/typify.js');

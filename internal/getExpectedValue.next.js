@@ -1,6 +1,6 @@
 import callable from '../is/callable.next.js';
 import ownValue from '../has/ownValue.next.js';
-import slice from '../polyfill/Array.prototype.slice.next.js';
+import slice from '../ponyfill/Array.prototype.slice.next.js';
 import apply from './apply.next.js';
 
 /**

@@ -1,5 +1,5 @@
-const is = require('../polyfill/Object.is.js');
-const keys = require('../polyfill/Object.keys.js');
+const is = require('../ponyfill/Object.is.js');
+const keys = require('../ponyfill/Object.keys.js');
 const constructorOf = require('../internal/constructorOf.js');
 
 /**

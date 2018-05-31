@@ -14,3 +14,4 @@ exports.has = has;
 exports.is = is;
 exports.as = require('./as/index.js');
 exports.schema = require('./schema/index.js');
+exports.version = '__VERSION__';

@@ -22,9 +22,9 @@ module.exports = ([{
 	output: 'dist/describe-type.is',
 	format: env.FORMATS,
 }, {
-	module: 'describeType.polyfill',
-	source: 'polyfill/index.next.js',
-	output: 'dist/describe-type.polyfill',
+	module: 'describeType.ponyfill',
+	source: 'ponyfill/index.next.js',
+	output: 'dist/describe-type.ponyfill',
 	format: env.FORMATS,
 }, {
 	module: 'describeType.shim',

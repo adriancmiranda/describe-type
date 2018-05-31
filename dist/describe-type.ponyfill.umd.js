@@ -1,16 +1,18 @@
 /*!
  * 
- * ~~~~ describe-type v1.0.0-dev.2
+ * ~~~~ describe-type v1.0.0-dev.3
  * 
- * @commit fb444bbc381b4d50bba432eaa0dcc4344b063d87
- * @moment Thursday, May 31, 2018 8:36 AM
+ * @commit 92cf4b26b614012b6ea61bdc77c001afc15b6626
+ * @moment Thursday, May 31, 2018 9:48 AM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2021
  */
-this.describetype = this.describetype || {};
-this.describetype.polyfill = (function (exports) {
-	'use strict';
+(function (global, factory) {
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
+	typeof define === 'function' && define.amd ? define(['exports'], factory) :
+	(factory((global.describetype = global.describetype || {}, global.describetype.ponyfill = {})));
+}(this, (function (exports) { 'use strict';
 
 	var NUMBER = 'number';
 	var STRING = 'string';
@@ -611,6 +613,4 @@ this.describetype.polyfill = (function (exports) {
 	exports.keys = keys;
 	exports.startsWith = startsWith;
 
-	return exports;
-
-}({}));
+})));

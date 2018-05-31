@@ -1,7 +1,7 @@
 import test from 'ava';
 import colors from 'colors';
 import * as describeType from './index.next';
-import * as polyfill from './polyfill/index.next';
+import * as ponyfill from './ponyfill/index.next';
 import * as shim from './shim/index.next';
 
 function deleteAt(object, property) {
@@ -214,15 +214,15 @@ test(`${colors.underline('describeType built-in / constants')} expusures`, (t) =
 	t.is(describeType.constants.CALLEE, 'callee', '"describeType.constants.CALLEE" should be "callee"');
 });
 
-test(`${colors.underline('describeType polyfill')} expusures`, (t) => {
-	t.is(toString.call(polyfill.filter), '[object Function]', '"polyfill.filter" should be a function');
-	t.is(toString.call(polyfill.reduce), '[object Function]', '"polyfill.reduce" should be a function');
-	t.is(toString.call(polyfill.slice), '[object Function]', '"polyfill.slice" should be a function');
-	t.is(toString.call(polyfill.assign), '[object Function]', '"polyfill.assign" should be a function');
-	t.is(toString.call(polyfill.create), '[object Function]', '"polyfill.create" should be a function');
-	t.is(toString.call(polyfill.is), '[object Function]', '"polyfill.is" should be a function');
-	t.is(toString.call(polyfill.keys), '[object Function]', '"polyfill.keys" should be a function');
-	t.is(toString.call(polyfill.startsWith), '[object Function]', '"polyfill.startsWith" should be a function');
+test(`${colors.underline('describeType ponyfill')} expusures`, (t) => {
+	t.is(toString.call(ponyfill.filter), '[object Function]', '"ponyfill.filter" should be a function');
+	t.is(toString.call(ponyfill.reduce), '[object Function]', '"ponyfill.reduce" should be a function');
+	t.is(toString.call(ponyfill.slice), '[object Function]', '"ponyfill.slice" should be a function');
+	t.is(toString.call(ponyfill.assign), '[object Function]', '"ponyfill.assign" should be a function');
+	t.is(toString.call(ponyfill.create), '[object Function]', '"ponyfill.create" should be a function');
+	t.is(toString.call(ponyfill.is), '[object Function]', '"ponyfill.is" should be a function');
+	t.is(toString.call(ponyfill.keys), '[object Function]', '"ponyfill.keys" should be a function');
+	t.is(toString.call(ponyfill.startsWith), '[object Function]', '"ponyfill.startsWith" should be a function');
 });
 
 test(`${colors.underline('describeType shim')} expusures`, (t) => {

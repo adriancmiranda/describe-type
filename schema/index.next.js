@@ -1,9 +1,9 @@
-import startsWith from '../polyfill/String.prototype.startsWith.next.js';
-import keys from '../polyfill/Object.keys.next.js';
-import create from '../polyfill/Object.create.next.js';
-import assign from '../polyfill/Object.assign.next.js';
-import reduce from '../polyfill/Array.prototype.reduce.next.js';
-import filter from '../polyfill/Array.prototype.filter.next.js';
+import startsWith from '../ponyfill/String.prototype.startsWith.next.js';
+import keys from '../ponyfill/Object.keys.next.js';
+import create from '../ponyfill/Object.create.next.js';
+import assign from '../ponyfill/Object.assign.next.js';
+import reduce from '../ponyfill/Array.prototype.reduce.next.js';
+import filter from '../ponyfill/Array.prototype.filter.next.js';
 import { env } from '../internal/env.next.js';
 import stringify from '../internal/stringify.next.js';
 import typify from '../internal/typify.next.js';

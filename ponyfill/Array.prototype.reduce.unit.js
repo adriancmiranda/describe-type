@@ -1,10 +1,10 @@
 import test from 'ava';
-import * as polyfill from './index.next';
+import * as ponyfill from './index.next';
 import reduce from './Array.prototype.reduce.next';
 
-test('polyfill exposure', (t) => {
-	t.is(toString.call(polyfill), '[object Object]', 'should be a namespace');
-	t.is(toString.call(polyfill.reduce), '[object Function]', 'should be Function');
+test('ponyfill exposure', (t) => {
+	t.is(toString.call(ponyfill), '[object Object]', 'should be a namespace');
+	t.is(toString.call(ponyfill.reduce), '[object Function]', 'should be Function');
 });
 
 test('exposed', (t) => {

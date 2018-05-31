@@ -14,9 +14,9 @@ test.beforeEach('Kidnap Object.keys native method', (t) => {
 	t.context.vec3 = new Vec3();
 });
 
-test('describeType.polyfill.keys exposure', (t) => {
+test('describeType.ponyfill.keys exposure', (t) => {
 	t.is(toString.call(describeType), '[object Object]', 'should be an object as a namespace');
-	// t.is(toString.call(describeType.polyfill.keys), '[object Function]', 'should be a function');
+	// t.is(toString.call(describeType.ponyfill.keys), '[object Function]', 'should be a function');
 });
 
 test('keys', (t) => {

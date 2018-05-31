@@ -2,7 +2,7 @@
   "name": "describe-type",
   "description": "Evaluates whether an object is compatible with a specific data type.",
   "homepage": "https://github.com/adriancmiranda/describe-type",
-  "version": "1.0.0-dev.2",
+  "version": "1.0.0-dev.3",
   "main": "./dist/describe-type.umd.js",
   "license": "MIT",
   "ignore": [
