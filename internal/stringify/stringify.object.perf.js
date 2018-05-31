@@ -1,6 +1,6 @@
 import { Suite } from 'benchmark';
 import { benchmarkFatestStatus, benchmarkCycle } from '../../.fixtures/benchmark';
-import * as datatypes from '../.fixtures/datatypes.fixture';
+import * as datatypes from '../../.fixtures/datatypes.fixture';
 import * as describeType from '../../index.next';
 import stringify from './stringify.next';
 import stringifyObject from './stringify.object.next';
