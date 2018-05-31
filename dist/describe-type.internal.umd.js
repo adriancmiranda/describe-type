@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v1.0.0-dev.3
  * 
- * @commit 1c7b44442e024b0b91c186649d5ae2af7024d5fa
- * @moment Thursday, May 31, 2018 12:25 PM
+ * @commit 4f19a6cb5e3c69e0f07f2fb6bde3d2e74f265cb4
+ * @moment Thursday, May 31, 2018 1:18 PM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2021
@@ -110,6 +110,28 @@
 
 	/**
 	 *
+	 * @function
+	 * @memberof is
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function string(value) {
+		return typeof value === STRING || value instanceof String;
+	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function array(value) {
+		return value instanceof Array;
+	}
+
+	/**
+	 *
 	 * @name Object.getPrototypeOf
 	 * @function
 	 * @global
@@ -130,12 +152,14 @@
 	/**
 	 *
 	 * @function
-	 * @memberof is
+	 * @memberof built-in
 	 * @param {any} value
-	 * @returns {Boolean}
+	 * @returns {String}
 	 */
-	function array(value) {
-		return value instanceof Array;
+	function constructorOf(value) {
+		if (value.constructor === undefined) { return Object; }
+		var proto = getPrototypeOf(value) || Object;
+		return proto.constructor;
 	}
 
 	/**
@@ -145,9 +169,142 @@
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function string(value) {
-		return typeof value === STRING || value instanceof String;
+	function object(value) {
+		if (value === undefined || value === null) { return false; }
+		return constructorOf(value) === Object;
 	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function symbol(value) {
+		return typeof value === SYMBOL;
+	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function callable(value) {
+		return typeof value === FUNCTION;
+	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof has
+	 * @param {Object|Function} context
+	 * @param {any} key
+	 * @returns {Boolean}
+	 */
+	function ownProperty(context, key) {
+		if (context === undefined || context === null) { return false; }
+		return objectHasOwnProperty.call(context, key);
+	}
+
+	/* eslint-disable no-restricted-syntax */
+
+	/**
+	 *
+	 * @function
+	 * @memberof utility
+	 * @param {Object} keys -
+	 * @param {Boolean} getInheritedProps -
+	 * @returns {Array}
+	 */
+	function keys(object, getInheritedProps) {
+		if (object === undefined || object === null) { return []; }
+		if (Object.keys && !getInheritedProps) {
+			return Object.keys(object);
+		}
+		var properties = [];
+		for (var key in object) {
+			if (getInheritedProps || ownProperty(object, key)) {
+				properties[properties.length] = key;
+			}
+		}
+		return properties;
+	}
+
+	/**
+	 * The reduce() method applies a function against an accumulator and each
+	 * element in the array (from left to right) to reduce it to a single value.
+	 * @function
+	 * @memberof utility
+	 * @param {arraylike} list - list of elements.
+	 * @param {Function} cmd - Function to execute on each element in the array,
+	 * taking four arguments:
+	 *  - accumulator: The accumulator accumulates the callback's return values;
+	 *    it is the accumulated value previously returned in the last invocation
+	 *    of the callback, or initialValue, if supplied (see below).
+	 *  - currentIndex?: The index of the current element being processed in the array.
+	 *    Starts at index 0, if an initialValue is provided, and at index 1 otherwise.
+	 *  - array?: The array reduce() was called upon.
+	 * @param {any} initialValue - Value to use as the first argument to the first
+	 * call of the callback. If no initial value is supplied, the first element
+	 * in the array will be used. Calling reduce() on an empty array without an
+	 * initial value is an error.
+	 * @param {any} context - Value to use as this when executing callback.
+	 * @returns {any} The value that results from the reduction.
+	 */
+	function reduce(list, cmd, initialValue, context) {
+		if (list === undefined || list === null) { return undefined; }
+		if (callable(cmd) === false) { throw new TypeError(("The second argument should be a function, received \"" + (typeof cmd) + "\"")); }
+		var size = (0 | list.length);
+		if (size) {
+			var index = 0;
+			if (arguments.length === 2) {
+				initialValue = list[index];
+				index = 1;
+			}
+			for (index; index < size; index += 1) {
+				initialValue = cmd.call(context || null, initialValue, list[index], index, list);
+			}
+		}
+		return initialValue;
+	}
+
+	function stringifyArray(list) {
+		var size = list.length - 1;
+		return reduce(list, function (accumulator, item, index) {
+			var last = index === size;
+			accumulator += last ? ((stringify(item)) + "]") : ((stringify(item)) + ",");
+			return accumulator;
+		}, '[');
+	}
+
+	function stringifyObject(hash) {
+		var list = keys(hash);
+		var size = list.length - 1;
+		return reduce(list, function (accumulator, key, index) {
+			var last = index === size;
+			var value = stringify(hash[key]);
+			var pair = key + ":" + value;
+			accumulator += last ? (pair + "}") : (pair + ",");
+			return accumulator;
+		}, '{');
+	}
+
+	function stringify$1(value) {
+		if (value === undefined) { return UNDEFINED; }
+		if (value === null) { return NULL; }
+		if (string(value)) { return value; }
+		if (symbol(value)) { return symbolToString ? symbolToString.call(value) : ''; }
+		if (array(value)) { return stringifyArray(value); }
+		if (object(value)) { return stringifyObject(value); }
+		var result = String(value);
+		return (result == '0' && (1 / value) == -Infinity) ? '-0' : result;
+	}
+
+	stringify$1.array = stringifyArray;
+	stringify$1.object = stringifyObject;
 
 	/**
 	 *
@@ -389,17 +546,6 @@
 	/**
 	 *
 	 * @function
-	 * @memberof is
-	 * @param {any} value
-	 * @returns {Boolean}
-	 */
-	function callable(value) {
-		return typeof value === FUNCTION;
-	}
-
-	/**
-	 *
-	 * @function
 	 * @memberof has
 	 * @param {object} context
 	 * @param {any} value
@@ -411,31 +557,6 @@
 		} catch (err) {
 			return false;
 		}
-	}
-
-	/**
-	 *
-	 * @function
-	 * @memberof built-in
-	 * @param {any} value
-	 * @returns {String}
-	 */
-	function constructorOf(value) {
-		if (value.constructor === undefined) { return Object; }
-		var proto = getPrototypeOf(value) || Object;
-		return proto.constructor;
-	}
-
-	/**
-	 *
-	 * @function
-	 * @memberof is
-	 * @param {any} value
-	 * @returns {Boolean}
-	 */
-	function object(value) {
-		if (value === undefined || value === null) { return false; }
-		return constructorOf(value) === Object;
 	}
 
 	/**
@@ -539,19 +660,6 @@
 			if (blindly) { return err; }
 			throw err;
 		}
-	}
-
-	/**
-	 *
-	 * @function
-	 * @memberof has
-	 * @param {Object|Function} context
-	 * @param {any} key
-	 * @returns {Boolean}
-	 */
-	function ownProperty(context, key) {
-		if (context === undefined || context === null) { return false; }
-		return objectHasOwnProperty.call(context, key);
 	}
 
 	/**
@@ -671,115 +779,11 @@
 		return value;
 	}
 
-	/* eslint-disable no-restricted-syntax */
-
-	/**
-	 *
-	 * @function
-	 * @memberof utility
-	 * @param {Object} keys -
-	 * @param {Boolean} getInheritedProps -
-	 * @returns {Array}
-	 */
-	function keys(object, getInheritedProps) {
-		if (object === undefined || object === null) { return []; }
-		if (Object.keys && !getInheritedProps) {
-			return Object.keys(object);
-		}
-		var properties = [];
-		for (var key in object) {
-			if (getInheritedProps || ownProperty(object, key)) {
-				properties[properties.length] = key;
-			}
-		}
-		return properties;
-	}
-
-	/**
-	 * The reduce() method applies a function against an accumulator and each
-	 * element in the array (from left to right) to reduce it to a single value.
-	 * @function
-	 * @memberof utility
-	 * @param {arraylike} list - list of elements.
-	 * @param {Function} cmd - Function to execute on each element in the array,
-	 * taking four arguments:
-	 *  - accumulator: The accumulator accumulates the callback's return values;
-	 *    it is the accumulated value previously returned in the last invocation
-	 *    of the callback, or initialValue, if supplied (see below).
-	 *  - currentIndex?: The index of the current element being processed in the array.
-	 *    Starts at index 0, if an initialValue is provided, and at index 1 otherwise.
-	 *  - array?: The array reduce() was called upon.
-	 * @param {any} initialValue - Value to use as the first argument to the first
-	 * call of the callback. If no initial value is supplied, the first element
-	 * in the array will be used. Calling reduce() on an empty array without an
-	 * initial value is an error.
-	 * @param {any} context - Value to use as this when executing callback.
-	 * @returns {any} The value that results from the reduction.
-	 */
-	function reduce(list, cmd, initialValue, context) {
-		if (list === undefined || list === null) { return undefined; }
-		if (callable(cmd) === false) { throw new TypeError(("The second argument should be a function, received \"" + (typeof cmd) + "\"")); }
-		var size = (0 | list.length);
-		if (size) {
-			var index = 0;
-			if (arguments.length === 2) {
-				initialValue = list[index];
-				index = 1;
-			}
-			for (index; index < size; index += 1) {
-				initialValue = cmd.call(context || null, initialValue, list[index], index, list);
-			}
-		}
-		return initialValue;
-	}
-
-	/**
-	 *
-	 * @function
-	 * @memberof is
-	 * @param {any} value
-	 * @returns {Boolean}
-	 */
-	function symbol(value) {
-		return typeof value === SYMBOL;
-	}
-
-	function stringifyArray(list) {
-		var size = list.length - 1;
-		return reduce(list, function (accumulator, item, index) {
-			var last = index === size;
-			accumulator += last ? ((stringify(item)) + "]") : ((stringify(item)) + ",");
-			return accumulator;
-		}, '[');
-	}
-
-	function stringifyHash(hash) {
-		var list = keys(hash);
-		var size = list.length - 1;
-		return reduce(list, function (accumulator, key, index) {
-			var last = index === size;
-			var value = stringify(hash[key]);
-			var pair = key + ":" + value;
-			accumulator += last ? (pair + "}") : (pair + ",");
-			return accumulator;
-		}, '{');
-	}
-
-	function stringify(value) {
-		if (value === undefined) { return UNDEFINED; }
-		if (value === null) { return NULL; }
-		if (string(value)) { return value; }
-		if (symbol(value)) { return symbolToString ? symbolToString.call(value) : ''; }
-		if (array(value)) { return stringifyArray(value); }
-		if (object(value)) { return stringifyHash(value); }
-		var result = String(value);
-		return (result == '0' && (1 / value) == -Infinity) ? '-0' : result;
-	}
-
 	exports.prototypes = prototypes_next;
 	exports.builtIn = builtIn_next;
 	exports.patterns = patterns_next;
 	exports.constants = constants_next;
+	exports.stringify = stringify$1;
 	exports.stringOf = stringOf;
 	exports.booleanOf = booleanOf;
 	exports.floatOf = floatOf;
@@ -797,7 +801,6 @@
 	exports.resolveProperty = resolveProperty;
 	exports.getExpectedValue = getExpectedValue;
 	exports.mod = mod;
-	exports.stringify = stringify;
 	exports.inBrowser = inBrowser;
 	exports.inNode = inNode;
 	exports.env = env;

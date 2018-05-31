@@ -5,7 +5,7 @@ import assign from '../ponyfill/Object.assign.next.js';
 import reduce from '../ponyfill/Array.prototype.reduce.next.js';
 import filter from '../ponyfill/Array.prototype.filter.next.js';
 import { env } from '../internal/env.next.js';
-import stringify from '../internal/stringify.next.js';
+import stringify from '../internal/stringify/index.next.js';
 import typify from '../internal/typify.next.js';
 import any from '../is/any.next.js';
 import object from '../is/object/object.next.js';

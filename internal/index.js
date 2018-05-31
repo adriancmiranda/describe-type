@@ -10,6 +10,7 @@ const constants = require('./constants.js');
 		}
 	}
 }).call(exports, require('./env.js'));
+exports.stringify = require('./stringify/index.js');
 exports.stringOf = require('./stringOf.js');
 exports.booleanOf = require('./booleanOf.js');
 exports.floatOf = require('./floatOf.js');
@@ -27,7 +28,6 @@ exports.eachProperty = require('./eachProperty.js');
 exports.resolveProperty = require('./resolveProperty.js');
 exports.getExpectedValue = require('./getExpectedValue.js');
 exports.mod = require('./mod.js');
-exports.stringify = require('./stringify.js');
 exports.prototypes = prototypes;
 exports.builtIn = builtIn;
 exports.patterns = patterns;
