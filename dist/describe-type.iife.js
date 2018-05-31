@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v1.0.0-dev.3
  * 
- * @commit 9a8fc1a588cc438459637b6939b905571698f4d0
- * @moment Thursday, May 31, 2018 10:01 AM
+ * @commit 1c7b44442e024b0b91c186649d5ae2af7024d5fa
+ * @moment Thursday, May 31, 2018 12:25 PM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2021
@@ -46,22 +46,26 @@ var describetype = (function (exports) {
 	var ObjectProto = Object.prototype;
 	var ArrayProto = Array.prototype;
 	var StringProto = String.prototype;
+	var SymbolProto = Symbol.prototype;
 
 	var prototypes_next = /*#__PURE__*/{
 		ObjectProto: ObjectProto,
 		ArrayProto: ArrayProto,
-		StringProto: StringProto
+		StringProto: StringProto,
+		SymbolProto: SymbolProto
 	};
 
 	// built-in method(s)
 	var objectHasOwnProperty = ObjectProto.hasOwnProperty;
 	var objectToString = ObjectProto.toString;
 	var objectSupportsProto = StringProto === ''.__proto__;
+	var symbolToString$1 = SymbolProto ? SymbolProto.toString : undefined;
 
 	var builtIn_next = /*#__PURE__*/{
 		objectHasOwnProperty: objectHasOwnProperty,
 		objectToString: objectToString,
-		objectSupportsProto: objectSupportsProto
+		objectSupportsProto: objectSupportsProto,
+		symbolToString: symbolToString$1
 	};
 
 	var NUMBER = 'number';
@@ -72,13 +76,10 @@ var describetype = (function (exports) {
 	var FUNCTION = 'function';
 	var NULL = 'null';
 	var UNDEFINED = 'undefined';
-	var GENERATOR_FUNCTION = 'GeneratorFunction';
-	var ASYNC_FUNCTION = 'AsyncFunction';
 	var ARGUMENTS = 'Arguments';
 	var INFINITY = 'Infinity';
 	var NAN = 'NaN';
 	var CONSTRUCTOR = 'constructor';
-	var PREFIX_SEAL = '[object ';
 	var ARGUMENTS_SEAL = '[object Arguments]';
 	var CALLEE = 'callee';
 
@@ -91,13 +92,10 @@ var describetype = (function (exports) {
 		FUNCTION: FUNCTION,
 		NULL: NULL,
 		UNDEFINED: UNDEFINED,
-		GENERATOR_FUNCTION: GENERATOR_FUNCTION,
-		ASYNC_FUNCTION: ASYNC_FUNCTION,
 		ARGUMENTS: ARGUMENTS,
 		INFINITY: INFINITY,
 		NAN: NAN,
 		CONSTRUCTOR: CONSTRUCTOR,
-		PREFIX_SEAL: PREFIX_SEAL,
 		ARGUMENTS_SEAL: ARGUMENTS_SEAL,
 		CALLEE: CALLEE
 	};
@@ -670,62 +668,109 @@ var describetype = (function (exports) {
 		return value;
 	}
 
-	/**
-	 *
-	 * @function
-	 * @memberof is
-	 * @param {Function} expect
-	 * @param {any} value
-	 * @returns {Boolean}
-	 */
-	function type(expected, value) {
-		if (value === undefined || value === null) { return value === expected; }
-		if (expected === undefined || expected === null) { return expected === value; }
-		if (value === true || value === false) { return expected === Boolean; }
-		var type = typeof value;
-		if (type === STRING) { return expected === String; }
-		if (type === NUMBER) { return expected === Number; }
-		if (type === SYMBOL) { return expected === Symbol; }
-		if (expected === Function) { return type === FUNCTION; }
-		if (value instanceof Array) { return expected === Array; }
-		if (value instanceof RegExp) { return expected === RegExp; }
-		return constructorOf(value) === expected;
-	}
-
-	/**
-	 *
-	 * @param {Function|Array.<Function>} expected
-	 * @param {any} value
-	 * @returns {Boolean}
-	 */
-	function asA(expected, value) {
-		value = getExpectedValue(expected, value, arguments, 2);
-		return type(expected, value) ? value : arguments[2];
-	}
+	/* eslint-disable no-restricted-syntax */
 
 	/**
 	 *
 	 * @function
 	 * @memberof utility
-	 * @param {String} value -
-	 * @param {String} search -
-	 * @param {uint} position -
-	 * @returns {Boolean}
+	 * @param {Object} keys -
+	 * @param {Boolean} getInheritedProps -
+	 * @returns {Array}
 	 */
-	function startsWith(value, search, position) {
-		var str = asA(String, value) || '';
-		var startIndex = mod(position, 0, str.length);
-		return str.substr(startIndex, search.length) === search;
+	function keys(object, getInheritedProps) {
+		if (object === undefined || object === null) { return []; }
+		if (Object.keys && !getInheritedProps) {
+			return Object.keys(object);
+		}
+		var properties = [];
+		for (var key in object) {
+			if (getInheritedProps || ownProperty(object, key)) {
+				properties[properties.length] = key;
+			}
+		}
+		return properties;
 	}
 
-	// @todo: to implement
+	/**
+	 * The reduce() method applies a function against an accumulator and each
+	 * element in the array (from left to right) to reduce it to a single value.
+	 * @function
+	 * @memberof utility
+	 * @param {arraylike} list - list of elements.
+	 * @param {Function} cmd - Function to execute on each element in the array,
+	 * taking four arguments:
+	 *  - accumulator: The accumulator accumulates the callback's return values;
+	 *    it is the accumulated value previously returned in the last invocation
+	 *    of the callback, or initialValue, if supplied (see below).
+	 *  - currentIndex?: The index of the current element being processed in the array.
+	 *    Starts at index 0, if an initialValue is provided, and at index 1 otherwise.
+	 *  - array?: The array reduce() was called upon.
+	 * @param {any} initialValue - Value to use as the first argument to the first
+	 * call of the callback. If no initial value is supplied, the first element
+	 * in the array will be used. Calling reduce() on an empty array without an
+	 * initial value is an error.
+	 * @param {any} context - Value to use as this when executing callback.
+	 * @returns {any} The value that results from the reduction.
+	 */
+	function reduce(list, cmd, initialValue, context) {
+		if (list === undefined || list === null) { return undefined; }
+		if (callable(cmd) === false) { throw new TypeError(("The second argument should be a function, received \"" + (typeof cmd) + "\"")); }
+		var size = (0 | list.length);
+		if (size) {
+			var index = 0;
+			if (arguments.length === 2) {
+				initialValue = list[index];
+				index = 1;
+			}
+			for (index; index < size; index += 1) {
+				initialValue = cmd.call(context || null, initialValue, list[index], index, list);
+			}
+		}
+		return initialValue;
+	}
 
-	function stringify(value, replacer, space) {
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function symbol(value) {
+		return typeof value === SYMBOL;
+	}
+
+	function stringifyArray(list) {
+		var size = list.length - 1;
+		return reduce(list, function (accumulator, item, index) {
+			var last = index === size;
+			accumulator += last ? ((stringify(item)) + "]") : ((stringify(item)) + ",");
+			return accumulator;
+		}, '[');
+	}
+
+	function stringifyHash(hash) {
+		var list = keys(hash);
+		var size = list.length - 1;
+		return reduce(list, function (accumulator, key, index) {
+			var last = index === size;
+			var value = stringify(hash[key]);
+			var pair = key + ":" + value;
+			accumulator += last ? (pair + "}") : (pair + ",");
+			return accumulator;
+		}, '{');
+	}
+
+	function stringify(value) {
 		if (value === undefined) { return UNDEFINED; }
 		if (value === null) { return NULL; }
-		var seal = asA(String, value.toString, value);
-		if (startsWith(seal, PREFIX_SEAL)) { seal = ''; }
-		return seal || JSON.stringify(value, replacer, space);
+		if (string(value)) { return value; }
+		if (symbol(value)) { return symbolToString ? symbolToString.call(value) : ''; }
+		if (array(value)) { return stringifyArray(value); }
+		if (object(value)) { return stringifyHash(value); }
+		var result = String(value);
+		return (result == '0' && (1 / value) == -Infinity) ? '-0' : result;
 	}
 
 	/**
@@ -802,6 +847,28 @@ var describetype = (function (exports) {
 	}
 
 	arraylike.empty = isEmptyArraylike;
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {Function} expect
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function type(expected, value) {
+		if (value === undefined || value === null) { return value === expected; }
+		if (expected === undefined || expected === null) { return expected === value; }
+		if (value === true || value === false) { return expected === Boolean; }
+		var type = typeof value;
+		if (type === STRING) { return expected === String; }
+		if (type === NUMBER) { return expected === Number; }
+		if (type === SYMBOL) { return expected === Symbol; }
+		if (expected === Function) { return type === FUNCTION; }
+		if (value instanceof Array) { return expected === Array; }
+		if (value instanceof RegExp) { return expected === RegExp; }
+		return constructorOf(value) === expected;
+	}
 
 	/**
 	 *
@@ -1211,30 +1278,6 @@ var describetype = (function (exports) {
 		return valueA !== a && valueB !== b;
 	}
 
-	/* eslint-disable no-restricted-syntax */
-
-	/**
-	 *
-	 * @function
-	 * @memberof utility
-	 * @param {Object} keys -
-	 * @param {Boolean} getInheritedProps -
-	 * @returns {Array}
-	 */
-	function keys(object, getInheritedProps) {
-		if (object === undefined || object === null) { return []; }
-		if (Object.keys && !getInheritedProps) {
-			return Object.keys(object);
-		}
-		var properties = [];
-		for (var key in object) {
-			if (getInheritedProps || ownProperty(object, key)) {
-				properties[properties.length] = key;
-			}
-		}
-		return properties;
-	}
-
 	/**
 	 * The equal() method determines whether two values are the same value.
 	 * @function
@@ -1482,17 +1525,6 @@ var describetype = (function (exports) {
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function symbol(value) {
-		return typeof value === SYMBOL;
-	}
-
-	/**
-	 *
-	 * @function
-	 * @memberof is
-	 * @param {any} value
-	 * @returns {Boolean}
-	 */
 	function uint(value) {
 		return int(value) && value >= 0;
 	}
@@ -1573,6 +1605,17 @@ var describetype = (function (exports) {
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
+	function asA(expected, value) {
+		value = getExpectedValue(expected, value, arguments, 2);
+		return type(expected, value) ? value : arguments[2];
+	}
+
+	/**
+	 *
+	 * @param {Function|Array.<Function>} expected
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
 	function asAny(expected, value) {
 		value = getExpectedValue(expected, value, arguments, 2);
 		return any(expected, value) ? value : arguments[2];
@@ -1615,6 +1658,21 @@ var describetype = (function (exports) {
 	/**
 	 *
 	 * @function
+	 * @memberof utility
+	 * @param {String} value -
+	 * @param {String} search -
+	 * @param {uint} position -
+	 * @returns {Boolean}
+	 */
+	function startsWith(value, search, position) {
+		var str = asA(String, value) || '';
+		var startIndex = mod(position, 0, str.length);
+		return str.substr(startIndex, search.length) === search;
+	}
+
+	/**
+	 *
+	 * @function
 	 * @param {Object} proto - The object which should be the prototype of the newly-created object.
 	 * @param {Object} properties - Optional. If specified and not undefined, an object whose
 	 * enumerable own properties (that is, those properties defined upon itself and not enumerable
@@ -1635,44 +1693,6 @@ var describetype = (function (exports) {
 			proto[property] = value.value;
 		});
 		return proto;
-	}
-
-	/**
-	 * The reduce() method applies a function against an accumulator and each
-	 * element in the array (from left to right) to reduce it to a single value.
-	 * @function
-	 * @memberof utility
-	 * @param {arraylike} list - list of elements.
-	 * @param {Function} cmd - Function to execute on each element in the array,
-	 * taking four arguments:
-	 *  - accumulator: The accumulator accumulates the callback's return values;
-	 *    it is the accumulated value previously returned in the last invocation
-	 *    of the callback, or initialValue, if supplied (see below).
-	 *  - currentIndex?: The index of the current element being processed in the array.
-	 *    Starts at index 0, if an initialValue is provided, and at index 1 otherwise.
-	 *  - array?: The array reduce() was called upon.
-	 * @param {any} initialValue - Value to use as the first argument to the first
-	 * call of the callback. If no initial value is supplied, the first element
-	 * in the array will be used. Calling reduce() on an empty array without an
-	 * initial value is an error.
-	 * @param {any} context - Value to use as this when executing callback.
-	 * @returns {any} The value that results from the reduction.
-	 */
-	function reduce(list, cmd, initialValue, context) {
-		if (list === undefined || list === null) { return undefined; }
-		if (callable(cmd) === false) { throw new TypeError(("The second argument should be a function, received \"" + (typeof cmd) + "\"")); }
-		var size = (0 | list.length);
-		if (size) {
-			var index = 0;
-			if (arguments.length === 2) {
-				initialValue = list[index];
-				index = 1;
-			}
-			for (index; index < size; index += 1) {
-				initialValue = cmd.call(context || null, initialValue, list[index], index, list);
-			}
-		}
-		return initialValue;
 	}
 
 	var PR0PERTIES = {
@@ -1727,7 +1747,7 @@ var describetype = (function (exports) {
 	}
 
 	/* eslint-disable no-unused-vars */
-	var version = { tag: '1.0.0-dev.3', sha1: '9a8fc1a588cc438459637b6939b905571698f4d0', env: 'production', type: 'uncompressed' };
+	var version = { tag: '1.0.0-dev.3', sha1: '1c7b44442e024b0b91c186649d5ae2af7024d5fa', type: 'uncompressed' };
 
 	exports.has = index_next;
 	exports.is = index_next$1;

@@ -203,13 +203,10 @@ test(`${colors.underline('describeType built-in / constants')} expusures`, (t) =
 	t.is(describeType.constants.FUNCTION, 'function', '"describeType.constants.FUNCTION" should be "function"');
 	t.is(describeType.constants.NULL, 'null', '"describeType.constants.NULL" should be "null"');
 	t.is(describeType.constants.UNDEFINED, 'undefined', '"describeType.constants.UNDEFINED" should be "undefined"');
-	t.is(describeType.constants.GENERATOR_FUNCTION, 'GeneratorFunction', '"describeType.constants.GENERATOR_FUNCTION" should be "GeneratorFunction"');
-	t.is(describeType.constants.ASYNC_FUNCTION, 'AsyncFunction', '"describeType.constants.ASYNC_FUNCTION" should be "AsyncFunction"');
 	t.is(describeType.constants.ARGUMENTS, 'Arguments', '"describeType.constants.ARGUMENTS" should be "Arguments"');
 	t.is(describeType.constants.INFINITY, 'Infinity', '"describeType.constants.INFINITY" should be "Infinity"');
 	t.is(describeType.constants.NAN, 'NaN', '"describeType.constants.NAN" should be "NaN"');
 	t.is(describeType.constants.CONSTRUCTOR, 'constructor', '"describeType.constants.CONSTRUCTOR" should be "constructor"');
-	t.is(describeType.constants.PREFIX_SEAL, '[object ', '"describeType.constants.PREFIX_SEAL" should be "[object "');
 	t.is(describeType.constants.ARGUMENTS_SEAL, '[object Arguments]', '"describeType.constants.ARGUMENTS_SEAL" should be "[object Arguments]"');
 	t.is(describeType.constants.CALLEE, 'callee', '"describeType.constants.CALLEE" should be "callee"');
 });

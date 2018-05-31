@@ -14,4 +14,4 @@ exports.has = has;
 exports.is = is;
 exports.as = require('./as/index.js');
 exports.schema = require('./schema/index.js');
-exports.version = { tag: '__VERSION__', sha1: '__COMMIT__', env: '__ENV__', type: '__PTYPE__' };
+exports.version = { tag: '__VERSION__', sha1: '__COMMIT__', type: '__PTYPE__' };

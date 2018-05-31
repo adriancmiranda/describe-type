@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v1.0.0-dev.3
  * 
- * @commit 9a8fc1a588cc438459637b6939b905571698f4d0
- * @moment Thursday, May 31, 2018 10:01 AM
+ * @commit 1c7b44442e024b0b91c186649d5ae2af7024d5fa
+ * @moment Thursday, May 31, 2018 12:25 PM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2021
@@ -528,8 +528,6 @@ define(function () { 'use strict';
 	var inBrowser = new Function('try{return this===window;}catch(err){return false;}')();
 	var inNode = new Function('try{return this===global;}catch(err){return false;}')();
 	var env = exports.inNode ? global : window;
-
-	// @todo: to implement
 
 	/**
 	 *
