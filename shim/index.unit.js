@@ -7,5 +7,5 @@ test(`${colors.underline('getPrototypeOf')} exposure`, (t) => {
 });
 
 test(`${colors.underline('getPrototypeOf')} String`, (t) => {
-	t.deepEqual(getPrototypeOf(''), String, '"getPrototypeOf" should be an function');
+	t.deepEqual(getPrototypeOf(''), String.prototype, '"getPrototypeOf" should be an function');
 });
