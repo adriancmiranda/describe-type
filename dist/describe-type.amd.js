@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v1.0.0-dev.3
  * 
- * @commit 4f19a6cb5e3c69e0f07f2fb6bde3d2e74f265cb4
- * @moment Thursday, May 31, 2018 1:18 PM
+ * @commit acffe5ff7b0648bae00289cf06fd19d782beec20
+ * @moment Thursday, May 31, 2018 1:54 PM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2021
@@ -58,13 +58,13 @@ define(['exports'], function (exports) { 'use strict';
 	var objectHasOwnProperty = ObjectProto.hasOwnProperty;
 	var objectToString = ObjectProto.toString;
 	var objectSupportsProto = StringProto === ''.__proto__;
-	var symbolToString$1 = SymbolProto ? SymbolProto.toString : undefined;
+	var symbolToString = SymbolProto ? SymbolProto.toString : undefined;
 
 	var builtIn_next = /*#__PURE__*/{
 		objectHasOwnProperty: objectHasOwnProperty,
 		objectToString: objectToString,
 		objectSupportsProto: objectSupportsProto,
-		symbolToString: symbolToString$1
+		symbolToString: symbolToString
 	};
 
 	var NUMBER = 'number';
@@ -288,7 +288,7 @@ define(['exports'], function (exports) { 'use strict';
 		}, '{');
 	}
 
-	function stringify$1(value) {
+	function stringifyValue(value) {
 		if (value === undefined) { return UNDEFINED; }
 		if (value === null) { return NULL; }
 		if (string(value)) { return value; }
@@ -299,8 +299,8 @@ define(['exports'], function (exports) { 'use strict';
 		return (result == '0' && (1 / value) == -Infinity) ? '-0' : result;
 	}
 
-	stringify$1.array = stringifyArray;
-	stringify$1.object = stringifyObject;
+	stringifyValue.array = stringifyArray;
+	stringifyValue.object = stringifyObject;
 
 	/**
 	 *
@@ -1749,7 +1749,7 @@ define(['exports'], function (exports) { 'use strict';
 	}
 
 	/* eslint-disable no-unused-vars */
-	var version = { tag: '1.0.0-dev.3', sha1: '4f19a6cb5e3c69e0f07f2fb6bde3d2e74f265cb4', type: 'uncompressed' };
+	var version = { tag: '1.0.0-dev.3', sha1: 'acffe5ff7b0648bae00289cf06fd19d782beec20', type: 'uncompressed' };
 
 	exports.has = index_next;
 	exports.is = index_next$1;
@@ -1760,7 +1760,7 @@ define(['exports'], function (exports) { 'use strict';
 	exports.builtIn = builtIn_next;
 	exports.patterns = patterns_next;
 	exports.constants = constants_next;
-	exports.stringify = stringify$1;
+	exports.stringify = stringifyValue;
 	exports.stringOf = stringOf;
 	exports.booleanOf = booleanOf;
 	exports.floatOf = floatOf;

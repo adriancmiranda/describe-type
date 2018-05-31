@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v1.0.0-dev.3
  * 
- * @commit 4f19a6cb5e3c69e0f07f2fb6bde3d2e74f265cb4
- * @moment Thursday, May 31, 2018 1:18 PM
+ * @commit acffe5ff7b0648bae00289cf06fd19d782beec20
+ * @moment Thursday, May 31, 2018 1:54 PM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2021
@@ -60,13 +60,13 @@ this.describetype.internal = (function (exports) {
 	var objectHasOwnProperty = ObjectProto.hasOwnProperty;
 	var objectToString = ObjectProto.toString;
 	var objectSupportsProto = StringProto === ''.__proto__;
-	var symbolToString$1 = SymbolProto ? SymbolProto.toString : undefined;
+	var symbolToString = SymbolProto ? SymbolProto.toString : undefined;
 
 	var builtIn_next = /*#__PURE__*/{
 		objectHasOwnProperty: objectHasOwnProperty,
 		objectToString: objectToString,
 		objectSupportsProto: objectSupportsProto,
-		symbolToString: symbolToString$1
+		symbolToString: symbolToString
 	};
 
 	var NUMBER = 'number';
@@ -290,7 +290,7 @@ this.describetype.internal = (function (exports) {
 		}, '{');
 	}
 
-	function stringify$1(value) {
+	function stringifyValue(value) {
 		if (value === undefined) { return UNDEFINED; }
 		if (value === null) { return NULL; }
 		if (string(value)) { return value; }
@@ -301,8 +301,8 @@ this.describetype.internal = (function (exports) {
 		return (result == '0' && (1 / value) == -Infinity) ? '-0' : result;
 	}
 
-	stringify$1.array = stringifyArray;
-	stringify$1.object = stringifyObject;
+	stringifyValue.array = stringifyArray;
+	stringifyValue.object = stringifyObject;
 
 	/**
 	 *
@@ -781,7 +781,7 @@ this.describetype.internal = (function (exports) {
 	exports.builtIn = builtIn_next;
 	exports.patterns = patterns_next;
 	exports.constants = constants_next;
-	exports.stringify = stringify$1;
+	exports.stringify = stringifyValue;
 	exports.stringOf = stringOf;
 	exports.booleanOf = booleanOf;
 	exports.floatOf = floatOf;
