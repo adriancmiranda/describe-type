@@ -2,37 +2,37 @@ const { env } = require('./config');
 const rollup = require('./rollup');
 
 module.exports = ([{
-	module: 'describeType.as',
+	module: 'as',
 	source: 'as/index.next.js',
 	output: 'dist/describe-type.as',
 	format: env.FORMATS,
 }, {
-	module: 'describeType.has',
+	module: 'has',
 	source: 'has/index.next.js',
 	output: 'dist/describe-type.has',
 	format: env.FORMATS,
 }, {
-	module: 'describeType.internal',
+	module: 'internal',
 	source: 'internal/index.next.js',
 	output: 'dist/describe-type.internal',
 	format: env.FORMATS,
 }, {
-	module: 'describeType.is',
+	module: 'is',
 	source: 'is/index.next.js',
 	output: 'dist/describe-type.is',
 	format: env.FORMATS,
 }, {
-	module: 'describeType.ponyfill',
+	module: 'ponyfill',
 	source: 'ponyfill/index.next.js',
 	output: 'dist/describe-type.ponyfill',
 	format: env.FORMATS,
 }, {
-	module: 'describeType.shim',
+	module: 'shim',
 	source: 'shim/index.next.js',
 	output: 'dist/describe-type.shim',
 	format: env.FORMATS,
 }, {
-	module: 'describeType.schema',
+	module: 'schema',
 	source: 'schema/index.next',
 	output: 'dist/describe-type.schema',
 	format: env.FORMATS,

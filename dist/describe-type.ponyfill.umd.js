@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v1.0.0-dev.3
  * 
- * @commit e7a42a413200e192030e804543f3d2a652f0802f
- * @moment Thursday, May 31, 2018 5:38 PM
+ * @commit 4bf7208fd8365b400add93d82ccc2c8d83735034
+ * @moment Thursday, May 31, 2018 7:42 PM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2021
@@ -11,7 +11,7 @@
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
 	typeof define === 'function' && define.amd ? define(['exports'], factory) :
-	(factory((global.describetype = global.describetype || {}, global.describetype.ponyfill = {})));
+	(factory((global.ponyfill = {})));
 }(this, (function (exports) { 'use strict';
 
 	var NUMBER = 'number';

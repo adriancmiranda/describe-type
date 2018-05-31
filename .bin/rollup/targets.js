@@ -1,10 +1,9 @@
 const { env, flag } = require('../config');
-const toCamelCase = require('../@/toCamelCase');
 
 const defaultFormats = ['iife', 'amd', 'umd'];
 
 const target = (name, outputPath, format, interop) => ({
-  name: toCamelCase(name),
+  name,
   sourcemap: env.MINIFY,
   file: `${outputPath}.${format}${env.MINIFY ? '.min' : ''}.js`,
   banner: env.SIGN ? flag : '',
