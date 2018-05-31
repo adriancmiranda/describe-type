@@ -1,0 +1,140 @@
+toc:
+  - name: as
+    description: |
+      Evaluates whether an expression specified by the second operand is a
+      member of the data type specified by the first operand.
+  - as / a / an / type
+  - any
+  - instanceOf
+  - vectorOf
+
+  - name: has
+    description: |
+      Evaluates whether an expression specified by the second operand is a
+      member of the data type specified by the first operand.
+  - at
+  - own
+  - own.property
+  - own.value
+  - unsafeMethod
+
+  - name: internal
+    description: |
+      Evaluates whether an expression specified by the second operand is a
+      member of the data type specified by the first operand.
+  - apply
+  - booleanOf
+  - built-in
+  - constants
+  - constructorNameOf
+  - constructorOf
+  - each
+  - each.property
+  - each.value
+  - env
+  - floatOf
+  - getExpectedValue
+  - intOf
+  - mod
+  - name
+  - patterns
+  - prototypeOf
+  - prototypes
+  - resolveProperty
+  - stringify
+  - stringOf
+  - typeOf
+  - typify
+  - uintOf
+
+  - name: is
+    description: |
+      Evaluates whether an expression specified by the second operand is a
+      member of the data type specified by the first operand.
+  - args
+  - args.empty
+  - array
+  - array.empty
+  - arraylike
+  - arraylike.empty
+  - not
+  - not.a / not.an / not.type
+  - not.any
+  - not.instanceOf
+  - not.vectorOf
+  - object
+  - object.empty
+  - regexp
+  - regexp.flags
+  - regexp.string
+  - stream
+  - stream.duplex
+  - stream.readable
+  - stream.transform
+  - stream.writable
+  - string
+  - string.empty
+  - a / an / type
+  - any
+  - base64
+  - bool
+  - buffer
+  - callable
+  - date
+  - decimal
+  - defined
+  - element
+  - empty
+  - enumerable
+  - equal
+  - error
+  - even
+  - exotic
+  - filled
+  - hex
+  - hexadecimal / hex.decimal?
+  - hosted
+  - infinity
+  - instanceOf
+  - int / integer?
+  - jsonlike
+  - max
+  - min
+  - nan
+  - nativeFunction
+  - nil
+  - number
+  - numeric
+  - odd
+  - primitive
+  - symbol
+  - uint / unsignetInteger?
+  - undef
+  - unfilled
+  - vector / vectorOf?
+  - within
+
+  - name: polyfill
+    description: |
+      Evaluates whether an expression specified by the second operand is a
+      member of the data type specified by the first operand.
+  - Array.prototype.filter
+  - Array.prototype.reduce
+  - Array.prototype.slice
+  - Object.assign
+  - Object.create
+  - Object.is
+  - Object.keys
+  - String.prototype.startsWith
+
+  - name: schema
+    description: |
+      Evaluates whether an expression specified by the second operand is a
+      member of the data type specified by the first operand.
+  - schema
+
+  - name: shim
+    description: |
+      Evaluates whether an expression specified by the second operand is a
+      member of the data type specified by the first operand.
+  - Object.getPrototypeOf
