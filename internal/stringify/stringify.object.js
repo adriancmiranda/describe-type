@@ -1,6 +1,11 @@
 const reduce = require('../../ponyfill/Array.prototype.reduce.js');
 const keys = require('../../ponyfill/Object.keys.js');
 
+/**
+ *
+ * @param {Object} hash - .
+ * @returns {String}
+ */
 module.exports = function stringifyObject(hash) {
 	const list = keys(hash);
 	const size = list.length - 1;

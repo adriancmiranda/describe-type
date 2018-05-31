@@ -7,6 +7,11 @@ const symbol = require('../../is/symbol.js');
 const stringifyArray = require('./stringify.array.js');
 const stringifyObject = require('./stringify.object.js');
 
+/**
+ *
+ * @param {any} value - .
+ * @returns {String}
+ */
 module.exports = function stringifyValue(value) {
 	if (value === undefined) return UNDEFINED;
 	if (value === null) return NULL;

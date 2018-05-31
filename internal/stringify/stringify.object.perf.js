@@ -4,6 +4,7 @@ import * as datatypes from '../../.fixtures/datatypes.fixture';
 import * as describeType from '../../index.next';
 import stringify from './stringify.next';
 import stringifyObject from './stringify.object.next';
+import index from './index.next';
 
 let i = 0;
 datatypes.object.iterate(({ name, seal, label, ctor, value }) => {
@@ -23,6 +24,10 @@ datatypes.object.iterate(({ name, seal, label, ctor, value }) => {
 
 	.add(`${name}: stringifyObject(${label})`, () => {
 		stringifyObject(value);
+	})
+
+	.add(`${name}: index(${label})`, () => {
+		index(value);
 	})
 
 	.add(`${name}: JSON.stringify(${label})`, () => {

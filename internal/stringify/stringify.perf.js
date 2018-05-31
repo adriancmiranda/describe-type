@@ -3,8 +3,10 @@ import { benchmarkFatestStatus, benchmarkCycle } from '../../.fixtures/benchmark
 import * as datatypes from '../../.fixtures/datatypes.fixture';
 import * as describeType from '../../index.next';
 import stringify from './stringify.next';
+import index from './index.next';
 
 let i = 0;
+datatypes.object.add(datatypes.array);
 datatypes.object.iterate(({ name, seal, label, ctor, value }) => {
 	const loaded = ++i;
 	const total = datatypes.all.size();
@@ -20,6 +22,10 @@ datatypes.object.iterate(({ name, seal, label, ctor, value }) => {
 		stringify(value);
 	})
 
+	.add(`${name}: index(${label})`, () => {
+		index(value);
+	})
+
 	.add(`${name}: JSON.stringify(${label})`, () => {
 		JSON.stringify(value);
 	})
@@ -30,3 +36,4 @@ datatypes.object.iterate(({ name, seal, label, ctor, value }) => {
 
 	.run({ async: false });
 });
+datatypes.object.remove(datatypes.array);

@@ -7,6 +7,11 @@ import symbol from '../../is/symbol.next.js';
 import stringifyArray from './stringify.array.next.js';
 import stringifyObject from './stringify.object.next.js';
 
+/**
+ *
+ * @param {any} value - .
+ * @returns {String}
+ */
 export default function stringifyValue(value) {
 	if (value === undefined) return UNDEFINED;
 	if (value === null) return NULL;

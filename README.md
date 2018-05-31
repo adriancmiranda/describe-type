@@ -775,59 +775,236 @@ type.booleanOf('0')
 <sub>[▴ Back to top](#describe-type)</sub>
 
 
-<!-- project links -->
+<!-----------------------------------------------------------------------------
+ |
+ | FILES
+ |
+-'---------------------------------------------------------------------------->
+
+<!-- describe-type/ -->
+[describe-type]: describe-type/index.next.js ""
+
+<!-- as/ -->
+[describe-type/as]: describe-type/as/index.next.js ""
+[describe-type/as/a]: describe-type/as/a.next.js ""
+[describe-type/as/an]: describe-type/as/an.next.js ""
+[describe-type/as/type]: describe-type/as/type.next.js ""
+[describe-type/as/any]: describe-type/as/any.next.js ""
+[describe-type/as/instanceOf]: describe-type/as/instanceOf.next.js ""
+[describe-type/as/vectorOf]: describe-type/as/vectorOf.next.js ""
+
+<!-- has/ -->
+[describe-type/has]: describe-type/has/index.next.js ""
+[describe-type/has/at]: describe-type/has/at.next.js ""
+[describe-type/has/own]: describe-type/has/own.next.js ""
+[describe-type/has/ownProperty]: describe-type/has/ownProperty.next.js ""
+[describe-type/has/ownValue]: describe-type/has/ownValue.next.js ""
+[describe-type/has/unsafeMethod]: describe-type/has/unsafeMethod.next.js ""
+
+<!-- internal/ -->
+[describe-type/internal]: describe-type/internal/index.next.js ""
+[describe-type/internal/apply]: describe-type/internal/apply.next.js ""
+[describe-type/internal/booleanOf]: describe-type/internal/booleanOf.next.js ""
+[describe-type/internal/built-in]: describe-type/internal/built-in.next.js ""
+[describe-type/internal/constants]: describe-type/internal/constants.next.js ""
+[describe-type/internal/constructorNameOf]: describe-type/internal/constructorNameOf.next.js ""
+[describe-type/internal/constructorOf]: describe-type/internal/constructorOf.next.js ""
+[describe-type/internal/each]: describe-type/internal/each.next.js ""
+[describe-type/internal/each.property]: describe-type/internal/each.property.next.js ""
+[describe-type/internal/each.value]: describe-type/internal/each.value.next.js ""
+[describe-type/internal/env]: describe-type/internal/env.next.js ""
+[describe-type/internal/floatOf]: describe-type/internal/floatOf.next.js ""
+[describe-type/internal/getExpectedValue]: describe-type/internal/getExpectedValue.next.js ""
+[describe-type/internal/intOf]: describe-type/internal/intOf.next.js ""
+[describe-type/internal/mod]: describe-type/internal/mod.next.js ""
+[describe-type/internal/name]: describe-type/internal/name.next.js ""
+[describe-type/internal/patterns]: describe-type/internal/patterns.next.js ""
+[describe-type/internal/prototypeOf]: describe-type/internal/prototypeOf.next.js ""
+[describe-type/internal/prototypes]: describe-type/internal/prototypes.next.js ""
+[describe-type/internal/resolveProperty]: describe-type/internal/resolveProperty.next.js ""
+[describe-type/internal/stringify]: describe-type/internal/stringify.next.js ""
+[describe-type/internal/stringOf]: describe-type/internal/stringOf.next.js ""
+[describe-type/internal/typeOf]: describe-type/internal/typeOf.next.js ""
+[describe-type/internal/typify]: describe-type/internal/typify.next.js ""
+[describe-type/internal/uintOf]: describe-type/internal/uintOf.next.js ""
+
+<!-- is/ -->
+[describe-type/is]: describe-type/is/index.next.js ""
+[describe-type/is/a]: describe-type/is/a.next.js ""
+[describe-type/is/an]: describe-type/is/an.next.js ""
+[describe-type/is/type]: describe-type/is/type.next.js ""
+[describe-type/is/any]: describe-type/is/any.next.js ""
+[describe-type/is/base64]: describe-type/is/base64.next.js ""
+[describe-type/is/bool]: describe-type/is/bool.next.js ""
+[describe-type/is/buffer]: describe-type/is/buffer.next.js ""
+[describe-type/is/callable]: describe-type/is/callable.next.js ""
+[describe-type/is/date]: describe-type/is/date.next.js ""
+[describe-type/is/decimal]: describe-type/is/decimal.next.js ""
+[describe-type/is/defined]: describe-type/is/defined.next.js ""
+[describe-type/is/element]: describe-type/is/element.next.js ""
+[describe-type/is/empty]: describe-type/is/empty.next.js ""
+[describe-type/is/enumerable]: describe-type/is/enumerable.next.js ""
+[describe-type/is/equal]: describe-type/is/equal.next.js ""
+[describe-type/is/error]: describe-type/is/error.next.js ""
+[describe-type/is/even]: describe-type/is/even.next.js ""
+[describe-type/is/exotic]: describe-type/is/exotic.next.js ""
+[describe-type/is/filled]: describe-type/is/filled.next.js ""
+[describe-type/is/hex]: describe-type/is/hex.next.js ""
+[describe-type/is/hexadecimal]: describe-type/is/hexadecimal.next.js ""
+[describe-type/is/hosted]: describe-type/is/hosted.next.js ""
+[describe-type/is/infinity]: describe-type/is/infinity.next.js ""
+[describe-type/is/instanceOf]: describe-type/is/instanceOf.next.js ""
+[describe-type/is/int]: describe-type/is/int.next.js ""
+[describe-type/is/jsonlike]: describe-type/is/jsonlike.next.js ""
+[describe-type/is/max]: describe-type/is/max.next.js ""
+[describe-type/is/min]: describe-type/is/min.next.js ""
+[describe-type/is/nan]: describe-type/is/nan.next.js ""
+[describe-type/is/nativeFunction]: describe-type/is/nativeFunction.next.js ""
+[describe-type/is/nil]: describe-type/is/nil.next.js ""
+[describe-type/is/number]: describe-type/is/number.next.js ""
+[describe-type/is/numeric]: describe-type/is/numeric.next.js ""
+[describe-type/is/odd]: describe-type/is/odd.next.js ""
+[describe-type/is/primitive]: describe-type/is/primitive.next.js ""
+[describe-type/is/symbol]: describe-type/is/symbol.next.js ""
+[describe-type/is/uint]: describe-type/is/uint.next.js ""
+[describe-type/is/undef]: describe-type/is/undef.next.js ""
+[describe-type/is/unfilled]: describe-type/is/unfilled.next.js ""
+[describe-type/is/vector]: describe-type/is/vector.next.js ""
+[describe-type/is/within]: describe-type/is/within.next.js ""
+
+<!-- is/args/ -->
+[describe-type/is/args]: describe-type/is/args/index.next.js ""
+[describe-type/is/args/args.empty]: describe-type/is/args/args.empty.next.js ""
+
+<!-- is/array/ -->
+[describe-type/is/array]: describe-type/is/array/index.next.js ""
+[describe-type/is/array/array.empty]: describe-type/is/array/array.empty.next.js ""
+
+<!-- is/arraylike/ -->
+[describe-type/is/arraylike]: describe-type/is/arraylike/index.next.js ""
+[describe-type/is/arraylike/arraylike.empty]: describe-type/is/arraylike/arraylike.empty.next.js ""
+
+<!-- is/not/ -->
+[describe-type/is/not]: describe-type/is/not/index.next.js ""
+[describe-type/is/not/not.a]: describe-type/is/not/not.a.next.js ""
+[describe-type/is/not/not.an]: describe-type/is/not/not.an.next.js ""
+[describe-type/is/not/not.type]: describe-type/is/not/not.type.next.js ""
+[describe-type/is/not/not.any]: describe-type/is/not/not.any.next.js ""
+[describe-type/is/not/not.instanceOf]: describe-type/is/not/not.instanceOf.next.js ""
+[describe-type/is/not/not.vectorOf]: describe-type/is/not/not.vectorOf.next.js ""
+
+<!-- is/object/ -->
+[describe-type/is/object]: describe-type/is/object/index.next.js ""
+[describe-type/is/object/object.empty]: describe-type/is/object/object.empty.next.js ""
+
+<!-- is/regexp/ -->
+[describe-type/is/regexp]: describe-type/is/regexp/index.next.js ""
+[describe-type/is/regexp/regexp.flags]: describe-type/is/regexp/regexp.flags.next.js ""
+[describe-type/is/regexp/regexp.string]: describe-type/is/regexp/regexp.string.next.js ""
+
+<!-- is/stream/ -->
+[describe-type/is/stream]: describe-type/is/stream/index.next.js ""
+[describe-type/is/stream/stream.duplex]: describe-type/is/stream/stream.duplex.next.js ""
+[describe-type/is/stream/stream.readable]: describe-type/is/stream/stream.readable.next.js ""
+[describe-type/is/stream/stream.transform]: describe-type/is/stream/stream.transform.next.js ""
+[describe-type/is/stream/stream.writable]: describe-type/is/stream/stream.writable.next.js ""
+
+<!-- is/string/ -->
+[describe-type/is/string]: describe-type/is/string/index.next.js ""
+[describe-type/is/string/string.empty]: describe-type/is/string/string.empty.next.js ""
+
+<!-- ponyfill/ -->
+[describe-type/ponyfill]: describe-type/ponyfill/index.next.js ""
+[describe-type/ponyfill/Array.prototype.filter]: describe-type/ponyfill/Array.prototype.filter.next.js ""
+[describe-type/ponyfill/Array.prototype.reduce]: describe-type/ponyfill/Array.prototype.reduce.next.js ""
+[describe-type/ponyfill/Array.prototype.slice]: describe-type/ponyfill/Array.prototype.slice.next.js ""
+[describe-type/ponyfill/Object.assign]: describe-type/ponyfill/Object.assign.next.js ""
+[describe-type/ponyfill/Object.create]: describe-type/ponyfill/Object.create.next.js ""
+[describe-type/ponyfill/Object.is]: describe-type/ponyfill/Object.is.next.js ""
+[describe-type/ponyfill/Object.keys]: describe-type/ponyfill/Object.keys.next.js ""
+[describe-type/ponyfill/String.prototype.startsWith]: describe-type/ponyfill/String.prototype.startsWith.next.js ""
+
+<!-- schema/ -->
+[describe-type/schema]: describe-type/schema/index.next.js ""
+
+<!-- shim/ -->
+[describe-type/shim/Object.getPrototypeOf]: describe-type/shim/Object.getPrototypeOf.next.js ""
+
+
+<!-----------------------------------------------------------------------------
+ |
+ | PROJECT LINKS
+ |
+-'---------------------------------------------------------------------------->
 
 [fork]: https://github.com/adriancmiranda/describe-type/fork "Fork it"
 [pull_request]: https://github.com/adriancmiranda/describe-type/compare "Pull request"
 [issue_tracker]: http://github.com/adriancmiranda/describe-type/issues "Issue tracker"
 
 
-<!-- license -->
+<!-----------------------------------------------------------------------------
+ |
+ | LICENSE
+ |
+-'---------------------------------------------------------------------------->
 
-[licenses]: https://app.fossa.io/api/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Fadriancmiranda%2Fdescribe-type.svg?type=large
-[licenses-url]: https://app.fossa.io/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Fadriancmiranda%2Fdescribe-type?ref=badge_large
-
-
-<!-- badges -->
-
-[npm]: https://img.shields.io/npm/v/describe-type.svg
-[npm-url]: https://npmjs.com/package/describe-type
-
-[travis]: https://travis-ci.org/adriancmiranda/describe-type.svg?branch=master
-[travis-url]: https://travis-ci.org/adriancmiranda/describe-type
-
-[appveyor]: https://ci.appveyor.com/api/projects/status/skbkb868peiyn9db/branch/master?svg=true
-[appveyor-url]: https://ci.appveyor.com/project/adriancmiranda/describe-type/branch/master
-
-[deps]: https://david-dm.org/adriancmiranda/describe-type.svg
-[deps-url]: https://david-dm.org/adriancmiranda/describe-type
-
-[depsci]: https://dependencyci.com/github/adriancmiranda/describe-type/badge
-[depsci-url]: https://dependencyci.com/github/adriancmiranda/describe-type
-
-[codecov]: https://codecov.io/gh/adriancmiranda/describe-type/branch/master/graph/badge.svg
-[codecov-url]: https://codecov.io/gh/adriancmiranda/describe-type
-
-[codacy]: https://api.codacy.com/project/badge/Grade/22600fdddef64b20a7fb8f7a7ffaf00e
-[codacy-url]: https://www.codacy.com/app/adriancmiranda/describe-type?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=adriancmiranda/describe-type&amp;utm_campaign=Badge_Grade
-
-[saucelabs]: https://saucelabs.com/browser-matrix/adriancmiranda.svg
-[saucelabs-url]: https://saucelabs.com/u/adriancmiranda
-
-[nodei_status_image]: https://nodei.co/npm/describe-type.png?downloads=true&downloadRank=true&stars=true
-[nodei_status_url]: https://nodei.co/npm/describe-type/
-
-<!-- utils -->
-
-[ecma-type]: https://www.ecma-international.org/ecma-262/#sec-type
+[licenses]: https://app.fossa.io/api/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Fadriancmiranda%2Fdescribe-type.svg?type=large ""
+[licenses-url]: https://app.fossa.io/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Fadriancmiranda%2Fdescribe-type?ref=badge_large ""
 
 
-<!-- awful
-	typeof null // => 'object'
-	typeof [] // => 'object' also typeof [].valueOf() // => 'object'
-	typeof /abc/ // => 'object' or 'function' also typeof /abc/.valueOf() // => 'object' or 'function'
-	typeof new Number(1) // => 'object' 'cause typeof new Number(1).valueOf() // => 'number'
-	typeof new String('foo') // => 'object' cause typeof new String('foo').valueOf() // => 'string'
-	typeof new Date() // => object and typeof new Date().valueOf() // => 'number'
-	typeof Math // => 'object' also Math instanceof Math // => TypeError
--->
+<!-----------------------------------------------------------------------------
+ |
+ | BADGES
+ |
+-'---------------------------------------------------------------------------->
+
+[npm]: https://img.shields.io/npm/v/describe-type.svg ""
+[npm-url]: https://npmjs.com/package/describe-type ""
+
+[travis]: https://travis-ci.org/adriancmiranda/describe-type.svg?branch=master ""
+[travis-url]: https://travis-ci.org/adriancmiranda/describe-type ""
+
+[appveyor]: https://ci.appveyor.com/api/projects/status/skbkb868peiyn9db/branch/master?svg=true ""
+[appveyor-url]: https://ci.appveyor.com/project/adriancmiranda/describe-type/branch/master ""
+
+[deps]: https://david-dm.org/adriancmiranda/describe-type.svg ""
+[deps-url]: https://david-dm.org/adriancmiranda/describe-type ""
+
+[depsci]: https://dependencyci.com/github/adriancmiranda/describe-type/badge ""
+[depsci-url]: https://dependencyci.com/github/adriancmiranda/describe-type ""
+
+[codecov]: https://codecov.io/gh/adriancmiranda/describe-type/branch/master/graph/badge.svg ""
+[codecov-url]: https://codecov.io/gh/adriancmiranda/describe-type ""
+
+[codacy]: https://api.codacy.com/project/badge/Grade/22600fdddef64b20a7fb8f7a7ffaf00e ""
+[codacy-url]: https://www.codacy.com/app/adriancmiranda/describe-type?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=adriancmiranda/describe-type&amp;utm_campaign=Badge_Grade ""
+
+[saucelabs]: https://saucelabs.com/browser-matrix/adriancmiranda.svg ""
+[saucelabs-url]: https://saucelabs.com/u/adriancmiranda ""
+
+[nodei_status_image]: https://nodei.co/npm/describe-type.png?downloads=true&downloadRank=true&stars=true ""
+[nodei_status_url]: https://nodei.co/npm/describe-type ""
+
+
+<!-----------------------------------------------------------------------------
+ |
+ | UTILS
+ |
+-'---------------------------------------------------------------------------->
+
+[ecma-type]: https://www.ecma-international.org/ecma-262/#sec-type ""
+
+
+<!-----------------------------------------------------------------------------
+ |
+ | AWFUL
+ |
+-'-----------------------------------------------------------------------------
+ | typeof null // => 'object'
+ | typeof [] // => 'object' also typeof [].valueOf() // => 'object'
+ | typeof /abc/ // => 'object' or 'function' also typeof /abc/.valueOf() // => 'object' or 'function'
+ | typeof new Number(1) // => 'object' 'cause typeof new Number(1).valueOf() // => 'number'
+ | typeof new String('foo') // => 'object' cause typeof new String('foo').valueOf() // => 'string'
+ | typeof new Date() // => object and typeof new Date().valueOf() // => 'number'
+ | typeof Math // => 'object' also Math instanceof Math // => TypeError
+-'---------------------------------------------------------------------------->
