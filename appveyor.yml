@@ -7,6 +7,7 @@ clone_depth: 50
 # Branches to build
 branches:
   only:
+    - dev
     - master
     - /^greenkeeper-/
   except:

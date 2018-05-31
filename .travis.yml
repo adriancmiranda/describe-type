@@ -10,6 +10,7 @@ language: node_js
 # Branches to build
 branches:
   only:
+    - dev
     - master
     - /^greenkeeper-/
   except:

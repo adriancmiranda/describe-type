@@ -119,7 +119,7 @@
     "unkn": "0.0.3"
   },
   "ava": {
-    "tap": true,
+    "tap": false,
     "failFast": true,
     "powerAssert": true,
     "failWithoutAssertions": true,

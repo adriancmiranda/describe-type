@@ -27,6 +27,7 @@ exports.dependencies = Object.keys(exports.pack.dependencies || {});
 
 exports.vars = {
 	__ENV__: exports.env.NODE_ENV || 'development',
+	__PTYPE__: exports.env.MINIFY ? 'minified' : 'uncompressed',
 	__COMMIT__: exports.git.commithash(),
 	__VERSION__: exports.pack.version,
 };
