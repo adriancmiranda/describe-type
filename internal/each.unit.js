@@ -87,7 +87,7 @@ test('string: iterates over every item', (t) => {
 	each(string, function (item, key, data, index) {
 		t.deepEqual(this, context, 'this should be context')
 		t.is(item, data[key], 'item should equal to data[key]');
-		t.is(toString.call(key), '[object Number]', 'key should be a String');
+		t.is(toString.call(key), '[object Number]', 'key should be a Number');
 		t.is(toString.call(data), '[object String]', 'data should be an String');
 		t.is(toString.call(index), '[object Number]', 'key should be equal to index');
 	}, context);
