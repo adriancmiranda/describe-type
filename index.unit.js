@@ -24,6 +24,7 @@ test(`${colors.underline('describeType.env')} expusure`, (t) => {
 	const $global = toString.call(describeType.env);
 	t.is(toString.call(describeType.env), '[object global]', '"describeType.env" should be global');
 	t.is(toString.call(describeType.env.window), '[object Window]', 'The module "browser-env" should expose the window on global scope');
+	t.deepEqual(toString.call(describeType.objectSupportsProto), '[object Boolean]', '"describeType.builtIn.objectSupportsProto" should be a boolean');
 	t.is(describeType.inBrowser, false, '"describeType.inBrowser" should be false');
 	t.is(describeType.inNode, true, '"describeType.inNode" should be true');
 });
@@ -50,8 +51,8 @@ test(`${colors.underline('describeType.has')} expusure`, (t) => {
 test(`${colors.underline('describeType.is')} expusure`, (t) => {
 	t.is(toString.call(describeType.is), '[object Object]', '"describeType.is" should be a object');
 	t.is(toString.call(describeType.is.type), '[object Function]', '"describeType.is.type" should be a function');
-	// t.deepEqual(describeType.is.a, describeType.is.type, '"describeType.is.a" should be a alias to "describeType.is.type"');
-	// t.deepEqual(describeType.is.an, describeType.is.type, '"describeType.is.an" should be a alias to "describeType.is.type"');
+	t.deepEqual(describeType.is.a, describeType.is.type, '"describeType.is.a" should be a alias to "describeType.is.type"');
+	t.deepEqual(describeType.is.an, describeType.is.type, '"describeType.is.an" should be a alias to "describeType.is.type"');
 	t.is(toString.call(describeType.is.base64), '[object Function]', '"describeType.is.base64" should be a function');
 	t.is(toString.call(describeType.is.bool), '[object Function]', '"describeType.is.bool" should be a function');
 	t.is(toString.call(describeType.is.buffer), '[object Function]', '"describeType.is.buffer" should be a function');
@@ -152,6 +153,7 @@ test(`${colors.underline('describeType built-in')} expusures`, (t) => {
 	t.is(toString.call(describeType.getExpectedValue), '[object Function]', '"describeType.getExpectedValue" should be a function');
 	t.is(toString.call(describeType.mod), '[object Function]', '"describeType.mod" should be a function');
 	t.is(toString.call(describeType.stringify), '[object Function]', '"describeType.stringify" should be a function');
+	t.is(toString.call(describeType.slice), '[object Function]', '"describeType.slice" should be a function');
 });
 
 test(`${colors.underline('describeType built-in / each family')} expusures`, (t) => {
@@ -172,8 +174,6 @@ test(`${colors.underline('describeType built-in / builtIn')} expusures`, (t) => 
 	t.is(toString.call(describeType.builtIn), '[object Object]', '"builtIn" should be a object');
 	t.deepEqual(describeType.builtIn.objectHasOwnProperty, Object.prototype.hasOwnProperty, '"describeType.builtIn.objectHasOwnProperty" should be strictly equal to "Object.prototype.hasOwnProperty"');
 	t.deepEqual(describeType.builtIn.objectToString, Object.prototype.toString, '"describeType.builtIn.objectToString" should be strictly equal to "Object.prototype.toString"');
-	// t.deepEqual(describeType.builtIn.objectGetPrototypeOf, Object.getPrototypeOf, '"describeType.builtIn.objectGetPrototypeOf" should be strictly equal to "Object.getPrototypeOf"');
-	t.deepEqual(toString.call(describeType.builtIn.objectSupportsProto), '[object Boolean]', '"describeType.builtIn.objectSupportsProto" should be a boolean');
 });
 
 test(`${colors.underline('describeType built-in / patterns')} expusures`, (t) => {
@@ -214,14 +214,13 @@ test(`${colors.underline('describeType built-in / constants')} expusures`, (t) =
 test(`${colors.underline('describeType ponyfill')} expusures`, (t) => {
 	t.is(toString.call(ponyfill.filter), '[object Function]', '"ponyfill.filter" should be a function');
 	t.is(toString.call(ponyfill.reduce), '[object Function]', '"ponyfill.reduce" should be a function');
-	t.is(toString.call(ponyfill.slice), '[object Function]', '"ponyfill.slice" should be a function');
 	t.is(toString.call(ponyfill.assign), '[object Function]', '"ponyfill.assign" should be a function');
-	t.is(toString.call(ponyfill.create), '[object Function]', '"ponyfill.create" should be a function');
 	t.is(toString.call(ponyfill.is), '[object Function]', '"ponyfill.is" should be a function');
 	t.is(toString.call(ponyfill.keys), '[object Function]', '"ponyfill.keys" should be a function');
 	t.is(toString.call(ponyfill.startsWith), '[object Function]', '"ponyfill.startsWith" should be a function');
 });
 
 test(`${colors.underline('describeType shim')} expusures`, (t) => {
+	t.is(toString.call(shim.create), '[object Function]', '"ponyfill.create" should be a function');
 	t.is(toString.call(shim.getPrototypeOf), '[object Function]', '"shim.getPrototypeOf" should be a function');
 });

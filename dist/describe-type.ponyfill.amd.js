@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v1.0.0-dev.4
  * 
- * @commit b50e8f97ff3c21361a238cf2f6280cb551cbbb56
- * @moment Saturday, June 2, 2018 3:27 AM
+ * @commit 074766fbe435a0dc9967f90b88f11eeb4067f794
+ * @moment Saturday, June 2, 2018 5:25 AM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2021
@@ -34,7 +34,6 @@ define(['exports'], function (exports) { 'use strict';
 
 	// built-in method(s)
 	var objectHasOwnProperty = ObjectProto.hasOwnProperty;
-	var objectSupportsProto = StringProto === ''.__proto__;
 
 	/**
 	 * Creates a new array with all of the elements of this array for which the
@@ -321,6 +320,95 @@ define(['exports'], function (exports) { 'use strict';
 	};
 
 	/**
+	 * The Object.is() method determines whether two values are the same value.
+	 * @function
+	 * @param {Object} valueA - The first value to compare.
+	 * @param {Object} valueB - The second value to compare.
+	 * @returns {Boolean} The Object.is() method determines whether two values are
+	 * the same value.
+	 */
+	var Object_is_next = Object.is || function is(valueA, valueB) {
+		if (valueA === valueB) {
+			if (valueA === 0) { return 1 / valueA === 1 / valueB; }
+			return true;
+		}
+		var a = valueA;
+		var b = valueB;
+		return valueA !== a && valueB !== b;
+	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof has
+	 * @param {String|Array} context
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function ownValue(context, value) {
+		if (arraylike(context) === false) { return false; }
+		for (var id = context.length - 1; id > -1; id -= 1) {
+			if (value === context[id]) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 *
+	 * @param {Function} cmd - .
+	 * @param {any} context - .
+	 * @returns {any}
+	 */
+	function apply(cmd, context, args, blindly) {
+		try {
+			var $ = arraylike(args) ? args : [];
+			switch ($.length) {
+				case 0: return cmd.call(context);
+				case 1: return cmd.call(context, $[0]);
+				case 2: return cmd.call(context, $[0], $[1]);
+				case 3: return cmd.call(context, $[0], $[1], $[2]);
+				case 4: return cmd.call(context, $[0], $[1], $[2], $[3]);
+				case 5: return cmd.call(context, $[0], $[1], $[2], $[3], $[4]);
+				case 6: return cmd.call(context, $[0], $[1], $[2], $[3], $[4], $[5]);
+				case 7: return cmd.call(context, $[0], $[1], $[2], $[3], $[4], $[5], $[6]);
+				case 8: return cmd.call(context, $[0], $[1], $[2], $[3], $[4], $[5], $[6], $[7]);
+				case 9: return cmd.call(context, $[0], $[1], $[2], $[3], $[4], $[5], $[6], $[7], $[8]);
+				default: return cmd.apply(context, $);
+			}
+		} catch (err) {
+			if (blindly) { return err; }
+			throw err;
+		}
+	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {Function} expect -
+	 * @param {any} value -
+	 * @param {arraylike} args -
+	 * @param {int} startIndex -
+	 * @param {int} endIndex -
+	 * @returns {any}
+	 */
+	function getExpectedValue(expected, value, args, startIndex, endIndex) {
+		if (callable(value) && (expected === Function || ownValue(expected, Function)) === false) {
+			args = slice(args, startIndex, endIndex);
+			return apply(value, args[0], args, true);
+		}
+		return value;
+	}
+
+	// environment
+	var objectSupportsProto = StringProto === ''.__proto__;
+	var inBrowser = new Function('try{return this===window;}catch(err){return false;}')();
+	var inNode = new Function('try{return this===global;}catch(err){return false;}')();
+	var env = exports.inNode ? global : window;
+
+	/**
 	 *
 	 * @name Object.getPrototypeOf
 	 * @function
@@ -376,206 +464,6 @@ define(['exports'], function (exports) { 'use strict';
 
 	/**
 	 *
-	 * @function
-	 * @memberof is
-	 * @param {Function|Array.<Function>} expected
-	 * @param {any} value
-	 * @returns {Boolean}
-	 */
-	function notType(expected, value) {
-		return type(expected, value) === false;
-	}
-
-	/**
-	 *
-	 * @param {Function} cmd - .
-	 * @param {any} context - .
-	 * @returns {any}
-	 */
-	function apply(cmd, context, args, blindly) {
-		try {
-			var $ = arraylike(args) ? args : [];
-			switch ($.length) {
-				case 0: return cmd.call(context);
-				case 1: return cmd.call(context, $[0]);
-				case 2: return cmd.call(context, $[0], $[1]);
-				case 3: return cmd.call(context, $[0], $[1], $[2]);
-				case 4: return cmd.call(context, $[0], $[1], $[2], $[3]);
-				case 5: return cmd.call(context, $[0], $[1], $[2], $[3], $[4]);
-				case 6: return cmd.call(context, $[0], $[1], $[2], $[3], $[4], $[5]);
-				case 7: return cmd.call(context, $[0], $[1], $[2], $[3], $[4], $[5], $[6]);
-				case 8: return cmd.call(context, $[0], $[1], $[2], $[3], $[4], $[5], $[6], $[7]);
-				case 9: return cmd.call(context, $[0], $[1], $[2], $[3], $[4], $[5], $[6], $[7], $[8]);
-				default: return cmd.apply(context, $);
-			}
-		} catch (err) {
-			if (blindly) { return err; }
-			throw err;
-		}
-	}
-
-	/**
-	 *
-	 * @param {Object} value
-	 * @param {String} key
-	 * @param {Function} cmd
-	 * @param {Object} ctx
-	 * @param {any} args
-	 * @returns {any}
-	 */
-	function resolveProperty(value, key, readStatic, cmd, ctx, args) {
-		if (readStatic || (key !== 'prototype' && key !== 'length' && key !== 'name')) {
-			var item = value[key];
-			return apply(cmd, ctx || item, [item, key, value, args]);
-		}
-		return undefined;
-	}
-
-	/* eslint-disable no-restricted-syntax */
-
-	/**
-	 *
-	 * @function
-	 * @param {any} value
-	 * @param {Function} cmd
-	 * @param {any} context
-	 * @param {Boolean} getInheritedProps
-	 * @returns {?}
-	 */
-	function eachProperty(value, cmd, context, getInheritedProps) {
-		var i = 0;
-		var readStatics = callable(value) === false;
-		for (var key in value) {
-			if (getInheritedProps || ownProperty(value, key)) {
-				var response = resolveProperty(value, key, readStatics, cmd, context, i += 1);
-				if (response !== undefined) {
-					return response;
-				}
-			}
-		}
-		return undefined;
-	}
-
-	/**
-	 *
-	 * @function
-	 * @param {Array|arraylike} value
-	 * @param {Function} cmd
-	 * @param {any} context
-	 * @returns {?}
-	 */
-	function eachValue(value, cmd, context, keepReverse) {
-		if (value === undefined || value === null) { return undefined; }
-		var size = (0 | value.length) - 1;
-		for (var index = size; index > -1; index -= 1) {
-			var i = keepReverse ? index : size - index;
-			var item = value[i];
-			var resolve = cmd.call(context || item, item, i, value, i);
-			if (resolve === undefined === false) {
-				return resolve;
-			}
-		}
-		return undefined;
-	}
-
-	/* eslint-disable no-restricted-syntax */
-
-	/**
-	 *
-	 * @function
-	 * @param {any} value
-	 * @param {Function} cmd
-	 * @param {Object} context
-	 * @param {Boolean} keepReverseOrGetInheritedProps
-	 * @returns {?}
-	 */
-	function each(value, cmd, context, keepReverseOrGetInheritedProps) {
-		if (arraylike(value)) { return eachValue(value, cmd, context, keepReverseOrGetInheritedProps); }
-		return eachProperty(value, cmd, context, keepReverseOrGetInheritedProps);
-	}
-
-	/**
-	 *
-	 * @function
-	 * @param {Object} proto - The object which should be the prototype of the newly-created object.
-	 * @param {Object} properties - Optional. If specified and not undefined, an object whose
-	 * enumerable own properties (that is, those properties defined upon itself and not enumerable
-	 * properties along its prototype chain) specify property descriptors to be added to the
-	 * newly-created object, with the corresponding property names. These properties correspond to
-	 * the second argument of `Object.defineProperties()`.
-	 * @returns {Object}
-	 */
-	var Object_create_next = Object.create || function create(proto, properties) {
-		if (proto === null && properties === undefined) { return {}; }
-		if (notType(Object, proto)) {
-			throw new TypeError('Object prototype may only be an Object or null: ' + (typeof proto));
-		}
-		var Instance = function () {};
-		Instance.prototype = proto;
-		proto = new Instance();
-		each(properties, function (value, property) {
-			proto[property] = value.value;
-		});
-		return proto;
-	}
-
-	/**
-	 * The Object.is() method determines whether two values are the same value.
-	 * @function
-	 * @param {Object} valueA - The first value to compare.
-	 * @param {Object} valueB - The second value to compare.
-	 * @returns {Boolean} The Object.is() method determines whether two values are
-	 * the same value.
-	 */
-	var Object_is_next = Object.is || function is(valueA, valueB) {
-		if (valueA === valueB) {
-			if (valueA === 0) { return 1 / valueA === 1 / valueB; }
-			return true;
-		}
-		var a = valueA;
-		var b = valueB;
-		return valueA !== a && valueB !== b;
-	}
-
-	/**
-	 *
-	 * @function
-	 * @memberof has
-	 * @param {String|Array} context
-	 * @param {any} value
-	 * @returns {Boolean}
-	 */
-	function ownValue(context, value) {
-		if (arraylike(context) === false) { return false; }
-		for (var id = context.length - 1; id > -1; id -= 1) {
-			if (value === context[id]) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	/**
-	 *
-	 * @function
-	 * @memberof is
-	 * @param {Function} expect -
-	 * @param {any} value -
-	 * @param {arraylike} args -
-	 * @param {int} startIndex -
-	 * @param {int} endIndex -
-	 * @returns {any}
-	 */
-	function getExpectedValue(expected, value, args, startIndex, endIndex) {
-		if (callable(value) && (expected === Function || ownValue(expected, Function)) === false) {
-			args = slice(args, startIndex, endIndex);
-			return apply(value, args[0], args, true);
-		}
-		return value;
-	}
-
-	/**
-	 *
 	 * @param {Function|Array.<Function>} expected
 	 * @param {any} value
 	 * @returns {Boolean}
@@ -602,9 +490,7 @@ define(['exports'], function (exports) { 'use strict';
 
 	exports.filter = filter;
 	exports.reduce = reduce;
-	exports.slice = slice;
 	exports.assign = Object_assign_next;
-	exports.create = Object_create_next;
 	exports.is = Object_is_next;
 	exports.keys = keys;
 	exports.startsWith = startsWith;

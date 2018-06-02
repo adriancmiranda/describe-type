@@ -1,5 +1,5 @@
 import { objectHasOwnProperty } from '../internal/built-in.next.js';
-import slice from './Array.prototype.slice.next.js';
+import slice from '../internal/slice.next.js';
 
 /**
  *

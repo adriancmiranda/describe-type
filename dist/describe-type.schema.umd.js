@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v1.0.0-dev.4
  * 
- * @commit b50e8f97ff3c21361a238cf2f6280cb551cbbb56
- * @moment Saturday, June 2, 2018 3:27 AM
+ * @commit 074766fbe435a0dc9967f90b88f11eeb4067f794
+ * @moment Saturday, June 2, 2018 5:25 AM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2021
@@ -254,7 +254,12 @@
 
 	// built-in method(s)
 	var objectHasOwnProperty = ObjectProto.hasOwnProperty;
+
+	// environment
 	var objectSupportsProto = StringProto === ''.__proto__;
+	var inBrowser = new Function('try{return this===window;}catch(err){return false;}')();
+	var inNode = new Function('try{return this===global;}catch(err){return false;}')();
+	var env = exports.inNode ? global : window;
 
 	/**
 	 *
@@ -374,6 +379,44 @@
 	}
 
 	/**
+	 * The reduce() method applies a function against an accumulator and each
+	 * element in the array (from left to right) to reduce it to a single value.
+	 * @function
+	 * @memberof utility
+	 * @param {arraylike} list - list of elements.
+	 * @param {Function} cmd - Function to execute on each element in the array,
+	 * taking four arguments:
+	 *  - accumulator: The accumulator accumulates the callback's return values;
+	 *    it is the accumulated value previously returned in the last invocation
+	 *    of the callback, or initialValue, if supplied (see below).
+	 *  - currentIndex?: The index of the current element being processed in the array.
+	 *    Starts at index 0, if an initialValue is provided, and at index 1 otherwise.
+	 *  - array?: The array reduce() was called upon.
+	 * @param {any} initialValue - Value to use as the first argument to the first
+	 * call of the callback. If no initial value is supplied, the first element
+	 * in the array will be used. Calling reduce() on an empty array without an
+	 * initial value is an error.
+	 * @param {any} context - Value to use as this when executing callback.
+	 * @returns {any} The value that results from the reduction.
+	 */
+	function reduce(list, cmd, initialValue, context) {
+		if (list === undefined || list === null) { return undefined; }
+		if (callable(cmd) === false) { throw new TypeError(("The second argument should be a function, received \"" + (typeof cmd) + "\"")); }
+		var size = (0 | list.length);
+		if (size) {
+			var index = 0;
+			if (arguments.length === 2) {
+				initialValue = list[index];
+				index = 1;
+			}
+			for (index; index < size; index += 1) {
+				initialValue = cmd.call(context || null, initialValue, list[index], index, list);
+			}
+		}
+		return initialValue;
+	}
+
+	/**
 	 *
 	 * @function
 	 * @memberof is
@@ -489,49 +532,6 @@
 		});
 		return proto;
 	}
-
-	/**
-	 * The reduce() method applies a function against an accumulator and each
-	 * element in the array (from left to right) to reduce it to a single value.
-	 * @function
-	 * @memberof utility
-	 * @param {arraylike} list - list of elements.
-	 * @param {Function} cmd - Function to execute on each element in the array,
-	 * taking four arguments:
-	 *  - accumulator: The accumulator accumulates the callback's return values;
-	 *    it is the accumulated value previously returned in the last invocation
-	 *    of the callback, or initialValue, if supplied (see below).
-	 *  - currentIndex?: The index of the current element being processed in the array.
-	 *    Starts at index 0, if an initialValue is provided, and at index 1 otherwise.
-	 *  - array?: The array reduce() was called upon.
-	 * @param {any} initialValue - Value to use as the first argument to the first
-	 * call of the callback. If no initial value is supplied, the first element
-	 * in the array will be used. Calling reduce() on an empty array without an
-	 * initial value is an error.
-	 * @param {any} context - Value to use as this when executing callback.
-	 * @returns {any} The value that results from the reduction.
-	 */
-	function reduce(list, cmd, initialValue, context) {
-		if (list === undefined || list === null) { return undefined; }
-		if (callable(cmd) === false) { throw new TypeError(("The second argument should be a function, received \"" + (typeof cmd) + "\"")); }
-		var size = (0 | list.length);
-		if (size) {
-			var index = 0;
-			if (arguments.length === 2) {
-				initialValue = list[index];
-				index = 1;
-			}
-			for (index; index < size; index += 1) {
-				initialValue = cmd.call(context || null, initialValue, list[index], index, list);
-			}
-		}
-		return initialValue;
-	}
-
-	// environment
-	var inBrowser = new Function('try{return this===window;}catch(err){return false;}')();
-	var inNode = new Function('try{return this===global;}catch(err){return false;}')();
-	var env = exports.inNode ? global : window;
 
 	/**
 	 *

@@ -26,6 +26,7 @@ exports.each = require('./each.js');
 exports.eachValue = require('./eachValue.js');
 exports.eachProperty = require('./eachProperty.js');
 exports.resolveProperty = require('./resolveProperty.js');
+exports.slice = require('./slice.js');
 exports.getExpectedValue = require('./getExpectedValue.js');
 exports.mod = require('./mod.js');
 exports.prototypes = prototypes;

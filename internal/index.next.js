@@ -20,6 +20,7 @@ export { default as each } from './each.next.js';
 export { default as eachValue } from './eachValue.next.js';
 export { default as eachProperty } from './eachProperty.next.js';
 export { default as resolveProperty } from './resolveProperty.next.js';
+export { default as slice } from './slice.next.js';
 export { default as getExpectedValue } from './getExpectedValue.next.js';
 export { default as mod } from './mod.next.js';
 export { prototypes, builtIn, patterns, constants };

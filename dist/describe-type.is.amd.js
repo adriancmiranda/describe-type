@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v1.0.0-dev.4
  * 
- * @commit b50e8f97ff3c21361a238cf2f6280cb551cbbb56
- * @moment Saturday, June 2, 2018 3:27 AM
+ * @commit 074766fbe435a0dc9967f90b88f11eeb4067f794
+ * @moment Saturday, June 2, 2018 5:25 AM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2021
@@ -26,7 +26,6 @@ define(['exports'], function (exports) { 'use strict';
 	// built-in method(s)
 	var objectHasOwnProperty = ObjectProto.hasOwnProperty;
 	var objectToString = ObjectProto.toString;
-	var objectSupportsProto = StringProto === ''.__proto__;
 
 	/**
 	 *
@@ -65,6 +64,12 @@ define(['exports'], function (exports) { 'use strict';
 	function array(value) {
 		return value instanceof Array;
 	}
+
+	// environment
+	var objectSupportsProto = StringProto === ''.__proto__;
+	var inBrowser = new Function('try{return this===window;}catch(err){return false;}')();
+	var inNode = new Function('try{return this===global;}catch(err){return false;}')();
+	var env = exports.inNode ? global : window;
 
 	/**
 	 *
@@ -500,11 +505,6 @@ define(['exports'], function (exports) { 'use strict';
 	function bool(value) {
 		return value === true || value === false || value instanceof Boolean;
 	}
-
-	// environment
-	var inBrowser = new Function('try{return this===window;}catch(err){return false;}')();
-	var inNode = new Function('try{return this===global;}catch(err){return false;}')();
-	var env = exports.inNode ? global : window;
 
 	/**
 	 *

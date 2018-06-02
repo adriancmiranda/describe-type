@@ -1,5 +1,5 @@
 const { objectHasOwnProperty } = require('../internal/built-in.js');
-const slice = require('./Array.prototype.slice.js');
+const slice = require('../internal/slice.js');
 
 /**
  *

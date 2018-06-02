@@ -1,5 +1,5 @@
 import test from 'ava';
-import slice from './Array.prototype.slice.next';
+import slice from './slice.next';
 
 test('exposed', (t) => {
 	t.is(toString.call(slice), '[object Function]', 'should be a function');

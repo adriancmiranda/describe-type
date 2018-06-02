@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v1.0.0-dev.4
  * 
- * @commit b50e8f97ff3c21361a238cf2f6280cb551cbbb56
- * @moment Saturday, June 2, 2018 3:27 AM
+ * @commit 074766fbe435a0dc9967f90b88f11eeb4067f794
+ * @moment Saturday, June 2, 2018 5:25 AM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2021
@@ -61,13 +61,11 @@
 	// built-in method(s)
 	var objectHasOwnProperty = ObjectProto.hasOwnProperty;
 	var objectToString = ObjectProto.toString;
-	var objectSupportsProto = StringProto === ''.__proto__;
 	var symbolToString = SymbolProto ? SymbolProto.toString : undefined;
 
 	var builtIn_next = /*#__PURE__*/{
 		objectHasOwnProperty: objectHasOwnProperty,
 		objectToString: objectToString,
-		objectSupportsProto: objectSupportsProto,
 		symbolToString: symbolToString
 	};
 
@@ -104,6 +102,7 @@
 	};
 
 	// environment
+	var objectSupportsProto = StringProto === ''.__proto__;
 	var inBrowser = new Function('try{return this===window;}catch(err){return false;}')();
 	var inNode = new Function('try{return this===global;}catch(err){return false;}')();
 	var env = exports.inNode ? global : window;
@@ -1768,7 +1767,7 @@
 	}
 
 	/* eslint-disable no-unused-vars */
-	var version = { tag: '1.0.0-dev.4', sha1: 'b50e8f97ff3c21361a238cf2f6280cb551cbbb56', type: 'uncompressed' };
+	var version = { tag: '1.0.0-dev.4', sha1: '074766fbe435a0dc9967f90b88f11eeb4067f794', type: 'uncompressed' };
 
 	exports.has = index_next;
 	exports.is = index_next$1;
@@ -1795,8 +1794,10 @@
 	exports.eachValue = eachValue;
 	exports.eachProperty = eachProperty;
 	exports.resolveProperty = resolveProperty;
+	exports.slice = slice;
 	exports.getExpectedValue = getExpectedValue;
 	exports.mod = mod;
+	exports.objectSupportsProto = objectSupportsProto;
 	exports.inBrowser = inBrowser;
 	exports.inNode = inNode;
 	exports.env = env;

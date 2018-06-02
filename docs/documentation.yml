@@ -41,6 +41,7 @@ toc:
   - prototypeOf
   - prototypes
   - resolveProperty
+  - slice
   - stringify
   - stringOf
   - typeOf
@@ -120,9 +121,7 @@ toc:
       member of the data type specified by the first operand.
   - Array.prototype.filter
   - Array.prototype.reduce
-  - Array.prototype.slice
   - Object.assign
-  - Object.create
   - Object.is
   - Object.keys
   - String.prototype.startsWith
@@ -137,4 +136,5 @@ toc:
     description: |
       Evaluates whether an expression specified by the second operand is a
       member of the data type specified by the first operand.
+  - Object.create
   - Object.getPrototypeOf

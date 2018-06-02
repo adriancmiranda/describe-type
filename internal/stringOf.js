@@ -1,5 +1,5 @@
 const getPrototypeOf = require('../shim/Object.getPrototypeOf.js');
-const slice = require('../ponyfill/Array.prototype.slice.js');
+const slice = require('./slice.js');
 const { reFunctionName } = require('./patterns.js');
 const { objectToString } = require('./built-in.js');
 
