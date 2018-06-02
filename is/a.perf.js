@@ -1,7 +1,7 @@
 import { Suite } from 'benchmark';
 import { benchmarkFatestStatus, benchmarkCycle } from '../.fixtures/benchmark';
 import * as datatypes from '../.fixtures/datatypes.fixture';
-import * as deprecatedIsType from '../.fixtures/obsoleto/is/type';
+import * as deprecatedIsType from '../.fixtures/obsoleto/is/type.next';
 import * as describeType from '../index.next';
 import * as is from './index.next';
 
