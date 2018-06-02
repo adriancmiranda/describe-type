@@ -1,9 +1,9 @@
 /*!
  * 
- * ~~~~ describe-type v1.0.0-dev.3
+ * ~~~~ describe-type v1.0.0-dev.4
  * 
- * @commit 4bf7208fd8365b400add93d82ccc2c8d83735034
- * @moment Thursday, May 31, 2018 7:42 PM
+ * @commit b50e8f97ff3c21361a238cf2f6280cb551cbbb56
+ * @moment Saturday, June 2, 2018 3:27 AM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2021
@@ -13,14 +13,14 @@ var internal = (function (exports) {
 
 	// pattern(s)
 	var reIsBase64 = /^(data:\w+\/[a-zA-Z+\-.]+;base64,)?([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/;
+	var reIsHexadecimal = /^((#|0x)?([0-9A-Fa-f]{6}|[0-9A-Fa-f]{3}))?$/;
+	var reRegExpFlags = /^(?:([gimuy])(?!.*\1)){0,5}$/;
+	var reRegExp = /^\/([\s\S]*)\/((?:([gimuy])(?!.*\3)){0,5})$/;
 	var reFunctionName = /\s*function\s+([^(\s]*)\s*/;
 	var reIsNativeFn = /\[native\scode\]/;
 	var reStringToBoolean = /^true|[1-9]+$/gi;
 	var reToPropName = /^[^a-zA-Z_$]|[^\w|$]|[^\w$]$/g;
 	var reIsHex = /^([A-Fa-f0-9]+|)$/;
-	var reIsHexadecimal = /^((#|0x)?([0-9A-Fa-f]{6}|[0-9A-Fa-f]{3}))?$/;
-	var reRegExpFlags = /^(?:([gimuy])(?!.*\1)){0,5}$/;
-	var reRegExp = /^\/([\s\S]*)\/((?:([gimuy])(?!.*\3)){0,5})$/;
 	var reIsJsonStart = /^\[|^\{(?!\{)/;
 	var reEndsWithBracket = /\]$/;
 	var reEndsWithBrace = /\}$/;
@@ -28,14 +28,14 @@ var internal = (function (exports) {
 
 	var patterns_next = /*#__PURE__*/{
 		reIsBase64: reIsBase64,
+		reIsHexadecimal: reIsHexadecimal,
+		reRegExpFlags: reRegExpFlags,
+		reRegExp: reRegExp,
 		reFunctionName: reFunctionName,
 		reIsNativeFn: reIsNativeFn,
 		reStringToBoolean: reStringToBoolean,
 		reToPropName: reToPropName,
 		reIsHex: reIsHex,
-		reIsHexadecimal: reIsHexadecimal,
-		reRegExpFlags: reRegExpFlags,
-		reRegExp: reRegExp,
 		reIsJsonStart: reIsJsonStart,
 		reEndsWithBracket: reEndsWithBracket,
 		reEndsWithBrace: reEndsWithBrace,

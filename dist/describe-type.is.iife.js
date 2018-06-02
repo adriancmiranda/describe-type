@@ -1,9 +1,9 @@
 /*!
  * 
- * ~~~~ describe-type v1.0.0-dev.3
+ * ~~~~ describe-type v1.0.0-dev.4
  * 
- * @commit 4bf7208fd8365b400add93d82ccc2c8d83735034
- * @moment Thursday, May 31, 2018 7:42 PM
+ * @commit b50e8f97ff3c21361a238cf2f6280cb551cbbb56
+ * @moment Saturday, June 2, 2018 3:27 AM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2021
@@ -441,11 +441,11 @@ var is = (function (exports) {
 
 	// pattern(s)
 	var reIsBase64 = /^(data:\w+\/[a-zA-Z+\-.]+;base64,)?([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/;
-	var reIsNativeFn = /\[native\scode\]/;
-	var reIsHex = /^([A-Fa-f0-9]+|)$/;
 	var reIsHexadecimal = /^((#|0x)?([0-9A-Fa-f]{6}|[0-9A-Fa-f]{3}))?$/;
 	var reRegExpFlags = /^(?:([gimuy])(?!.*\1)){0,5}$/;
 	var reRegExp = /^\/([\s\S]*)\/((?:([gimuy])(?!.*\3)){0,5})$/;
+	var reIsNativeFn = /\[native\scode\]/;
+	var reIsHex = /^([A-Fa-f0-9]+|)$/;
 	var reIsJsonStart = /^\[|^\{(?!\{)/;
 	var reIsJsonEnds = { '[': exports.reEndsWithBracket, '{': exports.reEndsWithBrace };
 

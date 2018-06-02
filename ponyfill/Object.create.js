@@ -13,7 +13,7 @@ const each = require('../internal/each.js');
  * @returns {Object}
  */
 module.exports = Object.create || function create(proto, properties) {
-	if (proto === null) return {};
+	if (proto === null && properties === undefined) return {};
 	if (notType(Object, proto)) {
 		throw new TypeError('Object prototype may only be an Object or null: ' + (typeof proto));
 	}

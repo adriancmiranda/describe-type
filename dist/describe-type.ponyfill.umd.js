@@ -1,9 +1,9 @@
 /*!
  * 
- * ~~~~ describe-type v1.0.0-dev.3
+ * ~~~~ describe-type v1.0.0-dev.4
  * 
- * @commit 4bf7208fd8365b400add93d82ccc2c8d83735034
- * @moment Thursday, May 31, 2018 7:42 PM
+ * @commit b50e8f97ff3c21361a238cf2f6280cb551cbbb56
+ * @moment Saturday, June 2, 2018 3:27 AM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2021
@@ -510,7 +510,7 @@
 	 * @returns {Object}
 	 */
 	var Object_create_next = Object.create || function create(proto, properties) {
-		if (proto === null) { return {}; }
+		if (proto === null && properties === undefined) { return {}; }
 		if (notType(Object, proto)) {
 			throw new TypeError('Object prototype may only be an Object or null: ' + (typeof proto));
 		}
