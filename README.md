@@ -918,7 +918,6 @@ type.booleanOf('0')
 [describe-type/ponyfill/Array.prototype.reduce]: /ponyfill/Array.prototype.reduce.next.js ""
 [describe-type/ponyfill/Array.prototype.slice]: /ponyfill/Array.prototype.slice.next.js ""
 [describe-type/ponyfill/Object.assign]: /ponyfill/Object.assign.next.js ""
-[describe-type/ponyfill/Object.create]: /ponyfill/Object.create.next.js ""
 [describe-type/ponyfill/Object.is]: /ponyfill/Object.is.next.js ""
 [describe-type/ponyfill/Object.keys]: /ponyfill/Object.keys.next.js ""
 [describe-type/ponyfill/String.prototype.startsWith]: /ponyfill/String.prototype.startsWith.next.js ""
@@ -927,6 +926,7 @@ type.booleanOf('0')
 [describe-type/schema]: /schema/index.next.js ""
 
 <!-- shim/ -->
+[describe-type/shim/Object.create]: /shim/Object.create.next.js ""
 [describe-type/shim/Object.getPrototypeOf]: /shim/Object.getPrototypeOf.next.js ""
 
 
