@@ -6,7 +6,7 @@ toc:
   - as / a / an / type
   - any
   - instanceOf
-  - vectorOf
+  - arrayOf
 
   - name: has
     description: |
@@ -55,6 +55,7 @@ toc:
   - args
   - args.empty
   - array
+  - array.of
   - array.empty
   - arraylike
   - arraylike.empty
@@ -62,7 +63,7 @@ toc:
   - not.a / not.an / not.type
   - not.any
   - not.instanceOf
-  - not.vectorOf
+  - not.arrayOf
   - object
   - object.empty
   - regexp
@@ -112,7 +113,6 @@ toc:
   - uint / unsignetInteger?
   - undef
   - unfilled
-  - vector / vectorOf?
   - within
 
   - name: ponyfill

@@ -42,7 +42,8 @@ export { default as primitive } from './primitive.next.js';
 export { default as symbol } from './symbol.next.js';
 export { default as type } from './type.next.js';
 export { default as uint } from './uint.next.js';
+export { default as filled } from './filled.next.js';
+export { default as unfilled } from './unfilled.next.js';
 export { default as undef } from './undef.next.js';
-export { default as vector } from './vector.next.js';
 export { default as within } from './within.next.js';
 

@@ -6,9 +6,9 @@ import { as } from './index.next';
 import asA from './as.a.next';
 import asAn from './as.an.next';
 import asAny from './as.any.next';
-import asInstanceOf from './as.instanceOf.next';
 import asType from './as.type.next';
-import asVectorOf from './as.vectorOf.next';
+import asInstanceOf from './as.instanceOf.next';
+import asArrayOf from './as.arrayOf.next';
 
 let i = 0;
 datatypes.all.iterate(({ name, seal, label, ctor, value }) => {
@@ -58,12 +58,12 @@ datatypes.all.iterate(({ name, seal, label, ctor, value }) => {
 		asType(ctor, value);
 	})
 
-	.add(`${name}: asVectorOf(${name}, () => ${label})`, () => {
-		asVectorOf(ctor, () => value);
+	.add(`${name}: asArrayOf(${name}, () => ${label})`, () => {
+		asArrayOf(ctor, () => value);
 	})
 
-	.add(`${name}: asVectorOf(${name}, ${label})`, () => {
-		asVectorOf(ctor, value);
+	.add(`${name}: asArrayOf(${name}, ${label})`, () => {
+		asArrayOf(ctor, value);
 	})
 
 	.add(`${name}: as.a(${name}, () => ${label})`, () => {
@@ -106,12 +106,12 @@ datatypes.all.iterate(({ name, seal, label, ctor, value }) => {
 		as.type(ctor, value);
 	})
 
-	.add(`${name}: as.vectorOf(${name}, () => ${label})`, () => {
-		as.vectorOf(ctor, () => value);
+	.add(`${name}: as.arrayOf(${name}, () => ${label})`, () => {
+		as.arrayOf(ctor, () => value);
 	})
 
-	.add(`${name}: as.vectorOf(${name}, ${label})`, () => {
-		as.vectorOf(ctor, value);
+	.add(`${name}: as.arrayOf(${name}, ${label})`, () => {
+		as.arrayOf(ctor, value);
 	})
 
 	.add(`${name}: describeType.as.a(${name}, () => ${label})`, () => {
@@ -154,12 +154,12 @@ datatypes.all.iterate(({ name, seal, label, ctor, value }) => {
 		describeType.as.type(ctor, value);
 	})
 
-	.add(`${name}: describeType.as.vectorOf(${name}, () => ${label})`, () => {
-		describeType.as.vectorOf(ctor, () => value);
+	.add(`${name}: describeType.as.arrayOf(${name}, () => ${label})`, () => {
+		describeType.as.arrayOf(ctor, () => value);
 	})
 
-	.add(`${name}: describeType.as.vectorOf(${name}, ${label})`, () => {
-		describeType.as.vectorOf(ctor, value);
+	.add(`${name}: describeType.as.arrayOf(${name}, ${label})`, () => {
+		describeType.as.arrayOf(ctor, value);
 	})
 
 	.on('cycle', benchmarkCycle())

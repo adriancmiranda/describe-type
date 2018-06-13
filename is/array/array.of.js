@@ -1,5 +1,5 @@
-import notAny from './not/not.any.next.js';
-import arraylike from './arraylike/arraylike.next.js';
+const notAny = require('../not/not.any.js');
+const arraylike = require('../arraylike/arraylike.js');
 
 /**
  * TODO: a,an,any
@@ -9,7 +9,7 @@ import arraylike from './arraylike/arraylike.next.js';
  * @param {arraylike} value
  * @returns {Boolean}
  */
-export default function vector(expected, value) {
+module.exports = function arrayOf(expected, value) {
 	if (arraylike(value) === false) return false;
 	for (let i = value.length - 1; i > -1; i -= 1) {
 		if (notAny(expected, value[i])) return false;

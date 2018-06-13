@@ -1,9 +1,9 @@
 /*!
  * 
- * ~~~~ describe-type v1.0.0-dev.4
+ * ~~~~ describe-type v1.0.0-dev.5
  * 
- * @commit 074766fbe435a0dc9967f90b88f11eeb4067f794
- * @moment Saturday, June 2, 2018 5:25 AM
+ * @commit f510ec8252e9b6dcc1fc9f99a38e20e88e63a46a
+ * @moment Wednesday, June 13, 2018 12:39 PM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2021
@@ -403,7 +403,7 @@ define(function () { 'use strict';
 	 * @param {arraylike} value
 	 * @returns {Boolean}
 	 */
-	function vector(expected, value) {
+	function arrayOf(expected, value) {
 		if (arraylike(value) === false) { return false; }
 		for (var i = value.length - 1; i > -1; i -= 1) {
 			if (notAny(expected, value[i])) { return false; }
@@ -417,22 +417,22 @@ define(function () { 'use strict';
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function asVectorOf(expected, value) {
+	function asArrayOf(expected, value) {
 		value = getExpectedValue(expected, value, arguments, 2);
-		if (expected === undefined || expected === null) { return vector(expected, value); }
+		if (expected === undefined || expected === null) { return arrayOf(expected, value); }
 		if (expected instanceof Array && expected.length > 0) {
 			for (var i = expected.length - 1; i > -1; i -= 1) {
-				if (vector(expected[i], value)) { return value; }
+				if (arrayOf(expected[i], value)) { return value; }
 			}
 			return arguments[2];
 		}
-		return vector(expected, value) ? value : arguments[2];
+		return arrayOf(expected, value) ? value : arguments[2];
 	}
 
 	asA.a = asA.an = asA.type = asA;
 	asA.any = asAny;
 	asA.instanceOf = asInstanceOf;
-	asA.vectorOf = asVectorOf;
+	asA.arrayOf = asArrayOf;
 
 	return asA;
 

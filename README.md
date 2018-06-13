@@ -94,8 +94,8 @@ console.log(is.type(Function, mySprite)); // false
 - [arraylike](#api-arraylike)(value :any) :boolean <br>
 - [arraylike.empty](#api-arraylike.empty)(value :any) :boolean <br>
 - [array](#api-array)(value :any) :boolean <br>
+- [array.of](#api-array.of)(expected :Function, value :any) :boolean <br>
 - [array.empty](#api-array.empty)(value :any) :boolean <br>
-- [array.vector](#api-array.vector)(expected :Function, value :any) :boolean <br>
 
 ##### Object
 - [object](#api-object)(value :any) :boolean <br>
@@ -833,11 +833,11 @@ arrayEmpty(value);
 ```
 </td></tr></tbody></table>
 
-<!-- array/array.vector -->
+<!-- array/array.of -->
 
-<table id="api-array.vector"><thead><tr>
+<table id="api-array.of"><thead><tr>
 <th width="90" align="center">:umbrella:</th>
-<th width="790" align="left"><a href="#array">▴</a>is: Array Vector</th>
+<th width="790" align="left"><a href="#array">▴</a>is: Array of</th>
 </tr></thead><tbody>
 <tr><td>
 
@@ -845,23 +845,23 @@ arrayEmpty(value);
   
 ```html
 <script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/is.umd.js"></script>
-<script>is.array.vector(value);</script>
+<script>is.array.of(value);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
 
-[CJS][cjs:is/array/array.vector] </td><td>
+[CJS][cjs:is/array/array.of] </td><td>
 
 ```js
-const arrayVector = require('describe-type/is/array/array.vector');
-arrayVector(value);
+const arrayOf = require('describe-type/is/array/array.of');
+arrayOf(value);
 ```
 </td></tr><tr><td>
 
-[ES6][es6:is/array/array.vector] </td><td>
+[ES6][es6:is/array/array.of] </td><td>
 
 ```js
-import arrayVector from 'describe-type/is/array/array.vector.next';
-arrayVector(value);
+import arrayOf from 'describe-type/is/array/array.of.next';
+arrayOf(value);
 ```
 </td></tr></tbody></table>
 
@@ -2432,7 +2432,7 @@ See also the list of _[contributors][CONTRIBUTORS]_ who participated in this pro
 <!-- is/array/ -->
 [es6:is/array]: /describe-type/is/array/index.next.js ""
 [es6:is/array/array.empty]: /describe-type/is/array/array.empty.next.js ""
-[es6:is/array/array.vector]: /describe-type/is/array/array.vector.next.js ""
+[es6:is/array/array.of]: /describe-type/is/array/array.of.next.js ""
 
 <!-- is/arraylike/ -->
 [es6:is/arraylike]: /describe-type/is/arraylike/index.next.js ""
@@ -2533,7 +2533,7 @@ See also the list of _[contributors][CONTRIBUTORS]_ who participated in this pro
 <!-- is/array/ -->
 [cjs:is/array]: /describe-type/is/array/index.js ""
 [cjs:is/array/array.empty]: /describe-type/is/array/array.empty.js ""
-[cjs:is/array/array.vector]: /describe-type/is/array/array.vector.js ""
+[cjs:is/array/array.of]: /describe-type/is/array/array.of.js ""
 
 <!-- is/arraylike/ -->
 [cjs:is/arraylike]: /describe-type/is/arraylike/index.js ""

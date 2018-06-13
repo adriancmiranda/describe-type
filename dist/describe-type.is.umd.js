@@ -1,9 +1,9 @@
 /*!
  * 
- * ~~~~ describe-type v1.0.0-dev.4
+ * ~~~~ describe-type v1.0.0-dev.5
  * 
- * @commit 074766fbe435a0dc9967f90b88f11eeb4067f794
- * @moment Saturday, June 2, 2018 5:25 AM
+ * @commit f510ec8252e9b6dcc1fc9f99a38e20e88e63a46a
+ * @moment Wednesday, June 13, 2018 12:39 PM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2021
@@ -174,32 +174,6 @@
 	 *
 	 * @function
 	 * @memberof is
-	 * @param {any} value
-	 * @returns {Boolean}
-	 */
-	function isEmptyArray(value) {
-		return array(value) && value.length === 0;
-	}
-
-	array.empty = isEmptyArray;
-
-	/**
-	 *
-	 * @function
-	 * @memberof is
-	 * @param {any} value
-	 * @returns {Boolean}
-	 */
-	function isEmptyArraylike(value) {
-		return arraylike(value) && value.length === 0;
-	}
-
-	arraylike.empty = isEmptyArraylike;
-
-	/**
-	 *
-	 * @function
-	 * @memberof is
 	 * @param {Function} expect
 	 * @param {any} value
 	 * @returns {Boolean}
@@ -216,18 +190,6 @@
 		if (value instanceof Array) { return expected === Array; }
 		if (value instanceof RegExp) { return expected === RegExp; }
 		return constructorOf(value) === expected;
-	}
-
-	/**
-	 *
-	 * @function
-	 * @memberof is
-	 * @param {Function|Array.<Function>} expected
-	 * @param {any} value
-	 * @returns {Boolean}
-	 */
-	function notType(expected, value) {
-		return type(expected, value) === false;
 	}
 
 	/**
@@ -265,6 +227,61 @@
 	 * @function
 	 * @memberof is
 	 * @param {Function|Array.<Function>} expected
+	 * @param {arraylike} value
+	 * @returns {Boolean}
+	 */
+	function arrayOf(expected, value) {
+		if (arraylike(value) === false) { return false; }
+		for (var i = value.length - 1; i > -1; i -= 1) {
+			if (notAny(expected, value[i])) { return false; }
+		}
+		return true;
+	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function isEmptyArray(value) {
+		return array(value) && value.length === 0;
+	}
+
+	array.of = arrayOf;
+	array.empty = isEmptyArray;
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function isEmptyArraylike(value) {
+		return arraylike(value) && value.length === 0;
+	}
+
+	arraylike.empty = isEmptyArraylike;
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {Function|Array.<Function>} expected
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function notType(expected, value) {
+		return type(expected, value) === false;
+	}
+
+	/**
+	 * TODO: a,an,any
+	 * @function
+	 * @memberof is
+	 * @param {Function|Array.<Function>} expected
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
@@ -294,22 +311,6 @@
 	}
 
 	/**
-	 * TODO: a,an,any
-	 * @function
-	 * @memberof is
-	 * @param {Function|Array.<Function>} expected
-	 * @param {arraylike} value
-	 * @returns {Boolean}
-	 */
-	function vector(expected, value) {
-		if (arraylike(value) === false) { return false; }
-		for (var i = value.length - 1; i > -1; i -= 1) {
-			if (notAny(expected, value[i])) { return false; }
-		}
-		return true;
-	}
-
-	/**
 	 *
 	 * @function
 	 * @memberof is
@@ -317,14 +318,14 @@
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
-	function notVectorOf(expected, value) {
-		return vector(expected, value) === false;
+	function notArrayOf(expected, value) {
+		return arrayOf(expected, value) === false;
 	}
 
 	notType.a = notType.an = notType.type = notType;
 	notType.any = notAny;
+	notType.arrayOf = notArrayOf;
 	notType.instanceOf = notInstanceOf;
-	notType.vectorOf = notVectorOf;
 
 	/**
 	 *
@@ -981,6 +982,28 @@
 	}
 
 	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {any}
+	 * @returns {Boolean}
+	 */
+	function unfilled(value) {
+		return value === undefined || value === null;
+	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {any}
+	 * @returns {Boolean}
+	 */
+	function filled(value) {
+		return unfilled(value) === false;
+	}
+
+	/**
 	 * The `floatOf()` function parses an argument and returns a floating point number.
 	 *
 	 * @function
@@ -1061,8 +1084,9 @@
 	exports.symbol = symbol;
 	exports.type = type;
 	exports.uint = uint;
+	exports.filled = filled;
+	exports.unfilled = unfilled;
 	exports.undef = undef;
-	exports.vector = vector;
 	exports.within = within;
 
 })));

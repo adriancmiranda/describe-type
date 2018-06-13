@@ -36,7 +36,7 @@ test(`${colors.underline('describeType.as')} exposure`, (t) => {
 	t.deepEqual(describeType.as.an, describeType.as.type, '"describeType.as.an" should be a alias to "describeType.as.type"');
 	t.is(toString.call(describeType.as.any), '[object Function]', '"describeType.as.any" should be a function');
 	t.is(toString.call(describeType.as.instanceOf), '[object Function]', '"describeType.as.instanceOf" should be a function');
-	t.is(toString.call(describeType.as.vectorOf), '[object Function]', '"describeType.as.vectorOf" should be a function');
+	t.is(toString.call(describeType.as.arrayOf), '[object Function]', '"describeType.as.arrayOf" should be a function');
 });
 
 test(`${colors.underline('describeType.has')} expusure`, (t) => {
@@ -87,7 +87,6 @@ test(`${colors.underline('describeType.is')} expusure`, (t) => {
 	t.is(toString.call(describeType.is.symbol), '[object Function]', '"describeType.is.symbol" should be a function');
 	t.is(toString.call(describeType.is.uint), '[object Function]', '"describeType.is.uint" should be a function');
 	t.is(toString.call(describeType.is.undef), '[object Function]', '"describeType.is.undef" should be a function');
-	t.is(toString.call(describeType.is.vector), '[object Function]', '"describeType.is.vector" should be a function');
 	t.is(toString.call(describeType.is.within), '[object Function]', '"describeType.is.within" should be a function');
 });
 
@@ -98,6 +97,7 @@ test(`${colors.underline('describeType.is.args')} expusure`, (t) => {
 
 test(`${colors.underline('describeType.is.array')} expusure`, (t) => {
 	t.is(toString.call(describeType.is.array), '[object Function]', '"describeType.is.array" should be a function');
+	t.is(toString.call(describeType.is.array.of), '[object Function]', '"describeType.is.array.of" should be a function');
 	t.is(toString.call(describeType.is.array.empty), '[object Function]', '"describeType.is.array.empty" should be a function');
 });
 
@@ -113,7 +113,7 @@ test(`${colors.underline('describeType.is.not')} expusure`, (t) => {
 	t.deepEqual(describeType.is.not.an, describeType.is.not.type, '"describeType.is.not.an" should be a alias to "describeType.is.not.type"');
 	t.is(toString.call(describeType.is.not.any), '[object Function]', '"describeType.is.not.any" should be a function');
 	t.is(toString.call(describeType.is.not.instanceOf), '[object Function]', '"describeType.is.not.instanceOf" should be a function');
-	t.is(toString.call(describeType.is.not.vectorOf), '[object Function]', '"describeType.is.not.vectorOf" should be a function');
+	t.is(toString.call(describeType.is.not.arrayOf), '[object Function]', '"describeType.is.not.arrayOf" should be a function');
 });
 
 test(`${colors.underline('describeType.is.object')} expusure`, (t) => {

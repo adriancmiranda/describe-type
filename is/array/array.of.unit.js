@@ -1,14 +1,14 @@
 import test from 'ava';
 import { toSource, constructorNameOf } from '../.fixtures/datatype/utils';
 import * as describeType from '../index.next';
-import vector from './vector.next';
+import arrayOf from './array/array.of.next';
 
-test('describeType.is.vector exposure', (t) => {
-	t.is(toString.call(describeType.is.vector), '[object Function]', 'should be a function');
+test('describeType.is.arrayOf exposure', (t) => {
+	t.is(toString.call(describeType.is.arrayOf), '[object Function]', 'should be a function');
 });
 
-test('vector exposure', (t) => {
-	t.is(toString.call(vector), '[object Function]', 'should be a function');
+test('arrayOf exposure', (t) => {
+	t.is(toString.call(arrayOf), '[object Function]', 'should be a function');
 });
 
 [
@@ -23,8 +23,8 @@ test('vector exposure', (t) => {
 	{ type: Boolean, value: [true, false, true] },
 	{ type: RegExp, value: [/foo/, /bar/, /baz/] },
 ].forEach(datatype => {
-	test(`vector(${constructorNameOf(datatype.type)}, ${toSource(datatype.value)});`, (t) => {
-		t.is(vector(datatype.type, datatype.value), true, 'should be true');
+	test(`arrayOf(${constructorNameOf(datatype.type)}, ${toSource(datatype.value)});`, (t) => {
+		t.is(arrayOf(datatype.type, datatype.value), true, 'should be true');
 	});
 });
 
@@ -36,7 +36,7 @@ test('vector exposure', (t) => {
 	{ type: Object, value: [true, false, true] },
 	{ type: Boolean, value: [/foo/, /bar/, /baz/] },
 ].forEach(datatype => {
-	test(`vector(${constructorNameOf(datatype.type)}, ${toSource(datatype.value)});`, (t) => {
-		t.is(vector(datatype.value), false, 'should be false');
+	test(`arrayOf(${constructorNameOf(datatype.type)}, ${toSource(datatype.value)});`, (t) => {
+		t.is(arrayOf(datatype.value), false, 'should be false');
 	});
 });

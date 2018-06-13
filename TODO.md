@@ -65,7 +65,7 @@
 * [ ] [as.type](as/as.type.js)
 * [ ] [as.any](as/as.any.js)
 * [ ] [as.instanceOf](as/as.instanceOf.js)
-* [ ] [as.vectorOf](as/as.vectorOf.js)
+* [ ] [as.arrayOf](as/as.arrayOf.js)
 
 <sub>[▴ Back to top](#describe-type)</sub>
 
@@ -102,7 +102,7 @@
 * [ ] [is.not.any](is/not.any.js)
 * [ ] [is.not.instanceOf](is/not.instanceOf.js)
 * [ ] [is.not.type](is/not.type.js)
-* [ ] [is.not.vectorOf](is/not.vectorOf.js)
+* [ ] [is.not.arrayOf](is/not.arrayOf.js)
 * [ ] [is.object/](is/index.js)
 * [ ] [is.object.empty](is/object.empty.js)
 * [ ] [is.object](is/object.js)
@@ -154,7 +154,7 @@
 * [ ] [is.uint](is/uint.js)
 * [x] [is.undef](is/undef.js)
 * [ ] [is.unfilled](is/unfilled.js)
-* [ ] [is.vector](is/vector.js)
+* [ ] [is.array](is/array.js)
 * [ ] [is.within](is/within.js)
 
 <sub>[▴ Back to top](#describe-type)</sub>

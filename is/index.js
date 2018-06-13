@@ -42,7 +42,8 @@ exports.primitive = require('./primitive.js');
 exports.symbol = require('./symbol.js');
 exports.type = require('./type.js');
 exports.uint = require('./uint.js');
+exports.filled = require('./filled.js');
+exports.unfilled = require('./unfilled.js');
 exports.undef = require('./undef.js');
-exports.vector = require('./vector.js');
 exports.within = require('./within.js');
 

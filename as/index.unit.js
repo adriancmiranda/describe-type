@@ -26,6 +26,6 @@ test('as.type method is exposed', (t) => {
 	t.is(toString.call(as.type), '[object Function]', 'should be a function');
 });
 
-test('as.vectorOf method is exposed', (t) => {
-	t.is(toString.call(as.vectorOf), '[object Function]', 'should be a function');
+test('as.arrayOf method is exposed', (t) => {
+	t.is(toString.call(as.arrayOf), '[object Function]', 'should be a function');
 });
