@@ -173,7 +173,7 @@ console.log(is.type(Function, mySprite)); // false
 <!-- a, an or type -->
 
 <table id="api-a.an.type"><thead><tr>
-<th width="90" align="center">:umbrella:</th>
+<th width="90" align="center">☔️</th>
 <th width="790" align="left"><a href="#common">▴</a>is: A, An or Type</th>
 </tr></thead><tbody>
 <tr><td>
@@ -206,7 +206,7 @@ type(expected, value);
 <!-- instanceOf -->
 
 <table id="api-instanceOf"><thead><tr>
-<th width="90" align="center">:umbrella:</th>
+<th width="90" align="center">☔️</th>
 <th width="790" align="left"><a href="#common">▴</a>is: Instance of</th>
 </tr></thead><tbody>
 <tr><td>
@@ -239,7 +239,7 @@ instanceOf(expected, value);
 <!-- defined -->
 
 <table id="api-defined"><thead><tr>
-<th width="90" align="center">:umbrella:</th>
+<th width="90" align="center">☔️</th>
 <th width="790" align="left"><a href="#common">▴</a>is: Defined</th>
 </tr></thead><tbody>
 <tr><td>
@@ -272,7 +272,7 @@ defined(value);
 <!-- undef -->
 
 <table id="api-undef"><thead><tr>
-<th width="90" align="center">:umbrella:</th>
+<th width="90" align="center">☔️</th>
 <th width="790" align="left"><a href="#common">▴</a>is: undefined</th>
 </tr></thead><tbody>
 <tr><td>
@@ -305,7 +305,7 @@ undef(value);
 <!-- nil -->
 
 <table id="api-nil"><thead><tr>
-<th width="90" align="center">:umbrella:</th>
+<th width="90" align="center">☔️</th>
 <th width="790" align="left"><a href="#common">▴</a>is: null</th>
 </tr></thead><tbody>
 <tr><td>
@@ -338,7 +338,7 @@ nil(value);
 <!-- unfilled -->
 
 <table id="api-unfilled"><thead><tr>
-<th width="90" align="center">:umbrella:</th>
+<th width="90" align="center">☔️</th>
 <th width="790" align="left"><a href="#common">▴</a>is: Unfilled</th>
 </tr></thead><tbody>
 <tr><td>
@@ -371,7 +371,7 @@ unfilled(value);
 <!-- filled -->
 
 <table id="api-filled"><thead><tr>
-<th width="90" align="center">:umbrella:</th>
+<th width="90" align="center">☔️</th>
 <th width="790" align="left"><a href="#common">▴</a>is: Filled</th>
 </tr></thead><tbody>
 <tr><td>
@@ -404,7 +404,7 @@ filled(value);
 <!-- empty -->
 
 <table id="api-empty"><thead><tr>
-<th width="90" align="center">:umbrella:</th>
+<th width="90" align="center">☔️</th>
 <th width="790" align="left"><a href="#common">▴</a>is: Empty</th>
 </tr></thead><tbody>
 <tr><td>
@@ -437,7 +437,7 @@ empty(value);
 <!-- equal -->
 
 <table id="api-equal"><thead><tr>
-<th width="90" align="center">:umbrella:</th>
+<th width="90" align="center">☔️</th>
 <th width="790" align="left"><a href="#common">▴</a>is: Equal</th>
 </tr></thead><tbody>
 <tr><td>
@@ -470,7 +470,7 @@ equal(valueA, valueB);
 <!-- primitive -->
 
 <table id="api-primitive"><thead><tr>
-<th width="90" align="center">:umbrella:</th>
+<th width="90" align="center">☔️</th>
 <th width="790" align="left"><a href="#common">▴</a>is: Primitive</th>
 </tr></thead><tbody>
 <tr><td>
@@ -503,7 +503,7 @@ primitive(value);
 <!-- exotic -->
 
 <table id="api-exotic"><thead><tr>
-<th width="90" align="center">:umbrella:</th>
+<th width="90" align="center">☔️</th>
 <th width="790" align="left"><a href="#common">▴</a>is: Exotic</th>
 </tr></thead><tbody>
 <tr><td>
@@ -536,7 +536,7 @@ exotic(value);
 <!-- enumerable -->
 
 <table id="api-enumerable"><thead><tr>
-<th width="90" align="center">:umbrella:</th>
+<th width="90" align="center">☔️</th>
 <th width="790" align="left"><a href="#common">▴</a>is: Enumerable</th>
 </tr></thead><tbody>
 <tr><td>
@@ -569,7 +569,7 @@ enumerable(value);
 <!-- hosted -->
 
 <table id="api-hosted"><thead><tr>
-<th width="90" align="center">:umbrella:</th>
+<th width="90" align="center">☔️</th>
 <th width="790" align="left"><a href="#common">▴</a>is: Hosted</th>
 </tr></thead><tbody>
 <tr><td>
@@ -602,7 +602,7 @@ hosted(key, host);
 <!-- within -->
 
 <table id="api-within"><thead><tr>
-<th width="90" align="center">:umbrella:</th>
+<th width="90" align="center">☔️</th>
 <th width="790" align="left"><a href="#common">▴</a>is: Within</th>
 </tr></thead><tbody>
 <tr><td>
@@ -637,7 +637,7 @@ within(value, start, finish);
 <!-- args/ -->
 
 <table id="api-args"><thead><tr>
-<th width="90" align="center">:umbrella:</th>
+<th width="90" align="center">☔️</th>
 <th width="790" align="left"><a href="#arguments-1">▴</a>is: Arguments</th>
 </tr></thead><tbody>
 <tr><td>
@@ -670,7 +670,7 @@ args(value);
 <!-- args/empty -->
 
 <table id="api-args.empty"><thead><tr>
-<th width="90" align="center">:umbrella:</th>
+<th width="90" align="center">☔️</th>
 <th width="790" align="left"><a href="#arguments-1">▴</a>is: Arguments empty</th>
 </tr></thead><tbody>
 <tr><td>
@@ -705,7 +705,7 @@ argsEmpty(value);
 <!-- arraylike/ -->
 
 <table id="api-arraylike"><thead><tr>
-<th width="90" align="center">:umbrella:</th>
+<th width="90" align="center">☔️</th>
 <th width="790" align="left"><a href="#array">▴</a>is: Arraylike</th>
 </tr></thead><tbody>
 <tr><td>
@@ -738,7 +738,7 @@ arraylike(value);
 <!-- arraylike/arraylike.empty -->
 
 <table id="api-arraylike.empty"><thead><tr>
-<th width="90" align="center">:umbrella:</th>
+<th width="90" align="center">☔️</th>
 <th width="790" align="left"><a href="#array">▴</a>is: Arraylike empty</th>
 </tr></thead><tbody>
 <tr><td>
@@ -771,7 +771,7 @@ arraylikeEmpty(value);
 <!-- array/ -->
 
 <table id="api-array"><thead><tr>
-<th width="90" align="center">:umbrella:</th>
+<th width="90" align="center">☔️</th>
 <th width="790" align="left"><a href="#array">▴</a>is: Array</th>
 </tr></thead><tbody>
 <tr><td>
@@ -804,7 +804,7 @@ array(value);
 <!-- array/array.empty -->
 
 <table id="api-array.empty"><thead><tr>
-<th width="90" align="center">:umbrella:</th>
+<th width="90" align="center">☔️</th>
 <th width="790" align="left"><a href="#array">▴</a>is: Array empty</th>
 </tr></thead><tbody>
 <tr><td>
@@ -836,7 +836,7 @@ arrayEmpty(value);
 <!-- array/array.of -->
 
 <table id="api-array.of"><thead><tr>
-<th width="90" align="center">:umbrella:</th>
+<th width="90" align="center">☔️</th>
 <th width="790" align="left"><a href="#array">▴</a>is: Array of</th>
 </tr></thead><tbody>
 <tr><td>
@@ -871,7 +871,7 @@ arrayOf(value);
 <!-- object/ -->
 
 <table id="api-object"><thead><tr>
-<th width="90" align="center">:umbrella:</th>
+<th width="90" align="center">☔️</th>
 <th width="790" align="left"><a href="#object">▴</a>is: Object</th>
 </tr></thead><tbody>
 <tr><td>
@@ -904,7 +904,7 @@ object(value);
 <!-- object/object.empty -->
 
 <table id="api-object.empty"><thead><tr>
-<th width="90" align="center">:umbrella:</th>
+<th width="90" align="center">☔️</th>
 <th width="790" align="left"><a href="#object">▴</a>is: Object empty</th>
 </tr></thead><tbody>
 <tr><td>
@@ -939,7 +939,7 @@ objectEmpty(value);
 <!-- regexp/ -->
 
 <table id="api-regexp"><thead><tr>
-<th width="90" align="center">:umbrella:</th>
+<th width="90" align="center">☔️</th>
 <th width="790" align="left"><a href="#regexp">▴</a>is: RegExp</th>
 </tr></thead><tbody>
 <tr><td>
@@ -972,7 +972,7 @@ regexp(value);
 <!-- regexp/regexp.string -->
 
 <table id="api-regexp.string"><thead><tr>
-<th width="90" align="center">:umbrella:</th>
+<th width="90" align="center">☔️</th>
 <th width="790" align="left"><a href="#regexp">▴</a>is: RegExp String</th>
 </tr></thead><tbody>
 <tr><td>
@@ -1005,7 +1005,7 @@ regexpString(value);
 <!-- regexp/regexp.flags -->
 
 <table id="api-regexp.flags"><thead><tr>
-<th width="90" align="center">:umbrella:</th>
+<th width="90" align="center">☔️</th>
 <th width="790" align="left"><a href="#regexp">▴</a>is: RegExp Flags</th>
 </tr></thead><tbody>
 <tr><td>
@@ -1040,7 +1040,7 @@ regexpFlags(value);
 <!-- stream/ -->
 
 <table id="api-stream"><thead><tr>
-<th width="90" align="center">:umbrella:</th>
+<th width="90" align="center">☔️</th>
 <th width="790" align="left"><a href="#stream">▴</a>is: Stream</th>
 </tr></thead><tbody>
 <tr><td>
@@ -1073,7 +1073,7 @@ stream(value);
 <!-- stream/stream.duplex -->
 
 <table id="api-stream.duplex"><thead><tr>
-<th width="90" align="center">:umbrella:</th>
+<th width="90" align="center">☔️</th>
 <th width="790" align="left"><a href="#stream">▴</a>is: Stream duplex</th>
 </tr></thead><tbody>
 <tr><td>
@@ -1106,7 +1106,7 @@ streamDuplex(value);
 <!-- stream/stream.transform -->
 
 <table id="api-stream.transform"><thead><tr>
-<th width="90" align="center">:umbrella:</th>
+<th width="90" align="center">☔️</th>
 <th width="790" align="left"><a href="#stream">▴</a>is: Stream transform</th>
 </tr></thead><tbody>
 <tr><td>
@@ -1139,7 +1139,7 @@ streamTransform(value);
 <!-- stream/stream.readable -->
 
 <table id="api-stream.readable"><thead><tr>
-<th width="90" align="center">:umbrella:</th>
+<th width="90" align="center">☔️</th>
 <th width="790" align="left"><a href="#stream">▴</a>is: Stream readable</th>
 </tr></thead><tbody>
 <tr><td>
@@ -1172,7 +1172,7 @@ streamReadable(value);
 <!-- stream/stream.writable -->
 
 <table id="api-stream.writable"><thead><tr>
-<th width="90" align="center">:umbrella:</th>
+<th width="90" align="center">☔️</th>
 <th width="790" align="left"><a href="#stream">▴</a>is: Stream writable</th>
 </tr></thead><tbody>
 <tr><td>
@@ -1207,7 +1207,7 @@ streamWritable(value);
 <!-- string/ -->
 
 <table id="api-string"><thead><tr>
-<th width="90" align="center">:umbrella:</th>
+<th width="90" align="center">☔️</th>
 <th width="790" align="left"><a href="#string">▴</a>is: String</th>
 </tr></thead><tbody>
 <tr><td>
@@ -1240,7 +1240,7 @@ string(value);
 <!-- string/string.empty -->
 
 <table id="api-string.empty"><thead><tr>
-<th width="90" align="center">:umbrella:</th>
+<th width="90" align="center">☔️</th>
 <th width="790" align="left"><a href="#string">▴</a>is: String empty</th>
 </tr></thead><tbody>
 <tr><td>
@@ -1275,7 +1275,7 @@ stringEmpty(value);
 <!-- fn/ -->
 
 <table id="api-fn"><thead><tr>
-<th width="90" align="center">:umbrella:</th>
+<th width="90" align="center">☔️</th>
 <th width="790" align="left"><a href="#function">▴</a>is: Function</th>
 </tr></thead><tbody>
 <tr><td>
@@ -1308,7 +1308,7 @@ fn(value);
 <!-- fn/fn.native -->
 
 <table id="api-fn.native"><thead><tr>
-<th width="90" align="center">:umbrella:</th>
+<th width="90" align="center">☔️</th>
 <th width="790" align="left"><a href="#function">▴</a>is: Function Native</th>
 </tr></thead><tbody>
 <tr><td>
@@ -1341,7 +1341,7 @@ fnNative(value);
 <!-- fn/fn.callable -->
 
 <table id="api-fn.callable"><thead><tr>
-<th width="90" align="center">:umbrella:</th>
+<th width="90" align="center">☔️</th>
 <th width="790" align="left"><a href="#function">▴</a>is: Function Callable</th>
 </tr></thead><tbody>
 <tr><td>
@@ -1374,7 +1374,7 @@ fnCallable(value);
 <!-- fn/fn.caste -->
 
 <table id="api-fn.caste"><thead><tr>
-<th width="90" align="center">:umbrella:</th>
+<th width="90" align="center">☔️</th>
 <th width="790" align="left"><a href="#function">▴</a>is: Class</th>
 </tr></thead><tbody>
 <tr><td>
@@ -1409,7 +1409,7 @@ fnCaste(value);
 <!-- bool -->
 
 <table id="api-bool"><thead><tr>
-<th width="90" align="center">:umbrella:</th>
+<th width="90" align="center">☔️</th>
 <th width="790" align="left"><a href="#boolean">▴</a>is: Boolean</th>
 </tr></thead><tbody>
 <tr><td>
@@ -1444,7 +1444,7 @@ bool(value);
 <!-- date -->
 
 <table id="api-date"><thead><tr>
-<th width="90" align="center">:umbrella:</th>
+<th width="90" align="center">☔️</th>
 <th width="790" align="left"><a href="#date">▴</a>is: Date</th>
 </tr></thead><tbody>
 <tr><td>
@@ -1478,7 +1478,7 @@ date(value);
 <!-- number -->
 
 <table id="api-number"><thead><tr>
-<th width="90" align="center">:umbrella:</th>
+<th width="90" align="center">☔️</th>
 <th width="790" align="left"><a href="#number">▴</a>is: Number</th>
 </tr></thead><tbody>
 <tr><td>
@@ -1511,7 +1511,7 @@ number(value);
 <!-- numeric -->
 
 <table id="api-numeric"><thead><tr>
-<th width="90" align="center">:umbrella:</th>
+<th width="90" align="center">☔️</th>
 <th width="790" align="left"><a href="#number">▴</a>is: Numeric</th>
 </tr></thead><tbody>
 <tr><td>
@@ -1544,7 +1544,7 @@ numeric(value);
 <!-- int -->
 
 <table id="api-int"><thead><tr>
-<th width="90" align="center">:umbrella:</th>
+<th width="90" align="center">☔️</th>
 <th width="790" align="left"><a href="#number">▴</a>is: Integer</th>
 </tr></thead><tbody>
 <tr><td>
@@ -1577,7 +1577,7 @@ int(value);
 <!-- uint -->
 
 <table id="api-uint"><thead><tr>
-<th width="90" align="center">:umbrella:</th>
+<th width="90" align="center">☔️</th>
 <th width="790" align="left"><a href="#number">▴</a>is: Unsigned integer</th>
 </tr></thead><tbody>
 <tr><td>
@@ -1610,7 +1610,7 @@ uint(value);
 <!-- infinity -->
 
 <table id="api-infinity"><thead><tr>
-<th width="90" align="center">:umbrella:</th>
+<th width="90" align="center">☔️</th>
 <th width="790" align="left"><a href="#number">▴</a>is: Infinity</th>
 </tr></thead><tbody>
 <tr><td>
@@ -1643,7 +1643,7 @@ infinity(value);
 <!-- nan -->
 
 <table id="api-nan"><thead><tr>
-<th width="90" align="center">:umbrella:</th>
+<th width="90" align="center">☔️</th>
 <th width="790" align="left"><a href="#number">▴</a>is: NaN</th>
 </tr></thead><tbody>
 <tr><td>
@@ -1676,7 +1676,7 @@ nan(value);
 <!-- odd -->
 
 <table id="api-odd"><thead><tr>
-<th width="90" align="center">:umbrella:</th>
+<th width="90" align="center">☔️</th>
 <th width="790" align="left"><a href="#number">▴</a>is: Odd</th>
 </tr></thead><tbody>
 <tr><td>
@@ -1709,7 +1709,7 @@ odd(value);
 <!-- even -->
 
 <table id="api-even"><thead><tr>
-<th width="90" align="center">:umbrella:</th>
+<th width="90" align="center">☔️</th>
 <th width="790" align="left"><a href="#number">▴</a>is: Even</th>
 </tr></thead><tbody>
 <tr><td>
@@ -1742,7 +1742,7 @@ even(value);
 <!-- decimal -->
 
 <table id="api-decimal"><thead><tr>
-<th width="90" align="center">:umbrella:</th>
+<th width="90" align="center">☔️</th>
 <th width="790" align="left"><a href="#number">▴</a>is: Decimal</th>
 </tr></thead><tbody>
 <tr><td>
@@ -1775,7 +1775,7 @@ decimal(value);
 <!-- min -->
 
 <table id="api-min"><thead><tr>
-<th width="90" align="center">:umbrella:</th>
+<th width="90" align="center">☔️</th>
 <th width="790" align="left"><a href="#number">▴</a>is: Minimum</th>
 </tr></thead><tbody>
 <tr><td>
@@ -1808,7 +1808,7 @@ min(value, others);
 <!-- max -->
 
 <table id="api-max"><thead><tr>
-<th width="90" align="center">:umbrella:</th>
+<th width="90" align="center">☔️</th>
 <th width="790" align="left"><a href="#number">▴</a>is: Maximum</th>
 </tr></thead><tbody>
 <tr><td>
@@ -1843,7 +1843,7 @@ max(value, others);
 <!-- error -->
 
 <table id="api-error"><thead><tr>
-<th width="90" align="center">:umbrella:</th>
+<th width="90" align="center">☔️</th>
 <th width="790" align="left"><a href="#error">▴</a>is: Error</th>
 </tr></thead><tbody>
 <tr><td>
@@ -1878,7 +1878,7 @@ error(value);
 <!-- symbol -->
 
 <table id="api-symbol"><thead><tr>
-<th width="90" align="center">:umbrella:</th>
+<th width="90" align="center">☔️</th>
 <th width="790" align="left"><a href="#symbol">▴</a>is: Symbol</th>
 </tr></thead><tbody>
 <tr><td>
@@ -1913,7 +1913,7 @@ symbol(value);
 <!-- element -->
 
 <table id="api-element"><thead><tr>
-<th width="90" align="center">:umbrella:</th>
+<th width="90" align="center">☔️</th>
 <th width="790" align="left"><a href="#element">▴</a>is: Element</th>
 </tr></thead><tbody>
 <tr><td>
@@ -1948,7 +1948,7 @@ element(value);
 <!-- buffer -->
 
 <table id="api-buffer"><thead><tr>
-<th width="90" align="center">:umbrella:</th>
+<th width="90" align="center">☔️</th>
 <th width="790" align="left"><a href="#buffer">▴</a>is: Buffer</th>
 </tr></thead><tbody>
 <tr><td>
@@ -1983,7 +1983,7 @@ buffer(value);
 <!-- jsonlike -->
 
 <table id="api-jsonlike"><thead><tr>
-<th width="90" align="center">:umbrella:</th>
+<th width="90" align="center">☔️</th>
 <th width="790" align="left"><a href="#json">▴</a>is: Jsonlike</th>
 </tr></thead><tbody>
 <tr><td>
@@ -2018,7 +2018,7 @@ jsonlike(value);
 <!-- base64 -->
 
 <table id="api-base64"><thead><tr>
-<th width="90" align="center">:umbrella:</th>
+<th width="90" align="center">☔️</th>
 <th width="790" align="left"><a href="#encoded-binary">▴</a>is: Base64</th>
 </tr></thead><tbody>
 <tr><td>
@@ -2051,7 +2051,7 @@ base64(value);
 <!-- hex -->
 
 <table id="api-hex"><thead><tr>
-<th width="90" align="center">:umbrella:</th>
+<th width="90" align="center">☔️</th>
 <th width="790" align="left"><a href="#encoded-binary">▴</a>is: Hex</th>
 </tr></thead><tbody>
 <tr><td>
@@ -2086,7 +2086,7 @@ hex(value);
 <!-- hexadecimal -->
 
 <table id="api-hexadecimal"><thead><tr>
-<th width="90" align="center">:umbrella:</th>
+<th width="90" align="center">☔️</th>
 <th width="790" align="left"><a href="#colors">▴</a>is: Hexadecimal</th>
 </tr></thead><tbody>
 <tr><td>
@@ -2119,7 +2119,7 @@ hexadecimal(value);
 <!-- rgb -->
 
 <table id="api-rgb"><thead><tr>
-<th width="90" align="center">:umbrella:</th>
+<th width="90" align="center">☔️</th>
 <th width="790" align="left"><a href="#colors">▴</a>is: RGB</th>
 </tr></thead><tbody>
 <tr><td>
@@ -2152,7 +2152,7 @@ rgb(value);
 <!-- rgba -->
 
 <table id="api-rgba"><thead><tr>
-<th width="90" align="center">:umbrella:</th>
+<th width="90" align="center">☔️</th>
 <th width="790" align="left"><a href="#colors">▴</a>is: RGBA</th>
 </tr></thead><tbody>
 <tr><td>
@@ -2226,7 +2226,7 @@ console.log(as(Boolean, myArray, null)); // null
 <!-- any -->
 
 <table id="api-as.any"><thead><tr>
-<th width="90" align="center">:umbrella:</th>
+<th width="90" align="center">☔️</th>
 <th width="790" align="left"><a href="#variants">▴</a>as: Any</th>
 </tr></thead><tbody>
 <tr><td>
@@ -2259,7 +2259,7 @@ any([datatype1, datatype2, ...], currentValue, defaultValue);
 <!-- arrayOf -->
 
 <table id="api-as.arrayOf"><thead><tr>
-<th width="90" align="center">:umbrella:</th>
+<th width="90" align="center">☔️</th>
 <th width="790" align="left"><a href="#variants">▴</a>as: Array of</th>
 </tr></thead><tbody>
 <tr><td>
@@ -2294,7 +2294,7 @@ arrayOf(datatype, currentValue, defaultValue);
 <!-- a -->
 
 <table id="api-as.a"><thead><tr>
-<th width="90" align="center">:umbrella:</th>
+<th width="90" align="center">☔️</th>
 <th width="790" align="left"><a href="#shortcuts">▴</a>as: A</th>
 </tr></thead><tbody>
 <tr><td>
@@ -2327,7 +2327,7 @@ a(datatype, currentValue, defaultValue);
 <!-- an -->
 
 <table id="api-as.an"><thead><tr>
-<th width="90" align="center">:umbrella:</th>
+<th width="90" align="center">☔️</th>
 <th width="790" align="left"><a href="#shortcuts">▴</a>as: An</th>
 </tr></thead><tbody>
 <tr><td>
@@ -2360,7 +2360,7 @@ an(datatype, currentValue, defaultValue);
 <!-- type -->
 
 <table id="api-as.type"><thead><tr>
-<th width="90" align="center">:umbrella:</th>
+<th width="90" align="center">☔️</th>
 <th width="790" align="left"><a href="#shortcuts">▴</a>as: Type</th>
 </tr></thead><tbody>
 <tr><td>
