@@ -2185,7 +2185,7 @@ rgba(value);
 
 <details><summary><a>describe-type/as</a>
 
-> Evaluates whether an expression specified by the second argument is a member of the data type specified by the first argument. If the second argument is a member of the data type, the result is the second argument. Otherwise, the result is the value _undefined_ unless the third value is set as default.<br><br>The expression used for the second argument must evaluate to a data type.
+> Evaluates whether an expression specified by the second argument is a member of the data type specified by the first argument. If the second argument is a member of the data type, the result is the second argument. Otherwise, the result is the value _undefined_ unless the third value is set as default.<br><br>The expression used for the first argument must evaluate to a data type.
 
 </summary><p>
 
