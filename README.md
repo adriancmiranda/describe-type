@@ -70,7 +70,7 @@ console.log(is.type(Function, mySprite)); // false
 
 ##### Common
 - [a](#api-a.an.type)(expected :Function, value :any) :boolean <br>
-- [an](#api-a.an.type)(expected :Function, value :any) <br>
+- [an](#api-a.an.type)(expected :Function, value :any) :boolean <br>
 - [type](#api-a.an.type)(expected :Function, value :any) :boolean <br>
 - [instanceOf](#api-instanceOf)(expected :Function, value :any) :boolean <br>
 - [defined](#api-defined)(value :any) :boolean <br>
