@@ -2185,7 +2185,7 @@ rgba(value);
 
 <details><summary><a>describe-type/as</a>
 
-> Evaluates whether an expression specified by the first argument is a member of the data type specified by the second argument. If the first argument is a member of the data type, the result is the first argument. Otherwise, the result is the value _null_ unless the third value is set as default.<br><br>The expression used for the second argument must evaluate to a data type.
+> Evaluates whether an expression specified by the second argument is a member of the data type specified by the first argument. If the second argument is a member of the data type, the result is the second argument. Otherwise, the result is the value _undefined_ unless the third value is set as default.<br><br>The expression used for the second argument must evaluate to a data type.
 
 </summary><p>
 
@@ -2197,7 +2197,7 @@ rgba(value);
 
 ##### Result
 
-- [Object][Object] — The result is _expression_ if _expression_ is a member of the data type specified in _datatype_. <br> Otherwise, the result is the value _null_ or the _defaultValue_.
+- [Object][Object] — The result is _expression_ if _expression_ is a member of the data type specified in _datatype_. <br> Otherwise, the result is the value _undefined_ or the _defaultValue_.
 
 #### Example
 
@@ -2206,8 +2206,8 @@ The following example creates a simple array named _myArray_ and uses the _as_ f
 ```js
 var myArray = ['foo', 'bar', 'baz'];
 console.log(as(Array, myArray)); // foo,bar,baz
-console.log(as(Number, myArray)); // null
-console.log(as(Boolean, myArray, undefined)); // undefined
+console.log(as(Number, myArray)); // undefined
+console.log(as(Boolean, myArray, null)); // null
 ```
 
 #### Variants
