@@ -11,7 +11,7 @@ test('fnNative exposure', (t) => {
 	t.is(toString.call(fnNative), '[object Function]', 'should be a function');
 });
 
-datatypes.fnNative.iterate((datatype) => {
+datatypes.nativeFunction.iterate((datatype) => {
 	test(`${datatype.id} • fnNative(${datatype.label});`, (t) => {
 		t.is(fnNative(datatype.value), true, 'should be true');
 	});
