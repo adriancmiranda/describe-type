@@ -1,4 +1,5 @@
 import test from 'ava';
+import * as datatypes from '../../.fixtures/datatypes.fixture';
 import * as describeType from '../../index.next';
 import fn from './fn.next';
 
