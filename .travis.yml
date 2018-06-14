@@ -28,6 +28,9 @@ matrix:
   # Machines to test
   include:
     - os: linux
+      node_js: "9"
+      env: JOB_PART=test
+    - os: linux
       node_js: "8"
       env: JOB_PART=test
     - os: linux
