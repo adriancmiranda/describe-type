@@ -1,9 +1,9 @@
 /*!
  * 
- * ~~~~ describe-type v1.0.0-dev.5
+ * ~~~~ describe-type v1.0.0
  * 
- * @commit f510ec8252e9b6dcc1fc9f99a38e20e88e63a46a
- * @moment Wednesday, June 13, 2018 12:39 PM
+ * @commit 96275fae251dee5fef6b00db6c937544c4470a13
+ * @moment Thursday, June 14, 2018 5:58 AM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2021
@@ -27,6 +27,32 @@ var as = (function () {
 	 */
 	function callable(value) {
 		return typeof value === FUNCTION;
+	}
+
+	// pattern(s)
+	var reIsClass = /^class/;
+	var reIsJsonEnds = { '[': exports.reEndsWithBracket, '{': exports.reEndsWithBrace };
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function caste(value) {
+		return reIsClass.test(String(value));
+	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function callable$1(value) {
+		return callable(value) && caste(value) === false;
 	}
 
 	/**
@@ -238,7 +264,7 @@ var as = (function () {
 	 * @returns {any}
 	 */
 	function getExpectedValue(expected, value, args, startIndex, endIndex) {
-		if (callable(value) && (expected === Function || ownValue(expected, Function)) === false) {
+		if (callable$1(value) && (expected === Function || ownValue(expected, Function)) === false) {
 			args = slice(args, startIndex, endIndex);
 			return apply(value, args[0], args, true);
 		}
@@ -366,11 +392,11 @@ var as = (function () {
 			for (var i = expected.length - 1; i > -1; i -= 1) {
 				var ctor = expected[i];
 				if (ctor === Number) { return type(ctor, value); } // ... should normalize?!
-				if (callable(ctor) && value instanceof ctor) { return true; }
+				if (callable$1(ctor) && value instanceof ctor) { return true; }
 			}
 		}
 		if (expected === Number) { return type(expected, value); } // ... should normalize?!
-		return callable(expected) && value instanceof expected;
+		return callable$1(expected) && value instanceof expected;
 	}
 
 	/**

@@ -1,4 +1,4 @@
-const { FUNCTION } = require('../internal/constants.js');
+const fnCallable = require('./fn/fn.callable.js');
 
 /**
  *
@@ -7,6 +7,4 @@ const { FUNCTION } = require('../internal/constants.js');
  * @param {any} value
  * @returns {Boolean}
  */
-module.exports = function callable(value) {
-	return typeof value === FUNCTION;
-}
+module.exports = fnCallable;

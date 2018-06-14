@@ -1,9 +1,9 @@
 /*!
  * 
- * ~~~~ describe-type v1.0.0-dev.5
+ * ~~~~ describe-type v1.0.0
  * 
- * @commit f510ec8252e9b6dcc1fc9f99a38e20e88e63a46a
- * @moment Wednesday, June 13, 2018 12:39 PM
+ * @commit 96275fae251dee5fef6b00db6c937544c4470a13
+ * @moment Thursday, June 14, 2018 5:58 AM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2021
@@ -13,11 +13,14 @@ var describeType = (function (exports) {
 
 	// pattern(s)
 	var reIsBase64 = /^(data:\w+\/[a-zA-Z+\-.]+;base64,)?([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/;
+	var reIsRGB = /(rgb[(]\s*([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])\s*,\s*([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])\s*,\s*([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])?[)])/i;
+	var reIsRGBA = /(rgba[(]\s*([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])\s*,\s*([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])\s*,\s*([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])(\s*,\s*((0\.[0-9]{1})|(1\.0)|(1)))?[)])/i;
 	var reIsHexadecimal = /^((#|0x)?([0-9A-Fa-f]{6}|[0-9A-Fa-f]{3}))?$/;
 	var reRegExpFlags = /^(?:([gimuy])(?!.*\1)){0,5}$/;
 	var reRegExp = /^\/([\s\S]*)\/((?:([gimuy])(?!.*\3)){0,5})$/;
 	var reFunctionName = /\s*function\s+([^(\s]*)\s*/;
 	var reIsNativeFn = /\[native\scode\]/;
+	var reIsClass = /^class/;
 	var reStringToBoolean = /^true|[1-9]+$/gi;
 	var reToPropName = /^[^a-zA-Z_$]|[^\w|$]|[^\w$]$/g;
 	var reIsHex = /^([A-Fa-f0-9]+|)$/;
@@ -28,11 +31,14 @@ var describeType = (function (exports) {
 
 	var patterns_next = /*#__PURE__*/{
 		reIsBase64: reIsBase64,
+		reIsRGB: reIsRGB,
+		reIsRGBA: reIsRGBA,
 		reIsHexadecimal: reIsHexadecimal,
 		reRegExpFlags: reRegExpFlags,
 		reRegExp: reRegExp,
 		reFunctionName: reFunctionName,
 		reIsNativeFn: reIsNativeFn,
+		reIsClass: reIsClass,
 		reStringToBoolean: reStringToBoolean,
 		reToPropName: reToPropName,
 		reIsHex: reIsHex,
@@ -195,6 +201,28 @@ var describeType = (function (exports) {
 	/**
 	 *
 	 * @function
+	 * @memberof is
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function caste(value) {
+		return reIsClass.test(String(value));
+	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function callable$1(value) {
+		return callable(value) && caste(value) === false;
+	}
+
+	/**
+	 *
+	 * @function
 	 * @memberof has
 	 * @param {Object|Function} context
 	 * @param {any} key
@@ -252,7 +280,7 @@ var describeType = (function (exports) {
 	 */
 	function reduce(list, cmd, initialValue, context) {
 		if (list === undefined || list === null) { return undefined; }
-		if (callable(cmd) === false) { throw new TypeError(("The second argument should be a function, received \"" + (typeof cmd) + "\"")); }
+		if (callable$1(cmd) === false) { throw new TypeError(("The second argument should be a function, received \"" + (typeof cmd) + "\"")); }
 		var size = (0 | list.length);
 		if (size) {
 			var index = 0;
@@ -564,7 +592,7 @@ var describeType = (function (exports) {
 	 */
 	function unsafeMethod(context, methodName) {
 		try {
-			return callable(context[methodName]);
+			return callable$1(context[methodName]);
 		} catch (err) {
 			return false;
 		}
@@ -703,7 +731,7 @@ var describeType = (function (exports) {
 	 */
 	function eachProperty(value, cmd, context, getInheritedProps) {
 		var i = 0;
-		var readStatics = callable(value) === false;
+		var readStatics = callable$1(value) === false;
 		for (var key in value) {
 			if (getInheritedProps || ownProperty(value, key)) {
 				var response = resolveProperty(value, key, readStatics, cmd, context, i += 1);
@@ -783,7 +811,7 @@ var describeType = (function (exports) {
 	 * @returns {any}
 	 */
 	function getExpectedValue(expected, value, args, startIndex, endIndex) {
-		if (callable(value) && (expected === Function || ownValue(expected, Function)) === false) {
+		if (callable$1(value) && (expected === Function || ownValue(expected, Function)) === false) {
 			args = slice(args, startIndex, endIndex);
 			return apply(value, args[0], args, true);
 		}
@@ -960,11 +988,11 @@ var describeType = (function (exports) {
 			for (var i = expected.length - 1; i > -1; i -= 1) {
 				var ctor = expected[i];
 				if (ctor === Number) { return type(ctor, value); } // ... should normalize?!
-				if (callable(ctor) && value instanceof ctor) { return true; }
+				if (callable$1(ctor) && value instanceof ctor) { return true; }
 			}
 		}
 		if (expected === Number) { return type(expected, value); } // ... should normalize?!
-		return callable(expected) && value instanceof expected;
+		return callable$1(expected) && value instanceof expected;
 	}
 
 	/**
@@ -1027,7 +1055,7 @@ var describeType = (function (exports) {
 	function stream(value) {
 		if (value === undefined || value === null) { return false; }
 		if (value._events === undefined || value._events === null) { return false; }
-		return callable(value.pipe);
+		return callable$1(value.pipe);
 	}
 
 	/* eslint-disable no-underscore-dangle */
@@ -1043,7 +1071,7 @@ var describeType = (function (exports) {
 		return stream(value) &&
 		value.writable !== false &&
 		value._writableState != null &&
-		callable(value._write);
+		callable$1(value._write);
 	}
 
 	/* eslint-disable no-underscore-dangle */
@@ -1059,7 +1087,7 @@ var describeType = (function (exports) {
 		return stream(value) &&
 		value.readable !== false &&
 		value._readableState != null &&
-		callable(value._read);
+		callable$1(value._read);
 	}
 
 	/**
@@ -1085,7 +1113,7 @@ var describeType = (function (exports) {
 	function isStreamTransform(value) {
 		return isStreamDuplex(value) &&
 		value._transformState != null &&
-		callable(value._transform);
+		callable$1(value._transform);
 	}
 
 	stream.writable = isStreamWritable;
@@ -1152,6 +1180,22 @@ var describeType = (function (exports) {
 	 *
 	 * @function
 	 * @memberof is
+	 * @param {any}
+	 * @returns {Boolean}
+	 */
+	function nativeFunction(value) {
+		return callable(value) && reIsNativeFn.test(value.toString());
+	}
+
+	callable.fn = callable;
+	callable.native = nativeFunction;
+	callable.callable = callable$1;
+	callable.caste = caste;
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
@@ -1179,8 +1223,8 @@ var describeType = (function (exports) {
 	 */
 	function buffer(value) {
 		if (value === undefined || value === null) { return false; }
-		if (callable(env.Buffer) === false) { return false; }
-		var isBuffer = value instanceof env.Buffer && callable(value.constructor.isBuffer);
+		if (callable$1(env.Buffer) === false) { return false; }
+		var isBuffer = value instanceof env.Buffer && callable$1(value.constructor.isBuffer);
 		return isBuffer && value.constructor.isBuffer(value);
 	}
 
@@ -1238,7 +1282,7 @@ var describeType = (function (exports) {
 	function element(value) {
 		if (value === undefined || value === null) { return false; }
 		if (env.window === undefined || env.window === null) { return false; }
-		return callable(env.window.HTMLElement) &&
+		return callable$1(env.window.HTMLElement) &&
 		value instanceof env.window.HTMLElement &&
 		value.nodeType === 1;
 	}
@@ -1260,7 +1304,7 @@ var describeType = (function (exports) {
 		if (isEmptyObject(value)) {
 			return true;
 		}
-		if (callable(value.valueOf)) {
+		if (callable$1(value.valueOf)) {
 			return !value.valueOf();
 		}
 		return !value;
@@ -1275,7 +1319,7 @@ var describeType = (function (exports) {
 	 */
 	function enumerable(value) {
 		if (value === undefined || value === null) { return false; }
-		return number(value.length) && callable(value) === false;
+		return number(value.length) && callable$1(value) === false;
 	}
 
 	/**
@@ -1384,8 +1428,8 @@ var describeType = (function (exports) {
 	 */
 	function primitive(value) {
 		if (value === undefined || value === null) { return true; }
-		if (callable(value.valueOf)) { value = value.valueOf(); }
-		if (callable(value) || typeof value === OBJECT) {
+		if (callable$1(value.valueOf)) { value = value.valueOf(); }
+		if (callable$1(value) || typeof value === OBJECT) {
 			return false;
 		}
 		return true;
@@ -1408,6 +1452,14 @@ var describeType = (function (exports) {
 
 	function hexadecimal(value) {
 		return string(value) && reIsHexadecimal.test(value);
+	}
+
+	function rgb(value) {
+		return string(value) && reIsRGB.test(value);
+	}
+
+	function rgba(value) {
+		return string(value) && reIsRGBA.test(value);
 	}
 
 	/**
@@ -1483,17 +1535,6 @@ var describeType = (function (exports) {
 			}
 		}
 		return true;
-	}
-
-	/**
-	 *
-	 * @function
-	 * @memberof is
-	 * @param {any}
-	 * @returns {Boolean}
-	 */
-	function nativeFunction(value) {
-		return callable(value) && reIsNativeFn.test(value.toString());
 	}
 
 	/**
@@ -1598,13 +1639,14 @@ var describeType = (function (exports) {
 		stream: stream,
 		string: string,
 		regexp: regexp,
+		fn: callable,
+		callable: callable$1,
 		a: type,
 		an: type,
 		any: any,
 		base64: base64,
 		bool: bool,
 		buffer: buffer,
-		callable: callable,
 		date: date,
 		decimal: decimal,
 		defined: defined,
@@ -1617,6 +1659,8 @@ var describeType = (function (exports) {
 		exotic: exotic,
 		hex: hex,
 		hexadecimal: hexadecimal,
+		rgb: rgb,
+		rgba: rgba,
 		hosted: hosted,
 		infinity: infinity,
 		instanceOf: instanceOf,
@@ -1625,7 +1669,6 @@ var describeType = (function (exports) {
 		max: max,
 		min: min,
 		nan: nan,
-		nativeFunction: nativeFunction,
 		nil: nil,
 		number: number,
 		numeric: numeric,
@@ -1788,7 +1831,7 @@ var describeType = (function (exports) {
 	}
 
 	/* eslint-disable no-unused-vars */
-	var version = { tag: '1.0.0-dev.5', sha1: 'f510ec8252e9b6dcc1fc9f99a38e20e88e63a46a', type: 'uncompressed' };
+	var version = { tag: '1.0.0', sha1: '96275fae251dee5fef6b00db6c937544c4470a13', type: 'uncompressed' };
 
 	exports.has = index_next;
 	exports.is = index_next$1;

@@ -1,9 +1,9 @@
 /*!
  * 
- * ~~~~ describe-type v1.0.0-dev.5
+ * ~~~~ describe-type v1.0.0
  * 
- * @commit f510ec8252e9b6dcc1fc9f99a38e20e88e63a46a
- * @moment Wednesday, June 13, 2018 12:39 PM
+ * @commit 96275fae251dee5fef6b00db6c937544c4470a13
+ * @moment Thursday, June 14, 2018 5:58 AM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2021
@@ -27,6 +27,32 @@ var has = (function (exports) {
 		return typeof value === FUNCTION;
 	}
 
+	// pattern(s)
+	var reIsClass = /^class/;
+	var reIsJsonEnds = { '[': exports.reEndsWithBracket, '{': exports.reEndsWithBrace };
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function caste(value) {
+		return reIsClass.test(String(value));
+	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function callable$1(value) {
+		return callable(value) && caste(value) === false;
+	}
+
 	/**
 	 *
 	 * @function
@@ -37,7 +63,7 @@ var has = (function (exports) {
 	 */
 	function unsafeMethod(context, methodName) {
 		try {
-			return callable(context[methodName]);
+			return callable$1(context[methodName]);
 		} catch (err) {
 			return false;
 		}

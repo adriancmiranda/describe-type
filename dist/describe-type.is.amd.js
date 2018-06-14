@@ -1,9 +1,9 @@
 /*!
  * 
- * ~~~~ describe-type v1.0.0-dev.5
+ * ~~~~ describe-type v1.0.0
  * 
- * @commit f510ec8252e9b6dcc1fc9f99a38e20e88e63a46a
- * @moment Wednesday, June 13, 2018 12:39 PM
+ * @commit 96275fae251dee5fef6b00db6c937544c4470a13
+ * @moment Thursday, June 14, 2018 5:58 AM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2021
@@ -38,6 +38,41 @@ define(['exports'], function (exports) { 'use strict';
 		return typeof value === FUNCTION;
 	}
 
+	// pattern(s)
+	var reIsBase64 = /^(data:\w+\/[a-zA-Z+\-.]+;base64,)?([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/;
+	var reIsRGB = /(rgb[(]\s*([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])\s*,\s*([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])\s*,\s*([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])?[)])/i;
+	var reIsRGBA = /(rgba[(]\s*([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])\s*,\s*([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])\s*,\s*([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])(\s*,\s*((0\.[0-9]{1})|(1\.0)|(1)))?[)])/i;
+	var reIsHexadecimal = /^((#|0x)?([0-9A-Fa-f]{6}|[0-9A-Fa-f]{3}))?$/;
+	var reRegExpFlags = /^(?:([gimuy])(?!.*\1)){0,5}$/;
+	var reRegExp = /^\/([\s\S]*)\/((?:([gimuy])(?!.*\3)){0,5})$/;
+	var reIsNativeFn = /\[native\scode\]/;
+	var reIsClass = /^class/;
+	var reIsHex = /^([A-Fa-f0-9]+|)$/;
+	var reIsJsonStart = /^\[|^\{(?!\{)/;
+	var reIsJsonEnds = { '[': exports.reEndsWithBracket, '{': exports.reEndsWithBrace };
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function caste(value) {
+		return reIsClass.test(String(value));
+	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function callable$1(value) {
+		return callable(value) && caste(value) === false;
+	}
+
 	/**
 	 *
 	 * @function
@@ -48,7 +83,7 @@ define(['exports'], function (exports) { 'use strict';
 	 */
 	function unsafeMethod(context, methodName) {
 		try {
-			return callable(context[methodName]);
+			return callable$1(context[methodName]);
 		} catch (err) {
 			return false;
 		}
@@ -287,11 +322,11 @@ define(['exports'], function (exports) { 'use strict';
 			for (var i = expected.length - 1; i > -1; i -= 1) {
 				var ctor = expected[i];
 				if (ctor === Number) { return type(ctor, value); } // ... should normalize?!
-				if (callable(ctor) && value instanceof ctor) { return true; }
+				if (callable$1(ctor) && value instanceof ctor) { return true; }
 			}
 		}
 		if (expected === Number) { return type(expected, value); } // ... should normalize?!
-		return callable(expected) && value instanceof expected;
+		return callable$1(expected) && value instanceof expected;
 	}
 
 	/**
@@ -354,7 +389,7 @@ define(['exports'], function (exports) { 'use strict';
 	function stream(value) {
 		if (value === undefined || value === null) { return false; }
 		if (value._events === undefined || value._events === null) { return false; }
-		return callable(value.pipe);
+		return callable$1(value.pipe);
 	}
 
 	/* eslint-disable no-underscore-dangle */
@@ -370,7 +405,7 @@ define(['exports'], function (exports) { 'use strict';
 		return stream(value) &&
 		value.writable !== false &&
 		value._writableState != null &&
-		callable(value._write);
+		callable$1(value._write);
 	}
 
 	/* eslint-disable no-underscore-dangle */
@@ -386,7 +421,7 @@ define(['exports'], function (exports) { 'use strict';
 		return stream(value) &&
 		value.readable !== false &&
 		value._readableState != null &&
-		callable(value._read);
+		callable$1(value._read);
 	}
 
 	/**
@@ -412,7 +447,7 @@ define(['exports'], function (exports) { 'use strict';
 	function isStreamTransform(value) {
 		return isStreamDuplex(value) &&
 		value._transformState != null &&
-		callable(value._transform);
+		callable$1(value._transform);
 	}
 
 	stream.writable = isStreamWritable;
@@ -443,16 +478,6 @@ define(['exports'], function (exports) { 'use strict';
 	function regexp(value) {
 		return value instanceof RegExp;
 	}
-
-	// pattern(s)
-	var reIsBase64 = /^(data:\w+\/[a-zA-Z+\-.]+;base64,)?([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/;
-	var reIsHexadecimal = /^((#|0x)?([0-9A-Fa-f]{6}|[0-9A-Fa-f]{3}))?$/;
-	var reRegExpFlags = /^(?:([gimuy])(?!.*\1)){0,5}$/;
-	var reRegExp = /^\/([\s\S]*)\/((?:([gimuy])(?!.*\3)){0,5})$/;
-	var reIsNativeFn = /\[native\scode\]/;
-	var reIsHex = /^([A-Fa-f0-9]+|)$/;
-	var reIsJsonStart = /^\[|^\{(?!\{)/;
-	var reIsJsonEnds = { '[': exports.reEndsWithBracket, '{': exports.reEndsWithBrace };
 
 	/**
 	 *
@@ -489,6 +514,22 @@ define(['exports'], function (exports) { 'use strict';
 	 *
 	 * @function
 	 * @memberof is
+	 * @param {any}
+	 * @returns {Boolean}
+	 */
+	function nativeFunction(value) {
+		return callable(value) && reIsNativeFn.test(value.toString());
+	}
+
+	callable.fn = callable;
+	callable.native = nativeFunction;
+	callable.callable = callable$1;
+	callable.caste = caste;
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
 	 * @param {any} value
 	 * @returns {Boolean}
 	 */
@@ -516,8 +557,8 @@ define(['exports'], function (exports) { 'use strict';
 	 */
 	function buffer(value) {
 		if (value === undefined || value === null) { return false; }
-		if (callable(env.Buffer) === false) { return false; }
-		var isBuffer = value instanceof env.Buffer && callable(value.constructor.isBuffer);
+		if (callable$1(env.Buffer) === false) { return false; }
+		var isBuffer = value instanceof env.Buffer && callable$1(value.constructor.isBuffer);
 		return isBuffer && value.constructor.isBuffer(value);
 	}
 
@@ -597,7 +638,7 @@ define(['exports'], function (exports) { 'use strict';
 	function element(value) {
 		if (value === undefined || value === null) { return false; }
 		if (env.window === undefined || env.window === null) { return false; }
-		return callable(env.window.HTMLElement) &&
+		return callable$1(env.window.HTMLElement) &&
 		value instanceof env.window.HTMLElement &&
 		value.nodeType === 1;
 	}
@@ -619,7 +660,7 @@ define(['exports'], function (exports) { 'use strict';
 		if (isEmptyObject(value)) {
 			return true;
 		}
-		if (callable(value.valueOf)) {
+		if (callable$1(value.valueOf)) {
 			return !value.valueOf();
 		}
 		return !value;
@@ -634,7 +675,7 @@ define(['exports'], function (exports) { 'use strict';
 	 */
 	function enumerable(value) {
 		if (value === undefined || value === null) { return false; }
-		return number(value.length) && callable(value) === false;
+		return number(value.length) && callable$1(value) === false;
 	}
 
 	/**
@@ -780,8 +821,8 @@ define(['exports'], function (exports) { 'use strict';
 	 */
 	function primitive(value) {
 		if (value === undefined || value === null) { return true; }
-		if (callable(value.valueOf)) { value = value.valueOf(); }
-		if (callable(value) || typeof value === OBJECT) {
+		if (callable$1(value.valueOf)) { value = value.valueOf(); }
+		if (callable$1(value) || typeof value === OBJECT) {
 			return false;
 		}
 		return true;
@@ -804,6 +845,14 @@ define(['exports'], function (exports) { 'use strict';
 
 	function hexadecimal(value) {
 		return string(value) && reIsHexadecimal.test(value);
+	}
+
+	function rgb(value) {
+		return string(value) && reIsRGB.test(value);
+	}
+
+	function rgba(value) {
+		return string(value) && reIsRGBA.test(value);
 	}
 
 	/**
@@ -902,17 +951,6 @@ define(['exports'], function (exports) { 'use strict';
 	function nan(value) {
 		var isnum = number(value);
 		return isnum === false || (isnum && value !== value);
-	}
-
-	/**
-	 *
-	 * @function
-	 * @memberof is
-	 * @param {any}
-	 * @returns {Boolean}
-	 */
-	function nativeFunction(value) {
-		return callable(value) && reIsNativeFn.test(value.toString());
 	}
 
 	/**
@@ -1044,13 +1082,14 @@ define(['exports'], function (exports) { 'use strict';
 	exports.stream = stream;
 	exports.string = string;
 	exports.regexp = regexp;
+	exports.fn = callable;
+	exports.callable = callable$1;
 	exports.a = type;
 	exports.an = type;
 	exports.any = any;
 	exports.base64 = base64;
 	exports.bool = bool;
 	exports.buffer = buffer;
-	exports.callable = callable;
 	exports.date = date;
 	exports.decimal = decimal;
 	exports.defined = defined;
@@ -1063,6 +1102,8 @@ define(['exports'], function (exports) { 'use strict';
 	exports.exotic = exotic;
 	exports.hex = hex;
 	exports.hexadecimal = hexadecimal;
+	exports.rgb = rgb;
+	exports.rgba = rgba;
 	exports.hosted = hosted;
 	exports.infinity = infinity;
 	exports.instanceOf = instanceOf;
@@ -1071,7 +1112,6 @@ define(['exports'], function (exports) { 'use strict';
 	exports.max = max;
 	exports.min = min;
 	exports.nan = nan;
-	exports.nativeFunction = nativeFunction;
 	exports.nil = nil;
 	exports.number = number;
 	exports.numeric = numeric;

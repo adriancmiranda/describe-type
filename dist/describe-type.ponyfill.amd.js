@@ -1,9 +1,9 @@
 /*!
  * 
- * ~~~~ describe-type v1.0.0-dev.5
+ * ~~~~ describe-type v1.0.0
  * 
- * @commit f510ec8252e9b6dcc1fc9f99a38e20e88e63a46a
- * @moment Wednesday, June 13, 2018 12:39 PM
+ * @commit 96275fae251dee5fef6b00db6c937544c4470a13
+ * @moment Thursday, June 14, 2018 5:58 AM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2021
@@ -26,6 +26,32 @@ define(['exports'], function (exports) { 'use strict';
 	 */
 	function callable(value) {
 		return typeof value === FUNCTION;
+	}
+
+	// pattern(s)
+	var reIsClass = /^class/;
+	var reIsJsonEnds = { '[': exports.reEndsWithBracket, '{': exports.reEndsWithBrace };
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function caste(value) {
+		return reIsClass.test(String(value));
+	}
+
+	/**
+	 *
+	 * @function
+	 * @memberof is
+	 * @param {any} value
+	 * @returns {Boolean}
+	 */
+	function callable$1(value) {
+		return callable(value) && caste(value) === false;
 	}
 
 	// prototypes
@@ -54,7 +80,7 @@ define(['exports'], function (exports) { 'use strict';
 	 */
 	function filter(list, cmd, context) {
 	  if (list === undefined || list === null) { throw new TypeError; }
-	  if (callable(cmd) === false) { throw new TypeError; }
+	  if (callable$1(cmd) === false) { throw new TypeError; }
 	  var result = [];
 	  for (var index = 0; index < list.length; index += 1) {
 	    if (objectHasOwnProperty.call(list, index) === false) { continue; }
@@ -126,7 +152,7 @@ define(['exports'], function (exports) { 'use strict';
 	 */
 	function reduce(list, cmd, initialValue, context) {
 		if (list === undefined || list === null) { return undefined; }
-		if (callable(cmd) === false) { throw new TypeError(("The second argument should be a function, received \"" + (typeof cmd) + "\"")); }
+		if (callable$1(cmd) === false) { throw new TypeError(("The second argument should be a function, received \"" + (typeof cmd) + "\"")); }
 		var size = (0 | list.length);
 		if (size) {
 			var index = 0;
@@ -395,7 +421,7 @@ define(['exports'], function (exports) { 'use strict';
 	 * @returns {any}
 	 */
 	function getExpectedValue(expected, value, args, startIndex, endIndex) {
-		if (callable(value) && (expected === Function || ownValue(expected, Function)) === false) {
+		if (callable$1(value) && (expected === Function || ownValue(expected, Function)) === false) {
 			args = slice(args, startIndex, endIndex);
 			return apply(value, args[0], args, true);
 		}

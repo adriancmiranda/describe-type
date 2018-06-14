@@ -1,7 +1,7 @@
 import test from 'ava';
-import * as datatypes from '../.fixtures/datatypes.fixture';
-import * as describeType from '../index.next';
-import nativeFunction from './nativeFunction.next';
+import * as datatypes from '../../.fixtures/datatypes.fixture';
+import * as describeType from '../../index.next';
+import nativeFunction from './fn.native.next';
 
 test('describeType.is.nativeFunction exposure', (t) => {
 	t.is(toString.call(describeType.is.nativeFunction), '[object Function]', 'should be a function');

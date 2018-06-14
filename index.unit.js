@@ -77,7 +77,6 @@ test(`${colors.underline('describeType.is')} expusure`, (t) => {
 	t.is(toString.call(describeType.is.max), '[object Function]', '"describeType.is.max" should be a function');
 	t.is(toString.call(describeType.is.min), '[object Function]', '"describeType.is.min" should be a function');
 	t.is(toString.call(describeType.is.nan), '[object Function]', '"describeType.is.nan" should be a function');
-	t.is(toString.call(describeType.is.nativeFunction), '[object Function]', '"describeType.is.nativeFunction" should be a function');
 	t.is(toString.call(describeType.is.nil), '[object Function]', '"describeType.is.nil" should be a function');
 	t.is(toString.call(describeType.is.number), '[object Function]', '"describeType.is.number" should be a function');
 	t.is(toString.call(describeType.is.numeric), '[object Function]', '"describeType.is.numeric" should be a function');
@@ -104,6 +103,13 @@ test(`${colors.underline('describeType.is.array')} expusure`, (t) => {
 test(`${colors.underline('describeType.is.arraylike')} expusure`, (t) => {
 	t.is(toString.call(describeType.is.arraylike), '[object Function]', '"describeType.is.arraylike" should be a function');
 	t.is(toString.call(describeType.is.arraylike.empty), '[object Function]', '"describeType.is.arraylike.empty" should be a function');
+});
+
+test(`${colors.underline('describeType.is.fn')} expusure`, (t) => {
+	t.is(toString.call(describeType.is.fn), '[object Function]', '"describeType.is.fn" should be a function');
+	t.is(toString.call(describeType.is.fn.caste), '[object Function]', '"describeType.is.fn.caste" should be a function');
+	t.is(toString.call(describeType.is.fn.native), '[object Function]', '"describeType.is.fn.native" should be a function');
+	t.is(toString.call(describeType.is.fn.callable), '[object Function]', '"describeType.is.fn.callable" should be a function');
 });
 
 test(`${colors.underline('describeType.is.not')} expusure`, (t) => {

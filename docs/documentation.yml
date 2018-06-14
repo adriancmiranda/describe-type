@@ -59,6 +59,10 @@ toc:
   - array.empty
   - arraylike
   - arraylike.empty
+  - fn.callable
+  - fn.caste
+  - fn.native
+  - fn
   - not
   - not.a / not.an / not.type
   - not.any
@@ -103,7 +107,6 @@ toc:
   - max
   - min
   - nan
-  - nativeFunction
   - nil
   - number
   - numeric

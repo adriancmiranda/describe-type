@@ -1,4 +1,4 @@
-import { FUNCTION } from '../internal/constants.next.js';
+import fnCallable from './fn/fn.callable.next.js';
 
 /**
  *
@@ -7,6 +7,4 @@ import { FUNCTION } from '../internal/constants.next.js';
  * @param {any} value
  * @returns {Boolean}
  */
-export default function callable(value) {
-	return typeof value === FUNCTION;
-}
+export default fnCallable;
