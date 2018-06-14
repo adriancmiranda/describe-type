@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v1.0.0
  * 
- * @commit c0060b951933fe0f895d6f6d07843a3409d477ed
- * @moment Thursday, June 14, 2018 10:51 AM
+ * @commit 23bc860be962fff3e986a7df70c89ea09e9d9c3c
+ * @moment Thursday, June 14, 2018 11:33 AM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2021
@@ -303,7 +303,7 @@ define(['exports'], function (exports) { 'use strict';
 		var size = list.length - 1;
 		return reduce(list, function (accumulator, item, index) {
 			var last = index === size;
-			accumulator += last ? ((stringify(item)) + "]") : ((stringify(item)) + ",");
+			accumulator += last ? ((JSON.stringify(item)) + "]") : ((JSON.stringify(item)) + ",");
 			return accumulator;
 		}, '[');
 	}
@@ -318,7 +318,7 @@ define(['exports'], function (exports) { 'use strict';
 		var size = list.length - 1;
 		return reduce(list, function (accumulator, key, index) {
 			var last = index === size;
-			var value = stringify(hash[key]);
+			var value = JSON.stringify(hash[key]);
 			var pair = key + ":" + value;
 			accumulator += last ? (pair + "}") : (pair + ",");
 			return accumulator;
