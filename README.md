@@ -2391,6 +2391,34 @@ type(datatype, currentValue, defaultValue);
 <sub><a href="#describe-type">▴ back to top</a></sub>
 </p></details>
 
+<details><summary><a>describe-type/has</a>
+
+> Indicates whether an object has a specified property defined. This method returns _true_ if the target object has a property that matches the string specified by the _name_ parameter, and _false_ otherwise.
+
+</summary><p>
+
+The following types of properties cause this method to return _true_ for objects that has the specified property as its own property (as opposed to inheriting it):
+
+- **Fixed instance properties** — variables, constants, or methods defined by the object's prototype that are not static;
+- **Inherited fixed instance properties** — variables, constants, or methods inherited by the object's prototype;
+- **Dynamic properties** — properties added to an object after it is instantiated (outside of its prototype definition). To add dynamic properties, the object's defining class must be declared with the dynamic keyword.
+
+The following types of properties cause this method to return _false_ for objects that are instances of a prototype:
+
+- **Static properties** — variables, constants, or methods defined with the static keyword in an object's defining prototype or any of its prototype from which other prototypes are derived;
+- **Prototype properties** — properties defined on a prototype object that is part of the object's prototype chain. The prototype chain is not used for prototype inheritance, but still exists as an alternative form of inheritance. For example, an instance of the _Array_ prototype can access the _valueOf()_ method because it exists on _Object.prototype_, which is part of the prototype chain for the Array class. Although you can use _valueOf()_ on an instance of _Array_, the return value of _hasOwnProperty("valueOf")_ for that instance is _false_.
+
+#### Parameters
+
+- **context**:* — The object.
+- **name**:[String][String] — The property of the object.
+
+##### Returns
+
+[Boolean][Boolean] — If the target object has the property specified by the name parameter this value is _true_, otherwise _false_.
+
+</p></details>
+
 <!-----------------------------------------------------------------------------
  |
  | AUTHORS
@@ -2682,6 +2710,7 @@ See also the list of _[contributors][CONTRIBUTORS]_ who participated in this pro
 [Object]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object
 [Function]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function
 [Boolean]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean
+[String]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String
 [toString.call]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/toString
 [ecma-type]: https://www.ecma-international.org/ecma-262/#sec-type ""
 
