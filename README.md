@@ -2466,7 +2466,7 @@ at(datatype, currentValue, defaultValue);
 </tr></thead><tbody>
 <tr><td>
 
-[UMD][umd:own] </td><td>
+[UMD][umd:has] </td><td>
   
 ```html
 <script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/has.umd.js"></script>
