@@ -38,7 +38,7 @@
     "test:travis": "npm test",
     "test:cover": "cross-env NODE_ENV=test nyc npm run test -- --verbose",
     "test:unit": "cross-env NODE_ENV=test ava --color --no-cache",
-    "test": "npm run test:unit -- {*,**/*}.unit.js",
+    "test": "npm run test:unit -- {*,**/*,**/**/*}.unit.js",
     "dev": "cross-env NODE_ENV=test npm run test -- --watch",
     "rollup": "rollup -c .bin/index.js",
     "rollup:watch": "npm run rollup -- -w --environment=NODE_ENV:development",
