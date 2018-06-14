@@ -2593,107 +2593,153 @@ See also the list of _[contributors][CONTRIBUTORS]_ who participated in this pro
 -'---------------------------------------------------------------------------->
 
 <!-- is/args/ -->
-[es6:is/args]: /describe-type/is/args/index.next.js ""
-[es6:is/args/args.empty]: /describe-type/is/args/args.empty.next.js ""
+[es6:is/args]: https://github.com/adriancmiranda/describe-type/blob/master/is/args/index.next.js ""
+[es6:is/args/args.empty]: https://github.com/adriancmiranda/describe-type/blob/master/is/args/args.empty.next.js ""
 
 <!-- is/array/ -->
-[es6:is/array]: /describe-type/is/array/index.next.js ""
-[es6:is/array/array.empty]: /describe-type/is/array/array.empty.next.js ""
-[es6:is/array/array.of]: /describe-type/is/array/array.of.next.js ""
+[es6:is/array]: https://github.com/adriancmiranda/describe-type/blob/master/is/array/index.next.js ""
+[es6:is/array/array.empty]: https://github.com/adriancmiranda/describe-type/blob/master/is/array/array.empty.next.js ""
+[es6:is/array/array.of]: https://github.com/adriancmiranda/describe-type/blob/master/is/array/array.of.next.js ""
 
 <!-- is/arraylike/ -->
-[es6:is/arraylike]: /describe-type/is/arraylike/index.next.js ""
-[es6:is/arraylike/arraylike.empty]: /describe-type/is/arraylike/arraylike.empty.next.js ""
+[es6:is/arraylike]: https://github.com/adriancmiranda/describe-type/blob/master/is/arraylike/index.next.js ""
+[es6:is/arraylike/arraylike.empty]: https://github.com/adriancmiranda/describe-type/blob/master/is/arraylike/arraylike.empty.next.js ""
 
 <!-- is/fn/ -->
-[es6:is/fn]: /describe-type/is/fn/index.next.js ""
-[es6:is/fn/fn.native]: /describe-type/is/fn/fn.native.next.js ""
-[es6:is/fn/fn.callable]: /describe-type/is/fn/fn.callable.next.js ""
-[es6:is/fn/fn.caste]: /describe-type/is/fn/fn.caste.next.js ""
+[es6:is/fn]: https://github.com/adriancmiranda/describe-type/blob/master/is/fn/index.next.js ""
+[es6:is/fn/fn.native]: https://github.com/adriancmiranda/describe-type/blob/master/is/fn/fn.native.next.js ""
+[es6:is/fn/fn.callable]: https://github.com/adriancmiranda/describe-type/blob/master/is/fn/fn.callable.next.js ""
+[es6:is/fn/fn.caste]: https://github.com/adriancmiranda/describe-type/blob/master/is/fn/fn.caste.next.js ""
 
 <!-- is/object/ -->
-[es6:is/object]: /describe-type/is/object/index.next.js ""
-[es6:is/object/object.empty]: /describe-type/is/object/object.empty.next.js ""
+[es6:is/object]: https://github.com/adriancmiranda/describe-type/blob/master/is/object/index.next.js ""
+[es6:is/object/object.empty]: https://github.com/adriancmiranda/describe-type/blob/master/is/object/object.empty.next.js ""
 
 <!-- is/regexp/ -->
-[es6:is/regexp]: /describe-type/is/regexp/index.next.js ""
-[es6:is/regexp/regexp.flags]: /describe-type/is/regexp/regexp.flags.next.js ""
-[es6:is/regexp/regexp.string]: /describe-type/is/regexp/regexp.string.next.js ""
+[es6:is/regexp]: https://github.com/adriancmiranda/describe-type/blob/master/is/regexp/index.next.js ""
+[es6:is/regexp/regexp.flags]: https://github.com/adriancmiranda/describe-type/blob/master/is/regexp/regexp.flags.next.js ""
+[es6:is/regexp/regexp.string]: https://github.com/adriancmiranda/describe-type/blob/master/is/regexp/regexp.string.next.js ""
 
 <!-- is/stream/ -->
-[es6:is/stream]: /describe-type/is/stream/index.next.js ""
-[es6:is/stream/stream.duplex]: /describe-type/is/stream/stream.duplex.next.js ""
-[es6:is/stream/stream.readable]: /describe-type/is/stream/stream.readable.next.js ""
-[es6:is/stream/stream.transform]: /describe-type/is/stream/stream.transform.next.js ""
-[es6:is/stream/stream.writable]: /describe-type/is/stream/stream.writable.next.js ""
+[es6:is/stream]: https://github.com/adriancmiranda/describe-type/blob/master/is/stream/index.next.js ""
+[es6:is/stream/stream.duplex]: https://github.com/adriancmiranda/describe-type/blob/master/is/stream/stream.duplex.next.js ""
+[es6:is/stream/stream.readable]: https://github.com/adriancmiranda/describe-type/blob/master/is/stream/stream.readable.next.js ""
+[es6:is/stream/stream.transform]: https://github.com/adriancmiranda/describe-type/blob/master/is/stream/stream.transform.next.js ""
+[es6:is/stream/stream.writable]: https://github.com/adriancmiranda/describe-type/blob/master/is/stream/stream.writable.next.js ""
 
 <!-- is/string/ -->
-[es6:is/string]: /describe-type/is/string/index.next.js ""
-[es6:is/string/string.empty]: /describe-type/is/string/string.empty.next.js ""
+[es6:is/string]: https://github.com/adriancmiranda/describe-type/blob/master/is/string/index.next.js ""
+[es6:is/string/string.empty]: https://github.com/adriancmiranda/describe-type/blob/master/is/string/string.empty.next.js ""
 
 <!-- is/ -->
-[es6:is]: /describe-type/is/index.next.js ""
-[es6:is/a]: /describe-type/is/a.next.js ""
-[es6:is/an]: /describe-type/is/an.next.js ""
-[es6:is/type]: /describe-type/is/type.next.js ""
-[es6:is/any]: /describe-type/is/any.next.js ""
-[es6:is/base64]: /describe-type/is/base64.next.js ""
-[es6:is/bool]: /describe-type/is/bool.next.js ""
-[es6:is/buffer]: /describe-type/is/buffer.next.js ""
-[es6:is/date]: /describe-type/is/date.next.js ""
-[es6:is/decimal]: /describe-type/is/decimal.next.js ""
-[es6:is/defined]: /describe-type/is/defined.next.js ""
-[es6:is/element]: /describe-type/is/element.next.js ""
-[es6:is/empty]: /describe-type/is/empty.next.js ""
-[es6:is/enumerable]: /describe-type/is/enumerable.next.js ""
-[es6:is/equal]: /describe-type/is/equal.next.js ""
-[es6:is/error]: /describe-type/is/error.next.js ""
-[es6:is/even]: /describe-type/is/even.next.js ""
-[es6:is/exotic]: /describe-type/is/exotic.next.js ""
-[es6:is/filled]: /describe-type/is/filled.next.js ""
-[es6:is/hex]: /describe-type/is/hex.next.js ""
-[es6:is/hexadecimal]: /describe-type/is/hexadecimal.next.js ""
-[es6:is/rgb]: /describe-type/is/rgb.next.js ""
-[es6:is/rgba]: /describe-type/is/rgba.next.js ""
-[es6:is/hosted]: /describe-type/is/hosted.next.js ""
-[es6:is/infinity]: /describe-type/is/infinity.next.js ""
-[es6:is/instanceOf]: /describe-type/is/instanceOf.next.js ""
-[es6:is/int]: /describe-type/is/int.next.js ""
-[es6:is/jsonlike]: /describe-type/is/jsonlike.next.js ""
-[es6:is/max]: /describe-type/is/max.next.js ""
-[es6:is/min]: /describe-type/is/min.next.js ""
-[es6:is/nan]: /describe-type/is/nan.next.js ""
-[es6:is/nil]: /describe-type/is/nil.next.js ""
-[es6:is/number]: /describe-type/is/number.next.js ""
-[es6:is/numeric]: /describe-type/is/numeric.next.js ""
-[es6:is/odd]: /describe-type/is/odd.next.js ""
-[es6:is/primitive]: /describe-type/is/primitive.next.js ""
-[es6:is/symbol]: /describe-type/is/symbol.next.js ""
-[es6:is/uint]: /describe-type/is/uint.next.js ""
-[es6:is/undef]: /describe-type/is/undef.next.js ""
-[es6:is/unfilled]: /describe-type/is/unfilled.next.js ""
-[es6:is/within]: /describe-type/is/within.next.js ""
+[es6:is]: https://github.com/adriancmiranda/describe-type/blob/master/is/index.next.js ""
+[es6:is/a]: https://github.com/adriancmiranda/describe-type/blob/master/is/a.next.js ""
+[es6:is/an]: https://github.com/adriancmiranda/describe-type/blob/master/is/an.next.js ""
+[es6:is/type]: https://github.com/adriancmiranda/describe-type/blob/master/is/type.next.js ""
+[es6:is/any]: https://github.com/adriancmiranda/describe-type/blob/master/is/any.next.js ""
+[es6:is/base64]: https://github.com/adriancmiranda/describe-type/blob/master/is/base64.next.js ""
+[es6:is/bool]: https://github.com/adriancmiranda/describe-type/blob/master/is/bool.next.js ""
+[es6:is/buffer]: https://github.com/adriancmiranda/describe-type/blob/master/is/buffer.next.js ""
+[es6:is/date]: https://github.com/adriancmiranda/describe-type/blob/master/is/date.next.js ""
+[es6:is/decimal]: https://github.com/adriancmiranda/describe-type/blob/master/is/decimal.next.js ""
+[es6:is/defined]: https://github.com/adriancmiranda/describe-type/blob/master/is/defined.next.js ""
+[es6:is/element]: https://github.com/adriancmiranda/describe-type/blob/master/is/element.next.js ""
+[es6:is/empty]: https://github.com/adriancmiranda/describe-type/blob/master/is/empty.next.js ""
+[es6:is/enumerable]: https://github.com/adriancmiranda/describe-type/blob/master/is/enumerable.next.js ""
+[es6:is/equal]: https://github.com/adriancmiranda/describe-type/blob/master/is/equal.next.js ""
+[es6:is/error]: https://github.com/adriancmiranda/describe-type/blob/master/is/error.next.js ""
+[es6:is/even]: https://github.com/adriancmiranda/describe-type/blob/master/is/even.next.js ""
+[es6:is/exotic]: https://github.com/adriancmiranda/describe-type/blob/master/is/exotic.next.js ""
+[es6:is/filled]: https://github.com/adriancmiranda/describe-type/blob/master/is/filled.next.js ""
+[es6:is/hex]: https://github.com/adriancmiranda/describe-type/blob/master/is/hex.next.js ""
+[es6:is/hexadecimal]: https://github.com/adriancmiranda/describe-type/blob/master/is/hexadecimal.next.js ""
+[es6:is/rgb]: https://github.com/adriancmiranda/describe-type/blob/master/is/rgb.next.js ""
+[es6:is/rgba]: https://github.com/adriancmiranda/describe-type/blob/master/is/rgba.next.js ""
+[es6:is/hosted]: https://github.com/adriancmiranda/describe-type/blob/master/is/hosted.next.js ""
+[es6:is/infinity]: https://github.com/adriancmiranda/describe-type/blob/master/is/infinity.next.js ""
+[es6:is/instanceOf]: https://github.com/adriancmiranda/describe-type/blob/master/is/instanceOf.next.js ""
+[es6:is/int]: https://github.com/adriancmiranda/describe-type/blob/master/is/int.next.js ""
+[es6:is/jsonlike]: https://github.com/adriancmiranda/describe-type/blob/master/is/jsonlike.next.js ""
+[es6:is/max]: https://github.com/adriancmiranda/describe-type/blob/master/is/max.next.js ""
+[es6:is/min]: https://github.com/adriancmiranda/describe-type/blob/master/is/min.next.js ""
+[es6:is/nan]: https://github.com/adriancmiranda/describe-type/blob/master/is/nan.next.js ""
+[es6:is/nil]: https://github.com/adriancmiranda/describe-type/blob/master/is/nil.next.js ""
+[es6:is/number]: https://github.com/adriancmiranda/describe-type/blob/master/is/number.next.js ""
+[es6:is/numeric]: https://github.com/adriancmiranda/describe-type/blob/master/is/numeric.next.js ""
+[es6:is/odd]: https://github.com/adriancmiranda/describe-type/blob/master/is/odd.next.js ""
+[es6:is/primitive]: https://github.com/adriancmiranda/describe-type/blob/master/is/primitive.next.js ""
+[es6:is/symbol]: https://github.com/adriancmiranda/describe-type/blob/master/is/symbol.next.js ""
+[es6:is/uint]: https://github.com/adriancmiranda/describe-type/blob/master/is/uint.next.js ""
+[es6:is/undef]: https://github.com/adriancmiranda/describe-type/blob/master/is/undef.next.js ""
+[es6:is/unfilled]: https://github.com/adriancmiranda/describe-type/blob/master/is/unfilled.next.js ""
+[es6:is/within]: https://github.com/adriancmiranda/describe-type/blob/master/is/within.next.js ""
 
 <!-----------------------------------------------------------------------------
  | describe-type/as
 -'---------------------------------------------------------------------------->
-[es6:as]: /describe-type/as/index.next.js ""
-[es6:as/a]: /describe-type/as/a.next.js ""
-[es6:as/an]: /describe-type/as/an.next.js ""
-[es6:as/type]: /describe-type/as/type.next.js ""
-[es6:as/any]: /describe-type/as/any.next.js ""
-[es6:as/instanceOf]: /describe-type/as/instanceOf.next.js ""
-[es6:as/arrayOf]: /describe-type/as/arrayOf.next.js ""
+[es6:as]: https://github.com/adriancmiranda/describe-type/blob/master/as/index.next.js ""
+[es6:as/a]: https://github.com/adriancmiranda/describe-type/blob/master/as/a.next.js ""
+[es6:as/an]: https://github.com/adriancmiranda/describe-type/blob/master/as/an.next.js ""
+[es6:as/type]: https://github.com/adriancmiranda/describe-type/blob/master/as/type.next.js ""
+[es6:as/any]: https://github.com/adriancmiranda/describe-type/blob/master/as/any.next.js ""
+[es6:as/instanceOf]: https://github.com/adriancmiranda/describe-type/blob/master/as/instanceOf.next.js ""
+[es6:as/arrayOf]: https://github.com/adriancmiranda/describe-type/blob/master/as/arrayOf.next.js ""
 
 <!-----------------------------------------------------------------------------
  | describe-type/has
 -'---------------------------------------------------------------------------->
-[es6:has]: /describe-type/has/index.next.js ""
-[es6:has/at]: /describe-type/has/at.next.js ""
-[es6:has/own]: /describe-type/has/own.next.js ""
-[es6:has/ownValue]: /describe-type/has/ownValue.next.js ""
-[es6:has/ownProperty]: /describe-type/has/ownProperty.next.js ""
+[es6:has]: https://github.com/adriancmiranda/describe-type/blob/master/has/index.next.js ""
+[es6:has/at]: https://github.com/adriancmiranda/describe-type/blob/master/has/at.next.js ""
+[es6:has/own]: https://github.com/adriancmiranda/describe-type/blob/master/has/own.next.js ""
+[es6:has/ownValue]: https://github.com/adriancmiranda/describe-type/blob/master/has/ownValue.next.js ""
+[es6:has/ownProperty]: https://github.com/adriancmiranda/describe-type/blob/master/has/ownProperty.next.js ""
 
+<!-----------------------------------------------------------------------------
+ | describe-type/internal
+-'---------------------------------------------------------------------------->
+<!-- stringify -->
+[es6:internal/stringify/index]: https://github.com/adriancmiranda/describe-type/blob/master/internal/stringify/index.next.js
+[es6:internal/stringify/stringify]: https://github.com/adriancmiranda/describe-type/blob/master/internal/stringify/stringify.next.js
+[es6:internal/stringify/stringify.array]: https://github.com/adriancmiranda/describe-type/blob/master/internal/stringify/stringify.array.next.js
+[es6:internal/stringify/stringify.object]: https://github.com/adriancmiranda/describe-type/blob/master/internal/stringify/stringify.object.next.js
+
+<!-- built-in -->
+[es6:internal/apply]: https://github.com/adriancmiranda/describe-type/blob/master/internal/apply.next.js
+[es6:internal/booleanOf]: https://github.com/adriancmiranda/describe-type/blob/master/internal/booleanOf.next.js
+[es6:internal/built]: https://github.com/adriancmiranda/describe-type/blob/master/internal/built-in.next.js
+[es6:internal/constants]: https://github.com/adriancmiranda/describe-type/blob/master/internal/constants.next.js
+[es6:internal/constructorNameOf]: https://github.com/adriancmiranda/describe-type/blob/master/internal/constructorNameOf.next.js
+[es6:internal/constructorOf]: https://github.com/adriancmiranda/describe-type/blob/master/internal/constructorOf.next.js
+[es6:internal/each]: https://github.com/adriancmiranda/describe-type/blob/master/internal/each.next.js
+[es6:internal/eachProperty]: https://github.com/adriancmiranda/describe-type/blob/master/internal/eachProperty.next.js
+[es6:internal/eachValue]: https://github.com/adriancmiranda/describe-type/blob/master/internal/eachValue.next.js
+[es6:internal/env]: https://github.com/adriancmiranda/describe-type/blob/master/internal/env.next.js
+[es6:internal/floatOf]: https://github.com/adriancmiranda/describe-type/blob/master/internal/floatOf.next.js
+[es6:internal/getExpectedValue]: https://github.com/adriancmiranda/describe-type/blob/master/internal/getExpectedValue.next.js
+[es6:internal/index]: https://github.com/adriancmiranda/describe-type/blob/master/internal/index.next.js
+[es6:internal/intOf]: https://github.com/adriancmiranda/describe-type/blob/master/internal/intOf.next.js
+[es6:internal/mod]: https://github.com/adriancmiranda/describe-type/blob/master/internal/mod.next.js
+[es6:internal/name]: https://github.com/adriancmiranda/describe-type/blob/master/internal/name.next.js
+[es6:internal/patterns]: https://github.com/adriancmiranda/describe-type/blob/master/internal/patterns.next.js
+[es6:internal/prototypeOf]: https://github.com/adriancmiranda/describe-type/blob/master/internal/prototypeOf.next.js
+[es6:internal/prototypes]: https://github.com/adriancmiranda/describe-type/blob/master/internal/prototypes.next.js
+[es6:internal/resolveProperty]: https://github.com/adriancmiranda/describe-type/blob/master/internal/resolveProperty.next.js
+[es6:internal/slice]: https://github.com/adriancmiranda/describe-type/blob/master/internal/slice.next.js
+[es6:internal/stringOf]: https://github.com/adriancmiranda/describe-type/blob/master/internal/stringOf.next.js
+[es6:internal/typeOf]: https://github.com/adriancmiranda/describe-type/blob/master/internal/typeOf.next.js
+[es6:internal/typify]: https://github.com/adriancmiranda/describe-type/blob/master/internal/typify.next.js
+[es6:internal/uintOf]: https://github.com/adriancmiranda/describe-type/blob/master/internal/uintOf.next.js
+
+<!-----------------------------------------------------------------------------
+ | describe-type/internal
+-'---------------------------------------------------------------------------->
+[es6:ponyfill/Array.prototype.filter]: https://github.com/adriancmiranda/describe-type/blob/master/ponyfill/Array.prototype.filter.next.js
+[es6:ponyfill/Array.prototype.reduce]: https://github.com/adriancmiranda/describe-type/blob/master/ponyfill/Array.prototype.reduce.next.js
+[es6:ponyfill/index]: https://github.com/adriancmiranda/describe-type/blob/master/ponyfill/index.next.js
+[es6:ponyfill/Object.assign]: https://github.com/adriancmiranda/describe-type/blob/master/ponyfill/Object.assign.next.js
+[es6:ponyfill/Object.is]: https://github.com/adriancmiranda/describe-type/blob/master/ponyfill/Object.is.next.js
+[es6:ponyfill/Object.keys]: https://github.com/adriancmiranda/describe-type/blob/master/ponyfill/Object.keys.next.js
+[es6:ponyfill/String.prototype.startsWith]: https://github.com/adriancmiranda/describe-type/blob/master/ponyfill/String.prototype.startsWith.next.js
 
 <!-----------------------------------------------------------------------------
  |
@@ -2703,107 +2749,142 @@ See also the list of _[contributors][CONTRIBUTORS]_ who participated in this pro
  | describe-type/is
 -'---------------------------------------------------------------------------->
 <!-- is/args/ -->
-[cjs:is/args]: /describe-type/is/args/index.js ""
-[cjs:is/args/args.empty]: /describe-type/is/args/args.empty.js ""
+[cjs:is/args]: https://github.com/adriancmiranda/describe-type/blob/master/is/args/index.js ""
+[cjs:is/args/args.empty]: https://github.com/adriancmiranda/describe-type/blob/master/is/args/args.empty.js ""
 
 <!-- is/array/ -->
-[cjs:is/array]: /describe-type/is/array/index.js ""
-[cjs:is/array/array.empty]: /describe-type/is/array/array.empty.js ""
-[cjs:is/array/array.of]: /describe-type/is/array/array.of.js ""
+[cjs:is/array]: https://github.com/adriancmiranda/describe-type/blob/master/is/array/index.js ""
+[cjs:is/array/array.empty]: https://github.com/adriancmiranda/describe-type/blob/master/is/array/array.empty.js ""
+[cjs:is/array/array.of]: https://github.com/adriancmiranda/describe-type/blob/master/is/array/array.of.js ""
 
 <!-- is/arraylike/ -->
-[cjs:is/arraylike]: /describe-type/is/arraylike/index.js ""
-[cjs:is/arraylike/arraylike.empty]: /describe-type/is/arraylike/arraylike.empty.js ""
+[cjs:is/arraylike]: https://github.com/adriancmiranda/describe-type/blob/master/is/arraylike/index.js ""
+[cjs:is/arraylike/arraylike.empty]: https://github.com/adriancmiranda/describe-type/blob/master/is/arraylike/arraylike.empty.js ""
 
 <!-- is/fn/ -->
-[cjs:is/fn]: /describe-type/is/fn/index.js ""
-[cjs:is/fn/fn.native]: /describe-type/is/fn/fn.native.js ""
-[cjs:is/fn/fn.callable]: /describe-type/is/fn/fn.callable.js ""
-[cjs:is/fn/fn.caste]: /describe-type/is/fn/fn.caste.js ""
+[cjs:is/fn]: https://github.com/adriancmiranda/describe-type/blob/master/is/fn/index.js ""
+[cjs:is/fn/fn.native]: https://github.com/adriancmiranda/describe-type/blob/master/is/fn/fn.native.js ""
+[cjs:is/fn/fn.callable]: https://github.com/adriancmiranda/describe-type/blob/master/is/fn/fn.callable.js ""
+[cjs:is/fn/fn.caste]: https://github.com/adriancmiranda/describe-type/blob/master/is/fn/fn.caste.js ""
 
 <!-- is/object/ -->
-[cjs:is/object]: /describe-type/is/object/index.js ""
-[cjs:is/object/object.empty]: /describe-type/is/object/object.empty.js ""
+[cjs:is/object]: https://github.com/adriancmiranda/describe-type/blob/master/is/object/index.js ""
+[cjs:is/object/object.empty]: https://github.com/adriancmiranda/describe-type/blob/master/is/object/object.empty.js ""
 
 <!-- is/regexp/ -->
-[cjs:is/regexp]: /describe-type/is/regexp/index.js ""
-[cjs:is/regexp/regexp.flags]: /describe-type/is/regexp/regexp.flags.js ""
-[cjs:is/regexp/regexp.string]: /describe-type/is/regexp/regexp.string.js ""
+[cjs:is/regexp]: https://github.com/adriancmiranda/describe-type/blob/master/is/regexp/index.js ""
+[cjs:is/regexp/regexp.flags]: https://github.com/adriancmiranda/describe-type/blob/master/is/regexp/regexp.flags.js ""
+[cjs:is/regexp/regexp.string]: https://github.com/adriancmiranda/describe-type/blob/master/is/regexp/regexp.string.js ""
 
 <!-- is/stream/ -->
-[cjs:is/stream]: /describe-type/is/stream/index.js ""
-[cjs:is/stream/stream.duplex]: /describe-type/is/stream/stream.duplex.js ""
-[cjs:is/stream/stream.readable]: /describe-type/is/stream/stream.readable.js ""
-[cjs:is/stream/stream.transform]: /describe-type/is/stream/stream.transform.js ""
-[cjs:is/stream/stream.writable]: /describe-type/is/stream/stream.writable.js ""
+[cjs:is/stream]: https://github.com/adriancmiranda/describe-type/blob/master/is/stream/index.js ""
+[cjs:is/stream/stream.duplex]: https://github.com/adriancmiranda/describe-type/blob/master/is/stream/stream.duplex.js ""
+[cjs:is/stream/stream.readable]: https://github.com/adriancmiranda/describe-type/blob/master/is/stream/stream.readable.js ""
+[cjs:is/stream/stream.transform]: https://github.com/adriancmiranda/describe-type/blob/master/is/stream/stream.transform.js ""
+[cjs:is/stream/stream.writable]: https://github.com/adriancmiranda/describe-type/blob/master/is/stream/stream.writable.js ""
 
 <!-- is/string/ -->
-[cjs:is/string]: /describe-type/is/string/index.js ""
-[cjs:is/string/string.empty]: /describe-type/is/string/string.empty.js ""
+[cjs:is/string]: https://github.com/adriancmiranda/describe-type/blob/master/is/string/index.js ""
+[cjs:is/string/string.empty]: https://github.com/adriancmiranda/describe-type/blob/master/is/string/string.empty.js ""
 
 <!-- is/ -->
-[cjs:is]: /describe-type/is/index.js ""
-[cjs:is/a]: /describe-type/is/a.js ""
-[cjs:is/an]: /describe-type/is/an.js ""
-[cjs:is/type]: /describe-type/is/type.js ""
-[cjs:is/any]: /describe-type/is/any.js ""
-[cjs:is/base64]: /describe-type/is/base64.js ""
-[cjs:is/bool]: /describe-type/is/bool.js ""
-[cjs:is/buffer]: /describe-type/is/buffer.js ""
-[cjs:is/date]: /describe-type/is/date.js ""
-[cjs:is/decimal]: /describe-type/is/decimal.js ""
-[cjs:is/defined]: /describe-type/is/defined.js ""
-[cjs:is/element]: /describe-type/is/element.js ""
-[cjs:is/empty]: /describe-type/is/empty.js ""
-[cjs:is/enumerable]: /describe-type/is/enumerable.js ""
-[cjs:is/equal]: /describe-type/is/equal.js ""
-[cjs:is/error]: /describe-type/is/error.js ""
-[cjs:is/even]: /describe-type/is/even.js ""
-[cjs:is/exotic]: /describe-type/is/exotic.js ""
-[cjs:is/filled]: /describe-type/is/filled.js ""
-[cjs:is/hex]: /describe-type/is/hex.js ""
-[cjs:is/hexadecimal]: /describe-type/is/hexadecimal.js ""
-[cjs:is/rgb]: /describe-type/is/rgb.js ""
-[cjs:is/rgba]: /describe-type/is/rgba.js ""
-[cjs:is/hosted]: /describe-type/is/hosted.js ""
-[cjs:is/infinity]: /describe-type/is/infinity.js ""
-[cjs:is/instanceOf]: /describe-type/is/instanceOf.js ""
-[cjs:is/int]: /describe-type/is/int.js ""
-[cjs:is/jsonlike]: /describe-type/is/jsonlike.js ""
-[cjs:is/max]: /describe-type/is/max.js ""
-[cjs:is/min]: /describe-type/is/min.js ""
-[cjs:is/nan]: /describe-type/is/nan.js ""
-[cjs:is/nil]: /describe-type/is/nil.js ""
-[cjs:is/number]: /describe-type/is/number.js ""
-[cjs:is/numeric]: /describe-type/is/numeric.js ""
-[cjs:is/odd]: /describe-type/is/odd.js ""
-[cjs:is/primitive]: /describe-type/is/primitive.js ""
-[cjs:is/symbol]: /describe-type/is/symbol.js ""
-[cjs:is/uint]: /describe-type/is/uint.js ""
-[cjs:is/undef]: /describe-type/is/undef.js ""
-[cjs:is/unfilled]: /describe-type/is/unfilled.js ""
-[cjs:is/within]: /describe-type/is/within.js ""
+[cjs:is]: https://github.com/adriancmiranda/describe-type/blob/master/is/index.js ""
+[cjs:is/a]: https://github.com/adriancmiranda/describe-type/blob/master/is/a.js ""
+[cjs:is/an]: https://github.com/adriancmiranda/describe-type/blob/master/is/an.js ""
+[cjs:is/type]: https://github.com/adriancmiranda/describe-type/blob/master/is/type.js ""
+[cjs:is/any]: https://github.com/adriancmiranda/describe-type/blob/master/is/any.js ""
+[cjs:is/base64]: https://github.com/adriancmiranda/describe-type/blob/master/is/base64.js ""
+[cjs:is/bool]: https://github.com/adriancmiranda/describe-type/blob/master/is/bool.js ""
+[cjs:is/buffer]: https://github.com/adriancmiranda/describe-type/blob/master/is/buffer.js ""
+[cjs:is/date]: https://github.com/adriancmiranda/describe-type/blob/master/is/date.js ""
+[cjs:is/decimal]: https://github.com/adriancmiranda/describe-type/blob/master/is/decimal.js ""
+[cjs:is/defined]: https://github.com/adriancmiranda/describe-type/blob/master/is/defined.js ""
+[cjs:is/element]: https://github.com/adriancmiranda/describe-type/blob/master/is/element.js ""
+[cjs:is/empty]: https://github.com/adriancmiranda/describe-type/blob/master/is/empty.js ""
+[cjs:is/enumerable]: https://github.com/adriancmiranda/describe-type/blob/master/is/enumerable.js ""
+[cjs:is/equal]: https://github.com/adriancmiranda/describe-type/blob/master/is/equal.js ""
+[cjs:is/error]: https://github.com/adriancmiranda/describe-type/blob/master/is/error.js ""
+[cjs:is/even]: https://github.com/adriancmiranda/describe-type/blob/master/is/even.js ""
+[cjs:is/exotic]: https://github.com/adriancmiranda/describe-type/blob/master/is/exotic.js ""
+[cjs:is/filled]: https://github.com/adriancmiranda/describe-type/blob/master/is/filled.js ""
+[cjs:is/hex]: https://github.com/adriancmiranda/describe-type/blob/master/is/hex.js ""
+[cjs:is/hexadecimal]: https://github.com/adriancmiranda/describe-type/blob/master/is/hexadecimal.js ""
+[cjs:is/rgb]: https://github.com/adriancmiranda/describe-type/blob/master/is/rgb.js ""
+[cjs:is/rgba]: https://github.com/adriancmiranda/describe-type/blob/master/is/rgba.js ""
+[cjs:is/hosted]: https://github.com/adriancmiranda/describe-type/blob/master/is/hosted.js ""
+[cjs:is/infinity]: https://github.com/adriancmiranda/describe-type/blob/master/is/infinity.js ""
+[cjs:is/instanceOf]: https://github.com/adriancmiranda/describe-type/blob/master/is/instanceOf.js ""
+[cjs:is/int]: https://github.com/adriancmiranda/describe-type/blob/master/is/int.js ""
+[cjs:is/jsonlike]: https://github.com/adriancmiranda/describe-type/blob/master/is/jsonlike.js ""
+[cjs:is/max]: https://github.com/adriancmiranda/describe-type/blob/master/is/max.js ""
+[cjs:is/min]: https://github.com/adriancmiranda/describe-type/blob/master/is/min.js ""
+[cjs:is/nan]: https://github.com/adriancmiranda/describe-type/blob/master/is/nan.js ""
+[cjs:is/nil]: https://github.com/adriancmiranda/describe-type/blob/master/is/nil.js ""
+[cjs:is/number]: https://github.com/adriancmiranda/describe-type/blob/master/is/number.js ""
+[cjs:is/numeric]: https://github.com/adriancmiranda/describe-type/blob/master/is/numeric.js ""
+[cjs:is/odd]: https://github.com/adriancmiranda/describe-type/blob/master/is/odd.js ""
+[cjs:is/primitive]: https://github.com/adriancmiranda/describe-type/blob/master/is/primitive.js ""
+[cjs:is/symbol]: https://github.com/adriancmiranda/describe-type/blob/master/is/symbol.js ""
+[cjs:is/uint]: https://github.com/adriancmiranda/describe-type/blob/master/is/uint.js ""
+[cjs:is/undef]: https://github.com/adriancmiranda/describe-type/blob/master/is/undef.js ""
+[cjs:is/unfilled]: https://github.com/adriancmiranda/describe-type/blob/master/is/unfilled.js ""
+[cjs:is/within]: https://github.com/adriancmiranda/describe-type/blob/master/is/within.js ""
 
 <!-----------------------------------------------------------------------------
  | describe-type/as
 -'---------------------------------------------------------------------------->
-[cjs:as]: /describe-type/as/index.js ""
-[cjs:as/a]: /describe-type/as/a.js ""
-[cjs:as/an]: /describe-type/as/an.js ""
-[cjs:as/type]: /describe-type/as/type.js ""
-[cjs:as/any]: /describe-type/as/any.js ""
-[cjs:as/instanceOf]: /describe-type/as/instanceOf.js ""
-[cjs:as/arrayOf]: /describe-type/as/arrayOf.js ""
+[cjs:as]: https://github.com/adriancmiranda/describe-type/blob/master/as/index.js ""
+[cjs:as/a]: https://github.com/adriancmiranda/describe-type/blob/master/as/a.js ""
+[cjs:as/an]: https://github.com/adriancmiranda/describe-type/blob/master/as/an.js ""
+[cjs:as/type]: https://github.com/adriancmiranda/describe-type/blob/master/as/type.js ""
+[cjs:as/any]: https://github.com/adriancmiranda/describe-type/blob/master/as/any.js ""
+[cjs:as/instanceOf]: https://github.com/adriancmiranda/describe-type/blob/master/as/instanceOf.js ""
+[cjs:as/arrayOf]: https://github.com/adriancmiranda/describe-type/blob/master/as/arrayOf.js ""
 
 <!-----------------------------------------------------------------------------
  | describe-type/has
 -'---------------------------------------------------------------------------->
-[cjs:has]: /describe-type/has/index.js ""
-[cjs:has/at]: /describe-type/has/at.js ""
-[cjs:has/own]: /describe-type/has/own.js ""
-[cjs:has/ownValue]: /describe-type/has/ownValue.js ""
-[cjs:has/ownProperty]: /describe-type/has/ownProperty.js ""
+[cjs:has]: https://github.com/adriancmiranda/describe-type/blob/master/has/index.js ""
+[cjs:has/at]: https://github.com/adriancmiranda/describe-type/blob/master/has/at.js ""
+[cjs:has/own]: https://github.com/adriancmiranda/describe-type/blob/master/has/own.js ""
+[cjs:has/ownValue]: https://github.com/adriancmiranda/describe-type/blob/master/has/ownValue.js ""
+[cjs:has/ownProperty]: https://github.com/adriancmiranda/describe-type/blob/master/has/ownProperty.js ""
 
+<!-----------------------------------------------------------------------------
+ | describe-type/internal
+-'---------------------------------------------------------------------------->
+<!-- stringify -->
+[cjs:internal/stringify/index]: https://github.com/adriancmiranda/describe-type/blob/master/internal/stringify/index.js
+[cjs:internal/stringify/stringify.js]: https://github.com/adriancmiranda/describe-type/blob/master/internal/stringify/stringify.js
+[cjs:internal/stringify/stringify.array]: https://github.com/adriancmiranda/describe-type/blob/master/internal/stringify/stringify.array.js
+[cjs:internal/stringify/stringify.object]: https://github.com/adriancmiranda/describe-type/blob/master/internal/stringify/stringify.object.js
+
+<!-- built-in -->
+[cjs:internal/apply]: https://github.com/adriancmiranda/describe-type/blob/master/internal/apply.js
+[cjs:internal/booleanOf]: https://github.com/adriancmiranda/describe-type/blob/master/internal/booleanOf.js
+[cjs:internal/built]: https://github.com/adriancmiranda/describe-type/blob/master/internal/built-in.js
+[cjs:internal/constants]: https://github.com/adriancmiranda/describe-type/blob/master/internal/constants.js
+[cjs:internal/constructorNameOf]: https://github.com/adriancmiranda/describe-type/blob/master/internal/constructorNameOf.js
+[cjs:internal/constructorOf]: https://github.com/adriancmiranda/describe-type/blob/master/internal/constructorOf.js
+[cjs:internal/each]: https://github.com/adriancmiranda/describe-type/blob/master/internal/each.js
+[cjs:internal/eachProperty]: https://github.com/adriancmiranda/describe-type/blob/master/internal/eachProperty.js
+[cjs:internal/eachValue]: https://github.com/adriancmiranda/describe-type/blob/master/internal/eachValue.js
+[cjs:internal/env]: https://github.com/adriancmiranda/describe-type/blob/master/internal/env.js
+[cjs:internal/floatOf]: https://github.com/adriancmiranda/describe-type/blob/master/internal/floatOf.js
+[cjs:internal/getExpectedValue]: https://github.com/adriancmiranda/describe-type/blob/master/internal/getExpectedValue.js
+[cjs:internal/index]: https://github.com/adriancmiranda/describe-type/blob/master/internal/index.js
+[cjs:internal/intOf]: https://github.com/adriancmiranda/describe-type/blob/master/internal/intOf.js
+[cjs:internal/mod]: https://github.com/adriancmiranda/describe-type/blob/master/internal/mod.js
+[cjs:internal/name]: https://github.com/adriancmiranda/describe-type/blob/master/internal/name.js
+[cjs:internal/patterns]: https://github.com/adriancmiranda/describe-type/blob/master/internal/patterns.js
+[cjs:internal/prototypeOf]: https://github.com/adriancmiranda/describe-type/blob/master/internal/prototypeOf.js
+[cjs:internal/prototypes]: https://github.com/adriancmiranda/describe-type/blob/master/internal/prototypes.js
+[cjs:internal/resolveProperty]: https://github.com/adriancmiranda/describe-type/blob/master/internal/resolveProperty.js
+[cjs:internal/slice]: https://github.com/adriancmiranda/describe-type/blob/master/internal/slice.js
+[cjs:internal/stringOf]: https://github.com/adriancmiranda/describe-type/blob/master/internal/stringOf.js
+[cjs:internal/typeOf]: https://github.com/adriancmiranda/describe-type/blob/master/internal/typeOf.js
+[cjs:internal/typify]: https://github.com/adriancmiranda/describe-type/blob/master/internal/typify.js
+[cjs:internal/uintOf]: https://github.com/adriancmiranda/describe-type/blob/master/internal/uintOf.js
 
 <!-----------------------------------------------------------------------------
  |
