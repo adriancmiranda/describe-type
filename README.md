@@ -2429,7 +2429,7 @@ The following types of properties cause this method to return _false_ for object
 
 <table id="api-has.at"><thead><tr>
 <th width="90" align="center">☔️</th>
-<th width="790" align="left"><a href="#shortcuts">▴</a>has: at</th>
+<th width="790" align="left"><a href="#methods">▴</a>has: at</th>
 </tr></thead><tbody>
 <tr><td>
 
@@ -2462,7 +2462,7 @@ at(datatype, currentValue, defaultValue);
 
 <table id="api-has.own"><thead><tr>
 <th width="90" align="center">☔️</th>
-<th width="790" align="left"><a href="#shortcuts">▴</a>has: own</th>
+<th width="790" align="left"><a href="#methods">▴</a>has: own</th>
 </tr></thead><tbody>
 <tr><td>
 
@@ -2495,7 +2495,7 @@ own(object, value);
 
 <table id="api-has.ownValue"><thead><tr>
 <th width="90" align="center">☔️</th>
-<th width="790" align="left"><a href="#shortcuts">▴</a>has: ownValue</th>
+<th width="790" align="left"><a href="#methods">▴</a>has: ownValue</th>
 </tr></thead><tbody>
 <tr><td>
 
@@ -2528,7 +2528,7 @@ ownValue(object, value);
 
 <table id="api-has.ownProperty"><thead><tr>
 <th width="90" align="center">☔️</th>
-<th width="790" align="left"><a href="#shortcuts">▴</a>has: ownProperty</th>
+<th width="790" align="left"><a href="#methods">▴</a>has: ownProperty</th>
 </tr></thead><tbody>
 <tr><td>
 
