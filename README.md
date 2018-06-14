@@ -2499,7 +2499,7 @@ own(object, value);
 </tr></thead><tbody>
 <tr><td>
 
-[UMD][umd:ownValue] </td><td>
+[UMD][umd:has] </td><td>
   
 ```html
 <script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/has.umd.js"></script>
@@ -2532,7 +2532,7 @@ ownValue(object, value);
 </tr></thead><tbody>
 <tr><td>
 
-[UMD][umd:ownProperty] </td><td>
+[UMD][umd:has] </td><td>
   
 ```html
 <script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/has.umd.js"></script>
