@@ -69,108 +69,108 @@ console.log(is.type(Function, mySprite)); // false
 ### API
 
 ##### Common
-- [a](#api-a.an.type)(expected :Function, value :any) :boolean <br>
-- [an](#api-a.an.type)(expected :Function, value :any) :boolean <br>
-- [type](#api-a.an.type)(expected :Function, value :any) :boolean <br>
-- [instanceOf](#api-instanceOf)(expected :Function, value :any) :boolean <br>
-- [defined](#api-defined)(value :any) :boolean <br>
-- [undef](#api-undef)(value :any) :boolean <br>
-- [nil](#api-nil)(value :any) :boolean <br>
-- [unfilled](#api-unfilled)(value :any) :boolean <br>
-- [filled](#api-filled)(value :any) :boolean <br>
-- [empty](#api-empty)(value :any) :boolean <br>
-- [equal](#api-equal)(valueA :any, valueB :any) :boolean <br>
-- [primitive](#api-primitive)(value :any) :boolean <br>
-- [exotic](#api-exotic)(value :any) :boolean <br>
-- [enumerable](#api-enumerable)(value :any) :boolean <br>
-- [hosted](#api-hosted)(key :string | number, host :object) :boolean <br>
-- [within](#api-within)(value :number, start :number, finish :number) :boolean <br>
+- [a](#api-a.an.type)(expected :Function, value :any) :boolean
+- [an](#api-a.an.type)(expected :Function, value :any) :boolean
+- [type](#api-a.an.type)(expected :Function, value :any) :boolean
+- [instanceOf](#api-instanceOf)(expected :Function, value :any) :boolean
+- [defined](#api-defined)(value :any) :boolean
+- [undef](#api-undef)(value :any) :boolean
+- [nil](#api-nil)(value :any) :boolean
+- [unfilled](#api-unfilled)(value :any) :boolean
+- [filled](#api-filled)(value :any) :boolean
+- [empty](#api-empty)(value :any) :boolean
+- [equal](#api-equal)(valueA :any, valueB :any) :boolean
+- [primitive](#api-primitive)(value :any) :boolean
+- [exotic](#api-exotic)(value :any) :boolean
+- [enumerable](#api-enumerable)(value :any) :boolean
+- [hosted](#api-hosted)(key :string | number, host :object) :boolean
+- [within](#api-within)(value :number, start :number, finish :number) :boolean
 
 ##### Arguments
-- [args](#api-args)(value :any) :boolean <br>
-- [args.empty](#api-args.empty)(value :any) :boolean <br>
+- [args](#api-args)(value :any) :boolean
+- [args.empty](#api-args.empty)(value :any) :boolean
 
 ##### Array
-- [arraylike](#api-arraylike)(value :any) :boolean <br>
-- [arraylike.empty](#api-arraylike.empty)(value :any) :boolean <br>
-- [array](#api-array)(value :any) :boolean <br>
-- [array.of](#api-array.of)(expected :Function, value :any) :boolean <br>
-- [array.empty](#api-array.empty)(value :any) :boolean <br>
+- [arraylike](#api-arraylike)(value :any) :boolean
+- [arraylike.empty](#api-arraylike.empty)(value :any) :boolean
+- [array](#api-array)(value :any) :boolean
+- [array.of](#api-array.of)(expected :Function, value :any) :boolean
+- [array.empty](#api-array.empty)(value :any) :boolean
 
 ##### Object
-- [object](#api-object)(value :any) :boolean <br>
-- [object.empty](#api-object.empty)(value :any) :boolean <br>
+- [object](#api-object)(value :any) :boolean
+- [object.empty](#api-object.empty)(value :any) :boolean
 
 ##### RegExp
-- [regexp](#api-regexp)(value :any) :boolean <br>
-- [regexp.string](#api-regexp.string)(value :any) :boolean <br>
-- [regexp.flags](#api-regexp.flags)(value :any) :boolean <br>
+- [regexp](#api-regexp)(value :any) :boolean
+- [regexp.string](#api-regexp.string)(value :any) :boolean
+- [regexp.flags](#api-regexp.flags)(value :any) :boolean
 
 ##### Stream
-- [stream](#api-stream)(value :any) :boolean <br>
-- [stream.duplex](#api-stream.duplex)(value :any) :boolean <br>
-- [stream.transform](#api-stream.transform)(value :any) :boolean <br>
-- [stream.readable](#api-stream.readable)(value :any) :boolean <br>
-- [stream.writable](#api-stream.writable)(value :any) :boolean <br>
+- [stream](#api-stream)(value :any) :boolean
+- [stream.duplex](#api-stream.duplex)(value :any) :boolean
+- [stream.transform](#api-stream.transform)(value :any) :boolean
+- [stream.readable](#api-stream.readable)(value :any) :boolean
+- [stream.writable](#api-stream.writable)(value :any) :boolean
 
 ##### String
-- [string](#api-string)(value :any) :boolean <br>
-- [string.empty](#api-string.empty)(value :any) :boolean <br>
+- [string](#api-string)(value :any) :boolean
+- [string.empty](#api-string.empty)(value :any) :boolean
 
 ##### Function
-- [fn](#api-fn)(value :any) :boolean <br>
-- [fn.native](#api-fn.native)(value :any) :boolean <br>
-- [fn.callable](#api-fn.callable)(value :any) :boolean <br>
-- [fn.caste](#api-fn.caste)(value :any) :boolean <br>
+- [fn](#api-fn)(value :any) :boolean
+- [fn.native](#api-fn.native)(value :any) :boolean
+- [fn.callable](#api-fn.callable)(value :any) :boolean
+- [fn.caste](#api-fn.caste)(value :any) :boolean
 
 ##### Boolean
-- [bool](#api-bool)(value :any) :boolean <br>
+- [bool](#api-bool)(value :any) :boolean
 
 ##### Date
-- [date](#api-date)(value :any) :boolean <br>
+- [date](#api-date)(value :any) :boolean
 
 ##### Number
-- [number](#api-number)(value :any) :boolean <br>
-- [numeric](#api-numeric)(value :any) :boolean <br>
-- [int](#api-int)(value :any) :boolean <br>
-- [uint](#api-uint)(value :any) :boolean <br>
-- [infinity](#api-infinity)(value :any) :boolean <br>
-- [nan](#api-nan)(value :any) :boolean <br>
-- [odd](#api-odd)(value :any) :boolean <br>
-- [even](#api-even)(value :any) :boolean <br>
-- [decimal](#api-decimal)(value :any) :boolean <br>
-- [min](#api-min)(value: any, others: any[]) :boolean <br>
-- [max](#api-max)(value: any, others: any[]) :boolean <br>
+- [number](#api-number)(value :any) :boolean
+- [numeric](#api-numeric)(value :any) :boolean
+- [int](#api-int)(value :any) :boolean
+- [uint](#api-uint)(value :any) :boolean
+- [infinity](#api-infinity)(value :any) :boolean
+- [nan](#api-nan)(value :any) :boolean
+- [odd](#api-odd)(value :any) :boolean
+- [even](#api-even)(value :any) :boolean
+- [decimal](#api-decimal)(value :any) :boolean
+- [min](#api-min)(value: any, others: any[]) :boolean
+- [max](#api-max)(value: any, others: any[]) :boolean
 
 ##### Error
-- [error](#api-error)(value :any) :boolean <br>
+- [error](#api-error)(value :any) :boolean
 
 ##### Symbol
-- [symbol](#api-symbol)(value :any) :boolean <br>
+- [symbol](#api-symbol)(value :any) :boolean
 
 ##### Element
-- [element](#api-element)(value :any) :boolean <br>
+- [element](#api-element)(value :any) :boolean
 
 ##### Buffer
-- [buffer](#api-buffer)(value :any) :boolean <br>
+- [buffer](#api-buffer)(value :any) :boolean
 
 ##### JSON
-- [jsonlike](#api-jsonlike)(value :any) :boolean <br>
+- [jsonlike](#api-jsonlike)(value :any) :boolean
 
 ##### Encoded binary
-- [base64](#api-base64)(value :any) :boolean <br>
-- [hex](#api-hex)(value :any) :boolean <br>
+- [base64](#api-base64)(value :any) :boolean
+- [hex](#api-hex)(value :any) :boolean
 
 ##### Colors
-- [hexadecimal](#api-hexadecimal)(value :any) :boolean <br>
-- [rgb](#api-rgb)(value :any) :boolean <br>
-- [rgba](#api-rgba)(value :any) :boolean <br>
+- [hexadecimal](#api-hexadecimal)(value :any) :boolean
+- [rgb](#api-rgb)(value :any) :boolean
+- [rgba](#api-rgba)(value :any) :boolean
 <hr>
 
 
 #### Common
 
-<!-- a, an or type -->
+<!-- is/a, an or type -->
 
 <table id="api-a.an.type"><thead><tr>
 <th width="90" align="center">☔️</th>
@@ -203,7 +203,7 @@ type(expected, value);
 </td></tr></tbody></table>
 
 
-<!-- instanceOf -->
+<!-- is/instanceOf -->
 
 <table id="api-instanceOf"><thead><tr>
 <th width="90" align="center">☔️</th>
@@ -236,7 +236,7 @@ instanceOf(expected, value);
 </td></tr></tbody></table>
 
 
-<!-- defined -->
+<!-- is/defined -->
 
 <table id="api-defined"><thead><tr>
 <th width="90" align="center">☔️</th>
@@ -269,7 +269,7 @@ defined(value);
 </td></tr></tbody></table>
 
 
-<!-- undef -->
+<!-- is/undef -->
 
 <table id="api-undef"><thead><tr>
 <th width="90" align="center">☔️</th>
@@ -302,7 +302,7 @@ undef(value);
 </td></tr></tbody></table>
 
 
-<!-- nil -->
+<!-- is/nil -->
 
 <table id="api-nil"><thead><tr>
 <th width="90" align="center">☔️</th>
@@ -335,7 +335,7 @@ nil(value);
 </td></tr></tbody></table>
 
 
-<!-- unfilled -->
+<!-- is/unfilled -->
 
 <table id="api-unfilled"><thead><tr>
 <th width="90" align="center">☔️</th>
@@ -368,7 +368,7 @@ unfilled(value);
 </td></tr></tbody></table>
 
 
-<!-- filled -->
+<!-- is/filled -->
 
 <table id="api-filled"><thead><tr>
 <th width="90" align="center">☔️</th>
@@ -401,7 +401,7 @@ filled(value);
 </td></tr></tbody></table>
 
 
-<!-- empty -->
+<!-- is/empty -->
 
 <table id="api-empty"><thead><tr>
 <th width="90" align="center">☔️</th>
@@ -434,7 +434,7 @@ empty(value);
 </td></tr></tbody></table>
 
 
-<!-- equal -->
+<!-- is/equal -->
 
 <table id="api-equal"><thead><tr>
 <th width="90" align="center">☔️</th>
@@ -467,7 +467,7 @@ equal(valueA, valueB);
 </td></tr></tbody></table>
 
 
-<!-- primitive -->
+<!-- is/primitive -->
 
 <table id="api-primitive"><thead><tr>
 <th width="90" align="center">☔️</th>
@@ -500,7 +500,7 @@ primitive(value);
 </td></tr></tbody></table>
 
 
-<!-- exotic -->
+<!-- is/exotic -->
 
 <table id="api-exotic"><thead><tr>
 <th width="90" align="center">☔️</th>
@@ -533,7 +533,7 @@ exotic(value);
 </td></tr></tbody></table>
 
 
-<!-- enumerable -->
+<!-- is/enumerable -->
 
 <table id="api-enumerable"><thead><tr>
 <th width="90" align="center">☔️</th>
@@ -566,7 +566,7 @@ enumerable(value);
 </td></tr></tbody></table>
 
 
-<!-- hosted -->
+<!-- is/hosted -->
 
 <table id="api-hosted"><thead><tr>
 <th width="90" align="center">☔️</th>
@@ -599,7 +599,7 @@ hosted(key, host);
 </td></tr></tbody></table>
 
 
-<!-- within -->
+<!-- is/within -->
 
 <table id="api-within"><thead><tr>
 <th width="90" align="center">☔️</th>
@@ -634,7 +634,7 @@ within(value, start, finish);
 
 #### Arguments
 
-<!-- args/ -->
+<!-- is/args/ -->
 
 <table id="api-args"><thead><tr>
 <th width="90" align="center">☔️</th>
@@ -667,7 +667,7 @@ args(value);
 </td></tr></tbody></table>
 
 
-<!-- args/empty -->
+<!-- is/args/empty -->
 
 <table id="api-args.empty"><thead><tr>
 <th width="90" align="center">☔️</th>
@@ -702,7 +702,7 @@ argsEmpty(value);
 
 #### Array
 
-<!-- arraylike/ -->
+<!-- is/arraylike/ -->
 
 <table id="api-arraylike"><thead><tr>
 <th width="90" align="center">☔️</th>
@@ -735,7 +735,7 @@ arraylike(value);
 </td></tr></tbody></table>
 
 
-<!-- arraylike/arraylike.empty -->
+<!-- is/arraylike/arraylike.empty -->
 
 <table id="api-arraylike.empty"><thead><tr>
 <th width="90" align="center">☔️</th>
@@ -768,7 +768,7 @@ arraylikeEmpty(value);
 </td></tr></tbody></table>
 
 
-<!-- array/ -->
+<!-- is/array/ -->
 
 <table id="api-array"><thead><tr>
 <th width="90" align="center">☔️</th>
@@ -801,7 +801,7 @@ array(value);
 </td></tr></tbody></table>
 
 
-<!-- array/array.empty -->
+<!-- is/array/array.empty -->
 
 <table id="api-array.empty"><thead><tr>
 <th width="90" align="center">☔️</th>
@@ -833,7 +833,7 @@ arrayEmpty(value);
 ```
 </td></tr></tbody></table>
 
-<!-- array/array.of -->
+<!-- is/array/array.of -->
 
 <table id="api-array.of"><thead><tr>
 <th width="90" align="center">☔️</th>
@@ -868,7 +868,7 @@ arrayOf(value);
 
 #### Object
 
-<!-- object/ -->
+<!-- is/object/ -->
 
 <table id="api-object"><thead><tr>
 <th width="90" align="center">☔️</th>
@@ -901,7 +901,7 @@ object(value);
 </td></tr></tbody></table>
 
 
-<!-- object/object.empty -->
+<!-- is/object/object.empty -->
 
 <table id="api-object.empty"><thead><tr>
 <th width="90" align="center">☔️</th>
@@ -936,7 +936,7 @@ objectEmpty(value);
 
 #### RegExp
 
-<!-- regexp/ -->
+<!-- is/regexp/ -->
 
 <table id="api-regexp"><thead><tr>
 <th width="90" align="center">☔️</th>
@@ -969,7 +969,7 @@ regexp(value);
 </td></tr></tbody></table>
 
 
-<!-- regexp/regexp.string -->
+<!-- is/regexp/regexp.string -->
 
 <table id="api-regexp.string"><thead><tr>
 <th width="90" align="center">☔️</th>
@@ -1002,7 +1002,7 @@ regexpString(value);
 </td></tr></tbody></table>
 
 
-<!-- regexp/regexp.flags -->
+<!-- is/regexp/regexp.flags -->
 
 <table id="api-regexp.flags"><thead><tr>
 <th width="90" align="center">☔️</th>
@@ -1037,7 +1037,7 @@ regexpFlags(value);
 
 #### Stream
 
-<!-- stream/ -->
+<!-- is/stream/ -->
 
 <table id="api-stream"><thead><tr>
 <th width="90" align="center">☔️</th>
@@ -1070,7 +1070,7 @@ stream(value);
 </td></tr></tbody></table>
 
 
-<!-- stream/stream.duplex -->
+<!-- is/stream/stream.duplex -->
 
 <table id="api-stream.duplex"><thead><tr>
 <th width="90" align="center">☔️</th>
@@ -1103,7 +1103,7 @@ streamDuplex(value);
 </td></tr></tbody></table>
 
 
-<!-- stream/stream.transform -->
+<!-- is/stream/stream.transform -->
 
 <table id="api-stream.transform"><thead><tr>
 <th width="90" align="center">☔️</th>
@@ -1136,7 +1136,7 @@ streamTransform(value);
 </td></tr></tbody></table>
 
 
-<!-- stream/stream.readable -->
+<!-- is/stream/stream.readable -->
 
 <table id="api-stream.readable"><thead><tr>
 <th width="90" align="center">☔️</th>
@@ -1169,7 +1169,7 @@ streamReadable(value);
 </td></tr></tbody></table>
 
 
-<!-- stream/stream.writable -->
+<!-- is/stream/stream.writable -->
 
 <table id="api-stream.writable"><thead><tr>
 <th width="90" align="center">☔️</th>
@@ -1204,7 +1204,7 @@ streamWritable(value);
 
 #### String
 
-<!-- string/ -->
+<!-- is/string/ -->
 
 <table id="api-string"><thead><tr>
 <th width="90" align="center">☔️</th>
@@ -1237,7 +1237,7 @@ string(value);
 </td></tr></tbody></table>
 
 
-<!-- string/string.empty -->
+<!-- is/string/string.empty -->
 
 <table id="api-string.empty"><thead><tr>
 <th width="90" align="center">☔️</th>
@@ -1272,7 +1272,7 @@ stringEmpty(value);
 
 #### Function
 
-<!-- fn/ -->
+<!-- is/fn/ -->
 
 <table id="api-fn"><thead><tr>
 <th width="90" align="center">☔️</th>
@@ -1305,7 +1305,7 @@ fn(value);
 </td></tr></tbody></table>
 
 
-<!-- fn/fn.native -->
+<!-- is/fn/fn.native -->
 
 <table id="api-fn.native"><thead><tr>
 <th width="90" align="center">☔️</th>
@@ -1338,7 +1338,7 @@ fnNative(value);
 </td></tr></tbody></table>
 
 
-<!-- fn/fn.callable -->
+<!-- is/fn/fn.callable -->
 
 <table id="api-fn.callable"><thead><tr>
 <th width="90" align="center">☔️</th>
@@ -1371,7 +1371,7 @@ fnCallable(value);
 </td></tr></tbody></table>
 
 
-<!-- fn/fn.caste -->
+<!-- is/fn/fn.caste -->
 
 <table id="api-fn.caste"><thead><tr>
 <th width="90" align="center">☔️</th>
@@ -1406,7 +1406,7 @@ fnCaste(value);
 
 #### Boolean
 
-<!-- bool -->
+<!-- is/bool -->
 
 <table id="api-bool"><thead><tr>
 <th width="90" align="center">☔️</th>
@@ -1441,7 +1441,7 @@ bool(value);
 
 #### Date
 
-<!-- date -->
+<!-- is/date -->
 
 <table id="api-date"><thead><tr>
 <th width="90" align="center">☔️</th>
@@ -1475,7 +1475,7 @@ date(value);
 
 #### Number
 
-<!-- number -->
+<!-- is/number -->
 
 <table id="api-number"><thead><tr>
 <th width="90" align="center">☔️</th>
@@ -1508,7 +1508,7 @@ number(value);
 </td></tr></tbody></table>
 
 
-<!-- numeric -->
+<!-- is/numeric -->
 
 <table id="api-numeric"><thead><tr>
 <th width="90" align="center">☔️</th>
@@ -1541,7 +1541,7 @@ numeric(value);
 </td></tr></tbody></table>
 
 
-<!-- int -->
+<!-- is/int -->
 
 <table id="api-int"><thead><tr>
 <th width="90" align="center">☔️</th>
@@ -1574,7 +1574,7 @@ int(value);
 </td></tr></tbody></table>
 
 
-<!-- uint -->
+<!-- is/uint -->
 
 <table id="api-uint"><thead><tr>
 <th width="90" align="center">☔️</th>
@@ -1607,7 +1607,7 @@ uint(value);
 </td></tr></tbody></table>
 
 
-<!-- infinity -->
+<!-- is/infinity -->
 
 <table id="api-infinity"><thead><tr>
 <th width="90" align="center">☔️</th>
@@ -1640,7 +1640,7 @@ infinity(value);
 </td></tr></tbody></table>
 
 
-<!-- nan -->
+<!-- is/nan -->
 
 <table id="api-nan"><thead><tr>
 <th width="90" align="center">☔️</th>
@@ -1673,7 +1673,7 @@ nan(value);
 </td></tr></tbody></table>
 
 
-<!-- odd -->
+<!-- is/odd -->
 
 <table id="api-odd"><thead><tr>
 <th width="90" align="center">☔️</th>
@@ -1706,7 +1706,7 @@ odd(value);
 </td></tr></tbody></table>
 
 
-<!-- even -->
+<!-- is/even -->
 
 <table id="api-even"><thead><tr>
 <th width="90" align="center">☔️</th>
@@ -1739,7 +1739,7 @@ even(value);
 </td></tr></tbody></table>
 
 
-<!-- decimal -->
+<!-- is/decimal -->
 
 <table id="api-decimal"><thead><tr>
 <th width="90" align="center">☔️</th>
@@ -1772,7 +1772,7 @@ decimal(value);
 </td></tr></tbody></table>
 
 
-<!-- min -->
+<!-- is/min -->
 
 <table id="api-min"><thead><tr>
 <th width="90" align="center">☔️</th>
@@ -1805,7 +1805,7 @@ min(value, others);
 </td></tr></tbody></table>
 
 
-<!-- max -->
+<!-- is/max -->
 
 <table id="api-max"><thead><tr>
 <th width="90" align="center">☔️</th>
@@ -1840,7 +1840,7 @@ max(value, others);
 
 #### Error
 
-<!-- error -->
+<!-- is/error -->
 
 <table id="api-error"><thead><tr>
 <th width="90" align="center">☔️</th>
@@ -1875,7 +1875,7 @@ error(value);
 
 #### Symbol
 
-<!-- symbol -->
+<!-- is/symbol -->
 
 <table id="api-symbol"><thead><tr>
 <th width="90" align="center">☔️</th>
@@ -1910,7 +1910,7 @@ symbol(value);
 
 #### Element
 
-<!-- element -->
+<!-- is/element -->
 
 <table id="api-element"><thead><tr>
 <th width="90" align="center">☔️</th>
@@ -1945,7 +1945,7 @@ element(value);
 
 #### Buffer
 
-<!-- buffer -->
+<!-- is/buffer -->
 
 <table id="api-buffer"><thead><tr>
 <th width="90" align="center">☔️</th>
@@ -1980,7 +1980,7 @@ buffer(value);
 
 #### JSON
 
-<!-- jsonlike -->
+<!-- is/jsonlike -->
 
 <table id="api-jsonlike"><thead><tr>
 <th width="90" align="center">☔️</th>
@@ -2015,7 +2015,7 @@ jsonlike(value);
 
 #### Encoded binary
 
-<!-- base64 -->
+<!-- is/base64 -->
 
 <table id="api-base64"><thead><tr>
 <th width="90" align="center">☔️</th>
@@ -2048,7 +2048,7 @@ base64(value);
 </td></tr></tbody></table>
 
 
-<!-- hex -->
+<!-- is/hex -->
 
 <table id="api-hex"><thead><tr>
 <th width="90" align="center">☔️</th>
@@ -2083,7 +2083,7 @@ hex(value);
 
 #### Colors
 
-<!-- hexadecimal -->
+<!-- is/hexadecimal -->
 
 <table id="api-hexadecimal"><thead><tr>
 <th width="90" align="center">☔️</th>
@@ -2116,7 +2116,7 @@ hexadecimal(value);
 </td></tr></tbody></table>
 
 
-<!-- rgb -->
+<!-- is/rgb -->
 
 <table id="api-rgb"><thead><tr>
 <th width="90" align="center">☔️</th>
@@ -2149,7 +2149,7 @@ rgb(value);
 </td></tr></tbody></table>
 
 
-<!-- rgba -->
+<!-- is/rgba -->
 
 <table id="api-rgba"><thead><tr>
 <th width="90" align="center">☔️</th>
@@ -2212,18 +2212,18 @@ console.log(as(Boolean, myArray, null)); // null
 
 #### Variants
 
-- [as.any](#api-as.any)(datatype :Array&#60;Function&#62;, expression :&#42;, defaultValue :&#42;) :any <br>
-- [as.arrayOf](#api-as.arrayOf)(datatype :Function, expression :&#42;, defaultValue :&#42;) :any <br>
+- [as.any](#api-as.any)(datatype :Array&#60;Function&#62;, expression :&#42;, defaultValue :&#42;) :any
+- [as.arrayOf](#api-as.arrayOf)(datatype :Function, expression :&#42;, defaultValue :&#42;) :any
 
 #### Shortcuts
 
-- [as.a](#api-as.a)(datatype :Function, expression :&#42;, defaultValue :&#42;) :any <br>
-- [as.an](#api-as.an)(datatype :Function, expression :&#42;, defaultValue :&#42;) :any <br>
-- [as.type](#api-as.type)(datatype :Function, expression :&#42;, defaultValue :&#42;) :any <br>
+- [as.a](#api-as.a)(datatype :Function, expression :&#42;, defaultValue :&#42;) :any
+- [as.an](#api-as.an)(datatype :Function, expression :&#42;, defaultValue :&#42;) :any
+- [as.type](#api-as.type)(datatype :Function, expression :&#42;, defaultValue :&#42;) :any
 
 #### Variants
 
-<!-- any -->
+<!-- as/any -->
 
 <table id="api-as.any"><thead><tr>
 <th width="90" align="center">☔️</th>
@@ -2256,7 +2256,7 @@ any([datatype1, datatype2, ...], currentValue, defaultValue);
 </td></tr></tbody></table>
 
 
-<!-- arrayOf -->
+<!-- as/arrayOf -->
 
 <table id="api-as.arrayOf"><thead><tr>
 <th width="90" align="center">☔️</th>
@@ -2291,7 +2291,7 @@ arrayOf(datatype, currentValue, defaultValue);
 
 #### Shortcuts
 
-<!-- a -->
+<!-- as/a -->
 
 <table id="api-as.a"><thead><tr>
 <th width="90" align="center">☔️</th>
@@ -2324,7 +2324,7 @@ a(datatype, currentValue, defaultValue);
 </td></tr></tbody></table>
 
 
-<!-- an -->
+<!-- as/an -->
 
 <table id="api-as.an"><thead><tr>
 <th width="90" align="center">☔️</th>
@@ -2357,7 +2357,7 @@ an(datatype, currentValue, defaultValue);
 </td></tr></tbody></table>
 
 
-<!-- type -->
+<!-- as/type -->
 
 <table id="api-as.type"><thead><tr>
 <th width="90" align="center">☔️</th>
@@ -2416,6 +2416,145 @@ The following types of properties cause this method to return _false_ for object
 ##### Returns
 
 [Boolean][Boolean] — If the target object has the property specified by the name parameter this value is _true_, otherwise _false_.
+
+#### Methods
+
+- [has.at](#api-has.at)(context :Object, name :String | Number) :Boolean
+- [has.own](#api-has.own)(context :Object, name :String | Number) :Boolean
+- [has.ownValue](#api-has.ownValue)(context :Array, name :String | Number) :Boolean
+- [has.ownProperty](#api-has.ownProperty)(context :Object, name :String | Number) :Boolean
+
+
+<!-- has/at -->
+
+<table id="api-has.at"><thead><tr>
+<th width="90" align="center">☔️</th>
+<th width="790" align="left"><a href="#shortcuts">▴</a>has: at</th>
+</tr></thead><tbody>
+<tr><td>
+
+[UMD][umd:has] </td><td>
+  
+```html
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/has.umd.js"></script>
+<script>has.at(object, value);</script>
+```
+</td></tr><tr style="background-color: #fff!important;"><td>
+
+[CJS][cjs:has/at] </td><td>
+
+```js
+const at = require('describe-type/has/at');
+has.at(object, value);
+```
+</td></tr><tr><td>
+
+[ES6][es6:has/at] </td><td>
+
+```js
+import at from 'describe-type/has/at.next';
+at(datatype, currentValue, defaultValue);
+```
+</td></tr></tbody></table>
+
+
+<!-- has/own -->
+
+<table id="api-has.own"><thead><tr>
+<th width="90" align="center">☔️</th>
+<th width="790" align="left"><a href="#shortcuts">▴</a>has: own</th>
+</tr></thead><tbody>
+<tr><td>
+
+[UMD][umd:own] </td><td>
+  
+```html
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/has.umd.js"></script>
+<script>has.own(object, value);</script>
+```
+</td></tr><tr style="background-color: #fff!important;"><td>
+
+[CJS][cjs:has/own] </td><td>
+
+```js
+const own = require('describe-type/has/own');
+has.own(object, value);
+```
+</td></tr><tr><td>
+
+[ES6][es6:has/own] </td><td>
+
+```js
+import own from 'describe-type/has/own.next';
+own(object, value);
+```
+</td></tr></tbody></table>
+
+
+<!-- has/ownValue -->
+
+<table id="api-has.ownValue"><thead><tr>
+<th width="90" align="center">☔️</th>
+<th width="790" align="left"><a href="#shortcuts">▴</a>has: ownValue</th>
+</tr></thead><tbody>
+<tr><td>
+
+[UMD][umd:ownValue] </td><td>
+  
+```html
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/has.umd.js"></script>
+<script>has.ownValue(object, value);</script>
+```
+</td></tr><tr style="background-color: #fff!important;"><td>
+
+[CJS][cjs:has/ownValue] </td><td>
+
+```js
+const ownValue = require('describe-type/has/ownValue');
+has.ownValue(object, value);
+```
+</td></tr><tr><td>
+
+[ES6][es6:has/ownValue] </td><td>
+
+```js
+import ownValue from 'describe-type/has/ownValue.next';
+ownValue(object, value);
+```
+</td></tr></tbody></table>
+
+
+<!-- has/ownProperty -->
+
+<table id="api-has.ownProperty"><thead><tr>
+<th width="90" align="center">☔️</th>
+<th width="790" align="left"><a href="#shortcuts">▴</a>has: ownProperty</th>
+</tr></thead><tbody>
+<tr><td>
+
+[UMD][umd:ownProperty] </td><td>
+  
+```html
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/has.umd.js"></script>
+<script>has.ownProperty(object, value);</script>
+```
+</td></tr><tr style="background-color: #fff!important;"><td>
+
+[CJS][cjs:has/ownProperty] </td><td>
+
+```js
+const ownProperty = require('describe-type/has/ownProperty');
+has.ownProperty(object, value);
+```
+</td></tr><tr><td>
+
+[ES6][es6:has/ownProperty] </td><td>
+
+```js
+import ownProperty from 'describe-type/has/ownProperty.next';
+ownProperty(object, value);
+```
+</td></tr></tbody></table>
 
 </p></details>
 
@@ -2546,6 +2685,15 @@ See also the list of _[contributors][CONTRIBUTORS]_ who participated in this pro
 [es6:as/instanceOf]: /describe-type/as/instanceOf.next.js ""
 [es6:as/arrayOf]: /describe-type/as/arrayOf.next.js ""
 
+<!-----------------------------------------------------------------------------
+ | describe-type/has
+-'---------------------------------------------------------------------------->
+[es6:has]: /describe-type/has/index.next.js ""
+[es6:has/at]: /describe-type/has/at.next.js ""
+[es6:has/own]: /describe-type/has/own.next.js ""
+[es6:has/ownValue]: /describe-type/has/ownValue.next.js ""
+[es6:has/ownProperty]: /describe-type/has/ownProperty.next.js ""
+
 
 <!-----------------------------------------------------------------------------
  |
@@ -2647,6 +2795,15 @@ See also the list of _[contributors][CONTRIBUTORS]_ who participated in this pro
 [cjs:as/instanceOf]: /describe-type/as/instanceOf.js ""
 [cjs:as/arrayOf]: /describe-type/as/arrayOf.js ""
 
+<!-----------------------------------------------------------------------------
+ | describe-type/has
+-'---------------------------------------------------------------------------->
+[cjs:has]: /describe-type/has/index.js ""
+[cjs:has/at]: /describe-type/has/at.js ""
+[cjs:has/own]: /describe-type/has/own.js ""
+[cjs:has/ownValue]: /describe-type/has/ownValue.js ""
+[cjs:has/ownProperty]: /describe-type/has/ownProperty.js ""
+
 
 <!-----------------------------------------------------------------------------
  |
@@ -2665,6 +2822,12 @@ See also the list of _[contributors][CONTRIBUTORS]_ who participated in this pro
 [amd:as]: https://rawgit.com/adriancmiranda/describe-type/master/dist/as.amd.js ""
 [cjs:as]: https://rawgit.com/adriancmiranda/describe-type/master/dist/as.cjs.js ""
 [iife:as]: https://rawgit.com/adriancmiranda/describe-type/master/dist/as.iife.js ""
+
+<!-- has -->
+[umd:has]: https://rawgit.com/adriancmiranda/describe-type/master/dist/has.umd.js ""
+[amd:has]: https://rawgit.com/adriancmiranda/describe-type/master/dist/has.amd.js ""
+[cjs:has]: https://rawgit.com/adriancmiranda/describe-type/master/dist/has.cjs.js ""
+[iife:has]: https://rawgit.com/adriancmiranda/describe-type/master/dist/has.iife.js ""
 
 
 <!-----------------------------------------------------------------------------
