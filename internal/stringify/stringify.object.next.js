@@ -11,7 +11,7 @@ export default function stringifyObject(hash) {
 	const size = list.length - 1;
 	return reduce(list, (accumulator, key, index) => {
 		const last = index === size;
-		const value = stringify(hash[key]);
+		const value = JSON.stringify(hash[key]);
 		const pair = `${key}:${value}`;
 		accumulator += last ? `${pair}}` : `${pair},`;
 		return accumulator;
