@@ -181,7 +181,7 @@ console.log(is.type(Function, mySprite)); // false
 [UMD][umd:is] </td><td>
   
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/is.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.is.umd.js"></script>
 <script>is.a(expected, value);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -214,7 +214,7 @@ type(expected, value);
 [UMD][umd:is] </td><td>
   
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/is.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.is.umd.js"></script>
 <script>is.instanceOf(expected, value);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -247,7 +247,7 @@ instanceOf(expected, value);
 [UMD][umd:is] </td><td>
   
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/is.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.is.umd.js"></script>
 <script>is.defined(value);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -280,7 +280,7 @@ defined(value);
 [UMD][umd:is] </td><td>
   
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/is.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.is.umd.js"></script>
 <script>is.undef(value);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -313,7 +313,7 @@ undef(value);
 [UMD][umd:is] </td><td>
   
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/is.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.is.umd.js"></script>
 <script>is.nil(value);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -346,7 +346,7 @@ nil(value);
 [UMD][umd:is] </td><td>
   
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/is.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.is.umd.js"></script>
 <script>is.unfilled(value);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -379,7 +379,7 @@ unfilled(value);
 [UMD][umd:is] </td><td>
   
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/is.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.is.umd.js"></script>
 <script>is.filled(value);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -412,7 +412,7 @@ filled(value);
 [UMD][umd:is] </td><td>
   
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/is.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.is.umd.js"></script>
 <script>is.empty(value);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -445,7 +445,7 @@ empty(value);
 [UMD][umd:is] </td><td>
   
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/is.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.is.umd.js"></script>
 <script>is.equal(valueA, valueB);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -478,7 +478,7 @@ equal(valueA, valueB);
 [UMD][umd:is] </td><td>
   
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/is.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.is.umd.js"></script>
 <script>is.primitive(value);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -511,7 +511,7 @@ primitive(value);
 [UMD][umd:is] </td><td>
   
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/is.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.is.umd.js"></script>
 <script>is.exotic(value);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -544,7 +544,7 @@ exotic(value);
 [UMD][umd:is] </td><td>
   
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/is.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.is.umd.js"></script>
 <script>is.enumerable(value);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -577,7 +577,7 @@ enumerable(value);
 [UMD][umd:is] </td><td>
   
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/is.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.is.umd.js"></script>
 <script>is.hosted(key, host);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -610,7 +610,7 @@ hosted(key, host);
 [UMD][umd:is] </td><td>
   
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/is.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.is.umd.js"></script>
 <script>is.within(value, start, finish);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -645,7 +645,7 @@ within(value, start, finish);
 [UMD][umd:is] </td><td>
   
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/is.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.is.umd.js"></script>
 <script>is.args(value);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -678,7 +678,7 @@ args(value);
 [UMD][umd:is] </td><td>
   
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/is.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.is.umd.js"></script>
 <script>is.args.empty(value);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -713,7 +713,7 @@ argsEmpty(value);
 [UMD][umd:is] </td><td>
   
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/is.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.is.umd.js"></script>
 <script>is.arraylike(value);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -746,7 +746,7 @@ arraylike(value);
 [UMD][umd:is] </td><td>
   
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/is.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.is.umd.js"></script>
 <script>is.arraylike.empty(value);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -779,7 +779,7 @@ arraylikeEmpty(value);
 [UMD][umd:is] </td><td>
   
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/is.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.is.umd.js"></script>
 <script>is.array(value);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -812,7 +812,7 @@ array(value);
 [UMD][umd:is] </td><td>
   
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/is.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.is.umd.js"></script>
 <script>is.array.empty(value);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -844,7 +844,7 @@ arrayEmpty(value);
 [UMD][umd:is] </td><td>
   
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/is.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.is.umd.js"></script>
 <script>is.array.of(value);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -879,7 +879,7 @@ arrayOf(value);
 [UMD][umd:is] </td><td>
   
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/is.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.is.umd.js"></script>
 <script>is.object(value);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -912,7 +912,7 @@ object(value);
 [UMD][umd:is] </td><td>
   
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/is.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.is.umd.js"></script>
 <script>is.object.empty(value);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -947,7 +947,7 @@ objectEmpty(value);
 [UMD][umd:is] </td><td>
   
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/is.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.is.umd.js"></script>
 <script>is.regexp(value);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -980,7 +980,7 @@ regexp(value);
 [UMD][umd:is] </td><td>
   
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/is.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.is.umd.js"></script>
 <script>is.regexp.string(value);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -1013,7 +1013,7 @@ regexpString(value);
 [UMD][umd:is] </td><td>
   
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/is.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.is.umd.js"></script>
 <script>is.regexp.flags(value);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -1048,7 +1048,7 @@ regexpFlags(value);
 [UMD][umd:is] </td><td>
   
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/is.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.is.umd.js"></script>
 <script>is.stream(value);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -1081,7 +1081,7 @@ stream(value);
 [UMD][umd:is] </td><td>
   
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/is.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.is.umd.js"></script>
 <script>is.stream.duplex(value);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -1114,7 +1114,7 @@ streamDuplex(value);
 [UMD][umd:is] </td><td>
   
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/is.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.is.umd.js"></script>
 <script>is.stream.transform(value);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -1147,7 +1147,7 @@ streamTransform(value);
 [UMD][umd:is] </td><td>
   
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/is.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.is.umd.js"></script>
 <script>is.stream.readable(value);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -1180,7 +1180,7 @@ streamReadable(value);
 [UMD][umd:is] </td><td>
   
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/is.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.is.umd.js"></script>
 <script>is.stream.writable(value);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -1215,7 +1215,7 @@ streamWritable(value);
 [UMD][umd:is] </td><td>
   
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/is.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.is.umd.js"></script>
 <script>is.string(value);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -1248,7 +1248,7 @@ string(value);
 [UMD][umd:is] </td><td>
   
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/is.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.is.umd.js"></script>
 <script>is.string.empty(value);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -1283,7 +1283,7 @@ stringEmpty(value);
 [UMD][umd:is] </td><td>
   
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/is.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.is.umd.js"></script>
 <script>is.fn(value);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -1316,7 +1316,7 @@ fn(value);
 [UMD][umd:is] </td><td>
   
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/is.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.is.umd.js"></script>
 <script>is.fn.native(value);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -1349,7 +1349,7 @@ fnNative(value);
 [UMD][umd:is] </td><td>
   
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/is.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.is.umd.js"></script>
 <script>is.fn.callable(value);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -1382,7 +1382,7 @@ fnCallable(value);
 [UMD][umd:is] </td><td>
 
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/is.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.is.umd.js"></script>
 <script>is.fn.caste(value);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -1417,7 +1417,7 @@ fnCaste(value);
 [UMD][umd:is] </td><td>
   
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/is.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.is.umd.js"></script>
 <script>is.bool(value);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -1452,7 +1452,7 @@ bool(value);
 [UMD][umd:is] </td><td>
   
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/is.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.is.umd.js"></script>
 <script>is.date(value);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -1486,7 +1486,7 @@ date(value);
 [UMD][umd:is] </td><td>
   
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/is.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.is.umd.js"></script>
 <script>is.number(value);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -1519,7 +1519,7 @@ number(value);
 [UMD][umd:is] </td><td>
   
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/is.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.is.umd.js"></script>
 <script>is.numeric(value);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -1552,7 +1552,7 @@ numeric(value);
 [UMD][umd:is] </td><td>
   
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/is.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.is.umd.js"></script>
 <script>is.int(value);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -1585,7 +1585,7 @@ int(value);
 [UMD][umd:is] </td><td>
   
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/is.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.is.umd.js"></script>
 <script>is.uint(value);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -1618,7 +1618,7 @@ uint(value);
 [UMD][umd:is] </td><td>
   
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/is.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.is.umd.js"></script>
 <script>is.infinity(value);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -1651,7 +1651,7 @@ infinity(value);
 [UMD][umd:is] </td><td>
   
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/is.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.is.umd.js"></script>
 <script>is.nan(value);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -1684,7 +1684,7 @@ nan(value);
 [UMD][umd:is] </td><td>
   
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/is.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.is.umd.js"></script>
 <script>is.odd(value);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -1717,7 +1717,7 @@ odd(value);
 [UMD][umd:is] </td><td>
   
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/is.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.is.umd.js"></script>
 <script>is.even(value);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -1750,7 +1750,7 @@ even(value);
 [UMD][umd:is] </td><td>
   
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/is.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.is.umd.js"></script>
 <script>is.decimal(value);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -1783,7 +1783,7 @@ decimal(value);
 [UMD][umd:is] </td><td>
   
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/is.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.is.umd.js"></script>
 <script>is.min(value, others);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -1816,7 +1816,7 @@ min(value, others);
 [UMD][umd:is] </td><td>
   
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/is.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.is.umd.js"></script>
 <script>is.max(value, others);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -1851,7 +1851,7 @@ max(value, others);
 [UMD][umd:is] </td><td>
   
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/is.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.is.umd.js"></script>
 <script>is.error(value);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -1886,7 +1886,7 @@ error(value);
 [UMD][umd:is] </td><td>
   
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/is.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.is.umd.js"></script>
 <script>is.symbol(value);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -1921,7 +1921,7 @@ symbol(value);
 [UMD][umd:is] </td><td>
   
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/is.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.is.umd.js"></script>
 <script>is.element(value);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -1956,7 +1956,7 @@ element(value);
 [UMD][umd:is] </td><td>
   
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/is.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.is.umd.js"></script>
 <script>is.buffer(value);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -1991,7 +1991,7 @@ buffer(value);
 [UMD][umd:is] </td><td>
   
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/is.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.is.umd.js"></script>
 <script>is.jsonlike(value);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -2026,7 +2026,7 @@ jsonlike(value);
 [UMD][umd:is] </td><td>
   
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/is.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.is.umd.js"></script>
 <script>is.base64(value);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -2059,7 +2059,7 @@ base64(value);
 [UMD][umd:is] </td><td>
   
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/is.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.is.umd.js"></script>
 <script>is.hex(value);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -2094,7 +2094,7 @@ hex(value);
 [UMD][umd:is] </td><td>
   
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/is.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.is.umd.js"></script>
 <script>is.hexadecimal(value);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -2127,7 +2127,7 @@ hexadecimal(value);
 [UMD][umd:is] </td><td>
 
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/is.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.is.umd.js"></script>
 <script>is.rgb(value);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -2160,7 +2160,7 @@ rgb(value);
 [UMD][umd:is] </td><td>
 
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/is.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.is.umd.js"></script>
 <script>is.rgba(value);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -2234,7 +2234,7 @@ console.log(as(Boolean, myArray, null)); // null
 [UMD][umd:as] </td><td>
   
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/as.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.as.umd.js"></script>
 <script>as.any([datatype1, datatype2, ...], currentValue, defaultValue);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -2267,7 +2267,7 @@ any([datatype1, datatype2, ...], currentValue, defaultValue);
 [UMD][umd:as] </td><td>
   
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/as.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.as.umd.js"></script>
 <script>as.arrayOf(datatype, currentValue, defaultValue);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -2302,7 +2302,7 @@ arrayOf(datatype, currentValue, defaultValue);
 [UMD][umd:as] </td><td>
   
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/as.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.as.umd.js"></script>
 <script>as.a(datatype, currentValue, defaultValue);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -2335,7 +2335,7 @@ a(datatype, currentValue, defaultValue);
 [UMD][umd:as] </td><td>
   
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/as.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.as.umd.js"></script>
 <script>as.an(datatype, currentValue, defaultValue);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -2368,7 +2368,7 @@ an(datatype, currentValue, defaultValue);
 [UMD][umd:as] </td><td>
   
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/as.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.as.umd.js"></script>
 <script>as.type(datatype, currentValue, defaultValue);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -2436,7 +2436,7 @@ The following types of properties cause this method to return _false_ for object
 [UMD][umd:has] </td><td>
   
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/has.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.has.umd.js"></script>
 <script>has.at(object, value);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -2469,7 +2469,7 @@ at(datatype, currentValue, defaultValue);
 [UMD][umd:has] </td><td>
   
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/has.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.has.umd.js"></script>
 <script>has.own(object, value);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -2502,7 +2502,7 @@ own(object, value);
 [UMD][umd:has] </td><td>
   
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/has.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.has.umd.js"></script>
 <script>has.ownValue(object, value);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -2535,7 +2535,7 @@ ownValue(object, value);
 [UMD][umd:has] </td><td>
   
 ```html
-<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/has.umd.js"></script>
+<script src="https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.has.umd.js"></script>
 <script>has.ownProperty(object, value);</script>
 ```
 </td></tr><tr style="background-color: #fff!important;"><td>
@@ -2812,22 +2812,22 @@ See also the list of _[contributors][CONTRIBUTORS]_ who participated in this pro
 -'---------------------------------------------------------------------------->
 
 <!-- is -->
-[umd:is]: https://rawgit.com/adriancmiranda/describe-type/master/dist/is.umd.js ""
-[amd:is]: https://rawgit.com/adriancmiranda/describe-type/master/dist/is.amd.js ""
-[cjs:is]: https://rawgit.com/adriancmiranda/describe-type/master/dist/is.cjs.js ""
-[iife:is]: https://rawgit.com/adriancmiranda/describe-type/master/dist/is.iife.js ""
+[umd:is]: https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.is.umd.js ""
+[amd:is]: https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.is.amd.js ""
+[cjs:is]: https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.is.cjs.js ""
+[iife:is]: https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.is.iife.js ""
 
 <!-- as -->
-[umd:as]: https://rawgit.com/adriancmiranda/describe-type/master/dist/as.umd.js ""
-[amd:as]: https://rawgit.com/adriancmiranda/describe-type/master/dist/as.amd.js ""
-[cjs:as]: https://rawgit.com/adriancmiranda/describe-type/master/dist/as.cjs.js ""
-[iife:as]: https://rawgit.com/adriancmiranda/describe-type/master/dist/as.iife.js ""
+[umd:as]: https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.as.umd.js ""
+[amd:as]: https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.as.amd.js ""
+[cjs:as]: https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.as.cjs.js ""
+[iife:as]: https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.as.iife.js ""
 
 <!-- has -->
-[umd:has]: https://rawgit.com/adriancmiranda/describe-type/master/dist/has.umd.js ""
-[amd:has]: https://rawgit.com/adriancmiranda/describe-type/master/dist/has.amd.js ""
-[cjs:has]: https://rawgit.com/adriancmiranda/describe-type/master/dist/has.cjs.js ""
-[iife:has]: https://rawgit.com/adriancmiranda/describe-type/master/dist/has.iife.js ""
+[umd:has]: https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.has.umd.js ""
+[amd:has]: https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.has.amd.js ""
+[cjs:has]: https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.has.cjs.js ""
+[iife:has]: https://rawgit.com/adriancmiranda/describe-type/master/dist/describe-type.has.iife.js ""
 
 
 <!-----------------------------------------------------------------------------
