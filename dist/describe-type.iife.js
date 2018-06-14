@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v1.0.0
  * 
- * @commit 96275fae251dee5fef6b00db6c937544c4470a13
- * @moment Thursday, June 14, 2018 5:58 AM
+ * @commit f57087ec5728b329eaa90179fc20bcafb94fb7c5
+ * @moment Thursday, June 14, 2018 7:23 AM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2021
@@ -1831,7 +1831,7 @@ var describeType = (function (exports) {
 	}
 
 	/* eslint-disable no-unused-vars */
-	var version = { tag: '1.0.0', sha1: '96275fae251dee5fef6b00db6c937544c4470a13', type: 'uncompressed' };
+	var version = { tag: '1.0.0', sha1: 'f57087ec5728b329eaa90179fc20bcafb94fb7c5', type: 'uncompressed' };
 
 	exports.has = index_next;
 	exports.is = index_next$1;

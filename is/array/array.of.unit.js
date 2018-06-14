@@ -1,7 +1,7 @@
 import test from 'ava';
-import { toSource, constructorNameOf } from '../.fixtures/datatype/utils';
-import * as describeType from '../index.next';
-import arrayOf from './array/array.of.next';
+import { toSource, constructorNameOf } from '../../.fixtures/datatype/utils';
+import * as describeType from '../../index.next';
+import arrayOf from './array.of.next';
 
 test('describeType.is.arrayOf exposure', (t) => {
 	t.is(toString.call(describeType.is.arrayOf), '[object Function]', 'should be a function');
