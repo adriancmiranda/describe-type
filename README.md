@@ -2393,7 +2393,7 @@ type(datatype, currentValue, defaultValue);
 
 <details><summary><a>describe-type/has</a>
 
-> Indicates whether an object has a specified property defined. This method returns _true_ if the target object has a property that matches the string specified by the _name_ parameter, and _false_ otherwise.
+> Indicates whether an object has a specified property defined. All methods returns _true_ if the target object has a property that matches the string specified by the _name_ parameter, and _false_ otherwise.
 
 </summary><p>
 
