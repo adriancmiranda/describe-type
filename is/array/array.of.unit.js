@@ -4,7 +4,7 @@ import * as describeType from '../../index.next';
 import arrayOf from './array.of.next';
 
 test('describeType.is.arrayOf exposure', (t) => {
-	t.is(toString.call(describeType.is.arrayOf), '[object Function]', 'should be a function');
+	t.is(toString.call(describeType.is.array.of), '[object Function]', 'should be a function');
 });
 
 test('arrayOf exposure', (t) => {
