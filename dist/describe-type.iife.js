@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v1.0.0
  * 
- * @commit f57087ec5728b329eaa90179fc20bcafb94fb7c5
- * @moment Thursday, June 14, 2018 7:23 AM
+ * @commit c0060b951933fe0f895d6f6d07843a3409d477ed
+ * @moment Thursday, June 14, 2018 10:51 AM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2021
@@ -1338,7 +1338,7 @@ var describeType = (function (exports) {
 		var a = valueA;
 		var b = valueB;
 		return valueA !== a && valueB !== b;
-	}
+	};
 
 	/**
 	 * The equal() method determines whether two values are the same value.
@@ -1777,7 +1777,7 @@ var describeType = (function (exports) {
 			proto[property] = value.value;
 		});
 		return proto;
-	}
+	};
 
 	var PR0PERTIES = {
 		type: true,
@@ -1831,7 +1831,7 @@ var describeType = (function (exports) {
 	}
 
 	/* eslint-disable no-unused-vars */
-	var version = { tag: '1.0.0', sha1: 'f57087ec5728b329eaa90179fc20bcafb94fb7c5', type: 'uncompressed' };
+	var version = { tag: '1.0.0', sha1: 'c0060b951933fe0f895d6f6d07843a3409d477ed', type: 'uncompressed' };
 
 	exports.has = index_next;
 	exports.is = index_next$1;

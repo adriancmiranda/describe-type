@@ -2,8 +2,8 @@
  * 
  * ~~~~ describe-type v1.0.0
  * 
- * @commit f57087ec5728b329eaa90179fc20bcafb94fb7c5
- * @moment Thursday, June 14, 2018 7:23 AM
+ * @commit c0060b951933fe0f895d6f6d07843a3409d477ed
+ * @moment Thursday, June 14, 2018 10:51 AM
  * @homepage https://github.com/adriancmiranda/describe-type
  * @author Adrian C. Miranda
  * @license (c) 2016-2021
@@ -317,7 +317,7 @@
 			proto[property] = value.value;
 		});
 		return proto;
-	}
+	};
 
 	exports.create = Object_create_next;
 	exports.getPrototypeOf = getPrototypeOf;
