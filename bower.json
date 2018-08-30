@@ -10,7 +10,7 @@
     "bower_components",
     "node_modules",
     "**/.*",
-    "**/!(*.unit|*.perf).js",
+    "**/(*.unit|*.perf).js",
     "bower.json",
     "package-lock.json",
     "package.json",
