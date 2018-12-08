@@ -5,6 +5,7 @@ import * as constants from './constants.next.js';
 
 export * from './env.next.js';
 export { default as stringify } from './stringify/index.next.js';
+export { default as arrayOf } from './arrayOf.next.js';
 export { default as stringOf } from './stringOf.next.js';
 export { default as booleanOf } from './booleanOf.next.js';
 export { default as floatOf } from './floatOf.next.js';
