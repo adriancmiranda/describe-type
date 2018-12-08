@@ -11,6 +11,7 @@ const constants = require('./constants.js');
 	}
 }).call(exports, require('./env.js'));
 exports.stringify = require('./stringify/index.js');
+exports.arrayOf = require('./arrayOf.js');
 exports.stringOf = require('./stringOf.js');
 exports.booleanOf = require('./booleanOf.js');
 exports.floatOf = require('./floatOf.js');
